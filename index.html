@@ -3,13 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>One Piece Connections - Generador Automático</title>
+  <title>One Piece Connections - Dificultad por Tags</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     body { background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
     .container { max-width: 650px; width: 100%; text-align: center; position: relative; }
     h1 { margin-bottom: 5px; color: #f59e0b; font-size: 2rem; text-transform: uppercase; letter-spacing: 1px; }
-    p { margin-bottom: 20px; color: #94a3b8; }
+    p { margin-bottom: 15px; color: #94a3b8; }
+
+    .difficulty-selector { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+    .diff-btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 2px solid #334155;
+      background: #1e293b;
+      color: #94a3b8;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .diff-btn:hover:not(:disabled) { border-color: #f59e0b; color: #f8fafc; }
+    .diff-btn.active { background: #f59e0b; color: #0f172a; border-color: #f59e0b; }
 
     .lives-container { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; color: #e2e8f0; display: flex; justify-content: center; align-items: center; gap: 12px; }
     .life-wrapper { position: relative; display: inline-flex; justify-content: center; align-items: center; }
@@ -118,7 +132,14 @@
 
 <div class="container">
   <h1>One Piece Connections</h1>
-  <p>Generación automática de grupos basada en atributos de personajes.</p>
+  <p>Encuentra los grupos según la dificultad de sus conexiones.</p>
+
+  <div class="difficulty-selector">
+    <button class="diff-btn active" onclick="setDifficulty('todos', event)">Todos</button>
+    <button class="diff-btn" onclick="setDifficulty('novato', event)">Novato</button>
+    <button class="diff-btn" onclick="setDifficulty('supernova', event)">Supernova</button>
+    <button class="diff-btn" onclick="setDifficulty('yonko', event)">Yonko</button>
+  </div>
 
   <div class="lives-container">
     Vidas: <span id="lives-icons"></span>
@@ -153,57 +174,87 @@
   const COLORS = ["#fef08a", "#bbf7d0", "#bfdbfe", "#e9d5ff"];
   
   let database = [];
+  let currentDifficulty = "todos";
   let currentCategories = []; 
   let cards = [];
   let selectedCards = [];
   let lives = MAX_LIVES;
   let gameOver = false;
 
-  // Cargar personajes.json al iniciar
   window.addEventListener("DOMContentLoaded", () => {
     fetch("personajes.json")
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error(`No se pudo cargar personajes.json (${res.status})`);
+        return res.json();
+      })
       .then(data => {
         database = data;
         generateNewBoard();
       })
       .catch(err => {
-        document.getElementById("warning-msg").innerText = "Error cargando la base de datos de personajes.";
+        document.getElementById("warning-msg").innerText = "⚠️ " + err.message;
       });
   });
 
-  // Algoritmo que busca automáticamente 4 categorías válidas sin personajes repetidos
+  function setDifficulty(level, event) {
+    currentDifficulty = level;
+    document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    generateNewBoard();
+  }
+
   function generateNewBoard() {
     if (database.length === 0) return;
 
-    // Map de todos los valores posibles de etiquetas
     let tagGroups = {}; 
 
     database.forEach(char => {
-      Object.entries(char.tags).forEach(([key, val]) => {
-        const groupName = `${key}: ${val}`;
-        if (!tagGroups[groupName]) tagGroups[groupName] = [];
-        tagGroups[groupName].push(char);
-      });
+      if (char.tags) {
+        Object.entries(char.tags).forEach(([key, tagData]) => {
+          // Obtener datos del tag (compatible si es objeto o string antiguo)
+          const val = typeof tagData === "object" ? tagData.val : tagData;
+          const tagDif = typeof tagData === "object" ? tagData.dif : "novato";
+
+          // Filtrar por la dificultad seleccionada
+          if (currentDifficulty === "todos" || tagDif === currentDifficulty) {
+            
+            // Si el valor es un arreglo de opciones
+            if (Array.isArray(val)) {
+              val.forEach(v => {
+                const groupName = `${key}: ${v}`;
+                if (!tagGroups[groupName]) tagGroups[groupName] = [];
+                tagGroups[groupName].push(char);
+              });
+            } else {
+              const groupName = `${key}: ${val}`;
+              if (!tagGroups[groupName]) tagGroups[groupName] = [];
+              tagGroups[groupName].push(char);
+            }
+
+          }
+        });
+      }
     });
 
-    // Filtramos solo etiquetas con al menos 4 personajes
     let validGroups = Object.keys(tagGroups).filter(group => tagGroups[group].length >= 4);
+
+    if (validGroups.length < 4) {
+      document.getElementById("warning-msg").innerText = 
+        `⚠️ Faltan etiquetas con dificultad '${currentDifficulty.toUpperCase()}': Se necesitan al menos 4 etiquetas con 4 personajes cada una. Hay ${validGroups.length}.`;
+      return;
+    }
 
     let selectedGroups = [];
     let usedCharIds = new Set();
 
-    // Barajar grupos válidos
     validGroups = validGroups.sort(() => Math.random() - 0.5);
 
     for (let groupName of validGroups) {
       if (selectedGroups.length === 4) break;
 
-      // Obtener personajes disponibles que no hayan sido usados
       let availableChars = tagGroups[groupName].filter(c => !usedCharIds.has(c.id));
 
       if (availableChars.length >= 4) {
-        // Escoger 4 personajes aleatorios de este grupo
         let chosenChars = availableChars.sort(() => Math.random() - 0.5).slice(0, 4);
         
         selectedGroups.push({
@@ -217,7 +268,8 @@
     }
 
     if (selectedGroups.length < 4) {
-      document.getElementById("warning-msg").innerText = "No hay suficientes datos/combinaciones. Añade más personajes al JSON.";
+      document.getElementById("warning-msg").innerText = 
+        `⚠️ No se pudieron cruzar 4 grupos sin repetir personajes para etiquetas '${currentDifficulty.toUpperCase()}'. Añade más etiquetas a tus personajes.`;
       return;
     }
 
