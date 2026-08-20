@@ -760,6 +760,7 @@
       "Banda": { "val": ["CP0", "CP9"], "dif": "supernova" },
       "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
       "Origen": { "val": "North Blue", "dif": "supernova" },
+      "Haki": { "val": "Sin haki", "dif": "novato" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
       "Habilidades": { "val": "Rokushiki", "dif": "novato" }
     }
@@ -811,6 +812,7 @@
       "Banda": { "val": "CP9", "dif": "novato" },
       "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": "Sin haki", "dif": "novato" },
       "Fruta": { "val": "Sin fruta", "dif": "novato" },
       "Habilidades": { "val": "Rokushiki", "dif": "novato" }
     }
@@ -877,7 +879,7 @@
       "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
-      "Fruta": { "val": "Zoan prehistórica", "dif": "supernova" },
+      "Fruta": { "val": "Zoan mitológica", "dif": "supernova" },
       "Raza": { "val": "Clon", "dif": "yonko" },
       "Habilidades": { "val": "Rokushiki", "dif": "novato" }
     }
@@ -895,9 +897,9 @@
     }
   },
   {
-    "id": "guernika",
-    "name": "Guernika",
-    "img": "imagenes/Guernika.png",
+    "id": "guernica",
+    "name": "Guernica",
+    "img": "imagenes/Guernica.png",
     "tags": {
       "Banda": { "val": "CP0", "dif": "yonko" },
       "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
@@ -921,6 +923,19 @@
     }
   },
   {
+    "id": "giso",
+    "name": "Giso",
+    "img": "imagenes/Giso.png",
+    "tags": {
+      "Banda": { "val": "CP0", "dif": "yonko" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Sin fruta", "dif": "novato" },
+      "Habilidades": { "val": "Rokushiki", "dif": "novato" }
+    }
+  },
+  {
     "id": "maha",
     "name": "Maha",
     "img": "imagenes/Maha.png",
@@ -931,6 +946,164 @@
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
       "Fruta": { "val": "Sin fruta", "dif": "novato" },
       "Habilidades": { "val": "Rokushiki", "dif": "novato" }
+    }
+  },
+  {
+    "id": "zephyr",
+    "name": "Zephyr (Z)",
+    "img": "imagenes/Zephyr.png",
+    "tags": {
+      "Banda": { "val": ["Neo Marina", "Marina"], "dif": "supernova" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
+      "Titulo": { "val": "Almirante", "dif": "yonko" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Sin fruta", "dif": "novato" },
+      "Habilidades": { "val": "Rokushiki", "dif": "novato" },
+      "Estado": { "val": "Fallecido", "dif": "supernova" }
+    }
+  },
+  {
+    "id": "laskey",
+    "name": "Laskey",
+    "img": "imagenes/Laskey.png",
+    "tags": {
+      "Banda": { "val": "CP9", "dif": "novato" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": "Sin haki", "dif": "novato" },
+      "Fruta": { "val": "Sin fruta", "dif": "novato" },
+      "Habilidades": { "val": "Rokushiki", "dif": "novato" }
+    }
+  },
+  {
+    "id": "sengoku",
+    "name": "Sengoku",
+    "img": "imagenes/Sengoku.png",
+    "tags": {
+      "Banda": { "val": "Marina", "dif": "novato" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
+      "Titulo": { "val": "Almirante de la Flota", "dif": "yonko" },
+      "Origen": { "val": "South Blue", "dif": "supernova" },
+      "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
+      "Fruta": { "val": "Zoan mitológica", "dif": "supernova" },
+      "Habilidades": { "val": "Rokushiki", "dif": "novato" }
+    }
+  },
+  {
+    "id": "charlotte_yuen",
+    "name": "Charlotte Yuen",
+    "img": "imagenes/CharlotteYuen.png",
+    "tags": {
+      "Banda": { "val": "Piratas de Big Mom", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": "Sin haki", "dif": "novato" },
+      "Fruta": { "val": "Sin fruta", "dif": "novato" },
+      "Habilidades": { "val": "Rokushiki", "dif": "novato" }
+    }
+  },
+  {
+    "id": "decallizos_charlotte",
+    "name": "Decallizos Charlotte",
+    "img": "imagenes/DecallizosCharlotte.png",
+    "tags": {
+      "Banda": { "val": "Piratas de Big Mom", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": "Sin haki", "dif": "novato" },
+      "Fruta": { "val": "Sin fruta", "dif": "novato" },
+      "Habilidades": { "val": "Rokushiki", "dif": "novato" }
+    }
+  },
+  {
+    "id": "prince_grus",
+    "name": "Prince Grus",
+    "img": "imagenes/PrinceGrus.png",
+    "tags": {
+      "Banda": { "val": "Marina", "dif": "novato" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Paramecia", "dif": "supernova" },
+      "Habilidades": { "val": "Rokushiki", "dif": "novato" }
+    }
+  },
+  {
+    "id": "alpha",
+    "name": "Alpha",
+    "img": "imagenes/Alpha.png",
+    "tags": {
+      "Banda": { "val": "CP8", "dif": "novato" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": "Sin haki", "dif": "novato" },
+      "Fruta": { "val": "Sin fruta", "dif": "novato" },
+      "Habilidades": { "val": "Rokushiki", "dif": "novato" }
+    }
+  },
+  {
+    "id": "tosa",
+    "name": "Tosa",
+    "img": "imagenes/Tosa.png",
+    "tags": {
+      "Banda": { "val": "Marina", "dif": "novato" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Sin fruta", "dif": "novato" },
+      "Habilidades": { "val": "Rokushiki", "dif": "novato" }
+    }
+  },
+  {
+    "id": "hound",
+    "name": "Hound",
+    "img": "imagenes/Hound.png",
+    "tags": {
+      "Banda": { "val": "Marina", "dif": "novato" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Zoan", "dif": "supernova" },
+      "Habilidades": { "val": "Rokushiki", "dif": "novato" }
+    }
+  },
+  {
+    "id": "kibin",
+    "name": "Kibin",
+    "img": "imagenes/Kibin.png",
+    "tags": {
+      "Banda": { "val": "Marina", "dif": "novato" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Sin fruta", "dif": "novato" },
+      "Habilidades": { "val": "Rokushiki", "dif": "novato" }
+    }
+  },
+  {
+    "id": "nusjuro",
+    "name": "Ethanbaron V. Nusjuro",
+    "img": "imagenes/Nusjuro.png",
+    "tags": {
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
+      "Titulo": { "val": "Gorosei", "dif": "yonko" },
+      "Origen": { "val": "Red Line", "dif": "yonko" },
+      "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
+      "Fruta": { "val": "Zoan mitológica", "dif": "supernova" },
+      "Especialidad": { "val": "Espadachín", "dif": "supernova" },
+      "Habilidades": { "val": "Rokushiki", "dif": "novato" }
+    }
+  },
+  {
+    "id": "douglas_bullet",
+    "name": "Douglas Bullet",
+    "img": "imagenes/DouglasBullet.png",
+    "tags": {
+      "Banda": { "val": "Piratas de Roger", "dif": "supernova" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
+      "Fruta": { "val": "Paramecia", "dif": "supernova" },
+      "Habilidades": { "val": "Rokushiki", "dif": "novato" },
+      "Despertar": { "val": "Fruta despertada", "dif": "supernova" }
     }
   }
 ]
