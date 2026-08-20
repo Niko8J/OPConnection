@@ -1,23 +1,26 @@
 [
   {
     "id": "luffy",
-    "name": "Luffy",
+    "name": "Monkey D. Luffy",
     "img": "imagenes/Luffy.png",
     "tags": {
       "Banda": "Sombrero de Paja",
-      "Rango/Titulo": "Yonko",
-      "Mar": "East Blue",
+      "Rango/Titulo": "Yonko", "Supernova",
+      "Origen": "East Blue",
+      "Haki": "Haki del conquistador", "Haki de armadura", "Haki de observación",
       "Fruta": "Zoan Mitológica",
       "Especialidad": "Capitán"
     }
   },
   {
     "id": "zoro",
-    "name": "Zoro",
+    "name": "Roronoa Zoro",
     "img": "imagenes/Zoro.png",
     "tags": {
       "Banda": "Sombrero de Paja",
-      "Mar": "East Blue",
+      "Rango/Titulo": "Supernova",
+      "Origen": "East Blue",
+      "Haki": "Haki del conquistador", "Haki de armadura", "Haki de observación",
       "Fruta": "Ninguna",
       "Especialidad": "Espadachín"
     }
@@ -25,35 +28,161 @@
   {
     "id": "nami",
     "name": "Nami",
-    "img": "imagenes/nami.jpg",
+    "img": "imagenes/Nami.png",
     "tags": {
       "Banda": "Sombrero de Paja",
-      "Mar": "East Blue"
+      "Origen": "East Blue",
+      "Haki": "Ninguno",
+      "Fruta": "Ninguna",
+      "Especialidad": "Navegante"
     }
   },
   {
     "id": "usopp",
     "name": "Usopp",
-    "img": "imagenes/usopp.jpg",
+    "img": "imagenes/Usopp.png",
     "tags": {
       "Banda": "Sombrero de Paja",
-      "Mar": "East Blue"
+      "Origen": "East Blue",
+      "Haki": "Haki de observación",
+      "Fruta": "Ninguna",
+      "Especialidad": "Tirador"
+    }
+  },
+  {
+    "id": "sanji",
+    "name": "Vinsmoke Sanji",
+    "img": "imagenes/Sanji.png",
+    "tags": {
+      "Banda": "Sombrero de Paja",
+      "Origen": "North Blue",
+      "Haki": "Haki de armadura", "Haki de observación",
+      "Fruta": "Ninguna",
+      "Especialidad": "Cocinero"
+    }
+  },
+  {
+    "id": "chopper",
+    "name": "Tony Tony Chopper",
+    "img": "imagenes/Chopper.png",
+    "tags": {
+      "Banda": "Sombrero de Paja",
+      "Origen": "Grand Line",
+      "Haki": "Ninguno",
+      "Fruta": "Zoan",
+      "Especialidad": "Médico"
+    }
+  },
+  {
+    "id": "robin",
+    "name": "Nico Robin",
+    "img": "imagenes/Robin.png",
+    "tags": {
+      "Banda": "Sombrero de Paja",
+      "Origen": "West Blue",
+      "Haki": "Ninguno",
+      "Fruta": "Paramecia",
+      "Especialidad": "Arqueóloga"
+    }
+  },
+   {
+    "id": "franky",
+    "name": "Franky",
+    "img": "imagenes/Franky.png",
+    "tags": {
+      "Banda": "Sombrero de Paja",
+      "Origen": "South Blue",
+      "Haki": "Ninguno",
+      "Fruta": "Ninguna",
+      "Especialidad": "Carpintero"
+    }
+  },
+  {
+    "id": "Brook",
+    "name": "Brook",
+    "img": "imagenes/Brook.png",
+    "tags": {
+      "Banda": "Sombrero de Paja",
+      "Origen": "West Blue",
+      "Haki": "Ninguno",
+      "Fruta": "Paramecia",
+      "Especialidad": "Músico"
+    }
+  },
+  {
+    "id": "jinbe",
+    "name": "Jinbe",
+    "img": "imagenes/Jinbe.png",
+    "tags": {
+      "Banda": "Sombrero de Paja",
+      "Origen": "Grand Line",
+      "Haki": "Haki de armadura", "Haki de observación",
+      "Fruta": "Ninguna",
+      "Especialidad": "Timonel"
+    }
+  },
+  {
+    "id": "vivi",
+    "name": "Nefertari D Vivi",
+    "img": "imagenes/Vivi.png",
+    "tags": {
+      "Banda": "Sombrero de Paja",
+      "Origen": "Grand Line",
+      "Haki": "Ninguno",
+      "Fruta": "Ninguna",
+      "Especialidad": "Princesa"
+    }
+  },
+  {
+    "id": "carue",
+    "name": "Carue",
+    "img": "imagenes/Carue.png",
+    "tags": {
+      "Banda": "Sombrero de Paja",
+      "Origen": "Grand Line",
+      "Haki": "Ninguno",
+      "Fruta": "Ninguna",
+      "Especialidad": "Montura"
+    }
+  },
+  {
+    "id": "merry",
+    "name": "Going Merry",
+    "img": "imagenes/GoingMerry.png",
+    "tags": {
+      "Banda": "Sombrero de Paja",
+      "Origen": "East Blue",
+      "Haki": "Ninguno",
+      "Fruta": "Ninguna",
+      "Especialidad": "Barco"
+    }
+  },
+  {
+    "id": "sunny",
+    "name": "Thousand Sunny",
+    "img": "imagenes/Sunny.png",
+    "tags": {
+      "Banda": "Sombrero de Paja",
+      "Origen": "Grand Line",
+      "Haki": "Ninguno",
+      "Fruta": "Ninguna",
+      "Especialidad": "Barco"
     }
   },
   {
     "id": "buggy",
     "name": "Buggy",
-    "img": "imagenes/buggy.jpg",
+    "img": "imagenes/Buggy.png",
     "tags": {
       "Banda": "Cross Guild",
       "Rango/Titulo": "Yonko",
-      "Mar": "East Blue"
+      "Mar": "Grand Line"
     }
   },
   {
     "id": "shanks",
     "name": "Shanks",
-    "img": "imagenes/shanks.jpg",
+    "img": "imagenes/Shanks.png",
     "tags": {
       "Banda": "Piratas del Pelirrojo",
       "Rango/Titulo": "Yonko"
@@ -61,8 +190,8 @@
   },
   {
     "id": "teach",
-    "name": "Barbanegra",
-    "img": "imagenes/teach.jpg",
+    "name": "Marshal D. Teach (Barbanegra)",
+    "img": "imagenes/Barbanegra.png",
     "tags": {
       "Banda": "Piratas de Barbanegra",
       "Rango/Titulo": "Yonko"
