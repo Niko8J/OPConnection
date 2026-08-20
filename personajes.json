@@ -253,7 +253,7 @@
       "Titulo": { "val": "Shichibukai", "dif": "supernova" },
       "Origen": { "val": "Grand Line", "dif": "yonko" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
-      "Fruta": { "val": "Logia", "dif": "novato" },
+      "Fruta": { "val": "Logia", "dif": "novato" }
     }
   },
    {
@@ -263,7 +263,7 @@
     "tags": {
       "Banda": { "val": ["Baroque Works", "Cross Guild"], "dif": "supernova" },
       "Origen": { "val": "South Blue", "dif": "yonko" },
-      "Fruta": { "val": "Logia", "dif": "novato" },
+      "Fruta": { "val": "Logia", "dif": "novato" }
     }
   },
     {
@@ -273,7 +273,7 @@
     "tags": {
       "Banda": { "val": ["Baroque Works", "Cross Guild"], "dif": "supernova" },
       "Origen": { "val": "West Blue", "dif": "yonko" },
-      "Fruta": { "val": "Paramecia", "dif": "novato" },
+      "Fruta": { "val": "Paramecia", "dif": "novato" }
     }
   },
   {
