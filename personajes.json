@@ -5,11 +5,11 @@
     "img": "imagenes/Luffy.png",
     "tags": {
       "Banda": { "val": "Sombrero de Paja", "dif": "novato" },
-      "Titulo": { "val": ["Yonko", "Supernova"], "dif": "yonko" },
-      "Origen": { "val": "East Blue", "dif": "novato" },
+      "Titulo": { "val": ["Yonko", "Supernova"], "dif": "novato" },
+      "Origen": { "val": "East Blue", "dif": "yonko" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
-      "Fruta": { "val": "Zoan Mitológica", "dif": "yonko" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" }
+      "Fruta": { "val": "Zoan Mitológica", "dif": "supernova" },
+      "Especialidad": { "val": "Capitán", "dif": "yonko" }
     }
   },
   {
@@ -22,7 +22,7 @@
       "Origen": { "val": "East Blue", "dif": "novato" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Espadachín", "dif": "supernova" }
+      "Especialidad": { "val": "Espadachín", "dif": "yonko" }
     }
   },
   {
@@ -34,7 +34,7 @@
       "Origen": { "val": "East Blue", "dif": "novato" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Navegante", "dif": "novato" }
+      "Especialidad": { "val": "Navegante", "dif": "yonko" }
     }
   },
   {
@@ -46,7 +46,7 @@
       "Origen": { "val": "East Blue", "dif": "novato" },
       "Haki": { "val": "Haki de observación", "dif": "supernova" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Tirador", "dif": "novato" }
+      "Especialidad": { "val": "Tirador", "dif": "yonko" }
     }
   },
   {
@@ -58,7 +58,7 @@
       "Origen": { "val": "North Blue", "dif": "supernova" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Cocinero", "dif": "novato" }
+      "Especialidad": { "val": "Cocinero", "dif": "yonko" }
     }
   },
   {
@@ -70,7 +70,7 @@
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Zoan", "dif": "supernova" },
-      "Especialidad": { "val": "Médico", "dif": "novato" }
+      "Especialidad": { "val": "Médico", "dif": "yonko" }
     }
   },
   {
@@ -78,11 +78,11 @@
     "name": "Nico Robin",
     "img": "imagenes/Robin.png",
     "tags": {
-      "Banda": { "val": "Sombrero de Paja", "dif": "novato" },
+      "Banda": { "val": ["Sombrero de Paja", "Baroque Works"], "dif": "novato" },
       "Origen": { "val": "West Blue", "dif": "supernova" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Arqueóloga", "dif": "supernova" }
+      "Especialidad": { "val": "Arqueóloga", "dif": "yonko" }
     }
   },
   {
@@ -94,7 +94,7 @@
       "Origen": { "val": "South Blue", "dif": "supernova" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Carpintero", "dif": "novato" }
+      "Especialidad": { "val": "Carpintero", "dif": "yonko" }
     }
   },
   {
@@ -106,7 +106,7 @@
       "Origen": { "val": "West Blue", "dif": "supernova" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Músico", "dif": "novato" }
+      "Especialidad": { "val": "Músico", "dif": "yonko" }
     }
   },
   {
@@ -118,19 +118,19 @@
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Timonel", "dif": "supernova" }
+      "Especialidad": { "val": "Timonel", "dif": "yonko" }
     }
   },
   {
     "id": "vivi",
-    "name": "Nefertari D Vivi",
+    "name": "Nefertari D. Vivi",
     "img": "imagenes/Vivi.png",
     "tags": {
-      "Banda": { "val": "Sombrero de Paja", "dif": "novato" },
+      "Banda": { "val": ["Sombrero de Paja", "Baroque Works"], "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Princesa", "dif": "supernova" }
+      "Especialidad": { "val": "Princesa", "dif": "yonko" }
     }
   },
   {
@@ -138,11 +138,11 @@
     "name": "Carue",
     "img": "imagenes/Carue.png",
     "tags": {
-      "Banda": { "val": "Sombrero de Paja", "dif": "novato" },
+      "Banda": { "val": ["Sombrero de Paja", "Baroque Works"], "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Montura", "dif": "supernova" }
+      "Especialidad": { "val": "Montura", "dif": "yonko" }
     }
   },
   {
@@ -154,7 +154,7 @@
       "Origen": { "val": "East Blue", "dif": "novato" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Barco", "dif": "novato" }
+      "Especialidad": { "val": "Barco", "dif": "yonko" }
     }
   },
   {
@@ -166,7 +166,7 @@
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Barco", "dif": "novato" }
+      "Especialidad": { "val": "Barco", "dif": "yonko" }
     }
   },
   {
@@ -174,12 +174,12 @@
     "name": "Buggy",
     "img": "imagenes/Buggy.png",
     "tags": {
-      "Banda": { "val": "Cross Guild", "dif": "supernova" },
+      "Banda": { "val": ["Cross Guild", "Piratas de Roger"], "dif": "supernova" },
       "Titulo": { "val": ["Shichibukai", "Yonko"], "dif": "yonko" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" }
+      "Especialidad": { "val": "Capitán", "dif": "yonko" }
     }
   },
   {
@@ -187,12 +187,24 @@
     "name": "Shanks",
     "img": "imagenes/Shanks.png",
     "tags": {
-      "Banda": { "val": "Piratas del Pelirrojo", "dif": "supernova" },
+      "Banda": { "val": ["Piratas del Pelirrojo", "Piratas de Roger"], "dif": "supernova" },
       "Titulo": { "val": "Yonko", "dif": "yonko" },
       "Origen": { "val": "West Blue", "dif": "supernova" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" }
+      "Especialidad": { "val": "Capitán", "dif": "yonko" }
+    }
+  },
+   {
+    "id": "yasopp",
+    "name": "Yasopp",
+    "img": "imagenes/Yasopp.png",
+    "tags": {
+      "Banda": { "val": "Piratas del Pelirrojo", "dif": "supernova" },
+      "Origen": { "val": "East Blue", "dif": "supernova" },
+      "Haki": { "val": "Haki de observación", "dif": "yonko" },
+      "Fruta": { "val": "Ninguna", "dif": "novato" },
+      "Especialidad": { "val": "Tirador", "dif": "yonko" }
     }
   },
   {
@@ -200,12 +212,24 @@
     "name": "Marshal D. Teach (Barbanegra)",
     "img": "imagenes/Barbanegra.png",
     "tags": {
-      "Banda": { "val": "Piratas de Barbanegra", "dif": "supernova" },
+      "Banda": { "val": ["Piratas de Barbanegra", "Piratas de Barbablanca"], "dif": "supernova" },
       "Titulo": { "val": ["Shichibukai", "Yonko"], "dif": "yonko" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": ["Paramecia", "Logia"], "dif": "yonko" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" }
+      "Especialidad": { "val": "Capitán", "dif": "yonko" }
+    }
+  },
+   {
+    "id": "vanaugur",
+    "name": "Van Augur",
+    "img": "imagenes/VanAugur.png",
+    "tags": {
+      "Banda": { "val": "Piratas de Barbanegra", "dif": "supernova" },
+      "Origen": { "val": "East Blue", "dif": "novato" },
+      "Haki": { "val": "Haki de observación", "dif": "yonko" },
+      "Fruta": { "val": "Paramecia", "dif": "yonko" },
+      "Especialidad": { "val": "Tirador", "dif": "yonko" }
     }
   },
   {
@@ -217,7 +241,39 @@
       "Titulo": { "val": "Shichibukai", "dif": "supernova" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Espadachín", "dif": "supernova" }
+      "Especialidad": { "val": "Espadachín", "dif": "yonko" }
+    }
+  },
+  {
+    "id": "crocodile",
+    "name": "Crocodile",
+    "img": "imagenes/Crocodile.png",
+    "tags": {
+      "Banda": { "val": ["Baroque Works", "Cross Guild"], "dif": "supernova" },
+      "Titulo": { "val": "Shichibukai", "dif": "supernova" },
+      "Origen": { "val": "Grand Line", "dif": "yonko" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Logia", "dif": "novato" },
+    }
+  },
+   {
+    "id": "galdino",
+    "name": "Galdino (Mr. 3)",
+    "img": "imagenes/Galdino.png",
+    "tags": {
+      "Banda": { "val": ["Baroque Works", "Cross Guild"], "dif": "supernova" },
+      "Origen": { "val": "South Blue", "dif": "yonko" },
+      "Fruta": { "val": "Logia", "dif": "novato" },
+    }
+  },
+    {
+    "id": "dazbonez",
+    "name": "Daz Bonez (Mr. 1)",
+    "img": "imagenes/DazBonez.png",
+    "tags": {
+      "Banda": { "val": ["Baroque Works", "Cross Guild"], "dif": "supernova" },
+      "Origen": { "val": "West Blue", "dif": "yonko" },
+      "Fruta": { "val": "Paramecia", "dif": "novato" },
     }
   },
   {
@@ -230,7 +286,7 @@
       "Origen": { "val": "North Blue", "dif": "supernova" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": ["Capitán", "Médico"], "dif": "novato" }
+      "Especialidad": { "val": ["Capitán", "Médico"], "dif": "yonko" }
     }
   },
   {
@@ -243,7 +299,7 @@
       "Origen": { "val": "South Blue", "dif": "supernova" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" }
+      "Especialidad": { "val": "Capitán", "dif": "yonko" }
     }
   },
   {
@@ -256,7 +312,19 @@
       "Origen": { "val": "Red Line", "dif": "yonko" },
       "Haki": { "val": "Haki de armadura", "dif": "supernova" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" }
+      "Especialidad": { "val": "Capitán", "dif": "yonko" }
+    },
+  }
+    {
+    "id": "capone",
+    "name": "Capone 'Gang' Bege",
+    "img": "imagenes/Capone.png",
+    "tags": {
+      "Banda": { "val": "Piratas Fire Tank", "dif": "supernova" },
+      "Titulo": { "val": "Supernova", "dif": "supernova" },
+      "Origen": { "val": "West Blue", "dif": "yonko" },
+      "Fruta": { "val": "Paramecia", "dif": "supernova" },
+      "Especialidad": { "val": "Capitán", "dif": "yonko" }
     }
   }
 ]
