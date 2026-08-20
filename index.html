@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>One Piece Connections - Dificultad por Tags</title>
+  <title>One Piece Connections</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     body { background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
@@ -132,7 +132,7 @@
 
 <div class="container">
   <h1>One Piece Connections</h1>
-  <p>Encuentra los grupos según la dificultad de sus conexiones.</p>
+  <p>Encuentra los 4 grupos conectados por sus atributos sin coincidencias ambiguas.</p>
 
   <div class="difficulty-selector">
     <button class="diff-btn active" onclick="setDifficulty('todos', event)">Todos</button>
@@ -211,65 +211,94 @@
     database.forEach(char => {
       if (char.tags) {
         Object.entries(char.tags).forEach(([key, tagData]) => {
-          // Obtener datos del tag (compatible si es objeto o string antiguo)
-          const val = typeof tagData === "object" ? tagData.val : tagData;
-          const tagDif = typeof tagData === "object" ? tagData.dif : "novato";
+          let val = typeof tagData === "object" && tagData !== null && "val" in tagData ? tagData.val : tagData;
+          let tagDif = typeof tagData === "object" && tagData !== null && "dif" in tagData ? tagData.dif : "novato";
 
-          // Filtrar por la dificultad seleccionada
           if (currentDifficulty === "todos" || tagDif === currentDifficulty) {
-            
-            // Si el valor es un arreglo de opciones
-            if (Array.isArray(val)) {
-              val.forEach(v => {
-                const groupName = `${key}: ${v}`;
-                if (!tagGroups[groupName]) tagGroups[groupName] = [];
-                tagGroups[groupName].push(char);
-              });
-            } else {
-              const groupName = `${key}: ${val}`;
-              if (!tagGroups[groupName]) tagGroups[groupName] = [];
-              tagGroups[groupName].push(char);
-            }
+            let valuesArray = Array.isArray(val) ? val : [val];
 
+            valuesArray.forEach(v => {
+              const groupName = `${key}: ${v}`;
+              if (!tagGroups[groupName]) tagGroups[groupName] = [];
+              if (!tagGroups[groupName].some(c => c.id === char.id)) {
+                tagGroups[groupName].push(char);
+              }
+            });
           }
         });
       }
     });
 
-    let validGroups = Object.keys(tagGroups).filter(group => tagGroups[group].length >= 4);
+    let validGroupNames = Object.keys(tagGroups).filter(group => tagGroups[group].length >= 4);
 
-    if (validGroups.length < 4) {
+    if (validGroupNames.length < 4) {
       document.getElementById("warning-msg").innerText = 
-        `⚠️ Faltan etiquetas con dificultad '${currentDifficulty.toUpperCase()}': Se necesitan al menos 4 etiquetas con 4 personajes cada una. Hay ${validGroups.length}.`;
+        `⚠️ Faltan datos en '${currentDifficulty.toUpperCase()}': Se necesitan al menos 4 categorías válidas. Hay ${validGroupNames.length}.`;
       return;
     }
 
-    let selectedGroups = [];
-    let usedCharIds = new Set();
+    const charHasGroup = (char, groupName) => {
+      const [key, val] = groupName.split(": ");
+      if (!char.tags || !char.tags[key]) return false;
+      const tagData = char.tags[key];
+      const actualVal = typeof tagData === "object" && tagData !== null && "val" in tagData ? tagData.val : tagData;
+      return Array.isArray(actualVal) ? actualVal.includes(val) : actualVal === val;
+    };
 
-    validGroups = validGroups.sort(() => Math.random() - 0.5);
+    let selectedGroups = null;
+    let maxAttempts = 500;
 
-    for (let groupName of validGroups) {
-      if (selectedGroups.length === 4) break;
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      let shuffledGroups = [...validGroupNames].sort(() => Math.random() - 0.5);
+      let candidateGroups = [];
+      let usedCharIds = new Set();
 
-      let availableChars = tagGroups[groupName].filter(c => !usedCharIds.has(c.id));
+      for (let groupName of shuffledGroups) {
+        if (candidateGroups.length === 4) break;
 
-      if (availableChars.length >= 4) {
-        let chosenChars = availableChars.sort(() => Math.random() - 0.5).slice(0, 4);
-        
-        selectedGroups.push({
-          name: groupName,
-          color: COLORS[selectedGroups.length],
-          items: chosenChars
+        let exclusiveChars = tagGroups[groupName].filter(char => {
+          if (usedCharIds.has(char.id)) return false;
+          
+          for (let prevGroup of candidateGroups) {
+            if (charHasGroup(char, prevGroup.name)) return false;
+          }
+          return true;
         });
 
-        chosenChars.forEach(c => usedCharIds.add(c.id));
+        if (exclusiveChars.length >= 4) {
+          let chosenChars = exclusiveChars.sort(() => Math.random() - 0.5).slice(0, 4);
+
+          let invalidatesPrevious = false;
+          for (let prevGroup of candidateGroups) {
+            for (let prevChar of prevGroup.items) {
+              if (charHasGroup(prevChar, groupName)) {
+                invalidatesPrevious = true;
+                break;
+              }
+            }
+            if (invalidatesPrevious) break;
+          }
+
+          if (!invalidatesPrevious) {
+            candidateGroups.push({
+              name: groupName,
+              color: COLORS[candidateGroups.length],
+              items: chosenChars
+            });
+            chosenChars.forEach(c => usedCharIds.add(c.id));
+          }
+        }
+      }
+
+      if (candidateGroups.length === 4) {
+        selectedGroups = candidateGroups;
+        break;
       }
     }
 
-    if (selectedGroups.length < 4) {
+    if (!selectedGroups) {
       document.getElementById("warning-msg").innerText = 
-        `⚠️ No se pudieron cruzar 4 grupos sin repetir personajes para etiquetas '${currentDifficulty.toUpperCase()}'. Añade más etiquetas a tus personajes.`;
+        `⚠️ No se encontraron 4 categorías completamente independientes en '${currentDifficulty.toUpperCase()}'. Añade más personajes o varía sus etiquetas.`;
       return;
     }
 
