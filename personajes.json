@@ -126,7 +126,7 @@
     "name": "Nefertari D. Vivi",
     "img": "imagenes/Vivi.png",
     "tags": {
-      "Banda": { "val": ["Sombrero de Paja", "Baroque Works"], "dif": "novato" },
+      "Banda": { "val": ["Sombrero de Paja", "Baroque Works", "Reino de Alabasta"], "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
@@ -138,11 +138,42 @@
     "name": "Carue",
     "img": "imagenes/Carue.png",
     "tags": {
-      "Banda": { "val": ["Sombrero de Paja", "Baroque Works"], "dif": "novato" },
+      "Banda": { "val": ["Sombrero de Paja", "Baroque Works", "Reino de Alabasta"], "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
-      "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Montura", "dif": "supernova" }
+      "Fruta": { "val": "Ninguna", "dif": "novato" }
+    }
+  },
+   {
+    "id": "pell",
+    "name": "Pell",
+    "img": "imagenes/Pell.png",
+    "tags": {
+      "Banda": { "val": "Reino de Alabasta", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": "Ninguno", "dif": "novato" },
+      "Fruta": { "val": "Zoan", "dif": "novato" }
+    }
+  },
+   {
+    "id": "chaka",
+    "name": "Chaka",
+    "img": "imagenes/Chaka.png",
+    "tags": {
+      "Banda": { "val": "Reino de Alabasta", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": "Ninguno", "dif": "novato" },
+      "Fruta": { "val": "Zoan", "dif": "novato" }
+    }
+  },
+   {
+    "id": "Cobra",
+    "name": "Nefertari D. Cobra",
+    "img": "imagenes/Cobra.png",
+    "tags": {
+      "Banda": { "val": "Reino de Alabasta", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": "Ninguno", "dif": "novato" }
     }
   },
   {
