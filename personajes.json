@@ -544,6 +544,7 @@
     "img": "imagenes/Queen.png",
     "tags": {
       "Banda": { "val": "Piratas Bestias", "dif": "supernova" },
+      "Afiliacion": { "val": "Okamas", "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
       "Fruta": { "val": "Zoan", "dif": "supernova" },
@@ -1102,6 +1103,226 @@
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
       "Habilidades": { "val": "Rokushiki", "dif": "novato" },
       "Despertar": { "val": "Fruta despertada", "dif": "supernova" }
+    }
+  },
+  {
+    "id": "alvida",
+    "name": "Alvida",
+    "img": "imagenes/Alvida.png",
+    "tags": {
+      "Banda": { "val": ["Piratas de Alvida", "Cross Guild"], "dif": "novato" },
+      "Origen": { "val": "East Blue", "dif": "novato" },
+      "Haki": { "val": "Sin haki", "dif": "novato" },
+      "Fruta": { "val": "Paramecia", "dif": "novato" },
+      "Recompensa": { "val": "Menos de quinientos millones", "dif": "novato" }
+    }
+  },
+  {
+    "id": "roger",
+    "name": "Gol D. Roger",
+    "img": "imagenes/Roger.png",
+    "tags": {
+      "Banda": { "val": "Piratas de Roger", "dif": "supernova" },
+      "Origen": { "val": "East Blue", "dif": "novato" },
+      "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
+      "Fruta": { "val": "Sin fruta", "dif": "novato" },
+      "Especialidad": { "val": ["Capitanes pirata", "Espadachín"], "dif": "novato" },
+      "Recompensa": { "val": "Más de mil millones", "dif": "novato" },
+      "D": { "val": "Voluntad de la D.", "dif": "supernova" }
+    }
+  },
+  {
+    "id": "hawkins",
+    "name": "Basil Hawkins",
+    "img": "imagenes/Hawkins.png",
+    "tags": {
+      "Banda": { "val": ["Piratas Hawkins", "Piratas Bestia"], "dif": "supernova" },
+      "Titulo": { "val": "Supernova", "dif": "novato" },
+      "Origen": { "val": "North Blue", "dif": "supernova" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Paramecia", "dif": "novato" },
+      "Especialidad": { "val": "Capitanes pirata", "dif": "novato" },
+      "Recompensa": { "val": "Menos de quinientos millones", "dif": "novato" }
+    }
+  },
+  {
+    "id": "drake",
+    "name": "X Drake",
+    "img": "imagenes/Drake.png",
+    "tags": {
+      "Banda": { "val": "SWORD", "dif": "yonko" },
+      "Titulo": { "val": "Supernova", "dif": "novato" },
+      "Origen": { "val": "North Blue", "dif": "supernova" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Zoan prehistórica", "dif": "novato" },
+      "Especialidad": { "val": "Capitanes pirata", "dif": "novato" },
+      "Recompensa": { "val": "Menos de quinientos millones", "dif": "novato" }
+    }
+  },
+  {
+    "id": "apoo",
+    "name": "Scratchmen Apoo",
+    "img": "imagenes/Apoo.png",
+    "tags": {
+      "Banda": { "val": ["Piratas Onair", "Piratas Bestia"], "dif": "supernova" },
+      "Titulo": { "val": "Supernova", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "supernova" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Paramecia", "dif": "novato" },
+      "Especialidad": { "val": "Capitanes pirata", "dif": "novato" },
+      "Recompensa": { "val": "Menos de quinientos millones", "dif": "novato" }
+    }
+  },
+  {
+    "id": "urouge",
+    "name": "Urouge",
+    "img": "imagenes/Urouge.png",
+    "tags": {
+      "Banda": { "val": "Piratas del Monje Caído", "dif": "supernova" },
+      "Titulo": { "val": "Supernova", "dif": "novato" },
+      "Origen": { "val": "Isla del Cielo", "dif": "yonko" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Paramecia", "dif": "novato" },
+      "Especialidad": { "val": "Capitanes pirata", "dif": "novato" },
+      "Recompensa": { "val": "Menos de quinientos millones", "dif": "novato" }
+    }
+  },
+  {
+    "id": "bentham",
+    "name": "Bentham (Mr. 2 / Bon Clay)",
+    "img": "imagenes/Mr2.png",
+    "tags": {
+      "Banda": { "val": "Baroque Works", "dif": "novato" },
+      "Afiliacion": { "val": "Okamas", "dif": "novato" },
+      "Origen": { "val": "East Blue", "dif": "supernova" },
+      "Haki": { "val": "Sin haki", "dif": "novato" },
+      "Fruta": { "val": "Paramecia", "dif": "novato" },
+      "Recompensa": { "val": "Menos de quinientos millones", "dif": "novato" }
+    }
+  },
+   {
+    "id": "mr4",
+    "name": "Babe (Mr. 4)",
+    "img": "imagenes/Mr4.png",
+    "tags": {
+      "Banda": { "val": "Baroque Works", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "supernova" },
+      "Haki": { "val": "Sin haki", "dif": "novato" },
+      "Fruta": { "val": "Sin fruta", "dif": "novato" },
+      "Recompensa": { "val": "Menos de quinientos millones", "dif": "novato" }
+    }
+  },
+  {
+    "id": "mr5",
+    "name": "Gem (Mr. 5)",
+    "img": "imagenes/Mr5.png",
+    "tags": {
+      "Banda": { "val": "Baroque Works", "dif": "novato" },
+      "Origen": { "val": "South Blue", "dif": "supernova" },
+      "Haki": { "val": "Sin haki", "dif": "novato" },
+      "Fruta": { "val": "Paramecia", "dif": "novato" },
+      "Recompensa": { "val": "Menos de quinientos millones", "dif": "novato" }
+    }
+  },
+  {
+    "id": "miss_doublefinger",
+    "name": "Zala (Miss Doublefinger)",
+    "img": "imagenes/MissDoublefinger.png",
+    "tags": {
+      "Banda": { "val": "Baroque Works", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "supernova" },
+      "Haki": { "val": "Sin haki", "dif": "novato" },
+      "Fruta": { "val": "Paramecia", "dif": "novato" },
+      "Recompensa": { "val": "Menos de quinientos millones", "dif": "novato" }
+    }
+  },
+  {
+    "id": "miss_goldenweek",
+    "name": "Marianne (Miss Goldenweek)",
+    "img": "imagenes/MissGoldenweek.png",
+    "tags": {
+      "Banda": { "val": "Baroque Works", "dif": "novato" },
+      "Origen": { "val": "North Blue", "dif": "supernova" },
+      "Haki": { "val": "Sin haki", "dif": "novato" },
+      "Fruta": { "val": "Sin fruta", "dif": "novato" },
+      "Recompensa": { "val": "Menos de quinientos millones", "dif": "novato" }
+    }
+  },
+  {
+    "id": "miss_merry_christmas",
+    "name": "Drophy (Miss Merry Christmas)",
+    "img": "imagenes/MissMerryChristmas.png",
+    "tags": {
+      "Banda": { "val": "Baroque Works", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "supernova" },
+      "Haki": { "val": "Sin haki", "dif": "novato" },
+      "Fruta": { "val": "Zoan", "dif": "novato" },
+      "Recompensa": { "val": "Menos de quinientos millones", "dif": "novato" }
+    }
+  },
+  {
+    "id": "miss_valentine",
+    "name": "Mikita (Miss Valentine)",
+    "img": "imagenes/MissValentine.png",
+    "tags": {
+      "Banda": { "val": "Baroque Works", "dif": "novato" },
+      "Origen": { "val": "West Blue", "dif": "supernova" },
+      "Haki": { "val": "Sin haki", "dif": "novato" },
+      "Fruta": { "val": "Paramecia", "dif": "novato" },
+    }
+  },
+  {
+    "id": "miss_monday",
+    "name": "Miss Monday",
+    "img": "imagenes/MissMonday.png",
+    "tags": {
+      "Banda": { "val": "Baroque Works", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "supernova" },
+      "Haki": { "val": "Sin haki", "dif": "novato" },
+      "Fruta": { "val": "Sin fruta", "dif": "novato" },
+    }
+  },
+   {
+    "id": "hiruluk",
+    "name": "Dr. Hiruluk",
+    "img": "imagenes/Hiruluk.png",
+    "tags": {
+      "Banda": { "val": "Reino de Sakura", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "supernova" },
+      "Especialidad": { "val": "Médico", "dif": "novato" },
+    }
+  },
+  {
+    "id": "kureha",
+    "name": "Dr. Kureha",
+    "img": "imagenes/Kureha.png",
+    "tags": {
+      "Banda": { "val": "Reino de Sakura", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "supernova" },
+      "Especialidad": { "val": "Médico", "dif": "novato" },
+    }
+  },
+  {
+    "id": "dalton",
+    "name": "Dalton",
+    "img": "imagenes/Dalton.png",
+    "tags": {
+      "Banda": { "val": "Reino de Sakura", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "supernova" },
+      "Fruta": { "val": "Zoan", "dif": "novato" },
+    }
+  },
+  {
+    "id": "wapol",
+    "name": "Wapol",
+    "img": "imagenes/Wapol.png",
+    "tags": {
+      "Banda": { "val": "Piratas de Wapol", "dif": "supernova" },
+      "Origen": { "val": "Grand Line", "dif": "supernova" },
+      "Haki": { "val": "Sin haki", "dif": "novato" },
+      "Fruta": { "val": "Paramecia", "dif": "novato" },
+      "Especialidad": { "val": "Capitanes pirata", "dif": "novato" },
+      "Recompensa": { "val": "Menos de quinientos millones", "dif": "novato" }
     }
   }
 ]
