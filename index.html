@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One Piece Connections - Generador Automático</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+    .container { max-width: 650px; width: 100%; text-align: center; position: relative; }
+    h1 { margin-bottom: 5px; color: #f59e0b; font-size: 2rem; text-transform: uppercase; letter-spacing: 1px; }
+    p { margin-bottom: 20px; color: #94a3b8; }
+
+    .lives-container { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; color: #e2e8f0; display: flex; justify-content: center; align-items: center; gap: 12px; }
+    .life-wrapper { position: relative; display: inline-flex; justify-content: center; align-items: center; }
+    .life-icon { font-size: 1.5rem; user-select: none; }
+    .life-wrapper.lost .life-icon { filter: opacity(0.3); }
+    .life-wrapper.lost::after {
+      content: "❌";
+      position: absolute;
+      font-size: 1.2rem;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .warning-msg { color: #ef4444; font-size: 0.9rem; font-weight: bold; min-height: 20px; margin-bottom: 10px; }
+
+    .board { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .solved-category { padding: 15px; border-radius: 8px; font-weight: bold; color: #0f172a; text-align: center; animation: fadeIn 0.3s ease; }
+    .solved-items-list { display: flex; justify-content: center; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
+    .solved-img { width: 45px; height: 45px; object-fit: cover; border-radius: 6px; border: 2px solid #0f172a; }
+    
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    
+    .card {
+      background-color: #1e293b;
+      border: 3px solid #334155;
+      border-radius: 8px;
+      height: 110px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+      overflow: hidden;
+      padding: 4px;
+    }
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+    .card:hover { border-color: #f59e0b; }
+    .card.selected { border-color: #f59e0b; box-shadow: 0 0 10px #f59e0b; transform: scale(0.96); }
+    
+    .controls { display: flex; justify-content: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+    button.action-btn {
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: 2px solid #334155;
+      background: #1e293b;
+      color: #f8fafc;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    button.action-btn:hover:not(:disabled) { background: #334155; }
+    button.submit { background: #f59e0b; color: #0f172a; border-color: #f59e0b; }
+    button.submit:hover:not(:disabled) { background: #d97706; border-color: #d97706; }
+    button:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(4px);
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+    .modal-content {
+      background: #1e293b;
+      border: 2px solid #ef4444;
+      border-radius: 12px;
+      padding: 25px;
+      max-width: 520px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      animation: fadeIn 0.3s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    .modal-content h2 { margin-bottom: 10px; font-size: 1.6rem; }
+    .solutions-list { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; margin-bottom: 20px; text-align: left; }
+
+    .close-btn {
+      position: absolute;
+      top: 12px; right: 15px;
+      background: none; border: none;
+      color: #94a3b8; font-size: 1.5rem;
+      font-weight: bold; cursor: pointer;
+    }
+    .close-btn:hover { color: #f8fafc; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>One Piece Connections</h1>
+  <p>Generación automática de grupos basada en atributos de personajes.</p>
+
+  <div class="lives-container">
+    Vidas: <span id="lives-icons"></span>
+  </div>
+
+  <div id="warning-msg" class="warning-msg"></div>
+
+  <div class="board">
+    <div id="solved-container"></div>
+    <div id="grid" class="grid"></div>
+  </div>
+
+  <div class="controls">
+    <button class="action-btn" onclick="generateNewBoard()">🔀 Nueva Partida</button>
+    <button class="action-btn" id="deselect-btn" onclick="deselectAll()">Deseleccionar</button>
+    <button class="action-btn submit" id="submit-btn" onclick="checkGuess()">Enviar</button>
+  </div>
+</div>
+
+<div id="gameover-modal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal()">&times;</button>
+    <h2 id="modal-title"></h2>
+    <p id="modal-text"></p>
+    <div id="solutions-container" class="solutions-list"></div>
+    <button class="action-btn" onclick="closeModal()">Entendido</button>
+  </div>
+</div>
+
+<script>
+  const MAX_LIVES = 4;
+  const COLORS = ["#fef08a", "#bbf7d0", "#bfdbfe", "#e9d5ff"];
+  
+  let database = [];
+  let currentCategories = []; 
+  let cards = [];
+  let selectedCards = [];
+  let lives = MAX_LIVES;
+  let gameOver = false;
+
+  // Cargar personajes.json al iniciar
+  window.addEventListener("DOMContentLoaded", () => {
+    fetch("personajes.json")
+      .then(res => res.json())
+      .then(data => {
+        database = data;
+        generateNewBoard();
+      })
+      .catch(err => {
+        document.getElementById("warning-msg").innerText = "Error cargando la base de datos de personajes.";
+      });
+  });
+
+  // Algoritmo que busca automáticamente 4 categorías válidas sin personajes repetidos
+  function generateNewBoard() {
+    if (database.length === 0) return;
+
+    // Map de todos los valores posibles de etiquetas
+    let tagGroups = {}; 
+
+    database.forEach(char => {
+      Object.entries(char.tags).forEach(([key, val]) => {
+        const groupName = `${key}: ${val}`;
+        if (!tagGroups[groupName]) tagGroups[groupName] = [];
+        tagGroups[groupName].push(char);
+      });
+    });
+
+    // Filtramos solo etiquetas con al menos 4 personajes
+    let validGroups = Object.keys(tagGroups).filter(group => tagGroups[group].length >= 4);
+
+    let selectedGroups = [];
+    let usedCharIds = new Set();
+
+    // Barajar grupos válidos
+    validGroups = validGroups.sort(() => Math.random() - 0.5);
+
+    for (let groupName of validGroups) {
+      if (selectedGroups.length === 4) break;
+
+      // Obtener personajes disponibles que no hayan sido usados
+      let availableChars = tagGroups[groupName].filter(c => !usedCharIds.has(c.id));
+
+      if (availableChars.length >= 4) {
+        // Escoger 4 personajes aleatorios de este grupo
+        let chosenChars = availableChars.sort(() => Math.random() - 0.5).slice(0, 4);
+        
+        selectedGroups.push({
+          name: groupName,
+          color: COLORS[selectedGroups.length],
+          items: chosenChars
+        });
+
+        chosenChars.forEach(c => usedCharIds.add(c.id));
+      }
+    }
+
+    if (selectedGroups.length < 4) {
+      document.getElementById("warning-msg").innerText = "No hay suficientes datos/combinaciones. Añade más personajes al JSON.";
+      return;
+    }
+
+    currentCategories = selectedGroups;
+    initGame();
+  }
+
+  function initGame() {
+    lives = MAX_LIVES;
+    gameOver = false;
+    cards = [];
+    selectedCards = [];
+    
+    document.getElementById("solved-container").innerHTML = "";
+    document.getElementById("warning-msg").innerText = "";
+    document.getElementById("submit-btn").disabled = false;
+    document.getElementById("deselect-btn").disabled = false;
+    document.getElementById("gameover-modal").style.display = "none";
+
+    currentCategories.forEach(cat => {
+      cat.items.forEach(item => {
+        cards.push({ name: item.name, img: item.img, category: cat.name });
+      });
+    });
+
+    cards = cards.sort(() => Math.random() - 0.5);
+    renderLives();
+    renderGrid();
+  }
+
+  function renderLives() {
+    const livesIcons = document.getElementById("lives-icons");
+    livesIcons.innerHTML = "";
+
+    for (let i = 0; i < MAX_LIVES; i++) {
+      const wrapper = document.createElement("div");
+      wrapper.className = `life-wrapper ${i >= lives ? 'lost' : ''}`;
+      
+      const span = document.createElement("span");
+      span.className = "life-icon";
+      span.innerText = "🏴‍☠️";
+
+      wrapper.appendChild(span);
+      livesIcons.appendChild(wrapper);
+    }
+  }
+
+  function renderGrid() {
+    const grid = document.getElementById("grid");
+    grid.innerHTML = "";
+
+    cards.forEach((card, index) => {
+      const cardEl = document.createElement("div");
+      cardEl.className = `card ${selectedCards.includes(index) ? 'selected' : ''}`;
+      
+      const imgEl = document.createElement("img");
+      imgEl.src = card.img;
+      imgEl.alt = card.name;
+      
+      imgEl.onerror = function() {
+        this.onerror = null;
+        this.src = "https://dummyimage.com/200x200/334155/ffffff.png&text=" + encodeURIComponent(card.name);
+      };
+
+      cardEl.appendChild(imgEl);
+      cardEl.onclick = () => toggleSelect(index);
+      grid.appendChild(cardEl);
+    });
+  }
+
+  function toggleSelect(index) {
+    if (gameOver) return;
+    if (selectedCards.includes(index)) {
+      selectedCards = selectedCards.filter(i => i !== index);
+    } else {
+      selectedCards.push(index);
+    }
+    
+    if (selectedCards.length === 4) {
+      document.getElementById("warning-msg").innerText = "";
+    }
+    
+    renderGrid();
+  }
+
+  function deselectAll() {
+    if (gameOver) return;
+    selectedCards = [];
+    document.getElementById("warning-msg").innerText = "";
+    renderGrid();
+  }
+
+  function checkGuess() {
+    if (gameOver) return;
+    const warningMsg = document.getElementById("warning-msg");
+
+    if (selectedCards.length !== 4) {
+      warningMsg.innerText = selectedCards.length < 4 ? "Selecciona 4 imágenes para validar." : "Solo puedes validar 4 imágenes a la vez.";
+      return;
+    }
+
+    warningMsg.innerText = "";
+
+    const selectedCategory = cards[selectedCards[0]].category;
+    const isCorrect = selectedCards.every(i => cards[i].category === selectedCategory);
+
+    if (isCorrect) {
+      const catData = currentCategories.find(c => c.name === selectedCategory);
+      
+      const solvedContainer = document.getElementById("solved-container");
+      const solvedEl = document.createElement("div");
+      solvedEl.className = "solved-category";
+      solvedEl.style.backgroundColor = catData.color;
+      
+      let imgsHtml = '<div class="solved-items-list">';
+      catData.items.forEach(item => {
+        imgsHtml += `<img src="${item.img}" title="${item.name}" class="solved-img" onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'"/>`;
+      });
+      imgsHtml += '</div>';
+
+      solvedEl.innerHTML = `<div>${catData.name}</div>${imgsHtml}`;
+      solvedContainer.appendChild(solvedEl);
+
+      cards = cards.filter((_, i) => !selectedCards.includes(i));
+      selectedCards = [];
+      renderGrid();
+
+      if (cards.length === 0) {
+        handleWin();
+      }
+    } else {
+      lives--;
+      renderLives();
+
+      if (lives === 0) {
+        handleGameOver();
+      } else {
+        warningMsg.innerText = "Grupo incorrecto. Inténtalo de nuevo.";
+      }
+    }
+  }
+
+  function handleWin() {
+    gameOver = true;
+    document.getElementById("submit-btn").disabled = true;
+    document.getElementById("deselect-btn").disabled = true;
+
+    const modalContent = document.querySelector("#gameover-modal .modal-content");
+    modalContent.style.borderColor = "#22c55e";
+
+    const titleEl = document.getElementById("modal-title");
+    titleEl.innerText = "🏆 ¡VICTORIA!";
+    titleEl.style.color = "#22c55e";
+
+    const textEl = document.getElementById("modal-text");
+    textEl.innerText = "¡Has descubierto todas las conexiones correctamente!";
+
+    renderModalSolutions();
+  }
+
+  function handleGameOver() {
+    gameOver = true;
+    document.getElementById("submit-btn").disabled = true;
+    document.getElementById("deselect-btn").disabled = true;
+
+    const modalContent = document.querySelector("#gameover-modal .modal-content");
+    modalContent.style.borderColor = "#ef4444";
+
+    const titleEl = document.getElementById("modal-title");
+    titleEl.innerText = "🏴‍☠️ ¡DERROTADO!";
+    titleEl.style.color = "#ef4444";
+
+    const textEl = document.getElementById("modal-text");
+    textEl.innerText = "Has agotado todas tus vidas. Solución de esta partida:";
+
+    renderModalSolutions();
+  }
+
+  function renderModalSolutions() {
+    const solutionsContainer = document.getElementById("solutions-container");
+    solutionsContainer.innerHTML = "";
+
+    currentCategories.forEach(cat => {
+      const solEl = document.createElement("div");
+      solEl.className = "solved-category";
+      solEl.style.backgroundColor = cat.color;
+      
+      let imgsHtml = '<div class="solved-items-list">';
+      cat.items.forEach(item => {
+        imgsHtml += `<img src="${item.img}" title="${item.name}" class="solved-img" onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'"/>`;
+      });
+      imgsHtml += '</div>';
+
+      solEl.innerHTML = `<div>${cat.name}</div>${imgsHtml}`;
+      solutionsContainer.appendChild(solEl);
+    });
+
+    document.getElementById("gameover-modal").style.display = "flex";
+  }
+
+  function closeModal() {
+    document.getElementById("gameover-modal").style.display = "none";
+  }
+
+  function closeModalOnOverlay(event) {
+    if (event.target.id === "gameover-modal") {
+      closeModal();
+    }
+  }
+</script>
+</body>
+</html>

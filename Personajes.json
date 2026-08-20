@@ -1,0 +1,80 @@
+[
+  {
+    "id": "luffy",
+    "name": "Luffy",
+    "img": "imagenes/luffy.png",
+    "tags": {
+      "Banda": "Sombrero de Paja",
+      "Rango/Titulo": "Yonko",
+      "Mar": "East Blue",
+      "Fruta": "Zoan Mitológica"
+      "Especialidad": "Capitán"
+    }
+  },
+  {
+    "id": "zoro",
+    "name": "Zoro",
+    "img": "imagenes/zoro.png",
+    "tags": {
+      "Banda": "Sombrero de Paja",
+      "Mar": "East Blue",
+      "Fruta": "Ninguna"
+      "Especialidad": "Espadachín"
+    }
+  },
+  {
+    "id": "nami",
+    "name": "Nami",
+    "img": "imagenes/nami.jpg",
+    "tags": {
+      "Banda": "Sombrero de Paja",
+      "Mar": "East Blue"
+    }
+  },
+  {
+    "id": "usopp",
+    "name": "Usopp",
+    "img": "imagenes/usopp.jpg",
+    "tags": {
+      "Banda": "Sombrero de Paja",
+      "Mar": "East Blue"
+    }
+  },
+  {
+    "id": "buggy",
+    "name": "Buggy",
+    "img": "imagenes/buggy.jpg",
+    "tags": {
+      "Banda": "Cross Guild",
+      "Rango/Titulo": "Yonko",
+      "Mar": "East Blue"
+    }
+  },
+  {
+    "id": "shanks",
+    "name": "Shanks",
+    "img": "imagenes/shanks.jpg",
+    "tags": {
+      "Banda": "Piratas del Pelirrojo",
+      "Rango/Titulo": "Yonko"
+    }
+  },
+  {
+    "id": "teach",
+    "name": "Barbanegra",
+    "img": "imagenes/teach.jpg",
+    "tags": {
+      "Banda": "Piratas de Barbanegra",
+      "Rango/Titulo": "Yonko"
+    }
+  },
+  {
+    "id": "mihawk",
+    "name": "Mihawk",
+    "img": "imagenes/mihawk.jpg",
+    "tags": {
+      "Banda": "Cross Guild",
+      "Especialidad": "Espadachín"
+    }
+  }
+]
