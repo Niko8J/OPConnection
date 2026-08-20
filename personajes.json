@@ -2,7 +2,7 @@
   {
     "id": "luffy",
     "name": "Monkey D. Luffy",
-    "img": "imagenes/Luffy.png", "alt": "Monkey D. Luffy", "class": "card img",
+    "img": "imagenes/Luffy.png",
     "tags": {
       "Banda": { "val": "Sombrero de Paja", "dif": "novato" },
       "Titulo": { "val": ["Yonko", "Supernova"], "dif": "yonko" },
