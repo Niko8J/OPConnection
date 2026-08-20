@@ -60,7 +60,7 @@
     "name": "Vinsmoke Sanji",
     "img": "imagenes/Sanji.png",
     "tags": {
-      "Banda": { "val": "Sombrero de Paja", "dif": "novato" },
+      "Banda": { "val": ["Sombrero de Paja", "Germa 66"], "dif": "novato" },
       "Origen": { "val": "North Blue", "dif": "supernova" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
@@ -73,7 +73,7 @@
     "name": "Tony Tony Chopper",
     "img": "imagenes/Chopper.png",
     "tags": {
-      "Banda": { "val": "Sombrero de Paja", "dif": "novato" },
+      "Banda": { "val": ["Sombrero de Paja", "Sakura Kingdom"], "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Zoan", "dif": "supernova" },
@@ -87,7 +87,7 @@
     "name": "Nico Robin",
     "img": "imagenes/Robin.png",
     "tags": {
-      "Banda": { "val": ["Sombrero de Paja", "Baroque Works"], "dif": "novato" },
+      "Banda": { "val": ["Sombrero de Paja", "Baroque Works", "Eruditos de Ohara"], "dif": "novato" },
       "Origen": { "val": "West Blue", "dif": "supernova" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
@@ -114,7 +114,7 @@
     "name": "Brook",
     "img": "imagenes/Brook.png",
     "tags": {
-      "Banda": { "val": "Sombrero de Paja", "dif": "novato" },
+      "Banda": { "val": ["Sombrero de Paja", "Piratas Rumbar"], "dif": "novato" },
       "Origen": { "val": "West Blue", "dif": "supernova" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
@@ -128,7 +128,7 @@
     "name": "Jinbe",
     "img": "imagenes/Jinbe.png",
     "tags": {
-      "Banda": { "val": "Sombrero de Paja", "dif": "novato" },
+      "Banda": { "val": ["Sombrero de Paja", "Piratas del Sol"], "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
@@ -151,15 +151,13 @@
     }
   },
   {
-    "id": "carue",
-    "name": "Carue",
-    "img": "imagenes/Carue.png",
+    "id": "karoo",
+    "name": "Karoo",
+    "img": "imagenes/Karoo.png",
     "tags": {
       "Banda": { "val": ["Sombrero de Paja", "Baroque Works", "Reino de Alabasta"], "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
-      "Haki": { "val": "Ninguno", "dif": "novato" },
-      "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Raza": { "val": "Pato de Cintas Karoo", "dif": "novato" }
+      "Raza": { "val": "Superpato", "dif": "novato" }
     }
   },
   {
@@ -169,7 +167,6 @@
     "tags": {
       "Banda": { "val": "Reino de Alabasta", "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
-      "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Zoan", "dif": "novato" }
     }
   },
@@ -180,7 +177,6 @@
     "tags": {
       "Banda": { "val": "Reino de Alabasta", "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
-      "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Zoan", "dif": "novato" }
     }
   },
@@ -203,10 +199,7 @@
     "tags": {
       "Banda": { "val": "Sombrero de Paja", "dif": "novato" },
       "Origen": { "val": "East Blue", "dif": "novato" },
-      "Haki": { "val": "Ninguno", "dif": "novato" },
-      "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Barco", "dif": "novato" },
-      "Raza": { "val": "Barco / Klabautermann", "dif": "supernova" },
+      "Raza": { "val": "Barco", "dif": "supernova" },
       "Estado": { "val": "Fallecido", "dif": "novato" }
     }
   },
@@ -217,9 +210,6 @@
     "tags": {
       "Banda": { "val": "Sombrero de Paja", "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
-      "Haki": { "val": "Ninguno", "dif": "novato" },
-      "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Barco", "dif": "novato" },
       "Raza": { "val": "Barco", "dif": "novato" }
     }
   },
@@ -507,7 +497,7 @@
     "name": "Bartholomew Kuma",
     "img": "imagenes/Kuma.png",
     "tags": {
-      "Banda": { "val": ["Ejército Revolucionario", "Marina"], "dif": "supernova" },
+      "Banda": { "val": "Ejército Revolucionario", "dif": "supernova" },
       "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
       "Titulo": { "val": "Shichibukai", "dif": "supernova" },
       "Origen": { "val": "South Blue", "dif": "supernova" },
@@ -534,7 +524,7 @@
   },
   {
     "id": "king",
-    "name": "King el Albero",
+    "name": "King",
     "img": "imagenes/King.png",
     "tags": {
       "Banda": { "val": "Piratas Bestias", "dif": "supernova" },
@@ -563,11 +553,10 @@
     "name": "S-Snake",
     "img": "imagenes/SSnake.png",
     "tags": {
-      "Banda": { "val": "Seraphim", "dif": "supernova" },
+      "Título": { "val": "Seraphim", "dif": "supernova" },
       "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
-      "Origen": { "val": "Grand Line", "dif": "novato" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Raza": { "val": "Lunaria / Cyborg", "dif": "yonko" }
+      "Raza": { "val": ["Lunaria", "Cyborg"], "dif": "yonko" }
     }
   },
   {
@@ -575,11 +564,10 @@
     "name": "S-Hawk",
     "img": "imagenes/SHawk.png",
     "tags": {
-      "Banda": { "val": "Seraphim", "dif": "supernova" },
+      "Título": { "val": "Seraphim", "dif": "supernova" },
       "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
-      "Origen": { "val": "Grand Line", "dif": "novato" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Raza": { "val": "Lunaria / Cyborg", "dif": "yonko" },
+      "Raza": { "val": ["Lunaria", "Cyborg"], "dif": "yonko" }
       "Especialidad": { "val": "Espadachín", "dif": "supernova" }
     }
   },
@@ -588,11 +576,10 @@
     "name": "S-Shark",
     "img": "imagenes/SShark.png",
     "tags": {
-      "Banda": { "val": "Seraphim", "dif": "supernova" },
+      "Título": { "val": "Seraphim", "dif": "supernova" },
       "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
-      "Origen": { "val": "Grand Line", "dif": "novato" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Raza": { "val": "Lunaria / Cyborg", "dif": "yonko" }
+      "Raza": { "val": ["Lunaria", "Cyborg"], "dif": "yonko" }
     }
   },
   {
@@ -600,11 +587,10 @@
     "name": "S-Bear",
     "img": "imagenes/SBear.png",
     "tags": {
-      "Banda": { "val": "Seraphim", "dif": "supernova" },
+      "Título": { "val": "Seraphim", "dif": "supernova" },
       "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
-      "Origen": { "val": "Grand Line", "dif": "novato" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Raza": { "val": "Lunaria / Cyborg", "dif": "yonko" }
+      "Raza": { "val": ["Lunaria", "Cyborg"], "dif": "yonko" }
     }
   }
 ]
