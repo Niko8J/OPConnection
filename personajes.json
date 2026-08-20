@@ -9,7 +9,7 @@
       "Origen": { "val": "East Blue", "dif": "novato" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": "Zoan mitológica", "dif": "yonko" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Especialidad": { "val": "Capitanes pirata", "dif": "novato" },
       "Recompensa": { "val": "Más de mil millones", "dif": "novato" },
       "D": { "val": "Voluntad de la D.", "dif": "supernova" },
       "Despertar": { "val": "Fruta despertada", "dif": "supernova" }
@@ -224,7 +224,7 @@
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": "Sin haki", "dif": "novato" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Especialidad": { "val": "Capitanes pirata", "dif": "novato" },
       "Recompensa": { "val": "Más de mil millones", "dif": "supernova" }
     }
   },
@@ -238,7 +238,7 @@
       "Origen": { "val": "West Blue", "dif": "supernova" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": "Sin fruta", "dif": "novato" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Especialidad": { "val": "Capitanes pirata", "dif": "novato" },
       "Recompensa": { "val": "Más de mil millones", "dif": "supernova" }
     }
   },
@@ -255,8 +255,8 @@
     }
   },
   {
-    "id": "teach",
-    "name": "Marshal D. Teach (Barbanegra)",
+    "id": "barbanegra",
+    "name": "Marshall D. Teach (Barbanegra)",
     "img": "imagenes/Barbanegra.png",
     "tags": {
       "Banda": { "val": ["Piratas de Barbanegra", "Piratas de Barbablanca"], "dif": "supernova" },
@@ -264,7 +264,7 @@
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": ["Paramecia", "Logia"], "dif": "yonko" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Especialidad": { "val": "Capitanes pirata", "dif": "novato" },
       "Recompensa": { "val": "Más de mil millones", "dif": "supernova" },
       "D": { "val": "Voluntad de la D.", "dif": "supernova" }
     }
@@ -341,7 +341,7 @@
       "Origen": { "val": "North Blue", "dif": "supernova" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": ["Capitán", "Médico"], "dif": "novato" },
+      "Especialidad": { "val": ["Capitanes pirata", "Médico"], "dif": "novato" },
       "Recompensa": { "val": "Más de mil millones", "dif": "supernova" },
       "D": { "val": "Voluntad de la D.", "dif": "supernova" },
       "Despertar": { "val": "Fruta despertada", "dif": "supernova" }
@@ -357,7 +357,7 @@
       "Origen": { "val": "South Blue", "dif": "supernova" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Especialidad": { "val": "Capitanes pirata", "dif": "novato" },
       "Recompensa": { "val": "Más de mil millones", "dif": "supernova" },
       "Despertar": { "val": "Fruta despertada", "dif": "supernova" }
     }
@@ -372,7 +372,7 @@
       "Origen": { "val": "Red Line", "dif": "yonko" },
       "Haki": { "val": "Haki de armadura", "dif": "supernova" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Especialidad": { "val": "Capitanes pirata", "dif": "novato" },
       "Recompensa": { "val": "Entre 100M y 499M", "dif": "supernova" }
     }
   },
@@ -385,7 +385,7 @@
       "Titulo": { "val": "Supernova", "dif": "supernova" },
       "Origen": { "val": "West Blue", "dif": "supernova" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Especialidad": { "val": "Capitanes pirata", "dif": "novato" },
       "Recompensa": { "val": "Entre 100M y 499M", "dif": "supernova" }
     }
   },
@@ -520,7 +520,7 @@
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": "Zoan mitológica", "dif": "supernova" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Especialidad": { "val": "Capitanes pirata", "dif": "novato" },
       "Recompensa": { "val": "Más de mil millones", "dif": "supernova" },
       "Despertar": { "val": "Fruta despertada", "dif": "supernova" }
     }
@@ -534,7 +534,7 @@
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
       "Fruta": { "val": "Zoan", "dif": "supernova" },
-      "Raza": { "val": "Lunaria", "dif": "yonko" },
+      "Raza": { "val": "Lunarian", "dif": "yonko" },
       "Recompensa": { "val": "Más de mil millones", "dif": "supernova" }
     }
   },
@@ -559,7 +559,7 @@
       "Título": { "val": "Seraphim", "dif": "supernova" },
       "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Raza": { "val": ["Lunaria", "Cyborg"], "dif": "yonko" }
+      "Raza": { "val": ["Lunarian", "Cyborg"], "dif": "yonko" }
     }
   },
   {
@@ -570,7 +570,7 @@
       "Título": { "val": "Seraphim", "dif": "supernova" },
       "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Raza": { "val": ["Lunaria", "Cyborg"], "dif": "yonko" },
+      "Raza": { "val": ["Lunarian", "Cyborg"], "dif": "yonko" },
       "Especialidad": { "val": "Espadachín", "dif": "supernova" }
     }
   },
@@ -582,7 +582,7 @@
       "Título": { "val": "Seraphim", "dif": "supernova" },
       "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Raza": { "val": ["Lunaria", "Cyborg"], "dif": "yonko" }
+      "Raza": { "val": ["Lunarian", "Cyborg"], "dif": "yonko" }
     }
   },
   {
@@ -593,7 +593,7 @@
       "Título": { "val": "Seraphim", "dif": "supernova" },
       "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Raza": { "val": ["Lunaria", "Cyborg"], "dif": "yonko" }
+      "Raza": { "val": ["Lunarian", "Cyborg"], "dif": "yonko" }
     }
   },
   {
@@ -606,7 +606,7 @@
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Especialidad": { "val": "Capitanes pirata", "dif": "novato" },
       "Recompensa": { "val": "Más de mil millones", "dif": "supernova" },
       "Despertar": { "val": "Fruta despertada", "dif": "supernova" }
     }
@@ -634,7 +634,7 @@
       "Origen": { "val": "Calm Belt", "dif": "supernova" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Especialidad": { "val": "Capitanes pirata", "dif": "novato" },
       "Recompensa": { "val": "Más de mil millones", "dif": "supernova" }
     }
   },
@@ -659,7 +659,7 @@
       "Origen": { "val": "North Blue", "dif": "supernova" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Especialidad": { "val": "Capitanes pirata", "dif": "novato" },
       "Recompensa": { "val": "Entre 100M y 499M", "dif": "supernova" },
       "Despertar": { "val": "Fruta despertada", "dif": "supernova" }
     }
@@ -720,7 +720,7 @@
     "tags": {
       "Banda": { "val": "Ejército Revolucionario", "dif": "supernova" },
       "Origen": { "val": "East Blue", "dif": "novato" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Especialidad": { "val": "Capitanes pirata", "dif": "novato" },
       "D": { "val": "Voluntad de la D.", "dif": "supernova" }
     }
   },
