@@ -2,7 +2,7 @@
   {
     "id": "luffy",
     "name": "Luffy",
-    "img": "imagenes/luffy.png",
+    "img": "imagenes/Luffy.png",
     "tags": {
       "Banda": "Sombrero de Paja",
       "Rango/Titulo": "Yonko",
@@ -14,7 +14,7 @@
   {
     "id": "zoro",
     "name": "Zoro",
-    "img": "imagenes/zoro.png",
+    "img": "imagenes/Zoro.png",
     "tags": {
       "Banda": "Sombrero de Paja",
       "Mar": "East Blue",
