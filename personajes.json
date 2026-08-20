@@ -954,8 +954,6 @@
     "img": "imagenes/Zephyr.png",
     "tags": {
       "Banda": { "val": ["Neo Marina", "Marina"], "dif": "supernova" },
-      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
-      "Titulo": { "val": "Almirante", "dif": "yonko" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
       "Fruta": { "val": "Sin fruta", "dif": "novato" },
