@@ -1268,7 +1268,7 @@
       "Banda": { "val": "Baroque Works", "dif": "novato" },
       "Origen": { "val": "West Blue", "dif": "supernova" },
       "Haki": { "val": "Sin haki", "dif": "novato" },
-      "Fruta": { "val": "Paramecia", "dif": "novato" },
+      "Fruta": { "val": "Paramecia", "dif": "novato" }
     }
   },
   {
@@ -1279,7 +1279,7 @@
       "Banda": { "val": "Baroque Works", "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "supernova" },
       "Haki": { "val": "Sin haki", "dif": "novato" },
-      "Fruta": { "val": "Sin fruta", "dif": "novato" },
+      "Fruta": { "val": "Sin fruta", "dif": "novato" }
     }
   },
    {
@@ -1289,7 +1289,7 @@
     "tags": {
       "Banda": { "val": "Reino de Sakura", "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "supernova" },
-      "Especialidad": { "val": "Médico", "dif": "novato" },
+      "Especialidad": { "val": "Médico", "dif": "novato" }
     }
   },
   {
@@ -1299,7 +1299,7 @@
     "tags": {
       "Banda": { "val": "Reino de Sakura", "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "supernova" },
-      "Especialidad": { "val": "Médico", "dif": "novato" },
+      "Especialidad": { "val": "Médico", "dif": "novato" }
     }
   },
   {
@@ -1309,7 +1309,7 @@
     "tags": {
       "Banda": { "val": "Reino de Sakura", "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "supernova" },
-      "Fruta": { "val": "Zoan", "dif": "novato" },
+      "Fruta": { "val": "Zoan", "dif": "novato" }
     }
   },
   {
