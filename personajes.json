@@ -352,11 +352,106 @@
     "name": "Capone 'Gang' Bege",
     "img": "imagenes/Capone.png",
     "tags": {
-      "Banda": { "val": "Piratas Fire Tank", "dif": "supernova" },
+      "Banda": { "val": ["Piratas Fire Tank", "Piratas de Big Mom"], "dif": "supernova" },
       "Titulo": { "val": "Supernova", "dif": "supernova" },
       "Origen": { "val": "West Blue", "dif": "supernova" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
       "Especialidad": { "val": "Capitán", "dif": "novato" }
+    }
+  },
+  {
+    "id": "killer",
+    "name": "Killer",
+    "img": "imagenes/Killer.png",
+    "tags": {
+      "Banda": { "val": "Piratas de Kid", "dif": "supernova" },
+      "Titulo": { "val": "Supernova", "dif": "supernova" },
+      "Origen": { "val": "South Blue", "dif": "supernova" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Smile", "dif": "novato" }
+    }
+  },
+  {
+    "id": "smoker",
+    "name": "Smoker",
+    "img": "imagenes/Smoker.png",
+    "tags": {
+      "Banda": { "val": "Marina", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Logia", "dif": "supernova" },
+    }
+  },
+  {
+    "id": "tashigi",
+    "name": "Tashigi",
+    "img": "imagenes/Tashigi.png",
+    "tags": {
+      "Banda": { "val": "Marina", "dif": "novato" },
+      "Origen": { "val": "East Blue", "dif": "novato" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Ninguna", "dif": "novato" },
+      "Especialidad": { "val": "Espadachín", "dif": "supernova" }
+    }
+  },
+  {
+    "id": "kizaru",
+    "name": "Borsalino (Kizaru)",
+    "img": "imagenes/Kizaru.png",
+    "tags": {
+      "Banda": { "val": "Marina", "dif": "novato" },
+      "Titulo": { "val": "Almirante", "dif": "yonko" },
+      "Origen": { "val": "North Blue", "dif": "supernova" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Logia", "dif": "supernova" },
+      "Especialidad": { "val": "Marine", "dif": "novato" }
+    }
+  },
+  {
+    "id": "fujitora",
+    "name": "Issho (Fujitora)",
+    "img": "imagenes/Fujitora.png",
+    "tags": {
+      "Banda": { "val": "Marina", "dif": "novato" },
+      "Titulo": { "val": "Almirante", "dif": "yonko" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Paramecia", "dif": "supernova" },
+      "Especialidad": { "val": "Espadachín", "dif": "supernova" }
+    }
+  },
+  {
+    "id": "sabo",
+    "name": "Sabo",
+    "img": "imagenes/Sabo.png",
+    "tags": {
+      "Banda": { "val": "Ejército Revolucionario", "dif": "supernova" },
+      "Origen": { "val": "East Blue", "dif": "supernova" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Logia", "dif": "supernova" },
+    }
+  },
+  {
+    "id": "marco",
+    "name": "Marco el Fénix",
+    "img": "imagenes/Marco.png",
+    "tags": {
+      "Banda": { "val": "Piratas de Barbablanca", "dif": "supernova" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Zoan mitológica", "dif": "supernova" },
+      "Especialidad": { "val": "Médico", "dif": "yonko" }
+    }
+  },
+  {
+    "id": "lucci",
+    "name": "Rob Lucci",
+    "img": "imagenes/Lucci.png",
+    "tags": {
+      "Banda": { "val": "CP0", "dif": "yonko" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Zoan", "dif": "supernova" }
     }
   }
 ]
