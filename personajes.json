@@ -219,5 +219,44 @@
       "Fruta": "Ninguna",
       "Especialidad": "Espadachín"    
     }
+  },
+  {
+    "id": "law",
+    "name": "Trafalgar D. Water Law",
+    "img": "imagenes/Law.png",
+    "tags": {
+      "Banda": "Piratas Heart",
+      "Titulo": ["Shichibukai", "Supernova"],
+      "Origen": "North Blue",
+      "Haki": ["Haki del conquistador", "Haki de armadura", "Haki de observación"],
+      "Fruta": "Paramecia",
+      "Especialidad": ["Capitán", "Médico"]
+    }
+  },
+  {
+    "id": "kid",
+    "name": "Eustass Kid",
+    "img": "imagenes/Kid.png",
+    "tags": {
+      "Banda": "Piratas de Kid",
+      "Titulo": ["Supernova"],
+      "Origen": "South Blue",
+      "Haki": ["Haki del conquistador", "Haki de armadura", "Haki de observación"],
+      "Fruta": "Paramecia",
+      "Especialidad": "Capitán"
+    }
+  },
+  {
+    "id": "bonney",
+    "name": "Jewelry Bonney",
+    "img": "imagenes/Bonney.png",
+    "tags": {
+      "Banda": "Piratas de Bonney",
+      "Titulo": ["Supernova"],
+      "Origen": "Red Line",
+      "Haki": "Haki de armadura",
+      "Fruta": "Paramecia",
+      "Especialidad": "Capitán"
+    }
   }
 ]
