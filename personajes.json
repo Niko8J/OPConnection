@@ -8,8 +8,11 @@
       "Titulo": { "val": ["Yonko", "Supernova"], "dif": "yonko" },
       "Origen": { "val": "East Blue", "dif": "novato" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
-      "Fruta": { "val": "Zoan Mitológica", "dif": "yonko" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" }
+      "Fruta": { "val": "Zoan mitológica", "dif": "yonko" },
+      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Recompensa": { "val": "Más de mil millones", "dif": "novato" },
+      "D": { "val": "Voluntad de la D.", "dif": "supernova" },
+      "Despertar": { "val": "Fruta despertada", "dif": "supernova" }
     }
   },
   {
@@ -22,7 +25,8 @@
       "Origen": { "val": "East Blue", "dif": "novato" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Espadachín", "dif": "supernova" }
+      "Especialidad": { "val": "Espadachín", "dif": "supernova" },
+      "Recompensa": { "val": "Más de mil millones", "dif": "supernova" }
     }
   },
   {
@@ -34,7 +38,8 @@
       "Origen": { "val": "East Blue", "dif": "novato" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Navegante", "dif": "novato" }
+      "Especialidad": { "val": "Navegante", "dif": "novato" },
+      "Recompensa": { "val": "Entre 100M y 499M", "dif": "supernova" }
     }
   },
   {
@@ -46,7 +51,8 @@
       "Origen": { "val": "East Blue", "dif": "novato" },
       "Haki": { "val": "Haki de observación", "dif": "supernova" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Tirador", "dif": "supernova" }
+      "Especialidad": { "val": "Tirador", "dif": "supernova" },
+      "Recompensa": { "val": "Entre 500M y mil millones", "dif": "supernova" }
     }
   },
   {
@@ -58,7 +64,8 @@
       "Origen": { "val": "North Blue", "dif": "supernova" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Cocinero", "dif": "novato" }
+      "Especialidad": { "val": "Cocinero", "dif": "novato" },
+      "Recompensa": { "val": "Más de mil millones", "dif": "supernova" }
     }
   },
   {
@@ -70,7 +77,9 @@
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Zoan", "dif": "supernova" },
-      "Especialidad": { "val": "Médico", "dif": "novato" }
+      "Especialidad": { "val": "Médico", "dif": "novato" },
+      "Raza": { "val": "Reno", "dif": "novato" },
+      "Recompensa": { "val": "Menos de 100M", "dif": "novato" }
     }
   },
   {
@@ -82,7 +91,8 @@
       "Origen": { "val": "West Blue", "dif": "supernova" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Arqueóloga", "dif": "supernova" }
+      "Especialidad": { "val": "Arqueóloga", "dif": "supernova" },
+      "Recompensa": { "val": "Entre 500M y mil millones", "dif": "supernova" }
     }
   },
   {
@@ -94,7 +104,9 @@
       "Origen": { "val": "South Blue", "dif": "supernova" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Carpintero", "dif": "novato" }
+      "Especialidad": { "val": "Carpintero", "dif": "novato" },
+      "Raza": { "val": "Cyborg", "dif": "novato" },
+      "Recompensa": { "val": "Entre 100M y 499M", "dif": "supernova" }
     }
   },
   {
@@ -106,7 +118,9 @@
       "Origen": { "val": "West Blue", "dif": "supernova" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Músico", "dif": "novato" }
+      "Especialidad": { "val": "Músico", "dif": "novato" },
+      "Raza": { "val": "Esqueleto", "dif": "novato" },
+      "Recompensa": { "val": "Entre 100M y 499M", "dif": "supernova" }
     }
   },
   {
@@ -118,7 +132,9 @@
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Timonel", "dif": "supernova" }
+      "Especialidad": { "val": "Timonel", "dif": "supernova" },
+      "Raza": { "val": "Gyojin", "dif": "novato" },
+      "Recompensa": { "val": "Más de mil millones", "dif": "supernova" }
     }
   },
   {
@@ -130,7 +146,8 @@
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Princesa", "dif": "supernova" }
+      "Especialidad": { "val": "Princesa", "dif": "supernova" },
+      "D": { "val": "Voluntad de la D.", "dif": "supernova" }
     }
   },
   {
@@ -141,10 +158,11 @@
       "Banda": { "val": ["Sombrero de Paja", "Baroque Works", "Reino de Alabasta"], "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
-      "Fruta": { "val": "Ninguna", "dif": "novato" }
+      "Fruta": { "val": "Ninguna", "dif": "novato" },
+      "Raza": { "val": "Pato de Cintas Karoo", "dif": "novato" }
     }
   },
-   {
+  {
     "id": "pell",
     "name": "Pell",
     "img": "imagenes/Pell.png",
@@ -155,7 +173,7 @@
       "Fruta": { "val": "Zoan", "dif": "novato" }
     }
   },
-   {
+  {
     "id": "chaka",
     "name": "Chaka",
     "img": "imagenes/Chaka.png",
@@ -166,14 +184,16 @@
       "Fruta": { "val": "Zoan", "dif": "novato" }
     }
   },
-   {
+  {
     "id": "Cobra",
     "name": "Nefertari D. Cobra",
     "img": "imagenes/Cobra.png",
     "tags": {
       "Banda": { "val": "Reino de Alabasta", "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
-      "Haki": { "val": "Ninguno", "dif": "novato" }
+      "Haki": { "val": "Ninguno", "dif": "novato" },
+      "Estado": { "val": "Fallecido", "dif": "supernova" },
+      "D": { "val": "Voluntad de la D.", "dif": "supernova" }
     }
   },
   {
@@ -185,7 +205,9 @@
       "Origen": { "val": "East Blue", "dif": "novato" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Barco", "dif": "novato" }
+      "Especialidad": { "val": "Barco", "dif": "novato" },
+      "Raza": { "val": "Barco / Klabautermann", "dif": "supernova" },
+      "Estado": { "val": "Fallecido", "dif": "novato" }
     }
   },
   {
@@ -197,7 +219,8 @@
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Barco", "dif": "novato" }
+      "Especialidad": { "val": "Barco", "dif": "novato" },
+      "Raza": { "val": "Barco", "dif": "novato" }
     }
   },
   {
@@ -210,7 +233,8 @@
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": "Ninguno", "dif": "novato" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" }
+      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Recompensa": { "val": "Más de mil millones", "dif": "supernova" }
     }
   },
   {
@@ -223,7 +247,8 @@
       "Origen": { "val": "West Blue", "dif": "supernova" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" }
+      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Recompensa": { "val": "Más de mil millones", "dif": "supernova" }
     }
   },
   {
@@ -248,7 +273,9 @@
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": ["Paramecia", "Logia"], "dif": "yonko" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" }
+      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Recompensa": { "val": "Más de mil millones", "dif": "supernova" },
+      "D": { "val": "Voluntad de la D.", "dif": "supernova" }
     }
   },
   {
@@ -260,7 +287,8 @@
       "Origen": { "val": "East Blue", "dif": "novato" },
       "Haki": { "val": "Haki de observación", "dif": "supernova" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Tirador", "dif": "supernova" }
+      "Especialidad": { "val": "Tirador", "dif": "supernova" },
+      "Recompensa": { "val": "Entre 100M y 499M", "dif": "supernova" }
     }
   },
   {
@@ -273,7 +301,8 @@
       "Origen": { "val": "Desconocido", "dif": "supernova" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
-      "Especialidad": { "val": "Espadachín", "dif": "supernova" }
+      "Especialidad": { "val": "Espadachín", "dif": "supernova" },
+      "Recompensa": { "val": "Más de mil millones", "dif": "supernova" }
     }
   },
   {
@@ -285,7 +314,8 @@
       "Titulo": { "val": "Shichibukai", "dif": "supernova" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
-      "Fruta": { "val": "Logia", "dif": "supernova" }
+      "Fruta": { "val": "Logia", "dif": "supernova" },
+      "Recompensa": { "val": "Más de mil millones", "dif": "supernova" }
     }
   },
   {
@@ -295,7 +325,8 @@
     "tags": {
       "Banda": { "val": ["Baroque Works", "Cross Guild"], "dif": "supernova" },
       "Origen": { "val": "South Blue", "dif": "supernova" },
-      "Fruta": { "val": "Paramecia", "dif": "supernova" }
+      "Fruta": { "val": "Paramecia", "dif": "supernova" },
+      "Recompensa": { "val": "Menos de 100M", "dif": "novato" }
     }
   },
   {
@@ -305,7 +336,8 @@
     "tags": {
       "Banda": { "val": ["Baroque Works", "Cross Guild"], "dif": "supernova" },
       "Origen": { "val": "West Blue", "dif": "supernova" },
-      "Fruta": { "val": "Paramecia", "dif": "supernova" }
+      "Fruta": { "val": "Paramecia", "dif": "supernova" },
+      "Recompensa": { "val": "Menos de 100M", "dif": "novato" }
     }
   },
   {
@@ -318,7 +350,10 @@
       "Origen": { "val": "North Blue", "dif": "supernova" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": ["Capitán", "Médico"], "dif": "novato" }
+      "Especialidad": { "val": ["Capitán", "Médico"], "dif": "novato" },
+      "Recompensa": { "val": "Más de mil millones", "dif": "supernova" },
+      "D": { "val": "Voluntad de la D.", "dif": "supernova" },
+      "Despertar": { "val": "Fruta despertada", "dif": "supernova" }
     }
   },
   {
@@ -331,7 +366,9 @@
       "Origen": { "val": "South Blue", "dif": "supernova" },
       "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" }
+      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Recompensa": { "val": "Más de mil millones", "dif": "supernova" },
+      "Despertar": { "val": "Fruta despertada", "dif": "supernova" }
     }
   },
   {
@@ -344,7 +381,8 @@
       "Origen": { "val": "Red Line", "dif": "yonko" },
       "Haki": { "val": "Haki de armadura", "dif": "supernova" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" }
+      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Recompensa": { "val": "Entre 100M y 499M", "dif": "supernova" }
     }
   },
   {
@@ -356,7 +394,8 @@
       "Titulo": { "val": "Supernova", "dif": "supernova" },
       "Origen": { "val": "West Blue", "dif": "supernova" },
       "Fruta": { "val": "Paramecia", "dif": "supernova" },
-      "Especialidad": { "val": "Capitán", "dif": "novato" }
+      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Recompensa": { "val": "Entre 100M y 499M", "dif": "supernova" }
     }
   },
   {
@@ -368,7 +407,8 @@
       "Titulo": { "val": "Supernova", "dif": "supernova" },
       "Origen": { "val": "South Blue", "dif": "supernova" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
-      "Fruta": { "val": "Smile", "dif": "novato" }
+      "Fruta": { "val": "Smile", "dif": "novato" },
+      "Recompensa": { "val": "Entre 100M y 499M", "dif": "supernova" }
     }
   },
   {
@@ -377,9 +417,10 @@
     "img": "imagenes/Smoker.png",
     "tags": {
       "Banda": { "val": "Marina", "dif": "novato" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
-      "Fruta": { "val": "Logia", "dif": "supernova" },
+      "Fruta": { "val": "Logia", "dif": "supernova" }
     }
   },
   {
@@ -388,6 +429,7 @@
     "img": "imagenes/Tashigi.png",
     "tags": {
       "Banda": { "val": "Marina", "dif": "novato" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
       "Origen": { "val": "East Blue", "dif": "novato" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
       "Fruta": { "val": "Ninguna", "dif": "novato" },
@@ -400,6 +442,7 @@
     "img": "imagenes/Kizaru.png",
     "tags": {
       "Banda": { "val": "Marina", "dif": "novato" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
       "Titulo": { "val": "Almirante", "dif": "yonko" },
       "Origen": { "val": "North Blue", "dif": "supernova" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
@@ -413,6 +456,7 @@
     "img": "imagenes/Fujitora.png",
     "tags": {
       "Banda": { "val": "Marina", "dif": "novato" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
       "Titulo": { "val": "Almirante", "dif": "yonko" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
@@ -429,6 +473,7 @@
       "Origen": { "val": "East Blue", "dif": "supernova" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
       "Fruta": { "val": "Logia", "dif": "supernova" },
+      "Recompensa": { "val": "Entre 500M y mil millones", "dif": "supernova" }
     }
   },
   {
@@ -440,7 +485,8 @@
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
       "Fruta": { "val": "Zoan mitológica", "dif": "supernova" },
-      "Especialidad": { "val": "Médico", "dif": "yonko" }
+      "Especialidad": { "val": "Médico", "dif": "yonko" },
+      "Recompensa": { "val": "Más de mil millones", "dif": "supernova" }
     }
   },
   {
@@ -449,9 +495,116 @@
     "img": "imagenes/Lucci.png",
     "tags": {
       "Banda": { "val": "CP0", "dif": "yonko" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
       "Origen": { "val": "Grand Line", "dif": "novato" },
       "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
-      "Fruta": { "val": "Zoan", "dif": "supernova" }
+      "Fruta": { "val": "Zoan", "dif": "supernova" },
+      "Despertar": { "val": "Fruta despertada", "dif": "supernova" }
+    }
+  },
+  {
+    "id": "kuma",
+    "name": "Bartholomew Kuma",
+    "img": "imagenes/Kuma.png",
+    "tags": {
+      "Banda": { "val": ["Ejército Revolucionario", "Marina"], "dif": "supernova" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
+      "Titulo": { "val": "Shichibukai", "dif": "supernova" },
+      "Origen": { "val": "South Blue", "dif": "supernova" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Paramecia", "dif": "supernova" },
+      "Raza": { "val": "Bucanero", "dif": "yonko" },
+      "Recompensa": { "val": "Entre 100M y 499M", "dif": "supernova" }
+    }
+  },
+  {
+    "id": "kaido",
+    "name": "Kaido",
+    "img": "imagenes/Kaido.png",
+    "tags": {
+      "Banda": { "val": ["Piratas Bestias", "Piratas de Rocks"], "dif": "supernova" },
+      "Titulo": { "val": "Yonko", "dif": "yonko" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": ["Haki del conquistador", "Haki de armadura", "Haki de observación"], "dif": "yonko" },
+      "Fruta": { "val": "Zoan mitológica", "dif": "supernova" },
+      "Especialidad": { "val": "Capitán", "dif": "novato" },
+      "Recompensa": { "val": "Más de mil millones", "dif": "supernova" },
+      "Despertar": { "val": "Fruta despertada", "dif": "supernova" }
+    }
+  },
+  {
+    "id": "king",
+    "name": "King el Albero",
+    "img": "imagenes/King.png",
+    "tags": {
+      "Banda": { "val": "Piratas Bestias", "dif": "supernova" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Zoan", "dif": "supernova" },
+      "Raza": { "val": "Lunaria", "dif": "yonko" },
+      "Recompensa": { "val": "Más de mil millones", "dif": "supernova" }
+    }
+  },
+  {
+    "id": "queen",
+    "name": "Queen la Plaga",
+    "img": "imagenes/Queen.png",
+    "tags": {
+      "Banda": { "val": "Piratas Bestias", "dif": "supernova" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Haki": { "val": ["Haki de armadura", "Haki de observación"], "dif": "supernova" },
+      "Fruta": { "val": "Zoan", "dif": "supernova" },
+      "Raza": { "val": "Cyborg", "dif": "novato" },
+      "Recompensa": { "val": "Más de mil millones", "dif": "supernova" }
+    }
+  },
+  {
+    "id": "s_snake",
+    "name": "S-Snake",
+    "img": "imagenes/SSnake.png",
+    "tags": {
+      "Banda": { "val": "Seraphim", "dif": "supernova" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Fruta": { "val": "Paramecia", "dif": "supernova" },
+      "Raza": { "val": "Lunaria / Cyborg", "dif": "yonko" }
+    }
+  },
+  {
+    "id": "s_hawk",
+    "name": "S-Hawk",
+    "img": "imagenes/SHawk.png",
+    "tags": {
+      "Banda": { "val": "Seraphim", "dif": "supernova" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Fruta": { "val": "Paramecia", "dif": "supernova" },
+      "Raza": { "val": "Lunaria / Cyborg", "dif": "yonko" },
+      "Especialidad": { "val": "Espadachín", "dif": "supernova" }
+    }
+  },
+  {
+    "id": "s_shark",
+    "name": "S-Shark",
+    "img": "imagenes/SShark.png",
+    "tags": {
+      "Banda": { "val": "Seraphim", "dif": "supernova" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Fruta": { "val": "Paramecia", "dif": "supernova" },
+      "Raza": { "val": "Lunaria / Cyborg", "dif": "yonko" }
+    }
+  },
+  {
+    "id": "s_bear",
+    "name": "S-Bear",
+    "img": "imagenes/SBear.png",
+    "tags": {
+      "Banda": { "val": "Seraphim", "dif": "supernova" },
+      "Afiliacion": { "val": "Gobierno Mundial", "dif": "novato" },
+      "Origen": { "val": "Grand Line", "dif": "novato" },
+      "Fruta": { "val": "Paramecia", "dif": "supernova" },
+      "Raza": { "val": "Lunaria / Cyborg", "dif": "yonko" }
     }
   }
 ]
