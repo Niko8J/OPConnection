@@ -199,7 +199,7 @@
     "tags": {
       "Banda": [
         { "val": "Sombrero de Paja", "dif": "dificil" },
-        { "val": "Baroque Works", "dif": "dificil" },
+        { "val": "Baroque Works", "dif": "medio" },
         { "val": "Reino de Alabasta", "dif": "facil" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
@@ -216,7 +216,7 @@
     "tags": {
       "Banda": [
         { "val": "Sombrero de Paja", "dif": "dificil" },
-        { "val": "Baroque Works", "dif": "dificil" },
+        { "val": "Baroque Works", "dif": "medio" },
         { "val": "Reino de Alabasta", "dif": "facil" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
@@ -398,6 +398,7 @@
     "tags": {
       "Banda": [
         { "val": "Baroque Works", "dif": "facil" },
+        { "val": "Baroque Works", "dif": "medio" }
         { "val": "Cross Guild", "dif": "facil" }
       ],
       "Titulo": [{ "val": "Shichibukai", "dif": "facil" }],
@@ -417,6 +418,7 @@
     "tags": {
       "Banda": [
         { "val": "Baroque Works", "dif": "facil" },
+        { "val": "Baroque Works", "dif": "medio" }
         { "val": "Cross Guild", "dif": "facil" }
       ],
       "Origen": [{ "val": "South Blue", "dif": "dificil" }],
@@ -431,6 +433,7 @@
     "tags": {
       "Banda": [
         { "val": "Baroque Works", "dif": "facil" },
+        { "val": "Baroque Works", "dif": "medio" }
         { "val": "Cross Guild", "dif": "facil" }
       ],
       "Origen": [{ "val": "West Blue", "dif": "dificil" }],
@@ -657,7 +660,10 @@
         { "val": "Haki de observación", "dif": "dificil" }
       ],
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
-      "Raza": [{ "val": "Bucanero", "dif": "media" }],
+      "Raza": [
+        { "val": "Bucanero", "dif": "media" }
+        { "val": "Cyborg", "dif": "media" }
+      ],
       "Recompensa": [{ "val": "Entre 100M y 499M", "dif": "dificil" }]
     }
   },
@@ -937,6 +943,11 @@
     "tags": {
       "Banda": [{ "val": "Ejército Revolucionario", "dif": "facil" }],
       "Origen": [{ "val": "East Blue", "dif": "dificil" }],
+      "Haki": [
+        { "val": "Haki del conquistador", "dif": "dificil" },
+        { "val": "Haki de armadura", "dif": "dificil" },
+        { "val": "Haki de observación", "dif": "dificil" }
+      ],
       "Especialidad": [{ "val": "Capitanes pirata", "dif": "dificil" }],
       "D": [{ "val": "Voluntad de la D.", "dif": "media" }]
     }
@@ -1051,7 +1062,10 @@
     "name": "Koby",
     "img": "imagenes/Koby.png",
     "tags": {
-      "Banda": [{ "val": "Marina", "dif": "facil" }],
+      "Banda": [
+        { "val": "Marina", "dif": "facil" }
+        { "val": "SWORD", "dif": "facil" }
+      ],
       "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }],
       "Origen": [{ "val": "East Blue", "dif": "dificil" }],
       "Haki": [
@@ -1252,7 +1266,6 @@
     "tags": {
       "Banda": [{ "val": "Marina", "dif": "facil" }],
       "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }],
-      "Titulo": [{ "val": "Almirante de la Flota", "dif": "facil" }],
       "Origen": [{ "val": "South Blue", "dif": "dificil" }],
       "Haki": [
         { "val": "Haki del conquistador", "dif": "dificil" },
@@ -1292,7 +1305,10 @@
     "name": "Prince Grus",
     "img": "imagenes/PrinceGrus.png",
     "tags": {
-      "Banda": [{ "val": "Marina", "dif": "facil" }],
+      "Banda": [
+        { "val": "Marina", "dif": "facil" }
+        { "val": "SWORD", "dif": "facil" }
+      ],
       "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [
@@ -1308,7 +1324,6 @@
     "name": "Alpha",
     "img": "imagenes/Alpha.png",
     "tags": {
-      "Banda": [{ "val": "CP8", "dif": "facil" }],
       "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
@@ -1405,7 +1420,6 @@
     "img": "imagenes/Alvida.png",
     "tags": {
       "Banda": [
-        { "val": "Piratas de Alvida", "dif": "facil" },
         { "val": "Cross Guild", "dif": "facil" }
       ],
       "Origen": [{ "val": "East Blue", "dif": "dificil" }],
@@ -1442,7 +1456,7 @@
     "tags": {
       "Banda": [
         { "val": "Piratas Hawkins", "dif": "facil" },
-        { "val": "Piratas Bestia", "dif": "facil" }
+        { "val": "Piratas Bestia", "dif": "medio" }
       ],
       "Titulo": [{ "val": "Supernova", "dif": "facil" }],
       "Origen": [{ "val": "North Blue", "dif": "dificil" }],
@@ -1479,7 +1493,7 @@
     "tags": {
       "Banda": [
         { "val": "Piratas Onair", "dif": "facil" },
-        { "val": "Piratas Bestia", "dif": "facil" }
+        { "val": "Piratas Bestia", "dif": "medio" }
       ],
       "Titulo": [{ "val": "Supernova", "dif": "facil" }],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
@@ -1514,7 +1528,10 @@
     "name": "Bentham (Mr. 2 / Bon Clay)",
     "img": "imagenes/Mr2.png",
     "tags": {
-      "Banda": [{ "val": "Baroque Works", "dif": "facil" }],
+      "Banda": [
+        { "val": "Baroque Works", "dif": "facil" }
+        { "val": "Baroque Works", "dif": "medio" }
+      ],
       "Afiliacion": [{ "val": "Okamas", "dif": "facil" }],
       "Origen": [{ "val": "East Blue", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
@@ -1527,7 +1544,10 @@
     "name": "Babe (Mr. 4)",
     "img": "imagenes/Mr4.png",
     "tags": {
-      "Banda": [{ "val": "Baroque Works", "dif": "facil" }],
+      "Banda": [
+        { "val": "Baroque Works", "dif": "facil" }
+        { "val": "Baroque Works", "dif": "medio" }
+      ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
       "Fruta": [{ "val": "Sin fruta", "dif": "facil" }],
@@ -1539,7 +1559,10 @@
     "name": "Gem (Mr. 5)",
     "img": "imagenes/Mr5.png",
     "tags": {
-      "Banda": [{ "val": "Baroque Works", "dif": "facil" }],
+      "Banda": [
+        { "val": "Baroque Works", "dif": "facil" }
+        { "val": "Baroque Works", "dif": "medio" }
+      ],
       "Origen": [{ "val": "South Blue", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
@@ -1551,7 +1574,10 @@
     "name": "Zala (Miss Doublefinger)",
     "img": "imagenes/MissDoublefinger.png",
     "tags": {
-      "Banda": [{ "val": "Baroque Works", "dif": "facil" }],
+      "Banda": [
+        { "val": "Baroque Works", "dif": "facil" }
+        { "val": "Baroque Works", "dif": "medio" }
+      ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
@@ -1563,7 +1589,10 @@
     "name": "Marianne (Miss Goldenweek)",
     "img": "imagenes/MissGoldenweek.png",
     "tags": {
-      "Banda": [{ "val": "Baroque Works", "dif": "facil" }],
+      "Banda": [
+        { "val": "Baroque Works", "dif": "facil" }
+        { "val": "Baroque Works", "dif": "medio" }
+      ],
       "Origen": [{ "val": "North Blue", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
       "Fruta": [{ "val": "Sin fruta", "dif": "facil" }],
@@ -1575,7 +1604,10 @@
     "name": "Drophy (Miss Merry Christmas)",
     "img": "imagenes/MissMerryChristmas.png",
     "tags": {
-      "Banda": [{ "val": "Baroque Works", "dif": "facil" }],
+      "Banda": [
+        { "val": "Baroque Works", "dif": "facil" }
+        { "val": "Baroque Works", "dif": "medio" }
+      ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
       "Fruta": [{ "val": "Zoan", "dif": "facil" }],
@@ -1587,7 +1619,10 @@
     "name": "Mikita (Miss Valentine)",
     "img": "imagenes/MissValentine.png",
     "tags": {
-      "Banda": [{ "val": "Baroque Works", "dif": "facil" }],
+      "Banda": [
+        { "val": "Baroque Works", "dif": "facil" }
+        { "val": "Baroque Works", "dif": "medio" }
+      ],
       "Origen": [{ "val": "West Blue", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }]
@@ -1598,7 +1633,10 @@
     "name": "Miss Monday",
     "img": "imagenes/MissMonday.png",
     "tags": {
-      "Banda": [{ "val": "Baroque Works", "dif": "facil" }],
+      "Banda": [
+        { "val": "Baroque Works", "dif": "facil" }
+        { "val": "Baroque Works", "dif": "medio" }
+      ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
       "Fruta": [{ "val": "Sin fruta", "dif": "facil" }]
@@ -1654,7 +1692,8 @@
     "tags": {
       "Banda": [
         { "val": "Piratas de Arlong", "dif": "facil" },
-        { "val": "Piratas del Sol", "dif": "facil" }
+        { "val": "Piratas de Arlong", "dif": "dificil" },
+        { "val": "Piratas del Sol", "dif": "medio" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
@@ -1671,7 +1710,8 @@
     "tags": {
       "Banda": [
         { "val": "Piratas de Arlong", "dif": "facil" },
-        { "val": "Piratas del Sol", "dif": "facil" }
+        { "val": "Piratas de Arlong", "dif": "dificil" },
+        { "val": "Piratas del Sol", "dif": "medio" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
@@ -1685,7 +1725,10 @@
     "name": "Chew",
     "img": "imagenes/Chew.png",
     "tags": {
-      "Banda": [{ "val": "Piratas de Arlong", "dif": "facil" }],
+      "Banda": [
+        { "val": "Piratas de Arlong", "dif": "facil" },
+        { "val": "Piratas de Arlong", "dif": "dificil" }
+      ],      
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
       "Fruta": [{ "val": "Sin fruta", "dif": "facil" }],
@@ -1698,7 +1741,10 @@
     "name": "Momoo",
     "img": "imagenes/Momoo.png",
     "tags": {
-      "Banda": [{ "val": "Piratas de Arlong", "dif": "facil" }],
+      "Banda": [
+        { "val": "Piratas de Arlong", "dif": "facil" },
+        { "val": "Piratas de Arlong", "dif": "dificil" }
+      ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Raza": [{ "val": "Supervaca Marina", "dif": "media" }]
     }
@@ -1710,7 +1756,8 @@
     "tags": {
       "Banda": [
         { "val": "Piratas de Arlong", "dif": "facil" },
-        { "val": "Piratas del Sol", "dif": "facil" }
+        { "val": "Piratas de Arlong", "dif": "dificil" },
+        { "val": "Piratas del Sol", "dif": "medio" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
