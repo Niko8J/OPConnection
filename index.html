@@ -11,7 +11,8 @@
     h1 { margin-bottom: 5px; color: #f59e0b; font-size: 2rem; text-transform: uppercase; letter-spacing: 1px; }
     p { margin-bottom: 15px; color: #94a3b8; }
 
-    .difficulty-selector { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+    .difficulty-selector { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px; }
+    .difficulty-label { font-weight: bold; color: #e2e8f0; font-size: 1rem; }
     .diff-btn {
       padding: 8px 16px;
       border-radius: 8px;
@@ -135,8 +136,9 @@
   <p>Encuentra los 4 grupos conectados por sus atributos sin coincidencias ambiguas.</p>
 
   <div class="difficulty-selector">
-    <button class="diff-btn" onclick="setDifficulty('facil', event)">Novato</button>
-    <button class="diff-btn" onclick="setDifficulty('medio', event)">Supernova</button>
+    <span class="difficulty-label">Dificultad:</span>
+    <button class="diff-btn active" onclick="setDifficulty('facil', event)">Novato</button>
+    <button class="diff-btn" onclick="setDifficulty('media', event)">Supernova</button>
     <button class="diff-btn" onclick="setDifficulty('dificil', event)">Yonko</button>
   </div>
 
@@ -171,9 +173,9 @@
 <script>
   const MAX_LIVES = 4;
   const COLORS = ["#fef08a", "#bbf7d0", "#bfdbfe", "#e9d5ff"];
-
+  
   let database = [];
-  let currentDifficulty = "todos";
+  let currentDifficulty = "facil"; // Inicializado por defecto en fácil
   let currentCategories = []; 
   let cards = [];
   let selectedCards = [];
@@ -211,16 +213,13 @@
       if (char.tags) {
         Object.entries(char.tags).forEach(([key, tagData]) => {
           let val = typeof tagData === "object" && tagData !== null && "val" in tagData ? tagData.val : tagData;
-          let tagDif = typeof tagData === "object" && tagData !== null && "dif" in tagData ? tagData.dif : "novato";
+          let tagDif = typeof tagData === "object" && tagData !== null && "dif" in tagData ? tagData.dif : "facil";
 
           if (currentDifficulty === "todos" || tagDif === currentDifficulty) {
             let valuesArray = Array.isArray(val) ? val : [val];
 
             valuesArray.forEach(v => {
-              // Limpiamos la nomenclatura de la Key (ej: 'afiliacion' pasa a 'Afiliación', o capitaliza si no está en el mapa)
-              let formattedKey = TAG_NAMES_MAP[key] || key.replace(/_/g, ' ').replace(/^\w/, c => c.toUpperCase());
-              
-              const groupName = `${formattedKey}: ${v}`;
+              const groupName = `${key}: ${v}`;
               if (!tagGroups[groupName]) tagGroups[groupName] = [];
               if (!tagGroups[groupName].some(c => c.id === char.id)) {
                 tagGroups[groupName].push(char);
@@ -235,25 +234,23 @@
 
     if (validGroupNames.length < 4) {
       document.getElementById("warning-msg").innerText = 
-        `⚠️ Faltan datos en '${currentDifficulty.toUpperCase()}': Se necesitan al menos 4 categorías válidas. Hay ${validGroupNames.length}.`;
+        `⚠️ Faltan datos en '${currentDifficulty.toUpperCase()}': Se necesitan al menos 4 categorías válidas con 4 o más personajes. Hay ${validGroupNames.length}.`;
       return;
     }
 
-    // Función estricta adaptada al formato limpio de nombres de grupo
     const charHasAnyTagMatch = (char, targetGroupName) => {
       const separatorIndex = targetGroupName.indexOf(": ");
       if (separatorIndex === -1) return false;
       
-      const targetFormattedKey = targetGroupName.substring(0, separatorIndex);
+      const targetKey = targetGroupName.substring(0, separatorIndex);
       const targetVal = targetGroupName.substring(separatorIndex + 2);
 
       if (!char.tags) return false;
 
       return Object.entries(char.tags).some(([key, tagData]) => {
-        let formattedKey = TAG_NAMES_MAP[key] || key.replace(/_/g, ' ').replace(/^\w/, c => c.toUpperCase());
-        if (formattedKey !== targetFormattedKey) return false;
+        if (key !== targetKey) return false;
         
-        const actualVal = typeof tagData === "object" && tagData !== null && "val" in tagData ? tagData.val : tagData;
+        let actualVal = typeof tagData === "object" && tagData !== null && "val" in tagData ? tagData.val : tagData;
         return Array.isArray(actualVal) ? actualVal.includes(targetVal) : actualVal === targetVal;
       });
     };
