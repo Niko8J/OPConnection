@@ -204,7 +204,7 @@
     generateNewBoard();
   }
 
-  function generateNewBoard() {
+function generateNewBoard() {
     if (database.length === 0) return;
 
     let tagGroups = {}; 
@@ -213,9 +213,13 @@
       if (char.tags) {
         Object.entries(char.tags).forEach(([key, tagData]) => {
           let val = typeof tagData === "object" && tagData !== null && "val" in tagData ? tagData.val : tagData;
-          let tagDif = typeof tagData === "object" && tagData !== null && "dif" in tagData ? tagData.dif : "facil";
+          let rawDif = typeof tagData === "object" && tagData !== null && "dif" in tagData ? tagData.dif : "facil";
 
-          if (currentDifficulty === "todos" || tagDif === currentDifficulty) {
+          // Convertimos las dificultades a un array por si un tag pertenece a varias (ej: ["facil", "dificil"])
+          let diffsArray = Array.isArray(rawDif) ? rawDif : [rawDif];
+
+          // Si el usuario seleccionó una dificultad, comprobamos si este tag participa en ella
+          if (diffsArray.includes(currentDifficulty)) {
             let valuesArray = Array.isArray(val) ? val : [val];
 
             valuesArray.forEach(v => {
