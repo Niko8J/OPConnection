@@ -398,7 +398,7 @@
     "tags": {
       "Banda": [
         { "val": "Baroque Works", "dif": "facil" },
-        { "val": "Baroque Works", "dif": "medio" }
+        { "val": "Baroque Works", "dif": "medio" },
         { "val": "Cross Guild", "dif": "facil" }
       ],
       "Titulo": [{ "val": "Shichibukai", "dif": "facil" }],
@@ -418,7 +418,7 @@
     "tags": {
       "Banda": [
         { "val": "Baroque Works", "dif": "facil" },
-        { "val": "Baroque Works", "dif": "medio" }
+        { "val": "Baroque Works", "dif": "medio" },
         { "val": "Cross Guild", "dif": "facil" }
       ],
       "Origen": [{ "val": "South Blue", "dif": "dificil" }],
@@ -433,7 +433,7 @@
     "tags": {
       "Banda": [
         { "val": "Baroque Works", "dif": "facil" },
-        { "val": "Baroque Works", "dif": "medio" }
+        { "val": "Baroque Works", "dif": "medio" },
         { "val": "Cross Guild", "dif": "facil" }
       ],
       "Origen": [{ "val": "West Blue", "dif": "dificil" }],
@@ -1529,7 +1529,7 @@
     "img": "imagenes/Mr2.png",
     "tags": {
       "Banda": [
-        { "val": "Baroque Works", "dif": "facil" }
+        { "val": "Baroque Works", "dif": "facil" },
         { "val": "Baroque Works", "dif": "medio" }
       ],
       "Afiliacion": [{ "val": "Okamas", "dif": "facil" }],
@@ -1545,7 +1545,7 @@
     "img": "imagenes/Mr4.png",
     "tags": {
       "Banda": [
-        { "val": "Baroque Works", "dif": "facil" }
+        { "val": "Baroque Works", "dif": "facil" },
         { "val": "Baroque Works", "dif": "medio" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
@@ -1560,7 +1560,7 @@
     "img": "imagenes/Mr5.png",
     "tags": {
       "Banda": [
-        { "val": "Baroque Works", "dif": "facil" }
+        { "val": "Baroque Works", "dif": "facil" },
         { "val": "Baroque Works", "dif": "medio" }
       ],
       "Origen": [{ "val": "South Blue", "dif": "dificil" }],
@@ -1575,7 +1575,7 @@
     "img": "imagenes/MissDoublefinger.png",
     "tags": {
       "Banda": [
-        { "val": "Baroque Works", "dif": "facil" }
+        { "val": "Baroque Works", "dif": "facil" },
         { "val": "Baroque Works", "dif": "medio" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
@@ -1590,7 +1590,7 @@
     "img": "imagenes/MissGoldenweek.png",
     "tags": {
       "Banda": [
-        { "val": "Baroque Works", "dif": "facil" }
+        { "val": "Baroque Works", "dif": "facil" },
         { "val": "Baroque Works", "dif": "medio" }
       ],
       "Origen": [{ "val": "North Blue", "dif": "dificil" }],
@@ -1605,7 +1605,7 @@
     "img": "imagenes/MissMerryChristmas.png",
     "tags": {
       "Banda": [
-        { "val": "Baroque Works", "dif": "facil" }
+        { "val": "Baroque Works", "dif": "facil" },
         { "val": "Baroque Works", "dif": "medio" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
@@ -1620,7 +1620,7 @@
     "img": "imagenes/MissValentine.png",
     "tags": {
       "Banda": [
-        { "val": "Baroque Works", "dif": "facil" }
+        { "val": "Baroque Works", "dif": "facil" },
         { "val": "Baroque Works", "dif": "medio" }
       ],
       "Origen": [{ "val": "West Blue", "dif": "dificil" }],
@@ -1634,7 +1634,7 @@
     "img": "imagenes/MissMonday.png",
     "tags": {
       "Banda": [
-        { "val": "Baroque Works", "dif": "facil" }
+        { "val": "Baroque Works", "dif": "facil" },
         { "val": "Baroque Works", "dif": "medio" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
