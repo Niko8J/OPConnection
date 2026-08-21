@@ -172,6 +172,15 @@
 <script>
   const MAX_LIVES = 4;
   const COLORS = ["#fef08a", "#bbf7d0", "#bfdbfe", "#e9d5ff"];
+
+  // Diccionario para traducir o estilizar las keys técnicas del JSON a nombres limpios
+  const TAG_NAMES_MAP = {
+    "afiliacion": "Afiliación",
+    "mar_de_origen": "Mar de Origen",
+    "tipo_de_fruta": "Tipo de Fruta",
+    "ocupacion": "Ocupación"
+    // Puedes añadir más claves técnicas aquí si las creas en tu JSON
+  };
   
   let database = [];
   let currentDifficulty = "todos";
@@ -204,117 +213,121 @@
   }
 
   function generateNewBoard() {
-  if (database.length === 0) return;
+    if (database.length === 0) return;
 
-  // 1. Agrupar personajes según la dificultad activa
-  let tagGroups = {}; 
+    let tagGroups = {}; 
 
-  database.forEach(char => {
-    if (char.tags) {
-      Object.entries(char.tags).forEach(([key, tagData]) => {
-        let val = typeof tagData === "object" && tagData !== null && "val" in tagData ? tagData.val : tagData;
-        let tagDif = typeof tagData === "object" && tagData !== null && "dif" in tagData ? tagData.dif : "novato";
+    database.forEach(char => {
+      if (char.tags) {
+        Object.entries(char.tags).forEach(([key, tagData]) => {
+          let val = typeof tagData === "object" && tagData !== null && "val" in tagData ? tagData.val : tagData;
+          let tagDif = typeof tagData === "object" && tagData !== null && "dif" in tagData ? tagData.dif : "novato";
 
-        if (currentDifficulty === "todos" || tagDif === currentDifficulty) {
-          let valuesArray = Array.isArray(val) ? val : [val];
+          if (currentDifficulty === "todos" || tagDif === currentDifficulty) {
+            let valuesArray = Array.isArray(val) ? val : [val];
 
-          valuesArray.forEach(v => {
-            const groupName = `${key}: ${v}`;
-            if (!tagGroups[groupName]) tagGroups[groupName] = [];
-            if (!tagGroups[groupName].some(c => c.id === char.id)) {
-              tagGroups[groupName].push(char);
-            }
-          });
-        }
-      });
-    }
-  });
-
-  let validGroupNames = Object.keys(tagGroups).filter(group => tagGroups[group].length >= 4);
-
-  if (validGroupNames.length < 4) {
-    document.getElementById("warning-msg").innerText = 
-      `⚠️ Faltan datos en '${currentDifficulty.toUpperCase()}': Se necesitan al menos 4 categorías válidas. Hay ${validGroupNames.length}.`;
-    return;
-  }
-
-  // 2. Función estricta: Comprueba si un personaje tiene un tag específico (buscando en TODOS sus tags)
-  const charHasAnyTagMatch = (char, targetGroupName) => {
-    const [targetKey, targetVal] = targetGroupName.split(": ");
-    if (!char.tags) return false;
-
-    return Object.entries(char.tags).some(([key, tagData]) => {
-      if (key !== targetKey) return false;
-      const actualVal = typeof tagData === "object" && tagData !== null && "val" in tagData ? tagData.val : tagData;
-      return Array.isArray(actualVal) ? actualVal.includes(targetVal) : actualVal === targetVal;
-    });
-  };
-
-  let selectedGroups = null;
-  let maxAttempts = 1000;
-
-  // 3. Buscador de 4 grupos puramente disjuntos
-  for (let attempt = 0; attempt < maxAttempts; attempt++) {
-    let shuffledGroups = [...validGroupNames].sort(() => Math.random() - 0.5);
-    let candidateGroups = [];
-    let usedCharIds = new Set();
-
-    for (let groupName of shuffledGroups) {
-      if (candidateGroups.length === 4) break;
-
-      // Filtrar candidatos para esta categoría
-      let exclusiveChars = tagGroups[groupName].filter(char => {
-        // Regla A: El personaje no puede estar ya usado
-        if (usedCharIds.has(char.id)) return false;
-
-        // Regla B: El personaje NO puede poseer NINGUNA de las categorías elegidas previamente
-        for (let prevGroup of candidateGroups) {
-          if (charHasAnyTagMatch(char, prevGroup.name)) return false;
-        }
-        return true;
-      });
-
-      if (exclusiveChars.length >= 4) {
-        let chosenChars = exclusiveChars.sort(() => Math.random() - 0.5).slice(0, 4);
-
-        // Regla C: Ningún personaje de los grupos anteriores puede poseer ESTA nueva categoría
-        let invalidatesPrevious = false;
-        for (let prevGroup of candidateGroups) {
-          for (let prevChar of prevGroup.items) {
-            if (charHasAnyTagMatch(prevChar, groupName)) {
-              invalidatesPrevious = true;
-              break;
-            }
+            valuesArray.forEach(v => {
+              // Limpiamos la nomenclatura de la Key (ej: 'afiliacion' pasa a 'Afiliación', o capitaliza si no está en el mapa)
+              let formattedKey = TAG_NAMES_MAP[key] || key.replace(/_/g, ' ').replace(/^\w/, c => c.toUpperCase());
+              
+              const groupName = `${formattedKey}: ${v}`;
+              if (!tagGroups[groupName]) tagGroups[groupName] = [];
+              if (!tagGroups[groupName].some(c => c.id === char.id)) {
+                tagGroups[groupName].push(char);
+              }
+            });
           }
-          if (invalidatesPrevious) break;
-        }
+        });
+      }
+    });
 
-        if (!invalidatesPrevious) {
-          candidateGroups.push({
-            name: groupName,
-            color: COLORS[candidateGroups.length],
-            items: chosenChars
-          });
-          chosenChars.forEach(c => usedCharIds.add(c.id));
+    let validGroupNames = Object.keys(tagGroups).filter(group => tagGroups[group].length >= 4);
+
+    if (validGroupNames.length < 4) {
+      document.getElementById("warning-msg").innerText = 
+        `⚠️ Faltan datos en '${currentDifficulty.toUpperCase()}': Se necesitan al menos 4 categorías válidas. Hay ${validGroupNames.length}.`;
+      return;
+    }
+
+    // Función estricta adaptada al formato limpio de nombres de grupo
+    const charHasAnyTagMatch = (char, targetGroupName) => {
+      const separatorIndex = targetGroupName.indexOf(": ");
+      if (separatorIndex === -1) return false;
+      
+      const targetFormattedKey = targetGroupName.substring(0, separatorIndex);
+      const targetVal = targetGroupName.substring(separatorIndex + 2);
+
+      if (!char.tags) return false;
+
+      return Object.entries(char.tags).some(([key, tagData]) => {
+        let formattedKey = TAG_NAMES_MAP[key] || key.replace(/_/g, ' ').replace(/^\w/, c => c.toUpperCase());
+        if (formattedKey !== targetFormattedKey) return false;
+        
+        const actualVal = typeof tagData === "object" && tagData !== null && "val" in tagData ? tagData.val : tagData;
+        return Array.isArray(actualVal) ? actualVal.includes(targetVal) : actualVal === targetVal;
+      });
+    };
+
+    let selectedGroups = null;
+    let maxAttempts = 1000;
+
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      let shuffledGroups = [...validGroupNames].sort(() => Math.random() - 0.5);
+      let candidateGroups = [];
+      let usedCharIds = new Set();
+
+      for (let groupName of shuffledGroups) {
+        if (candidateGroups.length === 4) break;
+
+        let exclusiveChars = tagGroups[groupName].filter(char => {
+          if (usedCharIds.has(char.id)) return false;
+
+          for (let prevGroup of candidateGroups) {
+            if (charHasAnyTagMatch(char, prevGroup.name)) return false;
+          }
+          return true;
+        });
+
+        if (exclusiveChars.length >= 4) {
+          let chosenChars = exclusiveChars.sort(() => Math.random() - 0.5).slice(0, 4);
+
+          let invalidatesPrevious = false;
+          for (let prevGroup of candidateGroups) {
+            for (let prevChar of prevGroup.items) {
+              if (charHasAnyTagMatch(prevChar, groupName)) {
+                invalidatesPrevious = true;
+                break;
+              }
+            }
+            if (invalidatesPrevious) break;
+          }
+
+          if (!invalidatesPrevious) {
+            candidateGroups.push({
+              name: groupName,
+              color: COLORS[candidateGroups.length],
+              items: chosenChars
+            });
+            chosenChars.forEach(c => usedCharIds.add(c.id));
+          }
         }
+      }
+
+      if (candidateGroups.length === 4) {
+        selectedGroups = candidateGroups;
+        break;
       }
     }
 
-    if (candidateGroups.length === 4) {
-      selectedGroups = candidateGroups;
-      break;
+    if (!selectedGroups) {
+      document.getElementById("warning-msg").innerText = 
+        `⚠️ No se encontraron 4 categorías sin solapamiento en '${currentDifficulty.toUpperCase()}'. Añade más personajes al JSON o diversifica sus tags.`;
+      return;
     }
-  }
 
-  if (!selectedGroups) {
-    document.getElementById("warning-msg").innerText = 
-      `⚠️ No se encontraron 4 categorías sin solapamiento en '${currentDifficulty.toUpperCase()}'. Añade más personajes al JSON o diversifica sus tags.`;
-    return;
+    currentCategories = selectedGroups;
+    initGame();
   }
-
-  currentCategories = selectedGroups;
-  initGame();
-}
 
   function initGame() {
     lives = MAX_LIVES;
