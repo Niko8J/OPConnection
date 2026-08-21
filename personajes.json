@@ -198,9 +198,8 @@
     "img": "imagenes/Vivi.png",
     "tags": {
       "Banda": [
-        { "val": "Sombrero de Paja", "dif": "facil" },
         { "val": "Sombrero de Paja", "dif": "dificil" },
-        { "val": "Baroque Works", "dif": "facil" },
+        { "val": "Baroque Works", "dif": "dificil" },
         { "val": "Reino de Alabasta", "dif": "facil" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
@@ -216,13 +215,12 @@
     "img": "imagenes/Karoo.png",
     "tags": {
       "Banda": [
-        { "val": "Sombrero de Paja", "dif": "facil" },
         { "val": "Sombrero de Paja", "dif": "dificil" },
-        { "val": "Baroque Works", "dif": "facil" },
+        { "val": "Baroque Works", "dif": "dificil" },
         { "val": "Reino de Alabasta", "dif": "facil" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
-      "Raza": [{ "val": "Superpato", "dif": "media" }]
+      "Raza": [{ "val": "Animales", "dif": "media" }]
     }
   },
   {
@@ -263,7 +261,6 @@
     "img": "imagenes/GoingMerry.png",
     "tags": {
       "Banda": [
-        { "val": "Sombrero de Paja", "dif": "facil" },
         { "val": "Sombrero de Paja", "dif": "dificil" }
       ],
       "Origen": [{ "val": "East Blue", "dif": "dificil" }],
@@ -277,7 +274,6 @@
     "img": "imagenes/Sunny.png",
     "tags": {
       "Banda": [
-        { "val": "Sombrero de Paja", "dif": "facil" },
         { "val": "Sombrero de Paja", "dif": "dificil" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
