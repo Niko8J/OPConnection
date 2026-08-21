@@ -1063,7 +1063,7 @@
     "img": "imagenes/Koby.png",
     "tags": {
       "Banda": [
-        { "val": "Marina", "dif": "facil" }
+        { "val": "Marina", "dif": "facil" },
         { "val": "SWORD", "dif": "facil" }
       ],
       "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }],
