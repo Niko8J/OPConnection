@@ -661,7 +661,7 @@
       ],
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
       "Raza": [
-        { "val": "Bucanero", "dif": "media" }
+        { "val": "Bucanero", "dif": "media" },
         { "val": "Cyborg", "dif": "media" }
       ],
       "Recompensa": [{ "val": "Entre 100M y 499M", "dif": "dificil" }]
