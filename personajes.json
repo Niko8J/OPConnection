@@ -126,7 +126,7 @@
       "Banda": [
         { "val": "Sombrero de Paja", "dif": "facil" },
         { "val": "Sombrero de Paja", "dif": "dificil" },
-        { "val": "Baroque Works", "dif": "medio" },
+        { "val": "Baroque Works", "dif": "dificil" },
         { "val": "Eruditos de Ohara", "dif": "medio" }
       ],
       "Origen": [{ "val": "West Blue", "dif": "dificil" }],
@@ -199,7 +199,7 @@
     "tags": {
       "Banda": [
         { "val": "Sombrero de Paja", "dif": "dificil" },
-        { "val": "Baroque Works", "dif": "medio" },
+        { "val": "Baroque Works", "dif": "dificil" },
         { "val": "Reino de Alabasta", "dif": "facil" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
@@ -216,7 +216,7 @@
     "tags": {
       "Banda": [
         { "val": "Sombrero de Paja", "dif": "dificil" },
-        { "val": "Baroque Works", "dif": "medio" },
+        { "val": "Baroque Works", "dif": "dificil" },
         { "val": "Reino de Alabasta", "dif": "facil" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
@@ -398,7 +398,7 @@
     "tags": {
       "Banda": [
         { "val": "Baroque Works", "dif": "facil" },
-        { "val": "Baroque Works", "dif": "medio" },
+        { "val": "Baroque Works", "dif": "dificil" },
         { "val": "Cross Guild", "dif": "facil" }
       ],
       "Titulo": [{ "val": "Shichibukai", "dif": "facil" }],
@@ -418,7 +418,7 @@
     "tags": {
       "Banda": [
         { "val": "Baroque Works", "dif": "facil" },
-        { "val": "Baroque Works", "dif": "medio" },
+        { "val": "Baroque Works", "dif": "dificil" },
         { "val": "Cross Guild", "dif": "facil" }
       ],
       "Origen": [{ "val": "South Blue", "dif": "dificil" }],
@@ -433,7 +433,7 @@
     "tags": {
       "Banda": [
         { "val": "Baroque Works", "dif": "facil" },
-        { "val": "Baroque Works", "dif": "medio" },
+        { "val": "Baroque Works", "dif": "dificil" },
         { "val": "Cross Guild", "dif": "facil" }
       ],
       "Origen": [{ "val": "West Blue", "dif": "dificil" }],
@@ -1530,7 +1530,7 @@
     "tags": {
       "Banda": [
         { "val": "Baroque Works", "dif": "facil" },
-        { "val": "Baroque Works", "dif": "medio" }
+        { "val": "Baroque Works", "dif": "dificil" }
       ],
       "Afiliacion": [{ "val": "Okamas", "dif": "facil" }],
       "Origen": [{ "val": "East Blue", "dif": "dificil" }],
@@ -1546,7 +1546,7 @@
     "tags": {
       "Banda": [
         { "val": "Baroque Works", "dif": "facil" },
-        { "val": "Baroque Works", "dif": "medio" }
+        { "val": "Baroque Works", "dif": "dificil" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
@@ -1561,7 +1561,7 @@
     "tags": {
       "Banda": [
         { "val": "Baroque Works", "dif": "facil" },
-        { "val": "Baroque Works", "dif": "medio" }
+        { "val": "Baroque Works", "dif": "dificil" }
       ],
       "Origen": [{ "val": "South Blue", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
@@ -1576,7 +1576,7 @@
     "tags": {
       "Banda": [
         { "val": "Baroque Works", "dif": "facil" },
-        { "val": "Baroque Works", "dif": "medio" }
+        { "val": "Baroque Works", "dif": "dificil" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
@@ -1591,7 +1591,7 @@
     "tags": {
       "Banda": [
         { "val": "Baroque Works", "dif": "facil" },
-        { "val": "Baroque Works", "dif": "medio" }
+        { "val": "Baroque Works", "dif": "dificil" }
       ],
       "Origen": [{ "val": "North Blue", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
@@ -1606,7 +1606,7 @@
     "tags": {
       "Banda": [
         { "val": "Baroque Works", "dif": "facil" },
-        { "val": "Baroque Works", "dif": "medio" }
+        { "val": "Baroque Works", "dif": "dificil" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
@@ -1621,7 +1621,7 @@
     "tags": {
       "Banda": [
         { "val": "Baroque Works", "dif": "facil" },
-        { "val": "Baroque Works", "dif": "medio" }
+        { "val": "Baroque Works", "dif": "dificil" }
       ],
       "Origen": [{ "val": "West Blue", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
@@ -1635,7 +1635,7 @@
     "tags": {
       "Banda": [
         { "val": "Baroque Works", "dif": "facil" },
-        { "val": "Baroque Works", "dif": "medio" }
+        { "val": "Baroque Works", "dif": "dificil" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
