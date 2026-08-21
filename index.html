@@ -300,24 +300,38 @@
         }
       }
 
-      // REGLA CONDICIONAL PARA EL MODO DIFÍCIL ("Yonko")
+      // REGLAS CONDICIONALES PARA EL MODO DIFÍCIL ("Yonko")
       if (candidateGroups.length === 4) {
+        let boardIsValid = true;
+
         if (currentDifficulty === "dificil") {
-          // Buscamos si la categoría de Sombrero de Paja está presente en este tablero
-          let strawHatGroup = candidateGroups.find(g => g.name === "Banda: Sombrero de Paja");
           
+          // 1. Regla para "Sombrero de Paja"
+          let strawHatGroup = candidateGroups.find(g => g.name === "Banda: Sombrero de Paja");
           if (strawHatGroup) {
-            // IDs de los elementos especiales permitidos
-            const specialIds = ["vivi", "karoo", "merry", "sunny"]; // Asegúrate de que estos IDs coincidan con tu JSON
-            
-            // Verificamos si al menos uno de los 4 elegidos pertenece a los especiales
+            const specialIds = ["vivi", "karoo", "merry", "sunny"];
             let hasSpecialItem = strawHatGroup.items.some(item => specialIds.includes(item.id));
-            
-            // Si NO tiene ningún elemento especial, este intento no es válido para el modo difícil
-            if (!hasSpecialItem) {
-              continue; // Salta este intento y prueba con otro
-            }
+            if (!hasSpecialItem) boardIsValid = false;
           }
+
+          // 2. Regla para "Piratas de Arlong" (Debe incluir obligatoriamente a Nami)
+          let arlongGroup = candidateGroups.find(g => g.name === "Banda: Piratas de Arlong");
+          if (arlongGroup) {
+            let hasNami = arlongGroup.items.some(item => item.id === "nami");
+            if (!hasNami) boardIsValid = false;
+          }
+
+          // 3. Regla para "Baroque Works" (Debe incluir a Robin, Vivi o Karoo)
+          let baroqueGroup = candidateGroups.find(g => g.name === "Banda: Baroque Works");
+          if (baroqueGroup) {
+            const allowedIds = ["robin", "vivi", "karoo"];
+            let hasConditionChar = baroqueGroup.items.some(item => allowedIds.includes(item.id));
+            if (!hasConditionChar) boardIsValid = false;
+          }
+        }
+
+        if (!boardIsValid) {
+          continue; // Descarta este intento si no cumple alguna de las reglas estrictas
         }
 
         selectedGroups = candidateGroups;
@@ -327,7 +341,7 @@
 
     if (!selectedGroups) {
       document.getElementById("warning-msg").innerText = 
-        `⚠️ No se pudieron cumplir las restricciones de la categoría en '${currentDifficulty.toUpperCase()}'. Vuelve a intentarlo.`;
+        `⚠️ No se pudieron cumplir las restricciones de las categorías en '${currentDifficulty.toUpperCase()}'. Vuelve a intentarlo.`;
       return;
     }
 
