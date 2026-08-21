@@ -4,7 +4,10 @@
     "name": "Monkey D. Luffy",
     "img": "imagenes/Luffy.png",
     "tags": {
-      "Banda": [{ "val": "Sombrero de Paja", "dif": "facil" }],
+      "Banda": [
+        { "val": "Sombrero de Paja", "dif": "facil" },
+        { "val": "Sombrero de Paja", "dif": "dificil" }
+      ],
       "Titulo": [
         { "val": "Yonko", "dif": "facil" },
         { "val": "Supernova", "dif": "media" }
@@ -27,7 +30,10 @@
     "name": "Roronoa Zoro",
     "img": "imagenes/Zoro.png",
     "tags": {
-      "Banda": [{ "val": "Sombrero de Paja", "dif": "facil" }],
+      "Banda": [
+        { "val": "Sombrero de Paja", "dif": "facil" },
+        { "val": "Sombrero de Paja", "dif": "dificil" }
+      ],
       "Titulo": [{ "val": "Supernova", "dif": "facil" }],
       "Origen": [{ "val": "East Blue", "dif": "dificil" }],
       "Haki": [
@@ -47,6 +53,7 @@
     "tags": {
       "Banda": [
         { "val": "Sombrero de Paja", "dif": "facil" },
+        { "val": "Sombrero de Paja", "dif": "dificil" },
         { "val": "Piratas de Arlong", "dif": "facil" }
       ],
       "Origen": [{ "val": "East Blue", "dif": "dificil" }],
@@ -61,7 +68,10 @@
     "name": "Usopp",
     "img": "imagenes/Usopp.png",
     "tags": {
-      "Banda": [{ "val": "Sombrero de Paja", "dif": "facil" }],
+      "Banda": [
+        { "val": "Sombrero de Paja", "dif": "facil" },
+        { "val": "Sombrero de Paja", "dif": "dificil" }
+      ],
       "Origen": [{ "val": "East Blue", "dif": "dificil" }],
       "Haki": [{ "val": "Haki de observación", "dif": "dificil" }],
       "Fruta": [{ "val": "Sin fruta", "dif": "facil" }],
@@ -76,6 +86,7 @@
     "tags": {
       "Banda": [
         { "val": "Sombrero de Paja", "dif": "facil" },
+        { "val": "Sombrero de Paja", "dif": "dificil" },
         { "val": "Germa 66", "dif": "facil" }
       ],
       "Origen": [{ "val": "North Blue", "dif": "dificil" }],
@@ -96,6 +107,7 @@
     "tags": {
       "Banda": [
         { "val": "Sombrero de Paja", "dif": "facil" },
+        { "val": "Sombrero de Paja", "dif": "dificil" },
         { "val": "Sakura Kingdom", "dif": "facil" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
@@ -113,6 +125,7 @@
     "tags": {
       "Banda": [
         { "val": "Sombrero de Paja", "dif": "facil" },
+        { "val": "Sombrero de Paja", "dif": "dificil" },
         { "val": "Baroque Works", "dif": "facil" },
         { "val": "Eruditos de Ohara", "dif": "facil" }
       ],
@@ -128,7 +141,10 @@
     "name": "Franky",
     "img": "imagenes/Franky.png",
     "tags": {
-      "Banda": [{ "val": "Sombrero de Paja", "dif": "facil" }],
+      "Banda": [
+        { "val": "Sombrero de Paja", "dif": "facil" },
+        { "val": "Sombrero de Paja", "dif": "dificil" }
+      ],
       "Origen": [{ "val": "South Blue", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
       "Fruta": [{ "val": "Sin fruta", "dif": "facil" }],
@@ -144,6 +160,7 @@
     "tags": {
       "Banda": [
         { "val": "Sombrero de Paja", "dif": "facil" },
+        { "val": "Sombrero de Paja", "dif": "dificil" },
         { "val": "Piratas Rumbar", "dif": "facil" }
       ],
       "Origen": [{ "val": "West Blue", "dif": "dificil" }],
@@ -161,6 +178,7 @@
     "tags": {
       "Banda": [
         { "val": "Sombrero de Paja", "dif": "facil" },
+        { "val": "Sombrero de Paja", "dif": "dificil" },
         { "val": "Piratas del Sol", "dif": "facil" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
@@ -181,6 +199,7 @@
     "tags": {
       "Banda": [
         { "val": "Sombrero de Paja", "dif": "facil" },
+        { "val": "Sombrero de Paja", "dif": "dificil" },
         { "val": "Baroque Works", "dif": "facil" },
         { "val": "Reino de Alabasta", "dif": "facil" }
       ],
@@ -198,6 +217,7 @@
     "tags": {
       "Banda": [
         { "val": "Sombrero de Paja", "dif": "facil" },
+        { "val": "Sombrero de Paja", "dif": "dificil" },
         { "val": "Baroque Works", "dif": "facil" },
         { "val": "Reino de Alabasta", "dif": "facil" }
       ],
@@ -242,7 +262,10 @@
     "name": "Going Merry",
     "img": "imagenes/GoingMerry.png",
     "tags": {
-      "Banda": [{ "val": "Sombrero de Paja", "dif": "facil" }],
+      "Banda": [
+        { "val": "Sombrero de Paja", "dif": "facil" },
+        { "val": "Sombrero de Paja", "dif": "dificil" }
+      ],
       "Origen": [{ "val": "East Blue", "dif": "dificil" }],
       "Raza": [{ "val": "Barco", "dif": "media" }],
       "Estado": [{ "val": "Fallecido", "dif": "facil" }]
@@ -253,7 +276,10 @@
     "name": "Thousand Sunny",
     "img": "imagenes/Sunny.png",
     "tags": {
-      "Banda": [{ "val": "Sombrero de Paja", "dif": "facil" }],
+      "Banda": [
+        { "val": "Sombrero de Paja", "dif": "facil" },
+        { "val": "Sombrero de Paja", "dif": "dificil" }
+      ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Raza": [{ "val": "Barco", "dif": "media" }]
     }
