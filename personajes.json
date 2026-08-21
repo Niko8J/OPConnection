@@ -54,7 +54,7 @@
       "Banda": [
         { "val": "Sombrero de Paja", "dif": "facil" },
         { "val": "Sombrero de Paja", "dif": "dificil" },
-        { "val": "Piratas de Arlong", "dif": "facil" }
+        { "val": "Piratas de Arlong", "dif": "dificil" }
       ],
       "Origen": [{ "val": "East Blue", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
@@ -87,7 +87,7 @@
       "Banda": [
         { "val": "Sombrero de Paja", "dif": "facil" },
         { "val": "Sombrero de Paja", "dif": "dificil" },
-        { "val": "Germa 66", "dif": "facil" }
+        { "val": "Germa 66", "dif": "dificil" }
       ],
       "Origen": [{ "val": "North Blue", "dif": "dificil" }],
       "Haki": [
@@ -126,8 +126,8 @@
       "Banda": [
         { "val": "Sombrero de Paja", "dif": "facil" },
         { "val": "Sombrero de Paja", "dif": "dificil" },
-        { "val": "Baroque Works", "dif": "facil" },
-        { "val": "Eruditos de Ohara", "dif": "facil" }
+        { "val": "Baroque Works", "dif": "medio" },
+        { "val": "Eruditos de Ohara", "dif": "medio" }
       ],
       "Origen": [{ "val": "West Blue", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
@@ -179,7 +179,7 @@
       "Banda": [
         { "val": "Sombrero de Paja", "dif": "facil" },
         { "val": "Sombrero de Paja", "dif": "dificil" },
-        { "val": "Piratas del Sol", "dif": "facil" }
+        { "val": "Piratas del Sol", "dif": "medio" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [
