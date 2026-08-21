@@ -175,7 +175,7 @@
   const COLORS = ["#fef08a", "#bbf7d0", "#bfdbfe", "#e9d5ff"];
   
   let database = [];
-  let currentDifficulty = "facil"; // Inicializado por defecto en fácil
+  let currentDifficulty = "facil"; 
   let currentCategories = []; 
   let cards = [];
   let selectedCards = [];
@@ -204,7 +204,7 @@
     generateNewBoard();
   }
 
-function generateNewBoard() {
+  function generateNewBoard() {
     if (database.length === 0) return;
 
     let tagGroups = {}; 
@@ -213,13 +213,9 @@ function generateNewBoard() {
       if (char.tags) {
         Object.entries(char.tags).forEach(([key, tagData]) => {
           let val = typeof tagData === "object" && tagData !== null && "val" in tagData ? tagData.val : tagData;
-          let rawDif = typeof tagData === "object" && tagData !== null && "dif" in tagData ? tagData.dif : "facil";
+          let tagDif = typeof tagData === "object" && tagData !== null && "dif" in tagData ? tagData.dif : "facil";
 
-          // Convertimos las dificultades a un array por si un tag pertenece a varias (ej: ["facil", "dificil"])
-          let diffsArray = Array.isArray(rawDif) ? rawDif : [rawDif];
-
-          // Si el usuario seleccionó una dificultad, comprobamos si este tag participa en ella
-          if (diffsArray.includes(currentDifficulty)) {
+          if (currentDifficulty === "todos" || tagDif === currentDifficulty) {
             let valuesArray = Array.isArray(val) ? val : [val];
 
             valuesArray.forEach(v => {
@@ -304,7 +300,26 @@ function generateNewBoard() {
         }
       }
 
+      // REGLA CONDICIONAL PARA EL MODO DIFÍCIL ("Yonko")
       if (candidateGroups.length === 4) {
+        if (currentDifficulty === "dificil") {
+          // Buscamos si la categoría de Sombrero de Paja está presente en este tablero
+          let strawHatGroup = candidateGroups.find(g => g.name === "Banda: Sombrero de Paja");
+          
+          if (strawHatGroup) {
+            // IDs de los elementos especiales permitidos
+            const specialIds = ["vivi", "karoo", "merry", "sunny"]; // Asegúrate de que estos IDs coincidan con tu JSON
+            
+            // Verificamos si al menos uno de los 4 elegidos pertenece a los especiales
+            let hasSpecialItem = strawHatGroup.items.some(item => specialIds.includes(item.id));
+            
+            // Si NO tiene ningún elemento especial, este intento no es válido para el modo difícil
+            if (!hasSpecialItem) {
+              continue; // Salta este intento y prueba con otro
+            }
+          }
+        }
+
         selectedGroups = candidateGroups;
         break;
       }
@@ -312,7 +327,7 @@ function generateNewBoard() {
 
     if (!selectedGroups) {
       document.getElementById("warning-msg").innerText = 
-        `⚠️ No se encontraron 4 categorías sin solapamiento en '${currentDifficulty.toUpperCase()}'. Añade más personajes al JSON o diversifica sus tags.`;
+        `⚠️ No se pudieron cumplir las restricciones de la categoría en '${currentDifficulty.toUpperCase()}'. Vuelve a intentarlo.`;
       return;
     }
 
