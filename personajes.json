@@ -2651,6 +2651,133 @@
       "Raza": [{ "val": "Gigantes", "dif": "media" }],
       "Especialidad": [{ "val": "Carpinteros", "dif": "dificil" }]
     }
+  },
+  {
+    "id": "benn_beckman",
+    "name": "Benn Beckman",
+    "img": "imagenes/BennBeckman.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas del Pelirrojo", "dif": "facil" }],
+      "Origen": [{ "val": "Origen: North Blue", "dif": "dificil" }],
+      "Haki": [
+        { "val": "Usuarios de haki de armadura", "dif": "dificil" },
+        { "val": "Usuarios de haki de observación", "dif": "dificil" }
+      ]
+    }
+  },
+  {
+    "id": "lucky_roux",
+    "name": "Lucky Roux",
+    "img": "imagenes/LuckyRoux.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas del Pelirrojo", "dif": "facil" }],
+      "Origen": [{ "val": "Origen: South Blue", "dif": "dificil" }],
+      "Especialidad": [{ "val": "Cocineros", "dif": "media" }],
+      "Haki": [
+        { "val": "Usuarios de haki de armadura", "dif": "dificil" },
+        { "val": "Usuarios de haki de observación", "dif": "dificil" }
+      ]
+    }
+  },
+  {
+    "id": "limejuice",
+    "name": "Limejuice",
+    "img": "imagenes/Limejuice.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas del Pelirrojo", "dif": "facil" }]
+    }
+  },
+  {
+    "id": "bonk_punch",
+    "name": "Bonk Punch",
+    "img": "imagenes/BonkPunch.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas del Pelirrojo", "dif": "facil" }],
+      "Especialidad": [{ "val": "Músicos", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "monster",
+    "name": "Monster",
+    "img": "imagenes/Monster.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas del Pelirrojo", "dif": "facil" }],
+      "Raza": [{ "val": "Animales", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "building_snake",
+    "name": "Building Snake",
+    "img": "imagenes/BuildingSnake.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas del Pelirrojo", "dif": "facil" }],
+      "Especialidad": [{ "val": "Navegantes", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "hongo",
+    "name": "Hongo",
+    "img": "imagenes/Hongo.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas del Pelirrojo", "dif": "facil" }],
+      "Especialidad": [{ "val": "Médicos", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "gab",
+    "name": "Gab",
+    "img": "imagenes/Gab.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas del Pelirrojo", "dif": "facil" }]
+    }
+  },
+  {
+    "id": "rockstar",
+    "name": "Rockstar",
+    "img": "imagenes/Rockstar.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas del Pelirrojo", "dif": "facil" }],
+      "Recompensa": [{ "val": "Recompensa: Menos de 100M", "dif": "media" }]
+    }
+  },
+  {
+    "id": "izou",
+    "name": "Izou",
+    "img": "imagenes/Izou.png",
+    "tags": {
+      "Banda": [
+        { "val": "Wano", "dif": "facil" },
+        { "val": "Piratas de Barbablanca", "dif": "facil" }
+      ],
+      "Origen": [{ "val": "Origen: Grand Line", "dif": "dificil" }],
+      "Haki": [
+        { "val": "Usuarios de haki de armadura", "dif": "dificil" },
+        { "val": "Usuarios de haki de observación", "dif": "dificil" }
+      ],
+      "Fruta": [{ "val": "Sin fruta del diablo", "dif": "facil" }],
+      "Titulo": [{ "val": "Vainas Rojas", "dif": "dificil" }],
+      "Especialidad": [{ "val": "Tiradores", "dif": "media" }],
+      "Recompensa": [{ "val": "Recompensa: Entre 500M y mil millones", "dif": "media" }]
+
+    }
+  },
+  {
+    "id": "hibari",
+    "name": "Hibari",
+    "img": "imagenes/Hibari.png",
+    "tags": {
+      "Banda": [
+        { "val": "Marina", "dif": "facil" },
+        { "val": "SWORD", "dif": "facil" }
+      ],
+      "Origen": [{ "val": "Origen: North Blue", "dif": "dificil" }],
+      "Haki": [
+        { "val": "Usuarios de haki de armadura", "dif": "dificil" },
+        { "val": "Usuarios de haki de observación", "dif": "dificil" }
+      ],
+      "Fruta": [{ "val": "Sin fruta del diablo", "dif": "facil" }],
+      "Especialidad": [{ "val": "Tiradores", "dif": "media" }]
+    }
   }
 ]
 ]
