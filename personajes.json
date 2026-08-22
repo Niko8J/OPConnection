@@ -1532,19 +1532,6 @@
       "Recompensa": [{ "val": "Menos de 100M", "dif": "dificil" }]
     }
   },
-    {
-    "id": "lassoo",
-    "name": "Lassoo",
-    "img": "imagenes/Lassoo.png",
-    "tags": {
-      "Banda": [
-        { "val": "Baroque Works", "dif": "facil" },
-        { "val": "Baroque Works", "dif": "dificil" }
-      ],
-      "Fruta": [{ "val": "Zoan", "dif": "facil" }],
-      "Raza": [{ "val": "Objetos que se ha comido una fruta", "dif": "medio" }]
-    }
-  },
   {
     "id": "mr5",
     "name": "Gem (Mr. 5)",
@@ -1975,16 +1962,6 @@
     }
   },
   {
-    "id": "cerberus",
-    "name": "Cerberus",
-    "img": "imagenes/Cerberus.png",
-    "tags": {
-      "Raza": [{ "val": "Animales", "dif": "media" }],
-      "Fruta": [{ "val": "Zoan mitológica", "dif": "facil" }],
-      "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }]
-    }
-  },
-  {
     "id": "killingham",
     "name": "Rimoshifu Killingham",
     "img": "imagenes/Killingham.png",
@@ -2231,6 +2208,69 @@
       "Banda": [{ "val": "Germa 66", "dif": "facil" }],
       "Origen": [{ "val": "North Blue", "dif": "dificil" }],
       "Fruta": [{ "val": "Sin fruta", "dif": "facil" }]
+    }
+  },
+    {
+    "id": "lassoo",
+    "name": "Lassoo",
+    "img": "imagenes/Lassoo.png",
+    "tags": {
+      "Banda": [
+        { "val": "Baroque Works", "dif": "facil" },
+        { "val": "Baroque Works", "dif": "dificil" }
+      ],
+      "Fruta": [{ "val": "Zoan", "dif": "facil" }],
+      "Raza": [{ "val": "Objetos que se ha comido una fruta", "dif": "medio" }]
+    }
+  },
+  {
+    "id": "funkfreed",
+    "name": "Funkfreed",
+    "img": "imagenes/Funkfreed.png",
+    "tags": {
+      "Banda": [{ "val": "CP9", "dif": "facil" }],
+      "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }],
+      "Fruta": [{ "val": "Zoan", "dif": "media" }],
+      "Raza": [{ "val": "Objetos que se ha comido una fruta", "dif": "medio" }]
+    }
+  },
+  {
+    "id": "smiley",
+    "name": "Smiley",
+    "img": "imagenes/Smiley.png",
+    "tags": {
+      "Fruta": [{ "val": "Zoan", "dif": "media" }],
+      "Raza": [{ "val": "Objetos que se ha comido una fruta", "dif": "medio" }]
+    }
+  },
+  {
+    "id": "bunbuku",
+    "name": "Bunbuku",
+    "img": "imagenes/Bunbuku.png",
+    "tags": {
+      "Banda": [{ "val": "Wano", "dif": "facil" }],
+      "Fruta": [{ "val": "Zoan", "dif": "facil" }],
+      "Raza": [{ "val": "Objetos que se ha comido una fruta", "dif": "medio" }]
+    }
+  },
+  {
+    "id": "ragnir",
+    "name": "Ragnir",
+    "img": "imagenes/Ragnir.png",
+    "tags": {
+      "Banda": [{ "val": "Elbaf", "dif": "facil" }], 
+      "Fruta": [{ "val": "Zoan mitológica", "dif": "dificil" }],
+      "Raza": [{ "val": "Objetos que se ha comido una fruta", "dif": "medio" }]
+    }
+  },
+    {
+    "id": "cerberus",
+    "name": "Cerberus",
+    "img": "imagenes/Cerberus.png",
+    "tags": {
+      "Raza": [{ "val": "Objetos que se ha comido una fruta", "dif": "medio" }]
+      "Fruta": [{ "val": "Zoan mitológica", "dif": "facil" }],
+      "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }]
     }
   }
 ]
