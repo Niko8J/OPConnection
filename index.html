@@ -219,7 +219,8 @@
             let valuesArray = Array.isArray(val) ? val : [val];
 
             valuesArray.forEach(v => {
-              const groupName = `${key}: ${v}`;
+              let cleanVal = (typeof v === "object" && v !== null) ? (v.val || JSON.stringify(v)) : v;
+              const groupName = `${key}: ${cleanVal}`;
               if (!tagGroups[groupName]) tagGroups[groupName] = [];
               if (!tagGroups[groupName].some(c => c.id === char.id)) {
                 tagGroups[groupName].push(char);
@@ -300,13 +301,10 @@
         }
       }
 
-      // REGLAS CONDICIONALES PARA EL MODO DIFÍCIL ("Yonko")
       if (candidateGroups.length === 4) {
         let boardIsValid = true;
 
         if (currentDifficulty === "dificil") {
-          
-          // 1. Regla para "Sombrero de Paja"
           let strawHatGroup = candidateGroups.find(g => g.name === "Banda: Sombrero de Paja");
           if (strawHatGroup) {
             const specialIds = ["vivi", "karoo", "merry", "sunny"];
@@ -314,14 +312,12 @@
             if (!hasSpecialItem) boardIsValid = false;
           }
 
-          // 2. Regla para "Piratas de Arlong" (Debe incluir obligatoriamente a Nami)
           let arlongGroup = candidateGroups.find(g => g.name === "Banda: Piratas de Arlong");
           if (arlongGroup) {
             let hasNami = arlongGroup.items.some(item => item.id === "nami");
             if (!hasNami) boardIsValid = false;
           }
 
-          // 3. Regla para "Baroque Works" (Debe incluir a Robin, Vivi o Karoo)
           let baroqueGroup = candidateGroups.find(g => g.name === "Banda: Baroque Works");
           if (baroqueGroup) {
             const allowedIds = ["robin", "vivi", "karoo"];
@@ -331,7 +327,7 @@
         }
 
         if (!boardIsValid) {
-          continue; // Descarta este intento si no cumple alguna de las reglas estrictas
+          continue;
         }
 
         selectedGroups = candidateGroups;
@@ -462,8 +458,10 @@
       });
       imgsHtml += '</div>';
 
-      let categoryTitle = typeof catData.name === "object" ? (catData.name.val || JSON.stringify(catData.name)) : catData.name;
-solvedEl.innerHTML = `<div>${categoryTitle}</div>${imgsHtml}`;
+      let rawName = catData.name;
+      let categoryTitle = (typeof rawName === "object" && rawName !== null) ? (rawName.val || JSON.stringify(rawName)) : String(rawName);
+      
+      solvedEl.innerHTML = `<div>${categoryTitle}</div>${imgsHtml}`;
       solvedContainer.appendChild(solvedEl);
 
       cards = cards.filter((_, i) => !selectedCards.includes(i));
@@ -521,7 +519,7 @@ solvedEl.innerHTML = `<div>${categoryTitle}</div>${imgsHtml}`;
     renderModalSolutions();
   }
 
-function renderModalSolutions() {
+  function renderModalSolutions() {
     const solutionsContainer = document.getElementById("solutions-container");
     solutionsContainer.innerHTML = "";
 
@@ -530,8 +528,8 @@ function renderModalSolutions() {
       solEl.className = "solved-category";
       solEl.style.backgroundColor = cat.color;
       
-      // Aseguramos que cat.name sea un texto plano legible
-      let categoryTitle = typeof cat.name === "object" ? (cat.name.val || JSON.stringify(cat.name)) : cat.name;
+      let rawName = cat.name;
+      let categoryTitle = (typeof rawName === "object" && rawName !== null) ? (rawName.val || JSON.stringify(rawName)) : String(rawName);
 
       let imgsHtml = '<div class="solved-items-list">';
       cat.items.forEach(item => {
