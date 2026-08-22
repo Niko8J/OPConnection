@@ -182,12 +182,16 @@
   let lives = MAX_LIVES;
   let gameOver = false;
 
-  // Función universal para limpiar cualquier objeto y asegurar que devuelva texto plano
   function formatCategoryName(name) {
     if (typeof name === "object" && name !== null) {
-      return name.val || name.name || name.title || JSON.stringify(name);
+      name = name.val || name.name || name.title || JSON.stringify(name);
     }
-    return String(name);
+    let str = String(name);
+    // Si el nombre incluye el formato "Clave: Valor", extraemos solo el "Valor"
+    if (str.includes(": ")) {
+      return str.split(": ")[1];
+    }
+    return str;
   }
 
   window.addEventListener("DOMContentLoaded", () => {
@@ -227,7 +231,7 @@
             let valuesArray = Array.isArray(val) ? val : [val];
 
             valuesArray.forEach(v => {
-              let cleanVal = formatCategoryName(v);
+              let cleanVal = (typeof v === "object" && v !== null) ? (v.val || v.name || JSON.stringify(v)) : String(v);
               const groupName = `${key}: ${cleanVal}`;
               if (!tagGroups[groupName]) tagGroups[groupName] = [];
               if (!tagGroups[groupName].some(c => c.id === char.id)) {
@@ -260,8 +264,8 @@
         if (key !== targetKey) return false;
         
         let actualVal = typeof tagData === "object" && tagData !== null && "val" in tagData ? tagData.val : tagData;
-        let actualValFormatted = formatCategoryName(actualVal);
-        return Array.isArray(actualVal) ? actualVal.map(formatCategoryName).includes(targetVal) : actualValFormatted === targetVal;
+        let actualValFormatted = (typeof actualVal === "object" && actualVal !== null) ? (actualVal.val || JSON.stringify(actualVal)) : String(actualVal);
+        return Array.isArray(actualVal) ? actualVal.map(item => (typeof item === "object" && item !== null ? item.val : String(item))).includes(targetVal) : actualValFormatted === targetVal;
       });
     };
 
