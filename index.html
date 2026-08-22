@@ -182,6 +182,14 @@
   let lives = MAX_LIVES;
   let gameOver = false;
 
+  // Función universal para limpiar cualquier objeto y asegurar que devuelva texto plano
+  function formatCategoryName(name) {
+    if (typeof name === "object" && name !== null) {
+      return name.val || name.name || name.title || JSON.stringify(name);
+    }
+    return String(name);
+  }
+
   window.addEventListener("DOMContentLoaded", () => {
     fetch("personajes.json")
       .then(res => {
@@ -219,7 +227,7 @@
             let valuesArray = Array.isArray(val) ? val : [val];
 
             valuesArray.forEach(v => {
-              let cleanVal = (typeof v === "object" && v !== null) ? (v.val || JSON.stringify(v)) : v;
+              let cleanVal = formatCategoryName(v);
               const groupName = `${key}: ${cleanVal}`;
               if (!tagGroups[groupName]) tagGroups[groupName] = [];
               if (!tagGroups[groupName].some(c => c.id === char.id)) {
@@ -252,7 +260,8 @@
         if (key !== targetKey) return false;
         
         let actualVal = typeof tagData === "object" && tagData !== null && "val" in tagData ? tagData.val : tagData;
-        return Array.isArray(actualVal) ? actualVal.includes(targetVal) : actualVal === targetVal;
+        let actualValFormatted = formatCategoryName(actualVal);
+        return Array.isArray(actualVal) ? actualVal.map(formatCategoryName).includes(targetVal) : actualValFormatted === targetVal;
       });
     };
 
@@ -458,8 +467,7 @@
       });
       imgsHtml += '</div>';
 
-      let rawName = catData.name;
-      let categoryTitle = (typeof rawName === "object" && rawName !== null) ? (rawName.val || JSON.stringify(rawName)) : String(rawName);
+      let categoryTitle = formatCategoryName(catData.name);
       
       solvedEl.innerHTML = `<div>${categoryTitle}</div>${imgsHtml}`;
       solvedContainer.appendChild(solvedEl);
@@ -528,8 +536,7 @@
       solEl.className = "solved-category";
       solEl.style.backgroundColor = cat.color;
       
-      let rawName = cat.name;
-      let categoryTitle = (typeof rawName === "object" && rawName !== null) ? (rawName.val || JSON.stringify(rawName)) : String(rawName);
+      let categoryTitle = formatCategoryName(cat.name);
 
       let imgsHtml = '<div class="solved-items-list">';
       cat.items.forEach(item => {
