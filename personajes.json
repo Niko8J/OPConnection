@@ -2268,7 +2268,7 @@
     "name": "Cerberus",
     "img": "imagenes/Cerberus.png",
     "tags": {
-      "Raza": [{ "val": "Objetos que se ha comido una fruta", "dif": "medio" }]
+      "Raza": [{ "val": "Objetos que se ha comido una fruta", "dif": "medio" }],
       "Fruta": [{ "val": "Zoan mitológica", "dif": "facil" }],
       "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }]
     }
