@@ -866,9 +866,7 @@
     "img": "imagenes/Doflamingo.png",
     "tags": {
       "Banda": [{ "val": "Donquixote Family", "dif": "facil" }],
-      "Titulo": [
-        { "val": "Shichibukais", "dif": "facil" }
-      ],
+      "Titulo": [{ "val": "Shichibukais", "dif": "facil" }],
       "Origen": [{ "val": "Origen: North Blue", "dif": "dificil" }],
       "Haki": [
         { "val": "Usuarios de haki del conquistador", "dif": "dificil" },
@@ -2393,7 +2391,7 @@
     "img": "imagenes/Hajrudin.png",
     "tags": {
       "Banda": [
-        { "val": "De Elbaf", "dif": "media" },
+        { "val": "Nuevos Piratas Gigantes Guerreros", "dif": "media" },
         { "val": "Banda: Gran Flota de Sombrero de Paja", "dif": "dificil" }
       ],
       "Origen": [{ "val": "Origen: Grand Line", "dif": "media" }],
@@ -2403,6 +2401,257 @@
         { "val": "Capitanes pirata", "dif": "dificil" }
       ]
     }
+  },
+    [
+  {
+    "id": "cavendish",
+    "name": "Cavendish",
+    "img": "imagenes/Cavendish.png",
+    "tags": {
+      "Banda": [{ "val": "Banda: Gran Flota de Sombrero de Paja", "dif": "facil" }],
+      "Origen": [{ "val": "Origen: Grand Line", "dif": "dificil" }],
+      "Especialidad": [
+        { "val": "Espadachines", "dif": "media" },
+        { "val": "Capitanes pirata", "dif": "media" },
+        { "val": "Príncipes", "dif": "media" }
+      ],
+      "Haki": [
+        { "val": "Usuarios de haki de armadura", "dif": "dificil" },
+        { "val": "Usuarios de haki de observación", "dif": "dificil" }
+      ],
+      "Recompensa": [{ "val": "Recompensa: Entre 100M y 499M", "dif": "media" }]
+    }
+  },
+  {
+    "id": "bartolomeo",
+    "name": "Bartolomeo",
+    "img": "imagenes/Bartolomeo.png",
+    "tags": {
+      "Banda": [{ "val": "Banda: Gran Flota de Sombrero de Paja", "dif": "facil" }],
+      "Origen": [{ "val": "Origen: East Blue", "dif": "dificil" }],
+      "Fruta": [{ "val": "Fruta del diablo: Paramecia", "dif": "facil" }],
+      "Especialidad": [{ "val": "Capitanes pirata", "dif": "media" }],
+      "Recompensa": [{ "val": "Recompensa: Entre 100M y 499M", "dif": "media" }]
+    }
+  },
+  {
+    "id": "sai",
+    "name": "Sai",
+    "img": "imagenes/Sai.png",
+    "tags": {
+      "Banda": [{ "val": "Banda: Gran Flota de Sombrero de Paja", "dif": "facil" }],
+      "Origen": [{ "val": "Origen: West Blue", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta del diablo", "dif": "facil" }],
+      "Especialidad": [{ "val": "Capitanes pirata", "dif": "media" }],
+      "Haki": [
+        { "val": "Usuarios de haki de armadura", "dif": "dificil" },
+        { "val": "Usuarios de haki de observación", "dif": "dificil" }
+      ],
+      "Recompensa": [{ "val": "Recompensa: Entre 100M y 499M", "dif": "media" }]
+    }
+  },
+  {
+    "id": "ideo",
+    "name": "Ideo",
+    "img": "imagenes/Ideo.png",
+    "tags": {
+      "Banda": [{ "val": "Banda: Gran Flota de Sombrero de Paja", "dif": "facil" }],
+      "Origen": [{ "val": "Origen: Grand Line", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta del diablo", "dif": "facil" }],
+      "Especialidad": [{ "val": "Capitanes pirata", "dif": "media" }],
+      "Raza": [{ "val": "Brazos largos", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "leo",
+    "name": "Leo",
+    "img": "imagenes/Leo.png",
+    "tags": {
+      "Banda": [{ "val": "Banda: Gran Flota de Sombrero de Paja", "dif": "facil" }],
+      "Origen": [{ "val": "Origen: Grand Line", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta del diablo", "dif": "facil" }],
+      "Especialidad": [{ "val": "Capitanes pirata", "dif": "media" }],
+      "Raza": [{ "val": "Tontatta", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "orlumbus",
+    "name": "Orlumbus",
+    "img": "imagenes/Orlumbus.png",
+    "tags": {
+      "Banda": [{ "val": "Banda: Gran Flota de Sombrero de Paja", "dif": "facil" }],
+      "Origen": [{ "val": "Origen: Grand Line", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta del diablo", "dif": "facil" }],
+      "Especialidad": [{ "val": "Capitanes pirata", "dif": "media" }],
+      "Recompensa": [{ "val": "Recompensa: Entre 100M y 499M", "dif": "media" }]
+    }
+  },
+  {
+    "id": "baby_five",
+    "name": "Baby 5",
+    "img": "imagenes/Baby5.png",
+    "tags": {
+      "Banda": [
+        { "val": "Banda: Gran Flota de Sombrero de Paja", "dif": "facil" },
+        { "val": "Donquixote Family", "dif": "facil" }
+      ],
+      "Origen": [{ "val": "Origen: North Blue", "dif": "dificil" }],
+      "Fruta": [{ "val": "Fruta del diablo: Paramecia", "dif": "facil" }]
+    }
+  },
+  {
+    "id": "blue_gilly",
+    "name": "Blue Gilly",
+    "img": "imagenes/BlueGilly.png",
+    "tags": {
+      "Banda": [{ "val": "Banda: Gran Flota de Sombrero de Paja", "dif": "facil" }],
+      "Origen": [{ "val": "Origen: Grand Line", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta del diablo", "dif": "facil" }],
+      "Raza": [{ "val": "Tribu de Piernas Largas", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "dorry",
+    "name": "Dorry",
+    "img": "imagenes/Dorry.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas Gigantes Guerreros", "dif": "media" }],
+      "Origen": [{ "val": "Origen: Grand Line", "dif": "media" }],
+      "Especialidad": [
+        { "val": "Capitanes pirata", "dif": "dificil" },
+        { "val": "Espadachines", "dif": "dificil" }
+      ],
+      "Raza": [{ "val": "Gigantes", "dif": "facil" }],
+      "Recompensa": [{ "val": "Recompensa: Más de mil millones", "dif": "dificil" }],
+      "Haki": [
+        { "val": "Usuarios de haki de armadura", "dif": "dificil" },
+        { "val": "Usuarios de haki de observación", "dif": "dificil" }
+      ]
+    }
+  },
+  {
+    "id": "brogy",
+    "name": "Brogy",
+    "img": "imagenes/Brogy.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas Gigantes Guerreros", "dif": "media" }],
+      "Origen": [{ "val": "Origen: Grand Line", "dif": "media" }],
+      "Especialidad": [{ "val": "Capitanes pirata", "dif": "dificil" }],
+      "Raza": [{ "val": "Gigantes", "dif": "facil" }],
+      "Recompensa": [{ "val": "Recompensa: Más de mil millones", "dif": "dificil" }],
+      "Haki": [
+        { "val": "Usuarios de haki de armadura", "dif": "dificil" },
+        { "val": "Usuarios de haki de observación", "dif": "dificil" }
+      ]
+    }
+  },
+  {
+    "id": "jaguar_d_saul",
+    "name": "Jaguar D. Saul",
+    "img": "imagenes/Saul.png",
+    "tags": {
+      "Banda": [{ "val": "Marina", "dif": "facil" }],
+      "Origen": [{ "val": "Origen: South Blue", "dif": "dificil" }],
+      "D": [{ "val": "Voluntad de la D.", "dif": "media" }],
+      "Raza": [{ "val": "Gigantes", "dif": "facil" }]
+    }
+  },
+  {
+    "id": "sanjuan_wolf",
+    "name": "Sanjuan Wolf",
+    "img": "imagenes/SanjuanWolf.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas de Barbanegra", "dif": "facil" }],
+      "Origen": [{ "val": "Origen: West Blue", "dif": "dificil" }],
+      "Fruta": [{ "val": "Fruta del diablo: Paramecia", "dif": "facil" }],
+      "Raza": [{ "val": "Raza: Gigantes", "dif": "media" }]
+    }
+  },
+  {
+    "id": "oimo",
+    "name": "Oimo",
+    "img": "imagenes/Oimo.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas Gigantes Guerreros", "dif": "media" }],
+      "Origen": [{ "val": "Origen: Grand Line", "dif": "media" }],
+      "Raza": [{ "val": "Gigantes", "dif": "facil" }]
+    }
+  },
+  {
+    "id": "kashi",
+    "name": "Kashi",
+    "img": "imagenes/Kashi.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas Gigantes Guerreros", "dif": "media" }],
+      "Origen": [{ "val": "Origen: Grand Line", "dif": "media" }],
+      "Raza": [{ "val": "Gigantes", "dif": "facil" }]    }
+  },
+  {
+    "id": "jarul",
+    "name": "Jarul",
+    "img": "imagenes/Jarul.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas Gigantes Guerreros", "dif": "media" }],
+      "Origen": [{ "val": "Origen: Grand Line", "dif": "media" }],
+      "Raza": [{ "val": "Gigantes", "dif": "facil" }]
+    }
+  },
+  {
+    "id": "gerd",
+    "name": "Gerd",
+    "img": "imagenes/Gerd.png",
+    "tags": {
+      "Banda": [
+        { "val": "Nuevos Piratas Gigantes Guerreros", "dif": "media" },
+        { "val": "Banda: Gran Flota de Sombrero de Paja", "dif": "dificil" }
+      ],
+      "Origen": [{ "val": "Origen: Grand Line", "dif": "media" }],
+      "Raza": [{ "val": "Gigantes", "dif": "media" }],
+      "Especialidad": [{ "val": "Médicos", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "road",
+    "name": "Road",
+    "img": "imagenes/Road.png",
+    "tags": {
+      "Banda": [
+        { "val": "Nuevos Piratas Gigantes Guerreros", "dif": "media" },
+        { "val": "Banda: Gran Flota de Sombrero de Paja", "dif": "dificil" }
+      ],
+      "Origen": [{ "val": "Origen: Grand Line", "dif": "media" }],
+      "Raza": [{ "val": "Gigantes", "dif": "media" }],
+      "Especialidad": [{ "val": "Navegantes", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "goldberg",
+    "name": "Goldberg",
+    "img": "imagenes/Goldberg.png",
+    "tags": {
+      "Banda": [
+        { "val": "Nuevos Piratas Gigantes Guerreros", "dif": "media" },
+        { "val": "Banda: Gran Flota de Sombrero de Paja", "dif": "dificil" }
+      ],
+      "Origen": [{ "val": "Origen: Grand Line", "dif": "media" }],
+      "Raza": [{ "val": "Gigantes", "dif": "media" }],
+      "Especialidad": [{ "val": "Cocineros", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "stansen",
+    "name": "Stansen",
+    "img": "imagenes/Stansen.png",
+    "tags": {
+      "Banda": [
+        { "val": "Nuevos Piratas Gigantes Guerreros", "dif": "media" },
+        { "val": "Banda: Gran Flota de Sombrero de Paja", "dif": "dificil" }
+      ],
+      "Origen": [{ "val": "Origen: Grand Line", "dif": "media" }],
+      "Raza": [{ "val": "Gigantes", "dif": "media" }],
+      "Especialidad": [{ "val": "Carpinteros", "dif": "dificil" }]
+    }
   }
+]
 ]
 ]
