@@ -181,6 +181,7 @@
         { "val": "Sombrero de Paja", "dif": "dificil" },
         { "val": "Piratas del Sol", "dif": "medio" }
       ],
+      "Titulo": { "val": "Shichibukai", "dif": "facil" },
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [
         { "val": "Haki de armadura", "dif": "dificil" },
@@ -732,7 +733,8 @@
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
       "Raza": [
         { "val": "Lunarian", "dif": "media" },
-        { "val": "Cyborg", "dif": "media" }
+        { "val": "Cyborg", "dif": "media" },
+        { "val": "Clon", "dif": "media" }
       ]
     }
   },
@@ -746,7 +748,8 @@
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
       "Raza": [
         { "val": "Lunarian", "dif": "media" },
-        { "val": "Cyborg", "dif": "media" }
+        { "val": "Cyborg", "dif": "media" },
+        { "val": "Clon", "dif": "media" }
       ],
       "Especialidad": [{ "val": "Espadachín", "dif": "dificil" }]
     }
@@ -761,7 +764,8 @@
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
       "Raza": [
         { "val": "Lunarian", "dif": "media" },
-        { "val": "Cyborg", "dif": "media" }
+        { "val": "Cyborg", "dif": "media" },
+        { "val": "Clon", "dif": "media" }
       ]
     }
   },
@@ -775,7 +779,8 @@
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
       "Raza": [
         { "val": "Lunarian", "dif": "media" },
-        { "val": "Cyborg", "dif": "media" }
+        { "val": "Cyborg", "dif": "media" },
+        { "val": "Clon", "dif": "media" }
       ]
     }
   },
@@ -824,7 +829,9 @@
     "img": "imagenes/Hancock.png",
     "tags": {
       "Banda": [{ "val": "Piratas Kuja", "dif": "facil" }],
-      "Titulo": [{ "val": "Shichibukai", "dif": "facil" }],
+      "Titulo": [
+        { "val": "Shichibukai", "dif": "facil" }
+      ],
       "Origen": [{ "val": "Calm Belt", "dif": "dificil" }],
       "Haki": [
         { "val": "Haki del conquistador", "dif": "dificil" },
@@ -857,7 +864,9 @@
     "img": "imagenes/Doflamingo.png",
     "tags": {
       "Banda": [{ "val": "Piratas Donquixote", "dif": "facil" }],
-      "Titulo": [{ "val": "Shichibukai", "dif": "facil" }],
+      "Titulo": [
+        { "val": "Shichibukai", "dif": "facil" }
+      ],
       "Origen": [{ "val": "North Blue", "dif": "dificil" }],
       "Haki": [
         { "val": "Haki del conquistador", "dif": "dificil" },
@@ -902,22 +911,6 @@
         { "val": "Haki de observación", "dif": "dificil" }
       ],
       "Fruta": [{ "val": "Logia", "dif": "facil" }]
-    }
-  },
-  {
-    "id": "garling",
-    "name": "Figarland Garling",
-    "img": "imagenes/Garling.png",
-    "tags": {
-      "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }],
-      "Titulo": [{ "val": "Gorosei", "dif": "facil" }],
-      "Origen": [{ "val": "Red Line", "dif": "dificil" }],
-      "Haki": [
-        { "val": "Haki del conquistador", "dif": "dificil" },
-        { "val": "Haki de armadura", "dif": "dificil" },
-        { "val": "Haki de observación", "dif": "dificil" }
-      ],
-      "Especialidad": [{ "val": "Espadachín", "dif": "dificil" }]
     }
   },
   {
@@ -1380,24 +1373,6 @@
     }
   },
   {
-    "id": "nusjuro",
-    "name": "Ethanbaron V. Nusjuro",
-    "img": "imagenes/Nusjuro.png",
-    "tags": {
-      "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }],
-      "Titulo": [{ "val": "Gorosei", "dif": "facil" }],
-      "Origen": [{ "val": "Red Line", "dif": "dificil" }],
-      "Haki": [
-        { "val": "Haki del conquistador", "dif": "dificil" },
-        { "val": "Haki de armadura", "dif": "dificil" },
-        { "val": "Haki de observación", "dif": "dificil" }
-      ],
-      "Fruta": [{ "val": "Zoan mitológica", "dif": "facil" }],
-      "Especialidad": [{ "val": "Espadachín", "dif": "dificil" }],
-      "Habilidades": [{ "val": "Rokushiki", "dif": "dificil" }]
-    }
-  },
-  {
     "id": "douglas_bullet",
     "name": "Douglas Bullet",
     "img": "imagenes/DouglasBullet.png",
@@ -1765,6 +1740,384 @@
       "Especialidad": [{ "val": "Espadachín", "dif": "dificil" }],
       "Raza": [{ "val": "Gyojin", "dif": "media" }],
       "Recompensa": [{ "val": "Menos de 100M", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "jack",
+    "name": "Jack",
+    "img": "imagenes/Jack.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas Bestias", "dif": "facil" }],
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
+      "Haki": [
+        { "val": "Haki de armadura", "dif": "dificil" },
+        { "val": "Haki de observación", "dif": "dificil" }
+      ],
+      "Fruta": [{ "val": "Zoan prehistórica", "dif": "facil" }],
+      "Raza": [{ "val": "Gyojin", "dif": "media" }],
+      "Recompensa": [{ "val": "Más de mil millones", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "page_one",
+    "name": "Page One",
+    "img": "imagenes/PageOne.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas Bestias", "dif": "facil" }],
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
+      "Haki": [
+        { "val": "Haki de armadura", "dif": "dificil" },
+        { "val": "Haki de observación", "dif": "dificil" }
+      ],
+      "Fruta": [{ "val": "Zoan prehistórica", "dif": "facil" }],
+      "Recompensa": [{ "val": "Entre 100M y 499M", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "ulti",
+    "name": "Ulti",
+    "img": "imagenes/Ulti.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas Bestias", "dif": "facil" }],
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
+      "Haki": [
+        { "val": "Haki de armadura", "dif": "dificil" },
+        { "val": "Haki de observación", "dif": "dificil" }
+      ],
+      "Fruta": [{ "val": "Zoan prehistórica", "dif": "facil" }],
+      "Recompensa": [{ "val": "Entre 100M y 499M", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "black_maria",
+    "name": "Black Maria",
+    "img": "imagenes/BlackMaria.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas Bestias", "dif": "facil" }],
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
+      "Haki": [
+        { "val": "Haki de armadura", "dif": "dificil" },
+        { "val": "Haki de observación", "dif": "dificil" }
+      ],
+      "Fruta": [{ "val": "Zoan prehistórica", "dif": "facil" }],
+      "Recompensa": [{ "val": "Entre 100M y 499M", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "sasaki",
+    "name": "Sasaki",
+    "img": "imagenes/Sasaki.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas Bestias", "dif": "facil" }],
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
+      "Haki": [
+        { "val": "Haki de armadura", "dif": "dificil" },
+        { "val": "Haki de observación", "dif": "dificil" }
+      ],
+      "Fruta": [{ "val": "Zoan prehistórica", "dif": "facil" }],
+      "Recompensa": [{ "val": "Entre 100M y 499M", "dif": "dificil" }],
+      "Especialidad": [{ "val": "Espadachín", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "catarina_devon",
+    "name": "Catarina Devon",
+    "img": "imagenes/CatarinaDevon.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas de Barbanegra", "dif": "facil" }],
+      "Origen": [{ "val": "South Blue", "dif": "dificil" }],
+      "Fruta": [{ "val": "Zoan mitológica", "dif": "facil" }]
+    }
+  },
+  {
+    "id": "orochi",
+    "name": "Kurozumi Orochi",
+    "img": "imagenes/Orochi.png",
+    "tags": {
+      "Banda": [{ "val": "Wano", "dif": "facil" }],
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
+      "Fruta": [{ "val": "Zoan mitológica", "dif": "facil" }],
+      "Estado": [{ "val": "Fallecido", "dif": "facil" }]
+    }
+  },
+  {
+    "id": "onimaru",
+    "name": "Onimaru",
+    "img": "imagenes/Onimaru.png",
+    "tags": {
+      "Banda": [{ "val": "Wano", "dif": "facil" }], 
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
+      "Fruta": [{ "val": "Zoan mitológica", "dif": "facil" }],
+      "Raza": [{ "val": "Animales", "dif": "media" }]
+    }
+  },
+  {
+    "id": "stronger",
+    "name": "Stronger",
+    "img": "imagenes/Stronger.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas de Barbanegra", "dif": "facil" }],
+      "Fruta": [{ "val": "Zoan mitológica", "dif": "facil" }],
+      "Raza": [{ "val": "Animales", "dif": "media" }]
+    }
+  },
+  {
+    "id": "cerberus",
+    "name": "Cerberus",
+    "img": "imagenes/Cerberus.png",
+    "tags": {
+      "Raza": [{ "val": "Animales", "dif": "media" }],
+      "Fruta": [{ "val": "Zoan mitológica", "dif": "facil" }],
+      "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }]
+    }
+  },
+  {
+    "id": "killingham",
+    "name": "Rimoshifu Killingham",
+    "img": "imagenes/Killingham.png",
+    "tags": {
+      "Fruta": [{ "val": "Zoan mitológica", "dif": "facil" }],
+      "Haki": [
+        { "val": "Haki de armadura", "dif": "dificil" },
+        { "val": "Haki de observación", "dif": "dificil" }
+      ],
+      "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }]
+    }
+  },
+  {
+    "id": "loki",
+    "name": "Loki",
+    "img": "imagenes/Loki.png",
+    "tags": {
+      "Banda": [{ "val": "Elbaf", "dif": "facil" }], 
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
+      "Raza": [{ "val": "Gigante", "dif": "media" }],
+      "Fruta": [{ "val": "Zoan mitológica", "dif": "facil" }],
+      "Recompensa": [{ "val": "Más de mil millones", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "koza",
+    "name": "Koza",
+    "img": "imagenes/Koza.png",
+    "tags": {
+      "Banda": [{ "val": "Reino de Alabasta", "dif": "facil" }],
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta", "dif": "facil" }],
+      "Haki": [{ "val": "Sin haki", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "toto",
+    "name": "Toto",
+    "img": "imagenes/Toto.png",
+    "tags": {
+      "Banda": [{ "val": "Reino de Alabasta", "dif": "facil" }],
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta", "dif": "facil" }],
+      "Haki": [{ "val": "Sin haki", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "matsuge",
+    "name": "Matsuge",
+    "img": "imagenes/Matsuge.png",
+    "tags": {
+      "Banda": [{ "val": "Reino de Alabasta", "dif": "facil" }],
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
+      "Raza": [{ "val": "Animales", "dif": "media" }]
+    }
+  },
+  {
+    "id": "hasami",
+    "name": "Hasami",
+    "img": "imagenes/Hasami.png",
+    "tags": {
+      "Banda": [{ "val": "Reino de Alabasta", "dif": "facil" }],
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
+      "Raza": [{ "val": "Animales", "dif": "media" }]
+    }
+  },
+  {
+    "id": "dugong",
+    "name": "Kung-Fu Dugong",
+    "img": "imagenes/Dugong.png",
+    "tags": {
+      "Banda": [{ "val": "Reino de Alabasta", "dif": "facil" }],
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
+      "Raza": [{ "val": "Animales", "dif": "media" }]
+    }
+  },
+  {
+    "id": "saturn",
+    "name": "Jaygarcia Saturn",
+    "img": "imagenes/Saturn.png",
+    "tags": {
+      "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }],
+      "Titulo": [{ "val": "Gorosei", "dif": "facil" }],
+      "Fruta": [{ "val": "Zoan mitológica", "dif": "facil" }],
+      "Haki": [
+        { "val": "Haki de armadura", "dif": "dificil" },
+        { "val": "Haki de observación", "dif": "dificil" }
+      ]
+    }
+  },
+  {
+    "id": "mars",
+    "name": "Marcus Mars",
+    "img": "imagenes/Mars.png",
+    "tags": {
+      "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }],
+      "Titulo": [{ "val": "Gorosei", "dif": "facil" }],
+      "Fruta": [{ "val": "Zoan mitológica", "dif": "facil" }],
+      "Haki": [
+        { "val": "Haki de armadura", "dif": "dificil" },
+        { "val": "Haki de observación", "dif": "dificil" }
+      ]
+    }
+  },
+  {
+    "id": "warcury",
+    "name": "Topman Warcury",
+    "img": "imagenes/Warcury.png",
+    "tags": {
+      "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }],
+      "Titulo": [{ "val": "Gorosei", "dif": "facil" }],
+      "Fruta": [{ "val": "Zoan mitológica", "dif": "facil" }],
+      "Haki": [
+        { "val": "Haki de armadura", "dif": "dificil" },
+        { "val": "Haki de observación", "dif": "dificil" }
+      ]
+    }
+  },
+  {
+    "id": "ju_peter",
+    "name": "Shepherd Ju Peter",
+    "img": "imagenes/JuPeter.png",
+    "tags": {
+      "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }],
+      "Titulo": [{ "val": "Gorosei", "dif": "facil" }],
+      "Fruta": [{ "val": "Zoan mitológica", "dif": "facil" }],
+      "Haki": [
+        { "val": "Haki de armadura", "dif": "dificil" },
+        { "val": "Haki de observación", "dif": "dificil" }
+      ]
+    }
+  },
+    {
+    "id": "nusjuro",
+    "name": "Ethanbaron V. Nusjuro",
+    "img": "imagenes/Nusjuro.png",
+    "tags": {
+      "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }],
+      "Titulo": [{ "val": "Gorosei", "dif": "facil" }],
+      "Haki": [
+        { "val": "Haki de armadura", "dif": "dificil" },
+        { "val": "Haki de observación", "dif": "dificil" }
+      ],
+      "Fruta": [{ "val": "Zoan mitológica", "dif": "facil" }],
+      "Especialidad": [{ "val": "Espadachín", "dif": "dificil" }],
+      "Habilidades": [{ "val": "Rokushiki", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "garling",
+    "name": "Figarland Garling",
+    "img": "imagenes/Garling.png",
+    "tags": {
+      "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }],
+      "Titulo": [{ "val": "Gorosei", "dif": "facil" }],
+      "Haki": [
+        { "val": "Haki de armadura", "dif": "dificil" },
+        { "val": "Haki de observación", "dif": "dificil" }
+      ],
+      "Especialidad": [{ "val": "Espadachín", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "moriah",
+    "name": "Gecko Moriah",
+    "img": "imagenes/Moriah.png",
+    "tags": {
+      "Banda": [{ "val": "Piratas de Thriller Bark", "dif": "facil" }],
+      "Titulo": [{ "val": "Shichibukai", "dif": "facil" }],
+      "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
+      "Recompensa": [{ "val": "Entre 100M y 499M", "dif": "dificil" }],
+      "Origen": [{ "val": "West Blue", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "weevil",
+    "name": "Edward Weevil",
+    "img": "imagenes/Weevil.png",
+    "tags": {
+      "Titulo": [{ "val": "Shichibukai", "dif": "facil" }],
+      "Fruta": [{ "val": "Sin fruta", "dif": "facil" }],
+      "Haki": [
+        { "val": "Haki de armadura", "dif": "dificil" },
+        { "val": "Haki de observación", "dif": "dificil" }
+      ],
+      "Recompensa": [{ "val": "Entre 100M y 499M", "dif": "dificil" }],
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }]
+    }
+  },
+    {
+    "id": "hanafuda",
+    "name": "Hanafuda",
+    "img": "imagenes/Hanafuda.png",
+    "tags": {
+      "Titulo": [{ "val": "Shichibukai", "dif": "facil" }],
+      "Estado": [{ "val": "Fallecido", "dif": "facil" }]
+    }
+  },
+  {
+    "id": "judge",
+    "name": "Vinsmoke Judge",
+    "img": "imagenes/Judge.png",
+    "tags": {
+      "Banda": [{ "val": "Germa 66", "dif": "facil" }],
+      "Origen": [{ "val": "North Blue", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta", "dif": "facil" }]
+    }
+  },
+  {
+    "id": "reiju",
+    "name": "Vinsmoke Reiju",
+    "img": "imagenes/Reiju.png",
+    "tags": {
+      "Banda": [{ "val": "Germa 66", "dif": "facil" }],
+      "Origen": [{ "val": "North Blue", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta", "dif": "facil" }]
+    }
+  },
+  {
+    "id": "ichiji",
+    "name": "Vinsmoke Ichiji",
+    "img": "imagenes/Ichiji.png",
+    "tags": {
+      "Banda": [{ "val": "Germa 66", "dif": "facil" }],
+      "Origen": [{ "val": "North Blue", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta", "dif": "facil" }]
+    }
+  },
+  {
+    "id": "niji",
+    "name": "Vinsmoke Niji",
+    "img": "imagenes/Niji.png",
+    "tags": {
+      "Banda": [{ "val": "Germa 66", "dif": "facil" }],
+      "Origen": [{ "val": "North Blue", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta", "dif": "facil" }]
+    }
+  },
+  {
+    "id": "yonji",
+    "name": "Vinsmoke Yonji",
+    "img": "imagenes/Yonji.png",
+    "tags": {
+      "Banda": [{ "val": "Germa 66", "dif": "facil" }],
+      "Origen": [{ "val": "North Blue", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta", "dif": "facil" }]
     }
   }
 ]
