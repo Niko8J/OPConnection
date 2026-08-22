@@ -707,7 +707,7 @@
   },
   {
     "id": "queen",
-    "name": "Queen la Plaga",
+    "name": "Queen",
     "img": "imagenes/Queen.png",
     "tags": {
       "Banda": [{ "val": "Piratas Bestias", "dif": "facil" }],
@@ -1140,7 +1140,7 @@
         { "val": "Haki de armadura", "dif": "dificil" },
         { "val": "Haki de observación", "dif": "dificil" }
       ],
-      "Fruta": [{ "val": "Zoan mitológica", "dif": "facil" }],
+      "Fruta": [{ "val": "Zoan", "dif": "facil" }],
       "Raza": [{ "val": "Clon", "dif": "media" }],
       "Habilidades": [{ "val": "Rokushiki", "dif": "dificil" }]
     }
@@ -1159,7 +1159,7 @@
         { "val": "Haki de armadura", "dif": "dificil" },
         { "val": "Haki de observación", "dif": "dificil" }
       ],
-      "Fruta": [{ "val": "Zoan mitológica", "dif": "facil" }],
+      "Fruta": [{ "val": "Zoan prehistórica", "dif": "facil" }],
       "Habilidades": [{ "val": "Rokushiki", "dif": "dificil" }]
     }
   },
