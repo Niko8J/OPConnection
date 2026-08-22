@@ -1634,6 +1634,104 @@
     }
   },
   {
+    "id": "miss_monday",
+    "name": "Miss Monday",
+    "img": "imagenes/MissMonday.png",
+    "tags": {
+      "Banda": [
+        { "val": "Baroque Works", "dif": "facil" },
+        { "val": "Baroque Works", "dif": "dificil" }
+      ],
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
+      "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta", "dif": "facil" }]
+    }
+  },
+  {
+    "id": "mr9",
+    "name": "Mr. 9",
+    "img": "imagenes/Mr9.png",
+    "tags": {
+      "Banda": [
+        { "val": "Baroque Works", "dif": "facil" },
+        { "val": "Baroque Works", "dif": "dificil" }
+      ],
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
+      "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta", "dif": "facil" }]
+    }
+  },
+  {
+    "id": "igaram",
+    "name": "Igaram",
+    "img": "imagenes/Igaram.png",
+    "tags": {
+      "Banda": [
+        { "val": "Baroque Works", "dif": "dificil" },
+        { "val": "Reino de Alabasta", "dif": "facil" }
+      ],
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
+      "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "mr7",
+    "name": "Mr. 7",
+    "img": "imagenes/Mr7.png",
+    "tags": {
+      "Banda": [
+        { "val": "Baroque Works", "dif": "facil" },
+        { "val": "Baroque Works", "dif": "dificil" }
+      ],
+      "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta", "dif": "facil" }]
+    }
+  },
+  {
+    "id": "miss_fathers_day",
+    "name": "Miss Father's Day",
+    "img": "imagenes/MissFathersDay.png",
+    "tags": {
+      "Banda": [
+        { "val": "Baroque Works", "dif": "facil" },
+        { "val": "Baroque Works", "dif": "dificil" }
+      ],
+      "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "miss_friday",
+    "name": "Miss Friday",
+    "img": "imagenes/MissFriday.png",
+    "tags": {
+      "Banda": [
+        { "val": "Baroque Works", "dif": "facil" },
+        { "val": "Baroque Works", "dif": "dificil" }
+      ],
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
+      "Raza": [{ "val": "Animales", "dif": "media" }],
+      "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta", "dif": "dificil" }]
+    }
+  },
+  {
+    "id": "mr13",
+    "name": "Mr. 13",
+    "img": "imagenes/Mr13.png",
+    "tags": {
+      "Banda": [
+        { "val": "Baroque Works", "dif": "facil" },
+        { "val": "Baroque Works", "dif": "dificil" }
+      ],
+      "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
+      "Raza": [{ "val": "Animales", "dif": "media" }],
+      "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
+      "Fruta": [{ "val": "Sin fruta", "dif": "dificil" }]
+    }
+  },
+  {
     "id": "hiruluk",
     "name": "Dr. Hiruluk",
     "img": "imagenes/Hiruluk.png",
