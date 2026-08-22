@@ -1400,7 +1400,7 @@
       "Origen": [{ "val": "East Blue", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
-      "Recompensa": [{ "val": "Menos de quinientos millones", "dif": "dificil" }]
+      "Recompensa": [{ "val": "Menos de 100M", "dif": "dificil" }]
     }
   },
   {
@@ -1441,7 +1441,7 @@
       ],
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
       "Especialidad": [{ "val": "Capitanes pirata", "dif": "dificil" }],
-      "Recompensa": [{ "val": "Menos de quinientos millones", "dif": "dificil" }]
+      "Recompensa": [{ "val": "Entre 100M y 499M", "dif": "dificil" }]
     }
   },
   {
@@ -1449,7 +1449,10 @@
     "name": "X Drake",
     "img": "imagenes/Drake.png",
     "tags": {
-      "Banda": [{ "val": "SWORD", "dif": "facil" }],
+      "Banda": [
+        { "val": "SWORD", "dif": "facil" },
+        { "val": "Piratas Bestia", "dif": "medio" }
+      ],
       "Titulo": [{ "val": "Supernova", "dif": "facil" }],
       "Origen": [{ "val": "North Blue", "dif": "dificil" }],
       "Haki": [
@@ -1458,7 +1461,7 @@
       ],
       "Fruta": [{ "val": "Zoan prehistórica", "dif": "facil" }],
       "Especialidad": [{ "val": "Capitanes pirata", "dif": "dificil" }],
-      "Recompensa": [{ "val": "Menos de quinientos millones", "dif": "dificil" }]
+      "Recompensa": [{ "val": "Entre 100M y 499M", "dif": "dificil" }]
     }
   },
   {
@@ -1478,7 +1481,7 @@
       ],
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
       "Especialidad": [{ "val": "Capitanes pirata", "dif": "dificil" }],
-      "Recompensa": [{ "val": "Menos de quinientos millones", "dif": "dificil" }]
+      "Recompensa": [{ "val": "Entre 100M y 499M", "dif": "dificil" }]
     }
   },
   {
@@ -1495,7 +1498,7 @@
       ],
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
       "Especialidad": [{ "val": "Capitanes pirata", "dif": "dificil" }],
-      "Recompensa": [{ "val": "Menos de quinientos millones", "dif": "dificil" }]
+      "Recompensa": [{ "val": "Entre 100M y 499M", "dif": "dificil" }]
     }
   },
   {
@@ -1511,7 +1514,7 @@
       "Origen": [{ "val": "East Blue", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
-      "Recompensa": [{ "val": "Menos de quinientos millones", "dif": "dificil" }]
+      "Recompensa": [{ "val": "Menos de 100M", "dif": "dificil" }]
     }
   },
   {
@@ -1526,7 +1529,20 @@
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
       "Fruta": [{ "val": "Sin fruta", "dif": "facil" }],
-      "Recompensa": [{ "val": "Menos de quinientos millones", "dif": "dificil" }]
+      "Recompensa": [{ "val": "Menos de 100M", "dif": "dificil" }]
+    }
+  },
+    {
+    "id": "lassoo",
+    "name": "Lassoo",
+    "img": "imagenes/Lassoo.png",
+    "tags": {
+      "Banda": [
+        { "val": "Baroque Works", "dif": "facil" },
+        { "val": "Baroque Works", "dif": "dificil" }
+      ],
+      "Fruta": [{ "val": "Zoan", "dif": "facil" }],
+      "Raza": [{ "val": "Objetos que se ha comido una fruta", "dif": "medio" }]
     }
   },
   {
@@ -1541,7 +1557,7 @@
       "Origen": [{ "val": "South Blue", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
-      "Recompensa": [{ "val": "Menos de quinientos millones", "dif": "dificil" }]
+      "Recompensa": [{ "val": "Menos de 100M", "dif": "dificil" }]
     }
   },
   {
@@ -1556,7 +1572,7 @@
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
-      "Recompensa": [{ "val": "Menos de quinientos millones", "dif": "dificil" }]
+      "Recompensa": [{ "val": "Menos de 100M", "dif": "dificil" }]
     }
   },
   {
@@ -1571,7 +1587,7 @@
       "Origen": [{ "val": "North Blue", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
       "Fruta": [{ "val": "Sin fruta", "dif": "facil" }],
-      "Recompensa": [{ "val": "Menos de quinientos millones", "dif": "dificil" }]
+      "Recompensa": [{ "val": "Menos de 100M", "dif": "dificil" }]
     }
   },
   {
@@ -1586,7 +1602,7 @@
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
       "Fruta": [{ "val": "Zoan", "dif": "facil" }],
-      "Recompensa": [{ "val": "Menos de quinientos millones", "dif": "dificil" }]
+      "Recompensa": [{ "val": "Menos de 100M", "dif": "dificil" }]
     }
   },
   {
@@ -1656,8 +1672,7 @@
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
-      "Especialidad": [{ "val": "Capitanes pirata", "dif": "dificil" }],
-      "Recompensa": [{ "val": "Menos de quinientos millones", "dif": "dificil" }]
+      "Especialidad": [{ "val": "Capitanes pirata", "dif": "dificil" }]
     }
   },
   {
@@ -1675,7 +1690,7 @@
       "Fruta": [{ "val": "Sin fruta", "dif": "facil" }],
       "Especialidad": [{ "val": "Capitanes pirata", "dif": "dificil" }],
       "Raza": [{ "val": "Gyojin", "dif": "media" }],
-      "Recompensa": [{ "val": "Menos de quinientos millones", "dif": "dificil" }]
+      "Recompensa": [{ "val": "Menos de 100M", "dif": "dificil" }]
     }
   },
   {
