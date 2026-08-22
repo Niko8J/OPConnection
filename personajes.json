@@ -167,7 +167,6 @@
       "Haki": [{ "val": "Sin haki", "dif": "dificil" }],
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
       "Especialidad": [{ "val": "Músico", "dif": "dificil" }],
-      "Raza": [{ "val": "Esqueleto", "dif": "media" }],
       "Recompensa": [{ "val": "Entre 100M y 499M", "dif": "dificil" }]
     }
   },
@@ -181,7 +180,7 @@
         { "val": "Sombrero de Paja", "dif": "dificil" },
         { "val": "Piratas del Sol", "dif": "medio" }
       ],
-      "Titulo": { "val": "Shichibukai", "dif": "facil" },
+      "Titulo": { "val": "Shichibukais", "dif": "facil" },
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [
         { "val": "Haki de armadura", "dif": "dificil" },
@@ -291,7 +290,7 @@
         { "val": "Piratas de Roger", "dif": "facil" }
       ],
       "Titulo": [
-        { "val": "Shichibukai", "dif": "facil" },
+        { "val": "Shichibukais", "dif": "facil" },
         { "val": "Yonko", "dif": "facil" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
@@ -344,7 +343,7 @@
         { "val": "Piratas de Barbablanca", "dif": "facil" }
       ],
       "Titulo": [
-        { "val": "Shichibukai", "dif": "facil" },
+        { "val": "Shichibukais", "dif": "facil" },
         { "val": "Yonko", "dif": "facil" }
       ],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
@@ -381,7 +380,7 @@
     "img": "imagenes/Mihawk.png",
     "tags": {
       "Banda": [{ "val": "Cross Guild", "dif": "facil" }],
-      "Titulo": [{ "val": "Shichibukai", "dif": "facil" }],
+      "Titulo": [{ "val": "Shichibukais", "dif": "facil" }],
       "Origen": [{ "val": "Desconocido", "dif": "dificil" }],
       "Haki": [
         { "val": "Haki de armadura", "dif": "dificil" },
@@ -402,7 +401,7 @@
         { "val": "Baroque Works", "dif": "dificil" },
         { "val": "Cross Guild", "dif": "facil" }
       ],
-      "Titulo": [{ "val": "Shichibukai", "dif": "facil" }],
+      "Titulo": [{ "val": "Shichibukais", "dif": "facil" }],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [
         { "val": "Haki de armadura", "dif": "dificil" },
@@ -449,7 +448,7 @@
     "tags": {
       "Banda": [{ "val": "Piratas Heart", "dif": "facil" }],
       "Titulo": [
-        { "val": "Shichibukai", "dif": "facil" },
+        { "val": "Shichibukais", "dif": "facil" },
         { "val": "Supernova", "dif": "facil" }
       ],
       "Origen": [{ "val": "North Blue", "dif": "dificil" }],
@@ -654,7 +653,7 @@
     "tags": {
       "Banda": [{ "val": "Ejército Revolucionario", "dif": "facil" }],
       "Afiliacion": [{ "val": "Gobierno Mundial", "dif": "facil" }],
-      "Titulo": [{ "val": "Shichibukai", "dif": "facil" }],
+      "Titulo": [{ "val": "Shichibukais", "dif": "facil" }],
       "Origen": [{ "val": "South Blue", "dif": "dificil" }],
       "Haki": [
         { "val": "Haki de armadura", "dif": "dificil" },
@@ -830,7 +829,7 @@
     "tags": {
       "Banda": [{ "val": "Piratas Kuja", "dif": "facil" }],
       "Titulo": [
-        { "val": "Shichibukai", "dif": "facil" }
+        { "val": "Shichibukais", "dif": "facil" }
       ],
       "Origen": [{ "val": "Calm Belt", "dif": "dificil" }],
       "Haki": [
@@ -848,7 +847,7 @@
     "name": "Yamato",
     "img": "imagenes/Yamato.png",
     "tags": {
-      "Banda": [{ "val": "Piratas Bestias", "dif": "facil" }],
+      "Banda": [{ "val": "Wano", "dif": "facil" }],
       "Origen": [{ "val": "Grand Line", "dif": "dificil" }],
       "Haki": [
         { "val": "Haki del conquistador", "dif": "dificil" },
@@ -865,7 +864,7 @@
     "tags": {
       "Banda": [{ "val": "Piratas Donquixote", "dif": "facil" }],
       "Titulo": [
-        { "val": "Shichibukai", "dif": "facil" }
+        { "val": "Shichibukais", "dif": "facil" }
       ],
       "Origen": [{ "val": "North Blue", "dif": "dificil" }],
       "Haki": [
@@ -2130,7 +2129,7 @@
     "img": "imagenes/Moriah.png",
     "tags": {
       "Banda": [{ "val": "Piratas de Thriller Bark", "dif": "facil" }],
-      "Titulo": [{ "val": "Shichibukai", "dif": "facil" }],
+      "Titulo": [{ "val": "Shichibukais", "dif": "facil" }],
       "Fruta": [{ "val": "Paramecia", "dif": "facil" }],
       "Recompensa": [{ "val": "Entre 100M y 499M", "dif": "dificil" }],
       "Origen": [{ "val": "West Blue", "dif": "dificil" }]
@@ -2141,7 +2140,7 @@
     "name": "Edward Weevil",
     "img": "imagenes/Weevil.png",
     "tags": {
-      "Titulo": [{ "val": "Shichibukai", "dif": "facil" }],
+      "Titulo": [{ "val": "Shichibukais", "dif": "facil" }],
       "Fruta": [{ "val": "Sin fruta", "dif": "facil" }],
       "Haki": [
         { "val": "Haki de armadura", "dif": "dificil" },
@@ -2156,7 +2155,7 @@
     "name": "Hanafuda",
     "img": "imagenes/Hanafuda.png",
     "tags": {
-      "Titulo": [{ "val": "Shichibukai", "dif": "facil" }],
+      "Titulo": [{ "val": "Shichibukais", "dif": "facil" }],
       "Estado": [{ "val": "Fallecido", "dif": "facil" }]
     }
   },
