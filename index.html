@@ -161,7 +161,6 @@
   </div>
 
   <div class="controls">
-    <button class="action-btn" onclick="generateNewBoard()">🔀 Nueva Partida</button>
     <button class="action-btn" id="deselect-btn" onclick="deselectAll()">Deseleccionar</button>
     <button class="action-btn submit" id="submit-btn" onclick="checkGuess()">Enviar</button>
     <button class="action-btn" id="view-results-btn" onclick="openModal()" style="display: none;">📊 Ver Resultados</button>
@@ -242,6 +241,10 @@
     });
 
     return { values: cleanValues, difficulty };
+  }
+
+  function getTagValueOnly(categoryName) {
+    return categoryName.includes(": ") ? categoryName.split(": ").slice(1).join(": ") : categoryName;
   }
 
   function generateNewBoard() {
@@ -461,7 +464,7 @@
       });
       imgsHtml += '</div>';
 
-      solvedEl.innerHTML = `${imgsHtml}<div>${catData.name}</div>`;
+      solvedEl.innerHTML = `${imgsHtml}<div>${getTagValueOnly(catData.name)}</div>`;
       solvedContainer.appendChild(solvedEl);
 
       cards = cards.filter((_, i) => !selectedCards.includes(i));
@@ -536,7 +539,7 @@
       });
       imgsHtml += '</div>';
 
-      solEl.innerHTML = `${imgsHtml}<div>${cat.name}</div>`;
+      solEl.innerHTML = `${imgsHtml}<div>${getTagValueOnly(cat.name)}</div>`;
       solutionsContainer.appendChild(solEl);
     });
 
