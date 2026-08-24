@@ -496,10 +496,23 @@
       lives--;
       renderLives();
 
+      const categoryCounts = {};
+      selectedCards.forEach(i => {
+        const cat = cards[i].category;
+        categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+      });
+      const maxMatches = Math.max(...Object.values(categoryCounts));
+
       if (lives === 0) {
         handleGameOver();
       } else {
-        warningMsg.innerText = "Grupo incorrecto. Inténtalo de nuevo.";
+        if (maxMatches === 3) {
+          warningMsg.innerText = "Grupo incorrecto: 3 coincidencias.";
+        } else if (maxMatches === 2) {
+          warningMsg.innerText = "Grupo incorrecto: 2 coincidencias.";
+        } else {
+          warningMsg.innerText = "Grupo incorrecto. Inténtalo de nuevo.";
+        }
       }
     }
   }
