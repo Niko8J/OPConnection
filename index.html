@@ -77,7 +77,23 @@
     .card:hover { border-color: #f59e0b; }
     .card.selected { border-color: #f59e0b; box-shadow: 0 0 10px #f59e0b; transform: scale(0.96); }
     
-    .controls { display: flex; justify-content: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+    .controls { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      gap: 10px; 
+      margin-top: 10px; 
+      width: 100%;
+      flex-wrap: wrap; 
+    }
+    .controls-left {
+      display: flex;
+      gap: 10px;
+    }
+    #view-results-btn {
+      margin-left: auto;
+    }
+
     button.action-btn {
       padding: 10px 20px;
       border-radius: 20px;
@@ -161,8 +177,10 @@
   </div>
 
   <div class="controls">
-    <button class="action-btn" id="deselect-btn" onclick="deselectAll()">Deseleccionar</button>
-    <button class="action-btn submit" id="submit-btn" onclick="checkGuess()">Enviar</button>
+    <div class="controls-left">
+      <button class="action-btn" id="deselect-btn" onclick="deselectAll()">Deseleccionar</button>
+      <button class="action-btn submit" id="submit-btn" onclick="checkGuess()">Enviar</button>
+    </div>
     <button class="action-btn" id="view-results-btn" onclick="openModal()" style="display: none;">📊 Ver Resultados</button>
   </div>
 </div>
