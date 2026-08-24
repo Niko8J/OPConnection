@@ -736,7 +736,7 @@
       "Raza": [
         { "val": "Lunarian", "dif": "media" },
         { "val": "Cyborgs", "dif": "media" },
-        { "val": "Clon", "dif": "media" }
+        { "val": "Clones", "dif": "media" }
       ]
     }
   },
@@ -751,7 +751,7 @@
       "Raza": [
         { "val": "Lunarian", "dif": "media" },
         { "val": "Cyborgs", "dif": "media" },
-        { "val": "Clon", "dif": "media" }
+        { "val": "Clones", "dif": "media" }
       ],
       "Especialidad": [{ "val": "Espadachines", "dif": "dificil" }]
     }
@@ -767,7 +767,7 @@
       "Raza": [
         { "val": "Lunarian", "dif": "media" },
         { "val": "Cyborgs", "dif": "media" },
-        { "val": "Clon", "dif": "media" }
+        { "val": "Clones", "dif": "media" }
       ]
     }
   },
@@ -782,7 +782,7 @@
       "Raza": [
         { "val": "Lunarian", "dif": "media" },
         { "val": "Cyborgs", "dif": "media" },
-        { "val": "Clon", "dif": "media" }
+        { "val": "Clones", "dif": "media" }
       ]
     }
   },
@@ -1134,7 +1134,7 @@
         { "val": "Usuarios de haki de observación", "dif": "dificil" }
       ],
       "Fruta": [{ "val": "Fruta del diablo: Zoan", "dif": "facil" }],
-      "Raza": [{ "val": "Clon", "dif": "media" }],
+      "Raza": [{ "val": "Clones", "dif": "media" }],
       "Habilidades": [{ "val": "Usuarios de rokushiki", "dif": "dificil" }]
     }
   },
