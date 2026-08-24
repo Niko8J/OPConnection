@@ -11,8 +11,7 @@
     h1 { margin-bottom: 5px; color: #f59e0b; font-size: 2rem; text-transform: uppercase; letter-spacing: 1px; }
     p { margin-bottom: 15px; color: #94a3b8; }
 
-    .difficulty-selector { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px; }
-    .difficulty-label { font-weight: bold; color: #e2e8f0; font-size: 1rem; }
+    .difficulty-selector { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
     .diff-btn {
       padding: 8px 16px;
       border-radius: 8px;
@@ -136,10 +135,10 @@
   <p>Encuentra los 4 grupos conectados por sus atributos sin coincidencias ambiguas.</p>
 
   <div class="difficulty-selector">
-    <span class="difficulty-label">Dificultad:</span>
-    <button class="diff-btn active" onclick="setDifficulty('facil', event)">Novato</button>
-    <button class="diff-btn" onclick="setDifficulty('media', event)">Supernova</button>
-    <button class="diff-btn" onclick="setDifficulty('dificil', event)">Yonko</button>
+    <button class="diff-btn active" onclick="setDifficulty('todos', event)">Todos</button>
+    <button class="diff-btn" onclick="setDifficulty('novato', event)">Novato</button>
+    <button class="diff-btn" onclick="setDifficulty('supernova', event)">Supernova</button>
+    <button class="diff-btn" onclick="setDifficulty('yonko', event)">Yonko</button>
   </div>
 
   <div class="lives-container">
@@ -175,24 +174,12 @@
   const COLORS = ["#fef08a", "#bbf7d0", "#bfdbfe", "#e9d5ff"];
   
   let database = [];
-  let currentDifficulty = "facil"; 
+  let currentDifficulty = "todos";
   let currentCategories = []; 
   let cards = [];
   let selectedCards = [];
   let lives = MAX_LIVES;
   let gameOver = false;
-
-  function formatCategoryName(name) {
-    if (typeof name === "object" && name !== null) {
-      name = name.val || name.name || name.title || JSON.stringify(name);
-    }
-    let str = String(name);
-    // Si el nombre incluye el formato "Clave: Valor", extraemos solo el "Valor"
-    if (str.includes(": ")) {
-      return str.split(": ")[1];
-    }
-    return str;
-  }
 
   window.addEventListener("DOMContentLoaded", () => {
     fetch("personajes.json")
@@ -225,14 +212,13 @@
       if (char.tags) {
         Object.entries(char.tags).forEach(([key, tagData]) => {
           let val = typeof tagData === "object" && tagData !== null && "val" in tagData ? tagData.val : tagData;
-          let tagDif = typeof tagData === "object" && tagData !== null && "dif" in tagData ? tagData.dif : "facil";
+          let tagDif = typeof tagData === "object" && tagData !== null && "dif" in tagData ? tagData.dif : "novato";
 
           if (currentDifficulty === "todos" || tagDif === currentDifficulty) {
             let valuesArray = Array.isArray(val) ? val : [val];
 
             valuesArray.forEach(v => {
-              let cleanVal = (typeof v === "object" && v !== null) ? (v.val || v.name || JSON.stringify(v)) : String(v);
-              const groupName = `${key}: ${cleanVal}`;
+              const groupName = `${key}: ${v}`;
               if (!tagGroups[groupName]) tagGroups[groupName] = [];
               if (!tagGroups[groupName].some(c => c.id === char.id)) {
                 tagGroups[groupName].push(char);
@@ -247,25 +233,18 @@
 
     if (validGroupNames.length < 4) {
       document.getElementById("warning-msg").innerText = 
-        `⚠️ Faltan datos en '${currentDifficulty.toUpperCase()}': Se necesitan al menos 4 categorías válidas con 4 o más personajes. Hay ${validGroupNames.length}.`;
+        `⚠️ Faltan datos en '${currentDifficulty.toUpperCase()}': Se necesitan al menos 4 categorías válidas. Hay ${validGroupNames.length}.`;
       return;
     }
 
     const charHasAnyTagMatch = (char, targetGroupName) => {
-      const separatorIndex = targetGroupName.indexOf(": ");
-      if (separatorIndex === -1) return false;
-      
-      const targetKey = targetGroupName.substring(0, separatorIndex);
-      const targetVal = targetGroupName.substring(separatorIndex + 2);
-
+      const [targetKey, targetVal] = targetGroupName.split(": ");
       if (!char.tags) return false;
 
       return Object.entries(char.tags).some(([key, tagData]) => {
         if (key !== targetKey) return false;
-        
-        let actualVal = typeof tagData === "object" && tagData !== null && "val" in tagData ? tagData.val : tagData;
-        let actualValFormatted = (typeof actualVal === "object" && actualVal !== null) ? (actualVal.val || JSON.stringify(actualVal)) : String(actualVal);
-        return Array.isArray(actualVal) ? actualVal.map(item => (typeof item === "object" && item !== null ? item.val : String(item))).includes(targetVal) : actualValFormatted === targetVal;
+        const actualVal = typeof tagData === "object" && tagData !== null && "val" in tagData ? tagData.val : tagData;
+        return Array.isArray(actualVal) ? actualVal.includes(targetVal) : actualVal === targetVal;
       });
     };
 
@@ -315,34 +294,6 @@
       }
 
       if (candidateGroups.length === 4) {
-        let boardIsValid = true;
-
-        if (currentDifficulty === "dificil") {
-          let strawHatGroup = candidateGroups.find(g => g.name === "Banda: Sombrero de Paja");
-          if (strawHatGroup) {
-            const specialIds = ["vivi", "karoo", "merry", "sunny"];
-            let hasSpecialItem = strawHatGroup.items.some(item => specialIds.includes(item.id));
-            if (!hasSpecialItem) boardIsValid = false;
-          }
-
-          let arlongGroup = candidateGroups.find(g => g.name === "Banda: Piratas de Arlong");
-          if (arlongGroup) {
-            let hasNami = arlongGroup.items.some(item => item.id === "nami");
-            if (!hasNami) boardIsValid = false;
-          }
-
-          let baroqueGroup = candidateGroups.find(g => g.name === "Banda: Baroque Works");
-          if (baroqueGroup) {
-            const allowedIds = ["robin", "vivi", "karoo"];
-            let hasConditionChar = baroqueGroup.items.some(item => allowedIds.includes(item.id));
-            if (!hasConditionChar) boardIsValid = false;
-          }
-        }
-
-        if (!boardIsValid) {
-          continue;
-        }
-
         selectedGroups = candidateGroups;
         break;
       }
@@ -350,7 +301,7 @@
 
     if (!selectedGroups) {
       document.getElementById("warning-msg").innerText = 
-        `⚠️ No se pudieron cumplir las restricciones de las categorías en '${currentDifficulty.toUpperCase()}'. Vuelve a intentarlo.`;
+        `⚠️ No se encontraron 4 categorías sin solapamiento en '${currentDifficulty.toUpperCase()}'. Añade más personajes al JSON o diversifica sus tags.`;
       return;
     }
 
@@ -471,9 +422,7 @@
       });
       imgsHtml += '</div>';
 
-      let categoryTitle = formatCategoryName(catData.name);
-      
-      solvedEl.innerHTML = `<div>${categoryTitle}</div>${imgsHtml}`;
+      solvedEl.innerHTML = `${imgsHtml}<div>${catData.name}</div>`;
       solvedContainer.appendChild(solvedEl);
 
       cards = cards.filter((_, i) => !selectedCards.includes(i));
@@ -540,15 +489,13 @@
       solEl.className = "solved-category";
       solEl.style.backgroundColor = cat.color;
       
-      let categoryTitle = formatCategoryName(cat.name);
-
       let imgsHtml = '<div class="solved-items-list">';
       cat.items.forEach(item => {
         imgsHtml += `<img src="${item.img}" title="${item.name}" class="solved-img" onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'"/>`;
       });
       imgsHtml += '</div>';
 
-      solEl.innerHTML = `<div>${categoryTitle}</div>${imgsHtml}`;
+      solEl.innerHTML = `${imgsHtml}<div>${cat.name}</div>`;
       solutionsContainer.appendChild(solEl);
     });
 
