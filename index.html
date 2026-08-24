@@ -212,6 +212,38 @@
     generateNewBoard();
   }
 
+  function parseTag(tagData) {
+    if (tagData === null || tagData === undefined) {
+      return { values: [], difficulty: "novato" };
+    }
+
+    let val = tagData;
+    let difficulty = "novato";
+
+    if (typeof tagData === "object" && !Array.isArray(tagData)) {
+      if ("dif" in tagData) difficulty = tagData.dif;
+
+      if ("val" in tagData) val = tagData.val;
+      else if ("value" in tagData) val = tagData.value;
+      else if ("nombre" in tagData) val = tagData.nombre;
+      else if ("name" in tagData) val = tagData.name;
+      else {
+        const stringVals = Object.values(tagData).filter(x => typeof x === "string" || typeof x === "number");
+        val = stringVals.length > 0 ? stringVals[0] : Object.values(tagData)[0];
+      }
+    }
+
+    let arr = Array.isArray(val) ? val : [val];
+    let cleanValues = arr.map(v => {
+      if (typeof v === "object" && v !== null) {
+        return v.val || v.value || v.name || v.nombre || Object.values(v)[0] || String(v);
+      }
+      return String(v);
+    });
+
+    return { values: cleanValues, difficulty };
+  }
+
   function generateNewBoard() {
     if (database.length === 0) return;
 
@@ -220,13 +252,10 @@
     database.forEach(char => {
       if (char.tags) {
         Object.entries(char.tags).forEach(([key, tagData]) => {
-          let val = typeof tagData === "object" && tagData !== null && "val" in tagData ? tagData.val : tagData;
-          let tagDif = typeof tagData === "object" && tagData !== null && "dif" in tagData ? tagData.dif : "novato";
+          const { values, difficulty: tagDif } = parseTag(tagData);
 
           if (currentDifficulty === "todos" || tagDif === currentDifficulty) {
-            let valuesArray = Array.isArray(val) ? val : [val];
-
-            valuesArray.forEach(v => {
+            values.forEach(v => {
               const groupName = `${key}: ${v}`;
               if (!tagGroups[groupName]) tagGroups[groupName] = [];
               if (!tagGroups[groupName].some(c => c.id === char.id)) {
@@ -252,8 +281,8 @@
 
       return Object.entries(char.tags).some(([key, tagData]) => {
         if (key !== targetKey) return false;
-        const actualVal = typeof tagData === "object" && tagData !== null && "val" in tagData ? tagData.val : tagData;
-        return Array.isArray(actualVal) ? actualVal.includes(targetVal) : actualVal === targetVal;
+        const { values } = parseTag(tagData);
+        return values.includes(targetVal);
       });
     };
 
