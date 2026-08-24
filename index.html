@@ -42,16 +42,14 @@
 
     .board { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
     .solved-category { padding: 15px; border-radius: 8px; font-weight: bold; color: #0f172a; text-align: center; animation: fadeIn 0.3s ease; }
-    .solved-items-list { display: flex; justify-content: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; padding: 4px; }
+    .solved-items-list { display: flex; justify-content: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
     .solved-img { 
-      width: 65px; 
-      height: 65px; 
-      object-fit: cover; 
-      object-position: center 0%; 
+      width: 50px; 
+      height: 50px; 
+      object-fit: contain; 
       border-radius: 6px; 
       border: 2px solid #0f172a; 
-      transform: scale(1.12);
-      transform-origin: top center;
+      background-color: #1e293b;
     }
     
     .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
@@ -68,19 +66,15 @@
       user-select: none;
       transition: all 0.2s ease;
       overflow: hidden;
-      padding: 0;
+      padding: 4px;
     }
     .card img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: center 0%;
-      transform-origin: top center;
-      transform: scale(1.08) translateY(4px);
-      transition: transform 0.2s ease;
+      object-fit: contain;
+      object-position: center;
     }
     .card:hover { border-color: #f59e0b; }
-    .card:hover img { transform: scale(1.18) translateY(4px); }
     .card.selected { border-color: #f59e0b; box-shadow: 0 0 10px #f59e0b; transform: scale(0.96); }
     
     .controls { display: flex; justify-content: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
@@ -170,6 +164,7 @@
     <button class="action-btn" onclick="generateNewBoard()">🔀 Nueva Partida</button>
     <button class="action-btn" id="deselect-btn" onclick="deselectAll()">Deseleccionar</button>
     <button class="action-btn submit" id="submit-btn" onclick="checkGuess()">Enviar</button>
+    <button class="action-btn" id="view-results-btn" onclick="openModal()" style="display: none;">📊 Ver Resultados</button>
   </div>
 </div>
 
@@ -333,6 +328,7 @@
     document.getElementById("warning-msg").innerText = "";
     document.getElementById("submit-btn").disabled = false;
     document.getElementById("deselect-btn").disabled = false;
+    document.getElementById("view-results-btn").style.display = "none";
     document.getElementById("gameover-modal").style.display = "none";
 
     currentCategories.forEach(cat => {
@@ -462,6 +458,7 @@
     gameOver = true;
     document.getElementById("submit-btn").disabled = true;
     document.getElementById("deselect-btn").disabled = true;
+    document.getElementById("view-results-btn").style.display = "inline-block";
 
     const modalContent = document.querySelector("#gameover-modal .modal-content");
     modalContent.style.borderColor = "#22c55e";
@@ -480,6 +477,7 @@
     gameOver = true;
     document.getElementById("submit-btn").disabled = true;
     document.getElementById("deselect-btn").disabled = true;
+    document.getElementById("view-results-btn").style.display = "inline-block";
 
     const modalContent = document.querySelector("#gameover-modal .modal-content");
     modalContent.style.borderColor = "#ef4444";
@@ -513,7 +511,13 @@
       solutionsContainer.appendChild(solEl);
     });
 
-    document.getElementById("gameover-modal").style.display = "flex";
+    openModal();
+  }
+
+  function openModal() {
+    if (gameOver) {
+      document.getElementById("gameover-modal").style.display = "flex";
+    }
   }
 
   function closeModal() {
