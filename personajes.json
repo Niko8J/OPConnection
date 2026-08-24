@@ -898,7 +898,7 @@
   {
     "id": "aokiji",
     "name": "Kuzan (Aokiji)",
-    "img": "imagenes/Aokiji.png",
+    "img": "imagenes/Kuzan.png",
     "tags": {
       "Banda": [
         { "val": "Banda: Piratas de Barbanegra", "dif": "facil" },
@@ -1504,7 +1504,7 @@
   {
     "id": "bentham",
     "name": "Bentham (Mr. 2 / Bon Clay)",
-    "img": "imagenes/Mr2.png",
+    "img": "imagenes/Bentham.png",
     "tags": {
       "Banda": [
         { "val": "Agentes de Baroque Works", "dif": "facil" },
@@ -1812,7 +1812,7 @@
   },
   {
     "id": "hachi",
-    "name": "Hachi",
+    "name": "Hatchan",
     "img": "imagenes/Hachi.png",
     "tags": {
       "Banda": [
