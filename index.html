@@ -156,13 +156,13 @@
 
 <div class="container">
   <h1>One Piece Connections</h1>
-  <p>Encuentra los 4 grupos conectados por sus atributos sin coincidencias ambiguas.</p>
+  <p>Encuentra 4 grupos conectados por distintos atributos.</p>
 
   <div class="difficulty-selector">
     <button class="diff-btn active" onclick="setDifficulty('todos', event)">Todos</button>
-    <button class="diff-btn" onclick="setDifficulty('facil', event)">Fácil</button>
-    <button class="diff-btn" onclick="setDifficulty('media', event)">Media</button>
-    <button class="diff-btn" onclick="setDifficulty('dificil', event)">Difícil</button>
+    <button class="diff-btn" onclick="setDifficulty('facil', event)">Novato</button>
+    <button class="diff-btn" onclick="setDifficulty('media', event)">Supernova</button>
+    <button class="diff-btn" onclick="setDifficulty('dificil', event)">Yonko</button>
   </div>
 
   <div class="lives-container">
@@ -179,9 +179,9 @@
   <div class="controls">
     <div class="controls-left">
       <button class="action-btn submit" id="submit-btn" onclick="checkGuess()">Enviar</button>
-      <button class="action-btn" id="deselect-btn" onclick="deselectAll()">Deseleccionar</button>
+      <button class="action-btn" id="deselect-btn" onclick="deselectAll()">Limpiar</button>
     </div>
-    <button class="action-btn" id="view-results-btn" onclick="openModal()" style="display: none;">📊 Ver resultados</button>
+    <button class="action-btn" id="view-results-btn" onclick="openModal()" style="display: none;">📊 Resultados</button>
   </div>
 </div>
 
