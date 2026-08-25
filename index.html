@@ -160,9 +160,9 @@
 
   <div class="difficulty-selector">
     <button class="diff-btn active" onclick="setDifficulty('todos', event)">Todos</button>
-    <button class="diff-btn" onclick="setDifficulty('novato', event)">Novato</button>
-    <button class="diff-btn" onclick="setDifficulty('supernova', event)">Supernova</button>
-    <button class="diff-btn" onclick="setDifficulty('yonko', event)">Yonko</button>
+    <button class="diff-btn" onclick="setDifficulty('facil', event)">Fácil</button>
+    <button class="diff-btn" onclick="setDifficulty('media', event)">Media</button>
+    <button class="diff-btn" onclick="setDifficulty('dificil', event)">Difícil</button>
   </div>
 
   <div class="lives-container">
@@ -231,11 +231,11 @@
 
   function parseTag(tagData) {
     if (tagData === null || tagData === undefined) {
-      return { values: [], difficulty: "novato" };
+      return { values: [], difficulty: "facil" };
     }
 
     let val = tagData;
-    let difficulty = "novato";
+    let difficulty = "facil";
 
     if (typeof tagData === "object" && !Array.isArray(tagData)) {
       if ("dif" in tagData) difficulty = tagData.dif;
