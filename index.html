@@ -6,12 +6,17 @@
   <title>One Piece Connections</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+    html { height: 100%; }
+    body {
+      background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center;
+      min-height: 100vh; min-height: 100dvh; padding: 12px;
+    }
     .container { max-width: 650px; width: 100%; text-align: center; position: relative; }
-    h1 { margin-bottom: 5px; color: #f59e0b; font-size: 2rem; text-transform: uppercase; letter-spacing: 1px; }
-    p { margin-bottom: 15px; color: #94a3b8; }
+    h1 { margin-bottom: 4px; color: #f59e0b; font-size: 2rem; text-transform: uppercase; letter-spacing: 1px; }
+    p { margin-bottom: 10px; color: #94a3b8; }
 
-    .difficulty-selector { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+    .difficulty-selector { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .diff-label { color: #94a3b8; font-weight: bold; margin-right: 2px; }
     .diff-btn {
       padding: 8px 16px;
       border-radius: 8px;
@@ -22,10 +27,12 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    .diff-btn:hover:not(:disabled) { border-color: #f59e0b; color: #f8fafc; }
+    @media (hover: hover) and (pointer: fine) {
+      .diff-btn:hover:not(:disabled) { border-color: #f59e0b; color: #f8fafc; }
+    }
     .diff-btn.active { background: #f59e0b; color: #0f172a; border-color: #f59e0b; }
 
-    .lives-container { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; color: #e2e8f0; display: flex; justify-content: center; align-items: center; gap: 12px; }
+    .lives-container { font-size: 1.1rem; font-weight: bold; margin-bottom: 8px; color: #e2e8f0; display: flex; justify-content: center; align-items: center; gap: 12px; }
     .life-wrapper { position: relative; display: inline-flex; justify-content: center; align-items: center; }
     .life-icon { font-size: 1.5rem; user-select: none; }
     .life-wrapper.lost .life-icon { filter: opacity(0.3); }
@@ -38,9 +45,9 @@
       pointer-events: none;
     }
 
-    .warning-msg { color: #ef4444; font-size: 0.9rem; font-weight: bold; min-height: 20px; margin-bottom: 10px; }
+    .warning-msg { color: #ef4444; font-size: 0.9rem; font-weight: bold; min-height: 18px; margin-bottom: 6px; }
 
-    .board { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .board { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
     .solved-category { padding: 15px; border-radius: 8px; font-weight: bold; color: #0f172a; text-align: center; animation: fadeIn 0.3s ease; }
     .solved-items-list { display: flex; justify-content: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
     .solved-img { 
@@ -74,17 +81,19 @@
       object-fit: contain;
       object-position: center;
     }
-    .card:hover { border-color: #f59e0b; }
+    @media (hover: hover) and (pointer: fine) {
+      .card:hover { border-color: #f59e0b; }
+    }
     .card.selected { border-color: #f59e0b; box-shadow: 0 0 10px #f59e0b; transform: scale(0.96); }
-    
-    .controls { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      gap: 10px; 
-      margin-top: 10px; 
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
       width: 100%;
-      flex-wrap: wrap; 
+      flex-wrap: wrap;
     }
     .controls-left {
       display: flex;
@@ -104,9 +113,11 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    button.action-btn:hover:not(:disabled) { background: #334155; }
+    @media (hover: hover) and (pointer: fine) {
+      button.action-btn:hover:not(:disabled) { background: #334155; }
+      button.submit:hover:not(:disabled) { background: #d97706; border-color: #d97706; }
+    }
     button.submit { background: #f59e0b; color: #0f172a; border-color: #f59e0b; }
-    button.submit:hover:not(:disabled) { background: #d97706; border-color: #d97706; }
     button:disabled { opacity: 0.3; cursor: not-allowed; }
 
     .modal-overlay {
@@ -144,11 +155,29 @@
       color: #94a3b8; font-size: 1.5rem;
       font-weight: bold; cursor: pointer;
     }
-    .close-btn:hover { color: #f8fafc; }
+    @media (hover: hover) and (pointer: fine) {
+      .close-btn:hover { color: #f8fafc; }
+    }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 8px; }
+      h1 { font-size: 1.4rem; margin-bottom: 2px; }
+      p { font-size: 0.85rem; margin-bottom: 8px; }
+      .difficulty-selector { gap: 6px; margin-bottom: 10px; }
+      .diff-label { width: 100%; margin-bottom: 2px; }
+      .diff-btn { padding: 6px 10px; font-size: 0.85rem; }
+      .lives-container { margin-bottom: 6px; font-size: 1rem; gap: 8px; }
+      .warning-msg { min-height: 14px; margin-bottom: 4px; font-size: 0.8rem; }
+      .board { gap: 6px; margin-bottom: 8px; }
+      .grid { gap: 6px; }
+      .card { height: 80px; padding: 3px; border-width: 2px; }
+      .controls { margin-top: 6px; gap: 8px; }
+      button.action-btn { padding: 8px 14px; font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -159,8 +188,8 @@
   <p>Encuentra 4 grupos conectados por distintos atributos.</p>
 
   <div class="difficulty-selector">
-    <button class="diff-btn active" onclick="setDifficulty('todos', event)">Todos</button>
-    <button class="diff-btn" onclick="setDifficulty('facil', event)">Novato</button>
+    <span class="diff-label">Dificultades:</span>
+    <button class="diff-btn active" onclick="setDifficulty('facil', event)">Novato</button>
     <button class="diff-btn" onclick="setDifficulty('media', event)">Supernova</button>
     <button class="diff-btn" onclick="setDifficulty('dificil', event)">Yonko</button>
   </div>
@@ -200,7 +229,7 @@
   const COLORS = ["#fef08a", "#bbf7d0", "#bfdbfe", "#e9d5ff"];
   
   let database = [];
-  let currentDifficulty = "todos";
+  let currentDifficulty = "facil";
   let currentCategories = []; 
   let cards = [];
   let selectedCards = [];
@@ -270,7 +299,7 @@
           const entries = parseTagEntries(tagData);
 
           entries.forEach(({ value, difficulty: tagDif }) => {
-            if (currentDifficulty === "todos" || tagDif === currentDifficulty) {
+            if (tagDif === currentDifficulty) {
               const groupName = `${key}: ${value}`;
               if (!tagGroups[groupName]) tagGroups[groupName] = [];
               if (!tagGroups[groupName].some(c => c.id === char.id)) {
