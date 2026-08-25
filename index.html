@@ -32,6 +32,8 @@
     }
     .diff-btn.active { background: #f59e0b; color: #0f172a; border-color: #f59e0b; }
 
+    .infinite-score { font-size: 1rem; font-weight: bold; color: #f59e0b; margin-bottom: 8px; }
+
     .lives-container { font-size: 1.1rem; font-weight: bold; margin-bottom: 8px; color: #e2e8f0; display: flex; justify-content: center; align-items: center; gap: 12px; }
     .life-wrapper { position: relative; display: inline-flex; justify-content: center; align-items: center; }
     .life-icon { font-size: 1.5rem; user-select: none; }
@@ -192,7 +194,10 @@
     <button class="diff-btn active" onclick="setDifficulty('facil', event)">Novato</button>
     <button class="diff-btn" onclick="setDifficulty('media', event)">Supernova</button>
     <button class="diff-btn" onclick="setDifficulty('dificil', event)">Yonko</button>
+    <button class="diff-btn" onclick="setDifficulty('infinito', event)">Infinito</button>
   </div>
+
+  <div id="infinite-score" class="infinite-score" style="display: none;"></div>
 
   <div class="lives-container">
     Vidas: <span id="lives-icons"></span>
@@ -230,11 +235,15 @@
   
   let database = [];
   let currentDifficulty = "facil";
-  let currentCategories = []; 
+  let currentCategories = [];
   let cards = [];
   let selectedCards = [];
   let lives = MAX_LIVES;
   let gameOver = false;
+
+  let isInfiniteMode = false;
+  let infiniteSolvedCount = 0;
+  let infiniteSavedState = null;
 
   window.addEventListener("DOMContentLoaded", () => {
     fetch("personajes.json")
@@ -252,10 +261,61 @@
   });
 
   function setDifficulty(level, event) {
+    // Si dejamos una partida Infinito a medias (sin haber fallado), guardamos su progreso.
+    if (isInfiniteMode && level !== "infinito" && !gameOver) {
+      infiniteSavedState = {
+        currentCategories,
+        cards,
+        selectedCards,
+        lives,
+        solvedCount: infiniteSolvedCount,
+        solvedContainerHTML: document.getElementById("solved-container").innerHTML
+      };
+    }
+
     currentDifficulty = level;
+    isInfiniteMode = (level === "infinito");
     document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');
+
+    if (isInfiniteMode) {
+      if (infiniteSavedState) {
+        // Reanudamos la partida Infinito justo donde se dejó.
+        currentCategories = infiniteSavedState.currentCategories;
+        cards = infiniteSavedState.cards;
+        selectedCards = infiniteSavedState.selectedCards;
+        lives = infiniteSavedState.lives;
+        infiniteSolvedCount = infiniteSavedState.solvedCount;
+        gameOver = false;
+
+        document.getElementById("solved-container").innerHTML = infiniteSavedState.solvedContainerHTML;
+        document.getElementById("warning-msg").innerText = "";
+        document.getElementById("submit-btn").disabled = false;
+        document.getElementById("deselect-btn").disabled = false;
+        document.getElementById("view-results-btn").style.display = "none";
+        document.getElementById("gameover-modal").style.display = "none";
+
+        renderLives();
+        renderGrid();
+        updateInfiniteScoreDisplay();
+        return;
+      }
+
+      infiniteSolvedCount = 0;
+    }
+
+    updateInfiniteScoreDisplay();
     generateNewBoard();
+  }
+
+  function updateInfiniteScoreDisplay() {
+    const el = document.getElementById("infinite-score");
+    if (isInfiniteMode) {
+      el.style.display = "block";
+      el.innerText = `🔥 Paneles resueltos: ${infiniteSolvedCount}`;
+    } else {
+      el.style.display = "none";
+    }
   }
 
   function parseTagEntries(tagData) {
@@ -299,7 +359,7 @@
           const entries = parseTagEntries(tagData);
 
           entries.forEach(({ value, difficulty: tagDif }) => {
-            if (tagDif === currentDifficulty) {
+            if (isInfiniteMode || tagDif === currentDifficulty) {
               const groupName = `${key}: ${value}`;
               if (!tagGroups[groupName]) tagGroups[groupName] = [];
               if (!tagGroups[groupName].some(c => c.id === char.id)) {
@@ -515,7 +575,20 @@
       renderGrid();
 
       if (cards.length === 0) {
-        handleWin();
+        if (isInfiniteMode) {
+          infiniteSolvedCount++;
+          updateInfiniteScoreDisplay();
+          warningMsg.innerText = "¡Panel resuelto! Preparando el siguiente...";
+          document.getElementById("submit-btn").disabled = true;
+          document.getElementById("deselect-btn").disabled = true;
+          setTimeout(() => {
+            document.getElementById("submit-btn").disabled = false;
+            document.getElementById("deselect-btn").disabled = false;
+            generateNewBoard();
+          }, 900);
+        } else {
+          handleWin();
+        }
       }
     } else {
       lives--;
@@ -575,7 +648,12 @@
     titleEl.style.color = "#ef4444";
 
     const textEl = document.getElementById("modal-text");
-    textEl.innerText = "Has agotado todas tus vidas. Solución de esta partida:";
+    if (isInfiniteMode) {
+      infiniteSavedState = null; // La partida Infinito termina: la próxima vez se empieza de cero.
+      textEl.innerText = `Has agotado tus vidas tras resolver ${infiniteSolvedCount} panel(es) en modo Infinito. Solución de este panel:`;
+    } else {
+      textEl.innerText = "Has agotado todas tus vidas. Solución de esta partida:";
+    }
 
     renderModalSolutions();
   }
