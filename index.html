@@ -229,36 +229,30 @@
     generateNewBoard();
   }
 
-  function parseTag(tagData) {
-    if (tagData === null || tagData === undefined) {
-      return { values: [], difficulty: "facil" };
-    }
+  function parseTagEntries(tagData) {
+    if (tagData === null || tagData === undefined) return [];
 
-    let val = tagData;
-    let difficulty = "facil";
+    const items = Array.isArray(tagData) ? tagData : [tagData];
 
-    if (typeof tagData === "object" && !Array.isArray(tagData)) {
-      if ("dif" in tagData) difficulty = tagData.dif;
+    return items.map(item => {
+      let value = item;
+      let difficulty = "facil";
 
-      if ("val" in tagData) val = tagData.val;
-      else if ("value" in tagData) val = tagData.value;
-      else if ("nombre" in tagData) val = tagData.nombre;
-      else if ("name" in tagData) val = tagData.name;
-      else {
-        const stringVals = Object.values(tagData).filter(x => typeof x === "string" || typeof x === "number");
-        val = stringVals.length > 0 ? stringVals[0] : Object.values(tagData)[0];
+      if (item !== null && typeof item === "object" && !Array.isArray(item)) {
+        if ("dif" in item) difficulty = item.dif;
+
+        if ("val" in item) value = item.val;
+        else if ("value" in item) value = item.value;
+        else if ("nombre" in item) value = item.nombre;
+        else if ("name" in item) value = item.name;
+        else {
+          const stringVals = Object.values(item).filter(x => typeof x === "string" || typeof x === "number");
+          value = stringVals.length > 0 ? stringVals[0] : Object.values(item)[0];
+        }
       }
-    }
 
-    let arr = Array.isArray(val) ? val : [val];
-    let cleanValues = arr.map(v => {
-      if (typeof v === "object" && v !== null) {
-        return v.val || v.value || v.name || v.nombre || Object.values(v)[0] || String(v);
-      }
-      return String(v);
+      return { value: String(value), difficulty };
     });
-
-    return { values: cleanValues, difficulty };
   }
 
   function getTagValueOnly(categoryName) {
@@ -273,17 +267,17 @@
     database.forEach(char => {
       if (char.tags) {
         Object.entries(char.tags).forEach(([key, tagData]) => {
-          const { values, difficulty: tagDif } = parseTag(tagData);
+          const entries = parseTagEntries(tagData);
 
-          if (currentDifficulty === "todos" || tagDif === currentDifficulty) {
-            values.forEach(v => {
-              const groupName = `${key}: ${v}`;
+          entries.forEach(({ value, difficulty: tagDif }) => {
+            if (currentDifficulty === "todos" || tagDif === currentDifficulty) {
+              const groupName = `${key}: ${value}`;
               if (!tagGroups[groupName]) tagGroups[groupName] = [];
               if (!tagGroups[groupName].some(c => c.id === char.id)) {
                 tagGroups[groupName].push(char);
               }
-            });
-          }
+            }
+          });
         });
       }
     });
@@ -297,13 +291,15 @@
     }
 
     const charHasAnyTagMatch = (char, targetGroupName) => {
-      const [targetKey, targetVal] = targetGroupName.split(": ");
+      const sepIndex = targetGroupName.indexOf(": ");
+      const targetKey = targetGroupName.slice(0, sepIndex);
+      const targetVal = targetGroupName.slice(sepIndex + 2);
       if (!char.tags) return false;
 
       return Object.entries(char.tags).some(([key, tagData]) => {
         if (key !== targetKey) return false;
-        const { values } = parseTag(tagData);
-        return values.includes(targetVal);
+        const entries = parseTagEntries(tagData);
+        return entries.some(e => e.value === targetVal);
       });
     };
 
