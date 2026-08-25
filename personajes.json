@@ -902,9 +902,6 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Logia", "dif": "facil"}
-      ],
-      "Especialidad": [
-        {"val": "Marine", "dif": "dificil"}
       ]
     }
   },
@@ -2351,7 +2348,7 @@
         {"val": "Supernovas", "dif": "facil"}
       ],
       "Origen": [
-        {"val": "Origen: Isla del Cielo", "dif": "dificil"}
+        {"val": "Origen: Islas del Cielo", "dif": "dificil"}
       ],
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
@@ -4510,6 +4507,96 @@
     }
   },
   {
+    "id": "demalo_black",
+    "name": "Demalo Black (Falso Luffy)",
+    "img": "imagenes/DemaloBlack.png",
+    "tags": {
+      "Banda": [
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Capitanes pirata", "dif": "dificil"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: Menos de 100M", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "manjaro",
+    "name": "Manjaro (Falso Zoro)",
+    "img": "imagenes/Manjaro.png",
+    "tags": {
+      "Banda": [
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "mounblutain",
+    "name": "Mounblutain (Falso Sogeking)",
+    "img": "imagenes/Mounblutain.png",
+    "tags": {
+      "Banda": [
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "drip",
+    "name": "Drip (Falso Sanji)",
+    "img": "imagenes/Drip.png",
+    "tags": {
+      "Banda": [
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "nora_gitsune",
+    "name": "Nora Gitsune (Falso Chopper)",
+    "img": "imagenes/NoraGitsune.png",
+    "tags": {
+      "Banda": [
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "turco",
+    "name": "Turco (Falso Franky)",
+    "img": "imagenes/Turco.png",
+    "tags": {
+      "Banda": [
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ]
+    }
+  },
+  {
     "id": "chocolat",
     "name": "Chocolat (Falsa Nami)",
     "img": "imagenes/Chocolat.png",
@@ -4518,7 +4605,7 @@
         {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"}
       ],
       "Origen": [
-        {"val": "Origen: Grand Line", "dif": "dificil"}
+        {"val": "Origen: East Blue", "dif": "dificil"}
       ],
     }
   },
@@ -4531,13 +4618,7 @@
         {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"}
       ],
       "Origen": [
-        {"val": "Origen: Grand Line", "dif": "dificil"}
-      ],
-      "Haki": [
-        {"val": "Sin haki", "dif": "dificil"}
-      ],
-      "Fruta": [
-        {"val": "Sin fruta del diablo", "dif": "facil"}
+        {"val": "Origen: East Blue", "dif": "dificil"}
       ]
     }
   },
@@ -4547,7 +4628,7 @@
     "img": "imagenes/Diamante.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Donquixote", "dif": "facil"}
+        {"val": "Donquixote Family", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
@@ -4575,15 +4656,9 @@
       "Banda": [
         {"val": "Miembros de Gran Tesoro", "dif": "facil"}
       ],
-      "Origen": [
-        {"val": "Origen: Grand Line", "dif": "dificil"}
-      ],
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"}
       ],
-      "Fruta": [
-        {"val": "Sin fruta del diablo", "dif": "facil"}
-      ]
     }
   },
   {
@@ -4596,10 +4671,6 @@
       ],
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
-      ],
-      "Haki": [
-        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
-        {"val": "Usuarios de haki de observación", "dif": "dificil"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
@@ -4617,9 +4688,6 @@
     "name": "Duval",
     "img": "imagenes/Duval.png",
     "tags": {
-      "Banda": [
-        {"val": "Jinetes de la Vida Rosada", "dif": "facil"}
-      ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
@@ -4637,10 +4705,10 @@
     "img": "imagenes/Enel.png",
     "tags": {
       "Banda": [
-        {"val": "Ejército de Enel", "dif": "facil"}
+        {"val": "Fuerzas de Enel", "dif": "facil"}
       ],
       "Origen": [
-        {"val": "Isla del Cielo", "dif": "dificil"}
+        {"val": "Origen: Islas del Cielo", "dif": "dificil"}
       ],
       "Haki": [
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
@@ -4665,15 +4733,12 @@
         {"val": "Origen: East Blue", "dif": "dificil"}
       ],
       "Haki": [
-        {"val": "Usuarios de haki del conquistador", "dif": "dificil"},
+        {"val": "Usuarios de haki del conquistador", "dif": "media"},
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
-      ],
-      "Especialidad": [
-        {"val": "Marine", "dif": "dificil"}
       ],
       "D": [
         {"val": "Voluntad de la D.", "dif": "media"}
@@ -4686,10 +4751,10 @@
     "img": "imagenes/Gedatsu.png",
     "tags": {
       "Banda": [
-        {"val": "Sacerdotes de Enel", "dif": "facil"}
+        {"val": "Fuerzas de Enel", "dif": "facil"}
       ],
       "Origen": [
-        {"val": "Isla del Cielo", "dif": "dificil"}
+        {"val": "Origen: Islas del Cielo", "dif": "dificil"}
       ],
       "Haki": [
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
@@ -4726,7 +4791,7 @@
     "img": "imagenes/Haredas.png",
     "tags": {
       "Origen": [
-        {"val": "Origen: Isla del Cielo", "dif": "dificil"}
+        {"val": "Origen: Islas del Cielo", "dif": "dificil"}
       ],
       "Especialidad": [
         {"val": "Científicos", "dif": "dificil"}
@@ -5025,10 +5090,10 @@
     "img": "imagenes/Ohm.png",
     "tags": {
       "Banda": [
-        {"val": "Sacerdotes de Enel", "dif": "facil"}
+        {"val": "Fuerzas de Enel", "dif": "facil"}
       ],
       "Origen": [
-        {"val": "Isla del Cielo", "dif": "dificil"}
+        {"val": "Origen: Islas del Cielo", "dif": "dificil"}
       ],
       "Haki": [
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
@@ -5160,10 +5225,10 @@
     "img": "imagenes/Satori.png",
     "tags": {
       "Banda": [
-        {"val": "Sacerdotes de Enel", "dif": "facil"}
+        {"val": "Fuerzas de Enel", "dif": "facil"}
       ],
       "Origen": [
-        {"val": "Isla del Cielo", "dif": "dificil"}
+        {"val": "Origen: Islas del Cielo", "dif": "dificil"}
       ],
       "Haki": [
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
@@ -5203,10 +5268,10 @@
     "img": "imagenes/Shura.png",
     "tags": {
       "Banda": [
-        {"val": "Sacerdotes de Enel", "dif": "facil"}
+        {"val": "Fuerzas de Enel", "dif": "facil"}
       ],
       "Origen": [
-        {"val": "Isla del Cielo", "dif": "dificil"}
+        {"val": "Origen: Islas del Cielo", "dif": "dificil"}
       ],
       "Haki": [
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
