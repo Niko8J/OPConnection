@@ -1289,7 +1289,7 @@
     "img": "imagenes/Hancock.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas Kuja", "dif": "facil"}
+        {"val": "Miembras de la tribu Kuja", "dif": "facil"}
       ],
       "Titulo": [
         {"val": "Shichibukais", "dif": "facil"}
@@ -4470,7 +4470,7 @@
         {"val": "Científicos", "dif": "dificil"}
       ]
     }
-  }
+  },
   {
     "id": "camie",
     "name": "Camie",
@@ -4606,7 +4606,7 @@
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
-      ],
+      ]
     }
   },
   {
@@ -4658,7 +4658,7 @@
       ],
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"}
-      ],
+      ]
     }
   },
   {
@@ -4771,7 +4771,7 @@
     "tags": {
       "Banda": [
         {"val": "Piratas de Rocks", "dif": "media"},
-        {"val": "Tribu Kuja", "dif": "facil"}
+        {"val": "Miembras de la tribu Kuja", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Calm Belt", "dif": "dificil"}
@@ -4796,6 +4796,7 @@
       "Especialidad": [
         {"val": "Científicos", "dif": "dificil"}
     }
+      ]
   },
   {
     "id": "heracles",
@@ -4844,9 +4845,11 @@
     "img": "imagenes/Inuarashi.png",
     "tags": {
       "Banda": [
-        {"val": "Vainas Rojas", "dif": "facil"},
         {"val": "Banda: Piratas de Roger", "dif": "facil"},
         {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Titulo": [
+        {"val": "Vainas Rojas", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -4880,10 +4883,6 @@
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
-      "Haki": [
-        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
-        {"val": "Usuarios de haki de observación", "dif": "dificil"}
-      ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
       ]
@@ -4892,7 +4891,7 @@
   {
     "id": "burgess",
     "name": "Jesus Burgess",
-    "img": "imagenes/Burgess.png",
+    "img": "imagenes/Jesus.png",
     "tags": {
       "Banda": [
         {"val": "Banda: Piratas de Barbanegra", "dif": "facil"}
@@ -4921,7 +4920,7 @@
         {"val": "Piratas de Barbablanca", "dif": "facil"}
       ],
       "Origen": [
-        {"val": "Origen: Grand Line", "dif": "dificil"}
+        {"val": "Origen: West Blue", "dif": "dificil"}
       ],
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
@@ -4937,7 +4936,7 @@
     "name": "Kin'emon",
     "img": "imagenes/Kinemon.png",
     "tags": {
-      "Banda": [
+      "Titulo": [
         {"val": "Vainas Rojas", "dif": "facil"}
       ],
       "Origen": [
@@ -4986,10 +4985,6 @@
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
       ],
-      "Haki": [
-        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
-        {"val": "Usuarios de haki de observación", "dif": "dificil"}
-      ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan", "dif": "facil"}
       ],
@@ -5012,10 +5007,6 @@
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
-      "Haki": [
-        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
-        {"val": "Usuarios de haki de observación", "dif": "dificil"}
-      ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
       ]
@@ -5027,7 +5018,7 @@
     "img": "imagenes/Marguerite.png",
     "tags": {
       "Banda": [
-        {"val": "Tribu Kuja", "dif": "facil"}
+        {"val": "Miembras de la tribu Kuja", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Calm Belt", "dif": "dificil"}
@@ -5048,12 +5039,6 @@
       "Banda": [
         {"val": "Miembros de Gran Tesoro", "dif": "facil"}
       ],
-      "Origen": [
-        {"val": "Origen: Grand Line", "dif": "dificil"}
-      ],
-      "Haki": [
-        {"val": "Sin haki", "dif": "dificil"}
-      ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
       ]
@@ -5065,9 +5050,11 @@
     "img": "imagenes/Nekomamushi.png",
     "tags": {
       "Banda": [
-        {"val": "Vainas Rojas", "dif": "facil"},
         {"val": "Banda: Piratas de Roger", "dif": "facil"},
         {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Titulo": [
+        {"val": "Vainas Rojas", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -5113,12 +5100,6 @@
     "tags": {
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
-      ],
-      "Haki": [
-        {"val": "Sin haki", "dif": "dificil"}
-      ],
-      "Fruta": [
-        {"val": "Sin fruta del diablo", "dif": "facil"}
       ],
       "Raza": [
         {"val": "Animales", "dif": "media"}
@@ -5176,7 +5157,7 @@
     "img": "imagenes/Pica.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Donquixote", "dif": "facil"}
+        {"val": "Donquixote Family", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
@@ -5199,10 +5180,10 @@
   {
     "id": "senor_pink",
     "name": "Senor Pink",
-    "img": "imagenes/SenorPink.png",
+    "img": "imagenes/Pink.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Donquixote", "dif": "facil"}
+        {"val": "Donquixote Family", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
@@ -5282,13 +5263,10 @@
     }
   },
   {
-    "id": "sicilian",
-    "name": "Sicilian",
-    "img": "imagenes/Sicilian.png",
+    "id": "shishilian",
+    "name": "Shishilian",
+    "img": "imagenes/Shishilian.png",
     "tags": {
-      "Banda": [
-        {"val": "Mosqueteros de Inuarashi", "dif": "facil"}
-      ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
@@ -5336,7 +5314,7 @@
     "img": "imagenes/Sugar.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Donquixote", "dif": "facil"}
+        {"val": "Donquixote Family", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
@@ -5355,14 +5333,7 @@
     "img": "imagenes/Tesoro.png",
     "tags": {
       "Banda": [
-        {"val": "Gran Tesoro", "dif": "facil"}
-      ],
-      "Origen": [
-        {"val": "Origen: Grand Line", "dif": "dificil"}
-      ],
-      "Haki": [
-        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
-        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+        {"val": "Miembros de Gran Tesoro", "dif": "facil"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
@@ -5378,7 +5349,7 @@
     "img": "imagenes/Trebol.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Donquixote", "dif": "facil"}
+        {"val": "Donquixote Family", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
@@ -5400,14 +5371,8 @@
     "name": "Vander Decken IX",
     "img": "imagenes/VanderDecken.png",
     "tags": {
-      "Banda": [
-        {"val": "Piratas Flying", "dif": "facil"}
-      ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
-      ],
-      "Haki": [
-        {"val": "Sin haki", "dif": "dificil"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
@@ -5426,9 +5391,7 @@
     "img": "imagenes/Wadatsumi.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas del Sol", "dif": "facil"},
-        {"val": "Nuevos Piratas Gyojin", "dif": "dificil"},
-        {"val": "Piratas Flying", "dif": "dificil"}
+        {"val": "Piratas del Sol", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -5449,15 +5412,8 @@
     "name": "Wanda",
     "img": "imagenes/Wanda.png",
     "tags": {
-      "Banda": [
-        {"val": "Mosqueteros de Inuarashi", "dif": "facil"}
-      ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
-      ],
-      "Haki": [
-        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
-        {"val": "Usuarios de haki de observación", "dif": "dificil"}
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
