@@ -225,7 +225,7 @@
     <h2 id="modal-title"></h2>
     <p id="modal-text"></p>
     <div id="solutions-container" class="solutions-list"></div>
-    <button class="action-btn" onclick="closeModal()">Entendido</button>
+    <button class="action-btn" id="modal-action-btn" onclick="closeModal()">Entendido</button>
   </div>
 </div>
 
@@ -244,6 +244,8 @@
   let isInfiniteMode = false;
   let infiniteSolvedCount = 0;
   let infiniteSavedState = null;
+  let solvedOrder = [];
+  let awaitingNextPanel = false;
 
   window.addEventListener("DOMContentLoaded", () => {
     fetch("personajes.json")
@@ -261,16 +263,27 @@
   });
 
   function setDifficulty(level, event) {
-    // Si dejamos una partida Infinito a medias (sin haber fallado), guardamos su progreso.
-    if (isInfiniteMode && level !== "infinito" && !gameOver) {
-      infiniteSavedState = {
-        currentCategories,
-        cards,
-        selectedCards,
-        lives,
-        solvedCount: infiniteSolvedCount,
-        solvedContainerHTML: document.getElementById("solved-container").innerHTML
-      };
+    if (isInfiniteMode && level !== "infinito") {
+      // Si dejamos un panel ya resuelto sin pulsar "Siguiente", lo avanzamos en silencio
+      // para no dejar un panel a medio cerrar guardado.
+      if (awaitingNextPanel) {
+        closeModal();
+        awaitingNextPanel = false;
+        generateNewBoard();
+      }
+
+      // Si dejamos una partida Infinito a medias (sin haber fallado), guardamos su progreso.
+      if (!gameOver) {
+        infiniteSavedState = {
+          currentCategories,
+          cards,
+          selectedCards,
+          lives,
+          solvedCount: infiniteSolvedCount,
+          solvedOrder,
+          solvedContainerHTML: document.getElementById("solved-container").innerHTML
+        };
+      }
     }
 
     currentDifficulty = level;
@@ -286,7 +299,9 @@
         selectedCards = infiniteSavedState.selectedCards;
         lives = infiniteSavedState.lives;
         infiniteSolvedCount = infiniteSavedState.solvedCount;
+        solvedOrder = infiniteSavedState.solvedOrder || [];
         gameOver = false;
+        awaitingNextPanel = false;
 
         document.getElementById("solved-container").innerHTML = infiniteSavedState.solvedContainerHTML;
         document.getElementById("warning-msg").innerText = "";
@@ -456,9 +471,11 @@
   function initGame() {
     lives = MAX_LIVES;
     gameOver = false;
+    awaitingNextPanel = false;
     cards = [];
     selectedCards = [];
-    
+    solvedOrder = [];
+
     document.getElementById("solved-container").innerHTML = "";
     document.getElementById("warning-msg").innerText = "";
     document.getElementById("submit-btn").disabled = false;
@@ -569,6 +586,7 @@
 
       solvedEl.innerHTML = `${imgsHtml}<div>${getTagValueOnly(catData.name)}</div>`;
       solvedContainer.appendChild(solvedEl);
+      solvedOrder.push(selectedCategory);
 
       cards = cards.filter((_, i) => !selectedCards.includes(i));
       selectedCards = [];
@@ -576,16 +594,7 @@
 
       if (cards.length === 0) {
         if (isInfiniteMode) {
-          infiniteSolvedCount++;
-          updateInfiniteScoreDisplay();
-          warningMsg.innerText = "¡Panel resuelto! Preparando el siguiente...";
-          document.getElementById("submit-btn").disabled = true;
-          document.getElementById("deselect-btn").disabled = true;
-          setTimeout(() => {
-            document.getElementById("submit-btn").disabled = false;
-            document.getElementById("deselect-btn").disabled = false;
-            generateNewBoard();
-          }, 900);
+          handlePanelComplete();
         } else {
           handleWin();
         }
@@ -615,8 +624,41 @@
     }
   }
 
+  function handlePanelComplete() {
+    infiniteSolvedCount++;
+    updateInfiniteScoreDisplay();
+    awaitingNextPanel = true;
+
+    document.getElementById("submit-btn").disabled = true;
+    document.getElementById("deselect-btn").disabled = true;
+    document.getElementById("view-results-btn").style.display = "inline-block";
+
+    const modalContent = document.querySelector("#gameover-modal .modal-content");
+    modalContent.style.borderColor = "#22c55e";
+
+    const titleEl = document.getElementById("modal-title");
+    titleEl.innerText = "🎉 ¡Panel superado!";
+    titleEl.style.color = "#22c55e";
+
+    const textEl = document.getElementById("modal-text");
+    textEl.innerText = `Paneles resueltos en este Infinito: ${infiniteSolvedCount}.`;
+
+    const actionBtn = document.getElementById("modal-action-btn");
+    actionBtn.innerText = "Siguiente ➡️";
+    actionBtn.onclick = continueInfinitePanel;
+
+    renderModalSolutions();
+  }
+
+  function continueInfinitePanel() {
+    awaitingNextPanel = false;
+    document.getElementById("gameover-modal").style.display = "none";
+    generateNewBoard();
+  }
+
   function handleWin() {
     gameOver = true;
+    awaitingNextPanel = false;
     document.getElementById("submit-btn").disabled = true;
     document.getElementById("deselect-btn").disabled = true;
     document.getElementById("view-results-btn").style.display = "inline-block";
@@ -631,11 +673,16 @@
     const textEl = document.getElementById("modal-text");
     textEl.innerText = "¡Has descubierto todas las conexiones correctamente!";
 
+    const actionBtn = document.getElementById("modal-action-btn");
+    actionBtn.innerText = "Entendido";
+    actionBtn.onclick = closeModal;
+
     renderModalSolutions();
   }
 
   function handleGameOver() {
     gameOver = true;
+    awaitingNextPanel = false;
     document.getElementById("submit-btn").disabled = true;
     document.getElementById("deselect-btn").disabled = true;
     document.getElementById("view-results-btn").style.display = "inline-block";
@@ -655,6 +702,10 @@
       textEl.innerText = "Has agotado todas tus vidas. Solución de esta partida:";
     }
 
+    const actionBtn = document.getElementById("modal-action-btn");
+    actionBtn.innerText = "Entendido";
+    actionBtn.onclick = closeModal;
+
     renderModalSolutions();
   }
 
@@ -662,7 +713,16 @@
     const solutionsContainer = document.getElementById("solutions-container");
     solutionsContainer.innerHTML = "";
 
+    // Mostramos primero las categorías en el orden en que se acertaron;
+    // si quedó alguna sin acertar (derrota), se añade al final.
+    const orderedCats = solvedOrder
+      .map(name => currentCategories.find(c => c.name === name))
+      .filter(Boolean);
     currentCategories.forEach(cat => {
+      if (!orderedCats.includes(cat)) orderedCats.push(cat);
+    });
+
+    orderedCats.forEach(cat => {
       const solEl = document.createElement("div");
       solEl.className = "solved-category";
       solEl.style.backgroundColor = cat.color;
@@ -681,7 +741,7 @@
   }
 
   function openModal() {
-    if (gameOver) {
+    if (gameOver || awaitingNextPanel) {
       document.getElementById("gameover-modal").style.display = "flex";
     }
   }
