@@ -1114,7 +1114,8 @@
     "img": "imagenes/Queen.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas Bestias", "dif": "facil"}
+        {"val": "Piratas Bestias", "dif": "facil"},
+        {"val": "Miembros de MADS", "dif": "dificil"}
       ],
       "Afiliacion": [
         {"val": "Okamas", "dif": "facil"}
@@ -2350,7 +2351,7 @@
         {"val": "Supernovas", "dif": "facil"}
       ],
       "Origen": [
-        {"val": "Isla del Cielo", "dif": "dificil"}
+        {"val": "Origen: Isla del Cielo", "dif": "dificil"}
       ],
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
@@ -3377,7 +3378,8 @@
     "img": "imagenes/Judge.png",
     "tags": {
       "Banda": [
-        {"val": "Germa 66", "dif": "facil"}
+        {"val": "Germa 66", "dif": "facil"},
+        {"val": "Miembros de MADS", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
@@ -3562,7 +3564,7 @@
   },
   {
     "id": "barbablanca",
-    "name": "Edward Newgate",
+    "name": "Edward Newgate (Barbablanca)",
     "img": "imagenes/Barbablanca.png",
     "tags": {
       "Banda": [
@@ -4340,6 +4342,1063 @@
       ],
       "Especialidad": [
         {"val": "Tiradores", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "baccarat",
+    "name": "Baccarat",
+    "img": "imagenes/Baccarat.png",
+    "tags": {
+      "Banda": [
+        {"val": "Miembros de Gran Tesoro", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "bellamy",
+    "name": "Bellamy",
+    "img": "imagenes/Bellamy.png",
+    "tags": {
+      "Banda": [
+        {"val": "Donquixote Family", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: Entre 100M y 499M", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "bepo",
+    "name": "Bepo",
+    "img": "imagenes/Bepo.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Heart", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Navegantes", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Minks", "dif": "media"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: Menos de 100M", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "caesar",
+    "name": "Caesar Clown",
+    "img": "imagenes/Caesar.png",
+    "tags": {
+      "Banda": [
+        {"val": "Donquixote Family", "dif": "dificil"},
+        {"val": "Miembros de MADS", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Logia", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Científicos", "dif": "dificil"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: Entre 100M y 499M", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "vegapunk",
+    "name": "Dr. Vegapunk",
+    "img": "imagenes/Vegapunk.png",
+    "tags": {
+      "Banda": [
+        {"val": "Miembros de MADS", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Científicos", "dif": "dificil"}
+      ],
+      "Estado": [
+        {"val": "Personajes fallecidos", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "buckingham_stussy",
+    "name": "Buckingham Stussy (Miss Bakkin)",
+    "img": "imagenes/BuckinghamStussy.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Rocks", "dif": "facil"},
+        {"val": "Miembros de MADS", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Científicos", "dif": "dificil"}
+      ]
+    }
+  }
+  {
+    "id": "camie",
+    "name": "Camie",
+    "img": "imagenes/Camie.png",
+    "tags": {
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Raza": [
+        {"val": "Gyojins", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "carina",
+    "name": "Carina",
+    "img": "imagenes/Carina.png",
+    "tags": {
+      "Banda": [
+        {"val": "Miembros de Gran Tesoro", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Músicos", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "chocolat",
+    "name": "Chocolat (Falsa Nami)",
+    "img": "imagenes/Chocolat.png",
+    "tags": {
+      "Banda": [
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+    }
+  },
+  {
+    "id": "cocoa",
+    "name": "Cocoa (Falsa Robin)",
+    "img": "imagenes/Cocoa.png",
+    "tags": {
+      "Banda": [
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "diamante",
+    "name": "Diamante",
+    "img": "imagenes/Diamante.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Donquixote", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: Menos de 100M", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "dice",
+    "name": "Dice",
+    "img": "imagenes/Dice.png",
+    "tags": {
+      "Banda": [
+        {"val": "Miembros de Gran Tesoro", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "docq",
+    "name": "Doc Q",
+    "img": "imagenes/DocQ.png",
+    "tags": {
+      "Banda": [
+        {"val": "Banda: Piratas de Barbanegra", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Médicos", "dif": "dificil"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: Menos de 100M", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "duval",
+    "name": "Duval",
+    "img": "imagenes/Duval.png",
+    "tags": {
+      "Banda": [
+        {"val": "Jinetes de la Vida Rosada", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "enel",
+    "name": "Enel",
+    "img": "imagenes/Enel.png",
+    "tags": {
+      "Banda": [
+        {"val": "Ejército de Enel", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Isla del Cielo", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Logia", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "garp",
+    "name": "Monkey D. Garp",
+    "img": "imagenes/Garp.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marina", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki del conquistador", "dif": "dificil"},
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Marine", "dif": "dificil"}
+      ],
+      "D": [
+        {"val": "Voluntad de la D.", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "gedatsu",
+    "name": "Gedatsu",
+    "img": "imagenes/Gedatsu.png",
+    "tags": {
+      "Banda": [
+        {"val": "Sacerdotes de Enel", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Isla del Cielo", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "gloriosa",
+    "name": "Gloriosa",
+    "img": "imagenes/Gloriosa.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Rocks", "dif": "media"},
+        {"val": "Tribu Kuja", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Calm Belt", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "haredas",
+    "name": "Haredas",
+    "img": "imagenes/Haredas.png",
+    "tags": {
+      "Origen": [
+        {"val": "Origen: Isla del Cielo", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Científicos", "dif": "dificil"}
+    }
+  },
+  {
+    "id": "heracles",
+    "name": "Heracles",
+    "img": "imagenes/Heracles.png",
+    "tags": {
+      "Origen": [
+        {"val": "Origen: South Blue", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "hody",
+    "name": "Hody Jones",
+    "img": "imagenes/Hody.png",
+    "tags": {
+      "Banda": [
+        {"val": "Nuevos Piratas Gyojin", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Capitanes pirata", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Gyojins", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "inuarashi",
+    "name": "Inuarashi",
+    "img": "imagenes/Inuarashi.png",
+    "tags": {
+      "Banda": [
+        {"val": "Vainas Rojas", "dif": "facil"},
+        {"val": "Banda: Piratas de Roger", "dif": "facil"},
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Minks", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "ivankov",
+    "name": "Emporio Ivankov",
+    "img": "imagenes/Ivankov.png",
+    "tags": {
+      "Banda": [
+        {"val": "Ejército Revolucionario", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Okamas", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "burgess",
+    "name": "Jesus Burgess",
+    "img": "imagenes/Burgess.png",
+    "tags": {
+      "Banda": [
+        {"val": "Banda: Piratas de Barbanegra", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: Entre 100M y 499M", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "jozu",
+    "name": "Jozu",
+    "img": "imagenes/Jozu.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "kinemon",
+    "name": "Kin'emon",
+    "img": "imagenes/Kinemon.png",
+    "tags": {
+      "Banda": [
+        {"val": "Vainas Rojas", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "koala",
+    "name": "Koala",
+    "img": "imagenes/Koala.png",
+    "tags": {
+      "Banda": [
+        {"val": "Ejército Revolucionario", "dif": "facil"},
+        {"val": "Piratas del Sol", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "lafitte",
+    "name": "Lafitte",
+    "img": "imagenes/Lafitte.png",
+    "tags": {
+      "Banda": [
+        {"val": "Banda: Piratas de Barbanegra", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: West Blue", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Navegantes", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "magellan",
+    "name": "Magellan",
+    "img": "imagenes/Magellan.png",
+    "tags": {
+      "Banda": [
+        {"val": "Impel Down", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "marguerite",
+    "name": "Marguerite",
+    "img": "imagenes/Marguerite.png",
+    "tags": {
+      "Banda": [
+        {"val": "Tribu Kuja", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Calm Belt", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "mrtanaka",
+    "name": "Mr. Tanaka",
+    "img": "imagenes/MrTanaka.png",
+    "tags": {
+      "Banda": [
+        {"val": "Miembros de Gran Tesoro", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "nekomamushi",
+    "name": "Nekomamushi",
+    "img": "imagenes/Nekomamushi.png",
+    "tags": {
+      "Banda": [
+        {"val": "Vainas Rojas", "dif": "facil"},
+        {"val": "Banda: Piratas de Roger", "dif": "facil"},
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Raza": [
+        {"val": "Minks", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "ohm",
+    "name": "Ohm",
+    "img": "imagenes/Ohm.png",
+    "tags": {
+      "Banda": [
+        {"val": "Sacerdotes de Enel", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Isla del Cielo", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "pappug",
+    "name": "Pappug",
+    "img": "imagenes/Pappug.png",
+    "tags": {
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "pekoms",
+    "name": "Pekoms",
+    "img": "imagenes/Pekoms.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Big Mom", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "facil"}
+      ],
+      "Raza": [
+        {"val": "Minks", "dif": "media"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: Entre 100M y 499M", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "perona",
+    "name": "Perona",
+    "img": "imagenes/Perona.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Thriller Bark", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: West Blue", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "pica",
+    "name": "Pica",
+    "img": "imagenes/Pica.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Donquixote", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: Menos de 100M", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "senor_pink",
+    "name": "Senor Pink",
+    "img": "imagenes/SenorPink.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Donquixote", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: Menos de 100M", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "satori",
+    "name": "Satori",
+    "img": "imagenes/Satori.png",
+    "tags": {
+      "Banda": [
+        {"val": "Sacerdotes de Enel", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Isla del Cielo", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "shiryu",
+    "name": "Shiryu de la Lluvia",
+    "img": "imagenes/Shiryu.png",
+    "tags": {
+      "Banda": [
+        {"val": "Banda: Piratas de Barbanegra", "dif": "facil"},
+        {"val": "Impel Down", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "shura",
+    "name": "Shura",
+    "img": "imagenes/Shura.png",
+    "tags": {
+      "Banda": [
+        {"val": "Sacerdotes de Enel", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Isla del Cielo", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "sicilian",
+    "name": "Sicilian",
+    "img": "imagenes/Sicilian.png",
+    "tags": {
+      "Banda": [
+        {"val": "Mosqueteros de Inuarashi", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Minks", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "spandam",
+    "name": "Spandam",
+    "img": "imagenes/Spandam.png",
+    "tags": {
+      "Banda": [
+        {"val": "CP0", "dif": "facil"},
+        {"val": "CP9", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "sugar",
+    "name": "Sugar",
+    "img": "imagenes/Sugar.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Donquixote", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "tesoro",
+    "name": "Guild Tesoro",
+    "img": "imagenes/Tesoro.png",
+    "tags": {
+      "Banda": [
+        {"val": "Gran Tesoro", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ],
+      "Despertar": [
+        {"val": "Fruta despertada", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "trebol",
+    "name": "Trébol",
+    "img": "imagenes/Trebol.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Donquixote", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: Menos de 100M", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "vanderdecken",
+    "name": "Vander Decken IX",
+    "img": "imagenes/VanderDecken.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Flying", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Capitanes pirata", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Gyojins", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "wadatsumi",
+    "name": "Wadatsumi",
+    "img": "imagenes/Wadatsumi.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas del Sol", "dif": "facil"},
+        {"val": "Nuevos Piratas Gyojin", "dif": "dificil"},
+        {"val": "Piratas Flying", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Raza": [
+        {"val": "Gyojins", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "wanda",
+    "name": "Wanda",
+    "img": "imagenes/Wanda.png",
+    "tags": {
+      "Banda": [
+        {"val": "Mosqueteros de Inuarashi", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Raza": [
+        {"val": "Minks", "dif": "media"}
       ]
     }
   }
