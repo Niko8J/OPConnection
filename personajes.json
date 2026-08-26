@@ -34,6 +34,10 @@
       ],
       "Despertar": [
         {"val": "Fruta despertada", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -65,6 +69,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ]
     }
   },
@@ -92,6 +99,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -237,6 +247,10 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -296,6 +310,10 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -323,6 +341,9 @@
       ],
       "D": [
         {"val": "Voluntad de la D.", "dif": "media"}
+      ],
+      "Luffy": [
+        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
       ]
     }
   },
@@ -491,6 +512,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ]
     }
   },
@@ -628,6 +652,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ]
     }
   },
@@ -711,6 +738,9 @@
       ],
       "Despertar": [
         {"val": "Fruta despertada", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -744,6 +774,9 @@
       ],
       "Despertar": [
         {"val": "Fruta despertada", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ]
     }
   },
@@ -929,6 +962,9 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ]
     }
   },
@@ -952,6 +988,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 500M y mil millones", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ]
     }
   },
@@ -978,6 +1017,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -1077,6 +1119,10 @@
       ],
       "Despertar": [
         {"val": "Fruta despertada", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -1281,6 +1327,10 @@
       ],
       "Despertar": [
         {"val": "Fruta despertada", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -1311,6 +1361,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -1332,6 +1385,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
+      ],
+      "Luffy": [
+        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
       ]
     }
   },
@@ -1388,6 +1444,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Logia", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -1412,6 +1471,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Logia", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ]
     }
   },
@@ -1436,6 +1498,9 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ]
     }
   },
@@ -1460,6 +1525,9 @@
       ],
       "D": [
         {"val": "Voluntad de la D.", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -2700,6 +2768,9 @@
       ],
       "Especialidad": [
         {"val": "Médicos", "dif": "dificil"}
+      ],
+      "Luffy": [
+        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
       ]
     }
   },
@@ -2868,6 +2939,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -3101,6 +3175,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+      ],
+      "Luffy": [
+        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
       ]
     }
   },
@@ -3610,6 +3687,10 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -3640,6 +3721,12 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "facil"}
+      ],
+      "Luffy": [
+        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -3837,6 +3924,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -4348,6 +4438,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 500M y mil millones", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -4899,6 +4992,9 @@
       ],
       "Raza": [
         {"val": "Minks", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -4987,6 +5083,12 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Luffy": [
+        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -5104,6 +5206,9 @@
       ],
       "Raza": [
         {"val": "Minks", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -6374,6 +6479,9 @@
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -6472,6 +6580,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -6488,6 +6599,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -6851,6 +6965,9 @@
       ],
       "Banda": [
         {"val": "Galley-La Company", "dif": "media"}
+      ],
+      "Luffy": [
+        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
       ]
     }
   },
@@ -6873,7 +6990,7 @@
       ]
     }
   },
-    {
+  {
     "id": "kokoro",
     "name": "Kokoro",
     "img": "imagenes/Kokoro.png",
@@ -7171,6 +7288,9 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -7187,6 +7307,9 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -7203,6 +7326,9 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -7216,6 +7342,9 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -7229,6 +7358,9 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -7242,6 +7374,9 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -7255,6 +7390,9 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -7268,6 +7406,9 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -7281,6 +7422,9 @@
       ],
       "Raza": [
         {"val": "Animales", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -7294,6 +7438,125 @@
       ],
       "Raza": [
         {"val": "Animales", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "gaimon",
+    "name": "Gaimon",
+    "img": "imagenes/Gaimon.png",
+    "tags": {
+      "Luffy": [
+        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "mocdonald",
+    "name": "MocDonald",
+    "img": "imagenes/MocDonald.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Thriller Bark", "dif": "facil"}
+      ],
+      "Luffy": [
+        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "unigaro",
+    "name": "Unigaro",
+    "img": "imagenes/Unigaro.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Thriller Bark", "dif": "facil"}
+      ],
+      "Luffy": [
+        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "hyoutauros",
+    "name": "Hyoutauros",
+    "img": "imagenes/Hyoutauros.png",
+    "tags": {
+      "Luffy": [
+        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "crocus",
+    "name": "Crocus",
+    "img": "imagenes/Crocus.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Roger", "dif": "facil"}
+      ],
+      
+      "Luffy": [
+        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Médicos", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "momonosuke",
+    "name": "Kouzuki Momonosuke",
+    "img": "imagenes/Momonosuke.png",
+    "tags": {
+      "Banda": [
+        {"val": "Wano", "dif": "facil"}
+      ],
+      "Luffy": [
+        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ]
+    }
+  },
+{
+    "id": "tama",
+    "name": "Kurozumi Tama",
+    "img": "imagenes/Tama.png",
+    "tags": {
+      "Banda": [
+        {"val": "Wano", "dif": "facil"}
+      ],
+      "Luffy": [
+        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   }
