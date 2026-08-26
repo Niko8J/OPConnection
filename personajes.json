@@ -217,7 +217,8 @@
     "tags": {
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "facil"},
-        {"val": "Banda: Sombrero de Paja", "dif": "dificil"}
+        {"val": "Banda: Sombrero de Paja", "dif": "dificil"},
+        {"val": "Franky Family", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: South Blue", "dif": "dificil"}
@@ -259,7 +260,7 @@
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
       ],
       "Especialidad": [
-        {"val": "Músicos", "dif": "dificil"}
+        {"val": "Músicos", "dif": "media"}
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
@@ -291,7 +292,7 @@
         {"val": "Timoneles", "dif": "dificil"}
       ],
       "Raza": [
-        {"val": "Gyojins", "dif": "media"}
+        {"val": "Gyojins", "dif": "facil"}
       ],
       "Recompensa": [
         {"val": "Recompensa: más de mil millones", "dif": "dificil"}
@@ -986,7 +987,8 @@
     "img": "imagenes/Lucci.png",
     "tags": {
       "Banda": [
-        {"val": "CP0", "dif": "facil"}
+        {"val": "CP0", "dif": "facil"},
+        {"val": "Galley-La Company", "dif": "media"}
       ],
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
@@ -1006,6 +1008,9 @@
       ],
       "Despertar": [
         {"val": "Fruta despertada", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Carpinteros", "dif": "dificil"}
       ]
     }
   },
@@ -1465,7 +1470,8 @@
     "tags": {
       "Banda": [
         {"val": "CP0", "dif": "facil"},
-        {"val": "CP9", "dif": "facil"}
+        {"val": "CP9", "dif": "facil"},
+        {"val": "Galley-La Company", "dif": "media"}
       ],
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
@@ -1481,7 +1487,8 @@
         {"val": "Fruta del diablo: Zoan", "dif": "media"}
       ],
       "Especialidad": [
-        {"val": "Espadachines", "dif": "dificil"}
+        {"val": "Espadachines", "dif": "dificil"},
+        {"val": "Carpinteros", "dif": "dificil"}
       ],
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
@@ -1599,7 +1606,8 @@
     "tags": {
       "Banda": [
         {"val": "CP0", "dif": "facil"},
-        {"val": "CP9", "dif": "facil"}
+        {"val": "CP9", "dif": "facil"},
+        {"val": "Galley-La Company", "dif": "media"}
       ],
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
@@ -1918,8 +1926,10 @@
     "img": "imagenes/Zephyr.png",
     "tags": {
       "Banda": [
-        {"val": "Neo Marina", "dif": "facil"},
         {"val": "Marines", "dif": "facil"}
+      ],
+      "Titulo": [
+        {"val": "Almirante", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -2324,7 +2334,7 @@
       ],
       "Especialidad": [
         {"val": "Capitanes pirata", "dif": "dificil"},
-        {"val": "Músicos", "dif": "dificil"}
+        {"val": "Músicos", "dif": "media"}
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
@@ -2754,7 +2764,7 @@
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
       "Raza": [
-        {"val": "Gyojins", "dif": "media"}
+        {"val": "Gyojins", "dif": "facil"}
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
@@ -2781,7 +2791,7 @@
         {"val": "Sin fruta del diablo", "dif": "facil"}
       ],
       "Raza": [
-        {"val": "Gyojins", "dif": "media"}
+        {"val": "Gyojins", "dif": "facil"}
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
@@ -2807,7 +2817,7 @@
         {"val": "Sin fruta del diablo", "dif": "facil"}
       ],
       "Raza": [
-        {"val": "Gyojins", "dif": "media"}
+        {"val": "Gyojins", "dif": "facil"}
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
@@ -2854,7 +2864,7 @@
         {"val": "Espadachines", "dif": "dificil"}
       ],
       "Raza": [
-        {"val": "Gyojins", "dif": "media"}
+        {"val": "Gyojins", "dif": "facil"}
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
@@ -2880,7 +2890,7 @@
         {"val": "Fruta del diablo: Zoan prehistórica", "dif": "dificil"}
       ],
       "Raza": [
-        {"val": "Gyojins", "dif": "media"}
+        {"val": "Gyojins", "dif": "facil"}
       ],
       "Recompensa": [
         {"val": "Recompensa: más de mil millones", "dif": "dificil"}
@@ -3642,7 +3652,7 @@
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
       "Raza": [
-        {"val": "Gyojins", "dif": "media"}
+        {"val": "Gyojins", "dif": "facil"}
       ],
       "Especialidad": [
         {"val": "Princesas", "dif": "facil"}
@@ -3719,7 +3729,7 @@
     "img": "imagenes/Fukaboshi.png",
     "tags": {
       "Raza": [
-        {"val": "Gyojins", "dif": "media"}
+        {"val": "Gyojins", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -3735,7 +3745,7 @@
     "img": "imagenes/Ryuboshi.png",
     "tags": {
       "Raza": [
-        {"val": "Gyojins", "dif": "media"}
+        {"val": "Gyojins", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -3751,7 +3761,7 @@
     "img": "imagenes/Manboshi.png",
     "tags": {
       "Raza": [
-        {"val": "Gyojins", "dif": "media"}
+        {"val": "Gyojins", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -4245,7 +4255,7 @@
         {"val": "Piratas del Pelirrojo", "dif": "facil"}
       ],
       "Especialidad": [
-        {"val": "Músicos", "dif": "dificil"}
+        {"val": "Músicos", "dif": "media"}
       ]
     }
   },
@@ -4509,7 +4519,7 @@
         {"val": "Sin fruta del diablo", "dif": "facil"}
       ],
       "Raza": [
-        {"val": "Gyojins", "dif": "media"}
+        {"val": "Gyojins", "dif": "facil"}
       ]
     }
   },
@@ -4525,7 +4535,7 @@
         {"val": "Origen: East Blue", "dif": "dificil"}
       ],
       "Especialidad": [
-        {"val": "Músicos", "dif": "dificil"}
+        {"val": "Músicos", "dif": "media"}
       ]
     }
   },
@@ -4843,7 +4853,7 @@
     "img": "imagenes/Hody.png",
     "tags": {
       "Banda": [
-        {"val": "Nuevos Piratas Gyojin", "dif": "facil"}
+        {"val": "Nuevos Piratas Gyojin", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -4858,7 +4868,7 @@
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
       "Raza": [
-        {"val": "Gyojins", "dif": "media"}
+        {"val": "Gyojins", "dif": "facil"}
       ]
     }
   },
@@ -5407,7 +5417,7 @@
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
       "Raza": [
-        {"val": "Gyojins", "dif": "media"}
+        {"val": "Gyojins", "dif": "facil"}
       ]
     }
   },
@@ -5429,7 +5439,7 @@
         {"val": "Sin fruta del diablo", "dif": "facil"}
       ],
       "Raza": [
-        {"val": "Gyojins", "dif": "media"}
+        {"val": "Gyojins", "dif": "facil"}
       ]
     }
   },
@@ -5734,7 +5744,7 @@
         {"val": "Piratas de Rocks", "dif": "dificil"}
       ],
       "Raza": [
-        {"val": "Gyojins", "dif": "media"}
+        {"val": "Gyojins", "dif": "facil"}
       ]
     }
   },
@@ -6488,6 +6498,9 @@
     "tags": {
       "Banda": [
         {"val": "Impel Down", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: South Blue", "dif": "dificil"}
       ]
     }
   },
@@ -6498,6 +6511,9 @@
     "tags": {
       "Banda": [
         {"val": "Impel Down", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -6508,6 +6524,9 @@
     "tags": {
       "Banda": [
         {"val": "Impel Down", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -6518,6 +6537,9 @@
     "tags": {
       "Banda": [
         {"val": "Piratas Heart", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
       ]
     }
   },
@@ -6528,6 +6550,9 @@
     "tags": {
       "Banda": [
         {"val": "Piratas Heart", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
       ]
     }
   },
@@ -6544,6 +6569,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: West Blue", "dif": "dificil"}
       ]
     }
   },
@@ -6560,6 +6588,9 @@
       ],
       "Especialidad": [
         {"val": "Médicos", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: West Blue", "dif": "dificil"}
       ]
     }
   },
@@ -6569,10 +6600,13 @@
     "img": "imagenes/Dosun.png",
     "tags": {
       "Banda": [
-        {"val": "Nuevos Piratas Gyojin", "dif": "facil"}
+        {"val": "Nuevos Piratas Gyojin", "dif": "media"}
       ],
       "Raza": [
-        {"val": "Gyojins", "dif": "media"}
+        {"val": "Gyojins", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -6582,10 +6616,13 @@
     "img": "imagenes/Zeo.png",
     "tags": {
       "Banda": [
-        {"val": "Nuevos Piratas Gyojin", "dif": "facil"}
+        {"val": "Nuevos Piratas Gyojin", "dif": "media"}
       ],
       "Raza": [
-        {"val": "Gyojins", "dif": "media"}
+        {"val": "Gyojins", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -6595,10 +6632,13 @@
     "img": "imagenes/Daruma.png",
     "tags": {
       "Banda": [
-        {"val": "Nuevos Piratas Gyojin", "dif": "facil"}
+        {"val": "Nuevos Piratas Gyojin", "dif": "media"}
       ],
       "Raza": [
-        {"val": "Gyojins", "dif": "media"}
+        {"val": "Gyojins", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -6612,6 +6652,9 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: South Blue", "dif": "dificil"}
       ]
     }
   },
@@ -6625,6 +6668,9 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: South Blue", "dif": "dificil"}
       ]
     }
   },
@@ -6638,6 +6684,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: West Blue", "dif": "dificil"}
       ]
     }
   },
@@ -6651,6 +6700,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: West Blue", "dif": "dificil"}
       ]
     }
   },
@@ -6662,6 +6714,9 @@
       "Banda": [
         {"val": "Piratas Fire Tank", "dif": "facil"},
         {"val": "Piratas de Big Mom", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -6670,8 +6725,8 @@
     "name": "Ain",
     "img": "imagenes/Ain.png",
     "tags": {
-      "Banda": [
-        {"val": "Neo Marina", "dif": "facil"}
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
       ]
     }
   },
@@ -6680,18 +6735,8 @@
     "name": "Binz",
     "img": "imagenes/Binz.png",
     "tags": {
-      "Banda": [
-        {"val": "Neo Marina", "dif": "facil"}
-      ]
-    }
-  },
-  {
-    "id": "shuzo",
-    "name": "Shuzo",
-    "img": "imagenes/Shuzo.png",
-    "tags": {
-      "Banda": [
-        {"val": "Neo Marina", "dif": "facil"}
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
       ]
     }
   },
@@ -6702,6 +6747,13 @@
     "tags": {
       "Banda": [
         {"val": "Piratas Rumbar", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Músicos", "dif": "media"},
+        {"val": "Capitanes pirata", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: West Blue", "dif": "dificil"}
       ]
     }
   },
@@ -6712,6 +6764,9 @@
     "tags": {
       "Banda": [
         {"val": "Piratas Rumbar", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Músicos", "dif": "media"}
       ]
     }
   },
@@ -6722,6 +6777,9 @@
     "tags": {
       "Banda": [
         {"val": "Piratas Rumbar", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Músicos", "dif": "media"}
       ]
     }
   },
@@ -6742,6 +6800,9 @@
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: South Blue", "dif": "dificil"}
       ]
     }
   },
@@ -6771,6 +6832,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -6781,6 +6845,12 @@
     "tags": {
       "Especialidad": [
         {"val": "Carpinteros", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Banda": [
+        {"val": "Galley-La Company", "dif": "media"}
       ]
     }
   },
@@ -6794,6 +6864,25 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Raza": [
+        {"val": "Gyojins", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ]
+    }
+  },
+    {
+    "id": "kokoro",
+    "name": "Kokoro",
+    "img": "imagenes/Kokoro.png",
+    "tags": {
+      "Raza": [
+        {"val": "Gyojins", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -6804,6 +6893,9 @@
     "tags": {
       "Banda": [
         {"val": "Piratas Bliking", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -6814,6 +6906,9 @@
     "tags": {
       "Banda": [
         {"val": "Piratas Bliking", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -6830,6 +6925,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: South Blue", "dif": "dificil"}
       ]
     }
   },
@@ -6843,6 +6941,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: SMILE defectuosa", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -6859,6 +6960,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -6875,7 +6979,7 @@
       ],
       "Raza": [
         {"val": "Animales", "dif": "media"}
-      ]
+      ],
     }
   },
   {
@@ -6901,6 +7005,9 @@
       ],
       "Raza": [
         {"val": "Tribu de Piernas Largas", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
       ]
     }
   },
@@ -6939,6 +7046,254 @@
       ],
       "Raza": [
         {"val": "Tribu de Piernas Largas", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "hakugan",
+    "name": "Hakugan",
+    "img": "imagenes/Hakugan.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Heart", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Timoneles", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "jean_bart",
+    "name": "Jean Bart",
+    "img": "imagenes/JeanBart.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Heart", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "pleasures",
+    "name": "Pleasures",
+    "img": "imagenes/Pleasures.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: SMILE defectuosa", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "ikaros_much",
+    "name": "Ikaros Much",
+    "img": "imagenes/IkarosMuch.png",
+    "tags": {
+      "Banda": [
+        {"val": "Nuevos Piratas Gyojin", "dif": "media"}
+      ],
+      "Raza": [
+        {"val": "Gyojins", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "hyouzou",
+    "name": "Hyouzou",
+    "img": "imagenes/Hyouzou.png",
+    "tags": {
+      "Banda": [
+        {"val": "Nuevos Piratas Gyojin", "dif": "media"}
+      ],
+      "Raza": [
+        {"val": "Gyojins", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "jean_noueilles",
+    "name": "Jean Noueilles",
+    "img": "imagenes/JeanNoueilles.png",
+    "tags": {
+      "Banda": [
+        {"val": "Nuevos Piratas Gyojin", "dif": "media"}
+      ],
+      "Raza": [
+        {"val": "Gyojins", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "hammond",
+    "name": "Hammond",
+    "img": "imagenes/Hammond.png",
+    "tags": {
+      "Banda": [
+        {"val": "Nuevos Piratas Gyojin", "dif": "media"}
+      ],
+      "Raza": [
+        {"val": "Gyojins", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Tiradores", "dif": "dificil"}
+      ]
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "paulie",
+    "name": "Paulie",
+    "img": "imagenes/Paulie.png",
+    "tags": {
+      "Banda": [
+        {"val": "Galley-La Company", "dif": "media"}
+      ],
+      "Especialidad": [
+        {"val": "Carpinteros", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "tilestone",
+    "name": "Tilestone",
+    "img": "imagenes/Tilestone.png",
+    "tags": {
+      "Banda": [
+        {"val": "Galley-La Company", "dif": "media"}
+      ],
+      "Especialidad": [
+        {"val": "Carpinteros", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "lulu",
+    "name": "Peepley Lulu",
+    "img": "imagenes/PeepleyLulu.png",
+    "tags": {
+      "Banda": [
+        {"val": "Galley-La Company", "dif": "media"}
+      ],
+      "Especialidad": [
+        {"val": "Carpinteros", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "zambai",
+    "name": "Zambai",
+    "img": "imagenes/Zambai.png",
+    "tags": {
+      "Banda": [
+        {"val": "Franky Family", "dif": "media"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "kiev",
+    "name": "Kiev",
+    "img": "imagenes/Kiev.png",
+    "tags": {
+      "Banda": [
+        {"val": "Franky Family", "dif": "media"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "tamagon",
+    "name": "Tamagon",
+    "img": "imagenes/Tamagon.png",
+    "tags": {
+      "Banda": [
+        {"val": "Franky Family", "dif": "media"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "kiwi",
+    "name": "Kiwi",
+    "img": "imagenes/Kiwi.png",
+    "tags": {
+      "Banda": [
+        {"val": "Franky Family", "dif": "media"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "mozu",
+    "name": "Mozu",
+    "img": "imagenes/Mozu.png",
+    "tags": {
+      "Banda": [
+        {"val": "Franky Family", "dif": "media"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "sodom",
+    "name": "Sodom",
+    "img": "imagenes/Sodom.png",
+    "tags": {
+      "Banda": [
+        {"val": "Franky Family", "dif": "media"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "gomorrah",
+    "name": "Gomorrah",
+    "img": "imagenes/Gomorrah.png",
+    "tags": {
+      "Banda": [
+        {"val": "Franky Family", "dif": "media"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
       ]
     }
   }
