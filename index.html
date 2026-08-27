@@ -50,7 +50,7 @@
 
     .site-title { display: flex; flex-direction: column; align-items: center; margin-bottom: 4px; }
     .site-logo {
-      max-width: 320px; width: 70%; height: auto; cursor: pointer;
+      height: 130px; width: auto; max-width: 90%; cursor: pointer;
       transition: transform 0.15s ease, filter 0.15s ease;
     }
     @media (hover: hover) and (pointer: fine) {
@@ -332,7 +332,7 @@
 
     @media (max-width: 480px) {
       body { padding: 8px; }
-      .site-logo { max-width: 220px; }
+      .site-logo { height: 90px; }
       .site-logo-fallback { font-size: 1.8rem; }
       .site-subtitle { font-size: 1.3rem; }
       .site-title { margin-bottom: 2px; }
@@ -434,7 +434,7 @@
   </div>
 
   <div class="lives-container">
-    Vidas: <span id="lives-icons"></span>
+    Vidas: <span id="lives-icons"><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div></span>
   </div>
 
   <div id="warning-msg" class="warning-msg"></div>
@@ -1137,6 +1137,19 @@
       document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
       const earlyBtn = document.querySelector(`.diff-btn[onclick*="${earlyLastDifficulty}"]`);
       if (earlyBtn) earlyBtn.classList.add('active');
+    }
+
+    // Si el último modo fue Infinito, mostramos ya el marcador de racha (con el último
+    // dato guardado localmente si lo hay) en vez de esperar a la carga completa.
+    if (earlyLastDifficulty === "infinito") {
+      let earlyCount = 0;
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY_STATE);
+        if (raw) earlyCount = JSON.parse(raw).solvedCount || 0;
+      } catch (e) {}
+      const scoreEl = document.getElementById("infinite-score");
+      scoreEl.style.display = "block";
+      scoreEl.innerText = `🔥 Paneles resueltos: ${earlyCount}`;
     }
 
     fetch("personajes.json")
