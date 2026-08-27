@@ -138,7 +138,7 @@
     }
     .diff-btn.active { background: #f59e0b; color: #0f172a; border-color: #f59e0b; }
 
-    .infinite-score { font-size: 1rem; font-weight: bold; color: #f59e0b; margin-bottom: 8px; }
+    .infinite-score { font-size: 1rem; font-weight: bold; color: #f59e0b; white-space: nowrap; }
 
     .lives-container { font-size: 1.1rem; font-weight: bold; margin-bottom: 8px; color: #e2e8f0; display: flex; justify-content: center; align-items: center; gap: 12px; }
     .life-wrapper { position: relative; display: inline-flex; justify-content: center; align-items: center; }
@@ -178,7 +178,8 @@
       background-color: #1e293b;
     }
     
-    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; min-height: calc(4 * 120px + 3 * 10px); }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .grid.grid-reserve { min-height: calc(4 * 120px + 3 * 10px); }
     
     .card {
       background-color: #1e293b;
@@ -218,8 +219,14 @@
       display: flex;
       gap: 10px;
     }
-    #view-results-btn {
+    .controls-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       margin-left: auto;
+    }
+    #view-results-btn {
+      margin-left: 0;
     }
 
     button.action-btn {
@@ -299,7 +306,8 @@
       .lives-container { margin-bottom: 6px; font-size: 1rem; gap: 8px; }
       .warning-msg { min-height: 14px; margin-bottom: 4px; font-size: 0.8rem; }
       .board { gap: 6px; margin-bottom: 8px; }
-      .grid { gap: 6px; min-height: calc(4 * 80px + 3 * 6px); }
+      .grid { gap: 6px; }
+      .grid.grid-reserve { min-height: calc(4 * 80px + 3 * 6px); }
       .card { height: 80px; padding: 0; border-width: 2px; }
       .card img {
         object-fit: cover;
@@ -369,8 +377,6 @@
     <button class="diff-btn" onclick="setDifficulty('infinito', event)">Infinito</button>
   </div>
 
-  <div id="infinite-score" class="infinite-score" style="display: none;"></div>
-
   <div class="lives-container">
     Vidas: <span id="lives-icons"></span>
   </div>
@@ -383,15 +389,18 @@
       <p>Cargando partida...</p>
     </div>
     <div id="solved-container"></div>
-    <div id="grid" class="grid"></div>
+    <div id="grid" class="grid grid-reserve"></div>
   </div>
 
   <div class="controls">
     <div class="controls-left">
       <button class="action-btn submit" id="submit-btn" onclick="checkGuess()">Enviar</button>
-      <button class="action-btn" id="deselect-btn" onclick="deselectAll()">Deseleccionar</button>
+      <button class="action-btn" id="deselect-btn" onclick="deselectAll()">Limpiar</button>
     </div>
-    <button class="action-btn" id="view-results-btn" onclick="openModal()" style="display: none;">📊 Resultados</button>
+    <div class="controls-right">
+      <div id="infinite-score" class="infinite-score" style="display: none;"></div>
+      <button class="action-btn" id="view-results-btn" onclick="openModal()" style="display: none;">📊 Resultados</button>
+    </div>
   </div>
 </div>
 
@@ -1059,9 +1068,21 @@
   function hideBoardLoading() {
     const el = document.getElementById("board-loading");
     if (el) el.style.display = "none";
+    const grid = document.getElementById("grid");
+    if (grid) grid.classList.remove("grid-reserve");
   }
 
   window.addEventListener("DOMContentLoaded", () => {
+    // Corregimos el botón de dificultad resaltado ya mismo (sin esperar a la red) para
+    // evitar el parpadeo inicial en "Novato" antes de aplicar la preferencia guardada.
+    let earlyLastDifficulty = null;
+    try { earlyLastDifficulty = localStorage.getItem(STORAGE_KEY_LAST_DIFFICULTY); } catch (e) {}
+    if (earlyLastDifficulty) {
+      document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
+      const earlyBtn = document.querySelector(`.diff-btn[onclick*="${earlyLastDifficulty}"]`);
+      if (earlyBtn) earlyBtn.classList.add('active');
+    }
+
     fetch("personajes.json")
       .then(res => {
         if (!res.ok) throw new Error(`No se pudo cargar Personajes.json (${res.status})`);
@@ -1495,7 +1516,7 @@
 
     document.getElementById("submit-btn").disabled = true;
     document.getElementById("deselect-btn").disabled = true;
-    document.getElementById("view-results-btn").style.display = "inline-block";
+    // En Infinito no mostramos el botón de Resultados: el modal ya se abre solo.
 
     const modalContent = document.querySelector("#gameover-modal .modal-content");
     modalContent.style.borderColor = "#22c55e";
@@ -1549,7 +1570,9 @@
     awaitingNextPanel = false;
     document.getElementById("submit-btn").disabled = true;
     document.getElementById("deselect-btn").disabled = true;
-    document.getElementById("view-results-btn").style.display = "inline-block";
+    if (!isInfiniteMode) {
+      document.getElementById("view-results-btn").style.display = "inline-block";
+    }
 
     const modalContent = document.querySelector("#gameover-modal .modal-content");
     modalContent.style.borderColor = "#ef4444";
