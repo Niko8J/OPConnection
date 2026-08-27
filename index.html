@@ -174,23 +174,25 @@
     .diff-btn.active { background: #f59e0b; color: #0f172a; border-color: #f59e0b; }
 
     .infinite-score {
-      font-size: clamp(0.68rem, 3vw, 1rem);
+      font-size: clamp(0.8rem, 3vw, 1.1rem);
       font-weight: bold;
       color: #f59e0b;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       min-width: 0;
+      flex-shrink: 0;
+      margin-bottom: var(--v-gap-sm);
     }
 
-    .lives-container { font-size: 1.1rem; font-weight: bold; margin-bottom: var(--v-gap-sm); color: #e2e8f0; display: flex; justify-content: center; align-items: center; gap: 12px; flex-shrink: 0; }
+    #lives-icons { display: flex; align-items: center; gap: 8px; }
     .life-wrapper { position: relative; display: inline-flex; justify-content: center; align-items: center; }
-    .life-icon { font-size: 1.5rem; user-select: none; }
+    .life-icon { font-size: 1.3rem; user-select: none; }
     .life-wrapper.lost .life-icon { filter: opacity(0.3); }
     .life-wrapper.lost::after {
       content: "❌";
       position: absolute;
-      font-size: 1.2rem;
+      font-size: 1.05rem;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       pointer-events: none;
@@ -386,7 +388,8 @@
       .auth-icon-btn { width: 68px; height: 68px; }
       .auth-corner { top: 2px; left: 2px; }
       .diff-btn { padding: 6px 10px; font-size: 0.85rem; }
-      .lives-container { font-size: 1rem; gap: 8px; }
+      #lives-icons { gap: 6px; }
+      .life-icon { font-size: 1.1rem; }
       .warning-msg { height: 14px; line-height: 14px; font-size: 0.8rem; }
       .card { padding: 0; border-width: 2px; }
       .card img {
@@ -475,9 +478,7 @@
     <button class="diff-btn" onclick="setDifficulty('infinito', event)">Infinito</button>
   </div>
 
-  <div class="lives-container">
-    Vidas: <span id="lives-icons"><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div></span>
-  </div>
+  <div id="infinite-score" class="infinite-score" style="display: none;"></div>
 
   <div id="warning-msg" class="warning-msg"></div>
 
@@ -493,10 +494,10 @@
     <div class="controls-left">
       <button class="action-btn submit" id="submit-btn" onclick="checkGuess()">Enviar</button>
       <button class="action-btn" id="deselect-btn" onclick="deselectAll()">Limpiar</button>
+      <button class="action-btn" id="view-results-btn" onclick="openModal()" style="display: none;">📊 Resultados</button>
     </div>
     <div class="controls-right">
-      <div id="infinite-score" class="infinite-score" style="display: none;"></div>
-      <button class="action-btn" id="view-results-btn" onclick="openModal()" style="display: none;">📊 Resultados</button>
+      <span id="lives-icons"><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div></span>
     </div>
   </div>
 </div>
@@ -570,7 +571,7 @@
     <h2>❓ Cómo jugar</h2>
     <div class="howto-content">
       <p>El objetivo es encontrar 4 grupos de 4 personajes de One Piece que comparten algo en común: una tripulación, un origen, una fruta del diablo, una habilidad...</p>
-      <p>Selecciona 4 imágenes y pulsa <strong>Enviar</strong>. Si aciertas el grupo, se resuelve y sube arriba del todo. Si fallas, pierdes una vida (tienes 4 en total). Al perderlas todas, se acaba la partida y se muestra la solución completa.</p>
+      <p>Selecciona 4 imágenes y pulsa <strong>Enviar</strong>. Si aciertas el grupo, se resuelve y sube arriba del todo. Si fallas, pierdes una vida (tienes 4 en total, representadas por las banderas 🏴‍☠️ junto a los botones). Al perderlas todas, se acaba la partida y se muestra la solución completa.</p>
       <p><strong>Modos de dificultad:</strong></p>
       <ul>
         <li><strong>Novato</strong> (fácil), <strong>Supernova</strong> (normal) y <strong>Yonko</strong> (difícil): un único panel con categorías de esa dificultad concreta.</li>
@@ -749,9 +750,7 @@
     awaitingNextPanel = false;
 
     document.getElementById("warning-msg").innerText = "";
-    document.getElementById("submit-btn").disabled = false;
-    document.getElementById("deselect-btn").disabled = false;
-    document.getElementById("view-results-btn").style.display = "none";
+    showGameControls();
     document.getElementById("gameover-modal").style.display = "none";
 
     updateInfiniteScoreDisplay();
@@ -1455,6 +1454,22 @@
     initGame();
   }
 
+  // Alterna entre "Enviar/Limpiar" (partida en curso) y "Resultados" (partida en pausa:
+  // panel superado, victoria, o sin vidas), que ocupa el mismo hueco.
+  function showGameControls() {
+    document.getElementById("submit-btn").style.display = "";
+    document.getElementById("deselect-btn").style.display = "";
+    document.getElementById("submit-btn").disabled = false;
+    document.getElementById("deselect-btn").disabled = false;
+    document.getElementById("view-results-btn").style.display = "none";
+  }
+
+  function showResultsControl() {
+    document.getElementById("submit-btn").style.display = "none";
+    document.getElementById("deselect-btn").style.display = "none";
+    document.getElementById("view-results-btn").style.display = "inline-block";
+  }
+
   function initGame() {
     lives = MAX_LIVES;
     gameOver = false;
@@ -1464,9 +1479,7 @@
     solvedOrder = [];
 
     document.getElementById("warning-msg").innerText = "";
-    document.getElementById("submit-btn").disabled = false;
-    document.getElementById("deselect-btn").disabled = false;
-    document.getElementById("view-results-btn").style.display = "none";
+    showGameControls();
     document.getElementById("gameover-modal").style.display = "none";
 
     currentCategories.forEach(cat => {
@@ -1658,9 +1671,7 @@
     saveInfiniteState();
     updateBestStreakIfNeeded();
 
-    document.getElementById("submit-btn").disabled = true;
-    document.getElementById("deselect-btn").disabled = true;
-    // En Infinito no mostramos el botón de Resultados: el modal ya se abre solo.
+    showResultsControl();
 
     const modalContent = document.querySelector("#gameover-modal .modal-content");
     modalContent.style.borderColor = "#22c55e";
@@ -1688,9 +1699,7 @@
   function handleWin() {
     gameOver = true;
     awaitingNextPanel = false;
-    document.getElementById("submit-btn").disabled = true;
-    document.getElementById("deselect-btn").disabled = true;
-    document.getElementById("view-results-btn").style.display = "inline-block";
+    showResultsControl();
 
     const modalContent = document.querySelector("#gameover-modal .modal-content");
     modalContent.style.borderColor = "#22c55e";
@@ -1712,11 +1721,7 @@
   function handleGameOver() {
     gameOver = true;
     awaitingNextPanel = false;
-    document.getElementById("submit-btn").disabled = true;
-    document.getElementById("deselect-btn").disabled = true;
-    if (!isInfiniteMode) {
-      document.getElementById("view-results-btn").style.display = "inline-block";
-    }
+    showResultsControl();
 
     const modalContent = document.querySelector("#gameover-modal .modal-content");
     modalContent.style.borderColor = "#ef4444";
