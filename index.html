@@ -4,7 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>One Piece Connections</title>
+
+  <!-- Icono para navegador de escritorio (pestaña) -->
   <link rel="icon" type="image/png" href="logo.png">
+  <link rel="shortcut icon" type="image/png" href="logo.png">
+
+  <!-- Icono para iOS (Safari: "Añadir a pantalla de inicio") -->
+  <link rel="apple-touch-icon" href="logo.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="OP Connections">
+
+  <!-- Icono para Android/Chrome (PWA / "Añadir a pantalla de inicio") -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f172a">
 
   <meta property="og:title" content="One Piece Connections">
   <meta property="og:description" content="Encuentra 4 grupos conectados por distintos atributos.">
@@ -143,6 +156,16 @@
     .warning-msg { color: #ef4444; font-size: 0.9rem; font-weight: bold; min-height: 18px; margin-bottom: 6px; }
 
     .board { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
+    .board-loading {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 12px; padding: 60px 0; color: #94a3b8;
+    }
+    .board-loading-spinner {
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 3px solid #334155; border-top-color: #f59e0b;
+      animation: board-loading-spin 0.8s linear infinite;
+    }
+    @keyframes board-loading-spin { to { transform: rotate(360deg); } }
     .solved-category { padding: 15px; border-radius: 8px; font-weight: bold; color: #0f172a; text-align: center; animation: fadeIn 0.3s ease; }
     .solved-items-list { display: flex; justify-content: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
     .solved-img { 
@@ -354,6 +377,10 @@
   <div id="warning-msg" class="warning-msg"></div>
 
   <div class="board">
+    <div id="board-loading" class="board-loading">
+      <div class="board-loading-spinner"></div>
+      <p>Cargando partida...</p>
+    </div>
     <div id="solved-container"></div>
     <div id="grid" class="grid"></div>
   </div>
@@ -460,6 +487,9 @@
   firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
   const db = firebase.firestore();
+  db.enablePersistence({ synchronizeTabs: true }).catch(() => {
+    // Falla en modo incógnito o con varias pestañas sin sincronizar: no es crítico, seguimos sin caché offline.
+  });
   try { firebase.analytics(); } catch (e) {
     // Analytics puede fallar si un bloqueador de anuncios/privacidad lo impide: no rompemos el juego por eso.
   }
@@ -473,6 +503,7 @@
   const MAX_LIVES = 4;
   const COLORS = ["#fef08a", "#bbf7d0", "#bfdbfe", "#e9d5ff"];
   const STORAGE_KEY_STATE = "opConnectionsInfiniteState";
+  const STORAGE_KEY_LAST_DIFFICULTY = "opConnectionsLastDifficulty";
 
   let database = [];
   let currentDifficulty = "facil";
@@ -1024,6 +1055,11 @@
     }
   });
 
+  function hideBoardLoading() {
+    const el = document.getElementById("board-loading");
+    if (el) el.style.display = "none";
+  }
+
   window.addEventListener("DOMContentLoaded", () => {
     fetch("personajes.json")
       .then(res => {
@@ -1033,7 +1069,25 @@
       .then(async data => {
         database = data;
 
-        await authReadyPromise; // esperamos a saber si hay sesión iniciada antes de decidir qué restaurar
+        let lastDifficulty = null;
+        try { lastDifficulty = localStorage.getItem(STORAGE_KEY_LAST_DIFFICULTY); } catch (e) {}
+
+        if (lastDifficulty && lastDifficulty !== "infinito") {
+          // La última vez que se jugó fue en un modo normal: no depende de la sesión del usuario,
+          // así que generamos el panel ya mismo sin esperar a que Firebase confirme el login.
+          currentDifficulty = lastDifficulty;
+          isInfiniteMode = false;
+          document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
+          const activeBtn = document.querySelector(`.diff-btn[onclick*="${lastDifficulty}"]`);
+          if (activeBtn) activeBtn.classList.add('active');
+          generateNewBoard();
+          hideBoardLoading();
+          return;
+        }
+
+        // Sin preferencia guardada (o la última vez fue Infinito): aquí sí necesitamos saber
+        // si hay sesión iniciada antes de decidir qué partida recuperar.
+        await authReadyPromise;
         const saved = await loadInfiniteState();
 
         if (saved) {
@@ -1046,9 +1100,11 @@
         } else {
           generateNewBoard();
         }
+        hideBoardLoading();
       })
       .catch(err => {
         document.getElementById("warning-msg").innerText = "⚠️ " + err.message;
+        hideBoardLoading();
       });
   });
 
@@ -1072,6 +1128,8 @@
     isInfiniteMode = (level === "infinito");
     document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');
+
+    try { localStorage.setItem(STORAGE_KEY_LAST_DIFFICULTY, level); } catch (e) {}
 
     if (isInfiniteMode) {
       const saved = await loadInfiniteState();
