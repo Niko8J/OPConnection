@@ -43,6 +43,7 @@
     :root {
       --card-gap: clamp(4px, 1.1vh, 10px);
       --logo-h: clamp(60px, 11vh, 130px);
+      --icon-size: clamp(48px, 14vw, 80px);
       --v-gap-sm: clamp(2px, 0.8vh, 8px);
       --v-gap-md: clamp(4px, 1.2vh, 12px);
     }
@@ -81,7 +82,7 @@
 
     .auth-corner { position: absolute; top: 0; left: 0; z-index: 20; }
     .auth-icon-btn {
-      width: 80px; height: 80px; border-radius: 50%; border: 2px solid #334155; background: #1e293b;
+      width: var(--icon-size); height: var(--icon-size); border-radius: 50%; border: 2px solid #334155; background: #1e293b;
       padding: 0; cursor: pointer; overflow: hidden; display: flex; align-items: center; justify-content: center;
     }
     .auth-icon-btn:hover { border-color: #f59e0b; }
@@ -92,7 +93,7 @@
     }
 
     .auth-dropdown {
-      display: none; position: absolute; top: 88px; left: 0; min-width: 210px;
+      display: none; position: absolute; top: calc(var(--icon-size) + 8px); left: 0; min-width: 210px;
       background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 6px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.4); text-align: left;
     }
@@ -387,7 +388,6 @@
       p { font-size: 0.85rem; }
       .difficulty-selector { gap: 6px; }
       .avatar-picker { grid-template-columns: repeat(4, 1fr); max-height: 180px; }
-      .auth-icon-btn { width: 68px; height: 68px; }
       .auth-corner { top: 2px; left: 2px; }
       .diff-btn { padding: 6px 10px; font-size: 0.85rem; }
       #lives-icons { gap: 6px; }
