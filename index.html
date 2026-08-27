@@ -187,12 +187,12 @@
 
     #lives-icons { display: flex; align-items: center; gap: 8px; }
     .life-wrapper { position: relative; display: inline-flex; justify-content: center; align-items: center; }
-    .life-icon { font-size: 1.3rem; user-select: none; }
+    .life-icon { font-size: 1.7rem; user-select: none; }
     .life-wrapper.lost .life-icon { filter: opacity(0.3); }
     .life-wrapper.lost::after {
       content: "❌";
       position: absolute;
-      font-size: 1.05rem;
+      font-size: 1.35rem;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       pointer-events: none;
@@ -389,7 +389,7 @@
       .auth-corner { top: 2px; left: 2px; }
       .diff-btn { padding: 6px 10px; font-size: 0.85rem; }
       #lives-icons { gap: 6px; }
-      .life-icon { font-size: 1.1rem; }
+      .life-icon { font-size: 1.4rem; }
       .warning-msg { height: 14px; line-height: 14px; font-size: 0.8rem; }
       .card { padding: 0; border-width: 2px; }
       .card img {
@@ -1470,6 +1470,14 @@
     document.getElementById("view-results-btn").style.display = "inline-block";
   }
 
+  // Deshabilita Enviar/Limpiar sin sustituirlos por "Resultados": para los casos de Infinito
+  // donde el modal ya se abre solo y, al cerrarlo, aparece directamente un panel nuevo
+  // (no hay ningún momento en el que el botón de Resultados llegue a poder pulsarse).
+  function disableGameControls() {
+    document.getElementById("submit-btn").disabled = true;
+    document.getElementById("deselect-btn").disabled = true;
+  }
+
   function initGame() {
     lives = MAX_LIVES;
     gameOver = false;
@@ -1671,7 +1679,7 @@
     saveInfiniteState();
     updateBestStreakIfNeeded();
 
-    showResultsControl();
+    disableGameControls();
 
     const modalContent = document.querySelector("#gameover-modal .modal-content");
     modalContent.style.borderColor = "#22c55e";
@@ -1721,7 +1729,11 @@
   function handleGameOver() {
     gameOver = true;
     awaitingNextPanel = false;
-    showResultsControl();
+    if (isInfiniteMode) {
+      disableGameControls();
+    } else {
+      showResultsControl();
+    }
 
     const modalContent = document.querySelector("#gameover-modal .modal-content");
     modalContent.style.borderColor = "#ef4444";
