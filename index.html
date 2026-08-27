@@ -42,7 +42,7 @@
     }
     :root {
       --card-gap: clamp(4px, 1.1vh, 10px);
-      --card-h: clamp(50px, 10vh, 120px);
+      --card-max-h: clamp(70px, 16vh, 130px);
       --logo-h: clamp(60px, 11vh, 130px);
       --v-gap-sm: clamp(2px, 0.8vh, 8px);
       --v-gap-md: clamp(4px, 1.2vh, 12px);
@@ -220,14 +220,15 @@
     }
     
     .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--card-gap); }
-    .grid.grid-reserve { min-height: calc(4 * var(--card-h) + 3 * var(--card-gap)); }
+    .grid.grid-reserve { min-height: calc(4 * var(--card-max-h) + 3 * var(--card-gap)); }
     
     .card {
       background-color: #1e293b;
       border: 3px solid #334155;
       border-radius: 8px;
-      height: var(--card-h);
-      max-height: 120px;
+      aspect-ratio: 1 / 1;
+      height: auto;
+      max-height: var(--card-max-h);
       display: flex;
       justify-content: center;
       align-items: center;
