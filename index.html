@@ -1126,6 +1126,43 @@
     return categoryName.includes(": ") ? categoryName.split(": ").slice(1).join(": ") : categoryName;
   }
 
+  // Categorías donde el grupo completo de miembros (evidentes + no evidentes) sirve para
+  // paneles difíciles/Infinito, pero SOLO si el grupo de 4 elegido incluye al menos uno de
+  // los miembros "no evidentes". Así evitamos que salga, por ejemplo, un panel "difícil" de
+  // Sombrero de Paja formado únicamente por Luffy/Zoro/Nami/Usopp.
+  // Se incluyen ambas variantes del nombre por si el JSON tiene o no el prefijo "Banda: " duplicado.
+  const HARD_MODE_MUST_INCLUDE_ONE_OF = {
+    "Banda: Banda: Sombrero de Paja": ["vivi", "karoo", "sunny", "merry"],
+    "Banda: Sombrero de Paja": ["vivi", "karoo", "sunny", "merry"],
+    "Banda: Agentes de Baroque Works": ["igaram", "vivi", "karoo", "bentham"],
+    "Banda: Piratas de Arlong": ["nami"]
+  };
+
+  // Elige los 4 personajes de un grupo, forzando que se incluya un miembro "no evidente"
+  // cuando el grupo lo requiere y el panel es difícil o Infinito.
+  function pickCharsForGroup(groupName, exclusiveChars) {
+    const mustIncludeIds = (currentDifficulty === "dificil" || isInfiniteMode)
+      ? HARD_MODE_MUST_INCLUDE_ONE_OF[groupName]
+      : null;
+
+    if (mustIncludeIds) {
+      const specialCandidates = exclusiveChars.filter(c => mustIncludeIds.includes(c.id));
+      if (specialCandidates.length > 0) {
+        const forced = specialCandidates[Math.floor(Math.random() * specialCandidates.length)];
+        const rest = exclusiveChars
+          .filter(c => c.id !== forced.id)
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 3);
+        return [forced, ...rest].sort(() => Math.random() - 0.5);
+      }
+      // Si ningún miembro "no evidente" está disponible ahora mismo (por ejemplo, porque ya
+      // se usó en otra categoría del mismo panel), seguimos con la selección normal en vez
+      // de bloquear la generación del panel.
+    }
+
+    return exclusiveChars.sort(() => Math.random() - 0.5).slice(0, 4);
+  }
+
   function generateNewBoard() {
     if (database.length === 0) return;
 
@@ -1191,7 +1228,7 @@
         });
 
         if (exclusiveChars.length >= 4) {
-          let chosenChars = exclusiveChars.sort(() => Math.random() - 0.5).slice(0, 4);
+          let chosenChars = pickCharsForGroup(groupName, exclusiveChars);
 
           let invalidatesPrevious = false;
           for (let prevGroup of candidateGroups) {
