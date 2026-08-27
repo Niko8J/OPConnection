@@ -29,12 +29,17 @@
   <meta name="twitter:description" content="Encuentra 4 grupos conectados por distintos atributos.">
   <meta name="twitter:image" content="https://niko8j.github.io/OPConnection/previsualizacion.png">
 
-  <!-- Fuente estilo pirata/aventura para el título -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+  <!-- Fuente estilo pirata/aventura para el título, servida desde el propio repo (sin depender de Google Fonts) -->
+  <link rel="preload" href="PirataOne.ttf" as="font" type="font/ttf" crossorigin>
 
   <style>
+    @font-face {
+      font-family: 'Pirata One';
+      src: url('PirataOne.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: optional;
+    }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     html { height: 100%; }
     body {
@@ -65,7 +70,7 @@
 
     .auth-corner { position: absolute; top: 0; left: 0; z-index: 20; }
     .auth-icon-btn {
-      width: 40px; height: 40px; border-radius: 50%; border: 2px solid #334155; background: #1e293b;
+      width: 80px; height: 80px; border-radius: 50%; border: 2px solid #334155; background: #1e293b;
       padding: 0; cursor: pointer; overflow: hidden; display: flex; align-items: center; justify-content: center;
     }
     .auth-icon-btn:hover { border-color: #f59e0b; }
@@ -76,7 +81,7 @@
     }
 
     .auth-dropdown {
-      display: none; position: absolute; top: 48px; left: 0; min-width: 210px;
+      display: none; position: absolute; top: 88px; left: 0; min-width: 210px;
       background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 6px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.4); text-align: left;
     }
@@ -334,7 +339,7 @@
       p { font-size: 0.85rem; margin-bottom: 8px; }
       .difficulty-selector { gap: 6px; margin-bottom: 10px; }
       .avatar-picker { grid-template-columns: repeat(4, 1fr); max-height: 180px; }
-      .auth-icon-btn { width: 34px; height: 34px; }
+      .auth-icon-btn { width: 68px; height: 68px; }
       .auth-corner { top: 2px; left: 2px; }
       .diff-btn { padding: 6px 10px; font-size: 0.85rem; }
       .lives-container { margin-bottom: 6px; font-size: 1rem; gap: 8px; }
