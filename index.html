@@ -227,12 +227,13 @@
       max-width: 100%;
       aspect-ratio: 1 / 1;
       object-fit: cover;
+      object-position: top center;
       border-radius: 6px;
       border: 2px solid #0f172a;
       background-color: #1e293b;
     }
     .solved-label {
-      flex-shrink: 0; font-size: clamp(0.6rem, 1.6vw, 0.85rem);
+      flex-shrink: 0; font-size: clamp(0.75rem, 2.2vw, 1rem);
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
     }
     
@@ -342,6 +343,18 @@
     }
     .modal-content h2 { margin-bottom: 10px; font-size: 1.6rem; }
     .solutions-list { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; margin-bottom: 20px; text-align: left; }
+    .solution-row {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      border-radius: 8px; font-weight: bold; color: #0f172a; text-align: center;
+      padding: 12px; animation: fadeIn 0.3s ease;
+    }
+    .solution-items { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+    .solution-img {
+      width: 50px; height: 50px;
+      object-fit: cover; object-position: top center;
+      border-radius: 6px; border: 2px solid #0f172a; background-color: #1e293b;
+    }
+    .solution-label { font-size: 0.95rem; }
 
     .close-btn {
       position: absolute;
@@ -386,7 +399,8 @@
       .modal-content h2 { font-size: 1.25rem; margin-bottom: 6px; }
       .modal-content p { font-size: 0.85rem; margin-bottom: 4px; }
       .solutions-list { gap: 8px; margin-top: 10px; margin-bottom: 14px; }
-      .solved-img { width: 40px; height: 40px; }
+      .solution-img { width: 40px; height: 40px; }
+      .solution-row { padding: 8px; gap: 6px; }
       .close-btn { top: 8px; right: 10px; font-size: 1.3rem; }
     }
   </style>
@@ -1737,16 +1751,16 @@
 
     orderedCats.forEach(cat => {
       const solEl = document.createElement("div");
-      solEl.className = "solved-category";
+      solEl.className = "solution-row";
       solEl.style.backgroundColor = cat.color;
       
-      let imgsHtml = '<div class="solved-items-list">';
+      let imgsHtml = '<div class="solution-items">';
       cat.items.forEach(item => {
-        imgsHtml += `<img src="${item.img}" title="${item.name}" class="solved-img" onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'"/>`;
+        imgsHtml += `<img src="${item.img}" title="${item.name}" class="solution-img" onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'"/>`;
       });
       imgsHtml += '</div>';
 
-      solEl.innerHTML = `${imgsHtml}<div>${getTagValueOnly(cat.name)}</div>`;
+      solEl.innerHTML = `${imgsHtml}<div class="solution-label">${getTagValueOnly(cat.name)}</div>`;
       solutionsContainer.appendChild(solEl);
     });
 
