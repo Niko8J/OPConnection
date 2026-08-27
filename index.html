@@ -276,7 +276,7 @@
   let awaitingNextPanel = false;
 
   window.addEventListener("DOMContentLoaded", () => {
-    fetch("Personajes.json")
+    fetch("personajes.json")
       .then(res => {
         if (!res.ok) throw new Error(`No se pudo cargar Personajes.json (${res.status})`);
         return res.json();
