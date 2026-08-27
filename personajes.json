@@ -2450,6 +2450,7 @@
     "img": "imagenes/Bentham.png",
     "tags": {
       "Banda": [
+        {"val": "Agentes de Baroque Works", "dif": "facil"},
         {"val": "Agentes de Baroque Works", "dif": "dificil"}
       ],
       "Afiliacion": [
