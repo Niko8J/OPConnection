@@ -202,7 +202,6 @@
       display: flex; flex-direction: column; gap: var(--v-gap-md); margin-bottom: var(--v-gap-md);
       position: relative; flex: 1; min-height: 0;
     }
-    #solved-container { flex-shrink: 0; }
     .board-loading {
       position: absolute; inset: 0;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -214,16 +213,24 @@
       animation: board-loading-spin 0.8s linear infinite;
     }
     @keyframes board-loading-spin { to { transform: rotate(360deg); } }
-    .solved-category { padding: 15px; border-radius: 8px; font-weight: bold; color: #0f172a; text-align: center; animation: fadeIn 0.3s ease; }
-    .solved-items-list { display: flex; justify-content: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
-    .solved-img { 
-      width: 50px; 
-      height: 50px; 
-      object-fit: contain; 
-      border-radius: 6px; 
-      border: 2px solid #0f172a; 
+    .solved-category {
+      grid-column: 1 / -1;
+      height: 100%; width: 100%;
+      display: flex; align-items: center; justify-content: center; gap: clamp(4px, 1.5vw, 10px);
+      border-radius: 8px; font-weight: bold; color: #0f172a; text-align: center;
+      padding: 4px 10px; overflow: hidden; animation: fadeIn 0.3s ease; min-width: 0;
+    }
+    .solved-items-list { display: flex; gap: 6px; flex-shrink: 0; height: 100%; align-items: center; }
+    .solved-img {
+      height: 100%;
+      width: auto;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 2px solid #0f172a;
       background-color: #1e293b;
     }
+    .solved-label { font-size: clamp(0.7rem, 2vw, 0.95rem); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
     
     .grid {
       display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr);
@@ -457,7 +464,6 @@
       <div class="board-loading-spinner"></div>
       <p>Cargando partida...</p>
     </div>
-    <div id="solved-container"></div>
     <div id="grid" class="grid"></div>
   </div>
 
@@ -606,8 +612,7 @@
       selectedCards,
       lives,
       solvedCount: infiniteSolvedCount,
-      solvedOrder,
-      solvedContainerHTML: document.getElementById("solved-container").innerHTML
+      solvedOrder
     };
   }
 
@@ -721,7 +726,6 @@
     gameOver = false;
     awaitingNextPanel = false;
 
-    document.getElementById("solved-container").innerHTML = saved.solvedContainerHTML;
     document.getElementById("warning-msg").innerText = "";
     document.getElementById("submit-btn").disabled = false;
     document.getElementById("deselect-btn").disabled = false;
@@ -1436,7 +1440,6 @@
     selectedCards = [];
     solvedOrder = [];
 
-    document.getElementById("solved-container").innerHTML = "";
     document.getElementById("warning-msg").innerText = "";
     document.getElementById("submit-btn").disabled = false;
     document.getElementById("deselect-btn").disabled = false;
@@ -1472,9 +1475,44 @@
     }
   }
 
+  function buildSolvedCategoryEl(catData) {
+    const el = document.createElement("div");
+    el.className = "solved-category";
+    el.style.backgroundColor = catData.color;
+
+    const imgsWrap = document.createElement("div");
+    imgsWrap.className = "solved-items-list";
+    catData.items.forEach(item => {
+      const img = document.createElement("img");
+      img.src = item.img;
+      img.title = item.name;
+      img.className = "solved-img";
+      img.onerror = function () {
+        this.onerror = null;
+        this.src = "https://dummyimage.com/100x100/334155/ffffff.png&text=?";
+      };
+      imgsWrap.appendChild(img);
+    });
+
+    const label = document.createElement("div");
+    label.className = "solved-label";
+    label.innerText = getTagValueOnly(catData.name);
+
+    el.appendChild(imgsWrap);
+    el.appendChild(label);
+    return el;
+  }
+
   function renderGrid() {
     const grid = document.getElementById("grid");
     grid.innerHTML = "";
+
+    // Las categorías ya acertadas van primero, cada una ocupando una fila completa,
+    // para que el tamaño de las tarjetas restantes nunca cambie.
+    solvedOrder.forEach(catName => {
+      const catData = currentCategories.find(c => c.name === catName);
+      if (catData) grid.appendChild(buildSolvedCategoryEl(catData));
+    });
 
     cards.forEach((card, index) => {
       const cardEl = document.createElement("div");
@@ -1532,21 +1570,6 @@
     const isCorrect = selectedCards.every(i => cards[i].category === selectedCategory);
 
     if (isCorrect) {
-      const catData = currentCategories.find(c => c.name === selectedCategory);
-      
-      const solvedContainer = document.getElementById("solved-container");
-      const solvedEl = document.createElement("div");
-      solvedEl.className = "solved-category";
-      solvedEl.style.backgroundColor = catData.color;
-      
-      let imgsHtml = '<div class="solved-items-list">';
-      catData.items.forEach(item => {
-        imgsHtml += `<img src="${item.img}" title="${item.name}" class="solved-img" onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'"/>`;
-      });
-      imgsHtml += '</div>';
-
-      solvedEl.innerHTML = `${imgsHtml}<div>${getTagValueOnly(catData.name)}</div>`;
-      solvedContainer.appendChild(solvedEl);
       solvedOrder.push(selectedCategory);
 
       cards = cards.filter((_, i) => !selectedCards.includes(i));
