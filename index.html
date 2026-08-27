@@ -28,6 +28,12 @@
   <meta name="twitter:title" content="One Piece Connections">
   <meta name="twitter:description" content="Encuentra 4 grupos conectados por distintos atributos.">
   <meta name="twitter:image" content="https://niko8j.github.io/OPConnection/previsualizacion.png">
+
+  <!-- Fuente estilo pirata/aventura para el título -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     html { height: 100%; }
@@ -36,7 +42,23 @@
       min-height: 100vh; min-height: 100dvh; padding: 12px;
     }
     .container { max-width: 650px; width: 100%; text-align: center; position: relative; padding-top: 6px; }
-    h1 { margin-bottom: 4px; color: #f59e0b; font-size: 2rem; text-transform: uppercase; letter-spacing: 1px; }
+
+    .site-title { display: flex; flex-direction: column; align-items: center; margin-bottom: 4px; }
+    .site-logo {
+      max-width: 320px; width: 70%; height: auto; cursor: pointer;
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .site-logo:hover, .site-logo-fallback:hover { transform: scale(1.03); filter: brightness(1.1); }
+    }
+    .site-logo-fallback {
+      color: #f59e0b; font-size: 2.6rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+      font-family: 'Pirata One', cursive; text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+    }
+    .site-subtitle {
+      margin-top: -6px; color: #f59e0b; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 2px;
+      font-family: 'Pirata One', cursive; text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+    }
     p { margin-bottom: 10px; color: #94a3b8; }
 
     .difficulty-selector { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
@@ -305,7 +327,10 @@
 
     @media (max-width: 480px) {
       body { padding: 8px; }
-      h1 { font-size: 1.4rem; margin-bottom: 2px; }
+      .site-logo { max-width: 220px; }
+      .site-logo-fallback { font-size: 1.8rem; }
+      .site-subtitle { font-size: 1.3rem; }
+      .site-title { margin-bottom: 2px; }
       p { font-size: 0.85rem; margin-bottom: 8px; }
       .difficulty-selector { gap: 6px; margin-bottom: 10px; }
       .avatar-picker { grid-template-columns: repeat(4, 1fr); max-height: 180px; }
@@ -375,7 +400,25 @@
     </div>
   </div>
 
-  <h1>One Piece Connections</h1>
+  <div class="site-title">
+    <img
+      id="site-logo"
+      src="titulo.png"
+      alt="One Piece"
+      class="site-logo"
+      title="Recargar página"
+      onclick="location.reload()"
+      onerror="this.style.display='none'; document.getElementById('site-logo-fallback').style.display='block';"
+    >
+    <div
+      id="site-logo-fallback"
+      class="site-logo-fallback"
+      style="display: none;"
+      title="Recargar página"
+      onclick="location.reload()"
+    >One Piece</div>
+    <div class="site-subtitle">Connections</div>
+  </div>
   <p>Encuentra 4 grupos conectados por distintos atributos.</p>
 
   <div class="difficulty-selector">
