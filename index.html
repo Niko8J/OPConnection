@@ -41,7 +41,7 @@
 
     .difficulty-selector { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 
-    .auth-corner { position: absolute; top: 0; right: 0; z-index: 20; }
+    .auth-corner { position: absolute; top: 0; left: 0; z-index: 20; }
     .auth-icon-btn {
       width: 40px; height: 40px; border-radius: 50%; border: 2px solid #334155; background: #1e293b;
       padding: 0; cursor: pointer; overflow: hidden; display: flex; align-items: center; justify-content: center;
@@ -54,7 +54,7 @@
     }
 
     .auth-dropdown {
-      display: none; position: absolute; top: 48px; right: 0; min-width: 210px;
+      display: none; position: absolute; top: 48px; left: 0; min-width: 210px;
       background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 6px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.4); text-align: left;
     }
@@ -122,7 +122,6 @@
     .avatar-option.selected { border-color: #f59e0b; opacity: 1; }
     .auth-switch { text-align: center; margin-top: 10px; font-size: 0.9rem; color: #94a3b8; }
     .auth-switch a { color: #f59e0b; cursor: pointer; text-decoration: underline; }
-    .diff-label { color: #94a3b8; font-weight: bold; margin-right: 2px; }
     .diff-btn {
       padding: 8px 16px;
       border-radius: 8px;
@@ -138,7 +137,15 @@
     }
     .diff-btn.active { background: #f59e0b; color: #0f172a; border-color: #f59e0b; }
 
-    .infinite-score { font-size: 1rem; font-weight: bold; color: #f59e0b; white-space: nowrap; }
+    .infinite-score {
+      font-size: clamp(0.68rem, 3vw, 1rem);
+      font-weight: bold;
+      color: #f59e0b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+    }
 
     .lives-container { font-size: 1.1rem; font-weight: bold; margin-bottom: 8px; color: #e2e8f0; display: flex; justify-content: center; align-items: center; gap: 12px; }
     .life-wrapper { position: relative; display: inline-flex; justify-content: center; align-items: center; }
@@ -210,23 +217,26 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       margin-top: 8px;
       width: 100%;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
     }
     .controls-left {
       display: flex;
       gap: 10px;
+      flex-shrink: 0;
     }
     .controls-right {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       margin-left: auto;
+      min-width: 0;
     }
     #view-results-btn {
       margin-left: 0;
+      flex-shrink: 0;
     }
 
     button.action-btn {
@@ -300,8 +310,7 @@
       .difficulty-selector { gap: 6px; margin-bottom: 10px; }
       .avatar-picker { grid-template-columns: repeat(4, 1fr); max-height: 180px; }
       .auth-icon-btn { width: 34px; height: 34px; }
-      .auth-corner { top: 2px; right: 2px; }
-      .diff-label { width: 100%; margin-bottom: 2px; }
+      .auth-corner { top: 2px; left: 2px; }
       .diff-btn { padding: 6px 10px; font-size: 0.85rem; }
       .lives-container { margin-bottom: 6px; font-size: 1rem; gap: 8px; }
       .warning-msg { min-height: 14px; margin-bottom: 4px; font-size: 0.8rem; }
@@ -370,7 +379,6 @@
   <p>Encuentra 4 grupos conectados por distintos atributos.</p>
 
   <div class="difficulty-selector">
-    <span class="diff-label">Dificultades:</span>
     <button class="diff-btn active" onclick="setDifficulty('facil', event)">Novato</button>
     <button class="diff-btn" onclick="setDifficulty('media', event)">Supernova</button>
     <button class="diff-btn" onclick="setDifficulty('dificil', event)">Yonko</button>
