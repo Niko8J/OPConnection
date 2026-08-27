@@ -42,7 +42,6 @@
     }
     :root {
       --card-gap: clamp(4px, 1.1vh, 10px);
-      --card-max-h: clamp(70px, 16vh, 130px);
       --logo-h: clamp(60px, 11vh, 130px);
       --v-gap-sm: clamp(2px, 0.8vh, 8px);
       --v-gap-md: clamp(4px, 1.2vh, 12px);
@@ -50,12 +49,15 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     html { height: 100%; }
     body {
-      background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: flex-start;
-      min-height: 100vh; min-height: 100dvh; padding: 12px;
+      background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center;
+      height: 100vh; height: 100dvh; padding: 12px; overflow: hidden;
     }
-    .container { max-width: 650px; width: 100%; text-align: center; position: relative; padding-top: 6px; margin-top: clamp(4px, 2vh, 24px); }
+    .container {
+      max-width: 650px; width: 100%; text-align: center; position: relative;
+      display: flex; flex-direction: column; height: 100%; padding-top: clamp(2px, 1.5vh, 16px);
+    }
 
-    .site-title { display: flex; flex-direction: column; align-items: center; margin-bottom: var(--v-gap-sm); }
+    .site-title { display: flex; flex-direction: column; align-items: center; margin-bottom: var(--v-gap-sm); flex-shrink: 0; }
     .site-logo {
       height: var(--logo-h); width: auto; max-width: 90%; max-height: 130px; cursor: pointer;
       transition: transform 0.15s ease, filter 0.15s ease;
@@ -71,9 +73,9 @@
       margin-top: -6px; color: #f59e0b; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 2px;
       font-family: 'Pirata One', cursive; text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
     }
-    p { margin-bottom: var(--v-gap-md); color: #94a3b8; }
+    p { margin-bottom: var(--v-gap-md); color: #94a3b8; flex-shrink: 0; }
 
-    .difficulty-selector { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: var(--v-gap-md); }
+    .difficulty-selector { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: var(--v-gap-md); flex-shrink: 0; }
 
     .auth-corner { position: absolute; top: 0; left: 0; z-index: 20; }
     .auth-icon-btn {
@@ -181,7 +183,7 @@
       min-width: 0;
     }
 
-    .lives-container { font-size: 1.1rem; font-weight: bold; margin-bottom: var(--v-gap-sm); color: #e2e8f0; display: flex; justify-content: center; align-items: center; gap: 12px; }
+    .lives-container { font-size: 1.1rem; font-weight: bold; margin-bottom: var(--v-gap-sm); color: #e2e8f0; display: flex; justify-content: center; align-items: center; gap: 12px; flex-shrink: 0; }
     .life-wrapper { position: relative; display: inline-flex; justify-content: center; align-items: center; }
     .life-icon { font-size: 1.5rem; user-select: none; }
     .life-wrapper.lost .life-icon { filter: opacity(0.3); }
@@ -194,9 +196,13 @@
       pointer-events: none;
     }
 
-    .warning-msg { color: #ef4444; font-size: 0.9rem; font-weight: bold; min-height: 18px; margin-bottom: var(--v-gap-sm); }
+    .warning-msg { color: #ef4444; font-size: 0.9rem; font-weight: bold; min-height: 18px; margin-bottom: var(--v-gap-sm); flex-shrink: 0; }
 
-    .board { display: flex; flex-direction: column; gap: var(--v-gap-md); margin-bottom: var(--v-gap-md); position: relative; }
+    .board {
+      display: flex; flex-direction: column; gap: var(--v-gap-md); margin-bottom: var(--v-gap-md);
+      position: relative; flex: 1; min-height: 0;
+    }
+    #solved-container { flex-shrink: 0; }
     .board-loading {
       position: absolute; inset: 0;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -219,16 +225,18 @@
       background-color: #1e293b;
     }
     
-    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--card-gap); }
-    .grid.grid-reserve { min-height: calc(4 * var(--card-max-h) + 3 * var(--card-gap)); }
+    .grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr);
+      gap: var(--card-gap); flex: 1; min-height: 0; overflow-y: auto;
+    }
     
     .card {
       background-color: #1e293b;
       border: 3px solid #334155;
       border-radius: 8px;
-      aspect-ratio: 1 / 1;
-      height: auto;
-      max-height: var(--card-max-h);
+      width: 100%;
+      height: 100%;
+      min-height: 40px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -257,6 +265,7 @@
       margin-top: var(--v-gap-sm);
       width: 100%;
       flex-wrap: nowrap;
+      flex-shrink: 0;
     }
     .controls-left {
       display: flex;
@@ -449,7 +458,7 @@
       <p>Cargando partida...</p>
     </div>
     <div id="solved-container"></div>
-    <div id="grid" class="grid grid-reserve"></div>
+    <div id="grid" class="grid"></div>
   </div>
 
   <div class="controls">
@@ -1128,8 +1137,6 @@
   function hideBoardLoading() {
     const el = document.getElementById("board-loading");
     if (el) el.style.display = "none";
-    const grid = document.getElementById("grid");
-    if (grid) grid.classList.remove("grid-reserve");
   }
 
   window.addEventListener("DOMContentLoaded", () => {
