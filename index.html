@@ -196,7 +196,11 @@
       pointer-events: none;
     }
 
-    .warning-msg { color: #ef4444; font-size: 0.9rem; font-weight: bold; min-height: 18px; margin-bottom: var(--v-gap-sm); flex-shrink: 0; }
+    .warning-msg {
+      color: #ef4444; font-size: 0.9rem; font-weight: bold; height: 18px; line-height: 18px;
+      margin-bottom: var(--v-gap-sm); flex-shrink: 0; overflow: hidden; white-space: nowrap;
+      text-overflow: ellipsis;
+    }
 
     .board {
       display: flex; flex-direction: column; gap: var(--v-gap-md); margin-bottom: var(--v-gap-md);
@@ -344,7 +348,7 @@
     .modal-content h2 { margin-bottom: 10px; font-size: 1.6rem; }
     .solutions-list { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; margin-bottom: 20px; text-align: left; }
     .solution-row {
-      display: flex; align-items: center; justify-content: center; gap: 10px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
       border-radius: 8px; font-weight: bold; color: #0f172a; text-align: center;
       padding: 12px; animation: fadeIn 0.3s ease;
     }
@@ -383,7 +387,7 @@
       .auth-corner { top: 2px; left: 2px; }
       .diff-btn { padding: 6px 10px; font-size: 0.85rem; }
       .lives-container { font-size: 1rem; gap: 8px; }
-      .warning-msg { min-height: 14px; font-size: 0.8rem; }
+      .warning-msg { height: 14px; line-height: 14px; font-size: 0.8rem; }
       .card { padding: 0; border-width: 2px; }
       .card img {
         object-fit: cover;
