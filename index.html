@@ -27,6 +27,32 @@
     p { margin-bottom: 10px; color: #94a3b8; }
 
     .difficulty-selector { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+
+    .auth-bar { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+    .auth-guest, .auth-user { display: flex; align-items: center; gap: 8px; }
+    .auth-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; object-position: top center; border: 2px solid #f59e0b; }
+    #auth-user-name { font-weight: bold; color: #f8fafc; }
+
+    .auth-modal-content { max-width: 380px; text-align: left; }
+    .auth-input {
+      width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 6px;
+      border: 1px solid #334155; background: #1e293b; color: #f8fafc; font-size: 0.95rem;
+    }
+    .auth-error { color: #ef4444; font-size: 0.85rem; margin-bottom: 8px; min-height: 1em; }
+    .auth-avatar-label { margin: 6px 0; color: #94a3b8; font-size: 0.9rem; }
+    .avatar-picker {
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px;
+      max-height: 220px; overflow-y: auto; margin-bottom: 12px; padding: 6px;
+      background: #0f172a; border-radius: 6px;
+    }
+    .avatar-option {
+      width: 100%; aspect-ratio: 1; object-fit: cover; object-position: top center;
+      border-radius: 6px; cursor: pointer; border: 2px solid transparent; opacity: 0.7;
+    }
+    .avatar-option:hover { opacity: 1; }
+    .avatar-option.selected { border-color: #f59e0b; opacity: 1; }
+    .auth-switch { text-align: center; margin-top: 10px; font-size: 0.9rem; color: #94a3b8; }
+    .auth-switch a { color: #f59e0b; cursor: pointer; text-decoration: underline; }
     .diff-label { color: #94a3b8; font-weight: bold; margin-right: 2px; }
     .diff-btn {
       padding: 8px 16px;
@@ -185,6 +211,8 @@
       h1 { font-size: 1.4rem; margin-bottom: 2px; }
       p { font-size: 0.85rem; margin-bottom: 8px; }
       .difficulty-selector { gap: 6px; margin-bottom: 10px; }
+      .avatar-picker { grid-template-columns: repeat(4, 1fr); max-height: 180px; }
+      .auth-bar { gap: 6px; }
       .diff-label { width: 100%; margin-bottom: 2px; }
       .diff-btn { padding: 6px 10px; font-size: 0.85rem; }
       .lives-container { margin-bottom: 6px; font-size: 1rem; gap: 8px; }
@@ -210,12 +238,28 @@
       .close-btn { top: 8px; right: 10px; font-size: 1.3rem; }
     }
   </style>
+  <!-- Firebase SDK (Auth + Firestore) -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 </head>
 <body>
 
 <div class="container">
   <h1>One Piece Connections</h1>
   <p>Encuentra 4 grupos conectados por distintos atributos.</p>
+
+  <div id="auth-bar" class="auth-bar">
+    <div id="auth-guest" class="auth-guest">
+      <button class="action-btn" onclick="openAuthModal('login')">Iniciar sesión</button>
+      <button class="action-btn" onclick="openAuthModal('register')">Registrarse</button>
+    </div>
+    <div id="auth-user" class="auth-user" style="display: none;">
+      <img id="auth-user-avatar" class="auth-avatar" src="" alt="Avatar">
+      <span id="auth-user-name"></span>
+      <button class="action-btn" onclick="doLogout()">Cerrar sesión</button>
+    </div>
+  </div>
 
   <div class="difficulty-selector">
     <span class="diff-label">Dificultades:</span>
@@ -257,10 +301,55 @@
   </div>
 </div>
 
+<div id="auth-modal" class="modal-overlay" onclick="closeAuthModalOnOverlay(event)">
+  <div class="modal-content auth-modal-content">
+    <button class="close-btn" onclick="closeAuthModal()">&times;</button>
+    <h2 id="auth-modal-title">Iniciar sesión</h2>
+
+    <div id="auth-error" class="auth-error"></div>
+
+    <input type="email" id="auth-email" class="auth-input" placeholder="Correo electrónico" autocomplete="email">
+    <input type="password" id="auth-password" class="auth-input" placeholder="Contraseña" autocomplete="current-password">
+
+    <div id="auth-register-extra" style="display:none;">
+      <input type="password" id="auth-password-confirm" class="auth-input" placeholder="Confirma tu contraseña" autocomplete="new-password">
+      <input type="text" id="auth-username" class="auth-input" placeholder="Nombre de usuario">
+      <p class="auth-avatar-label">Elige tu foto de perfil:</p>
+      <div id="avatar-picker" class="avatar-picker"></div>
+    </div>
+
+    <button class="action-btn submit" id="auth-submit-btn" onclick="submitAuthForm()">Entrar</button>
+    <p class="auth-switch">
+      <span id="auth-switch-text">¿No tienes cuenta?</span>
+      <a href="#" id="auth-switch-link" onclick="toggleAuthMode(event)">Regístrate</a>
+    </p>
+  </div>
+</div>
+
 <script>
+  // ---------- Firebase ----------
+  // Sustituye estos valores por los de tu proyecto (Configuración del proyecto > General > Tus apps).
+  const firebaseConfig = {
+    apiKey: "AIzaSyCuksk-Eeon3Si4f8SJgevvYo-D41fycm8",
+    authDomain: "op-connections.firebaseapp.com",
+    projectId: "op-connections",
+    storageBucket: "op-connections.firebasestorage.app",
+    messagingSenderId: "749076812222",
+    appId: "1:749076812222:web:2886ea2491fab3ded729ef"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  let currentUser = null;
+  let currentUserProfile = null; // { username, avatar, email }
+  let authMode = "login"; // "login" | "register"
+  let selectedAvatarImg = null;
+
   const MAX_LIVES = 4;
   const COLORS = ["#fef08a", "#bbf7d0", "#bfdbfe", "#e9d5ff"];
-  
+  const STORAGE_KEY_STATE = "opConnectionsInfiniteState";
+
   let database = [];
   let currentDifficulty = "facil";
   let currentCategories = [];
@@ -271,9 +360,312 @@
 
   let isInfiniteMode = false;
   let infiniteSolvedCount = 0;
-  let infiniteSavedState = null;
   let solvedOrder = [];
   let awaitingNextPanel = false;
+
+  // ---------- Progreso de Infinito: nube (usuario logueado) o localStorage (invitado) ----------
+
+  function buildInfiniteStateSnapshot() {
+    return {
+      currentCategories,
+      cards,
+      selectedCards,
+      lives,
+      solvedCount: infiniteSolvedCount,
+      solvedOrder,
+      solvedContainerHTML: document.getElementById("solved-container").innerHTML
+    };
+  }
+
+  function saveInfiniteStateLocal(state) {
+    try {
+      localStorage.setItem(STORAGE_KEY_STATE, JSON.stringify(state));
+    } catch (e) {
+      // localStorage no disponible (navegación privada, cuota llena, etc.): fallamos en silencio.
+    }
+  }
+
+  function loadInfiniteStateLocal() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY_STATE);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function clearInfiniteStateLocal() {
+    try {
+      localStorage.removeItem(STORAGE_KEY_STATE);
+    } catch (e) {
+      // sin acceso a localStorage: no hay nada que limpiar
+    }
+  }
+
+  async function saveInfiniteStateCloud(state) {
+    if (!currentUser) return;
+    try {
+      await db.collection("users").doc(currentUser.uid).set({ infiniteState: state }, { merge: true });
+    } catch (e) {
+      console.error("No se pudo guardar el progreso en la nube:", e);
+    }
+  }
+
+  async function loadInfiniteStateCloud() {
+    if (!currentUser) return null;
+    try {
+      const snap = await db.collection("users").doc(currentUser.uid).get();
+      return snap.exists && snap.data().infiniteState ? snap.data().infiniteState : null;
+    } catch (e) {
+      console.error("No se pudo cargar el progreso de la nube:", e);
+      return null;
+    }
+  }
+
+  async function clearInfiniteStateCloud() {
+    if (!currentUser) return;
+    try {
+      await db.collection("users").doc(currentUser.uid).set(
+        { infiniteState: firebase.firestore.FieldValue.delete() }, { merge: true }
+      );
+    } catch (e) {
+      console.error("No se pudo limpiar el progreso de la nube:", e);
+    }
+  }
+
+  // Guarda el progreso del modo Infinito: en Firestore si hay sesión iniciada, si no en localStorage.
+  function saveInfiniteState() {
+    if (!isInfiniteMode || gameOver) return;
+    const state = buildInfiniteStateSnapshot();
+    if (currentUser) {
+      saveInfiniteStateCloud(state); // no bloqueamos la partida esperando la escritura
+    } else {
+      saveInfiniteStateLocal(state);
+    }
+  }
+
+  async function loadInfiniteState() {
+    return currentUser ? await loadInfiniteStateCloud() : loadInfiniteStateLocal();
+  }
+
+  function clearInfiniteStorage() {
+    if (currentUser) {
+      clearInfiniteStateCloud();
+    } else {
+      clearInfiniteStateLocal();
+    }
+  }
+
+  // Restaura una partida Infinito guardada (usado tanto al recargar la página como al volver a pulsar "Infinito").
+  function resumeInfiniteFromSaved(saved) {
+    currentCategories = saved.currentCategories;
+    cards = saved.cards;
+    selectedCards = saved.selectedCards;
+    lives = saved.lives;
+    infiniteSolvedCount = saved.solvedCount;
+    solvedOrder = saved.solvedOrder || [];
+    gameOver = false;
+    awaitingNextPanel = false;
+
+    document.getElementById("solved-container").innerHTML = saved.solvedContainerHTML;
+    document.getElementById("warning-msg").innerText = "";
+    document.getElementById("submit-btn").disabled = false;
+    document.getElementById("deselect-btn").disabled = false;
+    document.getElementById("view-results-btn").style.display = "none";
+    document.getElementById("gameover-modal").style.display = "none";
+
+    updateInfiniteScoreDisplay();
+
+    if (!cards || cards.length === 0) {
+      // El progreso se guardó justo al completar un panel: empezamos el siguiente.
+      generateNewBoard();
+    } else {
+      renderLives();
+      renderGrid();
+    }
+  }
+
+  // ---------- Autenticación (registro / login / logout) ----------
+
+  function updateAuthUI() {
+    const guestEl = document.getElementById("auth-guest");
+    const userEl = document.getElementById("auth-user");
+
+    if (currentUser) {
+      guestEl.style.display = "none";
+      userEl.style.display = "flex";
+      const avatarSrc = (currentUserProfile && currentUserProfile.avatar) || "https://dummyimage.com/100x100/334155/ffffff.png&text=?";
+      document.getElementById("auth-user-avatar").src = avatarSrc;
+      document.getElementById("auth-user-name").innerText = (currentUserProfile && currentUserProfile.username) || currentUser.email;
+    } else {
+      guestEl.style.display = "flex";
+      userEl.style.display = "none";
+    }
+  }
+
+  function openAuthModal(mode) {
+    authMode = mode;
+    document.getElementById("auth-error").innerText = "";
+    document.getElementById("auth-email").value = "";
+    document.getElementById("auth-password").value = "";
+    document.getElementById("auth-password-confirm").value = "";
+    document.getElementById("auth-username").value = "";
+    selectedAvatarImg = null;
+    applyAuthModeUI();
+    if (mode === "register") buildAvatarPicker();
+    document.getElementById("auth-modal").style.display = "flex";
+  }
+
+  function applyAuthModeUI() {
+    const isRegister = authMode === "register";
+    document.getElementById("auth-modal-title").innerText = isRegister ? "Crear cuenta" : "Iniciar sesión";
+    document.getElementById("auth-register-extra").style.display = isRegister ? "block" : "none";
+    document.getElementById("auth-submit-btn").innerText = isRegister ? "Registrarme" : "Entrar";
+    document.getElementById("auth-switch-text").innerText = isRegister ? "¿Ya tienes cuenta?" : "¿No tienes cuenta?";
+    document.getElementById("auth-switch-link").innerText = isRegister ? "Inicia sesión" : "Regístrate";
+  }
+
+  function toggleAuthMode(event) {
+    event.preventDefault();
+    authMode = authMode === "login" ? "register" : "login";
+    document.getElementById("auth-error").innerText = "";
+    applyAuthModeUI();
+    if (authMode === "register") buildAvatarPicker();
+  }
+
+  function closeAuthModal() {
+    document.getElementById("auth-modal").style.display = "none";
+  }
+
+  function closeAuthModalOnOverlay(event) {
+    if (event.target.id === "auth-modal") closeAuthModal();
+  }
+
+  function buildAvatarPicker() {
+    const picker = document.getElementById("avatar-picker");
+    picker.innerHTML = "";
+
+    database.forEach(char => {
+      const img = document.createElement("img");
+      img.src = char.img;
+      img.alt = char.name;
+      img.title = char.name;
+      img.className = "avatar-option";
+      img.onerror = function () { this.src = "https://dummyimage.com/100x100/334155/ffffff.png&text=?"; };
+      img.onclick = () => {
+        document.querySelectorAll(".avatar-option.selected").forEach(el => el.classList.remove("selected"));
+        img.classList.add("selected");
+        selectedAvatarImg = char.img;
+      };
+      picker.appendChild(img);
+    });
+  }
+
+  async function submitAuthForm() {
+    const errorEl = document.getElementById("auth-error");
+    errorEl.innerText = "";
+
+    const email = document.getElementById("auth-email").value.trim();
+    const password = document.getElementById("auth-password").value;
+
+    if (!email || !password) {
+      errorEl.innerText = "Rellena correo y contraseña.";
+      return;
+    }
+
+    if (authMode === "login") {
+      try {
+        await auth.signInWithEmailAndPassword(email, password);
+        closeAuthModal();
+      } catch (e) {
+        errorEl.innerText = traduceErrorFirebase(e);
+      }
+      return;
+    }
+
+    // Registro
+    const passwordConfirm = document.getElementById("auth-password-confirm").value;
+    const username = document.getElementById("auth-username").value.trim();
+
+    if (password.length < 6) {
+      errorEl.innerText = "La contraseña debe tener al menos 6 caracteres.";
+      return;
+    }
+    if (password !== passwordConfirm) {
+      errorEl.innerText = "Las contraseñas no coinciden.";
+      return;
+    }
+    if (!username) {
+      errorEl.innerText = "Elige un nombre de usuario.";
+      return;
+    }
+    if (!selectedAvatarImg) {
+      errorEl.innerText = "Elige una foto de perfil.";
+      return;
+    }
+
+    try {
+      const cred = await auth.createUserWithEmailAndPassword(email, password);
+      await db.collection("users").doc(cred.user.uid).set({ username, avatar: selectedAvatarImg, email });
+      currentUserProfile = { username, avatar: selectedAvatarImg, email };
+      updateAuthUI();
+      closeAuthModal();
+    } catch (e) {
+      errorEl.innerText = traduceErrorFirebase(e);
+    }
+  }
+
+  function doLogout() {
+    auth.signOut();
+  }
+
+  function traduceErrorFirebase(e) {
+    const map = {
+      "auth/email-already-in-use": "Ese correo ya está registrado.",
+      "auth/invalid-email": "El correo no es válido.",
+      "auth/weak-password": "La contraseña es demasiado débil (mínimo 6 caracteres).",
+      "auth/user-not-found": "No existe ninguna cuenta con ese correo.",
+      "auth/wrong-password": "Contraseña incorrecta.",
+      "auth/invalid-credential": "Correo o contraseña incorrectos.",
+      "auth/too-many-requests": "Demasiados intentos. Prueba de nuevo en unos minutos."
+    };
+    return (e && map[e.code]) || "Ha ocurrido un error. Inténtalo de nuevo.";
+  }
+
+  // Se resuelve la primera vez que Firebase confirma si había sesión guardada en el navegador.
+  let resolveAuthReady;
+  const authReadyPromise = new Promise(resolve => { resolveAuthReady = resolve; });
+  let authListenerFired = false;
+
+  auth.onAuthStateChanged(async user => {
+    const isFirstCall = !authListenerFired;
+    authListenerFired = true;
+    currentUser = user;
+
+    if (user) {
+      try {
+        const snap = await db.collection("users").doc(user.uid).get();
+        currentUserProfile = snap.exists ? snap.data() : null;
+      } catch (e) {
+        currentUserProfile = null;
+      }
+    } else {
+      currentUserProfile = null;
+    }
+
+    updateAuthUI();
+
+    if (isFirstCall) {
+      resolveAuthReady();
+      return;
+    }
+
+    // Si el usuario inicia sesión durante la partida, recuperamos su progreso Infinito guardado en la nube.
+    if (user && isInfiniteMode) {
+      const saved = await loadInfiniteStateCloud();
+      if (saved) resumeInfiniteFromSaved(saved);
+    }
+  });
 
   window.addEventListener("DOMContentLoaded", () => {
     fetch("personajes.json")
@@ -281,16 +673,29 @@
         if (!res.ok) throw new Error(`No se pudo cargar Personajes.json (${res.status})`);
         return res.json();
       })
-      .then(data => {
+      .then(async data => {
         database = data;
-        generateNewBoard();
+
+        await authReadyPromise; // esperamos a saber si hay sesión iniciada antes de decidir qué restaurar
+        const saved = await loadInfiniteState();
+
+        if (saved) {
+          currentDifficulty = "infinito";
+          isInfiniteMode = true;
+          document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
+          const infinitoBtn = document.querySelector('.diff-btn[onclick*="infinito"]');
+          if (infinitoBtn) infinitoBtn.classList.add('active');
+          resumeInfiniteFromSaved(saved);
+        } else {
+          generateNewBoard();
+        }
       })
       .catch(err => {
         document.getElementById("warning-msg").innerText = "⚠️ " + err.message;
       });
   });
 
-  function setDifficulty(level, event) {
+  async function setDifficulty(level, event) {
     if (isInfiniteMode && level !== "infinito") {
       // Si dejamos un panel ya resuelto sin pulsar "Siguiente", lo avanzamos en silencio
       // para no dejar un panel a medio cerrar guardado.
@@ -302,15 +707,7 @@
 
       // Si dejamos una partida Infinito a medias (sin haber fallado), guardamos su progreso.
       if (!gameOver) {
-        infiniteSavedState = {
-          currentCategories,
-          cards,
-          selectedCards,
-          lives,
-          solvedCount: infiniteSolvedCount,
-          solvedOrder,
-          solvedContainerHTML: document.getElementById("solved-container").innerHTML
-        };
+        saveInfiniteState();
       }
     }
 
@@ -320,30 +717,11 @@
     event.target.classList.add('active');
 
     if (isInfiniteMode) {
-      if (infiniteSavedState) {
-        // Reanudamos la partida Infinito justo donde se dejó.
-        currentCategories = infiniteSavedState.currentCategories;
-        cards = infiniteSavedState.cards;
-        selectedCards = infiniteSavedState.selectedCards;
-        lives = infiniteSavedState.lives;
-        infiniteSolvedCount = infiniteSavedState.solvedCount;
-        solvedOrder = infiniteSavedState.solvedOrder || [];
-        gameOver = false;
-        awaitingNextPanel = false;
-
-        document.getElementById("solved-container").innerHTML = infiniteSavedState.solvedContainerHTML;
-        document.getElementById("warning-msg").innerText = "";
-        document.getElementById("submit-btn").disabled = false;
-        document.getElementById("deselect-btn").disabled = false;
-        document.getElementById("view-results-btn").style.display = "none";
-        document.getElementById("gameover-modal").style.display = "none";
-
-        renderLives();
-        renderGrid();
-        updateInfiniteScoreDisplay();
+      const saved = await loadInfiniteState();
+      if (saved) {
+        resumeInfiniteFromSaved(saved);
         return;
       }
-
       infiniteSolvedCount = 0;
     }
 
@@ -520,6 +898,7 @@
     cards = cards.sort(() => Math.random() - 0.5);
     renderLives();
     renderGrid();
+    saveInfiniteState();
   }
 
   function renderLives() {
@@ -619,6 +998,7 @@
       cards = cards.filter((_, i) => !selectedCards.includes(i));
       selectedCards = [];
       renderGrid();
+      saveInfiniteState();
 
       if (cards.length === 0) {
         if (isInfiniteMode) {
@@ -648,6 +1028,7 @@
         } else {
           warningMsg.innerText = "Grupo incorrecto. Inténtalo de nuevo.";
         }
+        saveInfiniteState();
       }
     }
   }
@@ -656,6 +1037,7 @@
     infiniteSolvedCount++;
     updateInfiniteScoreDisplay();
     awaitingNextPanel = true;
+    saveInfiniteState();
 
     document.getElementById("submit-btn").disabled = true;
     document.getElementById("deselect-btn").disabled = true;
@@ -724,7 +1106,7 @@
 
     const textEl = document.getElementById("modal-text");
     if (isInfiniteMode) {
-      infiniteSavedState = null; // La partida Infinito termina: la próxima vez se empieza de cero.
+      clearInfiniteStorage(); // La partida Infinito termina: la próxima vez se empieza de cero.
       textEl.innerText = `Has agotado tus vidas tras resolver ${infiniteSolvedCount} panel(es) en modo Infinito. Solución de este panel:`;
     } else {
       textEl.innerText = "Has agotado todas tus vidas. Solución de esta partida:";
@@ -780,7 +1162,7 @@
     // En Infinito, tras una derrota, al cerrar el aviso empezamos una nueva partida automáticamente.
     if (isInfiniteMode && gameOver) {
       infiniteSolvedCount = 0;
-      infiniteSavedState = null;
+      clearInfiniteStorage();
       gameOver = false;
       updateInfiniteScoreDisplay();
       generateNewBoard();
