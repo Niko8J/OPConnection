@@ -27,7 +27,7 @@
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: tres mil millones o más", "dif": "dificil"}
       ],
       "D": [
         {"val": "Voluntad de la D.", "dif": "media"}
@@ -68,7 +68,7 @@
         {"val": "Espadachines", "dif": "dificil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"}
@@ -159,7 +159,7 @@
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ]
     }
   },
@@ -309,7 +309,7 @@
         {"val": "Gyojins", "dif": "facil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
@@ -480,7 +480,7 @@
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: tres mil millones o más", "dif": "dificil"}
       ]
     }
   },
@@ -494,7 +494,9 @@
         {"val": "Piratas de Roger", "dif": "facil"}
       ],
       "Titulo": [
-        {"val": "Yonko", "dif": "facil"}
+        {"val": "Yonko", "dif": "facil"},
+        {"val": "Nobles mundiales", "dif": "dificil"},
+        {"val": "Caballeros de Dios", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
@@ -511,7 +513,7 @@
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: tres mil millones o más", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"}
@@ -569,7 +571,7 @@
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: tres mil millones o más", "dif": "dificil"}
       ],
       "D": [
         {"val": "Voluntad de la D.", "dif": "media"}
@@ -623,7 +625,7 @@
         {"val": "Espadachines", "dif": "dificil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: tres mil millones o más", "dif": "dificil"}
       ]
     }
   },
@@ -651,7 +653,7 @@
         {"val": "Fruta del diablo: Logia", "dif": "media"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"}
@@ -731,7 +733,7 @@
         {"val": "Médicos", "dif": "dificil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: tres mil millones o más", "dif": "dificil"}
       ],
       "D": [
         {"val": "Voluntad de la D.", "dif": "media"}
@@ -770,7 +772,7 @@
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: tres mil millones o más", "dif": "dificil"}
       ],
       "Despertar": [
         {"val": "Fruta despertada", "dif": "dificil"}
@@ -878,6 +880,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Logia", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ]
     }
   },
@@ -1016,7 +1021,7 @@
         {"val": "Médicos", "dif": "dificil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"}
@@ -1115,7 +1120,7 @@
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: tres mil millones o más", "dif": "dificil"}
       ],
       "Despertar": [
         {"val": "Fruta despertada", "dif": "dificil"}
@@ -1148,7 +1153,7 @@
         {"val": "Lunarian", "dif": "media"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ]
     }
   },
@@ -1178,7 +1183,7 @@
         {"val": "Cyborgs", "dif": "media"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ]
     }
   },
@@ -1296,7 +1301,7 @@
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: tres mil millones o más", "dif": "dificil"}
       ],
       "Despertar": [
         {"val": "Fruta despertada", "dif": "dificil"}
@@ -1323,7 +1328,7 @@
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ],
       "Despertar": [
         {"val": "Fruta despertada", "dif": "dificil"}
@@ -1360,7 +1365,7 @@
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"}
@@ -1400,7 +1405,8 @@
         {"val": "Donquixote Family", "dif": "facil"}
       ],
       "Titulo": [
-        {"val": "Shichibukais", "dif": "facil"}
+        {"val": "Shichibukais", "dif": "facil"},
+        {"val": "Nobles mundiales", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
@@ -2313,7 +2319,7 @@
         {"val": "Espadachines", "dif": "dificil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: tres mil millones o más", "dif": "dificil"}
       ],
       "D": [
         {"val": "Voluntad de la D.", "dif": "media"}
@@ -2967,7 +2973,7 @@
         {"val": "Gyojins", "dif": "facil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ]
     }
   },
@@ -3150,6 +3156,9 @@
       ],
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Titulo": [
+        {"val": "Caballeros de Dios", "dif": "dificil"}
       ]
     }
   },
@@ -3174,7 +3183,7 @@
         {"val": "Príncipes", "dif": "dificil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ],
       "Luffy": [
         {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
@@ -3276,7 +3285,8 @@
         {"val": "Gobierno Mundial", "dif": "facil"}
       ],
       "Titulo": [
-        {"val": "Gorosei", "dif": "facil"}
+        {"val": "Gorosei", "dif": "facil"},
+        {"val": "Nobles mundiales", "dif": "dificil"}
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
@@ -3302,7 +3312,8 @@
         {"val": "Gobierno Mundial", "dif": "facil"}
       ],
       "Titulo": [
-        {"val": "Gorosei", "dif": "facil"}
+        {"val": "Gorosei", "dif": "facil"},
+        {"val": "Nobles mundiales", "dif": "dificil"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
@@ -3325,7 +3336,8 @@
         {"val": "Gobierno Mundial", "dif": "facil"}
       ],
       "Titulo": [
-        {"val": "Gorosei", "dif": "facil"}
+        {"val": "Gorosei", "dif": "facil"},
+        {"val": "Nobles mundiales", "dif": "dificil"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
@@ -3348,7 +3360,8 @@
         {"val": "Gobierno Mundial", "dif": "facil"}
       ],
       "Titulo": [
-        {"val": "Gorosei", "dif": "facil"}
+        {"val": "Gorosei", "dif": "facil"},
+        {"val": "Nobles mundiales", "dif": "dificil"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
@@ -3371,7 +3384,8 @@
         {"val": "Gobierno Mundial", "dif": "facil"}
       ],
       "Titulo": [
-        {"val": "Gorosei", "dif": "facil"}
+        {"val": "Gorosei", "dif": "facil"},
+        {"val": "Nobles mundiales", "dif": "dificil"}
       ],
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
@@ -3397,7 +3411,9 @@
         {"val": "Gobierno Mundial", "dif": "facil"}
       ],
       "Titulo": [
-        {"val": "Gorosei", "dif": "facil"}
+        {"val": "Gorosei", "dif": "facil"},
+        {"val": "Nobles mundiales", "dif": "dificil"},
+        {"val": "Caballeros de Dios", "dif": "dificil"}
       ],
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
@@ -3651,6 +3667,9 @@
       "Fruta": [
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
       ],
+      "Despertar": [
+        {"val": "Fruta despertada", "dif": "dificil"}
+      ],
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
       ]
@@ -3683,7 +3702,7 @@
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: tres mil millones o más", "dif": "dificil"}
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "facil"}
@@ -4081,7 +4100,7 @@
         {"val": "Gigantes", "dif": "facil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ],
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
@@ -4108,7 +4127,7 @@
         {"val": "Gigantes", "dif": "facil"}
       ],
       "Recompensa": [
-        {"val": "Recompensa: más de mil millones", "dif": "dificil"}
+        {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ],
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
@@ -4430,9 +4449,6 @@
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
       ],
-      "Titulo": [
-        {"val": "Vainas Rojas", "dif": "facil"}
-      ],
       "Especialidad": [
         {"val": "Tiradores", "dif": "dificil"}
       ],
@@ -4441,6 +4457,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
+      "Estado": [
+        {"val": "Personajes fallecidos", "dif": "media"}
       ]
     }
   },
@@ -4994,7 +5013,8 @@
         {"val": "Minks", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes con tatuajes", "dif": "dificil"}
+        {"val": "Personajes con tatuajes", "dif": "dificil"},
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ]
     }
   },
@@ -5208,7 +5228,8 @@
         {"val": "Minks", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes con tatuajes", "dif": "dificil"}
+        {"val": "Personajes con tatuajes", "dif": "dificil"},
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ]
     }
   },
@@ -5676,6 +5697,9 @@
       ],
       "D": [
         {"val": "Voluntad de la D.", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Nobles mundiales", "dif": "dificil"}
       ]
     }
   },
@@ -7504,7 +7528,6 @@
       "Banda": [
         {"val": "Piratas de Roger", "dif": "facil"}
       ],
-      
       "Luffy": [
         {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
       ],
@@ -7541,7 +7564,7 @@
       ]
     }
   },
-{
+  {
     "id": "tama",
     "name": "Kurozumi Tama",
     "img": "imagenes/Tama.png",
@@ -7557,6 +7580,478 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "raizo",
+    "name": "Raizo",
+    "img": "imagenes/Raizo.png",
+    "tags": {
+      "Banda": [
+        {"val": "Wano", "dif": "facil"}
+      ],
+      "Titulo": [
+        {"val": "Vainas Rojas", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "kanjuro",
+    "name": "Kanjuro",
+    "img": "imagenes/Kanjuro.png",
+    "tags": {
+      "Banda": [
+        {"val": "Wano", "dif": "facil"}
+      ],
+      "Titulo": [
+        {"val": "Vainas Rojas", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
+      "Estado": [
+        {"val": "Personajes fallecidos", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "kiku",
+    "name": "Kikunojo (Kiku)",
+    "img": "imagenes/Kiku.png",
+    "tags": {
+      "Banda": [
+        {"val": "Wano", "dif": "facil"}
+      ],
+      "Titulo": [
+        {"val": "Vainas Rojas", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "denjiro",
+    "name": "Denjiro",
+    "img": "imagenes/Denjiro.png",
+    "tags": {
+      "Banda": [
+        {"val": "Wano", "dif": "facil"}
+      ],
+      "Titulo": [
+        {"val": "Vainas Rojas", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "ashura_doji",
+    "name": "Ashura Doji",
+    "img": "imagenes/AshuraDoji.png",
+    "tags": {
+      "Banda": [
+        {"val": "Wano", "dif": "facil"}
+      ],
+      "Titulo": [
+        {"val": "Vainas Rojas", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Estado": [
+        {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "kawamatsu",
+    "name": "Kawamatsu",
+    "img": "imagenes/Kawamatsu.png",
+    "tags": {
+      "Banda": [
+        {"val": "Wano", "dif": "facil"}
+      ],
+      "Titulo": [
+        {"val": "Vainas Rojas", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Raza": [
+        {"val": "Gyojins", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "shamrock",
+    "name": "Figarland Shamrock",
+    "img": "imagenes/Shamrock.png",
+    "tags": {
+      "Titulo": [
+        {"val": "Nobles mundiales", "dif": "dificil"},
+        {"val": "Caballeros de Dios", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: West Blue", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "gunko",
+    "name": "Gunko",
+    "img": "imagenes/Gunko.png",
+    "tags": {
+      "Titulo": [
+        {"val": "Nobles mundiales", "dif": "dificil"},
+        {"val": "Caballeros de Dios", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Princesas", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: West Blue", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "maffey",
+    "name": "Satchels Maffey",
+    "img": "imagenes/SatchelsMaffey.png",
+    "tags": {
+      "Titulo": [
+        {"val": "Nobles mundiales", "dif": "dificil"},
+        {"val": "Caballeros de Dios", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Red Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "charlos",
+    "name": "Rosward Charlos",
+    "img": "imagenes/Charlos.png",
+    "tags": {
+      "Titulo": [
+        {"val": "Nobles mundiales", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Red Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "rosward",
+    "name": "Rosward Rosward",
+    "img": "imagenes/Rosward.png",
+    "tags": {
+      "Titulo": [
+        {"val": "Nobles mundiales", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Red Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "shalria",
+    "name": "Rosward Shalria",
+    "img": "imagenes/Shalria.png",
+    "tags": {
+      "Titulo": [
+        {"val": "Nobles mundiales", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Red Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "rosinante",
+    "name": "Donquixote Rosinante",
+    "img": "imagenes/Rosinante.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"},
+        {"val": "Donquixote Family", "dif": "facil"}
+      ],
+      "Titulo": [
+        {"val": "Nobles mundiales", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Estado": [
+        {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Red Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "homing",
+    "name": "Donquixote Homing",
+    "img": "imagenes/Homing.png",
+    "tags": {
+      "Titulo": [
+        {"val": "Nobles mundiales", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Estado": [
+        {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Red Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "mjosgard",
+    "name": "Mjosgard",
+    "img": "imagenes/Mjosgard.png",
+    "tags": {
+      "Titulo": [
+        {"val": "Nobles mundiales", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Red Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "shivercalero",
+    "name": "Shivercalero",
+    "img": "imagenes/Shivercalero.png",
+    "tags": {
+      "Titulo": [
+        {"val": "Nobles mundiales", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Red Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "laboon",
+    "name": "Laboon",
+    "img": "imagenes/Laboon.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Rumbar", "dif": "facil"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: West Blue", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "oden",
+    "name": "Kozuki Oden",
+    "img": "imagenes/Oden.png",
+    "tags": {
+      "Banda": [
+        {"val": "Wano", "dif": "facil"},
+        {"val": "Piratas de Roger", "dif": "facil"},
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki del conquistador", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Estado": [
+        {"val": "Personajes fallecidos", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "imu",
+    "name": "Nerona Imu",
+    "img": "imagenes/Imu.png",
+    "tags": {
+      "Titulo": [
+        {"val": "Nobles mundiales", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki del conquistador", "dif": "dificil"},
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "shinobu",
+    "name": "Shinobu",
+    "img": "imagenes/Shinobu.png",
+    "tags": {
+      "Banda": [
+        {"val": "Wano", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "shakuyaku",
+    "name": "Shakuyaku (Shakky)",
+    "img": "imagenes/Shakuyaku.png",
+    "tags": {
+      "Banda": [
+        {"val": "Miembras de la tribu Kuja", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Calm Belt", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
       ]
     }
   }
