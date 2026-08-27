@@ -1474,8 +1474,11 @@
   // donde el modal ya se abre solo y, al cerrarlo, aparece directamente un panel nuevo
   // (no hay ningún momento en el que el botón de Resultados llegue a poder pulsarse).
   function disableGameControls() {
+    document.getElementById("submit-btn").style.display = "";
+    document.getElementById("deselect-btn").style.display = "";
     document.getElementById("submit-btn").disabled = true;
     document.getElementById("deselect-btn").disabled = true;
+    document.getElementById("view-results-btn").style.display = "none";
   }
 
   function initGame() {
