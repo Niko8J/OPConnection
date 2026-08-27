@@ -138,6 +138,7 @@
       border: 1px solid #334155; background: #1e293b; color: #f8fafc; font-size: 0.95rem;
     }
     .auth-error { color: #ef4444; font-size: 0.85rem; margin-bottom: 8px; min-height: 1em; }
+    .auth-success { color: #22c55e; font-size: 0.85rem; margin-bottom: 8px; }
     .auth-avatar-label { margin: 6px 0; color: #94a3b8; font-size: 0.9rem; }
 
     .auth-divider { display: flex; align-items: center; gap: 10px; margin: 12px 0; color: #64748b; font-size: 0.85rem; }
@@ -458,6 +459,7 @@
           <div id="auth-dropdown-best-streak" class="auth-dropdown-best-streak"></div>
         </div>
         <button class="auth-dropdown-item" onclick="openRankingModal()">🏆 Ranking</button>
+        <button class="auth-dropdown-item" onclick="openEditProfileModal()">✏️ Editar perfil</button>
         <button class="auth-dropdown-item" onclick="doLogout()">Cerrar sesión</button>
       </div>
 
@@ -580,6 +582,33 @@
     <h2>🏆 Ranking</h2>
     <p class="ranking-subtitle">Mejor racha de paneles resueltos en modo Infinito</p>
     <div id="ranking-list" class="ranking-list"></div>
+  </div>
+</div>
+
+<div id="edit-profile-modal" class="modal-overlay" onclick="closeEditProfileModalOnOverlay(event)">
+  <div class="modal-content auth-modal-content">
+    <button class="close-btn" onclick="closeEditProfileModal()">&times;</button>
+    <h2>✏️ Editar perfil</h2>
+
+    <div id="edit-profile-error" class="auth-error"></div>
+    <div id="edit-profile-success" class="auth-success" style="display: none;"></div>
+
+    <input type="text" id="edit-username" class="auth-input" placeholder="Nombre de usuario">
+    <p class="auth-avatar-label">Elige tu foto de perfil:</p>
+    <div id="edit-avatar-picker" class="avatar-picker"></div>
+    <button class="action-btn submit" onclick="submitProfileEdit()">Guardar cambios</button>
+
+    <div id="edit-password-section" style="display: none;">
+      <div class="auth-divider"><span>Cambiar contraseña</span></div>
+      <input type="password" id="edit-current-password" class="auth-input" placeholder="Contraseña actual" autocomplete="current-password">
+      <input type="password" id="edit-new-password" class="auth-input" placeholder="Nueva contraseña" autocomplete="new-password">
+      <input type="password" id="edit-new-password-confirm" class="auth-input" placeholder="Confirma la nueva contraseña" autocomplete="new-password">
+      <button class="action-btn" onclick="submitPasswordChange()">Cambiar contraseña</button>
+    </div>
+
+    <p id="edit-google-note" class="auth-avatar-label" style="display: none;">
+      Iniciaste sesión con Google, así que tu contraseña se gestiona desde tu cuenta de Google, no desde aquí.
+    </p>
   </div>
 </div>
 
@@ -1089,6 +1118,134 @@
     if (event.target.id === "ranking-modal") closeRankingModal();
   }
 
+  // ---------- Editar perfil (foto, nombre de usuario, contraseña) ----------
+
+  let editSelectedAvatarImg = null;
+
+  function openEditProfileModal() {
+    document.getElementById("auth-dropdown").style.display = "none";
+    if (!currentUser) return;
+
+    document.getElementById("edit-profile-error").innerText = "";
+    document.getElementById("edit-profile-success").style.display = "none";
+    document.getElementById("edit-profile-success").innerText = "";
+
+    document.getElementById("edit-username").value = (currentUserProfile && currentUserProfile.username) || "";
+    editSelectedAvatarImg = (currentUserProfile && currentUserProfile.avatar) || null;
+    buildEditAvatarPicker();
+
+    // La contraseña solo se puede cambiar aquí si la cuenta usa email/contraseña (no si es solo Google).
+    const hasPasswordProvider = currentUser.providerData.some(p => p.providerId === "password");
+    document.getElementById("edit-password-section").style.display = hasPasswordProvider ? "block" : "none";
+    document.getElementById("edit-google-note").style.display = hasPasswordProvider ? "none" : "block";
+    document.getElementById("edit-current-password").value = "";
+    document.getElementById("edit-new-password").value = "";
+    document.getElementById("edit-new-password-confirm").value = "";
+
+    document.getElementById("edit-profile-modal").style.display = "flex";
+  }
+
+  function buildEditAvatarPicker() {
+    const picker = document.getElementById("edit-avatar-picker");
+    picker.innerHTML = "";
+
+    const sortedChars = [...database].sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base' }));
+
+    sortedChars.forEach(char => {
+      const img = document.createElement("img");
+      img.src = char.img;
+      img.alt = char.name;
+      img.title = char.name;
+      img.className = "avatar-option" + (char.img === editSelectedAvatarImg ? " selected" : "");
+      img.onerror = function () { this.src = "https://dummyimage.com/100x100/334155/ffffff.png&text=?"; };
+      img.onclick = () => {
+        document.querySelectorAll("#edit-avatar-picker .avatar-option.selected").forEach(el => el.classList.remove("selected"));
+        img.classList.add("selected");
+        editSelectedAvatarImg = char.img;
+      };
+      picker.appendChild(img);
+    });
+  }
+
+  function closeEditProfileModal() {
+    document.getElementById("edit-profile-modal").style.display = "none";
+  }
+
+  function closeEditProfileModalOnOverlay(event) {
+    if (event.target.id === "edit-profile-modal") closeEditProfileModal();
+  }
+
+  async function submitProfileEdit() {
+    const errorEl = document.getElementById("edit-profile-error");
+    const successEl = document.getElementById("edit-profile-success");
+    errorEl.innerText = "";
+    successEl.style.display = "none";
+
+    const username = document.getElementById("edit-username").value.trim();
+    if (!username) {
+      errorEl.innerText = "Elige un nombre de usuario.";
+      return;
+    }
+    if (!editSelectedAvatarImg) {
+      errorEl.innerText = "Elige una foto de perfil.";
+      return;
+    }
+
+    try {
+      await db.collection("users").doc(currentUser.uid).set({ username, avatar: editSelectedAvatarImg }, { merge: true });
+      await db.collection("publicProfiles").doc(currentUser.uid).set({ username, avatar: editSelectedAvatarImg }, { merge: true });
+      currentUserProfile = { ...(currentUserProfile || {}), username, avatar: editSelectedAvatarImg };
+      updateAuthUI();
+
+      successEl.style.display = "block";
+      successEl.innerText = "Perfil actualizado correctamente.";
+    } catch (e) {
+      errorEl.innerText = "No se pudo actualizar el perfil. Inténtalo de nuevo.";
+      console.error("Error actualizando el perfil:", e);
+    }
+  }
+
+  async function submitPasswordChange() {
+    const errorEl = document.getElementById("edit-profile-error");
+    const successEl = document.getElementById("edit-profile-success");
+    errorEl.innerText = "";
+    successEl.style.display = "none";
+
+    const currentPassword = document.getElementById("edit-current-password").value;
+    const newPassword = document.getElementById("edit-new-password").value;
+    const newPasswordConfirm = document.getElementById("edit-new-password-confirm").value;
+
+    if (!currentPassword) {
+      errorEl.innerText = "Introduce tu contraseña actual.";
+      return;
+    }
+    if (newPassword.length < 6) {
+      errorEl.innerText = "La nueva contraseña debe tener al menos 6 caracteres.";
+      return;
+    }
+    if (newPassword !== newPasswordConfirm) {
+      errorEl.innerText = "Las contraseñas nuevas no coinciden.";
+      return;
+    }
+
+    try {
+      // Firebase exige haber iniciado sesión "recientemente" para cambiar la contraseña,
+      // así que primero volvemos a confirmar la identidad con la contraseña actual.
+      const credential = firebase.auth.EmailAuthProvider.credential(currentUser.email, currentPassword);
+      await currentUser.reauthenticateWithCredential(credential);
+      await currentUser.updatePassword(newPassword);
+
+      document.getElementById("edit-current-password").value = "";
+      document.getElementById("edit-new-password").value = "";
+      document.getElementById("edit-new-password-confirm").value = "";
+
+      successEl.style.display = "block";
+      successEl.innerText = "Contraseña actualizada correctamente.";
+    } catch (e) {
+      errorEl.innerText = traduceErrorFirebase(e);
+    }
+  }
+
   // ---------- Cómo jugar ----------
 
   function openHowToPlayModal() {
@@ -1114,7 +1271,8 @@
       "auth/invalid-credential": "Correo o contraseña incorrectos.",
       "auth/too-many-requests": "Demasiados intentos. Prueba de nuevo en unos minutos.",
       "auth/popup-blocked": "Tu navegador ha bloqueado la ventana de Google. Permite ventanas emergentes e inténtalo de nuevo.",
-      "auth/account-exists-with-different-credential": "Ya existe una cuenta con ese correo registrada de otra forma (email y contraseña). Inicia sesión con ese método."
+      "auth/account-exists-with-different-credential": "Ya existe una cuenta con ese correo registrada de otra forma (email y contraseña). Inicia sesión con ese método.",
+      "auth/requires-recent-login": "Por seguridad, vuelve a iniciar sesión e inténtalo de nuevo."
     };
     return (e && map[e.code]) || "Ha ocurrido un error. Inténtalo de nuevo.";
   }
