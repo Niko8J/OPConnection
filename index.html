@@ -38,7 +38,7 @@
       src: url('PirataOne.ttf') format('truetype');
       font-weight: 400;
       font-style: normal;
-      font-display: optional;
+      font-display: swap;
     }
     :root {
       --card-gap: clamp(4px, 1.1vh, 10px);
@@ -59,7 +59,9 @@
 
     .site-title { display: flex; flex-direction: column; align-items: center; margin-bottom: var(--v-gap-sm); flex-shrink: 0; }
     .site-logo {
-      height: var(--logo-h); width: auto; max-width: 90%; max-height: 130px; cursor: pointer;
+      width: auto; height: auto;
+      max-width: min(50%, 260px); max-height: var(--logo-h);
+      cursor: pointer;
       transition: transform 0.15s ease, filter 0.15s ease;
     }
     @media (hover: hover) and (pointer: fine) {
