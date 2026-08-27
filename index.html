@@ -22,16 +22,35 @@
       background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center;
       min-height: 100vh; min-height: 100dvh; padding: 12px;
     }
-    .container { max-width: 650px; width: 100%; text-align: center; position: relative; }
+    .container { max-width: 650px; width: 100%; text-align: center; position: relative; padding-top: 6px; }
     h1 { margin-bottom: 4px; color: #f59e0b; font-size: 2rem; text-transform: uppercase; letter-spacing: 1px; }
     p { margin-bottom: 10px; color: #94a3b8; }
 
     .difficulty-selector { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 
-    .auth-bar { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
-    .auth-guest, .auth-user { display: flex; align-items: center; gap: 8px; }
-    .auth-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; object-position: top center; border: 2px solid #f59e0b; }
-    #auth-user-name { font-weight: bold; color: #f8fafc; }
+    .auth-corner { position: absolute; top: 0; right: 0; z-index: 20; }
+    .auth-icon-btn {
+      width: 40px; height: 40px; border-radius: 50%; border: 2px solid #334155; background: #1e293b;
+      padding: 0; cursor: pointer; overflow: hidden; display: flex; align-items: center; justify-content: center;
+    }
+    .auth-icon-btn:hover { border-color: #f59e0b; }
+    .auth-icon-empty { width: 100%; height: 100%; }
+    .auth-icon-avatar { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: none; }
+
+    .auth-dropdown {
+      display: none; position: absolute; top: 48px; right: 0; min-width: 170px;
+      background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 6px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4); text-align: left;
+    }
+    .auth-dropdown-item {
+      display: block; width: 100%; text-align: left; background: none; border: none;
+      color: #f8fafc; padding: 8px 10px; border-radius: 6px; cursor: pointer; font-size: 0.9rem;
+    }
+    .auth-dropdown-item:hover { background: #334155; }
+    .auth-dropdown-username {
+      padding: 6px 10px 8px; font-weight: bold; color: #f59e0b; border-bottom: 1px solid #334155;
+      margin-bottom: 4px; font-size: 0.9rem; word-break: break-word;
+    }
 
     .auth-modal-content { max-width: 380px; text-align: left; }
     .auth-input {
@@ -40,6 +59,15 @@
     }
     .auth-error { color: #ef4444; font-size: 0.85rem; margin-bottom: 8px; min-height: 1em; }
     .auth-avatar-label { margin: 6px 0; color: #94a3b8; font-size: 0.9rem; }
+
+    .auth-divider { display: flex; align-items: center; gap: 10px; margin: 12px 0; color: #64748b; font-size: 0.85rem; }
+    .auth-divider::before, .auth-divider::after { content: ""; flex: 1; height: 1px; background: #334155; }
+    .auth-google-btn {
+      width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 10px; border-radius: 6px; border: 1px solid #334155; background: #f8fafc;
+      color: #1f2937; font-size: 0.9rem; font-weight: bold; cursor: pointer;
+    }
+    .auth-google-btn:hover { background: #e2e8f0; }
     .avatar-picker {
       display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px;
       max-height: 220px; overflow-y: auto; margin-bottom: 12px; padding: 6px;
@@ -212,7 +240,8 @@
       p { font-size: 0.85rem; margin-bottom: 8px; }
       .difficulty-selector { gap: 6px; margin-bottom: 10px; }
       .avatar-picker { grid-template-columns: repeat(4, 1fr); max-height: 180px; }
-      .auth-bar { gap: 6px; }
+      .auth-icon-btn { width: 34px; height: 34px; }
+      .auth-corner { top: 2px; right: 2px; }
       .diff-label { width: 100%; margin-bottom: 2px; }
       .diff-btn { padding: 6px 10px; font-size: 0.85rem; }
       .lives-container { margin-bottom: 6px; font-size: 1rem; gap: 8px; }
@@ -246,20 +275,29 @@
 <body>
 
 <div class="container">
-  <h1>One Piece Connections</h1>
-  <p>Encuentra 4 grupos conectados por distintos atributos.</p>
-
-  <div id="auth-bar" class="auth-bar">
-    <div id="auth-guest" class="auth-guest">
-      <button class="action-btn" onclick="openAuthModal('login')">Iniciar sesión</button>
-      <button class="action-btn" onclick="openAuthModal('register')">Registrarse</button>
-    </div>
-    <div id="auth-user" class="auth-user" style="display: none;">
-      <img id="auth-user-avatar" class="auth-avatar" src="" alt="Avatar">
-      <span id="auth-user-name"></span>
-      <button class="action-btn" onclick="doLogout()">Cerrar sesión</button>
+  <div class="auth-corner">
+    <button id="auth-icon-btn" class="auth-icon-btn" onclick="toggleAuthMenu(event)" title="Cuenta">
+      <svg id="auth-icon-empty" class="auth-icon-empty" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="12" fill="#334155"/>
+        <circle cx="12" cy="9.5" r="4" fill="#94a3b8"/>
+        <path d="M4 20.5c0-4.2 4-6.5 8-6.5s8 2.3 8 6.5" fill="#94a3b8"/>
+      </svg>
+      <img id="auth-icon-avatar" class="auth-icon-avatar" src="" alt="Tu avatar">
+    </button>
+    <div id="auth-dropdown" class="auth-dropdown">
+      <div id="auth-dropdown-guest">
+        <button class="auth-dropdown-item" onclick="openAuthModal('login')">Iniciar sesión</button>
+        <button class="auth-dropdown-item" onclick="openAuthModal('register')">Registrarse</button>
+      </div>
+      <div id="auth-dropdown-user" style="display: none;">
+        <div id="auth-dropdown-username" class="auth-dropdown-username"></div>
+        <button class="auth-dropdown-item" onclick="doLogout()">Cerrar sesión</button>
+      </div>
     </div>
   </div>
+
+  <h1>One Piece Connections</h1>
+  <p>Encuentra 4 grupos conectados por distintos atributos.</p>
 
   <div class="difficulty-selector">
     <span class="diff-label">Dificultades:</span>
@@ -308,18 +346,37 @@
 
     <div id="auth-error" class="auth-error"></div>
 
-    <input type="email" id="auth-email" class="auth-input" placeholder="Correo electrónico" autocomplete="email">
-    <input type="password" id="auth-password" class="auth-input" placeholder="Contraseña" autocomplete="current-password">
+    <div id="auth-credentials">
+      <input type="email" id="auth-email" class="auth-input" placeholder="Correo electrónico" autocomplete="email">
+      <input type="password" id="auth-password" class="auth-input" placeholder="Contraseña" autocomplete="current-password">
 
-    <div id="auth-register-extra" style="display:none;">
-      <input type="password" id="auth-password-confirm" class="auth-input" placeholder="Confirma tu contraseña" autocomplete="new-password">
+      <div id="auth-register-extra" style="display:none;">
+        <input type="password" id="auth-password-confirm" class="auth-input" placeholder="Confirma tu contraseña" autocomplete="new-password">
+      </div>
+    </div>
+
+    <div id="auth-profile-extra" style="display:none;">
       <input type="text" id="auth-username" class="auth-input" placeholder="Nombre de usuario">
       <p class="auth-avatar-label">Elige tu foto de perfil:</p>
       <div id="avatar-picker" class="avatar-picker"></div>
     </div>
 
     <button class="action-btn submit" id="auth-submit-btn" onclick="submitAuthForm()">Entrar</button>
-    <p class="auth-switch">
+
+    <div id="auth-google-section">
+      <div class="auth-divider"><span>o</span></div>
+      <button type="button" id="auth-google-btn" class="auth-google-btn" onclick="signInWithGoogle()">
+        <svg class="auth-google-icon" viewBox="0 0 48 48" width="18" height="18">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.9-2.26 5.36-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        </svg>
+        Continuar con Google
+      </button>
+    </div>
+
+    <p class="auth-switch" id="auth-switch-p">
       <span id="auth-switch-text">¿No tienes cuenta?</span>
       <a href="#" id="auth-switch-link" onclick="toggleAuthMode(event)">Regístrate</a>
     </p>
@@ -343,8 +400,9 @@
 
   let currentUser = null;
   let currentUserProfile = null; // { username, avatar, email }
-  let authMode = "login"; // "login" | "register"
+  let authMode = "login"; // "login" | "register" | "google-setup"
   let selectedAvatarImg = null;
+  let pendingGoogleUser = null; // usuario de Google autenticado que aún no tiene perfil (usuario+avatar) en Firestore
 
   const MAX_LIVES = 4;
   const COLORS = ["#fef08a", "#bbf7d0", "#bfdbfe", "#e9d5ff"];
@@ -488,22 +546,52 @@
   // ---------- Autenticación (registro / login / logout) ----------
 
   function updateAuthUI() {
-    const guestEl = document.getElementById("auth-guest");
-    const userEl = document.getElementById("auth-user");
+    const emptyIcon = document.getElementById("auth-icon-empty");
+    const avatarIcon = document.getElementById("auth-icon-avatar");
+    const dropdownGuest = document.getElementById("auth-dropdown-guest");
+    const dropdownUser = document.getElementById("auth-dropdown-user");
 
     if (currentUser) {
-      guestEl.style.display = "none";
-      userEl.style.display = "flex";
-      const avatarSrc = (currentUserProfile && currentUserProfile.avatar) || "https://dummyimage.com/100x100/334155/ffffff.png&text=?";
-      document.getElementById("auth-user-avatar").src = avatarSrc;
-      document.getElementById("auth-user-name").innerText = (currentUserProfile && currentUserProfile.username) || currentUser.email;
+      emptyIcon.style.display = "none";
+      avatarIcon.style.display = "block";
+      avatarIcon.src = (currentUserProfile && currentUserProfile.avatar) || "https://dummyimage.com/100x100/334155/ffffff.png&text=?";
+
+      dropdownGuest.style.display = "none";
+      dropdownUser.style.display = "block";
+      document.getElementById("auth-dropdown-username").innerText = (currentUserProfile && currentUserProfile.username) || currentUser.email;
     } else {
-      guestEl.style.display = "flex";
-      userEl.style.display = "none";
+      emptyIcon.style.display = "block";
+      avatarIcon.style.display = "none";
+
+      dropdownGuest.style.display = "block";
+      dropdownUser.style.display = "none";
     }
   }
 
+  function toggleAuthMenu(event) {
+    event.stopPropagation();
+
+    // Sesión de Google iniciada pero el perfil (usuario + avatar) aún sin completar:
+    // en vez de abrir el menú, retomamos directamente ese último paso.
+    if (currentUser && !currentUserProfile && pendingGoogleUser) {
+      enterGoogleSetupMode(pendingGoogleUser);
+      return;
+    }
+
+    const dropdown = document.getElementById("auth-dropdown");
+    dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+  }
+
+  document.addEventListener("click", (event) => {
+    const corner = document.querySelector(".auth-corner");
+    const dropdown = document.getElementById("auth-dropdown");
+    if (dropdown && corner && !corner.contains(event.target)) {
+      dropdown.style.display = "none";
+    }
+  });
+
   function openAuthModal(mode) {
+    document.getElementById("auth-dropdown").style.display = "none";
     authMode = mode;
     document.getElementById("auth-error").innerText = "";
     document.getElementById("auth-email").value = "";
@@ -518,9 +606,20 @@
 
   function applyAuthModeUI() {
     const isRegister = authMode === "register";
-    document.getElementById("auth-modal-title").innerText = isRegister ? "Crear cuenta" : "Iniciar sesión";
+    const isGoogleSetup = authMode === "google-setup";
+
+    document.getElementById("auth-modal-title").innerText =
+      isGoogleSetup ? "Completa tu perfil" : (isRegister ? "Crear cuenta" : "Iniciar sesión");
+
+    document.getElementById("auth-credentials").style.display = isGoogleSetup ? "none" : "block";
     document.getElementById("auth-register-extra").style.display = isRegister ? "block" : "none";
-    document.getElementById("auth-submit-btn").innerText = isRegister ? "Registrarme" : "Entrar";
+    document.getElementById("auth-profile-extra").style.display = (isRegister || isGoogleSetup) ? "block" : "none";
+    document.getElementById("auth-google-section").style.display = isGoogleSetup ? "none" : "block";
+    document.getElementById("auth-switch-p").style.display = isGoogleSetup ? "none" : "block";
+
+    document.getElementById("auth-submit-btn").innerText =
+      isGoogleSetup ? "Guardar y continuar" : (isRegister ? "Registrarme" : "Entrar");
+
     document.getElementById("auth-switch-text").innerText = isRegister ? "¿Ya tienes cuenta?" : "¿No tienes cuenta?";
     document.getElementById("auth-switch-link").innerText = isRegister ? "Inicia sesión" : "Regístrate";
   }
@@ -531,6 +630,44 @@
     document.getElementById("auth-error").innerText = "";
     applyAuthModeUI();
     if (authMode === "register") buildAvatarPicker();
+  }
+
+  // Se llama cuando alguien inicia sesión con Google por primera vez y aún no tiene
+  // usuario ni foto de perfil guardados en Firestore.
+  function enterGoogleSetupMode(user) {
+    pendingGoogleUser = user;
+    authMode = "google-setup";
+    document.getElementById("auth-error").innerText = "";
+    document.getElementById("auth-username").value = "";
+    selectedAvatarImg = null;
+    applyAuthModeUI();
+    buildAvatarPicker();
+    document.getElementById("auth-modal").style.display = "flex";
+  }
+
+  async function signInWithGoogle() {
+    const errorEl = document.getElementById("auth-error");
+    errorEl.innerText = "";
+
+    const provider = new firebase.auth.GoogleAuthProvider();
+    try {
+      const result = await auth.signInWithPopup(provider);
+      const user = result.user;
+
+      const docRef = db.collection("users").doc(user.uid);
+      const snap = await docRef.get();
+
+      if (snap.exists) {
+        currentUserProfile = snap.data();
+        updateAuthUI();
+        closeAuthModal();
+      } else {
+        enterGoogleSetupMode(user);
+      }
+    } catch (e) {
+      if (e && e.code === "auth/popup-closed-by-user") return; // cerró la ventana de Google, no es un error real
+      errorEl.innerText = traduceErrorFirebase(e);
+    }
   }
 
   function closeAuthModal() {
@@ -545,7 +682,9 @@
     const picker = document.getElementById("avatar-picker");
     picker.innerHTML = "";
 
-    database.forEach(char => {
+    const sortedChars = [...database].sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base' }));
+
+    sortedChars.forEach(char => {
       const img = document.createElement("img");
       img.src = char.img;
       img.alt = char.name;
@@ -564,6 +703,31 @@
   async function submitAuthForm() {
     const errorEl = document.getElementById("auth-error");
     errorEl.innerText = "";
+
+    if (authMode === "google-setup") {
+      const username = document.getElementById("auth-username").value.trim();
+
+      if (!username) {
+        errorEl.innerText = "Elige un nombre de usuario.";
+        return;
+      }
+      if (!selectedAvatarImg) {
+        errorEl.innerText = "Elige una foto de perfil.";
+        return;
+      }
+
+      try {
+        const profile = { username, avatar: selectedAvatarImg, email: pendingGoogleUser.email || "" };
+        await db.collection("users").doc(pendingGoogleUser.uid).set(profile);
+        currentUserProfile = profile;
+        pendingGoogleUser = null;
+        updateAuthUI();
+        closeAuthModal();
+      } catch (e) {
+        errorEl.innerText = traduceErrorFirebase(e);
+      }
+      return;
+    }
 
     const email = document.getElementById("auth-email").value.trim();
     const password = document.getElementById("auth-password").value;
@@ -616,6 +780,7 @@
   }
 
   function doLogout() {
+    document.getElementById("auth-dropdown").style.display = "none";
     auth.signOut();
   }
 
@@ -627,7 +792,9 @@
       "auth/user-not-found": "No existe ninguna cuenta con ese correo.",
       "auth/wrong-password": "Contraseña incorrecta.",
       "auth/invalid-credential": "Correo o contraseña incorrectos.",
-      "auth/too-many-requests": "Demasiados intentos. Prueba de nuevo en unos minutos."
+      "auth/too-many-requests": "Demasiados intentos. Prueba de nuevo en unos minutos.",
+      "auth/popup-blocked": "Tu navegador ha bloqueado la ventana de Google. Permite ventanas emergentes e inténtalo de nuevo.",
+      "auth/account-exists-with-different-credential": "Ya existe una cuenta con ese correo registrada de otra forma (email y contraseña). Inicia sesión con ese método."
     };
     return (e && map[e.code]) || "Ha ocurrido un error. Inténtalo de nuevo.";
   }
@@ -649,8 +816,13 @@
       } catch (e) {
         currentUserProfile = null;
       }
+      if (!currentUserProfile) {
+        // No tiene perfil (usuario+avatar) guardado: puede ser un registro con Google a medio terminar.
+        pendingGoogleUser = user;
+      }
     } else {
       currentUserProfile = null;
+      pendingGoogleUser = null;
     }
 
     updateAuthUI();
