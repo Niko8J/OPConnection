@@ -216,21 +216,25 @@
     .solved-category {
       grid-column: 1 / -1;
       height: 100%; width: 100%;
-      display: flex; align-items: center; justify-content: center; gap: clamp(4px, 1.5vw, 10px);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
       border-radius: 8px; font-weight: bold; color: #0f172a; text-align: center;
-      padding: 4px 10px; overflow: hidden; animation: fadeIn 0.3s ease; min-width: 0;
+      padding: 4px 8px; overflow: hidden; animation: fadeIn 0.3s ease; min-width: 0; min-height: 0;
     }
-    .solved-items-list { display: flex; gap: 6px; flex-shrink: 0; height: 100%; align-items: center; }
+    .solved-items-list { display: flex; justify-content: center; gap: 6px; flex: 1; min-height: 0; align-items: center; }
     .solved-img {
       height: 100%;
       width: auto;
+      max-width: 100%;
       aspect-ratio: 1 / 1;
       object-fit: cover;
       border-radius: 6px;
       border: 2px solid #0f172a;
       background-color: #1e293b;
     }
-    .solved-label { font-size: clamp(0.7rem, 2vw, 0.95rem); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+    .solved-label {
+      flex-shrink: 0; font-size: clamp(0.6rem, 1.6vw, 0.85rem);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
+    }
     
     .grid {
       display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr);
@@ -738,6 +742,7 @@
       // El progreso se guardó justo al completar un panel: empezamos el siguiente.
       generateNewBoard();
     } else {
+      renderAllSolvedBlocks();
       renderLives();
       renderGrid();
     }
@@ -1453,6 +1458,7 @@
     });
 
     cards = cards.sort(() => Math.random() - 0.5);
+    renderAllSolvedBlocks(); // limpia bloques resueltos que pudieran quedar de un panel/modo anterior
     renderLives();
     renderGrid();
     saveInfiniteState();
@@ -1503,16 +1509,27 @@
     return el;
   }
 
-  function renderGrid() {
-    const grid = document.getElementById("grid");
-    grid.innerHTML = "";
+  // Añade UN bloque de categoría resuelta al final de las ya existentes, sin tocarlas
+  // (evita que las categorías ya acertadas parpadeen al seleccionar tarjetas).
+  function appendSolvedBlock(catData) {
+    document.getElementById("grid").appendChild(buildSolvedCategoryEl(catData));
+  }
 
-    // Las categorías ya acertadas van primero, cada una ocupando una fila completa,
-    // para que el tamaño de las tarjetas restantes nunca cambie.
+  // Reconstruye TODOS los bloques de categorías resueltas desde cero (solo se usa al
+  // restaurar una partida guardada, donde hace falta reconstruir todo de una vez).
+  function renderAllSolvedBlocks() {
+    const grid = document.getElementById("grid");
+    grid.querySelectorAll(".solved-category").forEach(el => el.remove());
     solvedOrder.forEach(catName => {
       const catData = currentCategories.find(c => c.name === catName);
       if (catData) grid.appendChild(buildSolvedCategoryEl(catData));
     });
+  }
+
+  function renderGrid() {
+    const grid = document.getElementById("grid");
+    // Solo tocamos las tarjetas activas: las categorías ya resueltas se quedan tal cual.
+    grid.querySelectorAll(".card").forEach(el => el.remove());
 
     cards.forEach((card, index) => {
       const cardEl = document.createElement("div");
@@ -1570,7 +1587,9 @@
     const isCorrect = selectedCards.every(i => cards[i].category === selectedCategory);
 
     if (isCorrect) {
+      const catData = currentCategories.find(c => c.name === selectedCategory);
       solvedOrder.push(selectedCategory);
+      if (catData) appendSolvedBlock(catData);
 
       cards = cards.filter((_, i) => !selectedCards.includes(i));
       selectedCards = [];
