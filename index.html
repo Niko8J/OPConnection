@@ -35,7 +35,10 @@
     }
     .auth-icon-btn:hover { border-color: #f59e0b; }
     .auth-icon-empty { width: 100%; height: 100%; }
-    .auth-icon-avatar { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: none; }
+    .auth-icon-avatar {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center; display: none;
+      transform: scale(1.4); transform-origin: center top;
+    }
 
     .auth-dropdown {
       display: none; position: absolute; top: 48px; right: 0; min-width: 170px;
@@ -807,6 +810,7 @@
   auth.onAuthStateChanged(async user => {
     const isFirstCall = !authListenerFired;
     authListenerFired = true;
+    const wasLoggedIn = !!currentUser;
     currentUser = user;
 
     if (user) {
@@ -836,6 +840,15 @@
     if (user && isInfiniteMode) {
       const saved = await loadInfiniteStateCloud();
       if (saved) resumeInfiniteFromSaved(saved);
+    }
+
+    // Si el usuario CIERRA sesión teniendo una partida Infinito en curso, no la dejamos
+    // continuar como si fuera de un invitado: empezamos una nueva (su progreso en la nube
+    // queda guardado tal cual para la próxima vez que inicie sesión).
+    if (!user && wasLoggedIn && isInfiniteMode) {
+      infiniteSolvedCount = 0;
+      solvedOrder = [];
+      generateNewBoard();
     }
   });
 
