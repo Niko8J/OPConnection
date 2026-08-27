@@ -1534,6 +1534,7 @@
     cards.forEach((card, index) => {
       const cardEl = document.createElement("div");
       cardEl.className = `card ${selectedCards.includes(index) ? 'selected' : ''}`;
+      cardEl.dataset.index = index;
       
       const imgEl = document.createElement("img");
       imgEl.src = card.img;
@@ -1562,14 +1563,17 @@
       document.getElementById("warning-msg").innerText = "";
     }
     
-    renderGrid();
+    // Solo actualizamos la tarjeta pulsada, sin tocar el resto.
+    const cardEl = document.querySelector(`#grid .card[data-index="${index}"]`);
+    if (cardEl) cardEl.classList.toggle("selected", selectedCards.includes(index));
   }
 
   function deselectAll() {
     if (gameOver) return;
     selectedCards = [];
     document.getElementById("warning-msg").innerText = "";
-    renderGrid();
+    // Solo quitamos la clase de selección de las tarjetas que la tuvieran, sin reconstruir nada.
+    document.querySelectorAll("#grid .card.selected").forEach(el => el.classList.remove("selected"));
   }
 
   function checkGuess() {
