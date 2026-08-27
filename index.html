@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>One Piece Connections</title>
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <meta property="og:title" content="One Piece Connections">
+  <meta property="og:description" content="Encuentra 4 grupos conectados por distintos atributos.">
+  <meta property="og:image" content="https://niko8j.github.io/OPConnection/previsualizacion.png">
+  <meta property="og:url" content="https://niko8j.github.io/OPConnection/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="One Piece Connections">
+  <meta name="twitter:description" content="Encuentra 4 grupos conectados por distintos atributos.">
+  <meta name="twitter:image" content="https://niko8j.github.io/OPConnection/previsualizacion.png">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     html { height: 100%; }
@@ -265,9 +276,9 @@
   let awaitingNextPanel = false;
 
   window.addEventListener("DOMContentLoaded", () => {
-    fetch("personajes.json")
+    fetch("Personajes.json")
       .then(res => {
-        if (!res.ok) throw new Error(`No se pudo cargar personajes.json (${res.status})`);
+        if (!res.ok) throw new Error(`No se pudo cargar Personajes.json (${res.status})`);
         return res.json();
       })
       .then(data => {
