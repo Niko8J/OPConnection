@@ -913,6 +913,23 @@
     if (authMode === "register") buildAvatarPicker();
   }
 
+  // Comprueba si un nombre de usuario ya está en uso por otra cuenta.
+  // excludeUid permite ignorar el propio documento (por ejemplo, al reguardar tu perfil
+  // sin haber cambiado el nombre).
+  async function isUsernameTaken(username, excludeUid) {
+    try {
+      const snap = await db.collection("publicProfiles").where("username", "==", username).limit(5).get();
+      if (snap.empty) return false;
+      if (excludeUid) {
+        return snap.docs.some(doc => doc.id !== excludeUid);
+      }
+      return true;
+    } catch (e) {
+      console.error("No se pudo comprobar si el nombre de usuario está en uso:", e);
+      return false; // si falla la comprobación por un problema de red, no bloqueamos sin más
+    }
+  }
+
   // Se llama cuando alguien inicia sesión con Google por primera vez y aún no tiene
   // usuario ni foto de perfil guardados en Firestore.
   function enterGoogleSetupMode(user) {
@@ -997,6 +1014,11 @@
         return;
       }
 
+      if (await isUsernameTaken(username, pendingGoogleUser.uid)) {
+        errorEl.innerText = "Ese nombre de usuario ya está en uso. Elige otro.";
+        return;
+      }
+
       try {
         const profile = { username, avatar: selectedAvatarImg, email: pendingGoogleUser.email || "" };
         await db.collection("users").doc(pendingGoogleUser.uid).set(profile);
@@ -1047,6 +1069,11 @@
     }
     if (!selectedAvatarImg) {
       errorEl.innerText = "Elige una foto de perfil.";
+      return;
+    }
+
+    if (await isUsernameTaken(username)) {
+      errorEl.innerText = "Ese nombre de usuario ya está en uso. Elige otro.";
       return;
     }
 
@@ -1196,6 +1223,11 @@
     }
     if (!editSelectedAvatarImg) {
       errorEl.innerText = "Elige una foto de perfil.";
+      return;
+    }
+
+    if (await isUsernameTaken(username, currentUser.uid)) {
+      errorEl.innerText = "Ese nombre de usuario ya está en uso. Elige otro.";
       return;
     }
 
