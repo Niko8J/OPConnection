@@ -405,10 +405,6 @@
         transform: scale(1.15);
         transform-origin: top center;
       }
-      .solved-img {
-        object-fit: cover;
-        object-position: top center;
-      }
       .controls { gap: 8px; }
       button.action-btn { padding: 8px 14px; font-size: 0.9rem; }
 
@@ -424,16 +420,22 @@
 
     /* Pantallas notablemente más altas que anchas (la mayoría de móviles en vertical):
        los huecos del panel salen más rectangulares que cuadrados, así que quitamos el
-       recorte/zoom de las fotos para que se vean enteras en vez de cortadas. */
+       recorte/zoom de las fotos activas para que se vean enteras en vez de cortadas. */
     @media (max-aspect-ratio: 3/5) {
       .card img {
         object-fit: contain;
         object-position: center;
         transform: none;
       }
+    }
+
+    /* Fotos de categorías ya resueltas: recorte/zoom en móvil y tablet (hasta el ancho
+       máximo del propio tablero), sin recorte en pantallas más anchas que eso (navegador
+       de escritorio), donde las filas pueden salir demasiado altas y el recorte exagera. */
+    @media (max-width: 650px) {
       .solved-img {
-        object-fit: contain;
-        object-position: center;
+        object-fit: cover;
+        object-position: top center;
       }
     }
   </style>
