@@ -439,8 +439,8 @@
       <p>Selecciona 4 imágenes y pulsa <strong>Enviar</strong>. Si aciertas el grupo, se resuelve y sube arriba del todo. Si fallas, pierdes una vida (tienes 4 en total). Al perderlas todas, se acaba la partida y se muestra la solución completa.</p>
       <p><strong>Modos de dificultad:</strong></p>
       <ul>
-        <li><strong>Novato / Supernova / Yonko:</strong> un único panel con categorías de esa dificultad concreta.</li>
-        <li><strong>Infinito:</strong> panel tras panel sin parar, mezclando todas las dificultades, hasta que te quedes sin vidas. Si has iniciado sesión, tu progreso se guarda automáticamente y tu mejor racha entra en el Ranking.</li>
+        <li><strong>Novato</strong> (fácil), <strong>Supernova</strong> (normal) y <strong>Yonko</strong> (difícil): un único panel con categorías de esa dificultad concreta.</li>
+        <li><strong>Infinito:</strong> panel tras panel sin parar, mezclando todas las dificultades, hasta que te quedes sin vidas. Si has iniciado sesión, tu progreso se guarda automáticamente y tu mejor racha entra en el ranking.</li>
       </ul>
     </div>
   </div>
@@ -1090,7 +1090,7 @@
     const el = document.getElementById("infinite-score");
     if (isInfiniteMode) {
       el.style.display = "block";
-      el.innerText = `🏆 Paneles resueltos: ${infiniteSolvedCount}`;
+      el.innerText = `🔥 Paneles resueltos: ${infiniteSolvedCount}`;
     } else {
       el.style.display = "none";
     }
