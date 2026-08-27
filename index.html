@@ -412,6 +412,17 @@
       .solution-row { padding: 8px; gap: 6px; }
       .close-btn { top: 8px; right: 10px; font-size: 1.3rem; }
     }
+
+    /* Pantallas notablemente más altas que anchas (la mayoría de móviles en vertical):
+       los huecos del panel salen más rectangulares que cuadrados, así que quitamos el
+       recorte/zoom de las fotos para que se vean enteras en vez de cortadas. */
+    @media (max-aspect-ratio: 3/5) {
+      .card img {
+        object-fit: contain;
+        object-position: center;
+        transform: none;
+      }
+    }
   </style>
   <!-- Firebase SDK (Auth + Firestore) -->
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
