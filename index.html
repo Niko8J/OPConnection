@@ -86,7 +86,9 @@
       width: var(--icon-size); height: var(--icon-size); border-radius: 50%; border: 2px solid #334155; background: #1e293b;
       padding: 0; cursor: pointer; overflow: hidden; display: flex; align-items: center; justify-content: center;
     }
-    .auth-icon-btn:hover { border-color: #f59e0b; }
+    @media (hover: hover) and (pointer: fine) {
+      .auth-icon-btn:hover { border-color: #f59e0b; }
+    }
     .auth-icon-empty { width: 100%; height: 100%; }
     .auth-icon-avatar {
       width: 100%; height: 100%; object-fit: cover; object-position: top center; display: none;
@@ -138,6 +140,7 @@
       width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 6px;
       border: 1px solid #334155; background: #1e293b; color: #f8fafc; font-size: 0.95rem;
     }
+    .contact-textarea { font-family: inherit; resize: vertical; min-height: 120px; }
     .auth-error { color: #ef4444; font-size: 0.85rem; margin-bottom: 8px; min-height: 1em; }
     .auth-success { color: #22c55e; font-size: 0.85rem; margin-bottom: 8px; }
     .auth-avatar-label { margin: 6px 0; color: #94a3b8; font-size: 0.9rem; }
@@ -478,6 +481,7 @@
 
       <button class="auth-dropdown-item" onclick="openHowToPlayModal()">❓ Cómo jugar</button>
       <button class="auth-dropdown-item auth-dropdown-item-disabled" disabled title="Disponible próximamente">🌐 Idioma (próximamente)</button>
+      <button class="auth-dropdown-item" onclick="openContactModal()">✉️ Contacto</button>
     </div>
   </div>
 
@@ -636,6 +640,24 @@
         <li><strong>Infinito:</strong> panel tras panel sin parar, mezclando todas las dificultades, hasta que te quedes sin vidas. Si has iniciado sesión, tu progreso se guarda automáticamente y tu mejor racha entra en el ranking.</li>
       </ul>
     </div>
+  </div>
+</div>
+
+<div id="contact-modal" class="modal-overlay" onclick="closeContactModalOnOverlay(event)">
+  <div class="modal-content auth-modal-content">
+    <button class="close-btn" onclick="closeContactModal()">&times;</button>
+    <h2>✉️ Contacto</h2>
+
+    <p class="auth-avatar-label">
+      Aquí puedes escribirme sugerencias, dudas o quejas sobre el juego. También se agradece muchísimo cualquier fallo que hayas encontrado, ya sea en la programación del juego o en las conexiones de los personajes.
+    </p>
+
+    <div id="contact-error" class="auth-error"></div>
+
+    <input type="email" id="contact-email" class="auth-input" placeholder="Tu correo electrónico">
+    <textarea id="contact-message" class="auth-input contact-textarea" placeholder="Escribe aquí tu mensaje..." rows="6"></textarea>
+
+    <button class="action-btn submit" onclick="submitContactForm()">Enviar</button>
   </div>
 </div>
 
@@ -842,8 +864,7 @@
       document.getElementById("auth-dropdown-username").innerText = (currentUserProfile && currentUserProfile.username) || currentUser.email;
 
       const bestStreak = (currentUserProfile && currentUserProfile.bestStreak) || 0;
-      document.getElementById("auth-dropdown-best-streak").innerText =
-        `🔥 Mejor racha: ${bestStreak} ${bestStreak === 1 ? "panel" : "paneles"}`;
+      document.getElementById("auth-dropdown-best-streak").innerText = `🔥 Mejor racha: ${bestStreak}`;
     } else {
       emptyIcon.style.display = "block";
       avatarIcon.style.display = "none";
@@ -1303,6 +1324,47 @@
 
   function closeHowToModalOnOverlay(event) {
     if (event.target.id === "howto-modal") closeHowToModal();
+  }
+
+  // ---------- Contacto ----------
+
+  function openContactModal() {
+    document.getElementById("auth-dropdown").style.display = "none";
+    document.getElementById("contact-error").innerText = "";
+    document.getElementById("contact-email").value = (currentUser && currentUser.email) || "";
+    document.getElementById("contact-message").value = "";
+    document.getElementById("contact-modal").style.display = "flex";
+  }
+
+  function closeContactModal() {
+    document.getElementById("contact-modal").style.display = "none";
+  }
+
+  function closeContactModalOnOverlay(event) {
+    if (event.target.id === "contact-modal") closeContactModal();
+  }
+
+  function submitContactForm() {
+    const errorEl = document.getElementById("contact-error");
+    errorEl.innerText = "";
+
+    const email = document.getElementById("contact-email").value.trim();
+    const message = document.getElementById("contact-message").value.trim();
+
+    if (!email) {
+      errorEl.innerText = "Escribe tu correo electrónico.";
+      return;
+    }
+    if (!message) {
+      errorEl.innerText = "Escribe tu mensaje.";
+      return;
+    }
+
+    const subject = encodeURIComponent("OPConnection formulario");
+    const body = encodeURIComponent(`De: ${email}\n\n${message}`);
+    window.location.href = `mailto:nikojota888@gmail.com?subject=${subject}&body=${body}`;
+
+    closeContactModal();
   }
 
   function traduceErrorFirebase(e) {
