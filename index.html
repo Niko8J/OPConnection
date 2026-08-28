@@ -56,12 +56,8 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     html { height: 100%; }
     body {
-      background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center;
-      height: 100vh; height: 100dvh; height: var(--app-height, 100dvh); overflow: hidden;
-    }
-    #scale-wrapper {
-      display: flex; justify-content: center; padding: 12px;
-      transform-origin: center center;
+      background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: flex-start;
+      height: var(--frozen-vh, 100dvh); padding: 12px;
     }
     .container {
       max-width: 650px; width: 100%; text-align: center; position: relative;
@@ -454,7 +450,6 @@
 </head>
 <body>
 
-<div id="scale-wrapper">
 <div class="container">
   <div class="auth-corner">
     <button id="auth-icon-btn" class="auth-icon-btn" onclick="toggleAuthMenu(event)" title="Cuenta">
@@ -664,7 +659,6 @@
 
     <button class="action-btn submit" id="contact-submit-btn" onclick="submitContactForm()">Enviar</button>
   </div>
-</div>
 </div>
 
 <script>
@@ -1494,34 +1488,28 @@
     ]);
   }
 
-  // ---------- Diseño "congelado" + escalado en bloque (evita que el zoom deforme el juego) ----------
+  // ---------- Diseño "congelado" (evita que el zoom deforme el juego) ----------
   //
   // En vez de recalcular el diseño con medidas relativas a la pantalla (vh/vw) cada vez que
   // el navegador avisa de un cambio de tamaño —lo cual incluye el zoom, no solo un cambio de
-  // ventana real—, calculamos el diseño UNA VEZ para la "forma" de pantalla actual (ancho y
-  // alto) y lo dejamos fijo en píxeles. Cualquier cambio posterior se resuelve escalando ese
-  // diseño fijo en bloque (como una foto que se agranda o encoge), nunca reajustando sus
-  // proporciones internas por separado.
+  // ventana real—, calculamos el diseño UNA VEZ para la pantalla actual (ancho y alto) y lo
+  // dejamos fijo en píxeles. Así, el propio zoom del navegador amplía el diseño ya calculado
+  // tal cual (sin que nuestro código intente "compensarlo"), que es lo que amplía o reduce de
+  // forma proporcional sin deformar nada. Si el zoom hace que el juego ya no quepa entero,
+  // aparece scroll de forma natural, en vez de que todo se encoja para seguir cabiendo.
   //
   // Los navegadores no permiten saber a qué nivel de zoom está la página, así que no podemos
   // "detectarlo" directamente. Usamos en su lugar una aproximación fiable: el zoom casi nunca
   // cambia la relación de aspecto de la ventana (ancho/alto), mientras que un cambio real de
-  // tamaño de ventana o un giro de pantalla sí. Por eso solo recalculamos el diseño entero
-  // cuando esa relación cambia de forma notable; el resto de las veces, solo reescalamos.
+  // tamaño de ventana o un giro de pantalla sí. Por eso solo recalculamos el diseño cuando esa
+  // relación cambia de forma notable. Además, usamos window.innerWidth/innerHeight (no
+  // visualViewport), que no varían al hacer zoom táctil (pellizcar) en móvil/tablet — así ese
+  // gesto tampoco dispara ningún recálculo.
 
-  let frozenWidth = null;
-  let frozenHeight = null;
   let frozenAspect = null;
 
   function clampPx(min, preferred, max) {
     return Math.max(min, Math.min(preferred, max));
-  }
-
-  function getViewportSize() {
-    return {
-      w: (window.visualViewport && window.visualViewport.width) || window.innerWidth,
-      h: (window.visualViewport && window.visualViewport.height) || window.innerHeight
-    };
   }
 
   function computeDesignVars(w, h) {
@@ -1534,66 +1522,38 @@
     root.setProperty("--container-pad-top", clampPx(2, h * 0.015, 16) + "px");
     root.setProperty("--modal-max-h", Math.round(h * 0.85) + "px");
     root.setProperty("--ranking-list-max-h", Math.round(h * 0.55) + "px");
+    root.setProperty("--frozen-vh", h + "px");
   }
 
-  function applyScale() {
-    const wrapper = document.getElementById("scale-wrapper");
-    if (!wrapper || !frozenWidth || !frozenHeight) return;
-    const { w, h } = getViewportSize();
-    const scale = Math.min(w / frozenWidth, h / frozenHeight);
-    wrapper.style.transform = `scale(${scale})`;
-  }
-
-  // Recalcula el diseño entero (medidas, hueco disponible...) para la forma de pantalla actual.
+  // Recalcula el diseño entero para la pantalla actual. Solo se llama al cargar la página
+  // o cuando de verdad ha cambiado la forma de la pantalla (giro, ventana redimensionada...).
   function freezeDesign() {
-    const { w, h } = getViewportSize();
-    frozenWidth = w;
-    frozenHeight = h;
+    const w = window.innerWidth;
+    const h = window.innerHeight;
     frozenAspect = w / h;
-
     computeDesignVars(w, h);
-
-    const wrapper = document.getElementById("scale-wrapper");
-    if (wrapper) {
-      wrapper.style.width = w + "px";
-      wrapper.style.height = h + "px";
-    }
-
-    applyScale();
-  }
-
-  // La unidad CSS "dvh" a veces no se recalcula bien en algunas PWA de móvil/tablet
-  // justo después de gestos como "deslizar hacia abajo para actualizar", dejando un
-  // scroll residual. Calculamos la altura real con JS como red de seguridad adicional.
-  function updateAppHeight() {
-    const { h } = getViewportSize();
-    document.documentElement.style.setProperty("--app-height", h + "px");
   }
 
   function handleViewportChange() {
-    const { w, h } = getViewportSize();
+    const w = window.innerWidth;
+    const h = window.innerHeight;
     const currentAspect = w / h;
-    const aspectChanged = !frozenAspect || Math.abs(currentAspect - frozenAspect) / frozenAspect > 0.08;
+    const aspectChanged = !frozenAspect || Math.abs(currentAspect - frozenAspect) / frozenAspect > 0.15;
 
     if (aspectChanged) {
       freezeDesign(); // la forma de la pantalla ha cambiado de verdad (giro, ventana redimensionada...)
-    } else {
-      applyScale(); // probablemente solo zoom: reescalamos en bloque sin recalcular nada
     }
-    updateAppHeight();
+    // Si no ha cambiado la forma, no hacemos nada: probablemente es solo zoom, y dejamos que
+    // el propio navegador lo amplíe con normalidad sobre el diseño ya calculado.
   }
 
   freezeDesign();
-  updateAppHeight();
   window.addEventListener("resize", handleViewportChange);
   window.addEventListener("orientationchange", () => setTimeout(freezeDesign, 60));
   window.addEventListener("pageshow", handleViewportChange);
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) handleViewportChange();
   });
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener("resize", handleViewportChange);
-  }
 
   window.addEventListener("DOMContentLoaded", () => {
     // Corregimos el botón de dificultad resaltado ya mismo (sin esperar a la red) para
