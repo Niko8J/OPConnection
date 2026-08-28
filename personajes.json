@@ -860,6 +860,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
       ]
     }
   },
@@ -1208,6 +1211,9 @@
         {"val": "Lunarian", "dif": "media"},
         {"val": "Cyborgs", "dif": "media"},
         {"val": "Clones", "dif": "media"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
       ]
     }
   },
@@ -1232,6 +1238,9 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
       ]
     }
   },
@@ -1253,6 +1262,9 @@
         {"val": "Lunarian", "dif": "media"},
         {"val": "Cyborgs", "dif": "media"},
         {"val": "Clones", "dif": "media"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
       ]
     }
   },
@@ -1274,6 +1286,9 @@
         {"val": "Lunarian", "dif": "media"},
         {"val": "Cyborgs", "dif": "media"},
         {"val": "Clones", "dif": "media"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
       ]
     }
   },
@@ -1881,6 +1896,9 @@
       ],
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Tobiroppos de los Piratas Bestia", "dif": "media"}
       ]
     }
   },
@@ -2332,7 +2350,8 @@
         {"val": "Piratas Bestia", "dif": "facil"}
       ],
       "Titulo": [
-        {"val": "Supernovas", "dif": "media"}
+        {"val": "Supernovas", "dif": "media"},
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
@@ -2362,7 +2381,8 @@
         {"val": "Piratas Bestia", "dif": "facil"}
       ],
       "Titulo": [
-        {"val": "Supernovas", "dif": "media"}
+        {"val": "Supernovas", "dif": "media"},
+        {"val": "Tobiroppos de los Piratas Bestia", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
@@ -2994,6 +3014,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Tobiroppos de los Piratas Bestia", "dif": "media"}
       ]
     }
   },
@@ -3017,6 +3040,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Tobiroppos de los Piratas Bestia", "dif": "media"}
       ]
     }
   },
@@ -3040,6 +3066,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Tobiroppos de los Piratas Bestia", "dif": "media"}
       ]
     }
   },
@@ -3066,6 +3095,9 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Tobiroppos de los Piratas Bestia", "dif": "media"}
       ]
     }
   },
@@ -6838,6 +6870,9 @@
       ],
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Cyborgs", "dif": "media"}
       ]
     }
   },
@@ -7082,6 +7117,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
       ]
     }
   },
@@ -7101,6 +7139,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
       ]
     }
   },
@@ -7223,6 +7264,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: SMILE defectuosa", "dif": "facil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
       ]
     }
   },
@@ -7558,6 +7602,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
       ]
     }
   },
@@ -8049,6 +8096,1102 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "ageha_woman",
+    "name": "Ageha Woman",
+    "img": "imagenes/AgehaWoman.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "battaman",
+    "name": "Battaman",
+    "img": "imagenes/Battaman.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "beegirl",
+    "name": "Beegirl",
+    "img": "imagenes/Beegirl.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "beetleman",
+    "name": "Beetleman",
+    "img": "imagenes/Beetleman.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "bishonure_onna",
+    "name": "Bishonure-Onna",
+    "img": "imagenes/BishonureOnna.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "bisley",
+    "name": "Bisley",
+    "img": "imagenes/Bisley.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "fuga",
+    "name": "Fuga",
+    "img": "imagenes/Fuga.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "hoisassa",
+    "name": "Hoisassa",
+    "img": "imagenes/Hoisassa.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "koshi_falcon",
+    "name": "Koshi Falcon",
+    "img": "imagenes/KoshiFalcon.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "saitank",
+    "name": "Saitank",
+    "img": "imagenes/Saitank.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "usunoro",
+    "name": "Usunoro",
+    "img": "imagenes/Usunoro.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "yamanba",
+    "name": "Yamanba",
+    "img": "imagenes/Yamanba.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "sheepshead",
+    "name": "Sheepshead",
+    "img": "imagenes/Sheepshead.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "ginrummy",
+    "name": "Ginrummy",
+    "img": "imagenes/Ginrummy.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "batman",
+    "name": "Batman",
+    "img": "imagenes/Batman.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "gazelleman",
+    "name": "Gazelleman",
+    "img": "imagenes/Gazelleman.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "holedem",
+    "name": "Holed'em",
+    "img": "imagenes/Holedem.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "mouseman",
+    "name": "Mouseman",
+    "img": "imagenes/Mouseman.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "speed",
+    "name": "Speed",
+    "img": "imagenes/Speed.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "rabbitman",
+    "name": "Rabbitman",
+    "img": "imagenes/Rabbitman.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "snakeman",
+    "name": "Snakeman",
+    "img": "imagenes/Snakeman.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "sarahebi",
+    "name": "Sarahebi",
+    "img": "imagenes/Sarahebi.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "dobon",
+    "name": "Dobon",
+    "img": "imagenes/Dobon.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "alpacaman",
+    "name": "Alpacaman",
+    "img": "imagenes/Alpacaman.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "solitaire",
+    "name": "Solitaire",
+    "img": "imagenes/Solitaire.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "daifugo",
+    "name": "Daifugo",
+    "img": "imagenes/Daifugo.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "babanuki",
+    "name": "Babanuki",
+    "img": "imagenes/Babanuki.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "madilloman",
+    "name": "Madilloman",
+    "img": "imagenes/Madilloman.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "dachoman",
+    "name": "Dachoman",
+    "img": "imagenes/Dachoman.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "bao_huang",
+    "name": "Bao Huang",
+    "img": "imagenes/BaoHuang.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ],
+      "Raza": [
+        {"val": "Cyborgs", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "briscola",
+    "name": "Briscola",
+    "img": "imagenes/Briscola.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "fourtricks",
+    "name": "Fourtricks",
+    "img": "imagenes/Fourtricks.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "hamlet",
+    "name": "Hamlet",
+    "img": "imagenes/Hamlet.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "mizerka",
+    "name": "Mizerka",
+    "img": "imagenes/Mizerka.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "poker",
+    "name": "Poker",
+    "img": "imagenes/Poker.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "tenjo_sagari",
+    "name": "Tenjo-Sagari",
+    "img": "imagenes/TenjoSagari.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "nure_onna",
+    "name": "Nure-Onna",
+    "img": "imagenes/NureOnna.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "caimanlady",
+    "name": "Caimanlady",
+    "img": "imagenes/Caimanlady.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ],
+      "Raza": [
+        {"val": "Cyborgs", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "wanyudo",
+    "name": "Wanyudo",
+    "img": "imagenes/Wanyudo.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "scotch",
+    "name": "Scotch",
+    "img": "imagenes/Scotch.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Raza": [
+        {"val": "Cyborgs", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "ahiru",
+    "name": "Ahiru",
+    "img": "imagenes/Ahiru.png",
+    "tags": {
+      "Banda": [
+        {"val": "Ejército Revolucionario", "dif": "facil"}
+      ],
+      "Raza": [
+        {"val": "Cyborgs", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "belo_betty",
+    "name": "Belo Betty",
+    "img": "imagenes/BeloBetty.png",
+    "tags": {
+      "Banda": [
+        {"val": "Ejército Revolucionario", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "karasu",
+    "name": "Karasu",
+    "img": "imagenes/Karasu.png",
+    "tags": {
+      "Banda": [
+        {"val": "Ejército Revolucionario", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Logia", "dif": "media"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "morley",
+    "name": "Morley",
+    "img": "imagenes/Morley.png",
+    "tags": {
+      "Banda": [
+        {"val": "Ejército Revolucionario", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: West Blue", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Gigantes", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "lindbergh",
+    "name": "Lindbergh",
+    "img": "imagenes/Lindbergh.png",
+    "tags": {
+      "Banda": [
+        {"val": "Ejército Revolucionario", "dif": "facil"}
+      ],
+      "Raza": [
+        {"val": "Minks", "dif": "media"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "ginny",
+    "name": "Ginny",
+    "img": "imagenes/Ginny.png",
+    "tags": {
+      "Banda": [
+        {"val": "Ejército Revolucionario", "dif": "facil"}
+      ],
+      "Estado": [
+        {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "hack",
+    "name": "Hack",
+    "img": "imagenes/Hack.png",
+    "tags": {
+      "Banda": [
+        {"val": "Ejército Revolucionario", "dif": "facil"}
+      ],
+      "Raza": [
+        {"val": "Gyojins", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "nokokuwa_police",
+    "name": "Nokokuwa Police",
+    "img": "imagenes/NokokuwaPolice.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "hermanos_doubt",
+    "name": "Hermanos Doubt",
+    "img": "imagenes/HermanosDoubt.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Shinuchis de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "hawkman",
+    "name": "Hawkman",
+    "img": "imagenes/Hawkman.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "nightcrab_girl",
+    "name": "Nightcrab Girl",
+    "img": "imagenes/NightcrabGirl.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "redwolf",
+    "name": "Redwolf",
+    "img": "imagenes/Redwolf.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "jumper",
+    "name": "Jumper",
+    "img": "imagenes/Jumper.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "chochinman",
+    "name": "Chochinman",
+    "img": "imagenes/Chochinman.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "caucasusman",
+    "name": "Caucasusman",
+    "img": "imagenes/Caucasusman.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "kamakirigirl",
+    "name": "Kamakirigirl",
+    "img": "imagenes/Kamakirigirl.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "scorpionlady",
+    "name": "Scorpionlady",
+    "img": "imagenes/Scorpionlady.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "horseman",
+    "name": "Horseman",
+    "img": "imagenes/Horseman.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "SMILE": [
+        {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
       ]
     }
   }
