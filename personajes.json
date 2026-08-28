@@ -652,6 +652,9 @@
       "Fruta": [
         {"val": "Fruta del diablo: Logia", "dif": "media"}
       ],
+      "Despertar": [
+        {"val": "Fruta despertada", "dif": "dificil"}
+      ],
       "Recompensa": [
         {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ],
