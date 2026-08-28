@@ -42,21 +42,30 @@
       font-display: swap;
     }
     :root {
-      --card-gap: clamp(4px, 1.1vh, 10px);
-      --logo-h: clamp(60px, 11vh, 130px);
-      --icon-size: clamp(48px, 14vw, 70px);
-      --v-gap-sm: clamp(2px, 0.8vh, 8px);
-      --v-gap-md: clamp(4px, 1.2vh, 12px);
+      /* Valores de partida razonables; el JS los recalcula en píxeles fijos según la
+         pantalla real, y ya no cambian con el zoom (evita que el diseño se deforme). */
+      --card-gap: 8px;
+      --logo-h: 100px;
+      --icon-size: 62px;
+      --v-gap-sm: 6px;
+      --v-gap-md: 9px;
+      --container-pad-top: 10px;
+      --modal-max-h: 85vh;
+      --ranking-list-max-h: 55vh;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     html { height: 100%; }
     body {
-      background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center;
-      height: 100vh; height: 100dvh; height: var(--app-height, 100dvh); padding: 12px;
+      background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center;
+      height: 100vh; height: 100dvh; height: var(--app-height, 100dvh); overflow: hidden;
+    }
+    #scale-wrapper {
+      display: flex; justify-content: center; padding: 12px;
+      transform-origin: center center;
     }
     .container {
       max-width: 650px; width: 100%; text-align: center; position: relative;
-      display: flex; flex-direction: column; height: 100%; padding-top: clamp(2px, 1.5vh, 16px);
+      display: flex; flex-direction: column; height: 100%; padding-top: var(--container-pad-top);
     }
 
     .site-title { display: flex; flex-direction: column; align-items: center; margin-bottom: var(--v-gap-sm); flex-shrink: 0; }
@@ -116,7 +125,7 @@
 
     .ranking-modal-content { max-width: 420px; text-align: left; }
     .ranking-subtitle { color: #94a3b8; font-size: 0.85rem; margin-bottom: 10px; }
-    .ranking-list { max-height: 55vh; overflow-y: auto; }
+    .ranking-list { max-height: var(--ranking-list-max-h); overflow-y: auto; }
     .ranking-row { display: flex; align-items: center; gap: 10px; padding: 8px 4px; border-bottom: 1px solid #1e293b; }
     .ranking-row:last-child { border-bottom: none; }
     .ranking-position { width: 26px; text-align: center; font-weight: bold; color: #94a3b8; flex-shrink: 0; }
@@ -181,7 +190,7 @@
     .diff-btn.active { background: #f59e0b; color: #0f172a; border-color: #f59e0b; }
 
     .infinite-score {
-      font-size: clamp(0.8rem, 3vw, 1.1rem);
+      font-size: 0.95rem;
       font-weight: bold;
       color: #f59e0b;
       white-space: nowrap;
@@ -251,7 +260,7 @@
       background-color: #1e293b;
     }
     .solved-label {
-      flex-shrink: 0; font-size: clamp(0.75rem, 2.2vw, 1rem);
+      flex-shrink: 0; font-size: 0.85rem;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
     }
     
@@ -334,7 +343,7 @@
     .modal-overlay {
       display: none;
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%; height: 100dvh;
+      top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(4px);
       justify-content: center;
@@ -355,8 +364,7 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.5);
       animation: fadeIn 0.3s ease;
       position: relative;
-      max-height: 85vh;
-      max-height: 85dvh;
+      max-height: var(--modal-max-h);
       overflow-y: auto;
     }
     .modal-content h2 { margin-bottom: 10px; font-size: 1.6rem; }
@@ -411,7 +419,7 @@
       button.action-btn { padding: 8px 14px; font-size: 0.9rem; }
 
       .modal-overlay { padding: 12px 8px; }
-      .modal-content { padding: 16px; max-height: 92vh; max-height: 92dvh; }
+      .modal-content { padding: 16px; }
       .modal-content h2 { font-size: 1.25rem; margin-bottom: 6px; }
       .modal-content p { font-size: 0.85rem; margin-bottom: 4px; }
       .solutions-list { gap: 8px; margin-top: 10px; margin-bottom: 14px; }
@@ -446,6 +454,7 @@
 </head>
 <body>
 
+<div id="scale-wrapper">
 <div class="container">
   <div class="auth-corner">
     <button id="auth-icon-btn" class="auth-icon-btn" onclick="toggleAuthMenu(event)" title="Cuenta">
@@ -655,6 +664,7 @@
 
     <button class="action-btn submit" id="contact-submit-btn" onclick="submitContactForm()">Enviar</button>
   </div>
+</div>
 </div>
 
 <script>
@@ -1484,23 +1494,105 @@
     ]);
   }
 
+  // ---------- Diseño "congelado" + escalado en bloque (evita que el zoom deforme el juego) ----------
+  //
+  // En vez de recalcular el diseño con medidas relativas a la pantalla (vh/vw) cada vez que
+  // el navegador avisa de un cambio de tamaño —lo cual incluye el zoom, no solo un cambio de
+  // ventana real—, calculamos el diseño UNA VEZ para la "forma" de pantalla actual (ancho y
+  // alto) y lo dejamos fijo en píxeles. Cualquier cambio posterior se resuelve escalando ese
+  // diseño fijo en bloque (como una foto que se agranda o encoge), nunca reajustando sus
+  // proporciones internas por separado.
+  //
+  // Los navegadores no permiten saber a qué nivel de zoom está la página, así que no podemos
+  // "detectarlo" directamente. Usamos en su lugar una aproximación fiable: el zoom casi nunca
+  // cambia la relación de aspecto de la ventana (ancho/alto), mientras que un cambio real de
+  // tamaño de ventana o un giro de pantalla sí. Por eso solo recalculamos el diseño entero
+  // cuando esa relación cambia de forma notable; el resto de las veces, solo reescalamos.
+
+  let frozenWidth = null;
+  let frozenHeight = null;
+  let frozenAspect = null;
+
+  function clampPx(min, preferred, max) {
+    return Math.max(min, Math.min(preferred, max));
+  }
+
+  function getViewportSize() {
+    return {
+      w: (window.visualViewport && window.visualViewport.width) || window.innerWidth,
+      h: (window.visualViewport && window.visualViewport.height) || window.innerHeight
+    };
+  }
+
+  function computeDesignVars(w, h) {
+    const root = document.documentElement.style;
+    root.setProperty("--card-gap", clampPx(4, h * 0.011, 10) + "px");
+    root.setProperty("--logo-h", clampPx(60, h * 0.11, 130) + "px");
+    root.setProperty("--icon-size", clampPx(48, w * 0.14, 70) + "px");
+    root.setProperty("--v-gap-sm", clampPx(2, h * 0.008, 8) + "px");
+    root.setProperty("--v-gap-md", clampPx(4, h * 0.012, 12) + "px");
+    root.setProperty("--container-pad-top", clampPx(2, h * 0.015, 16) + "px");
+    root.setProperty("--modal-max-h", Math.round(h * 0.85) + "px");
+    root.setProperty("--ranking-list-max-h", Math.round(h * 0.55) + "px");
+  }
+
+  function applyScale() {
+    const wrapper = document.getElementById("scale-wrapper");
+    if (!wrapper || !frozenWidth || !frozenHeight) return;
+    const { w, h } = getViewportSize();
+    const scale = Math.min(w / frozenWidth, h / frozenHeight);
+    wrapper.style.transform = `scale(${scale})`;
+  }
+
+  // Recalcula el diseño entero (medidas, hueco disponible...) para la forma de pantalla actual.
+  function freezeDesign() {
+    const { w, h } = getViewportSize();
+    frozenWidth = w;
+    frozenHeight = h;
+    frozenAspect = w / h;
+
+    computeDesignVars(w, h);
+
+    const wrapper = document.getElementById("scale-wrapper");
+    if (wrapper) {
+      wrapper.style.width = w + "px";
+      wrapper.style.height = h + "px";
+    }
+
+    applyScale();
+  }
+
   // La unidad CSS "dvh" a veces no se recalcula bien en algunas PWA de móvil/tablet
   // justo después de gestos como "deslizar hacia abajo para actualizar", dejando un
-  // scroll residual. Calculamos la altura real con JS y la recalculamos ante cualquier
-  // cambio, como red de seguridad adicional.
+  // scroll residual. Calculamos la altura real con JS como red de seguridad adicional.
   function updateAppHeight() {
-    const height = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
-    document.documentElement.style.setProperty("--app-height", height + "px");
+    const { h } = getViewportSize();
+    document.documentElement.style.setProperty("--app-height", h + "px");
   }
+
+  function handleViewportChange() {
+    const { w, h } = getViewportSize();
+    const currentAspect = w / h;
+    const aspectChanged = !frozenAspect || Math.abs(currentAspect - frozenAspect) / frozenAspect > 0.08;
+
+    if (aspectChanged) {
+      freezeDesign(); // la forma de la pantalla ha cambiado de verdad (giro, ventana redimensionada...)
+    } else {
+      applyScale(); // probablemente solo zoom: reescalamos en bloque sin recalcular nada
+    }
+    updateAppHeight();
+  }
+
+  freezeDesign();
   updateAppHeight();
-  window.addEventListener("resize", updateAppHeight);
-  window.addEventListener("orientationchange", updateAppHeight);
-  window.addEventListener("pageshow", updateAppHeight);
+  window.addEventListener("resize", handleViewportChange);
+  window.addEventListener("orientationchange", () => setTimeout(freezeDesign, 60));
+  window.addEventListener("pageshow", handleViewportChange);
   document.addEventListener("visibilitychange", () => {
-    if (!document.hidden) updateAppHeight();
+    if (!document.hidden) handleViewportChange();
   });
   if (window.visualViewport) {
-    window.visualViewport.addEventListener("resize", updateAppHeight);
+    window.visualViewport.addEventListener("resize", handleViewportChange);
   }
 
   window.addEventListener("DOMContentLoaded", () => {
