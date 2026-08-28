@@ -9194,5 +9194,37 @@
         {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
       ]
     }
+  },
+  {
+    "id": "lapahn",
+    "name": "Lapahn",
+    "img": "imagenes/Lapahn.png",
+    "tags": {
+      "Banda": [
+        {"val": "Reino de Sakura", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "surume",
+    "name": "Surume",
+    "img": "imagenes/Surume.png",
+    "tags": {
+      "Banda": [
+        {"val": "Nuevos Piratas Gyojin", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ]
+    }
   }
 ]
