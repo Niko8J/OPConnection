@@ -448,6 +448,9 @@
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics-compat.js"></script>
+
+  <!-- EmailJS (envío del formulario de contacto sin servidor propio) -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -653,11 +656,12 @@
     </p>
 
     <div id="contact-error" class="auth-error"></div>
+    <div id="contact-success" class="auth-success" style="display: none;"></div>
 
     <input type="email" id="contact-email" class="auth-input" placeholder="Tu correo electrónico">
     <textarea id="contact-message" class="auth-input contact-textarea" placeholder="Escribe aquí tu mensaje..." rows="6"></textarea>
 
-    <button class="action-btn submit" onclick="submitContactForm()">Enviar</button>
+    <button class="action-btn submit" id="contact-submit-btn" onclick="submitContactForm()">Enviar</button>
   </div>
 </div>
 
@@ -680,6 +684,15 @@
   });
   try { firebase.analytics(); } catch (e) {
     // Analytics puede fallar si un bloqueador de anuncios/privacidad lo impide: no rompemos el juego por eso.
+  }
+
+  // ---------- EmailJS (formulario de contacto) ----------
+  // Sustituye estos tres valores por los de tu cuenta de EmailJS.
+  const EMAILJS_PUBLIC_KEY = "iursPsccVWGIlwfSE";
+  const EMAILJS_SERVICE_ID = "service_zccysml";
+  const EMAILJS_TEMPLATE_ID = "template_ufpnrpb";
+  try { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); } catch (e) {
+    console.error("No se pudo inicializar EmailJS:", e);
   }
 
   let currentUser = null;
@@ -1331,6 +1344,7 @@
   function openContactModal() {
     document.getElementById("auth-dropdown").style.display = "none";
     document.getElementById("contact-error").innerText = "";
+    document.getElementById("contact-success").style.display = "none";
     document.getElementById("contact-email").value = (currentUser && currentUser.email) || "";
     document.getElementById("contact-message").value = "";
     document.getElementById("contact-modal").style.display = "flex";
@@ -1344,9 +1358,12 @@
     if (event.target.id === "contact-modal") closeContactModal();
   }
 
-  function submitContactForm() {
+  async function submitContactForm() {
     const errorEl = document.getElementById("contact-error");
+    const successEl = document.getElementById("contact-success");
+    const submitBtn = document.getElementById("contact-submit-btn");
     errorEl.innerText = "";
+    successEl.style.display = "none";
 
     const email = document.getElementById("contact-email").value.trim();
     const message = document.getElementById("contact-message").value.trim();
@@ -1360,11 +1377,27 @@
       return;
     }
 
-    const subject = encodeURIComponent("OPConnection formulario");
-    const body = encodeURIComponent(`De: ${email}\n\n${message}`);
-    window.location.href = `mailto:nikojota888@gmail.com?subject=${subject}&body=${body}`;
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Enviando...";
 
-    closeContactModal();
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        user_email: email,
+        message: message,
+        subject: "OPConnection formulario"
+      });
+
+      document.getElementById("contact-email").value = "";
+      document.getElementById("contact-message").value = "";
+      successEl.style.display = "block";
+      successEl.innerText = "¡Mensaje enviado! Gracias por escribir.";
+    } catch (e) {
+      errorEl.innerText = "No se pudo enviar el mensaje. Inténtalo de nuevo en un momento.";
+      console.error("Error enviando el formulario de contacto:", e);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerText = "Enviar";
+    }
   }
 
   function traduceErrorFirebase(e) {
