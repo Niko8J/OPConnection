@@ -1380,12 +1380,6 @@
     "name": "Yamato",
     "img": "imagenes/Yamato.png",
     "tags": {
-      "Banda": [
-        {"val": "Wano", "dif": "facil"}
-      ],
-      "Origen": [
-        {"val": "Origen: Grand Line", "dif": "dificil"}
-      ],
       "Haki": [
         {"val": "Usuarios de haki del conquistador", "dif": "dificil"},
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
