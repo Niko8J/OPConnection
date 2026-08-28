@@ -6,8 +6,9 @@
   <title>One Piece Connections</title>
 
   <!-- Icono para navegador de escritorio (pestaña) -->
+  <link rel="icon" href="favicon.ico?v=2" sizes="any">
   <link rel="icon" type="image/png" href="logo.png?v=2">
-  <link rel="shortcut icon" type="image/png" href="logo.png?v=2">
+  <link rel="shortcut icon" href="favicon.ico?v=2">
 
   <!-- Icono para iOS (Safari: "Añadir a pantalla de inicio") -->
   <link rel="apple-touch-icon" href="logo.png?v=2">
@@ -733,7 +734,8 @@
   async function loadInfiniteStateCloud() {
     if (!currentUser) return null;
     try {
-      const snap = await db.collection("users").doc(currentUser.uid).get();
+      const snap = await withTimeout(db.collection("users").doc(currentUser.uid).get(), 5000);
+      if (!snap) return null; // se agotó el tiempo de espera sin respuesta
       return snap.exists && snap.data().infiniteState ? snap.data().infiniteState : null;
     } catch (e) {
       console.error("No se pudo cargar el progreso de la nube:", e);
@@ -1383,6 +1385,16 @@
     if (el) el.style.display = "none";
   }
 
+  // Evita que la carga se quede colgada para siempre si Firebase Auth no llega a confirmar
+  // la sesión (por ejemplo, por datos de sesión dañados tras un borrado de caché en el
+  // navegador). Pasado ese tiempo, seguimos adelante como si no hubiera sesión iniciada.
+  function withTimeout(promise, ms) {
+    return Promise.race([
+      promise,
+      new Promise(resolve => setTimeout(resolve, ms))
+    ]);
+  }
+
   // La unidad CSS "dvh" a veces no se recalcula bien en algunas PWA de móvil/tablet
   // justo después de gestos como "deslizar hacia abajo para actualizar", dejando un
   // scroll residual. Calculamos la altura real con JS y la recalculamos ante cualquier
@@ -1451,8 +1463,9 @@
         }
 
         // Sin preferencia guardada (o la última vez fue Infinito): aquí sí necesitamos saber
-        // si hay sesión iniciada antes de decidir qué partida recuperar.
-        await authReadyPromise;
+        // si hay sesión iniciada antes de decidir qué partida recuperar. Con un límite de
+        // tiempo, por si Firebase no llega a responder nunca.
+        await withTimeout(authReadyPromise, 4000);
         const saved = await loadInfiniteState();
 
         if (saved) {
