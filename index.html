@@ -1381,8 +1381,10 @@
     submitBtn.innerText = "Enviando...";
 
     try {
+      const username = (currentUser && currentUserProfile && currentUserProfile.username) || "Invitado (sin sesión iniciada)";
       await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
         user_email: email,
+        user_name: username,
         message: message,
         subject: "OPConnection formulario"
       });
