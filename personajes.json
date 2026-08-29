@@ -5809,7 +5809,6 @@
         {"val": "Nobles mundiales", "dif": "dificil"},
         {"val": "Monarcas", "dif": "dificil"}
       ]
-      ]
     }
   },
   {
@@ -5859,7 +5858,8 @@
     "img": "imagenes/CaptainJohn.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Rocks", "dif": "dificil"}
+        {"val": "Piratas de Rocks", "dif": "dificil"},
+        {"val": "Piratas de Thriller Bark", "dif": "dificil"}
       ],
       "Especialidad": [
         {"val": "Capitanes pirata", "dif": "dificil"}
@@ -5869,6 +5869,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Raza": [
+        {"val": "Zombies", "dif": "dificil"}
       ]
     }
   },
@@ -5905,7 +5908,8 @@
     "img": "imagenes/GillBastar.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Rocks", "dif": "dificil"}
+        {"val": "Piratas de Rocks", "dif": "dificil"},
+        {"val": "Piratas de Thriller Bark", "dif": "dificil"}
       ],
       "Especialidad": [
         {"val": "Tiradores", "dif": "dificil"}
@@ -5918,6 +5922,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 500M y mil millones", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Zombies", "dif": "dificil"}
       ]
     }
   },
@@ -5947,13 +5954,17 @@
     "img": "imagenes/Ganzui.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Rocks", "dif": "dificil"}
+        {"val": "Piratas de Rocks", "dif": "dificil"},
+        {"val": "Piratas de Thriller Bark", "dif": "dificil"}
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Raza": [
+        {"val": "Zombies", "dif": "dificil"}
       ]
     }
   },
@@ -6830,7 +6841,8 @@
     "img": "imagenes/Absalom.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Thriller Bark", "dif": "facil"}
+        {"val": "Piratas de Thriller Bark", "dif": "facil"},
+        {"val": "Piratas de Thriller Bark", "dif": "dificil"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
@@ -6840,6 +6852,9 @@
       ],
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ]
     }
   },
@@ -6859,6 +6874,9 @@
       ],
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ]
     }
   },
@@ -7636,10 +7654,18 @@
     "img": "imagenes/MocDonald.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Thriller Bark", "dif": "facil"}
+        {"val": "Piratas de Thriller Bark", "dif": "facil"},
+        {"val": "Piratas de Thriller Bark", "dif": "dificil"}
       ],
       "Luffy": [
         {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Zombies", "dif": "facil"},
+        {"val": "Zombies", "dif": "dificil"}
       ]
     }
   },
@@ -7649,10 +7675,18 @@
     "img": "imagenes/Unigaro.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Thriller Bark", "dif": "facil"}
+        {"val": "Piratas de Thriller Bark", "dif": "facil"},
+        {"val": "Piratas de Thriller Bark", "dif": "dificil"}
       ],
       "Luffy": [
         {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Zombies", "dif": "facil"},
+        {"val": "Zombies", "dif": "dificil"}
       ]
     }
   },
@@ -10343,6 +10377,370 @@
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
         {"val": "Piratas de Big Mom", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "mohji",
+    "name": "Mohji",
+    "img": "imagenes/Mohji.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Buggy", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Domadores", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "cabaji",
+    "name": "Cabaji",
+    "img": "imagenes/Cabaji.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Buggy", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"},
+        {"val": "Acróbatas", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "richie",
+    "name": "Richie",
+    "img": "imagenes/Richie.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Buggy", "dif": "facil"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "biblo",
+    "name": "Biblo",
+    "img": "imagenes/Biblo.png",
+    "tags": {
+      "Banda": [
+        {"val": "Elbaf", "dif": "facil"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Especialidad": [
+        {"val": "Bibliotecarios", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "kujaku",
+    "name": "Kujaku",
+    "img": "imagenes/Kujaku.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"},
+        {"val": "Miembros de SWORD", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "helmeppo",
+    "name": "Helmeppo",
+    "img": "imagenes/Helmeppo.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"},
+        {"val": "Miembros de SWORD", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "pudding",
+    "name": "Charlotte Pudding",
+    "img": "imagenes/CharlottePudding.png",
+    "tags": {
+      "Banda": [
+        {"val": "Familia Charlotte", "dif": "media"},
+        {"val": "Piratas de Big Mom", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "dellinger",
+    "name": "Dellinger",
+    "img": "imagenes/Dellinger.png",
+    "tags": {
+      "Banda": [
+        {"val": "Donquixote Family", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Gyojins", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "gladius",
+    "name": "Gladius",
+    "img": "imagenes/Gladius.png",
+    "tags": {
+      "Banda": [
+        {"val": "Donquixote Family", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "machvise",
+    "name": "Machvise",
+    "img": "imagenes/Machvise.png",
+    "tags": {
+      "Banda": [
+        {"val": "Donquixote Family", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "buffalo",
+    "name": "Buffalo",
+    "img": "imagenes/Buffalo.png",
+    "tags": {
+      "Banda": [
+        {"val": "Donquixote Family", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "kumashi",
+    "name": "Kumashi",
+    "img": "imagenes/Kumashi.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Thriller Bark", "dif": "facil"},
+        {"val": "Piratas de Thriller Bark", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Zombies", "dif": "facil"},
+        {"val": "Zombies", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "cindry",
+    "name": "Victoria Cindry",
+    "img": "imagenes/Cindry.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Thriller Bark", "dif": "facil"},
+        {"val": "Piratas de Thriller Bark", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Zombies", "dif": "facil"},
+        {"val": "Zombies", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "oars",
+    "name": "Oars",
+    "img": "imagenes/Oars.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Thriller Bark", "dif": "facil"},
+        {"val": "Piratas de Thriller Bark", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Zombies", "dif": "facil"},
+        {"val": "Zombies", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "ryuma",
+    "name": "Shimotsuki Ryuma",
+    "img": "imagenes/Ryuma.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Thriller Bark", "dif": "facil"},
+        {"val": "Piratas de Thriller Bark", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Estado": [
+        {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Raza": [
+        {"val": "Zombies", "dif": "facil"},
+        {"val": "Zombies", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "hildon",
+    "name": "Hildon",
+    "img": "imagenes/Hildon.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Thriller Bark", "dif": "facil"},
+        {"val": "Piratas de Thriller Bark", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Zombies", "dif": "facil"},
+        {"val": "Zombies", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "lola_zombie",
+    "name": "Lola (Zombi)",
+    "img": "imagenes/LolaZombie.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Thriller Bark", "dif": "facil"},
+        {"val": "Piratas de Thriller Bark", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Zombies", "dif": "facil"},
+        {"val": "Zombies", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "jigoro",
+    "name": "Jigoro",
+    "img": "imagenes/Jigoro.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Thriller Bark", "dif": "facil"},
+        {"val": "Piratas de Thriller Bark", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Zombies", "dif": "facil"},
+        {"val": "Zombies", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "inuppe",
+    "name": "Inuppe",
+    "img": "imagenes/Inuppe.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Thriller Bark", "dif": "facil"},
+        {"val": "Piratas de Thriller Bark", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Zombies", "dif": "facil"},
+        {"val": "Zombies", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "tararan",
+    "name": "Tararan",
+    "img": "imagenes/Tararan.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Thriller Bark", "dif": "facil"},
+        {"val": "Piratas de Thriller Bark", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Zombies", "dif": "facil"},
+        {"val": "Zombies", "dif": "dificil"}
       ]
     }
   }
