@@ -294,7 +294,9 @@
         {"val": "Banda: Sombrero de Paja", "dif": "dificil"},
         {"val": "Piratas del Sol", "dif": "media"}
       ],
-      "Titulo": {"val": "Shichibukais", "dif": "facil"},
+      "Titulo": [
+        {"val": "Shichibukais", "dif": "facil"}
+      ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
@@ -401,7 +403,7 @@
     }
   },
   {
-    "id": "Cobra",
+    "id": "cobra",
     "name": "Nefertari D. Cobra",
     "img": "imagenes/Cobra.png",
     "tags": {
@@ -419,6 +421,9 @@
       ],
       "D": [
         {"val": "Voluntad de la D.", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Monarcas", "dif": "dificil"}
       ]
     }
   },
@@ -1596,7 +1601,8 @@
     "img": "imagenes/Jabra.png",
     "tags": {
       "Banda": [
-        {"val": "CP9", "dif": "facil"}
+        {"val": "CP9", "dif": "facil"},
+        {"val": "CP0", "dif": "facil"}
       ],
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
@@ -1647,7 +1653,8 @@
     "img": "imagenes/Kumadori.png",
     "tags": {
       "Banda": [
-        {"val": "CP9", "dif": "facil"}
+        {"val": "CP9", "dif": "facil"},
+        {"val": "CP0", "dif": "facil"}
       ],
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
@@ -1672,7 +1679,8 @@
     "img": "imagenes/Fukurou.png",
     "tags": {
       "Banda": [
-        {"val": "CP9", "dif": "facil"}
+        {"val": "CP9", "dif": "facil"},
+        {"val": "CP0", "dif": "facil"}
       ],
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
@@ -2060,9 +2068,6 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
-      ],
-      "Haki": [
-        {"val": "Sin haki", "dif": "dificil"}
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
@@ -2846,6 +2851,9 @@
       ],
       "Especialidad": [
         {"val": "Capitanes pirata", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Monarcas", "dif": "dificil"}
       ]
     }
   },
@@ -3247,6 +3255,9 @@
       ],
       "Luffy": [
         {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Monarcas", "dif": "dificil"}
       ]
     }
   },
@@ -9472,7 +9483,8 @@
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
       "Titulo": [
-        {"val": "Caballeros de Dios", "dif": "dificil"}
+        {"val": "Caballeros de Dios", "dif": "dificil"},
+        {"val": "Monarcas", "dif": "dificil"}
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
@@ -9521,6 +9533,9 @@
     "tags": {
       "Raza": [
         {"val": "Minks", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Monarcas", "dif": "dificil"}
       ]
     }
   },
@@ -9560,6 +9575,9 @@
     "tags": {
       "Banda": [
         {"val": "Familia Riku", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Monarcas", "dif": "dificil"}
       ]
     }
   },
@@ -9753,6 +9771,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Monarcas", "dif": "dificil"}
       ]
     }
   },
@@ -9769,6 +9790,9 @@
       ],
       "Banda": [
         {"val": "Familia Neptune", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Monarcas", "dif": "dificil"}
       ]
     }
   },
@@ -10126,6 +10150,9 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Monarcas", "dif": "dificil"}
       ]
     }
   },
@@ -10222,6 +10249,93 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "spandine",
+    "name": "Spandine",
+    "img": "imagenes/Spandine.png",
+    "tags": {
+      "Banda": [
+        {"val": "CP9", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "uta",
+    "name": "Uta",
+    "img": "imagenes/Uta.png",
+    "tags": {
+      "Especialidad": [
+        {"val": "Músicos", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "sancrin",
+    "name": "Sancrin",
+    "img": "imagenes/Sancrin.png",
+    "tags": {
+      "Raza": [
+        {"val": "Tribu de brazos largos", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "charlotte_mobile",
+    "name": "Charlotte Mobile",
+    "img": "imagenes/CharlotteMobile.png",
+    "tags": {
+      "Raza": [
+        {"val": "Tribu de brazos largos", "dif": "media"}
+      ],
+      "Banda": [
+        {"val": "Familia Charlotte", "dif": "media"},
+        {"val": "Piratas de Big Mom", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "charlotte_myukuru",
+    "name": "Charlotte Myukuru",
+    "img": "imagenes/CharlotteMyukuru.png",
+    "tags": {
+      "Raza": [
+        {"val": "Tribu de brazos largos", "dif": "media"}
+      ],
+      "Banda": [
+        {"val": "Familia Charlotte", "dif": "media"},
+        {"val": "Piratas de Big Mom", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "charlotte_marble",
+    "name": "Charlotte Marble",
+    "img": "imagenes/CharlotteMarble.png",
+    "tags": {
+      "Raza": [
+        {"val": "Tribu de brazos largos", "dif": "media"}
+      ],
+      "Banda": [
+        {"val": "Familia Charlotte", "dif": "media"},
+        {"val": "Piratas de Big Mom", "dif": "facil"}
       ]
     }
   }
