@@ -1673,76 +1673,6 @@
     }
   }
 
-  // Barajado uniforme (Fisher-Yates): a diferencia de sort(() => Math.random()-0.5), aquí
-  // cada ordenación posible tiene exactamente la misma probabilidad, sin depender de cómo
-  // cada navegador implemente el algoritmo de ordenación por dentro.
-  function shuffle(array) {
-    const arr = [...array];
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }
-
-  // ---------- Ponderación de categorías poco usadas recientemente ----------
-  // Sin esto, las categorías con muchos miembros (más margen frente al filtro de
-  // solapamiento) tienden a salir una y otra vez, mientras que las pequeñas casi nunca
-  // aparecen. Llevamos la cuenta de cuándo se usó cada categoría por última vez y damos
-  // más peso (más probabilidad, no una garantía) a las que llevan más tiempo sin salir.
-  const STORAGE_KEY_CATEGORY_USAGE = "opc_category_usage_v1";
-
-  function loadCategoryUsageState() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY_CATEGORY_USAGE);
-      if (raw) return JSON.parse(raw);
-    } catch (e) {
-      // localStorage puede fallar en modo incógnito o si está lleno: no es crítico.
-    }
-    return { counter: 0, lastUsed: {} };
-  }
-
-  function saveCategoryUsageState(state) {
-    try {
-      localStorage.setItem(STORAGE_KEY_CATEGORY_USAGE, JSON.stringify(state));
-    } catch (e) {
-      // Igual que arriba: si falla el guardado, simplemente no se recuerda para la próxima vez.
-    }
-  }
-
-  function registerCategoryUsage(groupNames) {
-    const state = loadCategoryUsageState();
-    state.counter += 1;
-    groupNames.forEach(name => { state.lastUsed[name] = state.counter; });
-    saveCategoryUsageState(state);
-  }
-
-  // Baraja las categorías dando más peso (no una garantía) a las que llevan más tiempo sin
-  // usarse. Es un sorteo ponderado real (cada ronda se reparten pesos entre las que quedan),
-  // no un simple orden fijo de "menos usadas primero".
-  function weightedShuffleGroups(groupNames) {
-    const state = loadCategoryUsageState();
-    const pool = groupNames.map(name => {
-      const lastUsed = state.lastUsed[name] || 0;
-      const antiguedad = state.counter - lastUsed + 1; // cuanto más tiempo sin usarse, mayor
-      return { name, weight: antiguedad };
-    });
-
-    const result = [];
-    while (pool.length > 0) {
-      const totalWeight = pool.reduce((sum, p) => sum + p.weight, 0);
-      let r = Math.random() * totalWeight;
-      let idx = 0;
-      for (; idx < pool.length - 1; idx++) {
-        r -= pool[idx].weight;
-        if (r <= 0) break;
-      }
-      result.push(pool[idx].name);
-      pool.splice(idx, 1);
-    }
-    return result;
-  }
-
   function parseTagEntries(tagData) {
     if (tagData === null || tagData === undefined) return [];
 
@@ -1782,7 +1712,9 @@
     "Banda: Banda: Sombrero de Paja": ["vivi", "karoo", "sunny", "merry"],
     "Banda: Sombrero de Paja": ["vivi", "karoo", "sunny", "merry"],
     "Banda: Agentes de Baroque Works": ["igaram", "vivi", "karoo", "bentham"],
-    "Banda: Piratas de Arlong": ["nami"]
+    "Banda: Piratas de Arlong": ["nami"],
+    "Banda: Piratas de Thriller Bark": ["john", "ganzui", "gill_bastar"],
+    "Raza: Zombies": ["john", "ganzui", "gill_bastar"]
   };
 
   // Elige los 4 personajes de un grupo, forzando que se incluya un miembro "no evidente"
@@ -1796,15 +1728,18 @@
       const specialCandidates = exclusiveChars.filter(c => mustIncludeIds.includes(c.id));
       if (specialCandidates.length > 0) {
         const forced = specialCandidates[Math.floor(Math.random() * specialCandidates.length)];
-        const rest = shuffle(exclusiveChars.filter(c => c.id !== forced.id)).slice(0, 3);
-        return shuffle([forced, ...rest]);
+        const rest = exclusiveChars
+          .filter(c => c.id !== forced.id)
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 3);
+        return [forced, ...rest].sort(() => Math.random() - 0.5);
       }
       // Si ningún miembro "no evidente" está disponible ahora mismo (por ejemplo, porque ya
       // se usó en otra categoría del mismo panel), seguimos con la selección normal en vez
       // de bloquear la generación del panel.
     }
 
-    return shuffle(exclusiveChars).slice(0, 4);
+    return exclusiveChars.sort(() => Math.random() - 0.5).slice(0, 4);
   }
 
   function generateNewBoard() {
@@ -1855,7 +1790,7 @@
     let maxAttempts = 1000;
 
     for (let attempt = 0; attempt < maxAttempts; attempt++) {
-      let shuffledGroups = weightedShuffleGroups(validGroupNames);
+      let shuffledGroups = [...validGroupNames].sort(() => Math.random() - 0.5);
       let candidateGroups = [];
       let usedCharIds = new Set();
 
@@ -1909,7 +1844,6 @@
     }
 
     currentCategories = selectedGroups;
-    registerCategoryUsage(selectedGroups.map(g => g.name));
     initGame();
   }
 
@@ -1958,7 +1892,7 @@
       });
     });
 
-    cards = shuffle(cards);
+    cards = cards.sort(() => Math.random() - 0.5);
     renderAllSolvedBlocks(); // limpia bloques resueltos que pudieran quedar de un panel/modo anterior
     renderLives();
     renderGrid();
