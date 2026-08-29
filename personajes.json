@@ -4493,7 +4493,8 @@
         {"val": "Piratas del Pelirrojo", "dif": "facil"}
       ],
       "Especialidad": [
-        {"val": "Navegantes", "dif": "dificil"}
+        {"val": "Navegantes", "dif": "dificil"},
+        {"val": "Espadachines", "dif": "dificil"}
       ]
     }
   },
