@@ -3206,6 +3206,23 @@
     }
   },
   {
+    "id": "sommers",
+    "name": "Shepherd Sommers",
+    "img": "imagenes/Sommers.png",
+    "tags": {
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Titulo": [
+        {"val": "Caballeros de Dios", "dif": "dificil"},
+        {"val": "Nobles mundiales", "dif": "dificil"}
+      ]
+    }
+  },
+  {
     "id": "loki",
     "name": "Loki",
     "img": "imagenes/Loki.png",
@@ -5260,6 +5277,9 @@
       ],
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Tiradores", "dif": "dificil"}
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
@@ -9324,6 +9344,9 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
       ]
     }
   },
@@ -9343,6 +9366,9 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Tiradores", "dif": "dificil"}
       ]
     }
   },
@@ -9362,6 +9388,9 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Tiradores", "dif": "dificil"}
       ]
     }
   },
@@ -9479,6 +9508,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
       ]
     }
   },
@@ -9617,6 +9649,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
       ]
     }
   },
@@ -10104,6 +10139,9 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
       ]
     }
   },
