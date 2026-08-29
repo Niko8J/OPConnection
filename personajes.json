@@ -6077,6 +6077,9 @@
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
       ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
       ]
