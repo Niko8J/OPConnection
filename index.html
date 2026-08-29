@@ -1703,6 +1703,24 @@
     return categoryName.includes(": ") ? categoryName.split(": ").slice(1).join(": ") : categoryName;
   }
 
+  // Para un par de categorías con nombres largos, si el texto completo no cabe en una sola
+  // línea (por ejemplo, en móviles con pantalla más alta que ancha), lo sustituimos por una
+  // versión más corta que sigue teniendo sentido por sí sola.
+  const SHORT_LABEL_OVERRIDES = {
+    "Personajes que fueron convertidos en juguetes por Sugar": "Personajes que fueron convertidos en juguetes",
+    "Personajes a los que Luffy ha pedido unirse a su banda": "Personajes a los que Luffy ha pedido unirse"
+  };
+
+  function fixSolvedLabelOverflow(containerEl) {
+    const label = containerEl.querySelector(".solved-label");
+    if (!label) return;
+    const fullText = label.dataset.fullText;
+    const shortText = SHORT_LABEL_OVERRIDES[fullText];
+    if (shortText && label.scrollWidth > label.clientWidth) {
+      label.innerText = shortText;
+    }
+  }
+
   // Categorías donde el grupo completo de miembros (evidentes + no evidentes) sirve para
   // paneles difíciles/Infinito, pero SOLO si el grupo de 4 elegido incluye al menos uno de
   // los miembros "no evidentes". Así evitamos que salga, por ejemplo, un panel "difícil" de
@@ -1937,7 +1955,8 @@
 
     const label = document.createElement("div");
     label.className = "solved-label";
-    label.innerText = getTagValueOnly(catData.name);
+    label.dataset.fullText = getTagValueOnly(catData.name);
+    label.innerText = label.dataset.fullText;
 
     el.appendChild(imgsWrap);
     el.appendChild(label);
@@ -1947,7 +1966,9 @@
   // Añade UN bloque de categoría resuelta al final de las ya existentes, sin tocarlas
   // (evita que las categorías ya acertadas parpadeen al seleccionar tarjetas).
   function appendSolvedBlock(catData) {
-    document.getElementById("grid").appendChild(buildSolvedCategoryEl(catData));
+    const el = buildSolvedCategoryEl(catData);
+    document.getElementById("grid").appendChild(el);
+    fixSolvedLabelOverflow(el);
   }
 
   // Reconstruye TODOS los bloques de categorías resueltas desde cero (solo se usa al
@@ -1957,7 +1978,11 @@
     grid.querySelectorAll(".solved-category").forEach(el => el.remove());
     solvedOrder.forEach(catName => {
       const catData = currentCategories.find(c => c.name === catName);
-      if (catData) grid.appendChild(buildSolvedCategoryEl(catData));
+      if (catData) {
+        const el = buildSolvedCategoryEl(catData);
+        grid.appendChild(el);
+        fixSolvedLabelOverflow(el);
+      }
     });
   }
 
