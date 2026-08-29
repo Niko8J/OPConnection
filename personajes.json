@@ -518,7 +518,8 @@
         {"val": "Sin fruta del diablo", "dif": "facil"}
       ],
       "Especialidad": [
-        {"val": "Capitanes pirata", "dif": "dificil"}
+        {"val": "Capitanes pirata", "dif": "dificil"},
+        {"val": "Espadachines", "dif": "dificil"}
       ],
       "Recompensa": [
         {"val": "Recompensa: tres mil millones o más", "dif": "dificil"}
