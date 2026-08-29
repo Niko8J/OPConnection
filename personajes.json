@@ -5804,7 +5804,9 @@
         {"val": "Voluntad de la D.", "dif": "media"}
       ],
       "Titulo": [
-        {"val": "Nobles mundiales", "dif": "dificil"}
+        {"val": "Nobles mundiales", "dif": "dificil"},
+        {"val": "Monarcas", "dif": "dificil"}
+      ]
       ]
     }
   },
@@ -9825,6 +9827,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Monarcas", "dif": "dificil"}
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
