@@ -5278,9 +5278,6 @@
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"}
       ],
-      "Especialidad": [
-        {"val": "Tiradores", "dif": "dificil"}
-      ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
       ]
@@ -9899,6 +9896,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 500M y mil millones", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
       ]
     }
   },
