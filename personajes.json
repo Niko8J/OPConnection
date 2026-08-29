@@ -1363,7 +1363,7 @@
     "img": "imagenes/Hancock.png",
     "tags": {
       "Banda": [
-        {"val": "Miembras de la tribu Kuja", "dif": "facil"}
+        {"val": "Piratas Kuja", "dif": "facil"}
       ],
       "Titulo": [
         {"val": "Shichibukais", "dif": "facil"}
@@ -4945,7 +4945,7 @@
     "tags": {
       "Banda": [
         {"val": "Piratas de Rocks", "dif": "dificil"},
-        {"val": "Miembras de la tribu Kuja", "dif": "facil"}
+        {"val": "Piratas Kuja", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Calm Belt", "dif": "dificil"}
@@ -5205,7 +5205,7 @@
     "img": "imagenes/Marguerite.png",
     "tags": {
       "Banda": [
-        {"val": "Miembras de la tribu Kuja", "dif": "facil"}
+        {"val": "Piratas Kuja", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Calm Belt", "dif": "dificil"}
@@ -6626,7 +6626,7 @@
     "img": "imagenes/Sandersonia.png",
     "tags": {
       "Banda": [
-        {"val": "Miembras de la tribu Kuja", "dif": "facil"}
+        {"val": "Piratas Kuja", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Calm Belt", "dif": "dificil"}
@@ -6645,7 +6645,7 @@
     "img": "imagenes/Marigold.png",
     "tags": {
       "Banda": [
-        {"val": "Miembras de la tribu Kuja", "dif": "facil"}
+        {"val": "Piratas Kuja", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Calm Belt", "dif": "dificil"}
@@ -8089,7 +8089,7 @@
     "img": "imagenes/Shakuyaku.png",
     "tags": {
       "Banda": [
-        {"val": "Miembras de la tribu Kuja", "dif": "facil"}
+        {"val": "Piratas Kuja", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Calm Belt", "dif": "dificil"}
