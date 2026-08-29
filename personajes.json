@@ -10734,7 +10734,8 @@
       ],
       "Raza": [
         {"val": "Zombies", "dif": "facil"},
-        {"val": "Zombies", "dif": "dificil"}
+        {"val": "Zombies", "dif": "dificil"},
+        {"val": "Gigantes", "dif": "facil"}
       ]
     }
   },
@@ -10891,6 +10892,9 @@
       ],
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han usado máscara", "dif": "dificil"}
       ]
     }
   },
@@ -11070,6 +11074,22 @@
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "oars_jr",
+    "name": "Little Oars Jr.",
+    "img": "imagenes/OarsJr.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Raza": [
+        {"val": "Gigantes", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
       ]
     }
   }
