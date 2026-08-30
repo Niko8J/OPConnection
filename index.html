@@ -1659,7 +1659,7 @@
   // (girar el dispositivo, cambiar a uno distinto), nunca solo por el zoom.
 
   let frozenAspect = null;
-  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v13";
+  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v14";
 
   function loadCardReference() {
     try {
@@ -1790,7 +1790,7 @@
 
   freezeDesign();
   window.addEventListener("resize", handleViewportChange);
-  window.addEventListener("orientationchange", () => setTimeout(freezeDesign, 60));
+  window.addEventListener("orientationchange", () => setTimeout(freezeDesign, 400));
   window.addEventListener("pageshow", handleViewportChange);
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) handleViewportChange();
