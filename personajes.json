@@ -5051,7 +5051,8 @@
     "img": "imagenes/DemaloBlack.png",
     "tags": {
       "Banda": [
-        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"}
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"},
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
@@ -5073,7 +5074,8 @@
     "img": "imagenes/Manjaro.png",
     "tags": {
       "Banda": [
-        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"}
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"},
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
@@ -5089,7 +5091,8 @@
     "img": "imagenes/Mounblutain.png",
     "tags": {
       "Banda": [
-        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"}
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"},
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
@@ -5102,7 +5105,8 @@
     "img": "imagenes/Drip.png",
     "tags": {
       "Banda": [
-        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"}
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"},
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
@@ -5115,7 +5119,8 @@
     "img": "imagenes/NoraGitsune.png",
     "tags": {
       "Banda": [
-        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"}
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"},
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
@@ -5134,7 +5139,8 @@
     "img": "imagenes/Turco.png",
     "tags": {
       "Banda": [
-        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"}
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"},
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
@@ -5147,7 +5153,8 @@
     "img": "imagenes/Chocolat.png",
     "tags": {
       "Banda": [
-        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"}
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"},
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
@@ -5160,7 +5167,8 @@
     "img": "imagenes/Cocoa.png",
     "tags": {
       "Banda": [
-        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"}
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"},
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
@@ -11462,6 +11470,51 @@
       ],
       "Viaje": [
         {"val": "Personajes que viajaron con los Sombrero de Paja", "dif": "dificil"}
+      ],
+      "Banda": [
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "coribou",
+    "name": "Coribou",
+    "img": "imagenes/Coribou.png",
+    "tags": {
+      "Recompensa": [
+        {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Banda": [
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "albion",
+    "name": "Albion",
+    "img": "imagenes/Albion.png",
+    "tags": {
+      "Recompensa": [
+        {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Banda": [
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "lip_doughty",
+    "name": "Lip Doughty",
+    "img": "imagenes/LipDoughty.png",
+    "tags": {
+      "Recompensa": [
+        {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Banda": [
+        {"val": "Falsos Piratas de Sombrero de Paja", "dif": "dificil"}
       ]
     }
   },
