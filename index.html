@@ -53,8 +53,11 @@
     /* "orientation: landscape" + poco alto identifica un MÓVIL en horizontal: en esa
        orientación, el alto de pantalla pasa a ser el lado corto del dispositivo, que en
        cualquier móvil (sea cual sea la marca) es bastante menor que en una tablet. Así
-       distinguimos uno de otro sin depender de anchos fijos ni de modelos concretos. */
-    @media (orientation: landscape) and (max-height: 500px) {
+       distinguimos uno de otro sin depender de anchos fijos ni de modelos concretos.
+       Añadimos "any-pointer: coarse" (dispositivo táctil) porque, si no, un ordenador con
+       mucho zoom aplicado (que también reduce el alto disponible) activaba este aviso por
+       error, aunque no fuera ningún móvil de verdad. */
+    @media (orientation: landscape) and (max-height: 500px) and (any-pointer: coarse) {
       .rotate-overlay {
         display: flex; position: fixed; inset: 0; z-index: 9999;
         background-color: #0f172a; color: #f8fafc;
@@ -1656,7 +1659,7 @@
   // (girar el dispositivo, cambiar a uno distinto), nunca solo por el zoom.
 
   let frozenAspect = null;
-  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v10";
+  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v11";
 
   function loadCardReference() {
     try {
@@ -1713,7 +1716,7 @@
       siblingsHeight += child.offsetHeight + parseFloat(style.marginTop) + parseFloat(style.marginBottom);
     });
 
-    const availableHeight = Math.max(0, container.clientHeight - siblingsHeight - 16); // -16px: margen de seguridad ante redondeos/fuentes cargando
+    const availableHeight = Math.max(0, container.clientHeight - siblingsHeight - 40); // -40px: margen de seguridad amplio ante redondeos/imprecisiones de medición
     const availableWidth = board.clientWidth;
 
     const sizeByWidth = (availableWidth - (cols - 1) * gapPx) / cols;
