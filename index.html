@@ -364,12 +364,11 @@
     .ad-side {
       display: none;
     }
-    /* Los laterales salen a partir de 1100px de ancho, sin distinguir tablet de ordenador
-       (esa distinción resultó poco fiable con tablets que tienen S-Pen, ya que a veces se
-       detectan como "puntero preciso" igual que un ratón). Como container ahora nunca se
-       encoge (flex-shrink: 0 más arriba), el panel mantiene siempre su tamaño de siempre,
-       venga o no venga acompañado de los laterales. */
-    @media (min-width: 1100px) {
+    /* Los laterales solo salen en ordenador de verdad: comprobamos que el puntero PRINCIPAL
+       sea preciso (pointer: fine) y que se pueda hacer hover (hover: hover) — un ratón,
+       vamos — además del ancho mínimo. Las tablets (aunque tengan mucho ancho en horizontal,
+       o lleven S-Pen) quedan correctamente excluidas por esta combinación. */
+    @media (min-width: 1100px) and (hover: hover) and (pointer: fine) {
       .ad-side {
         display: flex;
         align-items: center;
@@ -1660,7 +1659,7 @@
   // (girar el dispositivo, cambiar a uno distinto), nunca solo por el zoom.
 
   let frozenAspect = null;
-  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v12";
+  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v13";
 
   function loadCardReference() {
     try {
