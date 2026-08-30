@@ -249,8 +249,7 @@
       width: 100%;
       height: 100%;
       min-width: 0;
-      object-fit: cover;
-      object-position: top center;
+      object-fit: fill;
       border-radius: 6px;
       border: 2px solid #0f172a;
       background-color: #1e293b;
@@ -284,8 +283,7 @@
     .card img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: top center;
+      object-fit: fill;
     }
     @media (hover: hover) and (pointer: fine) {
       .card:hover { border-color: #f59e0b; }
@@ -373,7 +371,7 @@
     .solution-items { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
     .solution-img {
       width: 50px; height: 50px;
-      object-fit: cover; object-position: top center;
+      object-fit: fill;
       border-radius: 6px; border: 2px solid #0f172a; background-color: #1e293b;
     }
     .solution-label { font-size: 0.95rem; }
@@ -407,10 +405,6 @@
       .life-icon { font-size: 1.4rem; }
       .warning-msg { height: 14px; line-height: 14px; font-size: 0.8rem; }
       .card { padding: 0; border-width: 2px; }
-      .card img {
-        transform: scale(1.15);
-        transform-origin: top center;
-      }
       .controls { gap: 8px; }
       button.action-btn { padding: 8px 14px; font-size: 0.9rem; }
 
@@ -424,20 +418,6 @@
       .close-btn { top: 8px; right: 10px; font-size: 1.3rem; }
     }
 
-    /* Pantallas notablemente más altas que anchas (la mayoría de móviles en vertical):
-       los huecos del panel salen más rectangulares que cuadrados, así que quitamos el
-       recorte/zoom de las fotos para que se vean enteras en vez de cortadas. */
-    @media (max-aspect-ratio: 3/5) {
-      .card img {
-        object-fit: contain;
-        object-position: center;
-        transform: none;
-      }
-      .solved-img {
-        object-fit: contain;
-        object-position: center;
-      }
-    }
   </style>
   <!-- Firebase SDK (Auth + Firestore) -->
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -1703,24 +1683,6 @@
     return categoryName.includes(": ") ? categoryName.split(": ").slice(1).join(": ") : categoryName;
   }
 
-  // Para un par de categorías con nombres largos, si el texto completo no cabe en una sola
-  // línea (por ejemplo, en móviles con pantalla más alta que ancha), lo sustituimos por una
-  // versión más corta que sigue teniendo sentido por sí sola.
-  const SHORT_LABEL_OVERRIDES = {
-    "Personajes que fueron convertidos en juguetes por Sugar": "Personajes que fueron convertidos en juguetes",
-    "Personajes a los que Luffy ha pedido unirse a su banda": "Personajes a los que Luffy ha pedido unirse"
-  };
-
-  function fixSolvedLabelOverflow(containerEl) {
-    const label = containerEl.querySelector(".solved-label");
-    if (!label) return;
-    const fullText = label.dataset.fullText;
-    const shortText = SHORT_LABEL_OVERRIDES[fullText];
-    if (shortText && label.scrollWidth > label.clientWidth) {
-      label.innerText = shortText;
-    }
-  }
-
   // Categorías donde el grupo completo de miembros (evidentes + no evidentes) sirve para
   // paneles difíciles/Infinito, pero SOLO si el grupo de 4 elegido incluye al menos uno de
   // los miembros "no evidentes". Así evitamos que salga, por ejemplo, un panel "difícil" de
@@ -1730,9 +1692,7 @@
     "Banda: Banda: Sombrero de Paja": ["vivi", "karoo", "sunny", "merry"],
     "Banda: Sombrero de Paja": ["vivi", "karoo", "sunny", "merry"],
     "Banda: Agentes de Baroque Works": ["igaram", "vivi", "karoo", "bentham"],
-    "Banda: Piratas de Arlong": ["nami"],
-    "Banda: Piratas de Thriller Bark": ["john", "ganzui", "gill_bastar"],
-    "Raza: Zombies": ["john", "ganzui", "gill_bastar"]
+    "Banda: Piratas de Arlong": ["nami"]
   };
 
   // Elige los 4 personajes de un grupo, forzando que se incluya un miembro "no evidente"
@@ -1955,8 +1915,7 @@
 
     const label = document.createElement("div");
     label.className = "solved-label";
-    label.dataset.fullText = getTagValueOnly(catData.name);
-    label.innerText = label.dataset.fullText;
+    label.innerText = getTagValueOnly(catData.name);
 
     el.appendChild(imgsWrap);
     el.appendChild(label);
@@ -1966,9 +1925,7 @@
   // Añade UN bloque de categoría resuelta al final de las ya existentes, sin tocarlas
   // (evita que las categorías ya acertadas parpadeen al seleccionar tarjetas).
   function appendSolvedBlock(catData) {
-    const el = buildSolvedCategoryEl(catData);
-    document.getElementById("grid").appendChild(el);
-    fixSolvedLabelOverflow(el);
+    document.getElementById("grid").appendChild(buildSolvedCategoryEl(catData));
   }
 
   // Reconstruye TODOS los bloques de categorías resueltas desde cero (solo se usa al
@@ -1978,11 +1935,7 @@
     grid.querySelectorAll(".solved-category").forEach(el => el.remove());
     solvedOrder.forEach(catName => {
       const catData = currentCategories.find(c => c.name === catName);
-      if (catData) {
-        const el = buildSolvedCategoryEl(catData);
-        grid.appendChild(el);
-        fixSolvedLabelOverflow(el);
-      }
+      if (catData) grid.appendChild(buildSolvedCategoryEl(catData));
     });
   }
 
