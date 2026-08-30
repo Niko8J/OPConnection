@@ -30,17 +30,7 @@
   <meta name="twitter:description" content="Encuentra 4 grupos conectados por distintos atributos.">
   <meta name="twitter:image" content="https://niko8j.github.io/OPConnection/previsualizacion.png">
 
-  <!-- Fuente estilo pirata/aventura para el título, servida desde el propio repo (sin depender de Google Fonts) -->
-  <link rel="preload" href="PirataOne.ttf" as="font" type="font/ttf" crossorigin>
-
   <style>
-    @font-face {
-      font-family: 'Pirata One';
-      src: url('PirataOne.ttf') format('truetype');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
     :root {
       /* Valores fijos de verdad: no se recalculan nunca por fórmula, así que el zoom del
          navegador los amplía o reduce de forma coherente con todo lo demás, sin ningún
@@ -78,12 +68,9 @@
       .site-logo:hover, .site-logo-fallback:hover { transform: scale(1.03); filter: brightness(1.1); }
     }
     .site-logo-fallback {
-      color: #f59e0b; font-size: 2.6rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
-      font-family: 'Pirata One', cursive; text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
-    }
-    .site-subtitle {
-      margin-top: -6px; color: #f59e0b; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 2px;
-      font-family: 'Pirata One', cursive; text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+      color: #f59e0b; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: bold;
+      text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
     }
     p { margin-bottom: var(--v-gap-md); color: #94a3b8; flex-shrink: 0; }
 
@@ -400,8 +387,7 @@
 
     @media (max-width: 480px) {
       body { padding: 8px; }
-      .site-logo-fallback { font-size: 1.8rem; }
-      .site-subtitle { font-size: 1.3rem; }
+      .site-logo-fallback { font-size: 1.6rem; }
       p { font-size: 0.85rem; }
       .difficulty-selector { gap: 6px; }
       .avatar-picker { grid-template-columns: repeat(4, minmax(0, 1fr)); max-height: 180px; }
@@ -486,8 +472,7 @@
       style="display: none;"
       title="Recargar página"
       onclick="location.reload()"
-    >One Piece</div>
-    <div class="site-subtitle">Connection</div>
+    >One Piece Connection</div>
   </div>
   <p>Encuentra 4 grupos conectados por distintos atributos.</p>
 
@@ -1493,7 +1478,7 @@
   // (girar el dispositivo, cambiar a uno distinto), nunca solo por el zoom.
 
   let frozenAspect = null;
-  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v4";
+  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v6";
 
   function loadCardReference() {
     try {
