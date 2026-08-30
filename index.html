@@ -53,6 +53,7 @@
       --modal-max-h: 85vh;
       --ranking-list-max-h: 55vh;
       --card-size: 70px;
+      --board-height: 300px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     html { height: 100%; }
@@ -63,6 +64,7 @@
     .container {
       max-width: 650px; width: 100%; text-align: center; position: relative;
       display: flex; flex-direction: column; height: 100%; padding-top: var(--container-pad-top);
+      justify-content: center;
     }
 
     .site-title { display: flex; flex-direction: column; align-items: center; margin-bottom: var(--v-gap-sm); flex-shrink: 0; }
@@ -218,7 +220,7 @@
 
     .board {
       display: flex; flex-direction: column; gap: var(--v-gap-md); margin-bottom: var(--v-gap-md);
-      position: relative; flex: 1; min-height: 0;
+      position: relative; height: var(--board-height, auto); flex-shrink: 0;
     }
     .board-loading {
       position: absolute; inset: 0;
@@ -264,7 +266,6 @@
       grid-template-columns: repeat(4, var(--card-size));
       grid-auto-rows: var(--card-size);
       gap: var(--card-gap);
-      flex: 1; min-height: 0; overflow-y: auto;
       justify-content: center; align-content: center;
     }
     
@@ -1516,19 +1517,34 @@
   // bloque, pero nunca se deforman ni deforman las fotos que llevan dentro.
   function measureAndSetCardSize() {
     const board = document.querySelector(".board");
-    if (!board) return;
+    const container = document.querySelector(".container");
+    if (!board || !container) return;
 
     const gapPx = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--card-gap")) || 8;
     const cols = 4, rows = 4;
 
+    // Cuánto alto le queda realmente disponible al tablero: el alto total del contenedor
+    // menos lo que ocupan el resto de elementos (título, botones, controles...). No usamos
+    // el propio alto de "board" porque ahora tiene una altura fija calculada por nosotros,
+    // no "todo lo que sobre" como antes.
+    let siblingsHeight = 0;
+    Array.from(container.children).forEach(child => {
+      if (child === board) return;
+      if (getComputedStyle(child).position === "absolute") return; // no ocupan espacio en el flujo
+      const style = getComputedStyle(child);
+      siblingsHeight += child.offsetHeight + parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+    });
+
+    const availableHeight = Math.max(0, container.clientHeight - siblingsHeight);
     const availableWidth = board.clientWidth;
-    const availableHeight = board.clientHeight;
 
     const sizeByWidth = (availableWidth - (cols - 1) * gapPx) / cols;
     const sizeByHeight = (availableHeight - (rows - 1) * gapPx) / rows;
     const cardSize = Math.max(30, Math.floor(Math.min(sizeByWidth, sizeByHeight)));
+    const boardHeight = cardSize * rows + (rows - 1) * gapPx;
 
     document.documentElement.style.setProperty("--card-size", cardSize + "px");
+    document.documentElement.style.setProperty("--board-height", boardHeight + "px");
   }
 
   // Recalcula el diseño entero para la pantalla actual. Solo se llama al cargar la página
