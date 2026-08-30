@@ -198,7 +198,6 @@
       text-overflow: ellipsis;
       min-width: 0;
       flex-shrink: 0;
-      margin-bottom: var(--v-gap-sm);
     }
 
     #lives-icons { display: flex; align-items: center; gap: 8px; }
@@ -1494,7 +1493,7 @@
   // (girar el dispositivo, cambiar a uno distinto), nunca solo por el zoom.
 
   let frozenAspect = null;
-  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v3";
+  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v4";
 
   function loadCardReference() {
     try {
