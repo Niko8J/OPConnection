@@ -1478,7 +1478,7 @@
   // (girar el dispositivo, cambiar a uno distinto), nunca solo por el zoom.
 
   let frozenAspect = null;
-  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v6";
+  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v7";
 
   function loadCardReference() {
     try {
@@ -1572,13 +1572,25 @@
     }
 
     // No hay una referencia válida todavía (primera vez, o la pantalla ha cambiado de forma
-    // de verdad): calculamos una nueva en el siguiente fotograma, cuando el navegador ya ha
-    // aplicado los cambios anteriores al diseño real de la página, y la guardamos.
-    requestAnimationFrame(() => {
-      const result = measureCardSize();
-      if (!result) return;
-      applyCardSize(result);
-      saveCardReference({ aspect: currentAspect, cardSize: result.cardSize, boardHeight: result.boardHeight });
+    // de verdad): esperamos a que la imagen del logo haya terminado de cargar (o haya
+    // fallado, en cuyo caso se usa el texto de reserva) —si no, la mediríamos con altura 0,
+    // antes de que "salte" a su tamaño real, y el cálculo saldría descuadrado— y entonces
+    // medimos y guardamos el resultado.
+    const logoImg = document.getElementById("site-logo");
+    const logoReady = (!logoImg || logoImg.complete)
+      ? Promise.resolve()
+      : new Promise(resolve => {
+          logoImg.addEventListener("load", resolve, { once: true });
+          logoImg.addEventListener("error", resolve, { once: true });
+        });
+
+    logoReady.then(() => {
+      requestAnimationFrame(() => {
+        const result = measureCardSize();
+        if (!result) return;
+        applyCardSize(result);
+        saveCardReference({ aspect: currentAspect, cardSize: result.cardSize, boardHeight: result.boardHeight });
+      });
     });
   }
 
