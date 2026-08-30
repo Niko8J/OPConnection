@@ -124,6 +124,8 @@
     .ranking-username { flex: 1; font-weight: bold; color: #f8fafc; word-break: break-word; font-size: 1.05rem; }
     .ranking-score { font-weight: bold; color: #f59e0b; font-size: 1.05rem; flex-shrink: 0; }
     .ranking-empty, .ranking-loading { color: #94a3b8; text-align: center; padding: 20px 0; font-size: 0.9rem; }
+    .ranking-row.own-row { border-radius: 8px; border-bottom: none; border: 2px solid #f59e0b; box-shadow: 0 0 10px #f59e0b; }
+    .ranking-ellipsis { text-align: center; color: #94a3b8; letter-spacing: 3px; padding: 4px 0; font-size: 1.1rem; }
 
     .howto-modal-content { max-width: 440px; text-align: left; }
     .howto-content p { margin-bottom: 10px; color: #cbd5e1; font-size: 0.9rem; line-height: 1.5; }
@@ -1127,29 +1129,53 @@
       const posClasses = ["gold", "silver", "bronze"];
       let position = 0;
       let html = "";
+      let currentUserInTop50 = false;
 
       snap.forEach(doc => {
         position++;
         const data = doc.data();
-        const posLabel = medals[position - 1] || position;
-        const posClass = posClasses[position - 1] || "";
-        const avatarSrc = data.avatar || "https://dummyimage.com/100x100/334155/ffffff.png&text=?";
-        const streak = data.bestStreak || 0;
-
-        html += `
-          <div class="ranking-row">
-            <div class="ranking-position ${posClass}">${posLabel}</div>
-            <img class="ranking-avatar" src="${escapeHtml(avatarSrc)}" alt="" onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'">
-            <div class="ranking-username">${escapeHtml(data.username || "Jugador")}</div>
-            <div class="ranking-score">${streak}</div>
-          </div>`;
+        const isOwnRow = currentUser && doc.id === currentUser.uid;
+        if (isOwnRow) currentUserInTop50 = true;
+        html += buildRankingRowHtml(position, data, medals, posClasses, isOwnRow);
       });
+
+      // Si el usuario ha iniciado sesión y no está entre los 50 primeros, buscamos su
+      // posición real (contando cuántos jugadores tienen una racha mejor que la suya) y la
+      // añadimos al final, con puntos suspensivos de por medio.
+      if (currentUser && !currentUserInTop50 && currentUserProfile) {
+        const myStreak = currentUserProfile.bestStreak || 0;
+        const higherCountSnap = await db.collection("publicProfiles")
+          .where("bestStreak", ">", myStreak)
+          .count().get();
+        const myPosition = higherCountSnap.data().count + 1;
+
+        html += '<div class="ranking-ellipsis">⋯</div>';
+        html += buildRankingRowHtml(myPosition, {
+          username: currentUserProfile.username,
+          avatar: currentUserProfile.avatar,
+          bestStreak: myStreak
+        }, medals, posClasses, true);
+      }
 
       list.innerHTML = html;
     } catch (e) {
       list.innerHTML = '<div class="ranking-empty">No se pudo cargar el ranking. Inténtalo más tarde.</div>';
       console.error("Error cargando el ranking:", e);
     }
+  }
+
+  function buildRankingRowHtml(position, data, medals, posClasses, isOwnRow) {
+    const posLabel = medals[position - 1] || position;
+    const posClass = posClasses[position - 1] || "";
+    const avatarSrc = data.avatar || "https://dummyimage.com/100x100/334155/ffffff.png&text=?";
+    const streak = data.bestStreak || 0;
+    return `
+      <div class="ranking-row${isOwnRow ? ' own-row' : ''}">
+        <div class="ranking-position ${posClass}">${posLabel}</div>
+        <img class="ranking-avatar" src="${escapeHtml(avatarSrc)}" alt="" onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'">
+        <div class="ranking-username">${escapeHtml(data.username || "Jugador")}</div>
+        <div class="ranking-score">${streak}</div>
+      </div>`;
   }
 
   function closeRankingModal() {
