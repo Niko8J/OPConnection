@@ -38,7 +38,8 @@
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
         {"val": "Personajes con tatuajes", "dif": "dificil"},
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes a los que Moriah robó su sombra", "dif": "dificil"}
       ]
     }
   },
@@ -72,7 +73,8 @@
         {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con cicatrices", "dif": "dificil"}
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes a los que Moriah robó su sombra", "dif": "dificil"}
       ]
     }
   },
@@ -166,7 +168,8 @@
         {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes a los que Moriah robó su sombra", "dif": "dificil"}
       ]
     }
   },
@@ -200,6 +203,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
       ]
     }
   },
@@ -232,7 +238,8 @@
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes a los que Moriah robó su sombra", "dif": "dificil"}
       ]
     }
   },
@@ -299,7 +306,8 @@
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes a los que Moriah robó su sombra", "dif": "dificil"}
       ]
     }
   },
@@ -3979,6 +3987,9 @@
       ],
       "Banda": [
         {"val": "Familia Neptune", "dif": "media"}
+      ],
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
       ]
     }
   },
@@ -7511,6 +7522,9 @@
       ],
       "SMILE": [
         {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ],
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
       ]
     }
   },
@@ -8022,6 +8036,9 @@
       ],
       "Viaje": [
         {"val": "Personajes que viajaron con los Sombrero de Paja", "dif": "dificil"}
+      ],
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
       ]
     }
   },
@@ -8041,6 +8058,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
       ]
     }
   },
@@ -9880,6 +9900,9 @@
       ],
       "Viaje": [
         {"val": "Personajes que viajaron con los Sombrero de Paja", "dif": "dificil"}
+      ],
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
       ]
     }
   },
@@ -10365,6 +10388,9 @@
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes a los que Moriah robó su sombra", "dif": "dificil"}
       ]
     }
   },
