@@ -194,6 +194,14 @@
     .life-wrapper { position: relative; display: inline-flex; justify-content: center; align-items: center; }
     .life-icon { font-size: 1.7rem; user-select: none; }
     .life-wrapper.lost .life-icon { filter: opacity(0.3); }
+    #lives-icons.shake { animation: lives-shake 0.4s ease; }
+    @keyframes lives-shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px) rotate(-4deg); }
+      40% { transform: translateX(5px) rotate(4deg); }
+      60% { transform: translateX(-4px) rotate(-3deg); }
+      80% { transform: translateX(3px) rotate(2deg); }
+    }
     .life-wrapper.lost::after {
       content: "❌";
       position: absolute;
@@ -2021,6 +2029,16 @@
     }
   }
 
+  // Pequeño temblor en las vidas al fallar un grupo, para que se note claramente que se ha
+  // perdido una vida (algunos jugadores no se daban cuenta). Reinicia la animación cada vez,
+  // incluso si el usuario falla varias veces seguidas rápido.
+  function shakeLivesIcons() {
+    const livesIcons = document.getElementById("lives-icons");
+    livesIcons.classList.remove("shake");
+    void livesIcons.offsetWidth; // fuerza un reflow para poder reiniciar la animación
+    livesIcons.classList.add("shake");
+  }
+
   function buildSolvedCategoryEl(catData) {
     const el = document.createElement("div");
     el.className = "solved-category";
@@ -2150,6 +2168,7 @@
     } else {
       lives--;
       renderLives();
+      shakeLivesIcons();
 
       const categoryCounts = {};
       selectedCards.forEach(i => {
