@@ -348,6 +348,9 @@
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
         {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
       ]
     }
   },
@@ -528,6 +531,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
       ]
     }
   },
@@ -719,6 +725,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
       ]
     }
   },
@@ -743,6 +752,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
       ]
     }
   },
@@ -767,6 +779,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
       ]
     }
   },
@@ -1560,6 +1575,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
       ]
     }
   },
@@ -2682,6 +2700,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
       ]
     }
   },
@@ -3090,6 +3111,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
       ]
     }
   },
@@ -3357,6 +3381,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
       ]
     }
   },
@@ -4061,6 +4088,9 @@
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"},
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
       ]
     }
   },
@@ -4546,6 +4576,9 @@
       ],
       "Raza": [
         {"val": "Gigantes", "dif": "media"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
       ]
     }
   },
@@ -5460,6 +5493,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
       ]
     }
   },
@@ -5582,7 +5618,7 @@
     "img": "imagenes/Magellan.png",
     "tags": {
       "Banda": [
-        {"val": "Impel Down", "dif": "facil"}
+        {"val": "Trabajadores de Impel Down", "dif": "media"}
       ],
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
@@ -5799,6 +5835,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
       ]
     }
   },
@@ -5832,7 +5871,7 @@
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbanegra", "dif": "facil"},
-        {"val": "Impel Down", "dif": "facil"}
+        {"val": "Trabajadores de Impel Down", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -5849,6 +5888,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
       ]
     }
   },
@@ -6207,6 +6249,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
       ]
     }
   },
@@ -7161,7 +7206,7 @@
     "img": "imagenes/Hannyabal.png",
     "tags": {
       "Banda": [
-        {"val": "Impel Down", "dif": "facil"}
+        {"val": "Trabajadores de Impel Down", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: South Blue", "dif": "dificil"}
@@ -7174,7 +7219,7 @@
     "img": "imagenes/Domino.png",
     "tags": {
       "Banda": [
-        {"val": "Impel Down", "dif": "facil"}
+        {"val": "Trabajadores de Impel Down", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -7190,7 +7235,7 @@
     "img": "imagenes/Saldeath.png",
     "tags": {
       "Banda": [
-        {"val": "Impel Down", "dif": "facil"}
+        {"val": "Trabajadores de Impel Down", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -7645,6 +7690,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
       ]
     }
   },
@@ -9545,6 +9593,12 @@
       ],
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Okamas", "dif": "facil"}
       ]
     }
   },
@@ -11636,6 +11690,152 @@
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"},
         {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "avalo_pizarro",
+    "name": "Avalo Pizarro",
+    "img": "imagenes/AvaloPizarro.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbanegra", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Titulo": [
+        {"val": "Monarcas", "dif": "dificil"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "vasco_shot",
+    "name": "Vasco Shot",
+    "img": "imagenes/VascoShot.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbanegra", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: South Blue", "dif": "dificil"}
+      ],
+      "Cárcel": [
+        {"val": "Presos de Impel Down", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "sadi",
+    "name": "Sadi",
+    "img": "imagenes/Sadi.png",
+    "tags": {
+      "Banda": [
+        {"val": "Trabajadores de Impel Down", "dif": "media"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "minotaurus",
+    "name": "Minotaurus",
+    "img": "imagenes/Minotaurus.png",
+    "tags": {
+      "Banda": [
+        {"val": "Trabajadores de Impel Down", "dif": "media"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Despertar": [
+        {"val": "Fruta despertada", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Bestias carceleras", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "minokoala",
+    "name": "Minokoala",
+    "img": "imagenes/Minokoala.png",
+    "tags": {
+      "Banda": [
+        {"val": "Trabajadores de Impel Down", "dif": "media"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Despertar": [
+        {"val": "Fruta despertada", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Bestias carceleras", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "minorhinoceros",
+    "name": "Minorhinoceros",
+    "img": "imagenes/Minorhinoceros.png",
+    "tags": {
+      "Banda": [
+        {"val": "Trabajadores de Impel Down", "dif": "media"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Despertar": [
+        {"val": "Fruta despertada", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Bestias carceleras", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "minozebra",
+    "name": "Minozebra",
+    "img": "imagenes/Minozebra.png",
+    "tags": {
+      "Banda": [
+        {"val": "Trabajadores de Impel Down", "dif": "media"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Despertar": [
+        {"val": "Fruta despertada", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Bestias carceleras", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "blugori",
+    "name": "Blugori",
+    "img": "imagenes/Blugori.png",
+    "tags": {
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ],
+      "Banda": [
+        {"val": "Trabajadores de Impel Down", "dif": "media"}
       ]
     }
   }
