@@ -109,7 +109,8 @@
     .auth-dropdown-separator { height: 1px; background: #334155; margin: 6px 2px; }
 
     .ranking-modal-content { max-width: 420px; text-align: left; }
-    .ranking-subtitle { color: #94a3b8; font-size: 0.85rem; margin-bottom: 10px; }
+    .ranking-subtitle { color: #94a3b8; font-size: 0.85rem; margin-bottom: 4px; }
+    .ranking-tiebreak-note { color: #64748b; font-size: 0.75rem; font-style: italic; margin-bottom: 10px; }
     .ranking-list { max-height: var(--ranking-list-max-h); overflow-y: auto; }
     .ranking-row { display: flex; align-items: center; gap: 14px; padding: 12px 6px; border-bottom: 1px solid #1e293b; }
     .ranking-row:last-child { border-bottom: none; }
@@ -118,7 +119,7 @@
     .ranking-position.silver { font-size: 1.4rem; color: #e2e8f0; }
     .ranking-position.bronze { font-size: 1.35rem; color: #f59e0b; }
     .ranking-avatar {
-      width: 52px; height: 52px; border-radius: 50%; object-fit: cover; object-position: top center;
+      width: 68px; height: 68px; border-radius: 50%; object-fit: cover; object-position: top center;
       flex-shrink: 0; border: 2px solid #334155;
     }
     .ranking-username { flex: 1; font-weight: bold; color: #f8fafc; word-break: break-word; font-size: 1.05rem; }
@@ -570,6 +571,7 @@
     <button class="close-btn" onclick="closeRankingModal()">&times;</button>
     <h2>🏆 Ranking</h2>
     <p class="ranking-subtitle">Mejor racha de paneles resueltos en modo Infinito</p>
+    <p class="ranking-tiebreak-note">En caso de empate, queda primero quien logró esa racha antes.</p>
     <div id="ranking-list" class="ranking-list"></div>
   </div>
 </div>
@@ -792,9 +794,10 @@
     if (infiniteSolvedCount <= currentBest) return;
 
     try {
+      const achievedAt = firebase.firestore.FieldValue.serverTimestamp();
       await Promise.all([
-        db.collection("users").doc(currentUser.uid).set({ bestStreak: infiniteSolvedCount }, { merge: true }),
-        db.collection("publicProfiles").doc(currentUser.uid).set({ bestStreak: infiniteSolvedCount }, { merge: true })
+        db.collection("users").doc(currentUser.uid).set({ bestStreak: infiniteSolvedCount, bestStreakAt: achievedAt }, { merge: true }),
+        db.collection("publicProfiles").doc(currentUser.uid).set({ bestStreak: infiniteSolvedCount, bestStreakAt: achievedAt }, { merge: true })
       ]);
       currentUserProfile = { ...(currentUserProfile || {}), bestStreak: infiniteSolvedCount };
       updateAuthUI();
@@ -1117,13 +1120,29 @@
     list.innerHTML = '<div class="ranking-loading">Cargando ranking...</div>';
     document.getElementById("ranking-modal").style.display = "flex";
 
+    const RANKING_TARGET = 50;
+    const RANKING_BUFFER = 70; // margen extra por si hay que extender la lista en un empate
+
     try {
-      const snap = await db.collection("publicProfiles").orderBy("bestStreak", "desc").limit(50).get();
+      const snap = await db.collection("publicProfiles")
+        .orderBy("bestStreak", "desc")
+        .orderBy("bestStreakAt", "asc") // en caso de empate en la racha, antes = más arriba
+        .limit(RANKING_BUFFER)
+        .get();
 
       if (snap.empty) {
         list.innerHTML = '<div class="ranking-empty">Todavía no hay rachas registradas.</div>';
         return;
       }
+
+      // Si hay empate justo en el puesto 50, extendemos la lista con los puestos siguientes
+      // que compartan esa misma racha, en vez de cortar el empate a medias arbitrariamente.
+      let cutoff = Math.min(RANKING_TARGET, snap.docs.length);
+      const boundaryStreak = snap.docs[cutoff - 1].data().bestStreak;
+      while (cutoff < snap.docs.length && snap.docs[cutoff].data().bestStreak === boundaryStreak) {
+        cutoff++;
+      }
+      const docs = snap.docs.slice(0, cutoff);
 
       const medals = ["🥇", "🥈", "🥉"];
       const posClasses = ["gold", "silver", "bronze"];
@@ -1131,7 +1150,7 @@
       let html = "";
       let currentUserInTop50 = false;
 
-      snap.forEach(doc => {
+      docs.forEach(doc => {
         position++;
         const data = doc.data();
         const isOwnRow = currentUser && doc.id === currentUser.uid;
@@ -1139,7 +1158,7 @@
         html += buildRankingRowHtml(position, data, medals, posClasses, isOwnRow);
       });
 
-      // Si el usuario ha iniciado sesión y no está entre los 50 primeros, buscamos su
+      // Si el usuario ha iniciado sesión y no está entre los mostrados, buscamos su
       // posición real (contando cuántos jugadores tienen una racha mejor que la suya) y la
       // añadimos al final, con puntos suspensivos de por medio.
       if (currentUser && !currentUserInTop50 && currentUserProfile) {
