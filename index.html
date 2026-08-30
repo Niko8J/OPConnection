@@ -1484,14 +1484,33 @@
   // aparece scroll de forma natural, en vez de que todo se encoja para seguir cabiendo.
   //
   // Los navegadores no permiten saber a qué nivel de zoom está la página, así que no podemos
-  // "detectarlo" directamente. Usamos en su lugar una aproximación fiable: el zoom casi nunca
-  // cambia la relación de aspecto de la ventana (ancho/alto), mientras que un cambio real de
-  // tamaño de ventana o un giro de pantalla sí. Por eso solo recalculamos el diseño cuando esa
-  // relación cambia de forma notable. Además, usamos window.innerWidth/innerHeight (no
-  // visualViewport), que no varían al hacer zoom táctil (pellizcar) en móvil/tablet — así ese
-  // gesto tampoco dispara ningún recálculo.
+  // "detectarlo" directamente — ni siquiera al RECARGAR la página con un zoom distinto ya
+  // puesto. Por eso el tamaño de tarjeta calculado se GUARDA en localStorage la primera vez,
+  // y las siguientes cargas lo reutilizan tal cual en vez de recalcularlo desde cero (que es
+  // lo que causaba que, al recargar con otro zoom, el "tamaño de referencia" cambiara). Solo
+  // se vuelve a calcular si la relación de aspecto de la pantalla cambia de forma notable
+  // (girar el dispositivo, cambiar a uno distinto), nunca solo por el zoom.
 
   let frozenAspect = null;
+  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v1";
+
+  function loadCardReference() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY_CARD_REFERENCE);
+      if (raw) return JSON.parse(raw);
+    } catch (e) {
+      // localStorage puede fallar en modo incógnito o si está lleno: no es crítico.
+    }
+    return null;
+  }
+
+  function saveCardReference(ref) {
+    try {
+      localStorage.setItem(STORAGE_KEY_CARD_REFERENCE, JSON.stringify(ref));
+    } catch (e) {
+      // Si falla el guardado, simplemente se recalculará en la próxima carga.
+    }
+  }
 
   function clampPx(min, preferred, max) {
     return Math.max(min, Math.min(preferred, max));
@@ -1509,13 +1528,11 @@
 
   // Mide el hueco real que le queda al tablero (después de restar título, botones, etc.) y
   // calcula el tamaño de tarjeta cuadrada más grande que cabe en 4 columnas y 4 filas a la
-  // vez. Así, en vez de que cada tarjeta se estire para llenar un hueco rectangular (que
-  // cambia de forma con el zoom), las tarjetas siempre son cuadradas: crecen o encogen en
-  // bloque, pero nunca se deforman ni deforman las fotos que llevan dentro.
-  function measureAndSetCardSize() {
+  // vez. Devuelve el resultado en vez de solo aplicarlo, para poder guardarlo aparte.
+  function measureCardSize() {
     const board = document.querySelector(".board");
     const container = document.querySelector(".container");
-    if (!board || !container) return;
+    if (!board || !container) return null;
 
     const gapPx = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--card-gap")) || 8;
     const cols = 4, rows = 4;
@@ -1540,21 +1557,43 @@
     const cardSize = Math.max(30, Math.floor(Math.min(sizeByWidth, sizeByHeight)));
     const boardHeight = cardSize * rows + (rows - 1) * gapPx;
 
-    document.documentElement.style.setProperty("--card-size", cardSize + "px");
-    document.documentElement.style.setProperty("--board-height", boardHeight + "px");
+    return { cardSize, boardHeight };
   }
 
-  // Recalcula el diseño entero para la pantalla actual. Solo se llama al cargar la página
-  // o cuando de verdad ha cambiado la forma de la pantalla (giro, ventana redimensionada...).
+  function applyCardSize(ref) {
+    document.documentElement.style.setProperty("--card-size", ref.cardSize + "px");
+    document.documentElement.style.setProperty("--board-height", ref.boardHeight + "px");
+  }
+
+  // Recalcula el diseño entero para la pantalla actual. Se llama al cargar la página o
+  // cuando de verdad ha cambiado la forma de la pantalla (giro, ventana redimensionada...).
   function freezeDesign() {
     const w = window.innerWidth;
     const h = window.innerHeight;
-    frozenAspect = w / h;
+    const currentAspect = w / h;
+    frozenAspect = currentAspect;
     computeDesignVars(w, h);
-    // El tamaño de tarjeta depende de cómo han quedado colocados el resto de elementos
-    // (título, botones...), así que lo medimos en el siguiente fotograma, cuando el
-    // navegador ya ha aplicado los cambios anteriores al diseño real de la página.
-    requestAnimationFrame(measureAndSetCardSize);
+
+    const saved = loadCardReference();
+    const savedStillValid = saved && Math.abs(currentAspect - saved.aspect) / saved.aspect <= 0.15;
+
+    if (savedStillValid) {
+      // Reutilizamos el tamaño ya calculado antes para esta misma "forma" de pantalla, en
+      // vez de recalcularlo de nuevo — así, aunque recargues con un zoom distinto puesto,
+      // el juego se mantiene siempre en su tamaño de referencia de siempre.
+      applyCardSize(saved);
+      return;
+    }
+
+    // No hay una referencia válida todavía (primera vez, o la pantalla ha cambiado de forma
+    // de verdad): calculamos una nueva en el siguiente fotograma, cuando el navegador ya ha
+    // aplicado los cambios anteriores al diseño real de la página, y la guardamos.
+    requestAnimationFrame(() => {
+      const result = measureCardSize();
+      if (!result) return;
+      applyCardSize(result);
+      saveCardReference({ aspect: currentAspect, cardSize: result.cardSize, boardHeight: result.boardHeight });
+    });
   }
 
   function handleViewportChange() {
