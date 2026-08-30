@@ -863,6 +863,9 @@
       ],
       "Viaje": [
         {"val": "Personajes que viajaron con los Sombrero de Paja", "dif": "dificil"}
+      ],
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
       ]
     }
   },
@@ -6928,6 +6931,9 @@
       ],
       "Haki": [
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
       ]
     }
   },
@@ -11349,6 +11355,36 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "colon",
+    "name": "Colon",
+    "img": "imagenes/Colon.png",
+    "tags": {
+      "Raza": [
+        {"val": "Gigantes", "dif": "facil"}
+      ],
+      "Banda": [
+        {"val": "Elbaf", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "charlotte_normande",
+    "name": "Charlotte Normande",
+    "img": "imagenes/CharlotteNormande.png",
+    "tags": {
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
+      ],
+      "Banda": [
+        {"val": "Piratas de Big Mom", "dif": "facil"},
+        {"val": "Familia Charlotte", "dif": "media"}
+      ],
+      "Raza": [
+        {"val": "Tontattas", "dif": "dificil"}
       ]
     }
   }
