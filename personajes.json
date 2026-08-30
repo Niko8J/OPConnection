@@ -239,6 +239,7 @@
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
         {"val": "Personajes a los que Moriah robó su sombra", "dif": "dificil"}
       ]
     }
@@ -562,7 +563,8 @@
         {"val": "Recompensa: tres mil millones o más", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con cicatrices", "dif": "dificil"}
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ]
     }
   },
@@ -619,6 +621,9 @@
       "Recompensa": [
         {"val": "Recompensa: tres mil millones o más", "dif": "dificil"}
       ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
       "D": [
         {"val": "Voluntad de la D.", "dif": "media"}
       ]
@@ -643,6 +648,9 @@
       ],
       "Especialidad": [
         {"val": "Tiradores", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
@@ -864,6 +872,9 @@
       "Viaje": [
         {"val": "Personajes que viajaron con los Sombrero de Paja", "dif": "dificil"}
       ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
       "Edad": [
         {"val": "Menores de edad", "dif": "dificil"}
       ]
@@ -922,6 +933,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han usado máscara", "dif": "dificil"}
       ],
       "SMILE": [
         {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
@@ -1263,6 +1277,10 @@
       "Raza": [
         {"val": "Cyborgs", "dif": "media"}
       ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
       "Recompensa": [
         {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ]
@@ -1364,6 +1382,9 @@
       ],
       "SMILE": [
         {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ]
     }
   },
@@ -1803,6 +1824,9 @@
       ],
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han usado máscara", "dif": "dificil"}
       ]
     }
   },
@@ -1828,6 +1852,9 @@
       ],
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ]
     }
   },
@@ -1855,6 +1882,9 @@
       ],
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ]
     }
   },
@@ -2199,6 +2229,9 @@
       ],
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ]
     }
   },
@@ -2272,6 +2305,9 @@
       ],
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ]
     }
   },
@@ -2352,6 +2388,9 @@
       ],
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con gafas", "dif": "dificil"}
       ]
     }
   },
