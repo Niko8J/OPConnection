@@ -291,7 +291,8 @@
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
       ],
       "Especialidad": [
-        {"val": "Músicos", "dif": "media"}
+        {"val": "Músicos", "dif": "media"},
+        {"val": "Espadachines", "dif": "dificil"}
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
