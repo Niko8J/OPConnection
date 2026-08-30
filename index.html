@@ -54,10 +54,11 @@
        orientación, el alto de pantalla pasa a ser el lado corto del dispositivo, que en
        cualquier móvil (sea cual sea la marca) es bastante menor que en una tablet. Así
        distinguimos uno de otro sin depender de anchos fijos ni de modelos concretos.
-       Añadimos "any-pointer: coarse" (dispositivo táctil) porque, si no, un ordenador con
+       Añadimos "pointer: coarse" (el puntero PRINCIPAL es táctil, no solo "tiene pantalla
+       táctil disponible") porque, si no, un ordenador con
        mucho zoom aplicado (que también reduce el alto disponible) activaba este aviso por
        error, aunque no fuera ningún móvil de verdad. */
-    @media (orientation: landscape) and (max-height: 500px) and (any-pointer: coarse) {
+    @media (orientation: landscape) and (max-height: 500px) and (pointer: coarse) {
       .rotate-overlay {
         display: flex; position: fixed; inset: 0; z-index: 9999;
         background-color: #0f172a; color: #f8fafc;
