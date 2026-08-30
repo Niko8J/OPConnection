@@ -2378,6 +2378,29 @@
       closeModalViaX();
     }
   }
+
+  // Pulsar Escape hace lo mismo que la X, hacer clic fuera, o el botón de acción: cierra la
+  // ventana emergente que esté abierta en ese momento (si hay alguna).
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+
+    const modals = [
+      { id: "gameover-modal", close: closeModalViaX },
+      { id: "auth-modal", close: closeAuthModal },
+      { id: "ranking-modal", close: closeRankingModal },
+      { id: "edit-profile-modal", close: closeEditProfileModal },
+      { id: "howto-modal", close: closeHowToModal },
+      { id: "contact-modal", close: closeContactModal },
+    ];
+
+    for (const modal of modals) {
+      const el = document.getElementById(modal.id);
+      if (el && el.style.display !== "none" && el.style.display !== "") {
+        modal.close();
+        break; // solo cerramos una, por si hubiera alguna anidada
+      }
+    }
+  });
 </script>
 </body>
 </html>
