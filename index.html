@@ -188,8 +188,8 @@
     .diff-btn.active { background: #f59e0b; color: #0f172a; border-color: #f59e0b; }
 
     .infinite-score {
-      height: 1.3em;
-      line-height: 1.3em;
+      height: 1.15em;
+      line-height: 1.15em;
       font-size: 0.95rem;
       font-weight: bold;
       color: #f59e0b;
@@ -1494,7 +1494,7 @@
   // (girar el dispositivo, cambiar a uno distinto), nunca solo por el zoom.
 
   let frozenAspect = null;
-  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v2";
+  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v3";
 
   function loadCardReference() {
     try {
@@ -1551,7 +1551,7 @@
       siblingsHeight += child.offsetHeight + parseFloat(style.marginTop) + parseFloat(style.marginBottom);
     });
 
-    const availableHeight = Math.max(0, container.clientHeight - siblingsHeight - 4); // -4px: margen de seguridad ante redondeos
+    const availableHeight = Math.max(0, container.clientHeight - siblingsHeight - 16); // -16px: margen de seguridad ante redondeos/fuentes cargando
     const availableWidth = board.clientWidth;
 
     const sizeByWidth = (availableWidth - (cols - 1) * gapPx) / cols;
