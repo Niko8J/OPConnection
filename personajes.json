@@ -2221,6 +2221,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con gafas", "dif": "dificil"}
       ]
     }
   },
@@ -3114,6 +3117,9 @@
       ],
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ]
     }
   },
@@ -7628,7 +7634,8 @@
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con tatuajes", "dif": "dificil"}
+        {"val": "Personajes con tatuajes", "dif": "dificil"},
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ]
     }
   },
@@ -11839,6 +11846,54 @@
       ],
       "Banda": [
         {"val": "Trabajadores de Impel Down", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "morgans",
+    "name": "\"Big News\" Morgans",
+    "img": "imagenes/Morgans.png",
+    "tags": {
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "tsuru",
+    "name": "Tsuru",
+    "img": "imagenes/Tsuru.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "onigumo",
+    "name": "Onigumo",
+    "img": "imagenes/Onigumo.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
       ]
     }
   }
