@@ -536,6 +536,7 @@
     <div class="controls-left">
       <button class="action-btn submit" id="submit-btn" onclick="checkGuess()">Enviar</button>
       <button class="action-btn" id="deselect-btn" onclick="deselectAll()">Limpiar</button>
+      <button class="action-btn" id="hint-btn" onclick="useHint()" style="display: none;">💡1</button>
       <button class="action-btn" id="view-results-btn" onclick="openModal()" style="display: none;">📊 Resultados</button>
     </div>
     <div class="controls-right">
@@ -716,6 +717,7 @@
   let currentCategories = [];
   let cards = [];
   let selectedCards = [];
+  let hintsRemaining = 1; // una pista por panel, solo aplica en modo Infinito
   let lives = MAX_LIVES;
   let gameOver = false;
 
@@ -733,7 +735,8 @@
       selectedCards,
       lives,
       solvedCount: infiniteSolvedCount,
-      solvedOrder
+      solvedOrder,
+      hintsRemaining
     };
   }
 
@@ -846,6 +849,7 @@
     lives = saved.lives;
     infiniteSolvedCount = saved.solvedCount;
     solvedOrder = saved.solvedOrder || [];
+    hintsRemaining = (saved.hintsRemaining !== undefined) ? saved.hintsRemaining : 1;
     gameOver = false;
     awaitingNextPanel = false;
 
@@ -854,6 +858,7 @@
     document.getElementById("gameover-modal").style.display = "none";
 
     updateInfiniteScoreDisplay();
+    updateHintButtonState();
 
     if (!cards || cards.length === 0) {
       // El progreso se guardó justo al completar un panel: empezamos el siguiente.
@@ -1804,11 +1809,14 @@
 
   function updateInfiniteScoreDisplay() {
     const el = document.getElementById("infinite-score");
+    const hintBtn = document.getElementById("hint-btn");
     if (isInfiniteMode) {
       el.style.visibility = "visible";
       el.innerText = `🔥 Paneles resueltos: ${infiniteSolvedCount}`;
+      hintBtn.style.display = "";
     } else {
       el.style.visibility = "hidden";
+      hintBtn.style.display = "none";
     }
   }
 
@@ -2057,11 +2065,16 @@
     document.getElementById("submit-btn").disabled = false;
     document.getElementById("deselect-btn").disabled = false;
     document.getElementById("view-results-btn").style.display = "none";
+    if (isInfiniteMode) {
+      document.getElementById("hint-btn").style.display = "";
+      updateHintButtonState();
+    }
   }
 
   function showResultsControl() {
     document.getElementById("submit-btn").style.display = "none";
     document.getElementById("deselect-btn").style.display = "none";
+    document.getElementById("hint-btn").style.display = "none";
     document.getElementById("view-results-btn").style.display = "inline-block";
   }
 
@@ -2074,6 +2087,10 @@
     document.getElementById("submit-btn").disabled = true;
     document.getElementById("deselect-btn").disabled = true;
     document.getElementById("view-results-btn").style.display = "none";
+    if (isInfiniteMode) {
+      document.getElementById("hint-btn").style.display = "";
+      document.getElementById("hint-btn").disabled = true;
+    }
   }
 
   function initGame() {
@@ -2083,9 +2100,11 @@
     cards = [];
     selectedCards = [];
     solvedOrder = [];
+    hintsRemaining = 1;
 
     document.getElementById("warning-msg").innerText = "";
     showGameControls();
+    updateHintButtonState();
     document.getElementById("gameover-modal").style.display = "none";
 
     currentCategories.forEach(cat => {
@@ -2218,6 +2237,7 @@
 
   function toggleSelect(index) {
     if (gameOver) return;
+    clearHintColors();
     if (selectedCards.includes(index)) {
       selectedCards = selectedCards.filter(i => i !== index);
     } else {
@@ -2231,14 +2251,61 @@
     // Solo actualizamos la tarjeta pulsada, sin tocar el resto.
     const cardEl = document.querySelector(`#grid .card[data-index="${index}"]`);
     if (cardEl) cardEl.classList.toggle("selected", selectedCards.includes(index));
+    updateHintButtonState();
   }
 
   function deselectAll() {
     if (gameOver) return;
+    clearHintColors();
     selectedCards = [];
     document.getElementById("warning-msg").innerText = "";
     // Solo quitamos la clase de selección de las tarjetas que la tuvieran, sin reconstruir nada.
     document.querySelectorAll("#grid .card.selected").forEach(el => el.classList.remove("selected"));
+    updateHintButtonState();
+  }
+
+  // El botón de pista se pone naranja (igual que Enviar) solo cuando hay 4 tarjetas
+  // seleccionadas y todavía queda algún uso disponible; si no, vuelve a su color normal.
+  function updateHintButtonState() {
+    const hintBtn = document.getElementById("hint-btn");
+    if (!hintBtn || !isInfiniteMode) return;
+    hintBtn.innerText = `💡${hintsRemaining}`;
+    hintBtn.disabled = hintsRemaining <= 0;
+    const shouldHighlight = selectedCards.length === 4 && hintsRemaining > 0;
+    hintBtn.classList.toggle("submit", shouldHighlight);
+  }
+
+  // Quita el color de "pista" de todas las tarjetas activas (se limpia en cuanto cambia la
+  // selección, para no dejar colores de una comprobación anterior confundiendo al jugador).
+  function clearHintColors() {
+    document.querySelectorAll("#grid .card").forEach(el => {
+      el.style.borderColor = "";
+      el.style.boxShadow = "";
+    });
+  }
+
+  // Usa la única pista disponible en el panel: sin resolver nada por el jugador, colorea
+  // el borde de las 4 tarjetas seleccionadas según su categoría REAL (los mismos 4 colores
+  // que se usan para las categorías ya resueltas), para que el jugador vea de un vistazo
+  // cuáles de las 4 comparten categoría de verdad y cuáles no.
+  function useHint() {
+    if (gameOver || isInfiniteMode !== true) return;
+    if (selectedCards.length !== 4 || hintsRemaining <= 0) return;
+
+    hintsRemaining--;
+
+    selectedCards.forEach(index => {
+      const card = cards[index];
+      const catData = currentCategories.find(c => c.name === card.category);
+      const cardEl = document.querySelector(`#grid .card[data-index="${index}"]`);
+      if (cardEl && catData) {
+        cardEl.style.borderColor = catData.color;
+        cardEl.style.boxShadow = `0 0 10px ${catData.color}`;
+      }
+    });
+
+    updateHintButtonState();
+    saveInfiniteState();
   }
 
   function checkGuess() {
@@ -2263,6 +2330,7 @@
       cards = cards.filter((_, i) => !selectedCards.includes(i));
       selectedCards = [];
       renderGrid();
+      updateHintButtonState();
       saveInfiniteState();
 
       if (cards.length === 0) {
