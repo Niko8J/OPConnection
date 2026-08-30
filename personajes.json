@@ -37,7 +37,8 @@
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
-        {"val": "Personajes con tatuajes", "dif": "dificil"}
+        {"val": "Personajes con tatuajes", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -128,6 +129,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 500M y mil millones", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -193,6 +197,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -290,7 +297,8 @@
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con cicatrices", "dif": "dificil"}
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -415,6 +423,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -506,6 +517,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: tres mil millones o más", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -565,6 +579,9 @@
       ],
       "Especialidad": [
         {"val": "Tiradores", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -652,6 +669,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: tres mil millones o más", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -771,7 +791,8 @@
         {"val": "Fruta despertada", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con tatuajes", "dif": "dificil"}
+        {"val": "Personajes con tatuajes", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ],
       "Viaje": [
         {"val": "Personajes que viajaron con los Sombrero de Paja", "dif": "dificil"}
@@ -866,6 +887,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -950,6 +974,9 @@
       ],
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -1033,7 +1060,8 @@
         {"val": "Recompensa: entre 500M y mil millones", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con cicatrices", "dif": "dificil"}
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -1134,6 +1162,9 @@
       ],
       "Viaje": [
         {"val": "Personajes que viajaron con los Sombrero de Paja", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -1365,6 +1396,9 @@
       ],
       "Despertar": [
         {"val": "Fruta despertada", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -1511,7 +1545,8 @@
         {"val": "Fruta del diablo: Logia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes con tatuajes", "dif": "dificil"}
+        {"val": "Personajes con tatuajes", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -2256,6 +2291,9 @@
       ],
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -2282,6 +2320,9 @@
       ],
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -2361,6 +2402,9 @@
       ],
       "Despertar": [
         {"val": "Fruta despertada", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -2383,6 +2427,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -2417,6 +2464,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -2478,6 +2528,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -2609,6 +2662,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -2655,6 +2711,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -2698,6 +2757,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -2775,6 +2837,9 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -2854,6 +2919,9 @@
       ],
       "Especialidad": [
         {"val": "Médicos", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -3102,6 +3170,9 @@
       ],
       "Titulo": [
         {"val": "Tobiroppos de los Piratas Bestia", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -3186,6 +3257,9 @@
       ],
       "Titulo": [
         {"val": "Tobiroppos de los Piratas Bestia", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -3202,6 +3276,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -3221,6 +3298,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -3437,6 +3517,9 @@
       ],
       "Origen": [
         {"val": "Red Line", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -3603,6 +3686,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -3852,7 +3938,8 @@
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
-        {"val": "Personajes con tatuajes", "dif": "dificil"}
+        {"val": "Personajes con tatuajes", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -3888,7 +3975,8 @@
         {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con tatuajes", "dif": "dificil"}
+        {"val": "Personajes con tatuajes", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4014,6 +4102,9 @@
       ],
       "Banda": [
         {"val": "Familia Neptune", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4055,6 +4146,9 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4083,6 +4177,9 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4184,6 +4281,9 @@
       ],
       "Raza": [
         {"val": "Tontattas", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4209,6 +4309,9 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4251,6 +4354,9 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4279,6 +4385,9 @@
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4306,6 +4415,9 @@
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4325,6 +4437,9 @@
       ],
       "Raza": [
         {"val": "Gigantes", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4361,6 +4476,9 @@
       ],
       "Raza": [
         {"val": "Gigantes", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4458,6 +4576,9 @@
       ],
       "Especialidad": [
         {"val": "Cocineros", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4631,7 +4752,8 @@
         {"val": "Recompensa: entre 500M y mil millones", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con tatuajes", "dif": "dificil"}
+        {"val": "Personajes con tatuajes", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
@@ -4672,6 +4794,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4791,6 +4916,9 @@
       ],
       "Especialidad": [
         {"val": "Científicos", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4848,6 +4976,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4864,6 +4995,9 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4877,6 +5011,9 @@
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4890,6 +5027,9 @@
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4906,6 +5046,9 @@
       ],
       "Raza": [
         {"val": "Animales", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5006,6 +5149,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5117,6 +5263,9 @@
       ],
       "Titulo": [
         {"val": "Emperatrices de Amazon Lilly", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5130,6 +5279,9 @@
       ],
       "Especialidad": [
         {"val": "Científicos", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5204,7 +5356,8 @@
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"},
-        {"val": "Personajes con cicatrices", "dif": "dificil"}
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5239,7 +5392,8 @@
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5312,6 +5466,9 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5331,6 +5488,9 @@
       ],
       "Especialidad": [
         {"val": "Navegantes", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5477,6 +5637,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5496,6 +5659,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5567,6 +5733,9 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5591,6 +5760,9 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5633,6 +5805,9 @@
       ],
       "Raza": [
         {"val": "Minks", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5678,6 +5853,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5736,6 +5914,9 @@
       ],
       "Raza": [
         {"val": "Gyojins", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5758,6 +5939,9 @@
       ],
       "Raza": [
         {"val": "Gyojins", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5984,6 +6168,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -6140,6 +6327,9 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -6177,6 +6367,9 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -6193,6 +6386,9 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -6206,6 +6402,9 @@
       ],
       "Raza": [
         {"val": "Tontattas", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -6573,6 +6772,9 @@
       ],
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -6731,7 +6933,8 @@
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
       ],
       "Marcas": [
-        {"val": "Personajes con tatuajes", "dif": "dificil"}
+        {"val": "Personajes con tatuajes", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -6765,6 +6968,9 @@
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -6785,6 +6991,9 @@
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -6878,6 +7087,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -6891,6 +7103,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -6939,7 +7154,8 @@
         {"val": "Origen: West Blue", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con cicatrices", "dif": "dificil"}
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ],
       "Raza": [
         {"val": "Zombies", "dif": "facil"},
@@ -7015,6 +7231,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -7134,6 +7353,9 @@
       ],
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -7196,6 +7418,9 @@
       ],
       "Raza": [
         {"val": "Tribu de brazos largos", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -7398,6 +7623,9 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -8037,7 +8265,8 @@
         {"val": "Gyojins", "dif": "facil"}
       ],
       "Marcas": [
-        {"val": "Personajes con tatuajes", "dif": "dificil"}
+        {"val": "Personajes con tatuajes", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -8178,6 +8407,9 @@
       ],
       "Origen": [
         {"val": "Red Line", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -8704,6 +8936,9 @@
       ],
       "SMILE": [
         {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -9135,6 +9370,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -9198,6 +9436,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -9236,6 +9477,9 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -9499,6 +9743,9 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -9543,6 +9790,9 @@
       ],
       "Especialidad": [
         {"val": "Tiradores", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -9771,6 +10021,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -9824,9 +10077,9 @@
     }
   },
   {
-    "id": "kozuki_toki",
+    "id": "toki",
     "name": "Kozuki Toki",
-    "img": "imagenes/KozukiToki.png",
+    "img": "imagenes/Toki.png",
     "tags": {
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
@@ -9883,6 +10136,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -9902,6 +10158,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -9943,6 +10202,9 @@
       ],
       "Titulo": [
         {"val": "Monarcas", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10025,6 +10287,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 500M y mil millones", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10079,6 +10344,9 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10107,6 +10375,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10181,6 +10452,9 @@
       ],
       "Raza": [
         {"val": "Tribu de cuellos de serpiente", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10344,6 +10618,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10360,6 +10637,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10523,6 +10803,9 @@
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10553,6 +10836,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10577,6 +10863,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10612,7 +10901,7 @@
   {
     "id": "pudding",
     "name": "Charlotte Pudding",
-    "img": "imagenes/CharlottePudding.png",
+    "img": "imagenes/Pudding.png",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -10642,6 +10931,9 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10660,7 +10952,8 @@
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10706,7 +10999,8 @@
         {"val": "Piratas de Thriller Bark", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con cicatrices", "dif": "dificil"}
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ],
       "Raza": [
         {"val": "Zombies", "dif": "facil"},
@@ -10819,7 +11113,8 @@
         {"val": "Piratas de Thriller Bark", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con cicatrices", "dif": "dificil"}
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
@@ -10840,7 +11135,8 @@
         {"val": "Piratas de Thriller Bark", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con cicatrices", "dif": "dificil"}
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ],
       "Raza": [
         {"val": "Zombies", "dif": "facil"},
@@ -10926,14 +11222,15 @@
         {"val": "Cyborgs", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
   {
     "id": "lilith",
     "name": "Lilith",
-    "img": "imagenes/ilith.png",
+    "img": "imagenes/Lilith.png",
     "tags": {
       "Banda": [
         {"val": "Satélites de Vegapunk", "dif": "media"}
@@ -11039,6 +11336,9 @@
       ],
       "Viaje": [
         {"val": "Personajes que viajaron con los Sombrero de Paja", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -11086,7 +11386,8 @@
         {"val": "Piratas de Big Mom", "dif": "facil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
