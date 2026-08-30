@@ -477,7 +477,7 @@
   <p>Encuentra 4 grupos conectados por distintos atributos.</p>
 
   <div class="difficulty-selector">
-    <button class="diff-btn active" onclick="setDifficulty('facil', event)">Novato</button>
+    <button class="diff-btn" onclick="setDifficulty('facil', event)">Novato</button>
     <button class="diff-btn" onclick="setDifficulty('media', event)">Supernova</button>
     <button class="diff-btn" onclick="setDifficulty('dificil', event)">Yonko</button>
     <button class="diff-btn" onclick="setDifficulty('infinito', event)">Infinito</button>
@@ -1616,15 +1616,15 @@
   });
 
   window.addEventListener("DOMContentLoaded", () => {
-    // Corregimos el botón de dificultad resaltado ya mismo (sin esperar a la red) para
-    // evitar el parpadeo inicial en "Novato" antes de aplicar la preferencia guardada.
+    // Marcamos ya mismo el botón de dificultad correcto (sin esperar a la red), tanto si hay
+    // una preferencia guardada como si no —así ningún botón queda marcado "por defecto" en el
+    // HTML de partida, que es lo que causaba el parpadeo en "Novato" al recargar estando en
+    // otro modo: el navegador llegaba a pintar ese primer fotograma antes de que este código
+    // tuviera ocasión de corregirlo.
     let earlyLastDifficulty = null;
     try { earlyLastDifficulty = localStorage.getItem(STORAGE_KEY_LAST_DIFFICULTY); } catch (e) {}
-    if (earlyLastDifficulty) {
-      document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
-      const earlyBtn = document.querySelector(`.diff-btn[onclick*="${earlyLastDifficulty}"]`);
-      if (earlyBtn) earlyBtn.classList.add('active');
-    }
+    const earlyBtn = document.querySelector(`.diff-btn[onclick*="${earlyLastDifficulty || "facil"}"]`);
+    if (earlyBtn) earlyBtn.classList.add('active');
 
     // Si el último modo fue Infinito, mostramos ya el marcador de racha (con el último
     // dato guardado localmente si lo hay) en vez de esperar a la carga completa.
