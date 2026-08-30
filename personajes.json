@@ -265,7 +265,7 @@
     }
   },
   {
-    "id": "Brook",
+    "id": "brook",
     "name": "Brook",
     "img": "imagenes/Brook.png",
     "tags": {
@@ -288,6 +288,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ]
     }
   },
@@ -3633,6 +3636,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Monarcas", "dif": "dificil"}
       ]
     }
   },
@@ -5516,6 +5522,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han usado máscara", "dif": "dificil"}
       ]
     }
   },
@@ -9703,6 +9712,9 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ]
     }
   },
@@ -10746,7 +10758,8 @@
     "tags": {
       "Banda": [
         {"val": "Piratas de Thriller Bark", "dif": "facil"},
-        {"val": "Piratas de Thriller Bark", "dif": "dificil"}
+        {"val": "Piratas de Thriller Bark", "dif": "dificil"},
+        {"val": "Wano", "dif": "facil"}
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"}
