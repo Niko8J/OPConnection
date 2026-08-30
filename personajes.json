@@ -38,7 +38,7 @@
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
         {"val": "Personajes con tatuajes", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -131,7 +131,7 @@
         {"val": "Recompensa: entre 500M y mil millones", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -199,7 +199,7 @@
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -299,7 +299,7 @@
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -424,9 +424,6 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan", "dif": "media"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -520,7 +517,7 @@
         {"val": "Recompensa: tres mil millones o más", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -580,9 +577,6 @@
       ],
       "Especialidad": [
         {"val": "Tiradores", "dif": "dificil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -672,7 +666,7 @@
         {"val": "Recompensa: tres mil millones o más", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -793,7 +787,7 @@
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ],
       "Viaje": [
         {"val": "Personajes que viajaron con los Sombrero de Paja", "dif": "dificil"}
@@ -890,7 +884,7 @@
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -975,9 +969,6 @@
       ],
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -1062,7 +1053,7 @@
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -1165,7 +1156,7 @@
         {"val": "Personajes que viajaron con los Sombrero de Paja", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -1399,7 +1390,7 @@
         {"val": "Fruta despertada", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -1547,7 +1538,7 @@
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -2294,7 +2285,7 @@
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -2323,7 +2314,7 @@
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -2403,9 +2394,6 @@
       ],
       "Despertar": [
         {"val": "Fruta despertada", "dif": "dificil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -2430,7 +2418,7 @@
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -2467,7 +2455,7 @@
         {"val": "Personajes fallecidos", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -2531,7 +2519,7 @@
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -2663,9 +2651,6 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -2714,7 +2699,7 @@
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -2760,7 +2745,7 @@
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -2838,9 +2823,6 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -2922,7 +2904,7 @@
         {"val": "Médicos", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -3173,7 +3155,7 @@
         {"val": "Tobiroppos de los Piratas Bestia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -3260,7 +3242,7 @@
         {"val": "Tobiroppos de los Piratas Bestia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -3279,7 +3261,7 @@
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -3301,7 +3283,7 @@
         {"val": "Personajes fallecidos", "dif": "facil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -3520,7 +3502,7 @@
         {"val": "Red Line", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -3689,7 +3671,7 @@
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -3940,7 +3922,7 @@
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
         {"val": "Personajes con tatuajes", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -3977,7 +3959,7 @@
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -4033,6 +4015,9 @@
       ],
       "Banda": [
         {"val": "Familia Riku", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han usado máscara", "dif": "dificil"}
       ]
     }
   },
@@ -4103,9 +4088,6 @@
       ],
       "Banda": [
         {"val": "Familia Neptune", "dif": "media"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4149,7 +4131,7 @@
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -4180,7 +4162,7 @@
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -4284,7 +4266,7 @@
         {"val": "Tontattas", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -4312,7 +4294,7 @@
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -4357,7 +4339,7 @@
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -4388,7 +4370,7 @@
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -4418,7 +4400,7 @@
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -4440,7 +4422,7 @@
         {"val": "Gigantes", "dif": "facil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -4479,7 +4461,7 @@
         {"val": "Gigantes", "dif": "facil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -4579,7 +4561,7 @@
         {"val": "Cocineros", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -4753,8 +4735,7 @@
         {"val": "Recompensa: entre 500M y mil millones", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con tatuajes", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
@@ -4795,9 +4776,6 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -4919,7 +4897,7 @@
         {"val": "Científicos", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -4979,7 +4957,7 @@
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -4996,9 +4974,6 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5012,9 +4987,6 @@
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5028,9 +5000,6 @@
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5049,7 +5018,7 @@
         {"val": "Animales", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -5152,7 +5121,7 @@
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -5266,7 +5235,7 @@
         {"val": "Emperatrices de Amazon Lilly", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -5282,7 +5251,7 @@
         {"val": "Científicos", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -5358,7 +5327,7 @@
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"},
         {"val": "Personajes con cicatrices", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -5393,8 +5362,7 @@
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara", "dif": "dificil"}
       ]
     }
   },
@@ -5469,7 +5437,7 @@
         {"val": "Sin fruta del diablo", "dif": "facil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -5491,7 +5459,7 @@
         {"val": "Navegantes", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -5638,9 +5606,6 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5662,7 +5627,7 @@
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -5736,7 +5701,7 @@
         {"val": "Sin fruta del diablo", "dif": "facil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -5763,7 +5728,7 @@
         {"val": "Espadachines", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -5808,7 +5773,7 @@
         {"val": "Minks", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -5856,7 +5821,7 @@
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -5917,7 +5882,7 @@
         {"val": "Gyojins", "dif": "facil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -5940,9 +5905,6 @@
       ],
       "Raza": [
         {"val": "Gyojins", "dif": "facil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -5959,6 +5921,9 @@
       ],
       "Raza": [
         {"val": "Minks", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -6171,7 +6136,7 @@
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -6328,9 +6293,6 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -6370,7 +6332,7 @@
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -6389,7 +6351,7 @@
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -6405,7 +6367,7 @@
         {"val": "Tontattas", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -6773,9 +6735,6 @@
       ],
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -6934,8 +6893,7 @@
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
       ],
       "Marcas": [
-        {"val": "Personajes con tatuajes", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -6969,9 +6927,6 @@
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -6994,7 +6949,7 @@
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -7090,7 +7045,7 @@
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -7106,7 +7061,7 @@
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -7156,7 +7111,7 @@
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ],
       "Raza": [
         {"val": "Zombies", "dif": "facil"},
@@ -7234,7 +7189,7 @@
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -7356,7 +7311,7 @@
         {"val": "Origen: West Blue", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -7421,7 +7376,7 @@
         {"val": "Tribu de brazos largos", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -7626,7 +7581,7 @@
         {"val": "Espadachines", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -8267,7 +8222,7 @@
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -8410,7 +8365,7 @@
         {"val": "Red Line", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -8937,9 +8892,6 @@
       ],
       "SMILE": [
         {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -9373,7 +9325,7 @@
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -9439,7 +9391,7 @@
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -9478,9 +9430,6 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -9746,7 +9695,7 @@
         {"val": "Espadachines", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -9791,9 +9740,6 @@
       ],
       "Especialidad": [
         {"val": "Tiradores", "dif": "dificil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10022,9 +9968,6 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10137,9 +10080,6 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10161,7 +10101,7 @@
         {"val": "Personajes fallecidos", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -10205,7 +10145,7 @@
         {"val": "Monarcas", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -10290,7 +10230,7 @@
         {"val": "Recompensa: entre 500M y mil millones", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -10345,9 +10285,6 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10378,7 +10315,7 @@
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -10455,7 +10392,7 @@
         {"val": "Tribu de cuellos de serpiente", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -10619,9 +10556,6 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10640,7 +10574,7 @@
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -10804,9 +10738,6 @@
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10837,9 +10768,6 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10864,9 +10792,6 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -10934,7 +10859,7 @@
         {"val": "Sin fruta del diablo", "dif": "facil"}
       ],
       "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
@@ -10953,8 +10878,7 @@
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara", "dif": "dificil"}
       ]
     }
   },
@@ -11000,8 +10924,7 @@
         {"val": "Piratas de Thriller Bark", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con cicatrices", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ],
       "Raza": [
         {"val": "Zombies", "dif": "facil"},
@@ -11114,8 +11037,7 @@
         {"val": "Piratas de Thriller Bark", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con cicatrices", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
@@ -11137,7 +11059,7 @@
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ],
       "Raza": [
         {"val": "Zombies", "dif": "facil"},
@@ -11223,8 +11145,7 @@
         {"val": "Cyborgs", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara", "dif": "dificil"}
       ]
     }
   },
@@ -11337,9 +11258,6 @@
       ],
       "Viaje": [
         {"val": "Personajes que viajaron con los Sombrero de Paja", "dif": "dificil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes con sombrero", "dif": "dificil"}
       ]
     }
   },
@@ -11388,7 +11306,7 @@
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"},
-        {"val": "Personajes con sombrero", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero (gorro, gorra, corona...)", "dif": "dificil"}
       ]
     }
   },
