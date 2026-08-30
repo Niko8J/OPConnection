@@ -1847,6 +1847,51 @@
   // los miembros "no evidentes". Así evitamos que salga, por ejemplo, un panel "difícil" de
   // Sombrero de Paja formado únicamente por Luffy/Zoro/Nami/Usopp.
   // Se incluyen ambas variantes del nombre por si el JSON tiene o no el prefijo "Banda: " duplicado.
+  // Baraja un array de forma realmente uniforme (Fisher-Yates), a diferencia de
+  // array.sort(() => Math.random() - 0.5), que tiene un sesgo conocido y no reparte las
+  // probabilidades por igual entre todos los órdenes posibles.
+  function shuffle(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  // Guarda en el navegador cuándo fue la última vez que salió cada categoría, para dar
+  // preferencia a las que llevan más tiempo sin aparecer (o nunca han salido) al generar un
+  // panel nuevo, sin dejar de haber aleatoriedad real entre las igual de "antiguas".
+  const STORAGE_KEY_CATEGORY_USAGE = "opc_category_usage_v1";
+
+  function loadCategoryUsageState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY_CATEGORY_USAGE);
+      if (raw) return JSON.parse(raw);
+    } catch (e) {}
+    return {};
+  }
+
+  function registerCategoryUsage(groupNames) {
+    try {
+      const state = loadCategoryUsageState();
+      const now = Date.now();
+      groupNames.forEach(name => { state[name] = now; });
+      localStorage.setItem(STORAGE_KEY_CATEGORY_USAGE, JSON.stringify(state));
+    } catch (e) {}
+  }
+
+  function weightedShuffleGroups(groupNames) {
+    const state = loadCategoryUsageState();
+    const withScores = groupNames.map(name => ({
+      name,
+      lastUsed: state[name] || 0, // 0 = nunca ha salido, máxima prioridad
+      rand: Math.random() // desempate aleatorio entre igual de "antiguas"
+    }));
+    withScores.sort((a, b) => (a.lastUsed !== b.lastUsed) ? a.lastUsed - b.lastUsed : a.rand - b.rand);
+    return withScores.map(item => item.name);
+  }
+
   const HARD_MODE_MUST_INCLUDE_ONE_OF = {
     "Banda: Banda: Sombrero de Paja": ["vivi", "karoo", "sunny", "merry"],
     "Banda: Sombrero de Paja": ["vivi", "karoo", "sunny", "merry"],
@@ -1868,18 +1913,15 @@
       const specialCandidates = exclusiveChars.filter(c => mustIncludeIds.includes(c.id));
       if (specialCandidates.length > 0) {
         const forced = specialCandidates[Math.floor(Math.random() * specialCandidates.length)];
-        const rest = exclusiveChars
-          .filter(c => c.id !== forced.id)
-          .sort(() => Math.random() - 0.5)
-          .slice(0, 3);
-        return [forced, ...rest].sort(() => Math.random() - 0.5);
+        const rest = shuffle(exclusiveChars.filter(c => c.id !== forced.id)).slice(0, 3);
+        return shuffle([forced, ...rest]);
       }
       // Si ningún miembro "no evidente" está disponible ahora mismo (por ejemplo, porque ya
       // se usó en otra categoría del mismo panel), seguimos con la selección normal en vez
       // de bloquear la generación del panel.
     }
 
-    return exclusiveChars.sort(() => Math.random() - 0.5).slice(0, 4);
+    return shuffle(exclusiveChars).slice(0, 4);
   }
 
   function generateNewBoard() {
@@ -1930,7 +1972,7 @@
     let maxAttempts = 1000;
 
     for (let attempt = 0; attempt < maxAttempts; attempt++) {
-      let shuffledGroups = [...validGroupNames].sort(() => Math.random() - 0.5);
+      let shuffledGroups = weightedShuffleGroups(validGroupNames);
       let candidateGroups = [];
       let usedCharIds = new Set();
 
@@ -1984,6 +2026,7 @@
     }
 
     currentCategories = selectedGroups;
+    registerCategoryUsage(selectedGroups.map(g => g.name));
     initGame();
   }
 
@@ -2032,7 +2075,7 @@
       });
     });
 
-    cards = cards.sort(() => Math.random() - 0.5);
+    cards = shuffle(cards);
     renderAllSolvedBlocks(); // limpia bloques resueltos que pudieran quedar de un panel/modo anterior
     renderLives();
     renderGrid();
