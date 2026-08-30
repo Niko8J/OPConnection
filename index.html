@@ -52,6 +52,7 @@
       --container-pad-top: 10px;
       --modal-max-h: 85vh;
       --ranking-list-max-h: 55vh;
+      --card-size: 70px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     html { height: 100%; }
@@ -259,16 +260,20 @@
     }
     
     .grid {
-      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(0, 1fr));
-      gap: var(--card-gap); flex: 1; min-height: 0; overflow-y: auto;
+      display: grid;
+      grid-template-columns: repeat(4, var(--card-size));
+      grid-auto-rows: var(--card-size);
+      gap: var(--card-gap);
+      flex: 1; min-height: 0; overflow-y: auto;
+      justify-content: center; align-content: center;
     }
     
     .card {
       background-color: #1e293b;
       border: 3px solid #334155;
       border-radius: 8px;
-      width: 100%;
-      height: 100%;
+      width: var(--card-size);
+      height: var(--card-size);
       min-height: 40px;
       display: flex;
       justify-content: center;
@@ -1504,6 +1509,28 @@
     root.setProperty("--frozen-vh", h + "px");
   }
 
+  // Mide el hueco real que le queda al tablero (después de restar título, botones, etc.) y
+  // calcula el tamaño de tarjeta cuadrada más grande que cabe en 4 columnas y 4 filas a la
+  // vez. Así, en vez de que cada tarjeta se estire para llenar un hueco rectangular (que
+  // cambia de forma con el zoom), las tarjetas siempre son cuadradas: crecen o encogen en
+  // bloque, pero nunca se deforman ni deforman las fotos que llevan dentro.
+  function measureAndSetCardSize() {
+    const board = document.querySelector(".board");
+    if (!board) return;
+
+    const gapPx = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--card-gap")) || 8;
+    const cols = 4, rows = 4;
+
+    const availableWidth = board.clientWidth;
+    const availableHeight = board.clientHeight;
+
+    const sizeByWidth = (availableWidth - (cols - 1) * gapPx) / cols;
+    const sizeByHeight = (availableHeight - (rows - 1) * gapPx) / rows;
+    const cardSize = Math.max(30, Math.floor(Math.min(sizeByWidth, sizeByHeight)));
+
+    document.documentElement.style.setProperty("--card-size", cardSize + "px");
+  }
+
   // Recalcula el diseño entero para la pantalla actual. Solo se llama al cargar la página
   // o cuando de verdad ha cambiado la forma de la pantalla (giro, ventana redimensionada...).
   function freezeDesign() {
@@ -1511,6 +1538,10 @@
     const h = window.innerHeight;
     frozenAspect = w / h;
     computeDesignVars(w, h);
+    // El tamaño de tarjeta depende de cómo han quedado colocados el resto de elementos
+    // (título, botones...), así que lo medimos en el siguiente fotograma, cuando el
+    // navegador ya ha aplicado los cambios anteriores al diseño real de la página.
+    requestAnimationFrame(measureAndSetCardSize);
   }
 
   function handleViewportChange() {
