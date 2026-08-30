@@ -49,22 +49,25 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     html { height: 100%; }
 
-    .rotate-overlay { display: none; }
     /* "orientation: landscape" + poco alto identifica un MÓVIL en horizontal: en esa
        orientación, el alto de pantalla pasa a ser el lado corto del dispositivo, que en
        cualquier móvil (sea cual sea la marca) es bastante menor que en una tablet. Así
-       distinguimos uno de otro sin depender de anchos fijos ni de modelos concretos. */
-    @media (orientation: landscape) and (max-height: 500px) {
-      .rotate-overlay {
-        display: flex; position: fixed; inset: 0; z-index: 9999;
-        background-color: #0f172a; color: #f8fafc;
-        flex-direction: column; align-items: center; justify-content: center;
-        text-align: center; padding: 20px; gap: 10px;
-      }
-      .rotate-overlay-icon { font-size: 2.5rem; animation: rotate-hint 1.6s ease-in-out infinite; }
-      @keyframes rotate-hint {
-        0%, 100% { transform: rotate(0deg); }
-        50% { transform: rotate(90deg); }
+       distinguimos uno de otro sin depender de anchos fijos ni de modelos concretos.
+       En ese caso, giramos visualmente toda la página -90° para compensar el giro físico
+       del teléfono: el contenido se sigue viendo "en vertical", aunque el móvil esté
+       tumbado de lado, igual que hacen los vídeos verticales de YouTube/TikTok. En
+       tablets (con más alto disponible) esta regla no se activa nunca, así que ahí se
+       puede seguir jugando en ambas orientaciones con normalidad. */
+    @media screen and (orientation: landscape) and (max-height: 500px) {
+      html {
+        transform: rotate(-90deg);
+        transform-origin: left top;
+        width: 100vh;
+        height: 100vw;
+        overflow-x: hidden;
+        position: absolute;
+        top: 100%;
+        left: 0;
       }
     }
     body {
@@ -453,11 +456,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
-
-<div class="rotate-overlay">
-  <div class="rotate-overlay-icon">📱</div>
-  <p>Gira el móvil a vertical para jugar</p>
-</div>
 
 <div class="container">
   <div class="auth-corner">
@@ -1673,7 +1671,16 @@
     });
   }
 
+  // Coincide exactamente con la condición del CSS que gira visualmente la página: en ese
+  // caso, aunque el teléfono esté físicamente en horizontal, el usuario lo sigue viendo en
+  // vertical, así que no hay que recalcular nada.
+  function isPhoneLandscapeCssFlip() {
+    return window.matchMedia("(orientation: landscape) and (max-height: 500px)").matches;
+  }
+
   function handleViewportChange() {
+    if (isPhoneLandscapeCssFlip()) return;
+
     const w = window.innerWidth;
     const h = window.innerHeight;
     const currentAspect = w / h;
@@ -1688,7 +1695,12 @@
 
   freezeDesign();
   window.addEventListener("resize", handleViewportChange);
-  window.addEventListener("orientationchange", () => setTimeout(freezeDesign, 60));
+  window.addEventListener("orientationchange", () => {
+    setTimeout(() => {
+      if (isPhoneLandscapeCssFlip()) return;
+      freezeDesign();
+    }, 60);
+  });
   window.addEventListener("pageshow", handleViewportChange);
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) handleViewportChange();
