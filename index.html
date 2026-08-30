@@ -194,7 +194,7 @@
     .life-wrapper { position: relative; display: inline-flex; justify-content: center; align-items: center; }
     .life-icon { font-size: 1.7rem; user-select: none; }
     .life-wrapper.lost .life-icon { filter: opacity(0.3); }
-    #lives-icons.shake { animation: lives-shake 0.4s ease; }
+    .shake { animation: lives-shake 0.4s ease; }
     @keyframes lives-shake {
       0%, 100% { transform: translateX(0); }
       20% { transform: translateX(-6px) rotate(-4deg); }
@@ -2039,6 +2039,17 @@
     livesIcons.classList.add("shake");
   }
 
+  // Mismo temblor, pero para las 4 tarjetas que se acaban de fallar.
+  function shakeSelectedCards(indices) {
+    indices.forEach(index => {
+      const cardEl = document.querySelector(`#grid .card[data-index="${index}"]`);
+      if (!cardEl) return;
+      cardEl.classList.remove("shake");
+      void cardEl.offsetWidth;
+      cardEl.classList.add("shake");
+    });
+  }
+
   function buildSolvedCategoryEl(catData) {
     const el = document.createElement("div");
     el.className = "solved-category";
@@ -2169,6 +2180,7 @@
       lives--;
       renderLives();
       shakeLivesIcons();
+      shakeSelectedCards(selectedCards);
 
       const categoryCounts = {};
       selectedCards.forEach(i => {
