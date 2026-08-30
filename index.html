@@ -74,6 +74,7 @@
     .container {
       max-width: 650px; width: 100%; text-align: center; position: relative;
       display: flex; flex-direction: column; height: 100%; padding-top: var(--container-pad-top);
+      flex-shrink: 0;
     }
 
     .site-title { display: flex; flex-direction: column; align-items: center; margin-bottom: var(--v-gap-sm); flex-shrink: 0; }
@@ -332,7 +333,7 @@
        "todo cabe sin scroll" si tardaban en cargar). */
     .ad-banner {
       width: 100%;
-      min-height: 90px;
+      height: 90px;
       margin-top: var(--v-gap-sm);
       display: flex;
       align-items: center;
@@ -359,6 +360,11 @@
     .ad-side {
       display: none;
     }
+    /* Los laterales salen a partir de 1100px de ancho, sin distinguir tablet de ordenador
+       (esa distinción resultó poco fiable con tablets que tienen S-Pen, ya que a veces se
+       detectan como "puntero preciso" igual que un ratón). Como container ahora nunca se
+       encoge (flex-shrink: 0 más arriba), el panel mantiene siempre su tamaño de siempre,
+       venga o no venga acompañado de los laterales. */
     @media (min-width: 1100px) {
       .ad-side {
         display: flex;
@@ -615,7 +621,7 @@
     <!-- Anuncio de la franja inferior (Google AdSense). Sustituye data-ad-slot por tu
          propio ID de bloque de anuncios en cuanto tengas la cuenta aprobada. -->
     <ins class="adsbygoogle"
-         style="display:block; width:100%; min-height:90px;"
+         style="display:block; width:100%; height:100%;"
          data-ad-client="ca-pub-5804898129171496"
          data-ad-slot="0000000000"
          data-ad-format="auto"
@@ -1650,7 +1656,7 @@
   // (girar el dispositivo, cambiar a uno distinto), nunca solo por el zoom.
 
   let frozenAspect = null;
-  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v8";
+  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v10";
 
   function loadCardReference() {
     try {
