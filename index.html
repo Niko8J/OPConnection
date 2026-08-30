@@ -48,6 +48,25 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     html { height: 100%; }
+
+    .rotate-overlay { display: none; }
+    /* "orientation: landscape" + poco alto identifica un MÓVIL en horizontal: en esa
+       orientación, el alto de pantalla pasa a ser el lado corto del dispositivo, que en
+       cualquier móvil (sea cual sea la marca) es bastante menor que en una tablet. Así
+       distinguimos uno de otro sin depender de anchos fijos ni de modelos concretos. */
+    @media (orientation: landscape) and (max-height: 500px) {
+      .rotate-overlay {
+        display: flex; position: fixed; inset: 0; z-index: 9999;
+        background-color: #0f172a; color: #f8fafc;
+        flex-direction: column; align-items: center; justify-content: center;
+        text-align: center; padding: 20px; gap: 10px;
+      }
+      .rotate-overlay-icon { font-size: 2.5rem; animation: rotate-hint 1.6s ease-in-out infinite; }
+      @keyframes rotate-hint {
+        0%, 100% { transform: rotate(0deg); }
+        50% { transform: rotate(90deg); }
+      }
+    }
     body {
       background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: flex-start;
       height: var(--frozen-vh, 100dvh); padding: 12px;
@@ -434,6 +453,11 @@
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
+
+<div class="rotate-overlay">
+  <div class="rotate-overlay-icon">📱</div>
+  <p>Gira el móvil a vertical para jugar</p>
+</div>
 
 <div class="container">
   <div class="auth-corner">
