@@ -325,6 +325,59 @@
       flex-wrap: nowrap;
       flex-shrink: 0;
     }
+
+    /* Franja de publicidad fija, debajo de los controles del juego. Le damos una altura
+       reservada fija para que el hueco no cambie de tamaño una vez cargue el anuncio real
+       (evita el mismo problema que ya tuvimos con la fuente y el logo, que descuadraban el
+       "todo cabe sin scroll" si tardaban en cargar). */
+    .ad-banner {
+      width: 100%;
+      min-height: 90px;
+      margin-top: var(--v-gap-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #1e293b;
+      border: 1px dashed #334155;
+      border-radius: 8px;
+      color: #64748b;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    /* Laterales de publicidad: solo en pantallas anchas (ordenador). En móvil/tablet
+       estrecho no aparecen en absoluto, para no robarle espacio al juego. */
+    .page-layout {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 16px;
+      width: 100%;
+      height: 100%;
+    }
+    .ad-side {
+      display: none;
+    }
+    @media (min-width: 1100px) {
+      .ad-side {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 160px;
+        height: 600px;
+        background: #1e293b;
+        border: 1px dashed #334155;
+        border-radius: 8px;
+        color: #64748b;
+        font-size: 0.75rem;
+        flex-shrink: 0;
+        position: sticky;
+        top: 20px;
+        overflow: hidden;
+      }
+    }
+
     .controls-left {
       display: flex;
       gap: 10px;
@@ -451,6 +504,10 @@
 
   <!-- EmailJS (envío del formulario de contacto sin servidor propio) -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <!-- Google AdSense: sustituye "ca-pub-XXXXXXXXXXXXXXXX" por tu propio ID de editor
+       en cuanto tengas la cuenta aprobada. Hasta entonces, no pasa nada por dejarlo así:
+       simplemente no se cargará ningún anuncio real. -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5804898129171496" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -459,7 +516,17 @@
   <p>Pon el móvil en vertical para seguir jugando</p>
 </div>
 
-<div class="container">
+<div class="page-layout">
+  <div class="ad-side" id="ad-side-left">
+    <!-- Anuncio lateral izquierdo (Google AdSense). Sustituye data-ad-slot por tu propio
+         ID de bloque de anuncios en cuanto tengas la cuenta aprobada. -->
+    <ins class="adsbygoogle"
+         style="display:inline-block; width:160px; height:600px;"
+         data-ad-client="ca-pub-5804898129171496"
+         data-ad-slot="0000000000"></ins>
+  </div>
+
+  <div class="container">
   <div class="auth-corner">
     <button id="auth-icon-btn" class="auth-icon-btn" onclick="toggleAuthMenu(event)" title="Cuenta">
       <svg id="auth-icon-empty" class="auth-icon-empty" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -542,6 +609,27 @@
     <div class="controls-right">
       <span id="lives-icons"><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div></span>
     </div>
+  </div>
+
+  <div class="ad-banner" id="ad-banner-bottom">
+    <!-- Anuncio de la franja inferior (Google AdSense). Sustituye data-ad-slot por tu
+         propio ID de bloque de anuncios en cuanto tengas la cuenta aprobada. -->
+    <ins class="adsbygoogle"
+         style="display:block; width:100%; min-height:90px;"
+         data-ad-client="ca-pub-5804898129171496"
+         data-ad-slot="0000000000"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+  </div>
+  </div>
+
+  <div class="ad-side" id="ad-side-right">
+    <!-- Anuncio lateral derecho (Google AdSense). Sustituye data-ad-slot por tu propio
+         ID de bloque de anuncios en cuanto tengas la cuenta aprobada. -->
+    <ins class="adsbygoogle"
+         style="display:inline-block; width:160px; height:600px;"
+         data-ad-client="ca-pub-5804898129171496"
+         data-ad-slot="0000000000"></ins>
   </div>
 </div>
 
@@ -1562,7 +1650,7 @@
   // (girar el dispositivo, cambiar a uno distinto), nunca solo por el zoom.
 
   let frozenAspect = null;
-  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v7";
+  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v8";
 
   function loadCardReference() {
     try {
@@ -2541,6 +2629,19 @@
         modal.close();
         break; // solo cerramos una, por si hubiera alguna anidada
       }
+    }
+  });
+
+  // Activa los tres bloques de anuncios (franja inferior + dos laterales). Cada uno se
+  // pide por separado y con su propio try/catch: si AdSense todavía no está aprobado, si
+  // un bloqueador de anuncios impide que cargue el script, o si un bloque en concreto falla,
+  // el resto del juego sigue funcionando con total normalidad.
+  document.querySelectorAll("ins.adsbygoogle").forEach(() => {
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+      // Sin conexión con AdSense (cuenta aún no aprobada, bloqueador de anuncios, etc.):
+      // el hueco reservado se queda simplemente vacío, sin romper nada más.
     }
   });
 </script>
