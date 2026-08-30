@@ -536,7 +536,7 @@
     <div class="controls-left">
       <button class="action-btn submit" id="submit-btn" onclick="checkGuess()">Enviar</button>
       <button class="action-btn" id="deselect-btn" onclick="deselectAll()">Limpiar</button>
-      <button class="action-btn" id="hint-btn" onclick="useHint()" style="display: none;">💡1</button>
+      <button class="action-btn" id="hint-btn" onclick="useHint()" style="display: none;">1💡</button>
       <button class="action-btn" id="view-results-btn" onclick="openModal()" style="display: none;">📊 Resultados</button>
     </div>
     <div class="controls-right">
@@ -2268,8 +2268,8 @@
   // seleccionadas y todavía queda algún uso disponible; si no, vuelve a su color normal.
   function updateHintButtonState() {
     const hintBtn = document.getElementById("hint-btn");
-    if (!hintBtn || !isInfiniteMode) return;
-    hintBtn.innerText = `💡${hintsRemaining}`;
+    if (!hintBtn) return;
+    hintBtn.innerText = `${hintsRemaining}💡`;
     hintBtn.disabled = hintsRemaining <= 0;
     const shouldHighlight = selectedCards.length === 4 && hintsRemaining > 0;
     hintBtn.classList.toggle("submit", shouldHighlight);
@@ -2281,6 +2281,7 @@
     document.querySelectorAll("#grid .card").forEach(el => {
       el.style.borderColor = "";
       el.style.boxShadow = "";
+      el.style.backgroundColor = "";
     });
   }
 
@@ -2301,6 +2302,7 @@
       if (cardEl && catData) {
         cardEl.style.borderColor = catData.color;
         cardEl.style.boxShadow = `0 0 10px ${catData.color}`;
+        cardEl.style.backgroundColor = catData.color;
       }
     });
 
