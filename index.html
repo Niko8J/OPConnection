@@ -1850,7 +1850,7 @@
   const HARD_MODE_MUST_INCLUDE_ONE_OF = {
     "Banda: Banda: Sombrero de Paja": ["vivi", "karoo", "sunny", "merry"],
     "Banda: Sombrero de Paja": ["vivi", "karoo", "sunny", "merry"],
-    "Banda: Agentes de Baroque Works": ["igaram", "vivi", "karoo", "bentham"],
+    "Banda: Agentes de Baroque Works": ["igaram", "vivi", "karoo", "robin", "bentham"],
     "Banda: Piratas de Arlong": ["nami"],
     "Banda: Falsos Piratas de Sombrero de Paja": ["caribou", "coribou", "albion", "lip_doughty"]
   };
@@ -1858,7 +1858,7 @@
   // Elige los 4 personajes de un grupo, forzando que se incluya un miembro "no evidente"
   // cuando el grupo lo requiere y el panel es difícil o Infinito.
   function pickCharsForGroup(groupName, exclusiveChars) {
-    const mustIncludeIds = (currentDifficulty === "dificil" || isInfiniteMode)
+    const mustIncludeIds = (currentDifficulty === "dificil" || currentDifficulty === "media" || isInfiniteMode)
       ? HARD_MODE_MUST_INCLUDE_ONE_OF[groupName]
       : null;
 
