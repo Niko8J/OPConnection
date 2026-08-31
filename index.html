@@ -350,6 +350,13 @@
       flex-shrink: 0;
       overflow: hidden;
     }
+    /* Cuando detectamos que un bloque de anuncios no se ha rellenado (cuenta de AdSense
+       aún sin aprobar, bloqueador de anuncios, o simplemente sin inventario disponible),
+       le añadimos esta clase por JS para que el hueco reservado desaparezca del todo en
+       vez de quedarse como una caja vacía que le roba espacio al juego. */
+    .ad-banner.ad-empty {
+      display: none;
+    }
 
     /* Laterales de publicidad: solo en pantallas anchas (ordenador). En móvil/tablet
        estrecho no aparecen en absoluto, para no robarle espacio al juego. */
@@ -368,6 +375,11 @@
        sea preciso (pointer: fine) y que se pueda hacer hover (hover: hover) — un ratón,
        vamos — además del ancho mínimo. Las tablets (aunque tengan mucho ancho en horizontal,
        o lleven S-Pen) quedan correctamente excluidas por esta combinación. */
+    /* Igual que con .ad-banner: si el lateral no consigue anuncio, lo colapsamos. Necesita
+       !important porque, si no, pierde contra el "display: flex" del media query de arriba. */
+    .ad-side.ad-empty {
+      display: none !important;
+    }
     @media (min-width: 1100px) and (hover: hover) and (pointer: fine) {
       .ad-side {
         display: flex;
@@ -1640,6 +1652,67 @@
     ]);
   }
 
+  // ---------- Anuncios: detectar huecos vacíos y colapsarlos ----------
+  //
+  // Mientras la cuenta de AdSense no esté aprobada (o si el usuario lleva un bloqueador de
+  // anuncios, o simplemente Google no tiene inventario que servir en ese momento), el script
+  // de AdSense marca el <ins> correspondiente con data-ad-status="unfilled". Si eso pasa, le
+  // añadimos la clase "ad-empty" a su contenedor para que el hueco reservado desaparezca del
+  // todo, en vez de quedarse como una caja vacía robándole espacio al juego (sobre todo en
+  // móvil, donde cada píxel de alto cuenta).
+  //
+  // Como el propio script de AdSense puede tardar en cargar (o no llegar a cargar nunca,
+  // p.ej. si el bloqueador de anuncios corta directamente la petición del script), añadimos
+  // también un tiempo de espera máximo: si pasado ese tiempo seguimos sin saber si el anuncio
+  // se rellenó, asumimos que no y colapsamos igualmente el hueco.
+  function watchAdSlot(insEl, timeoutMs = 4000) {
+    const wrapperEl = insEl.closest(".ad-banner, .ad-side");
+    return new Promise(resolve => {
+      if (!insEl || !wrapperEl) return resolve(false);
+
+      let settled = false;
+      function settle(filled) {
+        if (settled) return;
+        settled = true;
+        wrapperEl.classList.toggle("ad-empty", !filled);
+        resolve(filled);
+      }
+
+      const initialStatus = insEl.getAttribute("data-ad-status");
+      if (initialStatus === "filled") return settle(true);
+      if (initialStatus === "unfilled") return settle(false);
+
+      const observer = new MutationObserver(() => {
+        const status = insEl.getAttribute("data-ad-status");
+        if (status === "filled") { observer.disconnect(); settle(true); }
+        else if (status === "unfilled") { observer.disconnect(); settle(false); }
+      });
+      observer.observe(insEl, { attributes: true, attributeFilter: ["data-ad-status"] });
+
+      setTimeout(() => { observer.disconnect(); settle(false); }, timeoutMs);
+    });
+  }
+
+  // Activa los tres bloques de anuncios (franja inferior + dos laterales). Cada uno se pide
+  // por separado y con su propio try/catch: si AdSense todavía no está aprobado, si un
+  // bloqueador de anuncios impide que cargue el script, o si un bloque en concreto falla, el
+  // resto del juego sigue funcionando con total normalidad. Guardamos aparte la promesa del
+  // banner inferior porque, a diferencia de los laterales (que están fuera de ".container" y
+  // no afectan al cálculo del tablero), ese banner SÍ cuenta como hermano del tablero a la
+  // hora de calcular cuánto espacio le queda disponible: necesitamos saber si va a colapsarse
+  // ANTES de medir, para no dejar huecos ni tarjetas más pequeñas de lo necesario.
+  let adBottomReadyPromise = Promise.resolve(false);
+  document.querySelectorAll("ins.adsbygoogle").forEach((ins) => {
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+      // Sin conexión con AdSense (cuenta aún no aprobada, bloqueador de anuncios, etc.): el
+      // hueco reservado se colapsará igualmente en cuanto watchAdSlot agote su timeout.
+    }
+    const watchPromise = watchAdSlot(ins);
+    if (ins.closest("#ad-banner-bottom")) adBottomReadyPromise = watchPromise;
+  });
+
   // ---------- Diseño "congelado" (evita que el zoom deforme el juego) ----------
   //
   // En vez de recalcular el diseño con medidas relativas a la pantalla (vh/vw) cada vez que
@@ -1659,7 +1732,9 @@
   // (girar el dispositivo, cambiar a uno distinto), nunca solo por el zoom.
 
   let frozenAspect = null;
-  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v14";
+  // v15: subimos la versión para invalidar cachés antiguas, calculadas antes de que el
+  // tablero tuviera en cuenta si el banner de anuncios se colapsa o no.
+  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v15";
 
   function loadCardReference() {
     try {
@@ -1765,7 +1840,10 @@
           logoImg.addEventListener("error", resolve, { once: true });
         });
 
-    logoReady.then(() => {
+    // Esperamos también a saber si el banner inferior de anuncios se va a colapsar (ver
+    // "watchAdSlot" más arriba), para que la primera medición del tablero ya cuente con el
+    // espacio real disponible y no deje ni huecos ni tarjetas más pequeñas de lo necesario.
+    Promise.all([logoReady, adBottomReadyPromise]).then(() => {
       requestAnimationFrame(() => {
         const result = measureCardSize();
         if (!result) return;
@@ -2641,18 +2719,6 @@
     }
   });
 
-  // Activa los tres bloques de anuncios (franja inferior + dos laterales). Cada uno se
-  // pide por separado y con su propio try/catch: si AdSense todavía no está aprobado, si
-  // un bloqueador de anuncios impide que cargue el script, o si un bloque en concreto falla,
-  // el resto del juego sigue funcionando con total normalidad.
-  document.querySelectorAll("ins.adsbygoogle").forEach(() => {
-    try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-      // Sin conexión con AdSense (cuenta aún no aprobada, bloqueador de anuncios, etc.):
-      // el hueco reservado se queda simplemente vacío, sin romper nada más.
-    }
-  });
 </script>
 </body>
 </html>
