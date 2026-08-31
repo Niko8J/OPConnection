@@ -281,7 +281,7 @@
       background-color: #1e293b;
     }
     .solved-label {
-      flex-shrink: 0; font-size: 0.85rem;
+      flex-shrink: 0; font-size: 0.85rem; min-width: 0;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
     }
     
@@ -2075,7 +2075,25 @@
     if (!label) return;
     const fullText = label.dataset.fullText;
     const shortText = SHORT_LABEL_OVERRIDES[fullText];
-    if (shortText && label.scrollWidth > label.clientWidth) {
+    if (!shortText) return;
+
+    // Ojo: NO comparamos contra "label.clientWidth". La etiqueta usa "max-width: 100%"
+    // dentro de un flex item que a su vez es una celda de un grid con ancho calculado
+    // dinámicamente (--card-size) — y ese es justo el tipo de anidamiento grid+flex donde
+    // Safari/WebKit (el motor de CUALQUIER navegador en iPhone, incluido "Chrome") a veces
+    // no resuelve bien un "max-width" en porcentaje, dejando que "clientWidth" crea que hay
+    // más sitio del que realmente hay. El texto se corta igualmente por el "overflow: hidden"
+    // del contenedor padre, pero nuestra comparación no lo detectaba, así que el texto largo
+    // se quedaba con puntos suspensivos en vez de pasar a la versión corta.
+    // En su lugar, comparamos el ancho "natural" del texto (scrollWidth, que no depende de
+    // ese max-width) contra el ancho real disponible del contenedor padre (que sí tiene un
+    // tamaño fijo y sin ambigüedad, definido por el grid), restándole su padding horizontal.
+    const containerStyle = getComputedStyle(containerEl);
+    const availableWidth = containerEl.clientWidth
+      - parseFloat(containerStyle.paddingLeft || 0)
+      - parseFloat(containerStyle.paddingRight || 0);
+
+    if (label.scrollWidth > availableWidth) {
       label.innerText = shortText;
     }
   }
