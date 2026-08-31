@@ -1886,9 +1886,25 @@
     // el propio navegador lo amplíe con normalidad sobre el diseño ya calculado.
   }
 
+  // Durante un giro de pantalla, el navegador puede disparar varios eventos "resize" seguidos
+  // mientras dura la animación, con anchos y altos todavía "a medio camino" (ni el tamaño de
+  // antes del giro ni el de después). Si midiéramos el tablero en ese punto intermedio y
+  // guardáramos el resultado, saldría un tamaño equivocado que luego hay que corregir —y esa
+  // corrección es justo el parpadeo de "panel pequeño un par de segundos" al girar en tablet.
+  //
+  // Por eso, en vez de medir en cuanto llega el primer evento, esperamos ("debounce") a que
+  // los eventos dejen de llegar durante un ratito: solo entonces medimos, ya con el tamaño
+  // final y estable de la pantalla. Unificamos aquí "resize" y "orientationchange" en un único
+  // disparador para que no compitan entre sí ni se pisen el uno al otro.
+  let viewportSettleTimer = null;
+  function scheduleViewportCheck(delay) {
+    clearTimeout(viewportSettleTimer);
+    viewportSettleTimer = setTimeout(handleViewportChange, delay);
+  }
+
   freezeDesign();
-  window.addEventListener("resize", handleViewportChange);
-  window.addEventListener("orientationchange", () => setTimeout(freezeDesign, 400));
+  window.addEventListener("resize", () => scheduleViewportCheck(150));
+  window.addEventListener("orientationchange", () => scheduleViewportCheck(400));
   window.addEventListener("pageshow", handleViewportChange);
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) handleViewportChange();
