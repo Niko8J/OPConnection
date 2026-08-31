@@ -240,7 +240,8 @@
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"},
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
-        {"val": "Personajes a los que Moriah robó su sombra", "dif": "dificil"}
+        {"val": "Personajes a los que Moriah robó su sombra", "dif": "dificil"},
+        {"val": "Personajes con gafas", "dif": "dificil"}
       ]
     }
   },
@@ -2618,7 +2619,9 @@
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"},
+        {"val": "Personajes con gafas", "dif": "dificil"}
       ]
     }
   },
@@ -3157,7 +3160,8 @@
     "tags": {
       "Banda": [
         {"val": "Piratas de Arlong", "dif": "facil"},
-        {"val": "Piratas de Arlong", "dif": "media"}
+        {"val": "Piratas de Arlong", "dif": "media"},
+        {"val": "Piratas del Sol", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -5302,7 +5306,7 @@
     "img": "imagenes/Enel.png",
     "tags": {
       "Banda": [
-        {"val": "Fuerzas de Enel", "dif": "facil"}
+        {"val": "Ejército de Enel", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -5351,7 +5355,7 @@
     "img": "imagenes/Gedatsu.png",
     "tags": {
       "Banda": [
-        {"val": "Fuerzas de Enel", "dif": "facil"}
+        {"val": "Ejército de Enel", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -5592,7 +5596,8 @@
         {"val": "Sin fruta del diablo", "dif": "facil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con gafas", "dif": "dificil"}
       ]
     }
   },
@@ -5706,7 +5711,7 @@
     "img": "imagenes/Ohm.png",
     "tags": {
       "Banda": [
-        {"val": "Fuerzas de Enel", "dif": "facil"}
+        {"val": "Ejército de Enel", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -5853,7 +5858,7 @@
     "img": "imagenes/Satori.png",
     "tags": {
       "Banda": [
-        {"val": "Fuerzas de Enel", "dif": "facil"}
+        {"val": "Ejército de Enel", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -5906,7 +5911,7 @@
     "img": "imagenes/Shura.png",
     "tags": {
       "Banda": [
-        {"val": "Fuerzas de Enel", "dif": "facil"}
+        {"val": "Ejército de Enel", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -6905,7 +6910,7 @@
     "img": "imagenes/Yama.png",
     "tags": {
       "Banda": [
-        {"val": "Fuerzas de Enel", "dif": "facil"}
+        {"val": "Ejército de Enel", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -6918,7 +6923,7 @@
     "img": "imagenes/Hotori.png",
     "tags": {
       "Banda": [
-        {"val": "Fuerzas de Enel", "dif": "facil"}
+        {"val": "Ejército de Enel", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -6940,7 +6945,7 @@
     "img": "imagenes/Kotori.png",
     "tags": {
       "Banda": [
-        {"val": "Fuerzas de Enel", "dif": "facil"}
+        {"val": "Ejército de Enel", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -6962,7 +6967,7 @@
     "img": "imagenes/Holy.png",
     "tags": {
       "Banda": [
-        {"val": "Fuerzas de Enel", "dif": "facil"}
+        {"val": "Ejército de Enel", "dif": "facil"}
       ],
       "Raza": [
         {"val": "Animales", "dif": "media"}
@@ -6978,7 +6983,7 @@
     "img": "imagenes/Fuza.png",
     "tags": {
       "Banda": [
-        {"val": "Fuerzas de Enel", "dif": "facil"}
+        {"val": "Ejército de Enel", "dif": "facil"}
       ],
       "Raza": [
         {"val": "Animales", "dif": "media"}
