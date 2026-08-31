@@ -5722,6 +5722,9 @@
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
       ],
+      "Marcas": [
+        {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
       ]
@@ -5918,6 +5921,10 @@
       ],
       "Haki": [
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con gafas", "dif": "dificil"}
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "facil"}
@@ -7066,6 +7073,12 @@
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Shandias", "dif": "media"}
       ]
     }
   },
@@ -7079,6 +7092,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Shandias", "dif": "media"}
       ]
     }
   },
@@ -7089,6 +7105,9 @@
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
+      ],
+      "Raza": [
+        {"val": "Shandias", "dif": "media"}
       ]
     }
   },
@@ -7105,6 +7124,12 @@
       ],
       "Edad": [
         {"val": "Menores de edad", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Shandias", "dif": "media"}
       ]
     }
   },
@@ -7118,6 +7143,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Shandias", "dif": "media"}
       ]
     }
   },
@@ -7128,6 +7156,12 @@
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Shandias", "dif": "media"}
       ]
     }
   },
@@ -7141,6 +7175,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Shandias", "dif": "media"}
       ]
     }
   },
@@ -7153,7 +7190,8 @@
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
       ],
       "Raza": [
-        {"val": "Animales", "dif": "media"}
+        {"val": "Animales", "dif": "media"},
+        {"val": "Shandias", "dif": "media"}
       ]
     }
   },
@@ -7170,6 +7208,12 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Shandias", "dif": "media"}
       ]
     }
   },
