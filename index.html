@@ -358,8 +358,9 @@
       display: none;
     }
 
-    /* Laterales de publicidad: solo en pantallas anchas (ordenador). En móvil/tablet
-       estrecho no aparecen en absoluto, para no robarle espacio al juego. */
+    /* Laterales de publicidad: en pantallas con ancho de sobra para ellos, sea cual sea el
+       tipo de dispositivo (ordenador, tablet ancha en horizontal...). En pantallas estrechas
+       no aparecen en absoluto, para no robarle espacio al juego. */
     .page-layout {
       display: flex;
       justify-content: center;
@@ -371,16 +372,18 @@
     .ad-side {
       display: none;
     }
-    /* Los laterales solo salen en ordenador de verdad: comprobamos que el puntero PRINCIPAL
-       sea preciso (pointer: fine) y que se pueda hacer hover (hover: hover) — un ratón,
-       vamos — además del ancho mínimo. Las tablets (aunque tengan mucho ancho en horizontal,
-       o lleven S-Pen) quedan correctamente excluidas por esta combinación. */
     /* Igual que con .ad-banner: si el lateral no consigue anuncio, lo colapsamos. Necesita
-       !important porque, si no, pierde contra el "display: flex" del media query de arriba. */
+       !important porque, si no, pierde contra el "display: flex" del media query de abajo. */
     .ad-side.ad-empty {
       display: none !important;
     }
-    @media (min-width: 1100px) and (hover: hover) and (pointer: fine) {
+    /* 1080px de ancho es hueco de sobra para el panel (650px) + los dos laterales (160px
+       cada uno) + los huecos entre ellos + el padding del body, en cualquier dispositivo
+       (antes esto exigía además "pointer: fine" y "hover: hover" para excluir tablets, pero
+       una tablet ancha en horizontal tiene el mismo hueco libre que un ordenador, así que
+       ahora solo miramos el ancho). Cuando hay sitio para los laterales, el banner inferior
+       ya no hace falta, así que lo ocultamos para no reservar anuncios de más. */
+    @media (min-width: 1080px) {
       .ad-side {
         display: flex;
         align-items: center;
@@ -396,6 +399,9 @@
         position: sticky;
         top: 20px;
         overflow: hidden;
+      }
+      .ad-banner {
+        display: none;
       }
     }
 
