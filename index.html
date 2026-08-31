@@ -1736,6 +1736,18 @@
   // tablero tuviera en cuenta si el banner de anuncios se colapsa o no.
   const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v15";
 
+  // Misma condición que activa el aviso de ".rotate-overlay" ("Pon el dispositivo en
+  // vertical..."): un móvil táctil en horizontal. Mientras se cumpla, el tablero queda
+  // completamente tapado por el aviso, así que no tiene ningún sentido remedirlo ni,
+  // sobre todo, GUARDAR esa medición como referencia: al hacerlo con tan poca altura
+  // disponible, salía un tamaño diminuto que luego se aplicaba un instante de más al
+  // volver a vertical, antes de que se recalculara el tamaño correcto.
+  function isRotateBlocked() {
+    return window.matchMedia(
+      "(orientation: landscape) and (max-height: 500px) and (pointer: coarse)"
+    ).matches;
+  }
+
   function loadCardReference() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY_CARD_REFERENCE);
@@ -1810,6 +1822,8 @@
   // Recalcula el diseño entero para la pantalla actual. Se llama al cargar la página o
   // cuando de verdad ha cambiado la forma de la pantalla (giro, ventana redimensionada...).
   function freezeDesign() {
+    if (isRotateBlocked()) return; // tapado por el aviso de giro: no medimos ni guardamos nada.
+
     const w = window.innerWidth;
     const h = window.innerHeight;
     const currentAspect = w / h;
