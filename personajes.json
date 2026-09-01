@@ -181,7 +181,8 @@
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "facil"},
         {"val": "Banda: Sombrero de Paja", "dif": "media"},
-        {"val": "Reino de Sakura", "dif": "facil"}
+        {"val": "Reino de Sakura", "dif": "facil"},
+        {"val": "Piratas de Foxy", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -542,6 +543,9 @@
       ],
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -699,6 +703,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -736,6 +743,9 @@
       ],
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -790,6 +800,9 @@
       ],
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -993,6 +1006,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -1180,6 +1196,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -1256,6 +1275,9 @@
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
         {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -1289,6 +1311,9 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -1324,6 +1349,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Sanji", "dif": "dificil"}
       ]
     }
   },
@@ -1506,6 +1534,9 @@
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
         {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -1601,6 +1632,9 @@
       ],
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -1749,6 +1783,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -1775,6 +1812,9 @@
       ],
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Sanji", "dif": "dificil"}
       ]
     }
   },
@@ -2541,6 +2581,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -2734,6 +2777,9 @@
       ],
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Sanji", "dif": "dificil"}
       ]
     }
   },
@@ -3112,6 +3158,9 @@
       ],
       "Titulo": [
         {"val": "Monarcas", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -3148,6 +3197,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -3175,6 +3227,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Sanji", "dif": "dificil"}
       ]
     }
   },
@@ -3255,6 +3310,9 @@
       ],
       "Viaje": [
         {"val": "Personajes que viajaron con los Sombrero de Paja", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -3812,6 +3870,9 @@
       ],
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -4974,6 +5035,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -5344,6 +5408,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Logia", "dif": "media"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -5671,6 +5738,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -5855,6 +5925,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -7398,6 +7471,9 @@
       "Raza": [
         {"val": "Zombies", "dif": "facil"},
         {"val": "Zombies", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Sanji", "dif": "dificil"}
       ]
     }
   },
@@ -10627,6 +10703,9 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -11083,6 +11162,9 @@
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -11334,6 +11416,9 @@
       "Raza": [
         {"val": "Zombies", "dif": "facil"},
         {"val": "Zombies", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -11996,6 +12081,303 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "kuro",
+    "name": "Kuro (Klahadore)",
+    "img": "imagenes/Kuro.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas del Gato Negro", "dif": "facil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Capitanes pirata", "dif": "dificil"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "don_krieg",
+    "name": "Don Krieg",
+    "img": "imagenes/DonKrieg.png",
+    "tags": {
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Capitanes pirata", "dif": "dificil"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "foxy",
+    "name": "Foxy",
+    "img": "imagenes/Foxy.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Foxy", "dif": "facil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Especialidad": [
+        {"val": "Capitanes pirata", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: South Blue", "dif": "dificil"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "gin",
+    "name": "Gin",
+    "img": "imagenes/Gin.png",
+    "tags": {
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Sanji", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "pearl",
+    "name": "Pearl",
+    "img": "imagenes/Pearl.png",
+    "tags": {
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "buchi",
+    "name": "Buchi",
+    "img": "imagenes/Buchi.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas del Gato Negro", "dif": "facil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Zoro", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "sham",
+    "name": "Sham",
+    "img": "imagenes/Sham.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas del Gato Negro", "dif": "facil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Zoro", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "jango",
+    "name": "Jango",
+    "img": "imagenes/Jango.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas del Gato Negro", "dif": "facil"},
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Recompensa": [
+        {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con gafas", "dif": "dificil"},
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ]
+    }
+  },
+  
+  {
+    "id": "itomimizu",
+    "name": "Itomimizu",
+    "img": "imagenes/Itomimizu.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Foxy", "dif": "facil"},
+        {"val": "Piratas de Foxy", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "chuchun",
+    "name": "Chuchun",
+    "img": "imagenes/Chuchun.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Foxy", "dif": "facil"},
+        {"val": "Piratas de Foxy", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "capote",
+    "name": "Capote",
+    "img": "imagenes/Capote.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Foxy", "dif": "facil"},
+        {"val": "Piratas de Foxy", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Gyojins", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "monda",
+    "name": "Monda",
+    "img": "imagenes/Monda.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Foxy", "dif": "facil"},
+        {"val": "Piratas de Foxy", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "pickles",
+    "name": "Pickles",
+    "img": "imagenes/Pickles.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Foxy", "dif": "facil"},
+        {"val": "Piratas de Foxy", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "bigpan",
+    "name": "Big Pan",
+    "img": "imagenes/BigPan.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Foxy", "dif": "facil"},
+        {"val": "Piratas de Foxy", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Gyojins", "dif": "facil"},
+        {"val": "Gigantes", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han usado máscara", "dif": "dificil"}
       ]
     }
   }
