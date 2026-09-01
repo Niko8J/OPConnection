@@ -12654,8 +12654,8 @@
   },
   {
     "id": "morgan",
-    "name": "Capitán Morgan",
-    "img": "imagenes/CapitanMorgan.png",
+    "name": "Morgan",
+    "img": "imagenes/Morgan.png",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -12696,6 +12696,38 @@
       ],
       "Rivales": [
         {"val": "Rivales de Sanji", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "miyagi",
+    "name": "Miyagi",
+    "img": "imagenes/Miyagi.png",
+    "tags": {
+      "Raza": [
+        {"val": "Minks", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Médicos", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "tristan",
+    "name": "Tristan",
+    "img": "imagenes/Tristan.png",
+    "tags": {
+      "Raza": [
+        {"val": "Minks", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Médicos", "dif": "dificil"}
       ]
     }
   }
