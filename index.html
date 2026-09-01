@@ -1738,9 +1738,10 @@
   // (girar el dispositivo, cambiar a uno distinto), nunca solo por el zoom.
 
   let frozenAspect = null;
-  // v15: subimos la versión para invalidar cachés antiguas, calculadas antes de que el
-  // tablero tuviera en cuenta si el banner de anuncios se colapsa o no.
-  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v15";
+  // v16: subimos la versión para invalidar cachés antiguas, que podían haber quedado con un
+  // tamaño de tarjeta diminuto si la primerísima medición se hizo con la ventana todavía a
+  // medio restaurar (ver "settle" en freezeDesign más abajo).
+  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v16";
 
   // Misma condición que activa el aviso de ".rotate-overlay" ("Pon el dispositivo en
   // vertical..."): un móvil táctil en horizontal. Mientras se cumpla, el tablero queda
@@ -1863,12 +1864,33 @@
     // Esperamos también a saber si el banner inferior de anuncios se va a colapsar (ver
     // "watchAdSlot" más arriba), para que la primera medición del tablero ya cuente con el
     // espacio real disponible y no deje ni huecos ni tarjetas más pequeñas de lo necesario.
+    //
+    // Además, antes de GUARDAR ese resultado como referencia fija, comprobamos que la ventana
+    // ya está "quieta". Si la página carga justo cuando el sistema operativo todavía está
+    // restaurando la ventana (por ejemplo, Windows animando el paso de minimizada a normal),
+    // este primer fotograma puede llegar con un hueco disponible todavía provisional y más
+    // pequeño del real — y como luego la relación de aspecto apenas cambia al terminar de
+    // restaurarse, esa medición pequeña se quedaría fijada para siempre (justo el caso que
+    // vimos: tablero diminuto en el portátil, resto de la interfaz normal). Por eso medimos,
+    // aplicamos ya ese resultado (para no dejar la pantalla vacía), y volvemos a medir un
+    // instante después: solo guardamos como referencia definitiva cuando dos medidas seguidas
+    // coinciden, o como máximo tras unos pocos intentos.
     Promise.all([logoReady, adBottomReadyPromise]).then(() => {
       requestAnimationFrame(() => {
-        const result = measureCardSize();
-        if (!result) return;
-        applyCardSize(result);
-        saveCardReference({ aspect: currentAspect, cardSize: result.cardSize, boardHeight: result.boardHeight });
+        const settle = (lastResult, attempt) => {
+          const result = measureCardSize();
+          if (!result) return;
+          applyCardSize(result); // se aplica siempre, para que no quede vacío mientras se asienta
+          const stable = lastResult
+            && result.cardSize === lastResult.cardSize
+            && result.boardHeight === lastResult.boardHeight;
+          if (stable || attempt >= 5) {
+            saveCardReference({ aspect: currentAspect, cardSize: result.cardSize, boardHeight: result.boardHeight });
+            return;
+          }
+          setTimeout(() => settle(result, attempt + 1), 150);
+        };
+        settle(null, 0);
       });
     });
   }
