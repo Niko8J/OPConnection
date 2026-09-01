@@ -9284,9 +9284,6 @@
       "SMILE": [
         {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
       ],
-      "Titulo": [
-        {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
-      ],
       "Marcas": [
         {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
@@ -13278,6 +13275,162 @@
       ],
       "Banda": [
         {"val": "Trabajadores de Impel Down", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "kaya",
+    "name": "Kaya",
+    "img": "imagenes/Kaya.png",
+    "tags": {
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Médicos", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "brannew",
+    "name": "Brannew",
+    "img": "imagenes/Brannew.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "pound",
+    "name": "Pound",
+    "img": "imagenes/Pound.png",
+    "tags": {
+      "Banda": [
+        {"val": "Familia Charlotte", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "komachiyo",
+    "name": "Komachiyo",
+    "img": "imagenes/Komachiyo.png",
+    "tags": {
+      "Banda": [
+        {"val": "Wano", "dif": "facil"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "otsuru",
+    "name": "Otsuru",
+    "img": "imagenes/Otsuru.png",
+    "tags": {
+      "Banda": [
+        {"val": "Wano", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "inbi",
+    "name": "Inbi",
+    "img": "imagenes/Inbi.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "zanki",
+    "name": "Zanki",
+    "img": "imagenes/Zanki.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "jigoku_benten",
+    "name": "Jigoku Benten",
+    "img": "imagenes/JigokuBenten.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"},
+        {"val": "Wano", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Espías de Orochi", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "chome",
+    "name": "Chome",
+    "img": "imagenes/Chome.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"},
+        {"val": "Wano", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Espías de Orochi", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "yazaemon",
+    "name": "Yazaemon",
+    "img": "imagenes/Yazaemon.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"},
+        {"val": "Wano", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Espías de Orochi", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "fukurokuju",
+    "name": "Fukurokuju",
+    "img": "imagenes/Fukurokuju.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Bestia", "dif": "facil"},
+        {"val": "Wano", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Espías de Orochi", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con gafas", "dif": "dificil"}
       ]
     }
   }
