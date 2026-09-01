@@ -13199,5 +13199,86 @@
         {"val": "Tom's Workers", "dif": "media"}
       ]
     }
+  },
+  {
+    "id": "sentomaru",
+    "name": "Sentomaru",
+    "img": "imagenes/Sentomaru.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "spinhx",
+    "name": "Spinhx",
+    "img": "imagenes/Spinhx.png",
+    "tags": {
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ],
+      "Banda": [
+        {"val": "Trabajadores de Impel Down", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "tropa_de_lobos",
+    "name": "Tropa de lobos",
+    "img": "imagenes/TropaDeLobos.png",
+    "tags": {
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ],
+      "Banda": [
+        {"val": "Trabajadores de Impel Down", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "manticora",
+    "name": "Mantícora",
+    "img": "imagenes/Manticora.png",
+    "tags": {
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ],
+      "Banda": [
+        {"val": "Trabajadores de Impel Down", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "basilisk",
+    "name": "Basilisk",
+    "img": "imagenes/Basilisk.png",
+    "tags": {
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ],
+      "Banda": [
+        {"val": "Trabajadores de Impel Down", "dif": "media"}
+      ]
+    }
   }
 ]
