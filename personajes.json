@@ -12383,5 +12383,35 @@
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
       ]
     }
+  },
+  {
+    "id": "porche",
+    "name": "Porche",
+    "img": "imagenes/Porche.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Foxy", "dif": "media"},
+        {"val": "Piratas de Foxy", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "hamburg",
+    "name": "Hamburg",
+    "img": "imagenes/Hamburg.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Foxy", "dif": "media"},
+        {"val": "Piratas de Foxy", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+      ]
+    }
   }
 ]
