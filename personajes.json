@@ -12789,5 +12789,60 @@
         {"val": "Origen: East Blue", "dif": "dificil"}
       ]
     }
+  },
+  {
+    "id": "shu",
+    "name": "Shu",
+    "img": "imagenes/Shu.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "very_good",
+    "name": "Very Good",
+    "img": "imagenes/VeryGood.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "strawberry",
+    "name": "Strawberry",
+    "img": "imagenes/Strawberry.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "dificil"}
+      ]
+    }
   }
 ]
