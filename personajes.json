@@ -6623,7 +6623,7 @@
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ]
     }
   },
@@ -12146,7 +12146,7 @@
     "img": "imagenes/Foxy.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Foxy", "dif": "media"},
+        {"val": "Piratas de Foxy", "dif": "media"}
       ],
       "Haki": [
         {"val": "Sin haki", "dif": "dificil"}
