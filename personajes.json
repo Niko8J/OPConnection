@@ -12146,7 +12146,7 @@
     "img": "imagenes/Foxy.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas Foxy", "dif": "facil"}
+        {"val": "Piratas de Foxy", "dif": "media"},
       ],
       "Haki": [
         {"val": "Sin haki", "dif": "dificil"}
@@ -12218,7 +12218,7 @@
         {"val": "Sin haki", "dif": "dificil"}
       ],
       "Fruta": [
-        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+        {"val": "Sin fruta del diablo", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
@@ -12283,14 +12283,13 @@
       ]
     }
   },
-  
   {
     "id": "itomimizu",
     "name": "Itomimizu",
     "img": "imagenes/Itomimizu.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Foxy", "dif": "facil"},
+        {"val": "Piratas de Foxy", "dif": "media"},
         {"val": "Piratas de Foxy", "dif": "dificil"}
       ],
       "Marcas": [
@@ -12304,7 +12303,7 @@
     "img": "imagenes/Chuchun.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Foxy", "dif": "facil"},
+        {"val": "Piratas de Foxy", "dif": "media"},
         {"val": "Piratas de Foxy", "dif": "dificil"}
       ],
       "Raza": [
@@ -12321,7 +12320,7 @@
     "img": "imagenes/Capote.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Foxy", "dif": "facil"},
+        {"val": "Piratas de Foxy", "dif": "media"},
         {"val": "Piratas de Foxy", "dif": "dificil"}
       ],
       "Raza": [
@@ -12338,7 +12337,7 @@
     "img": "imagenes/Monda.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Foxy", "dif": "facil"},
+        {"val": "Piratas de Foxy", "dif": "media"},
         {"val": "Piratas de Foxy", "dif": "dificil"}
       ],
       "Raza": [
@@ -12355,7 +12354,7 @@
     "img": "imagenes/Pickles.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Foxy", "dif": "facil"},
+        {"val": "Piratas de Foxy", "dif": "media"},
         {"val": "Piratas de Foxy", "dif": "dificil"}
       ],
       "Marcas": [
@@ -12369,7 +12368,7 @@
     "img": "imagenes/BigPan.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Foxy", "dif": "facil"},
+        {"val": "Piratas de Foxy", "dif": "media"},
         {"val": "Piratas de Foxy", "dif": "dificil"}
       ],
       "Raza": [
