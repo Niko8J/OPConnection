@@ -430,6 +430,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con alas", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Robin", "dif": "dificil"}
       ]
     }
   },
@@ -606,6 +609,9 @@
       ],
       "Especialidad": [
         {"val": "Tiradores", "dif": "dificil"}
+      ],
+      "Familiares": [
+        {"val": "Padres de los Sombrero de Paja", "dif": "dificil"}
       ]
     }
   },
@@ -1041,6 +1047,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Robin", "dif": "dificil"}
       ]
     }
   },
@@ -1352,6 +1361,12 @@
       ],
       "Rivales": [
         {"val": "Rivales de Sanji", "dif": "dificil"}
+      ],
+      "Familiares": [
+        {"val": "Padres de los Sombrero de Paja", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Científicos", "dif": "dificil"}
       ]
     }
   },
@@ -1745,6 +1760,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
+      "Familiares": [
+        {"val": "Padres de los Sombrero de Paja", "dif": "dificil"}
       ]
     }
   },
@@ -1870,6 +1888,9 @@
       ],
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Chopper", "dif": "dificil"}
       ]
     }
   },
@@ -1896,6 +1917,9 @@
       ],
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Franky", "dif": "dificil"}
       ]
     }
   },
@@ -1927,6 +1951,9 @@
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"},
         {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Nami", "dif": "dificil"}
       ]
     }
   },
@@ -1955,6 +1982,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Franky", "dif": "dificil"}
       ]
     }
   },
@@ -2804,6 +2834,10 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Usopp", "dif": "dificil"},
+        {"val": "Rivales de Chopper", "dif": "dificil"}
       ]
     }
   },
@@ -2853,6 +2887,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Nami", "dif": "dificil"}
       ]
     }
   },
@@ -2905,6 +2942,10 @@
       ],
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Usopp", "dif": "dificil"},
+        {"val": "Rivales de Chopper", "dif": "dificil"}
       ]
     }
   },
@@ -3099,6 +3140,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Familiares": [
+        {"val": "Padres de los Sombrero de Paja", "dif": "dificil"}
       ]
     }
   },
@@ -3121,6 +3165,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
+      "Familiares": [
+        {"val": "Madres de los Sombrero de Paja", "dif": "dificil"}
       ]
     }
   },
@@ -3261,6 +3308,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Usopp", "dif": "dificil"}
       ]
     }
   },
@@ -3401,6 +3451,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Nami", "dif": "dificil"}
       ]
     }
   },
@@ -3427,6 +3480,9 @@
       ],
       "Titulo": [
         {"val": "Tobiroppos de los Piratas Bestia", "dif": "media"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Robin", "dif": "dificil"}
       ]
     }
   },
@@ -3459,6 +3515,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Franky", "dif": "dificil"}
       ]
     }
   },
@@ -3939,6 +3998,12 @@
       ],
       "Titulo": [
         {"val": "Monarcas", "dif": "dificil"}
+      ],
+      "Familiares": [
+        {"val": "Padres de los Sombrero de Paja", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Científicos", "dif": "dificil"}
       ]
     }
   },
@@ -5467,6 +5532,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con alas", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Chopper", "dif": "dificil"}
       ]
     }
   },
@@ -5900,6 +5968,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Usopp", "dif": "dificil"}
       ]
     }
   },
@@ -5961,6 +6032,9 @@
       ],
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Franky", "dif": "dificil"}
       ]
     }
   },
@@ -6089,6 +6163,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Robin", "dif": "dificil"}
       ]
     }
   },
@@ -6111,6 +6188,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Usopp", "dif": "dificil"}
       ]
     }
   },
@@ -6232,6 +6312,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Familiares": [
+        {"val": "Madres de los Sombrero de Paja", "dif": "dificil"}
       ]
     }
   },
@@ -7039,6 +7122,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con alas", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Robin", "dif": "dificil"}
       ]
     }
   },
@@ -7062,6 +7148,9 @@
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"},
         {"val": "Personajes con alas", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Nami", "dif": "dificil"}
       ]
     }
   },
@@ -7085,6 +7174,9 @@
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"},
         {"val": "Personajes con alas", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Nami", "dif": "dificil"}
       ]
     }
   },
@@ -7102,7 +7194,8 @@
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
       ],
-      "Marcas": []
+      "Marcas": [
+      ]
     }
   },
   {
@@ -7158,7 +7251,8 @@
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
       ],
-      "Marcas": []
+      "Marcas": [
+      ]
     }
   },
   {
@@ -7517,6 +7611,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Chopper", "dif": "dificil"}
       ]
     }
   },
@@ -7552,6 +7649,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Usopp", "dif": "dificil"}
       ]
     }
   },
@@ -7835,6 +7935,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Chopper", "dif": "dificil"}
       ]
     }
   },
@@ -7848,6 +7951,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Chopper", "dif": "dificil"}
       ]
     }
   },
@@ -8064,6 +8170,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Franky", "dif": "dificil"}
       ]
     }
   },
@@ -8118,6 +8227,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Robin", "dif": "dificil"}
       ]
     }
   },
@@ -10258,6 +10370,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Familiares": [
+        {"val": "Madres de los Sombrero de Paja", "dif": "dificil"}
       ]
     }
   },
@@ -10357,6 +10472,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Familiares": [
+        {"val": "Madres de los Sombrero de Paja", "dif": "dificil"}
       ]
     }
   },
@@ -10502,6 +10620,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Familiares": [
+        {"val": "Madres de los Sombrero de Paja", "dif": "dificil"}
       ]
     }
   },
@@ -12424,6 +12545,19 @@
       ],
       "Raza": [
         {"val": "Animales", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "dadan",
+    "name": "Curly Dadan",
+    "img": "imagenes/Dadan.png",
+    "tags": {
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Familiares": [
+        {"val": "Madres de los Sombrero de Paja", "dif": "dificil"}
       ]
     }
   }
