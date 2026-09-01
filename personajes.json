@@ -169,7 +169,8 @@
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"},
-        {"val": "Personajes a los que Moriah robó su sombra", "dif": "dificil"}
+        {"val": "Personajes a los que Moriah robó su sombra", "dif": "dificil"},
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -749,7 +750,8 @@
         {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con cicatrices", "dif": "dificil"}
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ],
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
@@ -1015,10 +1017,14 @@
         {"val": "Fruta del diablo: Logia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes con cicatrices", "dif": "dificil"}
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ],
       "Rivales": [
         {"val": "Rivales de Luffy", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
       ]
     }
   },
@@ -2056,6 +2062,9 @@
       ],
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
       ]
     }
   },
@@ -2082,6 +2091,9 @@
       ],
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
       ]
     }
   },
@@ -2112,6 +2124,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
       ]
     }
   },
@@ -2516,6 +2531,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
       ]
     }
   },
@@ -2545,6 +2563,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
       ]
     }
   },
@@ -4760,6 +4781,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
       ]
     }
   },
@@ -5551,6 +5575,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
       ]
     }
   },
@@ -10713,6 +10740,9 @@
       ],
       "Rivales": [
         {"val": "Rivales de Zoro", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
       ]
     }
   },
@@ -11979,6 +12009,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
       ]
     }
   },
@@ -12281,6 +12314,9 @@
       ],
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
       ]
     }
   },
@@ -12297,6 +12333,13 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que fuman", "dif": "dificil"},
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
       ]
     }
   },
@@ -12807,9 +12850,9 @@
     }
   },
   {
-    "id": "very_good",
+    "id": "berry_good",
     "name": "Very Good",
-    "img": "imagenes/VeryGood.png",
+    "img": "imagenes/BerryGood.png",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -12842,6 +12885,262 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "john_giant",
+    "name": "John Giant",
+    "img": "imagenes/JohnGiant.png",
+    "tags": {
+      "Banda": [
+        {"val": "Elbaf", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
+      ],
+      "Raza": [
+        {"val": "Gigantes", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "bluegrass",
+    "name": "Bluegrass",
+    "img": "imagenes/Bluegrass.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "doberman",
+    "name": "Doberman",
+    "img": "imagenes/Doberman.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes que fuman", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "doll",
+    "name": "Doll",
+    "img": "imagenes/Doll.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "maynard",
+    "name": "Maynard",
+    "img": "imagenes/Maynard.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que fuman", "dif": "dificil"},
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "yamakaji",
+    "name": "Yamakaji",
+    "img": "imagenes/Yamakaji.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que fuman", "dif": "dificil"},
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "urban",
+    "name": "Urban",
+    "img": "imagenes/Urban.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "guillotine",
+    "name": "Guillotine",
+    "img": "imagenes/Guillotine.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con gafas", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "pomsky",
+    "name": "Pomsky",
+    "img": "imagenes/Pomsky.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ]
+    }
+  },
+  {
+    "id": "lonz",
+    "name": "Lonz",
+    "img": "imagenes/Lonz.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Vicealmirantes de la marina", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han usado máscara", "dif": "dificil"}
       ]
     }
   }
