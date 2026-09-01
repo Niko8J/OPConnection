@@ -1050,7 +1050,8 @@
         {"val": "Personajes con gafas", "dif": "dificil"}
       ],
       "Rivales": [
-        {"val": "Rivales de Robin", "dif": "dificil"}
+        {"val": "Rivales de Robin", "dif": "dificil"},
+        {"val": "Rivales de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -1866,6 +1867,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -3100,6 +3104,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Sanji", "dif": "dificil"}
       ]
     }
   },
@@ -3126,6 +3133,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Sanji", "dif": "dificil"}
       ]
     }
   },
@@ -5177,6 +5187,9 @@
       ],
       "Viaje": [
         {"val": "Personajes que viajaron con los Sombrero de Paja", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -5635,6 +5648,9 @@
       ],
       "Raza": [
         {"val": "Gyojins", "dif": "facil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -5920,6 +5936,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con alas", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -6296,6 +6315,9 @@
       ],
       "Raza": [
         {"val": "Gyojins", "dif": "facil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Sanji", "dif": "dificil"}
       ]
     }
   },
@@ -8211,6 +8233,9 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -10667,6 +10692,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -11188,6 +11216,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -11542,6 +11573,9 @@
         {"val": "Zombies", "dif": "facil"},
         {"val": "Zombies", "dif": "dificil"},
         {"val": "Gigantes", "dif": "facil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -12584,6 +12618,53 @@
       ],
       "Familiares": [
         {"val": "Madres de los Sombrero de Paja", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "morgan",
+    "name": "Morgan",
+    "img": "imagenes/Morgan.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Luffy", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "wanze",
+    "name": "Wanze",
+    "img": "imagenes/Wanze.png",
+    "tags": {
+      "Banda": [
+        {"val": "CP9", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: West Blue", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Cocineros", "dif": "dificil"}
+      ],
+      "Habilidades": [
+        {"val": "Usuarios de rokushiki", "dif": "dificil"}
+      ],
+      "Rivales": [
+        {"val": "Rivales de Sanji", "dif": "dificil"}
       ]
     }
   }
