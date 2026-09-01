@@ -12654,8 +12654,8 @@
   },
   {
     "id": "morgan",
-    "name": "Morgan",
-    "img": "imagenes/Morgan.png",
+    "name": "Capitán Morgan",
+    "img": "imagenes/CapitanMorgan.png",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
