@@ -13386,6 +13386,12 @@
       ],
       "Afiliacion": [
         {"val": "Espías de Orochi", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Tiradores", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -13400,6 +13406,9 @@
       ],
       "Afiliacion": [
         {"val": "Espías de Orochi", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -13414,6 +13423,9 @@
       ],
       "Afiliacion": [
         {"val": "Espías de Orochi", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   },
@@ -13431,6 +13443,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
     }
   }
