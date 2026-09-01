@@ -494,6 +494,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -3508,6 +3511,9 @@
       ],
       "Rivales": [
         {"val": "Rivales de Robin", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -3962,6 +3968,9 @@
       ],
       "Rivales": [
         {"val": "Rivales de Luffy", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -5190,6 +5199,9 @@
       ],
       "Rivales": [
         {"val": "Rivales de Luffy", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -7188,7 +7200,8 @@
       ],
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"},
-        {"val": "Personajes con alas", "dif": "dificil"}
+        {"val": "Personajes con alas", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ],
       "Rivales": [
         {"val": "Rivales de Nami", "dif": "dificil"}
@@ -7214,7 +7227,8 @@
       ],
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"},
-        {"val": "Personajes con alas", "dif": "dificil"}
+        {"val": "Personajes con alas", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ],
       "Rivales": [
         {"val": "Rivales de Nami", "dif": "dificil"}
@@ -7521,6 +7535,9 @@
       ],
       "Origen": [
         {"val": "Origen: South Blue", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -7552,7 +7569,8 @@
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -11464,7 +11482,8 @@
         {"val": "Sin fruta del diablo", "dif": "facil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -12091,6 +12110,9 @@
       ],
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -12126,6 +12148,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -12145,6 +12170,9 @@
       ],
       "Titulo": [
         {"val": "Bestias carceleras", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -12183,6 +12211,9 @@
       ],
       "Titulo": [
         {"val": "Bestias carceleras", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
