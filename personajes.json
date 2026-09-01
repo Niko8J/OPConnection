@@ -959,7 +959,8 @@
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -1367,7 +1368,8 @@
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
         {"val": "Personajes con tatuajes", "dif": "dificil"},
-        {"val": "Personajes con gafas", "dif": "dificil"}
+        {"val": "Personajes con gafas", "dif": "dificil"},
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ],
       "Recompensa": [
         {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
@@ -1690,7 +1692,8 @@
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"},
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -2189,7 +2192,8 @@
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"},
-        {"val": "Personajes con cuernos", "dif": "dificil"}
+        {"val": "Personajes con cuernos", "dif": "dificil"},
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -3534,7 +3538,8 @@
         {"val": "Rivales de Robin", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con cuernos", "dif": "dificil"}
+        {"val": "Personajes con cuernos", "dif": "dificil"},
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -4673,6 +4678,9 @@
       ],
       "Especialidad": [
         {"val": "Tiradores", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -4964,6 +4972,9 @@
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -6162,7 +6173,8 @@
         {"val": "Espadachines", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ],
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
@@ -6542,6 +6554,9 @@
       ],
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -7405,7 +7420,8 @@
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"},
-        {"val": "Personajes con alas", "dif": "dificil"}
+        {"val": "Personajes con alas", "dif": "dificil"},
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -8338,6 +8354,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -8962,7 +8981,8 @@
         {"val": "Red Line", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -9932,7 +9952,8 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
-        {"val": "Personajes con gafas", "dif": "dificil"}
+        {"val": "Personajes con gafas", "dif": "dificil"},
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -10465,6 +10486,9 @@
       ],
       "Familiares": [
         {"val": "Madres de los Sombrero de Paja", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -10487,6 +10511,9 @@
       ],
       "Viaje": [
         {"val": "Personajes que viajaron con los Sombrero de Paja", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -11039,7 +11066,8 @@
         {"val": "Tribu de cuellos de serpiente", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -12093,7 +12121,8 @@
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes con gafas", "dif": "dificil"}
+        {"val": "Personajes con gafas", "dif": "dificil"},
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
@@ -12692,6 +12721,9 @@
       ],
       "Familiares": [
         {"val": "Madres de los Sombrero de Paja", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
