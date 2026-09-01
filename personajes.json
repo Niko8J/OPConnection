@@ -12413,5 +12413,18 @@
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
       ]
     }
+  },
+  {
+    "id": "shushu",
+    "name": "Shushu",
+    "img": "imagenes/Shushu.png",
+    "tags": {
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ]
+    }
   }
 ]
