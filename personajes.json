@@ -12730,5 +12730,63 @@
         {"val": "Médicos", "dif": "dificil"}
       ]
     }
+  },
+  {
+    "id": "fullbody",
+    "name": "Fullbody",
+    "img": "imagenes/Fullbody.png",
+    "tags": {
+      "Banda": [
+        {"val": "Marines", "dif": "facil"}
+      ],
+      "Afiliacion": [
+        {"val": "Gobierno Mundial", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "zeff",
+    "name": "Zeff",
+    "img": "imagenes/Zeff.png",
+    "tags": {
+      "Especialidad": [
+        {"val": "Cocineros", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "patty",
+    "name": "Patty",
+    "img": "imagenes/Patty.png",
+    "tags": {
+      "Especialidad": [
+        {"val": "Cocineros", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "carne",
+    "name": "Carne",
+    "img": "imagenes/Carne.png",
+    "tags": {
+      "Especialidad": [
+        {"val": "Cocineros", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ]
+    }
   }
 ]
