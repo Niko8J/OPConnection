@@ -2603,11 +2603,11 @@
         handleGameOver();
       } else {
         if (maxMatches === 3) {
-          warningMsg.innerText = "Grupo incorrecto: 3 coincidencias.";
+          warningMsg.innerText = "Grupo incorrecto: 3 personajes coinciden.";
         } else if (maxMatches === 2) {
-          warningMsg.innerText = "Grupo incorrecto: 2 coincidencias.";
+          warningMsg.innerText = "Grupo incorrecto: 2 personajes coinciden.";
         } else {
-          warningMsg.innerText = "Grupo incorrecto. Inténtalo de nuevo.";
+          warningMsg.innerText = "Grupo incorrecto: 0 personajes coinciden.";
         }
         saveInfiniteState();
       }
