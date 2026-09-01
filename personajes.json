@@ -203,7 +203,8 @@
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ],
       "Edad": [
         {"val": "Menores de edad", "dif": "dificil"}
@@ -1283,7 +1284,8 @@
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
-        {"val": "Personajes con tatuajes", "dif": "dificil"}
+        {"val": "Personajes con tatuajes", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ],
       "Rivales": [
         {"val": "Rivales de Luffy", "dif": "dificil"}
@@ -1316,7 +1318,8 @@
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"},
-        {"val": "Personajes con alas", "dif": "dificil"}
+        {"val": "Personajes con alas", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
@@ -1606,7 +1609,8 @@
         {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -2162,7 +2166,8 @@
         {"val": "Tobiroppos de los Piratas Bestia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -3184,6 +3189,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -3328,6 +3336,9 @@
       ],
       "Raza": [
         {"val": "Animales", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -3393,6 +3404,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -3450,7 +3464,8 @@
         {"val": "Tobiroppos de los Piratas Bestia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ],
       "Rivales": [
         {"val": "Rivales de Nami", "dif": "dificil"}
@@ -3514,7 +3529,8 @@
         {"val": "Tobiroppos de los Piratas Bestia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ],
       "Rivales": [
         {"val": "Rivales de Franky", "dif": "dificil"}
@@ -5813,6 +5829,9 @@
       ],
       "Rivales": [
         {"val": "Rivales de Luffy", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -9169,6 +9188,9 @@
       ],
       "Titulo": [
         {"val": "Gifters de los Piratas Bestia", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -11513,7 +11535,8 @@
         {"val": "Piratas de Thriller Bark", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con cicatrices", "dif": "dificil"}
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ],
       "Raza": [
         {"val": "Zombies", "dif": "facil"},
@@ -11933,6 +11956,9 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
