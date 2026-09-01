@@ -257,7 +257,8 @@
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "facil"},
         {"val": "Banda: Sombrero de Paja", "dif": "media"},
-        {"val": "Franky Family", "dif": "media"}
+        {"val": "Franky Family", "dif": "media"},
+        {"val": "Tom's Workers", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: South Blue", "dif": "dificil"}
@@ -7984,7 +7985,8 @@
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
       "Banda": [
-        {"val": "Galley-La Company", "dif": "media"}
+        {"val": "Galley-La Company", "dif": "media"},
+        {"val": "Tom's Workers", "dif": "media"}
       ],
       "Luffy": [
         {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
@@ -8011,6 +8013,9 @@
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"},
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Banda": [
+        {"val": "Tom's Workers", "dif": "media"}
       ]
     }
   },
@@ -8024,6 +8029,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Banda": [
+        {"val": "Tom's Workers", "dif": "media"}
       ]
     }
   },
@@ -13173,6 +13181,22 @@
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "yokozuna",
+    "name": "Yokozuna",
+    "img": "imagenes/Yokozuna.png",
+    "tags": {
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Banda": [
+        {"val": "Tom's Workers", "dif": "media"}
       ]
     }
   }
