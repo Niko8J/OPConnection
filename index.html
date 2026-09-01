@@ -2156,7 +2156,21 @@
     "Banda: Piratas de Arlong": ["nami"],
     "Banda: Falsos Piratas de Sombrero de Paja": ["caribou", "coribou", "albion", "lip_doughty"],
     "Banda: Piratas de Thriller Bark": ["john", "ganzui", "gill_bastar"],
-    "Raza: Zombies": ["john", "ganzui", "gill_bastar"]
+    "Raza: Zombies": ["john", "ganzui", "gill_bastar"],
+    // Chopper solo estuvo en la banda de Foxy brevemente (Davy Back Fight), así que su
+    // etiqueta solo existe en dificultad "dificil" (ver "Piratas de Arlong" con Nami, mismo
+    // patrón): forzamos que aparezca siempre que salga este grupo, para que ese dato
+    // sorprendente se vea de verdad y no dependa de la suerte del sorteo. En la práctica esto
+    // solo puede dispararse en dificil o en Infinito, porque ningún miembro de la banda de
+    // Foxy tiene ninguna entrada en dificultad "media" (la comprobación de "media" de más
+    // abajo es genérica para todos los grupos de esta lista, pero aquí nunca llega a aplicar).
+    "Banda: Piratas de Foxy": ["chopper"],
+    // De los 6 personajes a los que Moriah robó la sombra, 5 son Sombrero de Paja (Luffy,
+    // Zoro, Sanji, Robin, Brook), así que la gente los conecta a la primera con "Piratas de
+    // Sombrero de Paja" en cuanto ve varios juntos, sin fijarse en el atributo real. Forzamos
+    // que Charlotte Lola (la única no tripulante) esté siempre presente, para que el panel
+    // obligue a pensar en la sombra y no en la banda.
+    "Marcas: Personajes a los que Moriah robó su sombra": ["lola"]
   };
 
   // Elige los 4 personajes de un grupo, forzando que se incluya un miembro "no evidente"
