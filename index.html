@@ -522,6 +522,25 @@
       .close-btn { top: 8px; right: 10px; font-size: 1.3rem; }
     }
 
+    /* Ventanas con poco ALTO de verdad (portátil con escalado de Windows alto, barra de
+       marcadores/pestañas de Chrome ocupando su hueco, móviles pequeños en vertical...): el
+       logo, el texto, los botones y el hueco reservado para el anuncio inferior son fijos y,
+       si el alto disponible es corto, pueden llegar a comerse casi todo el sitio y dejar el
+       tablero diminuto aunque la ventana esté perfectamente maximizada. Aquí compactamos ese
+       "andamiaje" fijo; measureCardSize() vuelve a medir el hueco real ya con estos tamaños
+       aplicados, así que el tablero crece solo, sin tocar nada del JS. */
+    @media (max-height: 700px) {
+      :root { --logo-h: 56px; --container-pad-top: 4px; --v-gap-sm: 4px; --v-gap-md: 5px; }
+      .difficulty-selector { gap: 6px; }
+      .diff-btn { padding: 5px 10px; font-size: 0.85rem; }
+      .warning-msg { height: 14px; line-height: 14px; font-size: 0.8rem; }
+      .controls { gap: 6px; }
+      button.action-btn { padding: 6px 14px; font-size: 0.9rem; }
+      #lives-icons { gap: 6px; }
+      .life-icon { font-size: 1.4rem; }
+      .ad-banner { height: 50px; }
+    }
+
   </style>
   <!-- Firebase SDK (Auth + Firestore) -->
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -605,8 +624,6 @@
       onclick="location.reload()"
     >One Piece Connection</div>
   </div>
-  <p>Encuentra 4 grupos conectados por distintos atributos.</p>
-
   <div class="difficulty-selector">
     <button class="diff-btn" onclick="setDifficulty('facil', event)">Novato</button>
     <button class="diff-btn" onclick="setDifficulty('media', event)">Supernova</button>
@@ -1741,7 +1758,7 @@
   // v16: subimos la versión para invalidar cachés antiguas, que podían haber quedado con un
   // tamaño de tarjeta diminuto si la primerísima medición se hizo con la ventana todavía a
   // medio restaurar (ver "settle" en freezeDesign más abajo).
-  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v16";
+  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v17";
 
   // Misma condición que activa el aviso de ".rotate-overlay" ("Pon el dispositivo en
   // vertical..."): un móvil táctil en horizontal. Mientras se cumpla, el tablero queda
