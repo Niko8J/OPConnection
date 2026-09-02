@@ -3768,6 +3768,9 @@
       ],
       "Haki": [
         {"val": "Sin haki", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
       ]
     }
   },
