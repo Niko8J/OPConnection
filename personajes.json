@@ -8322,6 +8322,12 @@
       ],
       "Especialidad": [
         {"val": "Timoneles", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han usado máscara", "dif": "dificil"}
       ]
     }
   },
@@ -8972,6 +8978,9 @@
       ],
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con gafas", "dif": "dificil"}
       ]
     }
   },
