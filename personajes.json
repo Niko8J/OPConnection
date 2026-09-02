@@ -1082,7 +1082,7 @@
         {"val": "Gobierno Mundial", "dif": "facil"}
       ],
       "Titulo": [
-        {"val": "Almirante", "dif": "facil"}
+        {"val": "Almirantes", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
@@ -1111,7 +1111,7 @@
         {"val": "Gobierno Mundial", "dif": "facil"}
       ],
       "Titulo": [
-        {"val": "Almirante", "dif": "facil"}
+        {"val": "Almirantes", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -1718,7 +1718,7 @@
         {"val": "Marines", "dif": "facil"}
       ],
       "Titulo": [
-        {"val": "Almirante", "dif": "facil"}
+        {"val": "Almirantes", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: South Blue", "dif": "dificil"}
@@ -1780,9 +1780,6 @@
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
       ],
-      "Especialidad": [
-        {"val": "Capitanes pirata", "dif": "dificil"}
-      ],
       "D": [
         {"val": "Voluntad de la D.", "dif": "media"}
       ],
@@ -1828,7 +1825,8 @@
         {"val": "Fruta despertada", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ],
       "Peleas": [
         {"val": "Peleas de Zoro", "dif": "dificil"}
@@ -2342,7 +2340,7 @@
         {"val": "Marines", "dif": "facil"}
       ],
       "Titulo": [
-        {"val": "Almirante", "dif": "facil"}
+        {"val": "Almirantes", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -2862,6 +2860,9 @@
       ],
       "Peleas": [
         {"val": "Peleas de Sanji", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con alas", "dif": "dificil"}
       ]
     }
   },
@@ -3256,7 +3257,8 @@
     "img": "imagenes/Wapol.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas Bliking", "dif": "facil"}
+        {"val": "Piratas Bliking", "dif": "facil"},
+        {"val": "Reino de Sakura", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -6017,7 +6019,8 @@
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"},
-        {"val": "Personajes con cicatrices", "dif": "dificil"}
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -7990,7 +7993,7 @@
     "img": "imagenes/Ryokugyu.png",
     "tags": {
       "Titulo": [
-        {"val": "Almirante", "dif": "facil"}
+        {"val": "Almirantes", "dif": "facil"}
       ],
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
@@ -8116,7 +8119,8 @@
     "img": "imagenes/Chess.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas Bliking", "dif": "facil"}
+        {"val": "Piratas Bliking", "dif": "facil"},
+        {"val": "Reino de Sakura", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -8132,7 +8136,8 @@
     "img": "imagenes/Kuromarimo.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas Bliking", "dif": "facil"}
+        {"val": "Piratas Bliking", "dif": "facil"},
+        {"val": "Reino de Sakura", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -8217,7 +8222,8 @@
     "img": "imagenes/Robson.png",
     "tags": {
       "Banda": [
-        {"val": "Piratas Bliking", "dif": "facil"}
+        {"val": "Piratas Bliking", "dif": "facil"},
+        {"val": "Reino de Sakura", "dif": "dificil"}
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "dificil"}
