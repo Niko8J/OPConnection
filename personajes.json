@@ -40,6 +40,9 @@
         {"val": "Personajes con tatuajes", "dif": "dificil"},
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
         {"val": "Personajes a los que Moriah robó su sombra", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -1152,6 +1155,9 @@
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -4395,6 +4401,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -4509,6 +4518,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -4540,6 +4552,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -4565,6 +4580,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -4594,6 +4612,9 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -4619,6 +4640,9 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -4672,6 +4696,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -4720,6 +4747,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -5193,7 +5223,8 @@
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
       ],
       "Peleas": [
-        {"val": "Peleas de Luffy", "dif": "dificil"}
+        {"val": "Peleas de Luffy", "dif": "dificil"},
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -5494,6 +5525,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -5791,6 +5825,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -6142,7 +6179,8 @@
         {"val": "Presos de Impel Down", "dif": "dificil"}
       ],
       "Peleas": [
-        {"val": "Peleas de Franky", "dif": "dificil"}
+        {"val": "Peleas de Franky", "dif": "dificil"},
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -6738,6 +6776,9 @@
       ],
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -6754,6 +6795,9 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -6786,6 +6830,9 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -6810,6 +6857,9 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -6826,6 +6876,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -6845,6 +6898,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -10095,6 +10151,9 @@
       ],
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -10592,6 +10651,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -10605,6 +10667,9 @@
       ],
       "Titulo": [
         {"val": "Monarcas", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -11220,6 +11285,9 @@
       ],
       "Titulo": [
         {"val": "Monarcas", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -11239,6 +11307,9 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -11258,6 +11329,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -11277,6 +11351,9 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -11572,6 +11649,9 @@
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
         {"val": "Personajes con cuernos", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -11608,6 +11688,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -11834,6 +11917,9 @@
       ],
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -13080,6 +13166,9 @@
       "Marcas": [
         {"val": "Personajes que fuman", "dif": "dificil"},
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   },
@@ -13835,6 +13924,39 @@
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"},
         {"val": "Capitanes pirata", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "tank_lepanto",
+    "name": "Tank Lepanto",
+    "img": "imagenes/TankLepanto.png",
+    "tags": {
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "jean_ango",
+    "name": "Jean Ango",
+    "img": "imagenes/JeanAngo.png",
+    "tags": {
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "ucy",
+    "name": "Ucy",
+    "img": "imagenes/Ucy.png",
+    "tags": {
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ],
+      "Peleas": [
+        {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
     }
   }
