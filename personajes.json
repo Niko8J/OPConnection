@@ -434,8 +434,8 @@
       "Marcas": [
         {"val": "Personajes con alas", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Robin", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Robin", "dif": "dificil"}
       ]
     }
   },
@@ -553,8 +553,8 @@
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -716,8 +716,8 @@
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Zoro", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -757,8 +757,8 @@
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -814,8 +814,8 @@
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Zoro", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -896,7 +896,8 @@
         {"val": "Fruta despertada", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con cicatrices", "dif": "dificil"}
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes con gafas", "dif": "dificil"}
       ]
     }
   },
@@ -1022,8 +1023,8 @@
         {"val": "Personajes con cicatrices", "dif": "dificil"},
         {"val": "Personajes que fuman", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ],
       "Titulo": [
         {"val": "Vicealmirantes de la marina", "dif": "media"}
@@ -1060,9 +1061,9 @@
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Robin", "dif": "dificil"},
-        {"val": "Rivales de Zoro", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Robin", "dif": "dificil"},
+        {"val": "Peleas de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -1182,6 +1183,9 @@
         {"val": "Personajes con tatuajes", "dif": "dificil"},
         {"val": "Personajes con gafas", "dif": "dificil"},
         {"val": "Personajes con alas", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Comandantes de Barbablanca", "dif": "dificil"}
       ]
     }
   },
@@ -1219,8 +1223,8 @@
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -1299,8 +1303,8 @@
         {"val": "Personajes con tatuajes", "dif": "dificil"},
         {"val": "Personajes con cuernos", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -1336,8 +1340,8 @@
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Zoro", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -1375,8 +1379,8 @@
       "Recompensa": [
         {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Sanji", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Sanji", "dif": "dificil"}
       ],
       "Familiares": [
         {"val": "Padres de los Sombrero de Paja", "dif": "dificil"}
@@ -1566,8 +1570,8 @@
         {"val": "Personajes con cicatrices", "dif": "dificil"},
         {"val": "Personajes con tatuajes", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -1665,8 +1669,8 @@
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -1820,8 +1824,8 @@
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Zoro", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -1849,8 +1853,9 @@
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Sanji", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Sanji", "dif": "dificil"},
+        {"val": "Peleas de Usopp", "dif": "dificil"}
       ]
     }
   },
@@ -1881,8 +1886,8 @@
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -1910,8 +1915,9 @@
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Chopper", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Chopper", "dif": "dificil"},
+        {"val": "Peleas de Nami", "dif": "dificil"}
       ]
     }
   },
@@ -1939,8 +1945,8 @@
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Franky", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Franky", "dif": "dificil"}
       ]
     }
   },
@@ -1973,8 +1979,9 @@
         {"val": "Personajes que han usado máscara", "dif": "dificil"},
         {"val": "Personajes con gafas", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Nami", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Nami", "dif": "dificil"},
+        {"val": "Peleas de Sanji", "dif": "dificil"}
       ]
     }
   },
@@ -2004,8 +2011,8 @@
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Franky", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Franky", "dif": "dificil"}
       ]
     }
   },
@@ -2650,8 +2657,8 @@
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -2847,8 +2854,8 @@
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Sanji", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Sanji", "dif": "dificil"}
       ]
     }
   },
@@ -2873,9 +2880,9 @@
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Usopp", "dif": "dificil"},
-        {"val": "Rivales de Chopper", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Usopp", "dif": "dificil"},
+        {"val": "Peleas de Chopper", "dif": "dificil"}
       ]
     }
   },
@@ -2926,8 +2933,11 @@
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Nami", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Nami", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -2981,9 +2991,9 @@
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Usopp", "dif": "dificil"},
-        {"val": "Rivales de Chopper", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Usopp", "dif": "dificil"},
+        {"val": "Peleas de Chopper", "dif": "dificil"}
       ]
     }
   },
@@ -3134,8 +3144,8 @@
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Sanji", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Sanji", "dif": "dificil"}
       ]
     }
   },
@@ -3163,8 +3173,8 @@
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Sanji", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Sanji", "dif": "dificil"}
       ]
     }
   },
@@ -3257,8 +3267,8 @@
       "Titulo": [
         {"val": "Monarcas", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -3296,8 +3306,8 @@
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -3326,8 +3336,8 @@
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Sanji", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Sanji", "dif": "dificil"}
       ]
     }
   },
@@ -3356,8 +3366,8 @@
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Usopp", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Usopp", "dif": "dificil"}
       ]
     }
   },
@@ -3415,8 +3425,8 @@
       "Viaje": [
         {"val": "Personajes que viajaron con los Sombrero de Paja", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Zoro", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -3506,8 +3516,8 @@
         {"val": "Personajes que han usado máscara", "dif": "dificil"},
         {"val": "Personajes con cuernos", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Nami", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Nami", "dif": "dificil"}
       ]
     }
   },
@@ -3535,8 +3545,8 @@
       "Titulo": [
         {"val": "Tobiroppos de los Piratas Bestia", "dif": "media"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Robin", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Robin", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con cuernos", "dif": "dificil"},
@@ -3575,8 +3585,8 @@
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
         {"val": "Personajes con cuernos", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Franky", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Franky", "dif": "dificil"}
       ]
     }
   },
@@ -3993,8 +4003,8 @@
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con cuernos", "dif": "dificil"}
@@ -4321,6 +4331,9 @@
       ],
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Comandantes de Barbablanca", "dif": "dificil"}
       ]
     }
   },
@@ -5115,6 +5128,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Afiliacion": [
+        {"val": "Comandantes de Barbablanca", "dif": "dificil"}
       ]
     }
   },
@@ -5176,8 +5192,8 @@
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -5233,8 +5249,8 @@
       "Viaje": [
         {"val": "Personajes que viajaron con los Sombrero de Paja", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con cuernos", "dif": "dificil"}
@@ -5555,8 +5571,8 @@
       "Fruta": [
         {"val": "Fruta del diablo: Logia", "dif": "media"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -5613,8 +5629,8 @@
       "Marcas": [
         {"val": "Personajes con alas", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Chopper", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Chopper", "dif": "dificil"}
       ]
     }
   },
@@ -5700,8 +5716,8 @@
       "Raza": [
         {"val": "Gyojins", "dif": "facil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -5795,6 +5811,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Afiliacion": [
+        {"val": "Comandantes de Barbablanca", "dif": "dificil"}
       ]
     }
   },
@@ -5894,8 +5913,8 @@
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con cuernos", "dif": "dificil"}
@@ -5988,8 +6007,8 @@
       "Marcas": [
         {"val": "Personajes con alas", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Zoro", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -6058,8 +6077,8 @@
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Usopp", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Usopp", "dif": "dificil"}
       ]
     }
   },
@@ -6090,8 +6109,8 @@
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Zoro", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -6122,8 +6141,8 @@
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Franky", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Franky", "dif": "dificil"}
       ]
     }
   },
@@ -6254,8 +6273,8 @@
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Robin", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Robin", "dif": "dificil"}
       ]
     }
   },
@@ -6279,8 +6298,8 @@
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Usopp", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Usopp", "dif": "dificil"}
       ]
     }
   },
@@ -6368,8 +6387,8 @@
       "Raza": [
         {"val": "Gyojins", "dif": "facil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Sanji", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Sanji", "dif": "dificil"}
       ]
     }
   },
@@ -7219,8 +7238,8 @@
       "Marcas": [
         {"val": "Personajes con alas", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Robin", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Robin", "dif": "dificil"}
       ]
     }
   },
@@ -7246,8 +7265,8 @@
         {"val": "Personajes con alas", "dif": "dificil"},
         {"val": "Personajes con cuernos", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Nami", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Nami", "dif": "dificil"}
       ]
     }
   },
@@ -7273,8 +7292,8 @@
         {"val": "Personajes con alas", "dif": "dificil"},
         {"val": "Personajes con cuernos", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Nami", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Nami", "dif": "dificil"}
       ]
     }
   },
@@ -7673,8 +7692,8 @@
         {"val": "Zombies", "dif": "facil"},
         {"val": "Zombies", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Sanji", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Sanji", "dif": "dificil"}
       ]
     }
   },
@@ -7715,8 +7734,8 @@
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Chopper", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Chopper", "dif": "dificil"}
       ]
     }
   },
@@ -7753,8 +7772,8 @@
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Usopp", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Usopp", "dif": "dificil"}
       ]
     }
   },
@@ -8046,8 +8065,8 @@
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Chopper", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Chopper", "dif": "dificil"}
       ]
     }
   },
@@ -8062,8 +8081,8 @@
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Chopper", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Chopper", "dif": "dificil"}
       ]
     }
   },
@@ -8281,8 +8300,8 @@
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Franky", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Franky", "dif": "dificil"}
       ]
     }
   },
@@ -8303,8 +8322,8 @@
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Zoro", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -8341,8 +8360,8 @@
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Robin", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Robin", "dif": "dificil"}
       ]
     }
   },
@@ -9097,6 +9116,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Afiliacion": [
+        {"val": "Comandantes de Barbablanca", "dif": "dificil"}
       ]
     }
   },
@@ -10770,8 +10792,8 @@
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Zoro", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Zoro", "dif": "dificil"}
       ],
       "Titulo": [
         {"val": "Vicealmirantes de la marina", "dif": "media"}
@@ -10959,8 +10981,8 @@
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -11278,6 +11300,9 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Comandantes de Barbablanca", "dif": "dificil"}
       ]
     }
   },
@@ -11298,8 +11323,8 @@
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Zoro", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -11422,8 +11447,8 @@
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Zoro", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -11656,8 +11681,8 @@
         {"val": "Zombies", "dif": "dificil"},
         {"val": "Gigantes", "dif": "facil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -11681,8 +11706,8 @@
         {"val": "Zombies", "dif": "facil"},
         {"val": "Zombies", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Zoro", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -12400,8 +12425,8 @@
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
@@ -12425,8 +12450,8 @@
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
@@ -12450,8 +12475,8 @@
       "Especialidad": [
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: South Blue", "dif": "dificil"}
@@ -12478,8 +12503,8 @@
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Sanji", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Sanji", "dif": "dificil"}
       ]
     }
   },
@@ -12519,8 +12544,8 @@
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Zoro", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -12544,8 +12569,8 @@
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Zoro", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Zoro", "dif": "dificil"}
       ]
     }
   },
@@ -12733,9 +12758,9 @@
     }
   },
   {
-    "id": "morgan",
-    "name": "Morgan",
-    "img": "imagenes/Morgan.png",
+    "id": "capitan_morgan",
+    "name": "Capitán Morgan",
+    "img": "imagenes/CapitanMorgan.png",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -12746,8 +12771,8 @@
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Luffy", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Luffy", "dif": "dificil"}
       ]
     }
   },
@@ -12774,8 +12799,11 @@
       "Habilidades": [
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
       ],
-      "Rivales": [
-        {"val": "Rivales de Sanji", "dif": "dificil"}
+      "Peleas": [
+        {"val": "Peleas de Sanji", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con gafas", "dif": "dificil"}
       ]
     }
   },
@@ -13446,6 +13474,367 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "macro",
+    "name": "Macro",
+    "img": "imagenes/Macro.png",
+    "tags": {
+      "Raza": [
+        {"val": "Gyojins", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Banda": [
+        {"val": "Piratas del Sol", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Capitanes pirata", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "gyaro",
+    "name": "Gyaro",
+    "img": "imagenes/Gyaro.png",
+    "tags": {
+      "Raza": [
+        {"val": "Gyojins", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Banda": [
+        {"val": "Piratas del Sol", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "tansui",
+    "name": "Tansui",
+    "img": "imagenes/Tansui.png",
+    "tags": {
+      "Raza": [
+        {"val": "Gyojins", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Banda": [
+        {"val": "Piratas del Sol", "dif": "facil"}
+      ]
+    }
+  },
+  {
+    "id": "tatch",
+    "name": "Tatch",
+    "img": "imagenes/Tatch.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Estado": [
+        {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Comandantes de Barbablanca", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "blamenco",
+    "name": "Blamenco",
+    "img": "imagenes/Blamenco.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Fruta": [
+        {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: South Blue", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Comandantes de Barbablanca", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "rakuyo",
+    "name": "Rakuyo",
+    "img": "imagenes/Rakuyo.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: South Blue", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Comandantes de Barbablanca", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "namur",
+    "name": "Namur",
+    "img": "imagenes/Namur.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Gyojins", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Comandantes de Barbablanca", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "curiel",
+    "name": "Curiel",
+    "img": "imagenes/Curiel.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Tiradores", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con gafas", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Comandantes de Barbablanca", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "kingdew",
+    "name": "Kingdew",
+    "img": "imagenes/Kingdew.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Comandantes de Barbablanca", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "haruta",
+    "name": "Haruta",
+    "img": "imagenes/Haruta.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: South Blue", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Comandantes de Barbablanca", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "speed_jiru",
+    "name": "Speed Jiru",
+    "img": "imagenes/SpeedJiru.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Comandantes de Barbablanca", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "blenheim",
+    "name": "Blenheim",
+    "img": "imagenes/Blenheim.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Comandantes de Barbablanca", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "fossa",
+    "name": "Fossa",
+    "img": "imagenes/Fossa.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"},
+        {"val": "Personajes que fuman", "dif": "dificil"},
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Comandantes de Barbablanca", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "atmos",
+    "name": "Atmos",
+    "img": "imagenes/Atmos.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: West Blue", "dif": "dificil"}
+      ],
+      "Afiliacion": [
+        {"val": "Comandantes de Barbablanca", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "decalvan",
+    "name": "Hermanos Decalvan",
+    "img": "imagenes/HermanosDecalvan.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Capitanes pirata", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"},
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "doma",
+    "name": "Doma",
+    "img": "imagenes/Doma.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Capitanes pirata", "dif": "dificil"},
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "squard",
+    "name": "Squard",
+    "img": "imagenes/Squard.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "mcguy",
+    "name": "McGuy",
+    "img": "imagenes/McGuy.png",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Barbablanca", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"},
+        {"val": "Capitanes pirata", "dif": "dificil"}
       ]
     }
   }
