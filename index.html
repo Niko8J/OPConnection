@@ -386,6 +386,14 @@
     }
     .footer-sep { color: #334155; }
 
+    /* Enlace suelto dentro de un párrafo (por ejemplo, "Contacto" en Quiénes somos) que abre
+       otro modal: mismo aspecto que un enlace normal, pero como <button> para poder disparar
+       JS sin necesitar un href real. */
+    .inline-link {
+      background: none; border: none; padding: 0; margin: 0; font: inherit;
+      color: #f59e0b; text-decoration: underline; cursor: pointer;
+    }
+
     /* Laterales de publicidad: en pantallas con ancho de sobra para ellos, sea cual sea el
        tipo de dispositivo (ordenador, tablet ancha en horizontal...). En pantallas estrechas
        no aparecen en absoluto, para no robarle espacio al juego. */
@@ -625,7 +633,6 @@
 
       <button class="auth-dropdown-item" onclick="openHowToPlayModal()">❓ Cómo jugar</button>
       <button class="auth-dropdown-item auth-dropdown-item-disabled" disabled title="Disponible próximamente">🌐 Idioma (próximamente)</button>
-      <button class="auth-dropdown-item" onclick="openContactModal()">✉️ Contacto</button>
     </div>
   </div>
 
@@ -841,7 +848,8 @@
     <div class="howto-content">
       <p><i>One Piece Connection</i> es un proyecto fan hecho por una sola persona por afición, inspirado en el juego <i>Connections</i> del New York Times. El objetivo es puramente de entretenimiento: poner a prueba cuánto conoces a los personajes de <i>One Piece</i> a través de sus conexiones (tripulaciones, orígenes, frutas del diablo, habilidades...).</p>
       <p>Este sitio no tiene ánimo de lucro más allá de cubrir sus propios gastos de mantenimiento, y no está afiliado, patrocinado ni respaldado por Toei Animation, Shueisha, Eiichiro Oda, Bandai Namco ni ningún otro titular de los derechos de <i>One Piece</i>. Todos los nombres, imágenes y demás material pertenecen a sus respectivos propietarios y se usan aquí únicamente con fines de entretenimiento y homenaje a la obra.</p>
-      <p>¿Dudas, sugerencias o algún fallo? Usa el formulario de <strong>Contacto</strong>.</p>
+      <p>La mayoría de las imágenes de los personajes están sacadas del videojuego para móviles <i>One Piece: Treasure Cruise</i>; otras están editadas a partir de artes oficiales del anime.</p>
+      <p>¿Dudas, sugerencias o algún fallo? Usa el formulario de <button type="button" class="inline-link" onclick="closeAboutModal(); openContactModal();">Contacto</button>.</p>
     </div>
   </div>
 </div>
