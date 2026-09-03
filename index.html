@@ -6,6 +6,11 @@
   <title>One Piece Connections</title>
   <meta name="description" content="Encuentra los 4 grupos de personajes de One Piece que comparten algo en común. Juego gratuito estilo Connections hecho por fans, con niveles de dificultad y ranking.">
   <link rel="canonical" href="https://www.opconnection.es/">
+  <!-- El tablero no puede empezar a pedir ninguna imagen hasta que este JSON (bastante
+       pesado) se ha descargado y procesado, y eso solo empieza cuando el script de la
+       aplicación llega a ejecutarse, al final de todo. Con este "preload" el navegador
+       empieza a descargarlo en paralelo desde el principio, sin esperar a nada más. -->
+  <link rel="preload" as="fetch" href="personajes.json" crossorigin="anonymous">
 
   <!-- Icono para navegador de escritorio (pestaña) -->
   <link rel="icon" href="favicon.ico?v=2" sizes="any">
@@ -378,7 +383,7 @@
       font-size: 0.8rem; color: #64748b;
     }
     .footer-link {
-      background: none; border: none; color: #64748b; font-size: 0.8rem;
+      background: none; border: none; color: #94a3b8; font-size: 0.8rem;
       cursor: pointer; padding: 2px 4px; text-decoration: underline;
     }
     @media (hover: hover) and (pointer: fine) {
@@ -602,7 +607,7 @@
          data-ad-slot="0000000000"></ins>
   </div>
 
-  <div class="container">
+  <main class="container">
   <h1 class="visually-hidden">One Piece Connections: encuentra las conexiones entre personajes de One Piece</h1>
   <div class="auth-corner">
     <button id="auth-icon-btn" class="auth-icon-btn" onclick="toggleAuthMenu(event)" title="Cuenta">
@@ -643,6 +648,7 @@
       alt="One Piece"
       class="site-logo"
       title="Recargar página"
+      fetchpriority="high"
       onclick="location.reload()"
       onerror="this.style.display='none'; document.getElementById('site-logo-fallback').style.display='block';"
     >
@@ -703,7 +709,7 @@
     <span class="footer-sep">·</span>
     <button type="button" class="footer-link" onclick="openPrivacyModal()">Privacidad</button>
   </footer>
-  </div>
+  </main>
 
   <div class="ad-side" id="ad-side-right">
     <!-- Anuncio lateral derecho (Google AdSense). Sustituye data-ad-slot por tu propio
