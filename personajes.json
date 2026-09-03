@@ -6784,6 +6784,9 @@
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
       ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
       "Peleas": [
         {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
       ]
@@ -8014,7 +8017,8 @@
         {"val": "Origen: South Blue", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con gafas", "dif": "dificil"}
+        {"val": "Personajes con gafas", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
