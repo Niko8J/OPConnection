@@ -2,7 +2,7 @@
   {
     "id": "luffy",
     "name": "Monkey D. Luffy",
-    "img": "imagenes/Luffy.png",
+    "img": "imagenes/Luffy.webp",
     "tags": {
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "facil"},
@@ -49,7 +49,7 @@
   {
     "id": "zoro",
     "name": "Roronoa Zoro",
-    "img": "imagenes/Zoro.png",
+    "img": "imagenes/Zoro.webp",
     "tags": {
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "facil"},
@@ -84,7 +84,7 @@
   {
     "id": "nami",
     "name": "Nami",
-    "img": "imagenes/Nami.png",
+    "img": "imagenes/Nami.webp",
     "tags": {
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "facil"},
@@ -114,7 +114,7 @@
   {
     "id": "usopp",
     "name": "Usopp",
-    "img": "imagenes/Usopp.png",
+    "img": "imagenes/Usopp.webp",
     "tags": {
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "facil"},
@@ -143,7 +143,7 @@
   {
     "id": "sanji",
     "name": "Vinsmoke Sanji",
-    "img": "imagenes/Sanji.png",
+    "img": "imagenes/Sanji.webp",
     "tags": {
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "facil"},
@@ -180,7 +180,7 @@
   {
     "id": "chopper",
     "name": "Tony Tony Chopper",
-    "img": "imagenes/Chopper.png",
+    "img": "imagenes/Chopper.webp",
     "tags": {
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "facil"},
@@ -218,7 +218,7 @@
   {
     "id": "robin",
     "name": "Nico Robin",
-    "img": "imagenes/Robin.png",
+    "img": "imagenes/Robin.webp",
     "tags": {
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "facil"},
@@ -255,7 +255,7 @@
   {
     "id": "franky",
     "name": "Franky",
-    "img": "imagenes/Franky.png",
+    "img": "imagenes/Franky.webp",
     "tags": {
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "facil"},
@@ -292,7 +292,7 @@
   {
     "id": "brook",
     "name": "Brook",
-    "img": "imagenes/Brook.png",
+    "img": "imagenes/Brook.webp",
     "tags": {
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "facil"},
@@ -325,7 +325,7 @@
   {
     "id": "jinbe",
     "name": "Jinbe",
-    "img": "imagenes/Jinbe.png",
+    "img": "imagenes/Jinbe.webp",
     "tags": {
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "facil"},
@@ -366,7 +366,7 @@
   {
     "id": "vivi",
     "name": "Nefertari D. Vivi",
-    "img": "imagenes/Vivi.png",
+    "img": "imagenes/Vivi.webp",
     "tags": {
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "media"},
@@ -399,7 +399,7 @@
   {
     "id": "karoo",
     "name": "Karoo",
-    "img": "imagenes/Karoo.png",
+    "img": "imagenes/Karoo.webp",
     "tags": {
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "media"},
@@ -423,7 +423,7 @@
   {
     "id": "pell",
     "name": "Pell",
-    "img": "imagenes/Pell.png",
+    "img": "imagenes/Pell.webp",
     "tags": {
       "Banda": [
         {"val": "Reino de Alabasta", "dif": "facil"}
@@ -445,7 +445,7 @@
   {
     "id": "chaka",
     "name": "Chaka",
-    "img": "imagenes/Chaka.png",
+    "img": "imagenes/Chaka.webp",
     "tags": {
       "Banda": [
         {"val": "Reino de Alabasta", "dif": "facil"}
@@ -461,7 +461,7 @@
   {
     "id": "cobra",
     "name": "Nefertari D. Cobra",
-    "img": "imagenes/Cobra.png",
+    "img": "imagenes/Cobra.webp",
     "tags": {
       "Banda": [
         {"val": "Reino de Alabasta", "dif": "facil"}
@@ -486,7 +486,7 @@
   {
     "id": "merry",
     "name": "Going Merry",
-    "img": "imagenes/GoingMerry.png",
+    "img": "imagenes/GoingMerry.webp",
     "tags": {
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "media"}
@@ -508,7 +508,7 @@
   {
     "id": "sunny",
     "name": "Thousand Sunny",
-    "img": "imagenes/Sunny.png",
+    "img": "imagenes/Sunny.webp",
     "tags": {
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "media"}
@@ -524,7 +524,7 @@
   {
     "id": "buggy",
     "name": "Buggy",
-    "img": "imagenes/Buggy.png",
+    "img": "imagenes/Buggy.webp",
     "tags": {
       "Banda": [
         {"val": "Banda: Cross Guild", "dif": "facil"},
@@ -564,7 +564,7 @@
   {
     "id": "shanks",
     "name": "Shanks",
-    "img": "imagenes/Shanks.png",
+    "img": "imagenes/Shanks.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas del Pelirrojo", "dif": "facil"},
@@ -602,7 +602,7 @@
   {
     "id": "yasopp",
     "name": "Yasopp",
-    "img": "imagenes/Yasopp.png",
+    "img": "imagenes/Yasopp.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas del Pelirrojo", "dif": "facil"}
@@ -627,7 +627,7 @@
   {
     "id": "barbanegra",
     "name": "Marshall D. Teach (Barbanegra)",
-    "img": "imagenes/Barbanegra.png",
+    "img": "imagenes/Barbanegra.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbanegra", "dif": "facil"},
@@ -666,7 +666,7 @@
   {
     "id": "vanaugur",
     "name": "Van Augur",
-    "img": "imagenes/VanAugur.png",
+    "img": "imagenes/VanAugur.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbanegra", "dif": "facil"}
@@ -695,7 +695,7 @@
   {
     "id": "mihawk",
     "name": "Dracule Mihawk",
-    "img": "imagenes/Mihawk.png",
+    "img": "imagenes/Mihawk.webp",
     "tags": {
       "Banda": [
         {"val": "Banda: Cross Guild", "dif": "facil"}
@@ -727,7 +727,7 @@
   {
     "id": "crocodile",
     "name": "Crocodile",
-    "img": "imagenes/Crocodile.png",
+    "img": "imagenes/Crocodile.webp",
     "tags": {
       "Banda": [
         {"val": "Agentes de Baroque Works", "dif": "facil"},
@@ -768,7 +768,7 @@
   {
     "id": "galdino",
     "name": "Galdino (Mr. 3)",
-    "img": "imagenes/Galdino.png",
+    "img": "imagenes/Galdino.webp",
     "tags": {
       "Banda": [
         {"val": "Agentes de Baroque Works", "dif": "facil"},
@@ -795,7 +795,7 @@
   {
     "id": "dazbonez",
     "name": "Daz Bonez (Mr. 1)",
-    "img": "imagenes/DazBonez.png",
+    "img": "imagenes/DazBonez.webp",
     "tags": {
       "Banda": [
         {"val": "Agentes de Baroque Works", "dif": "facil"},
@@ -825,7 +825,7 @@
   {
     "id": "law",
     "name": "Trafalgar D. Water Law",
-    "img": "imagenes/Law.png",
+    "img": "imagenes/Law.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Heart", "dif": "facil"}
@@ -870,7 +870,7 @@
   {
     "id": "kid",
     "name": "Eustass Kid",
-    "img": "imagenes/Kid.png",
+    "img": "imagenes/Kid.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Kid", "dif": "facil"}
@@ -907,7 +907,7 @@
   {
     "id": "bonney",
     "name": "Jewelry Bonney",
-    "img": "imagenes/Bonney.png",
+    "img": "imagenes/Bonney.webp",
     "tags": {
       "Titulo": [
         {"val": "Supernovas", "dif": "media"}
@@ -941,7 +941,7 @@
   {
     "id": "capone",
     "name": "Capone 'Gang' Bege",
-    "img": "imagenes/Capone.png",
+    "img": "imagenes/Capone.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Fire Tank", "dif": "facil"},
@@ -972,7 +972,7 @@
   {
     "id": "killer",
     "name": "Killer",
-    "img": "imagenes/Killer.png",
+    "img": "imagenes/Killer.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Kid", "dif": "facil"}
@@ -1004,7 +1004,7 @@
   {
     "id": "smoker",
     "name": "Smoker",
-    "img": "imagenes/Smoker.png",
+    "img": "imagenes/Smoker.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -1037,7 +1037,7 @@
   {
     "id": "tashigi",
     "name": "Tashigi",
-    "img": "imagenes/Tashigi.png",
+    "img": "imagenes/Tashigi.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -1073,7 +1073,7 @@
   {
     "id": "kizaru",
     "name": "Borsalino (Kizaru)",
-    "img": "imagenes/Kizaru.png",
+    "img": "imagenes/Kizaru.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -1102,7 +1102,7 @@
   {
     "id": "fujitora",
     "name": "Issho (Fujitora)",
-    "img": "imagenes/Fujitora.png",
+    "img": "imagenes/Fujitora.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -1134,7 +1134,7 @@
   {
     "id": "sabo",
     "name": "Sabo",
-    "img": "imagenes/Sabo.png",
+    "img": "imagenes/Sabo.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército Revolucionario", "dif": "facil"}
@@ -1164,7 +1164,7 @@
   {
     "id": "marco",
     "name": "Marco el Fénix",
-    "img": "imagenes/Marco.png",
+    "img": "imagenes/Marco.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -1198,7 +1198,7 @@
   {
     "id": "lucci",
     "name": "Rob Lucci",
-    "img": "imagenes/Lucci.png",
+    "img": "imagenes/Lucci.webp",
     "tags": {
       "Banda": [
         {"val": "CP0", "dif": "facil"},
@@ -1237,7 +1237,7 @@
   {
     "id": "kuma",
     "name": "Bartholomew Kuma",
-    "img": "imagenes/Kuma.png",
+    "img": "imagenes/Kuma.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército Revolucionario", "dif": "facil"}
@@ -1275,7 +1275,7 @@
   {
     "id": "kaido",
     "name": "Kaido",
-    "img": "imagenes/Kaido.png",
+    "img": "imagenes/Kaido.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"},
@@ -1317,7 +1317,7 @@
   {
     "id": "king",
     "name": "King",
-    "img": "imagenes/King.png",
+    "img": "imagenes/King.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -1354,7 +1354,7 @@
   {
     "id": "queen",
     "name": "Queen",
-    "img": "imagenes/Queen.png",
+    "img": "imagenes/Queen.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"},
@@ -1399,7 +1399,7 @@
   {
     "id": "s_snake",
     "name": "S-Snake",
-    "img": "imagenes/SSnake.png",
+    "img": "imagenes/SSnake.webp",
     "tags": {
       "Titulo": [
         {"val": "Seraphim", "dif": "facil"}
@@ -1426,7 +1426,7 @@
   {
     "id": "s_hawk",
     "name": "S-Hawk",
-    "img": "imagenes/SHawk.png",
+    "img": "imagenes/SHawk.webp",
     "tags": {
       "Titulo": [
         {"val": "Seraphim", "dif": "facil"}
@@ -1456,7 +1456,7 @@
   {
     "id": "s_shark",
     "name": "S-Shark",
-    "img": "imagenes/SShark.png",
+    "img": "imagenes/SShark.webp",
     "tags": {
       "Titulo": [
         {"val": "Seraphim", "dif": "facil"}
@@ -1483,7 +1483,7 @@
   {
     "id": "s_bear",
     "name": "S-Bear",
-    "img": "imagenes/SBear.png",
+    "img": "imagenes/SBear.webp",
     "tags": {
       "Titulo": [
         {"val": "Seraphim", "dif": "facil"}
@@ -1511,7 +1511,7 @@
   {
     "id": "big_mom",
     "name": "Charlotte Linlin (Big Mom)",
-    "img": "imagenes/BigMom.png",
+    "img": "imagenes/BigMom.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Big Mom", "dif": "facil"},
@@ -1549,7 +1549,7 @@
   {
     "id": "katakuri",
     "name": "Charlotte Katakuri",
-    "img": "imagenes/Katakuri.png",
+    "img": "imagenes/Katakuri.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Big Mom", "dif": "facil"},
@@ -1584,7 +1584,7 @@
   {
     "id": "hancock",
     "name": "Boa Hancock",
-    "img": "imagenes/Hancock.png",
+    "img": "imagenes/Hancock.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Kuja", "dif": "facil"}
@@ -1618,7 +1618,7 @@
   {
     "id": "yamato",
     "name": "Yamato",
-    "img": "imagenes/Yamato.png",
+    "img": "imagenes/Yamato.webp",
     "tags": {
       "Haki": [
         {"val": "Usuarios de haki del conquistador", "dif": "dificil"},
@@ -1640,7 +1640,7 @@
   {
     "id": "doflamingo",
     "name": "Donquixote Doflamingo",
-    "img": "imagenes/Doflamingo.png",
+    "img": "imagenes/Doflamingo.webp",
     "tags": {
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"}
@@ -1683,7 +1683,7 @@
   {
     "id": "akainu",
     "name": "Sakazuki (Akainu)",
-    "img": "imagenes/Akainu.png",
+    "img": "imagenes/Akainu.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -1711,7 +1711,7 @@
   {
     "id": "aokiji",
     "name": "Kuzan (Aokiji)",
-    "img": "imagenes/Kuzan.png",
+    "img": "imagenes/Kuzan.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbanegra", "dif": "facil"},
@@ -1739,7 +1739,7 @@
   {
     "id": "rayleigh",
     "name": "Silvers Rayleigh",
-    "img": "imagenes/Rayleigh.png",
+    "img": "imagenes/Rayleigh.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Roger", "dif": "facil"}
@@ -1767,7 +1767,7 @@
   {
     "id": "dragon",
     "name": "Monkey D. Dragon",
-    "img": "imagenes/Dragon.png",
+    "img": "imagenes/Dragon.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército Revolucionario", "dif": "facil"}
@@ -1794,7 +1794,7 @@
   {
     "id": "kaku",
     "name": "Kaku",
-    "img": "imagenes/Kaku.png",
+    "img": "imagenes/Kaku.webp",
     "tags": {
       "Banda": [
         {"val": "CP0", "dif": "facil"},
@@ -1836,7 +1836,7 @@
   {
     "id": "jabra",
     "name": "Jabra",
-    "img": "imagenes/Jabra.png",
+    "img": "imagenes/Jabra.webp",
     "tags": {
       "Banda": [
         {"val": "CP9", "dif": "facil"},
@@ -1866,7 +1866,7 @@
   {
     "id": "blueno",
     "name": "Blueno",
-    "img": "imagenes/Blueno.png",
+    "img": "imagenes/Blueno.webp",
     "tags": {
       "Banda": [
         {"val": "CP0", "dif": "facil"},
@@ -1898,7 +1898,7 @@
   {
     "id": "kumadori",
     "name": "Kumadori",
-    "img": "imagenes/Kumadori.png",
+    "img": "imagenes/Kumadori.webp",
     "tags": {
       "Banda": [
         {"val": "CP9", "dif": "facil"},
@@ -1928,7 +1928,7 @@
   {
     "id": "fukurou",
     "name": "Fukurou",
-    "img": "imagenes/Fukurou.png",
+    "img": "imagenes/Fukurou.webp",
     "tags": {
       "Banda": [
         {"val": "CP9", "dif": "facil"},
@@ -1957,7 +1957,7 @@
   {
     "id": "kalifa",
     "name": "Kalifa",
-    "img": "imagenes/Kalifa.png",
+    "img": "imagenes/Kalifa.webp",
     "tags": {
       "Banda": [
         {"val": "CP0", "dif": "facil"},
@@ -1992,7 +1992,7 @@
   {
     "id": "nero",
     "name": "Nero",
-    "img": "imagenes/Nero.png",
+    "img": "imagenes/Nero.webp",
     "tags": {
       "Banda": [
         {"val": "CP9", "dif": "facil"}
@@ -2023,7 +2023,7 @@
   {
     "id": "koby",
     "name": "Koby",
-    "img": "imagenes/Koby.png",
+    "img": "imagenes/Koby.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"},
@@ -2054,7 +2054,7 @@
   {
     "id": "momonga",
     "name": "Momonga",
-    "img": "imagenes/Momonga.png",
+    "img": "imagenes/Momonga.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -2086,7 +2086,7 @@
   {
     "id": "dalmatian",
     "name": "Dalmatian",
-    "img": "imagenes/Dalmatian.png",
+    "img": "imagenes/Dalmatian.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -2115,7 +2115,7 @@
   {
     "id": "vergo",
     "name": "Vergo",
-    "img": "imagenes/Vergo.png",
+    "img": "imagenes/Vergo.webp",
     "tags": {
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"},
@@ -2148,7 +2148,7 @@
   {
     "id": "stussy",
     "name": "Stussy",
-    "img": "imagenes/Stussy.png",
+    "img": "imagenes/Stussy.webp",
     "tags": {
       "Banda": [
         {"val": "CP0", "dif": "facil"}
@@ -2180,7 +2180,7 @@
   {
     "id": "whos_who",
     "name": "Who's-Who",
-    "img": "imagenes/WhosWho.png",
+    "img": "imagenes/WhosWho.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"},
@@ -2212,7 +2212,7 @@
   {
     "id": "guernica",
     "name": "Guernika",
-    "img": "imagenes/Guernica.png",
+    "img": "imagenes/Guernica.webp",
     "tags": {
       "Banda": [
         {"val": "CP0", "dif": "facil"}
@@ -2244,7 +2244,7 @@
   {
     "id": "joseph",
     "name": "Joseph",
-    "img": "imagenes/Joseph.png",
+    "img": "imagenes/Joseph.webp",
     "tags": {
       "Banda": [
         {"val": "CP0", "dif": "facil"}
@@ -2276,7 +2276,7 @@
   {
     "id": "giso",
     "name": "Giso",
-    "img": "imagenes/Giso.png",
+    "img": "imagenes/Giso.webp",
     "tags": {
       "Banda": [
         {"val": "CP0", "dif": "facil"}
@@ -2305,7 +2305,7 @@
   {
     "id": "maha",
     "name": "Maha",
-    "img": "imagenes/Maha.png",
+    "img": "imagenes/Maha.webp",
     "tags": {
       "Banda": [
         {"val": "CP0", "dif": "facil"}
@@ -2334,7 +2334,7 @@
   {
     "id": "zephyr",
     "name": "Zephyr (Z)",
-    "img": "imagenes/Zephyr.png",
+    "img": "imagenes/Zephyr.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -2366,7 +2366,7 @@
   {
     "id": "laskey",
     "name": "Laskey",
-    "img": "imagenes/Laskey.png",
+    "img": "imagenes/Laskey.webp",
     "tags": {
       "Banda": [
         {"val": "CP9", "dif": "facil"}
@@ -2391,7 +2391,7 @@
   {
     "id": "sengoku",
     "name": "Sengoku",
-    "img": "imagenes/Sengoku.png",
+    "img": "imagenes/Sengoku.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -2422,7 +2422,7 @@
   {
     "id": "charlotte_yuen",
     "name": "Charlotte Yuen",
-    "img": "imagenes/CharlotteYuen.png",
+    "img": "imagenes/CharlotteYuen.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Big Mom", "dif": "facil"},
@@ -2445,7 +2445,7 @@
   {
     "id": "decallizos_charlotte",
     "name": "Decallizos Charlotte",
-    "img": "imagenes/DecallizosCharlotte.png",
+    "img": "imagenes/DecallizosCharlotte.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Big Mom", "dif": "facil"},
@@ -2468,7 +2468,7 @@
   {
     "id": "prince_grus",
     "name": "Prince Grus",
-    "img": "imagenes/PrinceGrus.png",
+    "img": "imagenes/PrinceGrus.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"},
@@ -2498,7 +2498,7 @@
   {
     "id": "alpha",
     "name": "Alpha",
-    "img": "imagenes/Alpha.png",
+    "img": "imagenes/Alpha.webp",
     "tags": {
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
@@ -2524,7 +2524,7 @@
   {
     "id": "tosa",
     "name": "Tosa",
-    "img": "imagenes/Tosa.png",
+    "img": "imagenes/Tosa.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -2556,7 +2556,7 @@
   {
     "id": "hound",
     "name": "Hound",
-    "img": "imagenes/Hound.png",
+    "img": "imagenes/Hound.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -2588,7 +2588,7 @@
   {
     "id": "kibin",
     "name": "Kibin",
-    "img": "imagenes/Kibin.png",
+    "img": "imagenes/Kibin.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -2614,7 +2614,7 @@
   {
     "id": "douglas_bullet",
     "name": "Douglas Bullet",
-    "img": "imagenes/DouglasBullet.png",
+    "img": "imagenes/DouglasBullet.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Roger", "dif": "facil"}
@@ -2641,7 +2641,7 @@
   {
     "id": "alvida",
     "name": "Alvida",
-    "img": "imagenes/Alvida.png",
+    "img": "imagenes/Alvida.webp",
     "tags": {
       "Banda": [
         {"val": "Banda: Cross Guild", "dif": "facil"}
@@ -2669,7 +2669,7 @@
   {
     "id": "roger",
     "name": "Gol D. Roger",
-    "img": "imagenes/Roger.png",
+    "img": "imagenes/Roger.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Roger", "dif": "facil"}
@@ -2706,7 +2706,7 @@
   {
     "id": "hawkins",
     "name": "Basil Hawkins",
-    "img": "imagenes/Hawkins.png",
+    "img": "imagenes/Hawkins.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -2736,7 +2736,7 @@
   {
     "id": "drake",
     "name": "X Drake",
-    "img": "imagenes/Drake.png",
+    "img": "imagenes/Drake.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de SWORD", "dif": "facil"},
@@ -2772,7 +2772,7 @@
   {
     "id": "apoo",
     "name": "Scratchmen Apoo",
-    "img": "imagenes/Apoo.png",
+    "img": "imagenes/Apoo.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -2805,7 +2805,7 @@
   {
     "id": "urouge",
     "name": "Urouge",
-    "img": "imagenes/Urouge.png",
+    "img": "imagenes/Urouge.webp",
     "tags": {
       "Titulo": [
         {"val": "Supernovas", "dif": "media"}
@@ -2834,7 +2834,7 @@
   {
     "id": "bentham",
     "name": "Bentham (Mr. 2 / Bon Clay)",
-    "img": "imagenes/Bentham.png",
+    "img": "imagenes/Bentham.webp",
     "tags": {
       "Banda": [
         {"val": "Agentes de Baroque Works", "dif": "facil"},
@@ -2869,7 +2869,7 @@
   {
     "id": "mr4",
     "name": "Babe (Mr. 4)",
-    "img": "imagenes/Mr4.png",
+    "img": "imagenes/Mr4.webp",
     "tags": {
       "Banda": [
         {"val": "Agentes de Baroque Works", "dif": "facil"},
@@ -2896,7 +2896,7 @@
   {
     "id": "mr5",
     "name": "Gem (Mr. 5)",
-    "img": "imagenes/Mr5.png",
+    "img": "imagenes/Mr5.webp",
     "tags": {
       "Banda": [
         {"val": "Agentes de Baroque Works", "dif": "facil"},
@@ -2922,7 +2922,7 @@
   {
     "id": "miss_doublefinger",
     "name": "Zala (Miss Doublefinger)",
-    "img": "imagenes/MissDoublefinger.png",
+    "img": "imagenes/MissDoublefinger.webp",
     "tags": {
       "Banda": [
         {"val": "Agentes de Baroque Works", "dif": "facil"},
@@ -2951,7 +2951,7 @@
   {
     "id": "miss_goldenweek",
     "name": "Marianne (Miss Goldenweek)",
-    "img": "imagenes/MissGoldenweek.png",
+    "img": "imagenes/MissGoldenweek.webp",
     "tags": {
       "Banda": [
         {"val": "Agentes de Baroque Works", "dif": "facil"},
@@ -2977,7 +2977,7 @@
   {
     "id": "miss_merry_christmas",
     "name": "Drophy (Miss Merry Christmas)",
-    "img": "imagenes/MissMerryChristmas.png",
+    "img": "imagenes/MissMerryChristmas.webp",
     "tags": {
       "Banda": [
         {"val": "Agentes de Baroque Works", "dif": "facil"},
@@ -3007,7 +3007,7 @@
   {
     "id": "miss_valentine",
     "name": "Mikita (Miss Valentine)",
-    "img": "imagenes/MissValentine.png",
+    "img": "imagenes/MissValentine.webp",
     "tags": {
       "Banda": [
         {"val": "Agentes de Baroque Works", "dif": "facil"},
@@ -3030,7 +3030,7 @@
   {
     "id": "miss_monday",
     "name": "Miss Monday",
-    "img": "imagenes/MissMonday.png",
+    "img": "imagenes/MissMonday.webp",
     "tags": {
       "Banda": [
         {"val": "Agentes de Baroque Works", "dif": "facil"},
@@ -3050,7 +3050,7 @@
   {
     "id": "mr9",
     "name": "Mr. 9",
-    "img": "imagenes/Mr9.png",
+    "img": "imagenes/Mr9.webp",
     "tags": {
       "Banda": [
         {"val": "Agentes de Baroque Works", "dif": "facil"},
@@ -3070,7 +3070,7 @@
   {
     "id": "igaram",
     "name": "Igaram",
-    "img": "imagenes/Igaram.png",
+    "img": "imagenes/Igaram.webp",
     "tags": {
       "Banda": [
         {"val": "Agentes de Baroque Works", "dif": "media"},
@@ -3093,7 +3093,7 @@
   {
     "id": "mr7",
     "name": "Mr. 7",
-    "img": "imagenes/Mr7.png",
+    "img": "imagenes/Mr7.webp",
     "tags": {
       "Banda": [
         {"val": "Agentes de Baroque Works", "dif": "facil"},
@@ -3113,7 +3113,7 @@
   {
     "id": "miss_fathers_day",
     "name": "Miss Father's Day",
-    "img": "imagenes/MissFathersDay.png",
+    "img": "imagenes/MissFathersDay.webp",
     "tags": {
       "Banda": [
         {"val": "Agentes de Baroque Works", "dif": "facil"},
@@ -3130,7 +3130,7 @@
   {
     "id": "miss_friday",
     "name": "Miss Friday",
-    "img": "imagenes/MissFriday.png",
+    "img": "imagenes/MissFriday.webp",
     "tags": {
       "Banda": [
         {"val": "Agentes de Baroque Works", "dif": "facil"},
@@ -3160,7 +3160,7 @@
   {
     "id": "mr13",
     "name": "Mr. 13",
-    "img": "imagenes/Mr13.png",
+    "img": "imagenes/Mr13.webp",
     "tags": {
       "Banda": [
         {"val": "Agentes de Baroque Works", "dif": "facil"},
@@ -3189,7 +3189,7 @@
   {
     "id": "hiruluk",
     "name": "Dr. Hiruluk",
-    "img": "imagenes/Hiruluk.png",
+    "img": "imagenes/Hiruluk.webp",
     "tags": {
       "Banda": [
         {"val": "Reino de Sakura", "dif": "facil"}
@@ -3211,7 +3211,7 @@
   {
     "id": "kureha",
     "name": "Dr. Kureha",
-    "img": "imagenes/Kureha.png",
+    "img": "imagenes/Kureha.webp",
     "tags": {
       "Banda": [
         {"val": "Reino de Sakura", "dif": "facil"}
@@ -3236,7 +3236,7 @@
   {
     "id": "dalton",
     "name": "Dalton",
-    "img": "imagenes/Dalton.png",
+    "img": "imagenes/Dalton.webp",
     "tags": {
       "Banda": [
         {"val": "Reino de Sakura", "dif": "facil"}
@@ -3255,7 +3255,7 @@
   {
     "id": "wapol",
     "name": "Wapol",
-    "img": "imagenes/Wapol.png",
+    "img": "imagenes/Wapol.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bliking", "dif": "facil"},
@@ -3284,7 +3284,7 @@
   {
     "id": "arlong",
     "name": "Arlong",
-    "img": "imagenes/Arlong.png",
+    "img": "imagenes/Arlong.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Arlong", "dif": "facil"},
@@ -3323,7 +3323,7 @@
   {
     "id": "kuroobi",
     "name": "Kuroobi",
-    "img": "imagenes/Kuroobi.png",
+    "img": "imagenes/Kuroobi.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Arlong", "dif": "facil"},
@@ -3353,7 +3353,7 @@
   {
     "id": "chew",
     "name": "Chew",
-    "img": "imagenes/Chew.png",
+    "img": "imagenes/Chew.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Arlong", "dif": "facil"},
@@ -3383,7 +3383,7 @@
   {
     "id": "momoo",
     "name": "Momoo",
-    "img": "imagenes/Momoo.png",
+    "img": "imagenes/Momoo.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Arlong", "dif": "facil"},
@@ -3403,7 +3403,7 @@
   {
     "id": "hachi",
     "name": "Hatchan",
-    "img": "imagenes/Hachi.png",
+    "img": "imagenes/Hachi.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Arlong", "dif": "facil"},
@@ -3442,7 +3442,7 @@
   {
     "id": "jack",
     "name": "Jack",
-    "img": "imagenes/Jack.png",
+    "img": "imagenes/Jack.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -3471,7 +3471,7 @@
   {
     "id": "page_one",
     "name": "Page One",
-    "img": "imagenes/PageOne.png",
+    "img": "imagenes/PageOne.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -3500,7 +3500,7 @@
   {
     "id": "ulti",
     "name": "Ulti",
-    "img": "imagenes/Ulti.png",
+    "img": "imagenes/Ulti.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -3533,7 +3533,7 @@
   {
     "id": "black_maria",
     "name": "Black Maria",
-    "img": "imagenes/BlackMaria.png",
+    "img": "imagenes/BlackMaria.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -3566,7 +3566,7 @@
   {
     "id": "sasaki",
     "name": "Sasaki",
-    "img": "imagenes/Sasaki.png",
+    "img": "imagenes/Sasaki.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -3602,7 +3602,7 @@
   {
     "id": "catarina_devon",
     "name": "Catarina Devon",
-    "img": "imagenes/CatarinaDevon.png",
+    "img": "imagenes/CatarinaDevon.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbanegra", "dif": "facil"}
@@ -3624,7 +3624,7 @@
   {
     "id": "orochi",
     "name": "Kurozumi Orochi",
-    "img": "imagenes/Orochi.png",
+    "img": "imagenes/Orochi.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"}
@@ -3646,7 +3646,7 @@
   {
     "id": "onimaru",
     "name": "Onimaru",
-    "img": "imagenes/Onimaru.png",
+    "img": "imagenes/Onimaru.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"}
@@ -3665,7 +3665,7 @@
   {
     "id": "stronger",
     "name": "Stronger",
-    "img": "imagenes/Stronger.png",
+    "img": "imagenes/Stronger.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbanegra", "dif": "facil"}
@@ -3684,7 +3684,7 @@
   {
     "id": "killingham",
     "name": "Rimoshifu Killingham",
-    "img": "imagenes/Killingham.png",
+    "img": "imagenes/Killingham.webp",
     "tags": {
       "Fruta": [
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
@@ -3704,7 +3704,7 @@
   {
     "id": "sommers",
     "name": "Shepherd Sommers",
-    "img": "imagenes/Sommers.png",
+    "img": "imagenes/Sommers.webp",
     "tags": {
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
@@ -3724,7 +3724,7 @@
   {
     "id": "loki",
     "name": "Loki",
-    "img": "imagenes/Loki.png",
+    "img": "imagenes/Loki.webp",
     "tags": {
       "Banda": [
         {"val": "Elbaf", "dif": "facil"}
@@ -3755,7 +3755,7 @@
   {
     "id": "koza",
     "name": "Koza",
-    "img": "imagenes/Koza.png",
+    "img": "imagenes/Koza.webp",
     "tags": {
       "Banda": [
         {"val": "Reino de Alabasta", "dif": "facil"}
@@ -3777,7 +3777,7 @@
   {
     "id": "toto",
     "name": "Toto",
-    "img": "imagenes/Toto.png",
+    "img": "imagenes/Toto.webp",
     "tags": {
       "Banda": [
         {"val": "Reino de Alabasta", "dif": "facil"}
@@ -3796,7 +3796,7 @@
   {
     "id": "matsuge",
     "name": "Matsuge",
-    "img": "imagenes/Matsuge.png",
+    "img": "imagenes/Matsuge.webp",
     "tags": {
       "Banda": [
         {"val": "Reino de Alabasta", "dif": "facil"}
@@ -3812,7 +3812,7 @@
   {
     "id": "hasami",
     "name": "Hasami",
-    "img": "imagenes/Hasami.png",
+    "img": "imagenes/Hasami.webp",
     "tags": {
       "Banda": [
         {"val": "Reino de Alabasta", "dif": "facil"}
@@ -3828,7 +3828,7 @@
   {
     "id": "dugong",
     "name": "Kung-Fu Dugong",
-    "img": "imagenes/Dugong.png",
+    "img": "imagenes/Dugong.webp",
     "tags": {
       "Banda": [
         {"val": "Reino de Alabasta", "dif": "facil"}
@@ -3844,7 +3844,7 @@
   {
     "id": "saturn",
     "name": "Jaygarcia Saturn",
-    "img": "imagenes/Saturn.png",
+    "img": "imagenes/Saturn.webp",
     "tags": {
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
@@ -3874,7 +3874,7 @@
   {
     "id": "mars",
     "name": "Marcus Mars",
-    "img": "imagenes/Mars.png",
+    "img": "imagenes/Mars.webp",
     "tags": {
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
@@ -3898,7 +3898,7 @@
   {
     "id": "warcury",
     "name": "Topman Warcury",
-    "img": "imagenes/Warcury.png",
+    "img": "imagenes/Warcury.webp",
     "tags": {
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
@@ -3922,7 +3922,7 @@
   {
     "id": "ju_peter",
     "name": "Shepherd Ju Peter",
-    "img": "imagenes/JuPeter.png",
+    "img": "imagenes/JuPeter.webp",
     "tags": {
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
@@ -3946,7 +3946,7 @@
   {
     "id": "nusjuro",
     "name": "Ethanbaron V. Nusjuro",
-    "img": "imagenes/Nusjuro.png",
+    "img": "imagenes/Nusjuro.webp",
     "tags": {
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
@@ -3976,7 +3976,7 @@
   {
     "id": "garling",
     "name": "Figarland Garling",
-    "img": "imagenes/Garling.png",
+    "img": "imagenes/Garling.webp",
     "tags": {
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
@@ -3998,7 +3998,7 @@
   {
     "id": "moriah",
     "name": "Gecko Moriah",
-    "img": "imagenes/Moriah.png",
+    "img": "imagenes/Moriah.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Thriller Bark", "dif": "facil"}
@@ -4026,7 +4026,7 @@
   {
     "id": "weevil",
     "name": "Edward Weevil",
-    "img": "imagenes/Weevil.png",
+    "img": "imagenes/Weevil.webp",
     "tags": {
       "Titulo": [
         {"val": "Shichibukais", "dif": "facil"}
@@ -4052,7 +4052,7 @@
   {
     "id": "hanafuda",
     "name": "Hanafuda",
-    "img": "imagenes/Hanafuda.png",
+    "img": "imagenes/Hanafuda.webp",
     "tags": {
       "Titulo": [
         {"val": "Shichibukais", "dif": "facil"}
@@ -4065,7 +4065,7 @@
   {
     "id": "judge",
     "name": "Vinsmoke Judge",
-    "img": "imagenes/Judge.png",
+    "img": "imagenes/Judge.webp",
     "tags": {
       "Banda": [
         {"val": "Germa 66", "dif": "facil"},
@@ -4094,7 +4094,7 @@
   {
     "id": "reiju",
     "name": "Vinsmoke Reiju",
-    "img": "imagenes/Reiju.png",
+    "img": "imagenes/Reiju.webp",
     "tags": {
       "Banda": [
         {"val": "Germa 66", "dif": "facil"}
@@ -4113,7 +4113,7 @@
   {
     "id": "ichiji",
     "name": "Vinsmoke Ichiji",
-    "img": "imagenes/Ichiji.png",
+    "img": "imagenes/Ichiji.webp",
     "tags": {
       "Banda": [
         {"val": "Germa 66", "dif": "facil"}
@@ -4132,7 +4132,7 @@
   {
     "id": "niji",
     "name": "Vinsmoke Niji",
-    "img": "imagenes/Niji.png",
+    "img": "imagenes/Niji.webp",
     "tags": {
       "Banda": [
         {"val": "Germa 66", "dif": "facil"}
@@ -4151,7 +4151,7 @@
   {
     "id": "yonji",
     "name": "Vinsmoke Yonji",
-    "img": "imagenes/Yonji.png",
+    "img": "imagenes/Yonji.webp",
     "tags": {
       "Banda": [
         {"val": "Germa 66", "dif": "facil"}
@@ -4170,7 +4170,7 @@
   {
     "id": "lassoo",
     "name": "Lassoo",
-    "img": "imagenes/Lassoo.png",
+    "img": "imagenes/Lassoo.webp",
     "tags": {
       "Banda": [
         {"val": "Agentes de Baroque Works", "dif": "facil"},
@@ -4187,7 +4187,7 @@
   {
     "id": "funkfreed",
     "name": "Funkfreed",
-    "img": "imagenes/Funkfreed.png",
+    "img": "imagenes/Funkfreed.webp",
     "tags": {
       "Banda": [
         {"val": "CP9", "dif": "facil"}
@@ -4206,7 +4206,7 @@
   {
     "id": "smiley",
     "name": "Smiley",
-    "img": "imagenes/Smiley.png",
+    "img": "imagenes/Smiley.webp",
     "tags": {
       "Fruta": [
         {"val": "Fruta del diablo: Zoan", "dif": "media"}
@@ -4219,7 +4219,7 @@
   {
     "id": "bunbuku",
     "name": "Bunbuku",
-    "img": "imagenes/Bunbuku.png",
+    "img": "imagenes/Bunbuku.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"}
@@ -4235,7 +4235,7 @@
   {
     "id": "ragnir",
     "name": "Ragnir",
-    "img": "imagenes/Ragnir.png",
+    "img": "imagenes/Ragnir.webp",
     "tags": {
       "Banda": [
         {"val": "Elbaf", "dif": "facil"}
@@ -4251,7 +4251,7 @@
   {
     "id": "cerberus",
     "name": "Cerberus",
-    "img": "imagenes/Cerberus.png",
+    "img": "imagenes/Cerberus.webp",
     "tags": {
       "Raza": [
         {"val": "Objetos que se han comido una fruta", "dif": "media"}
@@ -4270,7 +4270,7 @@
   {
     "id": "barbablanca",
     "name": "Edward Newgate (Barbablanca)",
-    "img": "imagenes/Barbablanca.png",
+    "img": "imagenes/Barbablanca.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"},
@@ -4309,7 +4309,7 @@
   {
     "id": "ace",
     "name": "Portgas D. Ace",
-    "img": "imagenes/Ace.png",
+    "img": "imagenes/Ace.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -4352,7 +4352,7 @@
   {
     "id": "shirahoshi",
     "name": "Shirahoshi",
-    "img": "imagenes/Shirahoshi.png",
+    "img": "imagenes/Shirahoshi.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -4374,7 +4374,7 @@
   {
     "id": "viola",
     "name": "Viola",
-    "img": "imagenes/Viola.png",
+    "img": "imagenes/Viola.webp",
     "tags": {
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"},
@@ -4394,7 +4394,7 @@
   {
     "id": "rebecca",
     "name": "Rebecca",
-    "img": "imagenes/Rebecca.png",
+    "img": "imagenes/Rebecca.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -4416,7 +4416,7 @@
   {
     "id": "mansherry",
     "name": "Mansherry",
-    "img": "imagenes/Mansherry.png",
+    "img": "imagenes/Mansherry.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -4435,7 +4435,7 @@
   {
     "id": "princesas_matryo",
     "name": "Princesas Matryo",
-    "img": "imagenes/Matryo.png",
+    "img": "imagenes/Matryo.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: South Blue", "dif": "dificil"}
@@ -4448,7 +4448,7 @@
   {
     "id": "fukaboshi",
     "name": "Fukaboshi",
-    "img": "imagenes/Fukaboshi.png",
+    "img": "imagenes/Fukaboshi.webp",
     "tags": {
       "Raza": [
         {"val": "Gyojins", "dif": "facil"}
@@ -4467,7 +4467,7 @@
   {
     "id": "ryuboshi",
     "name": "Ryuboshi",
-    "img": "imagenes/Ryuboshi.png",
+    "img": "imagenes/Ryuboshi.webp",
     "tags": {
       "Raza": [
         {"val": "Gyojins", "dif": "facil"}
@@ -4486,7 +4486,7 @@
   {
     "id": "manboshi",
     "name": "Manboshi",
-    "img": "imagenes/Manboshi.png",
+    "img": "imagenes/Manboshi.webp",
     "tags": {
       "Raza": [
         {"val": "Gyojins", "dif": "facil"}
@@ -4502,7 +4502,7 @@
   {
     "id": "hajrudin",
     "name": "Hajrudin",
-    "img": "imagenes/Hajrudin.png",
+    "img": "imagenes/Hajrudin.webp",
     "tags": {
       "Banda": [
         {"val": "Nuevos Piratas Gigantes Guerreros", "dif": "media"},
@@ -4533,7 +4533,7 @@
   {
     "id": "cavendish",
     "name": "Cavendish",
-    "img": "imagenes/Cavendish.png",
+    "img": "imagenes/Cavendish.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "facil"}
@@ -4567,7 +4567,7 @@
   {
     "id": "bartolomeo",
     "name": "Bartolomeo",
-    "img": "imagenes/Bartolomeo.png",
+    "img": "imagenes/Bartolomeo.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "facil"}
@@ -4595,7 +4595,7 @@
   {
     "id": "sai",
     "name": "Sai",
-    "img": "imagenes/Sai.png",
+    "img": "imagenes/Sai.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "facil"}
@@ -4627,7 +4627,7 @@
   {
     "id": "ideo",
     "name": "Ideo",
-    "img": "imagenes/Ideo.png",
+    "img": "imagenes/Ideo.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "facil"}
@@ -4655,7 +4655,7 @@
   {
     "id": "leo",
     "name": "Leo",
-    "img": "imagenes/Leo.png",
+    "img": "imagenes/Leo.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "facil"}
@@ -4680,7 +4680,7 @@
   {
     "id": "orlumbus",
     "name": "Orlumbus",
-    "img": "imagenes/Orlumbus.png",
+    "img": "imagenes/Orlumbus.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "facil"}
@@ -4711,7 +4711,7 @@
   {
     "id": "baby_five",
     "name": "Baby 5",
-    "img": "imagenes/Baby5.png",
+    "img": "imagenes/Baby5.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"},
@@ -4734,7 +4734,7 @@
   {
     "id": "blue_gilly",
     "name": "Blue Gilly",
-    "img": "imagenes/BlueGilly.png",
+    "img": "imagenes/BlueGilly.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -4762,7 +4762,7 @@
   {
     "id": "dorry",
     "name": "Dorry",
-    "img": "imagenes/Dorry.png",
+    "img": "imagenes/Dorry.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Gigantes Guerreros", "dif": "media"},
@@ -4793,7 +4793,7 @@
   {
     "id": "brogy",
     "name": "Brogy",
-    "img": "imagenes/Brogy.png",
+    "img": "imagenes/Brogy.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Gigantes Guerreros", "dif": "media"},
@@ -4823,7 +4823,7 @@
   {
     "id": "jaguar_d_saul",
     "name": "Jaguar D. Saul",
-    "img": "imagenes/Saul.png",
+    "img": "imagenes/Saul.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -4848,7 +4848,7 @@
   {
     "id": "sanjuan_wolf",
     "name": "Sanjuan Wolf",
-    "img": "imagenes/SanjuanWolf.png",
+    "img": "imagenes/SanjuanWolf.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbanegra", "dif": "facil"}
@@ -4870,7 +4870,7 @@
   {
     "id": "oimo",
     "name": "Oimo",
-    "img": "imagenes/Oimo.png",
+    "img": "imagenes/Oimo.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Gigantes Guerreros", "dif": "media"},
@@ -4890,7 +4890,7 @@
   {
     "id": "kashi",
     "name": "Kashi",
-    "img": "imagenes/Kashi.png",
+    "img": "imagenes/Kashi.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Gigantes Guerreros", "dif": "media"},
@@ -4907,7 +4907,7 @@
   {
     "id": "jarul",
     "name": "Jarul",
-    "img": "imagenes/Jarul.png",
+    "img": "imagenes/Jarul.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Gigantes Guerreros", "dif": "media"},
@@ -4924,7 +4924,7 @@
   {
     "id": "gerd",
     "name": "Gerd",
-    "img": "imagenes/Gerd.png",
+    "img": "imagenes/Gerd.webp",
     "tags": {
       "Banda": [
         {"val": "Nuevos Piratas Gigantes Guerreros", "dif": "media"},
@@ -4945,7 +4945,7 @@
   {
     "id": "road",
     "name": "Road",
-    "img": "imagenes/Road.png",
+    "img": "imagenes/Road.webp",
     "tags": {
       "Banda": [
         {"val": "Nuevos Piratas Gigantes Guerreros", "dif": "media"},
@@ -4966,7 +4966,7 @@
   {
     "id": "goldberg",
     "name": "Goldberg",
-    "img": "imagenes/Goldberg.png",
+    "img": "imagenes/Goldberg.webp",
     "tags": {
       "Banda": [
         {"val": "Nuevos Piratas Gigantes Guerreros", "dif": "media"},
@@ -4990,7 +4990,7 @@
   {
     "id": "stansen",
     "name": "Stansen",
-    "img": "imagenes/Stansen.png",
+    "img": "imagenes/Stansen.webp",
     "tags": {
       "Banda": [
         {"val": "Nuevos Piratas Gigantes Guerreros", "dif": "media"},
@@ -5011,7 +5011,7 @@
   {
     "id": "benn_beckman",
     "name": "Benn Beckman",
-    "img": "imagenes/BennBeckman.png",
+    "img": "imagenes/BennBeckman.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas del Pelirrojo", "dif": "facil"}
@@ -5031,7 +5031,7 @@
   {
     "id": "lucky_roux",
     "name": "Lucky Roux",
-    "img": "imagenes/LuckyRoux.png",
+    "img": "imagenes/LuckyRoux.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas del Pelirrojo", "dif": "facil"}
@@ -5051,7 +5051,7 @@
   {
     "id": "limejuice",
     "name": "Limejuice",
-    "img": "imagenes/Limejuice.png",
+    "img": "imagenes/Limejuice.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas del Pelirrojo", "dif": "facil"}
@@ -5061,7 +5061,7 @@
   {
     "id": "bonk_punch",
     "name": "Bonk Punch",
-    "img": "imagenes/BonkPunch.png",
+    "img": "imagenes/BonkPunch.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas del Pelirrojo", "dif": "facil"}
@@ -5074,7 +5074,7 @@
   {
     "id": "monster",
     "name": "Monster",
-    "img": "imagenes/Monster.png",
+    "img": "imagenes/Monster.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas del Pelirrojo", "dif": "facil"}
@@ -5087,7 +5087,7 @@
   {
     "id": "building_snake",
     "name": "Building Snake",
-    "img": "imagenes/BuildingSnake.png",
+    "img": "imagenes/BuildingSnake.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas del Pelirrojo", "dif": "facil"}
@@ -5101,7 +5101,7 @@
   {
     "id": "hongo",
     "name": "Hongo",
-    "img": "imagenes/Hongo.png",
+    "img": "imagenes/Hongo.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas del Pelirrojo", "dif": "facil"}
@@ -5114,7 +5114,7 @@
   {
     "id": "gab",
     "name": "'Howling' Gab",
-    "img": "imagenes/Gab.png",
+    "img": "imagenes/Gab.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas del Pelirrojo", "dif": "facil"}
@@ -5124,7 +5124,7 @@
   {
     "id": "rockstar",
     "name": "Rockstar",
-    "img": "imagenes/Rockstar.png",
+    "img": "imagenes/Rockstar.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas del Pelirrojo", "dif": "facil"}
@@ -5137,7 +5137,7 @@
   {
     "id": "izou",
     "name": "Izou",
-    "img": "imagenes/Izou.png",
+    "img": "imagenes/Izou.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"},
@@ -5173,7 +5173,7 @@
   {
     "id": "hibari",
     "name": "Hibari",
-    "img": "imagenes/Hibari.png",
+    "img": "imagenes/Hibari.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"},
@@ -5197,7 +5197,7 @@
   {
     "id": "baccarat",
     "name": "Baccarat",
-    "img": "imagenes/Baccarat.png",
+    "img": "imagenes/Baccarat.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de Gran Tesoro", "dif": "facil"}
@@ -5210,7 +5210,7 @@
   {
     "id": "bellamy",
     "name": "Bellamy",
-    "img": "imagenes/Bellamy.png",
+    "img": "imagenes/Bellamy.webp",
     "tags": {
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"}
@@ -5237,7 +5237,7 @@
   {
     "id": "bepo",
     "name": "Bepo",
-    "img": "imagenes/Bepo.png",
+    "img": "imagenes/Bepo.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Heart", "dif": "facil"}
@@ -5265,7 +5265,7 @@
   {
     "id": "caesar",
     "name": "Caesar Clown",
-    "img": "imagenes/Caesar.png",
+    "img": "imagenes/Caesar.webp",
     "tags": {
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"},
@@ -5297,7 +5297,7 @@
   {
     "id": "vegapunk",
     "name": "Dr. Vegapunk",
-    "img": "imagenes/Vegapunk.png",
+    "img": "imagenes/Vegapunk.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de MADS", "dif": "dificil"}
@@ -5322,7 +5322,7 @@
   {
     "id": "buckingham_stussy",
     "name": "Buckingham Stussy",
-    "img": "imagenes/BuckinghamStussy.png",
+    "img": "imagenes/BuckinghamStussy.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Rocks", "dif": "facil"},
@@ -5343,7 +5343,7 @@
   {
     "id": "camie",
     "name": "Camie",
-    "img": "imagenes/Camie.png",
+    "img": "imagenes/Camie.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -5365,7 +5365,7 @@
   {
     "id": "carina",
     "name": "Carina",
-    "img": "imagenes/Carina.png",
+    "img": "imagenes/Carina.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de Gran Tesoro", "dif": "facil"}
@@ -5381,7 +5381,7 @@
   {
     "id": "demalo_black",
     "name": "Demalo Black (Falso Luffy)",
-    "img": "imagenes/DemaloBlack.png",
+    "img": "imagenes/DemaloBlack.webp",
     "tags": {
       "Banda": [
         {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"},
@@ -5404,7 +5404,7 @@
   {
     "id": "manjaro",
     "name": "Manjaro (Falso Zoro)",
-    "img": "imagenes/Manjaro.png",
+    "img": "imagenes/Manjaro.webp",
     "tags": {
       "Banda": [
         {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"},
@@ -5421,7 +5421,7 @@
   {
     "id": "mounblutain",
     "name": "Mounblutain (Falso Sogeking)",
-    "img": "imagenes/Mounblutain.png",
+    "img": "imagenes/Mounblutain.webp",
     "tags": {
       "Banda": [
         {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"},
@@ -5435,7 +5435,7 @@
   {
     "id": "drip",
     "name": "Drip (Falso Sanji)",
-    "img": "imagenes/Drip.png",
+    "img": "imagenes/Drip.webp",
     "tags": {
       "Banda": [
         {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"},
@@ -5449,7 +5449,7 @@
   {
     "id": "nora_gitsune",
     "name": "Nora Gitsune (Falso Chopper)",
-    "img": "imagenes/NoraGitsune.png",
+    "img": "imagenes/NoraGitsune.webp",
     "tags": {
       "Banda": [
         {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"},
@@ -5469,7 +5469,7 @@
   {
     "id": "turco",
     "name": "Turco (Falso Franky)",
-    "img": "imagenes/Turco.png",
+    "img": "imagenes/Turco.webp",
     "tags": {
       "Banda": [
         {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"},
@@ -5483,7 +5483,7 @@
   {
     "id": "chocolat",
     "name": "Chocolat (Falsa Nami)",
-    "img": "imagenes/Chocolat.png",
+    "img": "imagenes/Chocolat.webp",
     "tags": {
       "Banda": [
         {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"},
@@ -5497,7 +5497,7 @@
   {
     "id": "cocoa",
     "name": "Cocoa (Falsa Robin)",
-    "img": "imagenes/Cocoa.png",
+    "img": "imagenes/Cocoa.webp",
     "tags": {
       "Banda": [
         {"val": "Falsos Piratas de Sombrero de Paja", "dif": "facil"},
@@ -5511,7 +5511,7 @@
   {
     "id": "diamante",
     "name": "Diamante",
-    "img": "imagenes/Diamante.png",
+    "img": "imagenes/Diamante.webp",
     "tags": {
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"}
@@ -5540,7 +5540,7 @@
   {
     "id": "dice",
     "name": "Dice",
-    "img": "imagenes/Dice.png",
+    "img": "imagenes/Dice.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de Gran Tesoro", "dif": "facil"}
@@ -5553,7 +5553,7 @@
   {
     "id": "docq",
     "name": "Doc Q",
-    "img": "imagenes/DocQ.png",
+    "img": "imagenes/DocQ.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbanegra", "dif": "facil"}
@@ -5578,7 +5578,7 @@
   {
     "id": "duval",
     "name": "Duval",
-    "img": "imagenes/Duval.png",
+    "img": "imagenes/Duval.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -5597,7 +5597,7 @@
   {
     "id": "enel",
     "name": "Enel",
-    "img": "imagenes/Enel.png",
+    "img": "imagenes/Enel.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército de Enel", "dif": "facil"}
@@ -5619,7 +5619,7 @@
   {
     "id": "garp",
     "name": "Monkey D. Garp",
-    "img": "imagenes/Garp.png",
+    "img": "imagenes/Garp.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -5652,7 +5652,7 @@
   {
     "id": "gedatsu",
     "name": "Gedatsu",
-    "img": "imagenes/Gedatsu.png",
+    "img": "imagenes/Gedatsu.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército de Enel", "dif": "facil"}
@@ -5677,7 +5677,7 @@
   {
     "id": "gloriosa",
     "name": "Gloriosa",
-    "img": "imagenes/Gloriosa.png",
+    "img": "imagenes/Gloriosa.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Rocks", "dif": "dificil"},
@@ -5704,7 +5704,7 @@
   {
     "id": "haredas",
     "name": "Haredas",
-    "img": "imagenes/Haredas.png",
+    "img": "imagenes/Haredas.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -5720,7 +5720,7 @@
   {
     "id": "heracles",
     "name": "Heracles",
-    "img": "imagenes/Heracles.png",
+    "img": "imagenes/Heracles.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: South Blue", "dif": "dificil"}
@@ -5736,7 +5736,7 @@
   {
     "id": "hody",
     "name": "Hody Jones",
-    "img": "imagenes/Hody.png",
+    "img": "imagenes/Hody.webp",
     "tags": {
       "Banda": [
         {"val": "Nuevos Piratas Gyojin", "dif": "media"}
@@ -5764,7 +5764,7 @@
   {
     "id": "inuarashi",
     "name": "Inuarashi",
-    "img": "imagenes/Inuarashi.png",
+    "img": "imagenes/Inuarashi.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Roger", "dif": "facil"},
@@ -5799,7 +5799,7 @@
   {
     "id": "ivankov",
     "name": "Emporio Ivankov",
-    "img": "imagenes/Ivankov.png",
+    "img": "imagenes/Ivankov.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército Revolucionario", "dif": "facil"}
@@ -5821,7 +5821,7 @@
   {
     "id": "burgess",
     "name": "Jesus Burgess",
-    "img": "imagenes/Jesus.png",
+    "img": "imagenes/Jesus.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbanegra", "dif": "facil"}
@@ -5840,7 +5840,7 @@
   {
     "id": "jozu",
     "name": "Jozu",
-    "img": "imagenes/Jozu.png",
+    "img": "imagenes/Jozu.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -5863,7 +5863,7 @@
   {
     "id": "kinemon",
     "name": "Kin'emon",
-    "img": "imagenes/Kinemon.png",
+    "img": "imagenes/Kinemon.webp",
     "tags": {
       "Titulo": [
         {"val": "Vainas Rojas", "dif": "facil"}
@@ -5895,7 +5895,7 @@
   {
     "id": "koala",
     "name": "Koala",
-    "img": "imagenes/Koala.png",
+    "img": "imagenes/Koala.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército Revolucionario", "dif": "facil"},
@@ -5919,7 +5919,7 @@
   {
     "id": "laffitte",
     "name": "Laffitte",
-    "img": "imagenes/Laffitte.png",
+    "img": "imagenes/Laffitte.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbanegra", "dif": "facil"}
@@ -5942,7 +5942,7 @@
   {
     "id": "magellan",
     "name": "Magellan",
-    "img": "imagenes/Magellan.png",
+    "img": "imagenes/Magellan.webp",
     "tags": {
       "Banda": [
         {"val": "Trabajadores de Impel Down", "dif": "media"}
@@ -5967,7 +5967,7 @@
   {
     "id": "marguerite",
     "name": "Marguerite",
-    "img": "imagenes/Marguerite.png",
+    "img": "imagenes/Marguerite.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Kuja", "dif": "facil"}
@@ -5986,7 +5986,7 @@
   {
     "id": "mrtanaka",
     "name": "Mr. Tanaka",
-    "img": "imagenes/MrTanaka.png",
+    "img": "imagenes/MrTanaka.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de Gran Tesoro", "dif": "facil"}
@@ -5999,7 +5999,7 @@
   {
     "id": "nekomamushi",
     "name": "Nekomamushi",
-    "img": "imagenes/Nekomamushi.png",
+    "img": "imagenes/Nekomamushi.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Roger", "dif": "facil"},
@@ -6031,7 +6031,7 @@
   {
     "id": "ohm",
     "name": "Ohm",
-    "img": "imagenes/Ohm.png",
+    "img": "imagenes/Ohm.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército de Enel", "dif": "facil"}
@@ -6059,7 +6059,7 @@
   {
     "id": "pappug",
     "name": "Pappug",
-    "img": "imagenes/Pappug.png",
+    "img": "imagenes/Pappug.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -6075,7 +6075,7 @@
   {
     "id": "pekoms",
     "name": "Pekoms",
-    "img": "imagenes/Pekoms.png",
+    "img": "imagenes/Pekoms.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Big Mom", "dif": "facil"}
@@ -6104,7 +6104,7 @@
   {
     "id": "perona",
     "name": "Perona",
-    "img": "imagenes/Perona.png",
+    "img": "imagenes/Perona.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Thriller Bark", "dif": "facil"}
@@ -6129,7 +6129,7 @@
   {
     "id": "pica",
     "name": "Pica",
-    "img": "imagenes/Pica.png",
+    "img": "imagenes/Pica.webp",
     "tags": {
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"}
@@ -6161,7 +6161,7 @@
   {
     "id": "senor_pink",
     "name": "Senor Pink",
-    "img": "imagenes/Pink.png",
+    "img": "imagenes/Pink.webp",
     "tags": {
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"}
@@ -6194,7 +6194,7 @@
   {
     "id": "satori",
     "name": "Satori",
-    "img": "imagenes/Satori.png",
+    "img": "imagenes/Satori.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército de Enel", "dif": "facil"}
@@ -6218,7 +6218,7 @@
   {
     "id": "shiryu",
     "name": "Shiryu de la Lluvia",
-    "img": "imagenes/Shiryu.png",
+    "img": "imagenes/Shiryu.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbanegra", "dif": "facil"},
@@ -6249,7 +6249,7 @@
   {
     "id": "shura",
     "name": "Shura",
-    "img": "imagenes/Shura.png",
+    "img": "imagenes/Shura.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército de Enel", "dif": "facil"}
@@ -6271,7 +6271,7 @@
   {
     "id": "shishilian",
     "name": "Shishilian",
-    "img": "imagenes/Shishilian.png",
+    "img": "imagenes/Shishilian.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -6297,7 +6297,7 @@
   {
     "id": "spandam",
     "name": "Spandam",
-    "img": "imagenes/Spandam.png",
+    "img": "imagenes/Spandam.webp",
     "tags": {
       "Banda": [
         {"val": "CP0", "dif": "facil"},
@@ -6326,7 +6326,7 @@
   {
     "id": "sugar",
     "name": "Sugar",
-    "img": "imagenes/Sugar.png",
+    "img": "imagenes/Sugar.webp",
     "tags": {
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"}
@@ -6351,7 +6351,7 @@
   {
     "id": "tesoro",
     "name": "Guild Tesoro",
-    "img": "imagenes/Tesoro.png",
+    "img": "imagenes/Tesoro.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de Gran Tesoro", "dif": "facil"}
@@ -6367,7 +6367,7 @@
   {
     "id": "trebol",
     "name": "Trébol",
-    "img": "imagenes/Trebol.png",
+    "img": "imagenes/Trebol.webp",
     "tags": {
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"}
@@ -6393,7 +6393,7 @@
   {
     "id": "vanderdecken",
     "name": "Vander Decken IX",
-    "img": "imagenes/VanderDecken.png",
+    "img": "imagenes/VanderDecken.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -6415,7 +6415,7 @@
   {
     "id": "wadatsumi",
     "name": "Wadatsumi",
-    "img": "imagenes/Wadatsumi.png",
+    "img": "imagenes/Wadatsumi.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas del Sol", "dif": "media"}
@@ -6440,7 +6440,7 @@
   {
     "id": "wanda",
     "name": "Wanda",
-    "img": "imagenes/Wanda.png",
+    "img": "imagenes/Wanda.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -6459,7 +6459,7 @@
   {
     "id": "olvia",
     "name": "Nico Olvia",
-    "img": "imagenes/Olvia.png",
+    "img": "imagenes/Olvia.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
@@ -6478,7 +6478,7 @@
   {
     "id": "clover",
     "name": "Clover",
-    "img": "imagenes/Clover.png",
+    "img": "imagenes/Clover.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
@@ -6494,7 +6494,7 @@
   {
     "id": "rint",
     "name": "Rint",
-    "img": "imagenes/Rint.png",
+    "img": "imagenes/Rint.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
@@ -6510,7 +6510,7 @@
   {
     "id": "zadie",
     "name": "Zadie",
-    "img": "imagenes/Zadie.png",
+    "img": "imagenes/Zadie.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
@@ -6526,7 +6526,7 @@
   {
     "id": "roche",
     "name": "Roche",
-    "img": "imagenes/Roche.png",
+    "img": "imagenes/Roche.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
@@ -6542,7 +6542,7 @@
   {
     "id": "rouge",
     "name": "Portgas D. Rouge",
-    "img": "imagenes/Rouge.png",
+    "img": "imagenes/Rouge.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: South Blue", "dif": "dificil"}
@@ -6558,7 +6558,7 @@
   {
     "id": "lili",
     "name": "Nefertari D. Lili",
-    "img": "imagenes/Lili.png",
+    "img": "imagenes/Lili.webp",
     "tags": {
       "Banda": [
         {"val": "Reino de Alabasta", "dif": "facil"}
@@ -6581,7 +6581,7 @@
   {
     "id": "xebec",
     "name": "Rocks D. Xebec",
-    "img": "imagenes/Xebec.png",
+    "img": "imagenes/Xebec.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Rocks", "dif": "facil"}
@@ -6605,7 +6605,7 @@
   {
     "id": "shiki",
     "name": "Shiki (El León Dorado)",
-    "img": "imagenes/Shiki.png",
+    "img": "imagenes/Shiki.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Rocks", "dif": "dificil"}
@@ -6628,7 +6628,7 @@
   {
     "id": "john",
     "name": "Capitán John",
-    "img": "imagenes/CaptainJohn.png",
+    "img": "imagenes/CaptainJohn.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Rocks", "dif": "dificil"},
@@ -6651,7 +6651,7 @@
   {
     "id": "whitey_bay",
     "name": "Whitey Bay",
-    "img": "imagenes/WhiteyBay.png",
+    "img": "imagenes/WhiteyBay.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -6661,7 +6661,7 @@
   {
     "id": "streusen",
     "name": "Streusen",
-    "img": "imagenes/Streusen.png",
+    "img": "imagenes/Streusen.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Rocks", "dif": "dificil"},
@@ -6681,7 +6681,7 @@
   {
     "id": "gill_bastar",
     "name": "Gill Bastar",
-    "img": "imagenes/GillBastar.png",
+    "img": "imagenes/GillBastar.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Rocks", "dif": "dificil"},
@@ -6707,7 +6707,7 @@
   {
     "id": "kyo",
     "name": "Kyo (Hacha Plateada)",
-    "img": "imagenes/Kyo.png",
+    "img": "imagenes/Kyo.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Rocks", "dif": "dificil"}
@@ -6717,7 +6717,7 @@
   {
     "id": "ochoku",
     "name": "Ochoku",
-    "img": "imagenes/Ochoku.png",
+    "img": "imagenes/Ochoku.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Rocks", "dif": "dificil"}
@@ -6727,7 +6727,7 @@
   {
     "id": "ganzui",
     "name": "Ganzui",
-    "img": "imagenes/Ganzui.png",
+    "img": "imagenes/Ganzui.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Rocks", "dif": "dificil"},
@@ -6747,7 +6747,7 @@
   {
     "id": "marlon",
     "name": "Don Marlon",
-    "img": "imagenes/Marlon.png",
+    "img": "imagenes/Marlon.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Rocks", "dif": "dificil"}
@@ -6763,7 +6763,7 @@
   {
     "id": "barbel",
     "name": "Barbel",
-    "img": "imagenes/Barbel.png",
+    "img": "imagenes/Barbel.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Rocks", "dif": "dificil"}
@@ -6776,7 +6776,7 @@
   {
     "id": "gambia",
     "name": "Gambia",
-    "img": "imagenes/Gambia.png",
+    "img": "imagenes/Gambia.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -6792,7 +6792,7 @@
   {
     "id": "suleiman",
     "name": "Suleiman",
-    "img": "imagenes/Suleiman.png",
+    "img": "imagenes/Suleiman.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -6811,7 +6811,7 @@
   {
     "id": "farul",
     "name": "Farul",
-    "img": "imagenes/Farul.png",
+    "img": "imagenes/Farul.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -6824,7 +6824,7 @@
   {
     "id": "boo",
     "name": "Boo",
-    "img": "imagenes/Boo.png",
+    "img": "imagenes/Boo.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -6846,7 +6846,7 @@
   {
     "id": "chinjao",
     "name": "Don Chinjao",
-    "img": "imagenes/Chinjao.png",
+    "img": "imagenes/Chinjao.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -6873,7 +6873,7 @@
   {
     "id": "abdullah",
     "name": "Abdullah",
-    "img": "imagenes/Abdullah.png",
+    "img": "imagenes/Abdullah.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -6892,7 +6892,7 @@
   {
     "id": "jeet",
     "name": "Jeet",
-    "img": "imagenes/Jeet.png",
+    "img": "imagenes/Jeet.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -6914,7 +6914,7 @@
   {
     "id": "gancho",
     "name": "Rey Gancho",
-    "img": "imagenes/Gancho.png",
+    "img": "imagenes/Gancho.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -6930,7 +6930,7 @@
   {
     "id": "kabu",
     "name": "Kabu",
-    "img": "imagenes/Kabu.png",
+    "img": "imagenes/Kabu.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -6949,7 +6949,7 @@
   {
     "id": "bian",
     "name": "Bian",
-    "img": "imagenes/Bian.png",
+    "img": "imagenes/Bian.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -6968,7 +6968,7 @@
   {
     "id": "going_luffy_senpai",
     "name": "Going Luffy-senpai",
-    "img": "imagenes/GoingLuffySenpai.png",
+    "img": "imagenes/GoingLuffySenpai.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -6981,7 +6981,7 @@
   {
     "id": "blanco_corcel_durmiente",
     "name": "Blanco Corcel Durmiente del Bosque",
-    "img": "imagenes/BlancoCorcelDurmiente.png",
+    "img": "imagenes/BlancoCorcelDurmiente.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -6994,7 +6994,7 @@
   {
     "id": "happosai",
     "name": "Happosai",
-    "img": "imagenes/Happosai.png",
+    "img": "imagenes/Happosai.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -7007,7 +7007,7 @@
   {
     "id": "naglfar",
     "name": "Naglfar",
-    "img": "imagenes/Naglfar.png",
+    "img": "imagenes/Naglfar.webp",
     "tags": {
       "Banda": [
         {"val": "Nuevos Piratas Gigantes Guerreros", "dif": "media"},
@@ -7021,7 +7021,7 @@
   {
     "id": "usoland",
     "name": "Usoland",
-    "img": "imagenes/Usoland.png",
+    "img": "imagenes/Usoland.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -7034,7 +7034,7 @@
   {
     "id": "yonta_maria",
     "name": "Yonta Maria",
-    "img": "imagenes/YontaMaria.png",
+    "img": "imagenes/YontaMaria.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -7047,7 +7047,7 @@
   {
     "id": "bomba",
     "name": "Bomba",
-    "img": "imagenes/Bomba.png",
+    "img": "imagenes/Bomba.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -7063,7 +7063,7 @@
   {
     "id": "rampo",
     "name": "Rampo",
-    "img": "imagenes/Rampo.png",
+    "img": "imagenes/Rampo.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -7079,7 +7079,7 @@
   {
     "id": "wicca",
     "name": "Wicca",
-    "img": "imagenes/Wicca.png",
+    "img": "imagenes/Wicca.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -7095,7 +7095,7 @@
   {
     "id": "inhel",
     "name": "Inhel",
-    "img": "imagenes/Inhel.png",
+    "img": "imagenes/Inhel.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -7111,7 +7111,7 @@
   {
     "id": "cotton",
     "name": "Cotton",
-    "img": "imagenes/Cotton.png",
+    "img": "imagenes/Cotton.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -7127,7 +7127,7 @@
   {
     "id": "baxcon",
     "name": "Baxcon",
-    "img": "imagenes/Baxcon.png",
+    "img": "imagenes/Baxcon.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -7143,7 +7143,7 @@
   {
     "id": "daikon",
     "name": "Daikon",
-    "img": "imagenes/Daikon.png",
+    "img": "imagenes/Daikon.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -7159,7 +7159,7 @@
   {
     "id": "flapper",
     "name": "Flapper",
-    "img": "imagenes/Flapper.png",
+    "img": "imagenes/Flapper.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -7178,7 +7178,7 @@
   {
     "id": "bobomba",
     "name": "Bobomba",
-    "img": "imagenes/Bobomba.png",
+    "img": "imagenes/Bobomba.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -7194,7 +7194,7 @@
   {
     "id": "chao",
     "name": "Chao",
-    "img": "imagenes/Chao.png",
+    "img": "imagenes/Chao.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -7210,7 +7210,7 @@
   {
     "id": "mauji",
     "name": "Mauji",
-    "img": "imagenes/Mauji.png",
+    "img": "imagenes/Mauji.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -7226,7 +7226,7 @@
   {
     "id": "nubon",
     "name": "Nubon",
-    "img": "imagenes/Nubon.png",
+    "img": "imagenes/Nubon.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -7242,7 +7242,7 @@
   {
     "id": "pellini",
     "name": "Pellini",
-    "img": "imagenes/Pellini.png",
+    "img": "imagenes/Pellini.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -7258,7 +7258,7 @@
   {
     "id": "eikon",
     "name": "Eikon",
-    "img": "imagenes/Eikon.png",
+    "img": "imagenes/Eikon.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -7274,7 +7274,7 @@
   {
     "id": "chicory",
     "name": "Chicory",
-    "img": "imagenes/Chicory.png",
+    "img": "imagenes/Chicory.webp",
     "tags": {
       "Banda": [
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"}
@@ -7290,7 +7290,7 @@
   {
     "id": "yama",
     "name": "Yama",
-    "img": "imagenes/Yama.png",
+    "img": "imagenes/Yama.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército de Enel", "dif": "facil"}
@@ -7309,7 +7309,7 @@
   {
     "id": "hotori",
     "name": "Hotori",
-    "img": "imagenes/Hotori.png",
+    "img": "imagenes/Hotori.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército de Enel", "dif": "facil"}
@@ -7336,7 +7336,7 @@
   {
     "id": "kotori",
     "name": "Kotori",
-    "img": "imagenes/Kotori.png",
+    "img": "imagenes/Kotori.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército de Enel", "dif": "facil"}
@@ -7363,7 +7363,7 @@
   {
     "id": "holy",
     "name": "Holy",
-    "img": "imagenes/Holy.png",
+    "img": "imagenes/Holy.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército de Enel", "dif": "facil"}
@@ -7381,7 +7381,7 @@
   {
     "id": "fuza",
     "name": "Fuza",
-    "img": "imagenes/Fuza.png",
+    "img": "imagenes/Fuza.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército de Enel", "dif": "facil"}
@@ -7400,7 +7400,7 @@
   {
     "id": "conis",
     "name": "Conis",
-    "img": "imagenes/Conis.png",
+    "img": "imagenes/Conis.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -7413,7 +7413,7 @@
   {
     "id": "pagaya",
     "name": "Pagaya",
-    "img": "imagenes/Pagaya.png",
+    "img": "imagenes/Pagaya.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -7426,7 +7426,7 @@
   {
     "id": "gan_fall",
     "name": "Gan Fall",
-    "img": "imagenes/GanFall.png",
+    "img": "imagenes/GanFall.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -7438,7 +7438,7 @@
   {
     "id": "pierre",
     "name": "Pierre",
-    "img": "imagenes/Pierre.png",
+    "img": "imagenes/Pierre.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -7457,7 +7457,7 @@
   {
     "id": "amazon",
     "name": "Amazon",
-    "img": "imagenes/Amazon.png",
+    "img": "imagenes/Amazon.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -7470,7 +7470,7 @@
   {
     "id": "mckinley",
     "name": "McKinley",
-    "img": "imagenes/McKinley.png",
+    "img": "imagenes/McKinley.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -7483,7 +7483,7 @@
   {
     "id": "jefe_shandia",
     "name": "Jefe Shandia",
-    "img": "imagenes/JefeShandia.png",
+    "img": "imagenes/JefeShandia.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -7496,7 +7496,7 @@
   {
     "id": "wyper",
     "name": "Wyper",
-    "img": "imagenes/Wyper.png",
+    "img": "imagenes/Wyper.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -7511,7 +7511,7 @@
   {
     "id": "raki",
     "name": "Raki",
-    "img": "imagenes/Raki.png",
+    "img": "imagenes/Raki.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -7524,7 +7524,7 @@
   {
     "id": "aisa",
     "name": "Aisa",
-    "img": "imagenes/Aisa.png",
+    "img": "imagenes/Aisa.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -7543,7 +7543,7 @@
   {
     "id": "kamakiri",
     "name": "Kamakiri",
-    "img": "imagenes/Kamakiri.png",
+    "img": "imagenes/Kamakiri.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -7557,7 +7557,7 @@
   {
     "id": "braham",
     "name": "Braham",
-    "img": "imagenes/Braham.png",
+    "img": "imagenes/Braham.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -7570,7 +7570,7 @@
   {
     "id": "genbo",
     "name": "Genbo",
-    "img": "imagenes/Genbo.png",
+    "img": "imagenes/Genbo.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -7584,7 +7584,7 @@
   {
     "id": "nola",
     "name": "Nola",
-    "img": "imagenes/Nola.png",
+    "img": "imagenes/Nola.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -7597,7 +7597,7 @@
   {
     "id": "kalgara",
     "name": "Kalgara",
-    "img": "imagenes/Kalgara.png",
+    "img": "imagenes/Kalgara.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
@@ -7616,7 +7616,7 @@
   {
     "id": "sandersonia",
     "name": "Boa Sandersonia",
-    "img": "imagenes/Sandersonia.png",
+    "img": "imagenes/Sandersonia.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Kuja", "dif": "facil"}
@@ -7635,7 +7635,7 @@
   {
     "id": "marigold",
     "name": "Boa Marigold",
-    "img": "imagenes/Marigold.png",
+    "img": "imagenes/Marigold.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Kuja", "dif": "facil"}
@@ -7654,7 +7654,7 @@
   {
     "id": "hannyabal",
     "name": "Hannyabal",
-    "img": "imagenes/Hannyabal.png",
+    "img": "imagenes/Hannyabal.webp",
     "tags": {
       "Banda": [
         {"val": "Trabajadores de Impel Down", "dif": "media"}
@@ -7670,7 +7670,7 @@
   {
     "id": "domino",
     "name": "Domino",
-    "img": "imagenes/Domino.png",
+    "img": "imagenes/Domino.webp",
     "tags": {
       "Banda": [
         {"val": "Trabajadores de Impel Down", "dif": "media"}
@@ -7686,7 +7686,7 @@
   {
     "id": "saldeath",
     "name": "Saldeath",
-    "img": "imagenes/Saldeath.png",
+    "img": "imagenes/Saldeath.webp",
     "tags": {
       "Banda": [
         {"val": "Trabajadores de Impel Down", "dif": "media"}
@@ -7703,7 +7703,7 @@
   {
     "id": "shachi",
     "name": "Shachi",
-    "img": "imagenes/Shachi.png",
+    "img": "imagenes/Shachi.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Heart", "dif": "facil"}
@@ -7719,7 +7719,7 @@
   {
     "id": "penguin",
     "name": "Penguin",
-    "img": "imagenes/Penguin.png",
+    "img": "imagenes/Penguin.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Heart", "dif": "facil"}
@@ -7732,7 +7732,7 @@
   {
     "id": "absalom",
     "name": "Absalom",
-    "img": "imagenes/Absalom.png",
+    "img": "imagenes/Absalom.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Thriller Bark", "dif": "facil"},
@@ -7763,7 +7763,7 @@
   {
     "id": "hogback",
     "name": "Hogback",
-    "img": "imagenes/Hogback.png",
+    "img": "imagenes/Hogback.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Thriller Bark", "dif": "facil"}
@@ -7786,7 +7786,7 @@
   {
     "id": "dosun",
     "name": "Dosun",
-    "img": "imagenes/Dosun.png",
+    "img": "imagenes/Dosun.webp",
     "tags": {
       "Banda": [
         {"val": "Nuevos Piratas Gyojin", "dif": "media"}
@@ -7805,7 +7805,7 @@
   {
     "id": "zeo",
     "name": "Zeo",
-    "img": "imagenes/Zeo.png",
+    "img": "imagenes/Zeo.webp",
     "tags": {
       "Banda": [
         {"val": "Nuevos Piratas Gyojin", "dif": "media"}
@@ -7821,7 +7821,7 @@
   {
     "id": "daruma",
     "name": "Daruma",
-    "img": "imagenes/Daruma.png",
+    "img": "imagenes/Daruma.webp",
     "tags": {
       "Banda": [
         {"val": "Nuevos Piratas Gyojin", "dif": "media"}
@@ -7843,7 +7843,7 @@
   {
     "id": "heat",
     "name": "Heat",
-    "img": "imagenes/Heat.png",
+    "img": "imagenes/Heat.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Kid", "dif": "facil"}
@@ -7859,7 +7859,7 @@
   {
     "id": "wire",
     "name": "Wire",
-    "img": "imagenes/Wire.png",
+    "img": "imagenes/Wire.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Kid", "dif": "facil"}
@@ -7875,7 +7875,7 @@
   {
     "id": "vito",
     "name": "Vito",
-    "img": "imagenes/Vito.png",
+    "img": "imagenes/Vito.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Fire Tank", "dif": "facil"}
@@ -7895,7 +7895,7 @@
   {
     "id": "gotti",
     "name": "Gotti",
-    "img": "imagenes/Gotti.png",
+    "img": "imagenes/Gotti.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Fire Tank", "dif": "facil"}
@@ -7914,7 +7914,7 @@
   {
     "id": "chiffon",
     "name": "Charlotte Chiffon",
-    "img": "imagenes/Chiffon.png",
+    "img": "imagenes/Chiffon.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Fire Tank", "dif": "facil"},
@@ -7929,7 +7929,7 @@
   {
     "id": "ain",
     "name": "Ain",
-    "img": "imagenes/Ain.png",
+    "img": "imagenes/Ain.webp",
     "tags": {
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
@@ -7939,7 +7939,7 @@
   {
     "id": "binz",
     "name": "Binz",
-    "img": "imagenes/Binz.png",
+    "img": "imagenes/Binz.webp",
     "tags": {
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "facil"}
@@ -7949,7 +7949,7 @@
   {
     "id": "yorki",
     "name": "Yorki",
-    "img": "imagenes/Yorki.png",
+    "img": "imagenes/Yorki.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Rumbar", "dif": "facil"}
@@ -7969,7 +7969,7 @@
   {
     "id": "madaisuki",
     "name": "Mizuta Madaisuki",
-    "img": "imagenes/Madaisuki.png",
+    "img": "imagenes/Madaisuki.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Rumbar", "dif": "facil"}
@@ -7982,7 +7982,7 @@
   {
     "id": "mawaritosuki",
     "name": "Mizuta Mawaritosuki",
-    "img": "imagenes/Mawaritosuki.png",
+    "img": "imagenes/Mawaritosuki.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Rumbar", "dif": "facil"}
@@ -7995,7 +7995,7 @@
   {
     "id": "ryokugyu",
     "name": "Ryokugyu (Aramaki)",
-    "img": "imagenes/Ryokugyu.png",
+    "img": "imagenes/Ryokugyu.webp",
     "tags": {
       "Titulo": [
         {"val": "Almirantes", "dif": "facil"}
@@ -8021,7 +8021,7 @@
   {
     "id": "diesel",
     "name": "Diesel",
-    "img": "imagenes/Diesel.png",
+    "img": "imagenes/Diesel.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Big Mom", "dif": "facil"}
@@ -8037,7 +8037,7 @@
   {
     "id": "tamago",
     "name": "Baron Tamago",
-    "img": "imagenes/Tamago.png",
+    "img": "imagenes/Tamago.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Big Mom", "dif": "facil"}
@@ -8059,7 +8059,7 @@
   {
     "id": "iceburg",
     "name": "Iceburg",
-    "img": "imagenes/Iceburg.png",
+    "img": "imagenes/Iceburg.webp",
     "tags": {
       "Especialidad": [
         {"val": "Carpinteros", "dif": "dificil"}
@@ -8079,7 +8079,7 @@
   {
     "id": "tom",
     "name": "Tom",
-    "img": "imagenes/Tom.png",
+    "img": "imagenes/Tom.webp",
     "tags": {
       "Especialidad": [
         {"val": "Carpinteros", "dif": "dificil"}
@@ -8106,7 +8106,7 @@
   {
     "id": "kokoro",
     "name": "Kokoro",
-    "img": "imagenes/Kokoro.png",
+    "img": "imagenes/Kokoro.webp",
     "tags": {
       "Raza": [
         {"val": "Gyojins", "dif": "facil"}
@@ -8122,7 +8122,7 @@
   {
     "id": "chess",
     "name": "Chess",
-    "img": "imagenes/Chess.png",
+    "img": "imagenes/Chess.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bliking", "dif": "facil"},
@@ -8139,7 +8139,7 @@
   {
     "id": "kuromarimo",
     "name": "Kuromarimo",
-    "img": "imagenes/Kuromarimo.png",
+    "img": "imagenes/Kuromarimo.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bliking", "dif": "facil"},
@@ -8156,7 +8156,7 @@
   {
     "id": "inazuma",
     "name": "Inazuma",
-    "img": "imagenes/Inazuma.png",
+    "img": "imagenes/Inazuma.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército Revolucionario", "dif": "facil"}
@@ -8181,7 +8181,7 @@
   {
     "id": "toko",
     "name": "Toko",
-    "img": "imagenes/Toko.png",
+    "img": "imagenes/Toko.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"}
@@ -8203,7 +8203,7 @@
   {
     "id": "yasuie",
     "name": "Shimotsuki Yasuie",
-    "img": "imagenes/YasuieShimotsuki.png",
+    "img": "imagenes/YasuieShimotsuki.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"}
@@ -8225,7 +8225,7 @@
   {
     "id": "robson",
     "name": "Robson",
-    "img": "imagenes/Robson.png",
+    "img": "imagenes/Robson.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bliking", "dif": "facil"},
@@ -8242,7 +8242,7 @@
   {
     "id": "smoothie",
     "name": "Charlotte Smoothie",
-    "img": "imagenes/CharlotteSmoothie.png",
+    "img": "imagenes/CharlotteSmoothie.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Big Mom", "dif": "facil"},
@@ -8275,7 +8275,7 @@
   {
     "id": "citron",
     "name": "Charlotte Citron",
-    "img": "imagenes/CharlotteCitron.png",
+    "img": "imagenes/CharlotteCitron.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Big Mom", "dif": "facil"},
@@ -8295,7 +8295,7 @@
   {
     "id": "cinnamon",
     "name": "Charlotte Cinnamon",
-    "img": "imagenes/CharlotteCinnamon.png",
+    "img": "imagenes/CharlotteCinnamon.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Big Mom", "dif": "facil"},
@@ -8315,7 +8315,7 @@
   {
     "id": "hakugan",
     "name": "Hakugan",
-    "img": "imagenes/Hakugan.png",
+    "img": "imagenes/Hakugan.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Heart", "dif": "facil"}
@@ -8334,7 +8334,7 @@
   {
     "id": "jean_bart",
     "name": "Jean Bart",
-    "img": "imagenes/JeanBart.png",
+    "img": "imagenes/JeanBart.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Heart", "dif": "facil"}
@@ -8347,7 +8347,7 @@
   {
     "id": "pleasures",
     "name": "Pleasures",
-    "img": "imagenes/Pleasures.png",
+    "img": "imagenes/Pleasures.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -8363,7 +8363,7 @@
   {
     "id": "ikaros_much",
     "name": "Ikaros Much",
-    "img": "imagenes/IkarosMuch.png",
+    "img": "imagenes/IkarosMuch.webp",
     "tags": {
       "Banda": [
         {"val": "Nuevos Piratas Gyojin", "dif": "media"}
@@ -8382,7 +8382,7 @@
   {
     "id": "hyouzou",
     "name": "Hyouzou",
-    "img": "imagenes/Hyouzou.png",
+    "img": "imagenes/Hyouzou.webp",
     "tags": {
       "Banda": [
         {"val": "Nuevos Piratas Gyojin", "dif": "media"}
@@ -8404,7 +8404,7 @@
   {
     "id": "jean_noueilles",
     "name": "Jean Noueilles",
-    "img": "imagenes/JeanNoueilles.png",
+    "img": "imagenes/JeanNoueilles.webp",
     "tags": {
       "Banda": [
         {"val": "Nuevos Piratas Gyojin", "dif": "media"}
@@ -8420,7 +8420,7 @@
   {
     "id": "hammond",
     "name": "Hammond",
-    "img": "imagenes/Hammond.png",
+    "img": "imagenes/Hammond.webp",
     "tags": {
       "Banda": [
         {"val": "Nuevos Piratas Gyojin", "dif": "media"}
@@ -8442,7 +8442,7 @@
   {
     "id": "paulie",
     "name": "Paulie",
-    "img": "imagenes/Paulie.png",
+    "img": "imagenes/Paulie.webp",
     "tags": {
       "Banda": [
         {"val": "Galley-La Company", "dif": "media"}
@@ -8464,7 +8464,7 @@
   {
     "id": "tilestone",
     "name": "Tilestone",
-    "img": "imagenes/Tilestone.png",
+    "img": "imagenes/Tilestone.webp",
     "tags": {
       "Banda": [
         {"val": "Galley-La Company", "dif": "media"}
@@ -8483,7 +8483,7 @@
   {
     "id": "lulu",
     "name": "Peepley Lulu",
-    "img": "imagenes/PeepleyLulu.png",
+    "img": "imagenes/PeepleyLulu.webp",
     "tags": {
       "Banda": [
         {"val": "Galley-La Company", "dif": "media"}
@@ -8503,7 +8503,7 @@
   {
     "id": "zambai",
     "name": "Zambai",
-    "img": "imagenes/Zambai.png",
+    "img": "imagenes/Zambai.webp",
     "tags": {
       "Banda": [
         {"val": "Franky Family", "dif": "media"}
@@ -8519,7 +8519,7 @@
   {
     "id": "kiev",
     "name": "Kiev",
-    "img": "imagenes/Kiev.png",
+    "img": "imagenes/Kiev.webp",
     "tags": {
       "Banda": [
         {"val": "Franky Family", "dif": "media"}
@@ -8535,7 +8535,7 @@
   {
     "id": "tamagon",
     "name": "Tamagon",
-    "img": "imagenes/Tamagon.png",
+    "img": "imagenes/Tamagon.webp",
     "tags": {
       "Banda": [
         {"val": "Franky Family", "dif": "media"}
@@ -8551,7 +8551,7 @@
   {
     "id": "kiwi",
     "name": "Kiwi",
-    "img": "imagenes/Kiwi.png",
+    "img": "imagenes/Kiwi.webp",
     "tags": {
       "Banda": [
         {"val": "Franky Family", "dif": "media"}
@@ -8567,7 +8567,7 @@
   {
     "id": "mozu",
     "name": "Mozu",
-    "img": "imagenes/Mozu.png",
+    "img": "imagenes/Mozu.webp",
     "tags": {
       "Banda": [
         {"val": "Franky Family", "dif": "media"}
@@ -8583,7 +8583,7 @@
   {
     "id": "sodom",
     "name": "Sodom",
-    "img": "imagenes/Sodom.png",
+    "img": "imagenes/Sodom.webp",
     "tags": {
       "Banda": [
         {"val": "Franky Family", "dif": "media"}
@@ -8599,7 +8599,7 @@
   {
     "id": "gomorrah",
     "name": "Gomorrah",
-    "img": "imagenes/Gomorrah.png",
+    "img": "imagenes/Gomorrah.webp",
     "tags": {
       "Banda": [
         {"val": "Franky Family", "dif": "media"}
@@ -8615,7 +8615,7 @@
   {
     "id": "gaimon",
     "name": "Gaimon",
-    "img": "imagenes/Gaimon.png",
+    "img": "imagenes/Gaimon.webp",
     "tags": {
       "Luffy": [
         {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
@@ -8631,7 +8631,7 @@
   {
     "id": "mocdonald",
     "name": "MocDonald",
-    "img": "imagenes/MocDonald.png",
+    "img": "imagenes/MocDonald.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Thriller Bark", "dif": "facil"},
@@ -8652,7 +8652,7 @@
   {
     "id": "unigaro",
     "name": "Unigaro",
-    "img": "imagenes/Unigaro.png",
+    "img": "imagenes/Unigaro.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Thriller Bark", "dif": "facil"},
@@ -8673,7 +8673,7 @@
   {
     "id": "hyoutauros",
     "name": "Hyoutauros",
-    "img": "imagenes/Hyoutauros.png",
+    "img": "imagenes/Hyoutauros.webp",
     "tags": {
       "Luffy": [
         {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
@@ -8683,7 +8683,7 @@
   {
     "id": "crocus",
     "name": "Crocus",
-    "img": "imagenes/Crocus.png",
+    "img": "imagenes/Crocus.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Roger", "dif": "facil"}
@@ -8708,7 +8708,7 @@
   {
     "id": "momonosuke",
     "name": "Kouzuki Momonosuke",
-    "img": "imagenes/Momonosuke.png",
+    "img": "imagenes/Momonosuke.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"},
@@ -8740,7 +8740,7 @@
   {
     "id": "tama",
     "name": "Kurozumi Tama",
-    "img": "imagenes/Tama.png",
+    "img": "imagenes/Tama.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"}
@@ -8762,7 +8762,7 @@
   {
     "id": "raizo",
     "name": "Raizo",
-    "img": "imagenes/Raizo.png",
+    "img": "imagenes/Raizo.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"}
@@ -8791,7 +8791,7 @@
   {
     "id": "kanjuro",
     "name": "Kanjuro",
-    "img": "imagenes/Kanjuro.png",
+    "img": "imagenes/Kanjuro.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"}
@@ -8823,7 +8823,7 @@
   {
     "id": "kiku",
     "name": "Kikunojo (Kiku)",
-    "img": "imagenes/Kiku.png",
+    "img": "imagenes/Kiku.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"}
@@ -8853,7 +8853,7 @@
   {
     "id": "denjiro",
     "name": "Denjiro",
-    "img": "imagenes/Denjiro.png",
+    "img": "imagenes/Denjiro.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"}
@@ -8882,7 +8882,7 @@
   {
     "id": "ashura_doji",
     "name": "Ashura Doji",
-    "img": "imagenes/AshuraDoji.png",
+    "img": "imagenes/AshuraDoji.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"}
@@ -8914,7 +8914,7 @@
   {
     "id": "kawamatsu",
     "name": "Kawamatsu",
-    "img": "imagenes/Kawamatsu.png",
+    "img": "imagenes/Kawamatsu.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"}
@@ -8944,7 +8944,7 @@
   {
     "id": "shamrock",
     "name": "Figarland Shamrock",
-    "img": "imagenes/Shamrock.png",
+    "img": "imagenes/Shamrock.webp",
     "tags": {
       "Titulo": [
         {"val": "Nobles mundiales", "dif": "dificil"},
@@ -8961,7 +8961,7 @@
   {
     "id": "gunko",
     "name": "Gunko",
-    "img": "imagenes/Gunko.png",
+    "img": "imagenes/Gunko.webp",
     "tags": {
       "Titulo": [
         {"val": "Nobles mundiales", "dif": "dificil"},
@@ -8987,7 +8987,7 @@
   {
     "id": "maffey",
     "name": "Satchels Maffey",
-    "img": "imagenes/SatchelsMaffey.png",
+    "img": "imagenes/SatchelsMaffey.webp",
     "tags": {
       "Titulo": [
         {"val": "Nobles mundiales", "dif": "dificil"},
@@ -9004,7 +9004,7 @@
   {
     "id": "charlos",
     "name": "Rosward Charlos",
-    "img": "imagenes/Charlos.png",
+    "img": "imagenes/Charlos.webp",
     "tags": {
       "Titulo": [
         {"val": "Nobles mundiales", "dif": "dificil"}
@@ -9023,7 +9023,7 @@
   {
     "id": "rosward",
     "name": "Rosward Rosward",
-    "img": "imagenes/Rosward.png",
+    "img": "imagenes/Rosward.webp",
     "tags": {
       "Titulo": [
         {"val": "Nobles mundiales", "dif": "dificil"}
@@ -9045,7 +9045,7 @@
   {
     "id": "shalria",
     "name": "Rosward Shalria",
-    "img": "imagenes/Shalria.png",
+    "img": "imagenes/Shalria.webp",
     "tags": {
       "Titulo": [
         {"val": "Nobles mundiales", "dif": "dificil"}
@@ -9064,7 +9064,7 @@
   {
     "id": "rosinante",
     "name": "Donquixote Rosinante",
-    "img": "imagenes/Rosinante.png",
+    "img": "imagenes/Rosinante.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"},
@@ -9094,7 +9094,7 @@
   {
     "id": "homing",
     "name": "Donquixote Homing",
-    "img": "imagenes/Homing.png",
+    "img": "imagenes/Homing.webp",
     "tags": {
       "Titulo": [
         {"val": "Nobles mundiales", "dif": "dificil"}
@@ -9116,7 +9116,7 @@
   {
     "id": "mjosgard",
     "name": "Mjosgard",
-    "img": "imagenes/Mjosgard.png",
+    "img": "imagenes/Mjosgard.webp",
     "tags": {
       "Titulo": [
         {"val": "Nobles mundiales", "dif": "dificil"}
@@ -9135,7 +9135,7 @@
   {
     "id": "shivercalero",
     "name": "Shivercalero",
-    "img": "imagenes/Shivercalero.png",
+    "img": "imagenes/Shivercalero.webp",
     "tags": {
       "Titulo": [
         {"val": "Nobles mundiales", "dif": "dificil"}
@@ -9154,7 +9154,7 @@
   {
     "id": "laboon",
     "name": "Laboon",
-    "img": "imagenes/Laboon.png",
+    "img": "imagenes/Laboon.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Rumbar", "dif": "facil"}
@@ -9170,7 +9170,7 @@
   {
     "id": "oden",
     "name": "Kozuki Oden",
-    "img": "imagenes/Oden.png",
+    "img": "imagenes/Oden.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"},
@@ -9203,7 +9203,7 @@
   {
     "id": "imu",
     "name": "Nerona Imu",
-    "img": "imagenes/Imu.png",
+    "img": "imagenes/Imu.webp",
     "tags": {
       "Titulo": [
         {"val": "Nobles mundiales", "dif": "dificil"}
@@ -9224,7 +9224,7 @@
   {
     "id": "shinobu",
     "name": "Shinobu",
-    "img": "imagenes/Shinobu.png",
+    "img": "imagenes/Shinobu.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"}
@@ -9240,7 +9240,7 @@
   {
     "id": "shakuyaku",
     "name": "Shakuyaku (Shakky)",
-    "img": "imagenes/Shakuyaku.png",
+    "img": "imagenes/Shakuyaku.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Kuja", "dif": "facil"}
@@ -9259,7 +9259,7 @@
   {
     "id": "ageha_woman",
     "name": "Ageha Woman",
-    "img": "imagenes/AgehaWoman.png",
+    "img": "imagenes/AgehaWoman.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9278,7 +9278,7 @@
   {
     "id": "battaman",
     "name": "Battaman",
-    "img": "imagenes/Battaman.png",
+    "img": "imagenes/Battaman.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9297,7 +9297,7 @@
   {
     "id": "beegirl",
     "name": "Beegirl",
-    "img": "imagenes/Beegirl.png",
+    "img": "imagenes/Beegirl.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9316,7 +9316,7 @@
   {
     "id": "beetleman",
     "name": "Beetleman",
-    "img": "imagenes/Beetleman.png",
+    "img": "imagenes/Beetleman.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9335,7 +9335,7 @@
   {
     "id": "bishonure_onna",
     "name": "Bishonure-Onna",
-    "img": "imagenes/BishonureOnna.png",
+    "img": "imagenes/BishonureOnna.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9354,7 +9354,7 @@
   {
     "id": "bisley",
     "name": "Bisley",
-    "img": "imagenes/Bisley.png",
+    "img": "imagenes/Bisley.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9373,7 +9373,7 @@
   {
     "id": "fuga",
     "name": "Fuga",
-    "img": "imagenes/Fuga.png",
+    "img": "imagenes/Fuga.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9392,7 +9392,7 @@
   {
     "id": "hoisassa",
     "name": "Hoisassa",
-    "img": "imagenes/Hoisassa.png",
+    "img": "imagenes/Hoisassa.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9411,7 +9411,7 @@
   {
     "id": "koshi_falcon",
     "name": "Koshi Falcon",
-    "img": "imagenes/KoshiFalcon.png",
+    "img": "imagenes/KoshiFalcon.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9433,7 +9433,7 @@
   {
     "id": "saitank",
     "name": "Saitank",
-    "img": "imagenes/Saitank.png",
+    "img": "imagenes/Saitank.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9452,7 +9452,7 @@
   {
     "id": "usunoro",
     "name": "Usunoro",
-    "img": "imagenes/Usunoro.png",
+    "img": "imagenes/Usunoro.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9471,7 +9471,7 @@
   {
     "id": "yamanba",
     "name": "Yamanba",
-    "img": "imagenes/Yamanba.png",
+    "img": "imagenes/Yamanba.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9490,7 +9490,7 @@
   {
     "id": "sheepshead",
     "name": "Sheepshead",
-    "img": "imagenes/Sheepshead.png",
+    "img": "imagenes/Sheepshead.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9509,7 +9509,7 @@
   {
     "id": "ginrummy",
     "name": "Ginrummy",
-    "img": "imagenes/Ginrummy.png",
+    "img": "imagenes/Ginrummy.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9531,7 +9531,7 @@
   {
     "id": "batman",
     "name": "Batman",
-    "img": "imagenes/Batman.png",
+    "img": "imagenes/Batman.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9550,7 +9550,7 @@
   {
     "id": "gazelleman",
     "name": "Gazelleman",
-    "img": "imagenes/Gazelleman.png",
+    "img": "imagenes/Gazelleman.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9569,7 +9569,7 @@
   {
     "id": "holedem",
     "name": "Holed'em",
-    "img": "imagenes/Holedem.png",
+    "img": "imagenes/Holedem.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9588,7 +9588,7 @@
   {
     "id": "mouseman",
     "name": "Mouseman",
-    "img": "imagenes/Mouseman.png",
+    "img": "imagenes/Mouseman.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9607,7 +9607,7 @@
   {
     "id": "speed",
     "name": "Speed",
-    "img": "imagenes/Speed.png",
+    "img": "imagenes/Speed.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9626,7 +9626,7 @@
   {
     "id": "rabbitman",
     "name": "Rabbitman",
-    "img": "imagenes/Rabbitman.png",
+    "img": "imagenes/Rabbitman.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9645,7 +9645,7 @@
   {
     "id": "snakeman",
     "name": "Snakeman",
-    "img": "imagenes/Snakeman.png",
+    "img": "imagenes/Snakeman.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9664,7 +9664,7 @@
   {
     "id": "sarahebi",
     "name": "Sarahebi",
-    "img": "imagenes/Sarahebi.png",
+    "img": "imagenes/Sarahebi.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9683,7 +9683,7 @@
   {
     "id": "dobon",
     "name": "Dobon",
-    "img": "imagenes/Dobon.png",
+    "img": "imagenes/Dobon.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9702,7 +9702,7 @@
   {
     "id": "alpacaman",
     "name": "Alpacaman",
-    "img": "imagenes/Alpacaman.png",
+    "img": "imagenes/Alpacaman.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9721,7 +9721,7 @@
   {
     "id": "solitaire",
     "name": "Solitaire",
-    "img": "imagenes/Solitaire.png",
+    "img": "imagenes/Solitaire.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9740,7 +9740,7 @@
   {
     "id": "daifugo",
     "name": "Daifugo",
-    "img": "imagenes/Daifugo.png",
+    "img": "imagenes/Daifugo.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9759,7 +9759,7 @@
   {
     "id": "babanuki",
     "name": "Babanuki",
-    "img": "imagenes/Babanuki.png",
+    "img": "imagenes/Babanuki.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9778,7 +9778,7 @@
   {
     "id": "madilloman",
     "name": "Madilloman",
-    "img": "imagenes/Madilloman.png",
+    "img": "imagenes/Madilloman.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9797,7 +9797,7 @@
   {
     "id": "dachoman",
     "name": "Dachoman",
-    "img": "imagenes/Dachoman.png",
+    "img": "imagenes/Dachoman.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9816,7 +9816,7 @@
   {
     "id": "bao_huang",
     "name": "Bao Huang",
-    "img": "imagenes/BaoHuang.png",
+    "img": "imagenes/BaoHuang.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9838,7 +9838,7 @@
   {
     "id": "briscola",
     "name": "Briscola",
-    "img": "imagenes/Briscola.png",
+    "img": "imagenes/Briscola.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9857,7 +9857,7 @@
   {
     "id": "fourtricks",
     "name": "Fourtricks",
-    "img": "imagenes/Fourtricks.png",
+    "img": "imagenes/Fourtricks.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9876,7 +9876,7 @@
   {
     "id": "hamlet",
     "name": "Hamlet",
-    "img": "imagenes/Hamlet.png",
+    "img": "imagenes/Hamlet.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9895,7 +9895,7 @@
   {
     "id": "mizerka",
     "name": "Mizerka",
-    "img": "imagenes/Mizerka.png",
+    "img": "imagenes/Mizerka.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9914,7 +9914,7 @@
   {
     "id": "poker",
     "name": "Poker",
-    "img": "imagenes/Poker.png",
+    "img": "imagenes/Poker.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9933,7 +9933,7 @@
   {
     "id": "tenjo_sagari",
     "name": "Tenjo-Sagari",
-    "img": "imagenes/TenjoSagari.png",
+    "img": "imagenes/TenjoSagari.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9952,7 +9952,7 @@
   {
     "id": "nure_onna",
     "name": "Nure-Onna",
-    "img": "imagenes/NureOnna.png",
+    "img": "imagenes/NureOnna.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9971,7 +9971,7 @@
   {
     "id": "caimanlady",
     "name": "Caimanlady",
-    "img": "imagenes/Caimanlady.png",
+    "img": "imagenes/Caimanlady.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -9993,7 +9993,7 @@
   {
     "id": "wanyudo",
     "name": "Wanyudo",
-    "img": "imagenes/Wanyudo.png",
+    "img": "imagenes/Wanyudo.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -10012,7 +10012,7 @@
   {
     "id": "scotch",
     "name": "Scotch",
-    "img": "imagenes/Scotch.png",
+    "img": "imagenes/Scotch.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -10025,7 +10025,7 @@
   {
     "id": "ahiru",
     "name": "Ahiru",
-    "img": "imagenes/Ahiru.png",
+    "img": "imagenes/Ahiru.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército Revolucionario", "dif": "facil"}
@@ -10041,7 +10041,7 @@
   {
     "id": "belo_betty",
     "name": "Belo Betty",
-    "img": "imagenes/BeloBetty.png",
+    "img": "imagenes/BeloBetty.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército Revolucionario", "dif": "facil"}
@@ -10065,7 +10065,7 @@
   {
     "id": "karasu",
     "name": "Karasu",
-    "img": "imagenes/Karasu.png",
+    "img": "imagenes/Karasu.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército Revolucionario", "dif": "facil"}
@@ -10087,7 +10087,7 @@
   {
     "id": "morley",
     "name": "Morley",
-    "img": "imagenes/Morley.png",
+    "img": "imagenes/Morley.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército Revolucionario", "dif": "facil"}
@@ -10118,7 +10118,7 @@
   {
     "id": "lindbergh",
     "name": "Lindbergh",
-    "img": "imagenes/Lindbergh.png",
+    "img": "imagenes/Lindbergh.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército Revolucionario", "dif": "facil"}
@@ -10141,7 +10141,7 @@
   {
     "id": "ginny",
     "name": "Ginny",
-    "img": "imagenes/Ginny.png",
+    "img": "imagenes/Ginny.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército Revolucionario", "dif": "facil"}
@@ -10160,7 +10160,7 @@
   {
     "id": "hack",
     "name": "Hack",
-    "img": "imagenes/Hack.png",
+    "img": "imagenes/Hack.webp",
     "tags": {
       "Banda": [
         {"val": "Ejército Revolucionario", "dif": "facil"}
@@ -10182,7 +10182,7 @@
   {
     "id": "nokokuwa_police",
     "name": "Nokokuwa Police",
-    "img": "imagenes/NokokuwaPolice.png",
+    "img": "imagenes/NokokuwaPolice.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -10201,7 +10201,7 @@
   {
     "id": "hermanos_doubt",
     "name": "Hermanos Doubt",
-    "img": "imagenes/HermanosDoubt.png",
+    "img": "imagenes/HermanosDoubt.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -10220,7 +10220,7 @@
   {
     "id": "hawkman",
     "name": "Hawkman",
-    "img": "imagenes/Hawkman.png",
+    "img": "imagenes/Hawkman.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -10242,7 +10242,7 @@
   {
     "id": "nightcrab_girl",
     "name": "Nightcrab Girl",
-    "img": "imagenes/NightcrabGirl.png",
+    "img": "imagenes/NightcrabGirl.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -10261,7 +10261,7 @@
   {
     "id": "redwolf",
     "name": "Redwolf",
-    "img": "imagenes/Redwolf.png",
+    "img": "imagenes/Redwolf.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -10280,7 +10280,7 @@
   {
     "id": "jumper",
     "name": "Jumper",
-    "img": "imagenes/Jumper.png",
+    "img": "imagenes/Jumper.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -10299,7 +10299,7 @@
   {
     "id": "chochinman",
     "name": "Chochinman",
-    "img": "imagenes/Chochinman.png",
+    "img": "imagenes/Chochinman.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -10318,7 +10318,7 @@
   {
     "id": "caucasusman",
     "name": "Caucasusman",
-    "img": "imagenes/Caucasusman.png",
+    "img": "imagenes/Caucasusman.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -10337,7 +10337,7 @@
   {
     "id": "kamakirigirl",
     "name": "Kamakirigirl",
-    "img": "imagenes/Kamakirigirl.png",
+    "img": "imagenes/Kamakirigirl.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -10356,7 +10356,7 @@
   {
     "id": "scorpionlady",
     "name": "Scorpionlady",
-    "img": "imagenes/Scorpionlady.png",
+    "img": "imagenes/Scorpionlady.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -10375,7 +10375,7 @@
   {
     "id": "horseman",
     "name": "Horseman",
-    "img": "imagenes/Horseman.png",
+    "img": "imagenes/Horseman.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -10394,7 +10394,7 @@
   {
     "id": "lapahn",
     "name": "Lapahn",
-    "img": "imagenes/Lapahn.png",
+    "img": "imagenes/Lapahn.webp",
     "tags": {
       "Banda": [
         {"val": "Reino de Sakura", "dif": "facil"}
@@ -10410,7 +10410,7 @@
   {
     "id": "surume",
     "name": "Surume",
-    "img": "imagenes/Surume.png",
+    "img": "imagenes/Surume.webp",
     "tags": {
       "Banda": [
         {"val": "Nuevos Piratas Gyojin", "dif": "media"}
@@ -10426,7 +10426,7 @@
   {
     "id": "aphelandra",
     "name": "Aphelandra",
-    "img": "imagenes/Aphelandra.png",
+    "img": "imagenes/Aphelandra.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Kuja", "dif": "facil"}
@@ -10451,7 +10451,7 @@
   {
     "id": "sweet_pea",
     "name": "Sweet Pea",
-    "img": "imagenes/SweetPea.png",
+    "img": "imagenes/SweetPea.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Kuja", "dif": "facil"}
@@ -10473,7 +10473,7 @@
   {
     "id": "kikyo",
     "name": "Kikyo",
-    "img": "imagenes/Kikyo.png",
+    "img": "imagenes/Kikyo.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Kuja", "dif": "facil"}
@@ -10495,7 +10495,7 @@
   {
     "id": "belladonna",
     "name": "Belladonna",
-    "img": "imagenes/Belladonna.png",
+    "img": "imagenes/Belladonna.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Kuja", "dif": "facil"}
@@ -10517,7 +10517,7 @@
   {
     "id": "tritoma",
     "name": "Tritoma",
-    "img": "imagenes/Tritoma.png",
+    "img": "imagenes/Tritoma.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Kuja", "dif": "facil"}
@@ -10542,7 +10542,7 @@
   {
     "id": "salome",
     "name": "Salome",
-    "img": "imagenes/Salome.png",
+    "img": "imagenes/Salome.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Kuja", "dif": "facil"}
@@ -10558,7 +10558,7 @@
   {
     "id": "harald",
     "name": "Harald",
-    "img": "imagenes/Harald.png",
+    "img": "imagenes/Harald.webp",
     "tags": {
       "Raza": [
         {"val": "Gigantes", "dif": "facil"}
@@ -10581,7 +10581,7 @@
   {
     "id": "bell_mere",
     "name": "Bell-mère",
-    "img": "imagenes/BellMere.png",
+    "img": "imagenes/BellMere.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -10603,7 +10603,7 @@
   {
     "id": "pedro",
     "name": "Pedro",
-    "img": "imagenes/Pedro.png",
+    "img": "imagenes/Pedro.webp",
     "tags": {
       "Raza": [
         {"val": "Minks", "dif": "media"}
@@ -10628,7 +10628,7 @@
   {
     "id": "carrot",
     "name": "Carrot",
-    "img": "imagenes/Carrot.png",
+    "img": "imagenes/Carrot.webp",
     "tags": {
       "Raza": [
         {"val": "Minks", "dif": "media"}
@@ -10647,7 +10647,7 @@
   {
     "id": "scarlett",
     "name": "Scarlett",
-    "img": "imagenes/Scarlett.png",
+    "img": "imagenes/Scarlett.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Riku", "dif": "media"}
@@ -10660,7 +10660,7 @@
   {
     "id": "kyros",
     "name": "Kyros",
-    "img": "imagenes/Kyros.png",
+    "img": "imagenes/Kyros.webp",
     "tags": {
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
@@ -10682,7 +10682,7 @@
   {
     "id": "riku_doldo_iii",
     "name": "Riku Doldo III",
-    "img": "imagenes/RikuDoldoIII.png",
+    "img": "imagenes/RikuDoldoIII.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Riku", "dif": "media"}
@@ -10698,7 +10698,7 @@
   {
     "id": "banchina",
     "name": "Banchina",
-    "img": "imagenes/Banchina.png",
+    "img": "imagenes/Banchina.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
@@ -10714,7 +10714,7 @@
   {
     "id": "madre_carmel",
     "name": "Madre Carmel",
-    "img": "imagenes/MadreCarmel.png",
+    "img": "imagenes/MadreCarmel.webp",
     "tags": {
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
@@ -10730,7 +10730,7 @@
   {
     "id": "charlotte_opera",
     "name": "Charlotte Opera",
-    "img": "imagenes/CharlotteOpera.png",
+    "img": "imagenes/CharlotteOpera.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Big Mom", "dif": "facil"},
@@ -10744,7 +10744,7 @@
   {
     "id": "fisher_tiger",
     "name": "Fisher Tiger",
-    "img": "imagenes/FisherTiger.png",
+    "img": "imagenes/FisherTiger.webp",
     "tags": {
       "Raza": [
         {"val": "Gyojins", "dif": "facil"}
@@ -10770,7 +10770,7 @@
   {
     "id": "jorul",
     "name": "Jorul",
-    "img": "imagenes/Jorul.png",
+    "img": "imagenes/Jorul.webp",
     "tags": {
       "Raza": [
         {"val": "Gigantes", "dif": "facil"}
@@ -10793,7 +10793,7 @@
   {
     "id": "toki",
     "name": "Kozuki Toki",
-    "img": "imagenes/Toki.png",
+    "img": "imagenes/Toki.webp",
     "tags": {
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
@@ -10812,7 +10812,7 @@
   {
     "id": "hiyori",
     "name": "Kozuki Hiyori",
-    "img": "imagenes/Hiyori.png",
+    "img": "imagenes/Hiyori.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Kozuki", "dif": "media"},
@@ -10829,7 +10829,7 @@
   {
     "id": "sukiyaki",
     "name": "Kozuki Sukiyaki",
-    "img": "imagenes/Sukiyaki.png",
+    "img": "imagenes/Sukiyaki.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Kozuki", "dif": "media"},
@@ -10843,7 +10843,7 @@
   {
     "id": "vinsmoke_sora",
     "name": "Vinsmoke Sora",
-    "img": "imagenes/VinsmokeSora.png",
+    "img": "imagenes/VinsmokeSora.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
@@ -10862,7 +10862,7 @@
   {
     "id": "t_bone",
     "name": "T-Bone",
-    "img": "imagenes/TBone.png",
+    "img": "imagenes/TBone.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -10890,7 +10890,7 @@
   {
     "id": "otohime",
     "name": "Otohime",
-    "img": "imagenes/Otohime.png",
+    "img": "imagenes/Otohime.webp",
     "tags": {
       "Raza": [
         {"val": "Gyojins", "dif": "facil"}
@@ -10912,7 +10912,7 @@
   {
     "id": "neptune",
     "name": "Neptune",
-    "img": "imagenes/Neptune.png",
+    "img": "imagenes/Neptune.webp",
     "tags": {
       "Raza": [
         {"val": "Gyojins", "dif": "facil"}
@@ -10934,7 +10934,7 @@
   {
     "id": "mamboshi",
     "name": "Mamboshi",
-    "img": "imagenes/Mamboshi.png",
+    "img": "imagenes/Mamboshi.webp",
     "tags": {
       "Raza": [
         {"val": "Gyojins", "dif": "facil"}
@@ -10953,7 +10953,7 @@
   {
     "id": "nefertari_titi",
     "name": "Nefertari Titi",
-    "img": "imagenes/NefertariTiti.png",
+    "img": "imagenes/NefertariTiti.webp",
     "tags": {
       "Banda": [
         {"val": "Reino de Alabasta", "dif": "facil"}
@@ -10972,7 +10972,7 @@
   {
     "id": "mont_blanc_noland",
     "name": "Mont Blanc Noland",
-    "img": "imagenes/MontBlancNoland.png",
+    "img": "imagenes/MontBlancNoland.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
@@ -10985,7 +10985,7 @@
   {
     "id": "brulee",
     "name": "Charlotte Brûlée",
-    "img": "imagenes/CharlotteBrulee.png",
+    "img": "imagenes/CharlotteBrulee.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -10999,7 +10999,7 @@
   {
     "id": "perospero",
     "name": "Charlotte Perospero",
-    "img": "imagenes/CharlottePerospero.png",
+    "img": "imagenes/CharlottePerospero.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11019,7 +11019,7 @@
   {
     "id": "oven",
     "name": "Charlotte Oven",
-    "img": "imagenes/CharlotteOven.png",
+    "img": "imagenes/CharlotteOven.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11036,7 +11036,7 @@
   {
     "id": "daifuku",
     "name": "Charlotte Daifuku",
-    "img": "imagenes/CharlotteDaifuku.png",
+    "img": "imagenes/CharlotteDaifuku.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11053,7 +11053,7 @@
   {
     "id": "cracker",
     "name": "Charlotte Cracker",
-    "img": "imagenes/CharlotteCracker.png",
+    "img": "imagenes/CharlotteCracker.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11076,7 +11076,7 @@
   {
     "id": "snack",
     "name": "Charlotte Snack",
-    "img": "imagenes/CharlotteSnack.png",
+    "img": "imagenes/CharlotteSnack.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11090,7 +11090,7 @@
   {
     "id": "mont_dor",
     "name": "Charlotte Mont-d'Or",
-    "img": "imagenes/CharlotteMontDor.png",
+    "img": "imagenes/CharlotteMontDor.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11107,7 +11107,7 @@
   {
     "id": "moscato",
     "name": "Charlotte Moscato",
-    "img": "imagenes/CharlotteMoscato.png",
+    "img": "imagenes/CharlotteMoscato.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11118,7 +11118,7 @@
   {
     "id": "praline",
     "name": "Charlotte Praline",
-    "img": "imagenes/CharlottePraline.png",
+    "img": "imagenes/CharlottePraline.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11132,7 +11132,7 @@
   {
     "id": "galette",
     "name": "Charlotte Galette",
-    "img": "imagenes/CharlotteGalette.png",
+    "img": "imagenes/CharlotteGalette.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11146,7 +11146,7 @@
   {
     "id": "lola",
     "name": "Charlotte Lola",
-    "img": "imagenes/CharlotteLola.png",
+    "img": "imagenes/CharlotteLola.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"}
@@ -11159,7 +11159,7 @@
   {
     "id": "flampe",
     "name": "Charlotte Flampe",
-    "img": "imagenes/CharlotteFlampe.png",
+    "img": "imagenes/CharlotteFlampe.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11170,7 +11170,7 @@
   {
     "id": "amande",
     "name": "Charlotte Amande",
-    "img": "imagenes/CharlotteAmande.png",
+    "img": "imagenes/CharlotteAmande.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11188,7 +11188,7 @@
   {
     "id": "mascarpone",
     "name": "Charlotte Mascarpone",
-    "img": "imagenes/CharlotteMascarpone.png",
+    "img": "imagenes/CharlotteMascarpone.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11202,7 +11202,7 @@
   {
     "id": "joscarpone",
     "name": "Charlotte Joscarpone",
-    "img": "imagenes/CharlotteJoscarpone.png",
+    "img": "imagenes/CharlotteJoscarpone.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11216,7 +11216,7 @@
   {
     "id": "wiro",
     "name": "Charlotte Wiro",
-    "img": "imagenes/CharlotteWiro.png",
+    "img": "imagenes/CharlotteWiro.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11230,7 +11230,7 @@
   {
     "id": "mondee",
     "name": "Charlotte Mondée",
-    "img": "imagenes/CharlotteMondee.png",
+    "img": "imagenes/CharlotteMondee.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11244,7 +11244,7 @@
   {
     "id": "hachee",
     "name": "Charlotte Hachée",
-    "img": "imagenes/CharlotteHachee.png",
+    "img": "imagenes/CharlotteHachee.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11258,7 +11258,7 @@
   {
     "id": "effilee",
     "name": "Charlotte Effilée",
-    "img": "imagenes/CharlotteEffilee.png",
+    "img": "imagenes/CharlotteEffilee.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11272,7 +11272,7 @@
   {
     "id": "aladine",
     "name": "Aladine",
-    "img": "imagenes/Aladine.png",
+    "img": "imagenes/Aladine.webp",
     "tags": {
       "Raza": [
         {"val": "Gyojins", "dif": "facil"}
@@ -11294,7 +11294,7 @@
   {
     "id": "elizabello_ii",
     "name": "Elizabello II",
-    "img": "imagenes/ElizabelloII.png",
+    "img": "imagenes/ElizabelloII.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -11316,7 +11316,7 @@
   {
     "id": "dagama",
     "name": "Dagama",
-    "img": "imagenes/Dagama.png",
+    "img": "imagenes/Dagama.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -11338,7 +11338,7 @@
   {
     "id": "kelly_funk",
     "name": "Kelly Funk",
-    "img": "imagenes/KellyFunk.png",
+    "img": "imagenes/KellyFunk.webp",
     "tags": {
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
@@ -11360,7 +11360,7 @@
   {
     "id": "bobby_funk",
     "name": "Bobby Funk",
-    "img": "imagenes/BobbyFunk.png",
+    "img": "imagenes/BobbyFunk.webp",
     "tags": {
       "Sugar": [
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
@@ -11382,7 +11382,7 @@
   {
     "id": "vista",
     "name": "Vista",
-    "img": "imagenes/Vista.png",
+    "img": "imagenes/Vista.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -11408,7 +11408,7 @@
   {
     "id": "monet",
     "name": "Monet",
-    "img": "imagenes/Monet.png",
+    "img": "imagenes/Monet.webp",
     "tags": {
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"}
@@ -11430,7 +11430,7 @@
   {
     "id": "spandine",
     "name": "Spandine",
-    "img": "imagenes/Spandine.png",
+    "img": "imagenes/Spandine.webp",
     "tags": {
       "Banda": [
         {"val": "CP9", "dif": "facil"}
@@ -11449,7 +11449,7 @@
   {
     "id": "uta",
     "name": "Uta",
-    "img": "imagenes/Uta.png",
+    "img": "imagenes/Uta.webp",
     "tags": {
       "Especialidad": [
         {"val": "Músicos", "dif": "dificil"}
@@ -11465,7 +11465,7 @@
   {
     "id": "sancrin",
     "name": "Sancrin",
-    "img": "imagenes/Sancrin.png",
+    "img": "imagenes/Sancrin.webp",
     "tags": {
       "Raza": [
         {"val": "Tribu de brazos largos", "dif": "media"}
@@ -11478,7 +11478,7 @@
   {
     "id": "charlotte_mobile",
     "name": "Charlotte Mobile",
-    "img": "imagenes/CharlotteMobile.png",
+    "img": "imagenes/CharlotteMobile.webp",
     "tags": {
       "Raza": [
         {"val": "Tribu de brazos largos", "dif": "media"}
@@ -11492,7 +11492,7 @@
   {
     "id": "charlotte_myukuru",
     "name": "Charlotte Myukuru",
-    "img": "imagenes/CharlotteMyukuru.png",
+    "img": "imagenes/CharlotteMyukuru.webp",
     "tags": {
       "Raza": [
         {"val": "Tribu de brazos largos", "dif": "media"}
@@ -11506,7 +11506,7 @@
   {
     "id": "charlotte_marble",
     "name": "Charlotte Marble",
-    "img": "imagenes/CharlotteMarble.png",
+    "img": "imagenes/CharlotteMarble.webp",
     "tags": {
       "Raza": [
         {"val": "Tribu de brazos largos", "dif": "media"}
@@ -11520,7 +11520,7 @@
   {
     "id": "mohji",
     "name": "Mohji",
-    "img": "imagenes/Mohji.png",
+    "img": "imagenes/Mohji.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Buggy", "dif": "facil"},
@@ -11534,7 +11534,7 @@
   {
     "id": "cabaji",
     "name": "Cabaji",
-    "img": "imagenes/Cabaji.png",
+    "img": "imagenes/Cabaji.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Buggy", "dif": "facil"},
@@ -11554,7 +11554,7 @@
   {
     "id": "richie",
     "name": "Richie",
-    "img": "imagenes/Richie.png",
+    "img": "imagenes/Richie.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Buggy", "dif": "facil"},
@@ -11568,7 +11568,7 @@
   {
     "id": "biblo",
     "name": "Biblo",
-    "img": "imagenes/Biblo.png",
+    "img": "imagenes/Biblo.webp",
     "tags": {
       "Banda": [
         {"val": "Elbaf", "dif": "facil"}
@@ -11584,7 +11584,7 @@
   {
     "id": "kujaku",
     "name": "Kujaku",
-    "img": "imagenes/Kujaku.png",
+    "img": "imagenes/Kujaku.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"},
@@ -11608,7 +11608,7 @@
   {
     "id": "helmeppo",
     "name": "Helmeppo",
-    "img": "imagenes/Helmeppo.png",
+    "img": "imagenes/Helmeppo.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"},
@@ -11637,7 +11637,7 @@
   {
     "id": "pudding",
     "name": "Charlotte Pudding",
-    "img": "imagenes/Pudding.png",
+    "img": "imagenes/Pudding.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11654,7 +11654,7 @@
   {
     "id": "dellinger",
     "name": "Dellinger",
-    "img": "imagenes/Dellinger.png",
+    "img": "imagenes/Dellinger.webp",
     "tags": {
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"}
@@ -11680,7 +11680,7 @@
   {
     "id": "gladius",
     "name": "Gladius",
-    "img": "imagenes/Gladius.png",
+    "img": "imagenes/Gladius.webp",
     "tags": {
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"}
@@ -11700,7 +11700,7 @@
   {
     "id": "machvise",
     "name": "Machvise",
-    "img": "imagenes/Machvise.png",
+    "img": "imagenes/Machvise.webp",
     "tags": {
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"}
@@ -11722,7 +11722,7 @@
   {
     "id": "buffalo",
     "name": "Buffalo",
-    "img": "imagenes/Buffalo.png",
+    "img": "imagenes/Buffalo.webp",
     "tags": {
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"}
@@ -11738,7 +11738,7 @@
   {
     "id": "kumashi",
     "name": "Kumashi",
-    "img": "imagenes/Kumashi.png",
+    "img": "imagenes/Kumashi.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Thriller Bark", "dif": "facil"},
@@ -11756,7 +11756,7 @@
   {
     "id": "cindry",
     "name": "Victoria Cindry",
-    "img": "imagenes/Cindry.png",
+    "img": "imagenes/Cindry.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Thriller Bark", "dif": "facil"},
@@ -11774,7 +11774,7 @@
   {
     "id": "oars",
     "name": "Oars",
-    "img": "imagenes/Oars.png",
+    "img": "imagenes/Oars.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Thriller Bark", "dif": "facil"},
@@ -11797,7 +11797,7 @@
   {
     "id": "ryuma",
     "name": "Shimotsuki Ryuma",
-    "img": "imagenes/Ryuma.png",
+    "img": "imagenes/Ryuma.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Thriller Bark", "dif": "facil"},
@@ -11822,7 +11822,7 @@
   {
     "id": "hildon",
     "name": "Hildon",
-    "img": "imagenes/Hildon.png",
+    "img": "imagenes/Hildon.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Thriller Bark", "dif": "facil"},
@@ -11840,7 +11840,7 @@
   {
     "id": "lola_zombie",
     "name": "Lola (Zombi)",
-    "img": "imagenes/LolaZombie.png",
+    "img": "imagenes/LolaZombie.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Thriller Bark", "dif": "facil"},
@@ -11858,7 +11858,7 @@
   {
     "id": "jigoro",
     "name": "Jigoro",
-    "img": "imagenes/Jigoro.png",
+    "img": "imagenes/Jigoro.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Thriller Bark", "dif": "facil"},
@@ -11879,7 +11879,7 @@
   {
     "id": "inuppe",
     "name": "Inuppe",
-    "img": "imagenes/Inuppe.png",
+    "img": "imagenes/Inuppe.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Thriller Bark", "dif": "facil"},
@@ -11898,7 +11898,7 @@
   {
     "id": "tararan",
     "name": "Tararan",
-    "img": "imagenes/Tararan.png",
+    "img": "imagenes/Tararan.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Thriller Bark", "dif": "facil"},
@@ -11916,7 +11916,7 @@
   {
     "id": "giolla",
     "name": "Giolla",
-    "img": "imagenes/Giolla.png",
+    "img": "imagenes/Giolla.webp",
     "tags": {
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"}
@@ -11935,7 +11935,7 @@
   {
     "id": "lao_g",
     "name": "Lao G",
-    "img": "imagenes/LaoG.png",
+    "img": "imagenes/LaoG.webp",
     "tags": {
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"}
@@ -11951,7 +11951,7 @@
   {
     "id": "kyuin",
     "name": "Kyuin",
-    "img": "imagenes/Kyuin.png",
+    "img": "imagenes/Kyuin.webp",
     "tags": {
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"}
@@ -11967,7 +11967,7 @@
   {
     "id": "shaka",
     "name": "Shaka",
-    "img": "imagenes/Shaka.png",
+    "img": "imagenes/Shaka.webp",
     "tags": {
       "Banda": [
         {"val": "Satélites de Vegapunk", "dif": "media"}
@@ -11986,7 +11986,7 @@
   {
     "id": "lilith",
     "name": "Lilith",
-    "img": "imagenes/Lilith.png",
+    "img": "imagenes/Lilith.webp",
     "tags": {
       "Banda": [
         {"val": "Satélites de Vegapunk", "dif": "media"}
@@ -12002,7 +12002,7 @@
   {
     "id": "edison",
     "name": "Edison",
-    "img": "imagenes/Edison.png",
+    "img": "imagenes/Edison.webp",
     "tags": {
       "Banda": [
         {"val": "Satélites de Vegapunk", "dif": "media"}
@@ -12018,7 +12018,7 @@
   {
     "id": "pythagoras",
     "name": "Pythagoras",
-    "img": "imagenes/Pythagoras.png",
+    "img": "imagenes/Pythagoras.webp",
     "tags": {
       "Banda": [
         {"val": "Satélites de Vegapunk", "dif": "media"}
@@ -12034,7 +12034,7 @@
   {
     "id": "atlas",
     "name": "Atlas",
-    "img": "imagenes/Atlas.png",
+    "img": "imagenes/Atlas.webp",
     "tags": {
       "Banda": [
         {"val": "Satélites de Vegapunk", "dif": "media"}
@@ -12050,7 +12050,7 @@
   {
     "id": "york",
     "name": "York",
-    "img": "imagenes/York.png",
+    "img": "imagenes/York.webp",
     "tags": {
       "Banda": [
         {"val": "Satélites de Vegapunk", "dif": "media"}
@@ -12072,7 +12072,7 @@
   {
     "id": "johnny",
     "name": "Johnny",
-    "img": "imagenes/Johnny.png",
+    "img": "imagenes/Johnny.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
@@ -12088,7 +12088,7 @@
   {
     "id": "yosaku",
     "name": "Yosaku",
-    "img": "imagenes/Yosaku.png",
+    "img": "imagenes/Yosaku.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
@@ -12104,7 +12104,7 @@
   {
     "id": "caribou",
     "name": "Caribou",
-    "img": "imagenes/Caribou.png",
+    "img": "imagenes/Caribou.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: South Blue", "dif": "dificil"}
@@ -12126,7 +12126,7 @@
   {
     "id": "coribou",
     "name": "Coribou",
-    "img": "imagenes/Coribou.png",
+    "img": "imagenes/Coribou.webp",
     "tags": {
       "Recompensa": [
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
@@ -12142,7 +12142,7 @@
   {
     "id": "albion",
     "name": "Albion",
-    "img": "imagenes/Albion.png",
+    "img": "imagenes/Albion.webp",
     "tags": {
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
@@ -12155,7 +12155,7 @@
   {
     "id": "lip_doughty",
     "name": "Lip Doughty",
-    "img": "imagenes/LipDoughty.png",
+    "img": "imagenes/LipDoughty.webp",
     "tags": {
       "Recompensa": [
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
@@ -12168,7 +12168,7 @@
   {
     "id": "bastille",
     "name": "Bastille",
-    "img": "imagenes/Bastille.png",
+    "img": "imagenes/Bastille.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -12187,7 +12187,7 @@
   {
     "id": "bobbin",
     "name": "Bobbin",
-    "img": "imagenes/Bobbin.png",
+    "img": "imagenes/Bobbin.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Big Mom", "dif": "facil"}
@@ -12201,7 +12201,7 @@
   {
     "id": "oars_jr",
     "name": "Little Oars Jr.",
-    "img": "imagenes/OarsJr.png",
+    "img": "imagenes/OarsJr.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -12220,7 +12220,7 @@
   {
     "id": "colon",
     "name": "Colon",
-    "img": "imagenes/Colon.png",
+    "img": "imagenes/Colon.webp",
     "tags": {
       "Raza": [
         {"val": "Gigantes", "dif": "facil"}
@@ -12233,7 +12233,7 @@
   {
     "id": "charlotte_normande",
     "name": "Charlotte Normande",
-    "img": "imagenes/CharlotteNormande.png",
+    "img": "imagenes/CharlotteNormande.webp",
     "tags": {
       "Edad": [
         {"val": "Menores de edad", "dif": "dificil"}
@@ -12250,7 +12250,7 @@
   {
     "id": "hina",
     "name": "Hina",
-    "img": "imagenes/Hina.png",
+    "img": "imagenes/Hina.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -12273,7 +12273,7 @@
   {
     "id": "hyogoro",
     "name": "Hyogoro",
-    "img": "imagenes/Hyogoro.png",
+    "img": "imagenes/Hyogoro.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"}
@@ -12297,7 +12297,7 @@
   {
     "id": "avalo_pizarro",
     "name": "Avalo Pizarro",
-    "img": "imagenes/AvaloPizarro.png",
+    "img": "imagenes/AvaloPizarro.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbanegra", "dif": "facil"}
@@ -12323,7 +12323,7 @@
   {
     "id": "vasco_shot",
     "name": "Vasco Shot",
-    "img": "imagenes/VascoShot.png",
+    "img": "imagenes/VascoShot.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbanegra", "dif": "facil"}
@@ -12342,7 +12342,7 @@
   {
     "id": "sadi",
     "name": "Sadi",
-    "img": "imagenes/Sadi.png",
+    "img": "imagenes/Sadi.webp",
     "tags": {
       "Banda": [
         {"val": "Trabajadores de Impel Down", "dif": "media"}
@@ -12361,7 +12361,7 @@
   {
     "id": "minotaurus",
     "name": "Minotaurus",
-    "img": "imagenes/Minotaurus.png",
+    "img": "imagenes/Minotaurus.webp",
     "tags": {
       "Banda": [
         {"val": "Trabajadores de Impel Down", "dif": "media"}
@@ -12383,7 +12383,7 @@
   {
     "id": "minokoala",
     "name": "Minokoala",
-    "img": "imagenes/Minokoala.png",
+    "img": "imagenes/Minokoala.webp",
     "tags": {
       "Banda": [
         {"val": "Trabajadores de Impel Down", "dif": "media"}
@@ -12402,7 +12402,7 @@
   {
     "id": "minorhinoceros",
     "name": "Minorhinoceros",
-    "img": "imagenes/Minorhinoceros.png",
+    "img": "imagenes/Minorhinoceros.webp",
     "tags": {
       "Banda": [
         {"val": "Trabajadores de Impel Down", "dif": "media"}
@@ -12424,7 +12424,7 @@
   {
     "id": "minozebra",
     "name": "Minozebra",
-    "img": "imagenes/Minozebra.png",
+    "img": "imagenes/Minozebra.webp",
     "tags": {
       "Banda": [
         {"val": "Trabajadores de Impel Down", "dif": "media"}
@@ -12443,7 +12443,7 @@
   {
     "id": "blugori",
     "name": "Blugori",
-    "img": "imagenes/Blugori.png",
+    "img": "imagenes/Blugori.webp",
     "tags": {
       "Raza": [
         {"val": "Animales", "dif": "media"}
@@ -12456,7 +12456,7 @@
   {
     "id": "morgans",
     "name": "\"Big News\" Morgans",
-    "img": "imagenes/Morgans.png",
+    "img": "imagenes/Morgans.webp",
     "tags": {
       "Fruta": [
         {"val": "Fruta del diablo: Zoan", "dif": "media"}
@@ -12472,7 +12472,7 @@
   {
     "id": "tsuru",
     "name": "Tsuru",
-    "img": "imagenes/Tsuru.png",
+    "img": "imagenes/Tsuru.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -12494,7 +12494,7 @@
   {
     "id": "onigumo",
     "name": "Onigumo",
-    "img": "imagenes/Onigumo.png",
+    "img": "imagenes/Onigumo.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -12517,7 +12517,7 @@
   {
     "id": "kuro",
     "name": "Kuro (Klahadore)",
-    "img": "imagenes/Kuro.png",
+    "img": "imagenes/Kuro.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas del Gato Negro", "dif": "facil"}
@@ -12548,7 +12548,7 @@
   {
     "id": "don_krieg",
     "name": "Don Krieg",
-    "img": "imagenes/DonKrieg.png",
+    "img": "imagenes/DonKrieg.webp",
     "tags": {
       "Haki": [
         {"val": "Sin haki", "dif": "dificil"}
@@ -12573,7 +12573,7 @@
   {
     "id": "foxy",
     "name": "Foxy",
-    "img": "imagenes/Foxy.png",
+    "img": "imagenes/Foxy.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Foxy", "dif": "media"}
@@ -12601,7 +12601,7 @@
   {
     "id": "gin",
     "name": "Gin",
-    "img": "imagenes/Gin.png",
+    "img": "imagenes/Gin.webp",
     "tags": {
       "Haki": [
         {"val": "Sin haki", "dif": "dificil"}
@@ -12623,7 +12623,7 @@
   {
     "id": "pearl",
     "name": "Pearl",
-    "img": "imagenes/Pearl.png",
+    "img": "imagenes/Pearl.webp",
     "tags": {
       "Haki": [
         {"val": "Sin haki", "dif": "dificil"}
@@ -12642,7 +12642,7 @@
   {
     "id": "buchi",
     "name": "Buchi",
-    "img": "imagenes/Buchi.png",
+    "img": "imagenes/Buchi.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas del Gato Negro", "dif": "facil"}
@@ -12667,7 +12667,7 @@
   {
     "id": "sham",
     "name": "Sham",
-    "img": "imagenes/Sham.png",
+    "img": "imagenes/Sham.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas del Gato Negro", "dif": "facil"}
@@ -12692,7 +12692,7 @@
   {
     "id": "jango",
     "name": "Jango",
-    "img": "imagenes/Jango.png",
+    "img": "imagenes/Jango.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas del Gato Negro", "dif": "facil"},
@@ -12719,7 +12719,7 @@
   {
     "id": "itomimizu",
     "name": "Itomimizu",
-    "img": "imagenes/Itomimizu.png",
+    "img": "imagenes/Itomimizu.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Foxy", "dif": "media"},
@@ -12733,7 +12733,7 @@
   {
     "id": "chuchun",
     "name": "Chuchun",
-    "img": "imagenes/Chuchun.png",
+    "img": "imagenes/Chuchun.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Foxy", "dif": "media"},
@@ -12750,7 +12750,7 @@
   {
     "id": "capote",
     "name": "Capote",
-    "img": "imagenes/Capote.png",
+    "img": "imagenes/Capote.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Foxy", "dif": "media"},
@@ -12767,7 +12767,7 @@
   {
     "id": "monda",
     "name": "Monda",
-    "img": "imagenes/Monda.png",
+    "img": "imagenes/Monda.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Foxy", "dif": "media"},
@@ -12784,7 +12784,7 @@
   {
     "id": "pickles",
     "name": "Pickles",
-    "img": "imagenes/Pickles.png",
+    "img": "imagenes/Pickles.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Foxy", "dif": "media"},
@@ -12798,7 +12798,7 @@
   {
     "id": "bigpan",
     "name": "Big Pan",
-    "img": "imagenes/BigPan.png",
+    "img": "imagenes/BigPan.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Foxy", "dif": "media"},
@@ -12816,7 +12816,7 @@
   {
     "id": "porche",
     "name": "Porche",
-    "img": "imagenes/Porche.png",
+    "img": "imagenes/Porche.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Foxy", "dif": "media"},
@@ -12831,7 +12831,7 @@
   {
     "id": "hamburg",
     "name": "Hamburg",
-    "img": "imagenes/Hamburg.png",
+    "img": "imagenes/Hamburg.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Foxy", "dif": "media"},
@@ -12846,7 +12846,7 @@
   {
     "id": "shushu",
     "name": "Shushu",
-    "img": "imagenes/Shushu.png",
+    "img": "imagenes/Shushu.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
@@ -12859,7 +12859,7 @@
   {
     "id": "dadan",
     "name": "Curly Dadan",
-    "img": "imagenes/Dadan.png",
+    "img": "imagenes/Dadan.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
@@ -12875,7 +12875,7 @@
   {
     "id": "capitan_morgan",
     "name": "Capitán Morgan",
-    "img": "imagenes/CapitanMorgan.png",
+    "img": "imagenes/CapitanMorgan.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -12894,7 +12894,7 @@
   {
     "id": "wanze",
     "name": "Wanze",
-    "img": "imagenes/Wanze.png",
+    "img": "imagenes/Wanze.webp",
     "tags": {
       "Banda": [
         {"val": "CP9", "dif": "facil"}
@@ -12925,7 +12925,7 @@
   {
     "id": "miyagi",
     "name": "Miyagi",
-    "img": "imagenes/Miyagi.png",
+    "img": "imagenes/Miyagi.webp",
     "tags": {
       "Raza": [
         {"val": "Minks", "dif": "media"}
@@ -12941,7 +12941,7 @@
   {
     "id": "tristan",
     "name": "Tristan",
-    "img": "imagenes/Tristan.png",
+    "img": "imagenes/Tristan.webp",
     "tags": {
       "Raza": [
         {"val": "Minks", "dif": "media"}
@@ -12957,7 +12957,7 @@
   {
     "id": "fullbody",
     "name": "Fullbody",
-    "img": "imagenes/Fullbody.png",
+    "img": "imagenes/Fullbody.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -12976,7 +12976,7 @@
   {
     "id": "zeff",
     "name": "Zeff",
-    "img": "imagenes/Zeff.png",
+    "img": "imagenes/Zeff.webp",
     "tags": {
       "Especialidad": [
         {"val": "Cocineros", "dif": "dificil"},
@@ -12990,7 +12990,7 @@
   {
     "id": "patty",
     "name": "Patty",
-    "img": "imagenes/Patty.png",
+    "img": "imagenes/Patty.webp",
     "tags": {
       "Especialidad": [
         {"val": "Cocineros", "dif": "dificil"}
@@ -13003,7 +13003,7 @@
   {
     "id": "carne",
     "name": "Carne",
-    "img": "imagenes/Carne.png",
+    "img": "imagenes/Carne.webp",
     "tags": {
       "Especialidad": [
         {"val": "Cocineros", "dif": "dificil"}
@@ -13016,7 +13016,7 @@
   {
     "id": "shu",
     "name": "Shu",
-    "img": "imagenes/Shu.png",
+    "img": "imagenes/Shu.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -13032,7 +13032,7 @@
   {
     "id": "berry_good",
     "name": "Very Good",
-    "img": "imagenes/BerryGood.png",
+    "img": "imagenes/BerryGood.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -13048,7 +13048,7 @@
   {
     "id": "strawberry",
     "name": "Strawberry",
-    "img": "imagenes/Strawberry.png",
+    "img": "imagenes/Strawberry.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -13077,7 +13077,7 @@
   {
     "id": "john_giant",
     "name": "John Giant",
-    "img": "imagenes/JohnGiant.png",
+    "img": "imagenes/JohnGiant.webp",
     "tags": {
       "Banda": [
         {"val": "Elbaf", "dif": "facil"}
@@ -13106,7 +13106,7 @@
   {
     "id": "bluegrass",
     "name": "Bluegrass",
-    "img": "imagenes/Bluegrass.png",
+    "img": "imagenes/Bluegrass.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -13129,7 +13129,7 @@
   {
     "id": "doberman",
     "name": "Doberman",
-    "img": "imagenes/Doberman.png",
+    "img": "imagenes/Doberman.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -13157,7 +13157,7 @@
   {
     "id": "doll",
     "name": "Doll",
-    "img": "imagenes/Doll.png",
+    "img": "imagenes/Doll.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -13177,7 +13177,7 @@
   {
     "id": "maynard",
     "name": "Maynard",
-    "img": "imagenes/Maynard.png",
+    "img": "imagenes/Maynard.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -13204,7 +13204,7 @@
   {
     "id": "yamakaji",
     "name": "Yamakaji",
-    "img": "imagenes/Yamakaji.png",
+    "img": "imagenes/Yamakaji.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -13228,7 +13228,7 @@
   {
     "id": "urban",
     "name": "Urban",
-    "img": "imagenes/Urban.png",
+    "img": "imagenes/Urban.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -13254,7 +13254,7 @@
   {
     "id": "guillotine",
     "name": "Guillotine",
-    "img": "imagenes/Guillotine.png",
+    "img": "imagenes/Guillotine.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -13280,7 +13280,7 @@
   {
     "id": "pomsky",
     "name": "Pomsky",
-    "img": "imagenes/Pomsky.png",
+    "img": "imagenes/Pomsky.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -13307,7 +13307,7 @@
   {
     "id": "lonz",
     "name": "Lonz",
-    "img": "imagenes/Lonz.png",
+    "img": "imagenes/Lonz.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -13330,7 +13330,7 @@
   {
     "id": "yokozuna",
     "name": "Yokozuna",
-    "img": "imagenes/Yokozuna.png",
+    "img": "imagenes/Yokozuna.webp",
     "tags": {
       "Raza": [
         {"val": "Animales", "dif": "media"}
@@ -13346,7 +13346,7 @@
   {
     "id": "sentomaru",
     "name": "Sentomaru",
-    "img": "imagenes/Sentomaru.png",
+    "img": "imagenes/Sentomaru.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -13370,9 +13370,9 @@
     }
   },
   {
-    "id": "sphinx",
-    "name": "Sphinx",
-    "img": "imagenes/Sphinx.png",
+    "id": "spinhx",
+    "name": "Spinhx",
+    "img": "imagenes/Spinhx.webp",
     "tags": {
       "Raza": [
         {"val": "Animales", "dif": "media"}
@@ -13388,7 +13388,7 @@
   {
     "id": "tropa_de_lobos",
     "name": "Tropa de lobos",
-    "img": "imagenes/TropaDeLobos.png",
+    "img": "imagenes/TropaDeLobos.webp",
     "tags": {
       "Raza": [
         {"val": "Animales", "dif": "media"}
@@ -13401,7 +13401,7 @@
   {
     "id": "manticora",
     "name": "Mantícora",
-    "img": "imagenes/Manticora.png",
+    "img": "imagenes/Manticora.webp",
     "tags": {
       "Raza": [
         {"val": "Animales", "dif": "media"}
@@ -13414,7 +13414,7 @@
   {
     "id": "basilisk",
     "name": "Basilisk",
-    "img": "imagenes/Basilisk.png",
+    "img": "imagenes/Basilisk.webp",
     "tags": {
       "Raza": [
         {"val": "Animales", "dif": "media"}
@@ -13427,7 +13427,7 @@
   {
     "id": "kaya",
     "name": "Kaya",
-    "img": "imagenes/Kaya.png",
+    "img": "imagenes/Kaya.webp",
     "tags": {
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
@@ -13440,7 +13440,7 @@
   {
     "id": "brannew",
     "name": "Brannew",
-    "img": "imagenes/Brannew.png",
+    "img": "imagenes/Brannew.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
@@ -13459,7 +13459,7 @@
   {
     "id": "pound",
     "name": "Pound",
-    "img": "imagenes/Pound.png",
+    "img": "imagenes/Pound.webp",
     "tags": {
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"}
@@ -13472,7 +13472,7 @@
   {
     "id": "komachiyo",
     "name": "Komachiyo",
-    "img": "imagenes/Komachiyo.png",
+    "img": "imagenes/Komachiyo.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"}
@@ -13485,7 +13485,7 @@
   {
     "id": "otsuru",
     "name": "Otsuru",
-    "img": "imagenes/Otsuru.png",
+    "img": "imagenes/Otsuru.webp",
     "tags": {
       "Banda": [
         {"val": "Wano", "dif": "facil"}
@@ -13498,7 +13498,7 @@
   {
     "id": "inbi",
     "name": "Inbi",
-    "img": "imagenes/Inbi.png",
+    "img": "imagenes/Inbi.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -13511,7 +13511,7 @@
   {
     "id": "zanki",
     "name": "Zanki",
-    "img": "imagenes/Zanki.png",
+    "img": "imagenes/Zanki.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
@@ -13524,7 +13524,7 @@
   {
     "id": "jigoku_benten",
     "name": "Jigoku Benten",
-    "img": "imagenes/JigokuBenten.png",
+    "img": "imagenes/JigokuBenten.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"},
@@ -13544,7 +13544,7 @@
   {
     "id": "chome",
     "name": "Chome",
-    "img": "imagenes/Chome.png",
+    "img": "imagenes/Chome.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"},
@@ -13561,7 +13561,7 @@
   {
     "id": "yazaemon",
     "name": "Yazaemon",
-    "img": "imagenes/Yazaemon.png",
+    "img": "imagenes/Yazaemon.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"},
@@ -13578,7 +13578,7 @@
   {
     "id": "fukurokuju",
     "name": "Fukurokuju",
-    "img": "imagenes/Fukurokuju.png",
+    "img": "imagenes/Fukurokuju.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"},
@@ -13598,7 +13598,7 @@
   {
     "id": "macro",
     "name": "Macro",
-    "img": "imagenes/Macro.png",
+    "img": "imagenes/Macro.webp",
     "tags": {
       "Raza": [
         {"val": "Gyojins", "dif": "media"}
@@ -13620,7 +13620,7 @@
   {
     "id": "gyaro",
     "name": "Gyaro",
-    "img": "imagenes/Gyaro.png",
+    "img": "imagenes/Gyaro.webp",
     "tags": {
       "Raza": [
         {"val": "Gyojins", "dif": "media"}
@@ -13642,7 +13642,7 @@
   {
     "id": "tansui",
     "name": "Tansui",
-    "img": "imagenes/Tansui.png",
+    "img": "imagenes/Tansui.webp",
     "tags": {
       "Raza": [
         {"val": "Gyojins", "dif": "media"}
@@ -13658,7 +13658,7 @@
   {
     "id": "tatch",
     "name": "Tatch",
-    "img": "imagenes/Tatch.png",
+    "img": "imagenes/Tatch.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -13680,7 +13680,7 @@
   {
     "id": "blamenco",
     "name": "Blamenco",
-    "img": "imagenes/Blamenco.png",
+    "img": "imagenes/Blamenco.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -13702,7 +13702,7 @@
   {
     "id": "rakuyo",
     "name": "Rakuyo",
-    "img": "imagenes/Rakuyo.png",
+    "img": "imagenes/Rakuyo.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -13718,7 +13718,7 @@
   {
     "id": "namur",
     "name": "Namur",
-    "img": "imagenes/Namur.png",
+    "img": "imagenes/Namur.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -13740,7 +13740,7 @@
   {
     "id": "curiel",
     "name": "Curiel",
-    "img": "imagenes/Curiel.png",
+    "img": "imagenes/Curiel.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -13764,7 +13764,7 @@
   {
     "id": "kingdew",
     "name": "Kingdew",
-    "img": "imagenes/Kingdew.png",
+    "img": "imagenes/Kingdew.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -13783,7 +13783,7 @@
   {
     "id": "haruta",
     "name": "Haruta",
-    "img": "imagenes/Haruta.png",
+    "img": "imagenes/Haruta.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -13802,7 +13802,7 @@
   {
     "id": "speed_jiru",
     "name": "Speed Jiru",
-    "img": "imagenes/SpeedJiru.png",
+    "img": "imagenes/SpeedJiru.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -13821,7 +13821,7 @@
   {
     "id": "blenheim",
     "name": "Blenheim",
-    "img": "imagenes/Blenheim.png",
+    "img": "imagenes/Blenheim.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -13843,7 +13843,7 @@
   {
     "id": "fossa",
     "name": "Fossa",
-    "img": "imagenes/Fossa.png",
+    "img": "imagenes/Fossa.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -13867,7 +13867,7 @@
   {
     "id": "atmos",
     "name": "Atmos",
-    "img": "imagenes/Atmos.png",
+    "img": "imagenes/Atmos.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -13891,7 +13891,7 @@
   {
     "id": "decalvan",
     "name": "Hermanos Decalvan",
-    "img": "imagenes/HermanosDecalvan.png",
+    "img": "imagenes/HermanosDecalvan.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -13908,7 +13908,7 @@
   {
     "id": "doma",
     "name": "Doma",
-    "img": "imagenes/Doma.png",
+    "img": "imagenes/Doma.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -13926,7 +13926,7 @@
   {
     "id": "squard",
     "name": "Squard",
-    "img": "imagenes/Squard.png",
+    "img": "imagenes/Squard.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -13945,7 +13945,7 @@
   {
     "id": "mcguy",
     "name": "McGuy",
-    "img": "imagenes/McGuy.png",
+    "img": "imagenes/McGuy.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbablanca", "dif": "facil"}
@@ -13959,7 +13959,7 @@
   {
     "id": "tank_lepanto",
     "name": "Tank Lepanto",
-    "img": "imagenes/TankLepanto.png",
+    "img": "imagenes/TankLepanto.webp",
     "tags": {
       "Peleas": [
         {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
@@ -13969,7 +13969,7 @@
   {
     "id": "jean_ango",
     "name": "Jean Ango",
-    "img": "imagenes/JeanAngo.png",
+    "img": "imagenes/JeanAngo.webp",
     "tags": {
       "Peleas": [
         {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
@@ -13979,7 +13979,7 @@
   {
     "id": "ucy",
     "name": "Ucy",
-    "img": "imagenes/Ucy.png",
+    "img": "imagenes/Ucy.webp",
     "tags": {
       "Raza": [
         {"val": "Animales", "dif": "media"}
