@@ -13034,9 +13034,9 @@
     }
   },
   {
-    "id": "berry_good",
+    "id": "very_good",
     "name": "Very Good",
-    "img": "imagenes/BerryGood.webp",
+    "img": "imagenes/VeryGood.webp",
     "tags": {
       "Banda": [
         {"val": "Marines", "dif": "facil"}
