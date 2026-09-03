@@ -13374,9 +13374,9 @@
     }
   },
   {
-    "id": "spinhx",
-    "name": "Spinhx",
-    "img": "imagenes/Spinhx.webp",
+    "id": "sphinx",
+    "name": "Sphinx",
+    "img": "imagenes/Sphinx.webp",
     "tags": {
       "Raza": [
         {"val": "Animales", "dif": "media"}
