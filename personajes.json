@@ -13370,9 +13370,9 @@
     }
   },
   {
-    "id": "spinhx",
-    "name": "Spinhx",
-    "img": "imagenes/Spinhx.png",
+    "id": "sphinx",
+    "name": "Sphinx",
+    "img": "imagenes/Sphinx.png",
     "tags": {
       "Raza": [
         {"val": "Animales", "dif": "media"}
