@@ -6,7 +6,8 @@
     "tags": {
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "facil"},
-        {"val": "Banda: Sombrero de Paja", "dif": "media"}
+        {"val": "Banda: Sombrero de Paja", "dif": "media"},
+        {"val": "Trabajadores del Baratie", "dif": "dificil"}
       ],
       "Titulo": [
         {"val": "Yonko", "dif": "facil"},
@@ -148,7 +149,9 @@
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "facil"},
         {"val": "Banda: Sombrero de Paja", "dif": "media"},
-        {"val": "Germa 66", "dif": "facil"}
+        {"val": "Germa 66", "dif": "facil"},
+        {"val": "Trabajadores del Baratie", "dif": "facil"},
+        {"val": "Trabajadores del Baratie", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
@@ -10062,7 +10065,8 @@
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
         {"val": "Personajes con gafas", "dif": "dificil"},
-        {"val": "Personajes que fuman", "dif": "dificil"}
+        {"val": "Personajes que fuman", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -12982,6 +12986,10 @@
     "name": "Zeff",
     "img": "imagenes/Zeff.webp",
     "tags": {
+      "Banda": [
+        {"val": "Trabajadores del Baratie", "dif": "facil"},
+        {"val": "Trabajadores del Baratie", "dif": "dificil"}
+      ],
       "Especialidad": [
         {"val": "Cocineros", "dif": "dificil"},
         {"val": "Capitanes pirata", "dif": "dificil"}
@@ -12996,6 +13004,10 @@
     "name": "Patty",
     "img": "imagenes/Patty.webp",
     "tags": {
+      "Banda": [
+        {"val": "Trabajadores del Baratie", "dif": "facil"},
+        {"val": "Trabajadores del Baratie", "dif": "dificil"}
+      ],
       "Especialidad": [
         {"val": "Cocineros", "dif": "dificil"}
       ],
@@ -13009,6 +13021,10 @@
     "name": "Carne",
     "img": "imagenes/Carne.webp",
     "tags": {
+      "Banda": [
+        {"val": "Trabajadores del Baratie", "dif": "facil"},
+        {"val": "Trabajadores del Baratie", "dif": "dificil"}
+      ],
       "Especialidad": [
         {"val": "Cocineros", "dif": "dificil"}
       ],
