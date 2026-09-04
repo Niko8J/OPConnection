@@ -2265,10 +2265,21 @@
     return arr;
   }
 
-  // Guarda en el navegador cuándo fue la última vez que salió cada categoría, para dar
-  // preferencia a las que llevan más tiempo sin aparecer (o nunca han salido) al generar un
-  // panel nuevo, sin dejar de haber aleatoriedad real entre las igual de "antiguas".
+  // Guarda en el navegador cuándo fue la última vez que salió cada categoría (valor exacto,
+  // p. ej. "Banda: Piratas de Arlong"), para dar preferencia a las que llevan más tiempo sin
+  // aparecer (o nunca han salido) al generar un panel nuevo, sin dejar de haber aleatoriedad
+  // real entre las igual de "antiguas". Esto es solo por valor exacto: que la "familia" entera
+  // (Banda, Titulo, Raza...) se repita en paneles distintos no pasa nada, solo se evita que se
+  // repita DENTRO de un mismo panel (ver "usedFamilies" en generateNewBoard).
   const STORAGE_KEY_CATEGORY_USAGE = "opc_category_usage_v1";
+
+  // La "familia" de una categoría es el trozo antes de los dos puntos (p. ej. "Banda" para
+  // "Banda: Piratas de Arlong"). Se usa únicamente para no repetir familia dentro de un mismo
+  // panel, no para el histórico de aparición entre partidas.
+  function getCategoryFamily(groupName) {
+    const sepIndex = groupName.indexOf(": ");
+    return sepIndex === -1 ? groupName : groupName.slice(0, sepIndex);
+  }
 
   function loadCategoryUsageState() {
     try {
@@ -2390,14 +2401,25 @@
 
     let selectedGroups = null;
     let maxAttempts = 1000;
+    // Últimos intentos "de emergencia" en los que dejamos de exigir familias distintas, por
+    // si algún día (p. ej. tras editar el JSON) una dificultad concreta se queda con muy
+    // pocas familias válidas y no llegara a formarse un panel de 4 respetando esa regla.
+    let relaxFamilyRuleFrom = maxAttempts - 100;
 
     for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      let relaxFamilyRule = attempt >= relaxFamilyRuleFrom;
       let shuffledGroups = weightedShuffleGroups(validGroupNames);
       let candidateGroups = [];
       let usedCharIds = new Set();
+      // Familias ("Banda", "Titulo", "Raza"...) ya representadas en este panel: como máximo
+      // una categoría por familia, para que no salgan dos tarjetas del mismo "tipo" a la vez
+      // (p. ej. dos bandas distintas), que es justo lo que se percibía como repetición.
+      let usedFamilies = new Set();
 
       for (let groupName of shuffledGroups) {
         if (candidateGroups.length === 4) break;
+
+        if (!relaxFamilyRule && usedFamilies.has(getCategoryFamily(groupName))) continue;
 
         let exclusiveChars = tagGroups[groupName].filter(char => {
           if (usedCharIds.has(char.id)) return false;
@@ -2429,6 +2451,7 @@
               items: chosenChars
             });
             chosenChars.forEach(c => usedCharIds.add(c.id));
+            usedFamilies.add(getCategoryFamily(groupName));
           }
         }
       }
