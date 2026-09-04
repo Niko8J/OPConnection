@@ -190,6 +190,7 @@
       color: #1f2937; font-size: 0.9rem; font-weight: bold; cursor: pointer;
     }
     .auth-google-btn:hover { background: #e2e8f0; }
+    .avatar-search-input { margin-bottom: 8px; }
     .avatar-picker {
       display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px;
       max-height: 220px; overflow-y: auto; margin-bottom: 12px; padding: 6px;
@@ -750,6 +751,8 @@
     <div id="auth-profile-extra" style="display:none;">
       <input type="text" id="auth-username" class="auth-input" placeholder="Nombre de usuario">
       <p class="auth-avatar-label">Elige tu foto de perfil:</p>
+      <input type="text" id="avatar-search-input" class="auth-input avatar-search-input"
+             placeholder="🔍 Buscar por nombre..." oninput="filterAvatarOptions('avatar-picker', this.value)">
       <div id="avatar-picker" class="avatar-picker"></div>
     </div>
 
@@ -795,6 +798,8 @@
 
     <input type="text" id="edit-username" class="auth-input" placeholder="Nombre de usuario">
     <p class="auth-avatar-label">Elige tu foto de perfil:</p>
+    <input type="text" id="edit-avatar-search-input" class="auth-input avatar-search-input"
+           placeholder="🔍 Buscar por nombre..." oninput="filterAvatarOptions('edit-avatar-picker', this.value)">
     <div id="edit-avatar-picker" class="avatar-picker"></div>
     <button class="action-btn submit" onclick="submitProfileEdit()">Guardar cambios</button>
 
@@ -1237,9 +1242,31 @@
     if (event.target.id === "auth-modal") closeAuthModal();
   }
 
+  // Quita acentos y pasa a minúsculas, para que buscar "nico" también encuentre "Nico Robin"
+  // y buscar "dofla" encuentre "Doflamingo" sin importar mayúsculas ni tildes.
+  function normalizeSearchText(str) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  }
+
+  // Filtra en vivo las fotos ya pintadas en un selector de avatar (el de registro o el de
+  // editar perfil) según lo que el jugador escriba en el buscador de nombre. No reconstruye
+  // el grid: solo oculta/muestra las imágenes ya existentes, así que es instantáneo.
+  function filterAvatarOptions(pickerId, query) {
+    const picker = document.getElementById(pickerId);
+    if (!picker) return;
+    const normalizedQuery = normalizeSearchText(query.trim());
+    picker.querySelectorAll(".avatar-option").forEach(img => {
+      const matches = !normalizedQuery || normalizeSearchText(img.alt).includes(normalizedQuery);
+      img.style.display = matches ? "" : "none";
+    });
+  }
+
   function buildAvatarPicker() {
     const picker = document.getElementById("avatar-picker");
     picker.innerHTML = "";
+
+    const searchInput = document.getElementById("avatar-search-input");
+    if (searchInput) searchInput.value = "";
 
     const sortedChars = [...database].sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base' }));
 
@@ -1484,6 +1511,9 @@
   function buildEditAvatarPicker() {
     const picker = document.getElementById("edit-avatar-picker");
     picker.innerHTML = "";
+
+    const searchInput = document.getElementById("edit-avatar-search-input");
+    if (searchInput) searchInput.value = "";
 
     const sortedChars = [...database].sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base' }));
 
