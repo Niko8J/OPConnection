@@ -1242,10 +1242,11 @@
     if (event.target.id === "auth-modal") closeAuthModal();
   }
 
-  // Quita acentos y pasa a minúsculas, para que buscar "nico" también encuentre "Nico Robin"
-  // y buscar "dofla" encuentre "Doflamingo" sin importar mayúsculas ni tildes.
+  // Quita acentos, guiones y apóstrofos, y pasa a minúsculas, para que buscar "nico" también
+  // encuentre "Nico Robin", buscar "dofla" encuentre "Doflamingo", y buscar "bellmere" (sin
+  // guion) encuentre igualmente a "Bell-mère" o "kinemon" (sin apóstrofo) a "Kin'emon".
   function normalizeSearchText(str) {
-    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[-']/g, "").toLowerCase();
   }
 
   // Filtra en vivo las fotos ya pintadas en un selector de avatar (el de registro o el de
