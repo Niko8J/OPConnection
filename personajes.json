@@ -4484,9 +4484,9 @@
     }
   },
   {
-    "id": "manboshi",
-    "name": "Manboshi",
-    "img": "imagenes/Manboshi.webp",
+    "id": "mamboshi",
+    "name": "Mamboshi",
+    "img": "imagenes/Mamboshi.webp",
     "tags": {
       "Raza": [
         {"val": "Gyojins", "dif": "facil"}
