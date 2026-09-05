@@ -598,7 +598,8 @@
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -3699,6 +3700,11 @@
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
       ],
+      "Marcas": [
+        {"val": "Personajes con gafas", "dif": "dificil"},
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
       "Titulo": [
         {"val": "Caballeros de Dios", "dif": "dificil"}
       ]
@@ -3720,7 +3726,8 @@
         {"val": "Nobles mundiales", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con gafas", "dif": "dificil"}
+        {"val": "Personajes con gafas", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -3735,6 +3742,10 @@
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
+      "Haki": [
+        {"val": "Usuarios de haki del conquistador", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
       "Raza": [
         {"val": "Gigantes", "dif": "media"}
       ],
@@ -3743,6 +3754,11 @@
       ],
       "Especialidad": [
         {"val": "Príncipes", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ],
       "Recompensa": [
         {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
@@ -3870,7 +3886,8 @@
         {"val": "Red Line", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -3885,6 +3902,9 @@
       "Titulo": [
         {"val": "Gorosei", "dif": "facil"},
         {"val": "Nobles mundiales", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
@@ -3913,6 +3933,9 @@
       "Fruta": [
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
       ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
@@ -3936,6 +3959,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ],
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
@@ -3972,7 +3998,8 @@
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con gafas", "dif": "dificil"}
+        {"val": "Personajes con gafas", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -3992,6 +4019,10 @@
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"},
+        {"val": "Personajes con gafas", "dif": "dificil"}
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
@@ -8958,6 +8989,9 @@
         {"val": "Nobles mundiales", "dif": "dificil"},
         {"val": "Caballeros de Dios", "dif": "dificil"}
       ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
       ],
@@ -8988,7 +9022,9 @@
         {"val": "Origen: West Blue", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con gafas", "dif": "dificil"}
+        {"val": "Personajes con gafas", "dif": "dificil"},
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -9000,6 +9036,11 @@
       "Titulo": [
         {"val": "Nobles mundiales", "dif": "dificil"},
         {"val": "Caballeros de Dios", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con gafas", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ],
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
@@ -10575,6 +10616,13 @@
       "Banda": [
         {"val": "Elbaf", "dif": "facil"}
       ],
+      "Haki": [
+        {"val": "Usuarios de haki del conquistador", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
@@ -10906,6 +10954,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de observación", "dif": "dificil"}
       ],
       "Banda": [
         {"val": "Familia Neptune", "dif": "media"}
