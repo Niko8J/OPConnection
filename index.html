@@ -184,7 +184,7 @@
        anchas. En pantallas estrechas (móvil) no caben 5 columnas legibles, así que se apilan
        una debajo de otra, cada una con sus logros en fila (como el diseño original). */
     .achievements-columns {
-      display: grid; grid-template-columns: repeat(5, minmax(100px, 1fr)); gap: 16px; align-items: start;
+      display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; align-items: start;
       max-width: 100%;
     }
     .achievement-column { display: flex; flex-direction: column; align-items: center; min-width: 0; }
@@ -217,6 +217,15 @@
       display: flex; flex-direction: column; align-items: center; gap: 4px;
       width: 96px; flex-shrink: 0;
       padding: 10px 4px; border-radius: 10px; background: #0f172a; border: 2px solid #334155;
+    }
+    /* En la disposición de 5 columnas (pantallas anchas) la insignia debe poder encogerse si la
+       columna se queda sin los 96px completos (p. ej. un modal que aún no ha alcanzado su nuevo
+       ancho máximo de 1080px); si no, con "flex-shrink: 0" fijo, la insignia se salía de su
+       columna y se solapaba visualmente con la de al lado. En móvil (fila con wrap, ver el
+       media query de más abajo) SÍ interesa mantener el ancho fijo, para que las insignias se
+       acomoden en filas ordenadas. */
+    @media (min-width: 861px) {
+      .achievement-badge { width: 100%; max-width: 96px; flex-shrink: 1; min-width: 0; }
     }
     /* Colores por nivel de medalla (mismos que ya usa el Ranking para 🥇🥈🥉), para que un
        logro de oro se note más de un vistazo que uno de bronce. */
