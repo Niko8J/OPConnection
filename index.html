@@ -342,6 +342,10 @@
       max-height: 220px; overflow-y: auto; margin-bottom: 12px; padding: 6px;
       background: #0f172a; border-radius: 6px;
     }
+    /* Separa los avatares exclusivos (arriba del todo, si tienes alguno) del resto de
+       personajes normales. Ocupa toda la fila (grid-column: 1/-1) sea cual sea el nº de
+       columnas del grid en cada tamaño de pantalla. */
+    .avatar-picker-separator { grid-column: 1 / -1; height: 1px; background: #334155; margin: 4px 0; }
     .avatar-option {
       width: 100%; aspect-ratio: 1; object-fit: cover; object-position: top center;
       border-radius: 6px; cursor: pointer; border: 2px solid transparent;
@@ -1039,8 +1043,11 @@
       </div>
       <div id="shop-error" class="auth-error"></div>
 
-      <!-- Cuando se construyan los avatares exclusivos (Fase 4), su sección va AQUÍ, encima
-           de Marcos, con su propia barra separadora antes de "Marcos". -->
+      <h3 class="shop-section-title">Avatares</h3>
+      <div id="shop-avatars-list" class="shop-frames-grid"></div>
+
+      <div class="shop-separator"></div>
+
       <h3 class="shop-section-title">Marcos</h3>
       <p class="shop-unequip-link" id="shop-frames-unequip" style="display: none;" onclick="handleEquipClick('frames', null)">Quitar marco</p>
       <div id="shop-frames-list" class="shop-frames-grid"></div>
@@ -1553,6 +1560,11 @@
       const matches = !normalizedQuery || normalizeSearchText(img.alt).includes(normalizedQuery);
       img.style.display = matches ? "" : "none";
     });
+    // El separador de "exclusivos / resto" no es un resultado en sí: lo escondemos mientras se
+    // busca algo, para que no se quede como una línea suelta si ninguno de los exclusivos
+    // coincide con la búsqueda.
+    const separator = picker.querySelector(".avatar-picker-separator");
+    if (separator) separator.style.display = normalizedQuery ? "none" : "";
   }
 
   function buildAvatarPicker() {
@@ -1969,6 +1981,31 @@
     }
   }
 
+  // Berries que se ganan por acertar/resolver un panel, aparte de los logros: un pequeño
+  // goteo constante por el simple hecho de jugar, distinto del premio gordo (y puntual) de
+  // los logros. Uno en Novato, dos en Supernova, tres en Yonko (cuanto más difícil, más da),
+  // y uno por cada panel resuelto en Infinito.
+  const DAILY_PANEL_COINS = { facil: 1, media: 2, dificil: 3 };
+  const INFINITE_PANEL_COINS = 1;
+
+  // A diferencia de checkAndAwardAchievementCoins, aquí no hace falta ninguna transacción ni
+  // llevar la cuenta de "ya pagado": esto se llama exactamente una vez por cada panel resuelto
+  // de verdad (nunca se recalcula), así que basta con sumar con FieldValue.increment(), que ya
+  // es atómico por sí solo aunque se llame varias veces seguidas muy rápido.
+  async function awardPanelCoins(amount) {
+    if (!currentUser || !amount) return;
+    try {
+      await db.collection("users").doc(currentUser.uid).set(
+        { berries: firebase.firestore.FieldValue.increment(amount) }, { merge: true }
+      );
+      currentUserProfile = currentUserProfile || {};
+      currentUserProfile.berries = (currentUserProfile.berries || 0) + amount;
+      updateAuthUI();
+    } catch (e) {
+      console.error("No se pudieron sumar las Berries del panel:", e);
+    }
+  }
+
   // ---------- Tienda (marcos y títulos) ----------
   //
   // Precios y nombres de ejemplo, fáciles de tocar más adelante sin afectar a nada más (basta
@@ -1999,6 +2036,16 @@
     }
   ];
 
+  // Avatares exclusivos: imágenes alternativas de personajes, solo disponibles en la Tienda.
+  // A diferencia de marcos/títulos, no tienen un campo "equipado" propio: al equiparlos, pasan
+  // a ser directamente tu foto de perfil normal (el mismo campo "avatar" de toda la vida), así
+  // que se ven en cualquier sitio sin tener que tocar nada más.
+  const SHOP_AVATARS = [
+    { id: "nika", name: "Nika", price: 1500, img: "imagenes/exclusivas/Nika.webp" },
+    { id: "demonio_fleur", name: "Demonio Fleur", price: 800, img: "imagenes/exclusivas/DemonioFleur.webp" },
+    { id: "vivi_karoo", name: "Vivi y Karoo", price: 500, img: "imagenes/exclusivas/ViviKaroo.webp" }
+  ];
+
   const SHOP_TITLES = [
     { id: "novato_grand_line", name: "Novato de la Grand Line", price: 100 },
     { id: "cazarrecompensas", name: "Cazarrecompensas", price: 200 },
@@ -2015,6 +2062,11 @@
   function getShopCategoryInfo(category) {
     if (category === "frames") {
       return { list: SHOP_FRAMES, ownedField: "ownedFrames", equippedField: "equippedFrameId" };
+    }
+    if (category === "avatars") {
+      // Sin "equippedField" clásico: lo equipado se comprueba comparando profile.avatar
+      // directamente con la imagen del avatar (ver equipShopItem).
+      return { list: SHOP_AVATARS, ownedField: "ownedAvatars", equippedField: null };
     }
     return { list: SHOP_TITLES, ownedField: "ownedTitles", equippedField: "equippedTitleId" };
   }
@@ -2116,6 +2168,27 @@
   async function equipShopItem(category, itemId) {
     if (!currentUser || !currentUserProfile) return;
 
+    if (category === "avatars") {
+      // Los avatares exclusivos no tienen "quitar" (itemId=null no aplica aquí: no existe un
+      // estado "sin avatar", siempre hay una foto de perfil puesta). Al equiparlo, se convierte
+      // directamente en tu "avatar" normal, reutilizando todo lo que ya existe para mostrarlo.
+      const owned = currentUserProfile.ownedAvatars || [];
+      const avatarDef = SHOP_AVATARS.find(a => a.id === itemId);
+      if (!avatarDef || !owned.includes(itemId)) return;
+
+      try {
+        await Promise.all([
+          db.collection("users").doc(currentUser.uid).set({ avatar: avatarDef.img }, { merge: true }),
+          db.collection("publicProfiles").doc(currentUser.uid).set({ avatar: avatarDef.img }, { merge: true })
+        ]);
+        currentUserProfile.avatar = avatarDef.img;
+        updateAuthUI();
+      } catch (e) {
+        console.error("No se pudo equipar el avatar:", e);
+      }
+      return;
+    }
+
     const { ownedField, equippedField } = getShopCategoryInfo(category);
     const owned = currentUserProfile[ownedField] || [];
     if (itemId && !owned.includes(itemId)) return; // no lo tienes, no se puede equipar
@@ -2184,9 +2257,37 @@
       </div>`;
   }
 
+  function buildShopAvatarItemHtml(avatarDef, profile) {
+    const owned = (profile.ownedAvatars || []).includes(avatarDef.id);
+    const equipped = profile.avatar === avatarDef.img;
+
+    let actionHtml;
+    if (equipped) {
+      actionHtml = `<button class="action-btn shop-item-equipped-btn" disabled>Equipado</button>`;
+    } else if (owned) {
+      actionHtml = `<button class="action-btn" onclick="handleEquipClick('avatars', '${avatarDef.id}')">Equipar</button>`;
+    } else {
+      const canAfford = (profile.berries || 0) >= avatarDef.price;
+      actionHtml = `
+        <button class="action-btn submit shop-buy-btn" ${canAfford ? "" : "disabled"} onclick="handlePurchaseClick('avatars', '${avatarDef.id}')">
+          Comprar (${avatarDef.price} <img src="berries_negro.webp" class="shop-btn-berries-icon" onerror="this.style.display='none'">)
+        </button>`;
+    }
+
+    return `
+      <div class="shop-item shop-frame-item">
+        <div class="shop-frame-preview">
+          <img src="${escapeHtml(avatarDef.img)}" class="shop-frame-preview-img" onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'">
+        </div>
+        <div class="shop-item-name">${escapeHtml(avatarDef.name)}</div>
+        ${actionHtml}
+      </div>`;
+  }
+
   function renderShopContent() {
     const profile = currentUserProfile || {};
     document.getElementById("shop-berries-balance-count").innerText = profile.berries || 0;
+    document.getElementById("shop-avatars-list").innerHTML = SHOP_AVATARS.map(a => buildShopAvatarItemHtml(a, profile)).join("");
     document.getElementById("shop-frames-list").innerHTML = SHOP_FRAMES.map(f => buildShopFrameItemHtml(f, profile)).join("");
     document.getElementById("shop-titles-list").innerHTML = SHOP_TITLES.map(t => buildShopTitleItemHtml(t, profile)).join("");
     document.getElementById("shop-frames-unequip").style.display = profile.equippedFrameId ? "block" : "none";
@@ -2480,6 +2581,34 @@
 
     const searchInput = document.getElementById("edit-avatar-search-input");
     if (searchInput) searchInput.value = "";
+
+    // Avatares exclusivos comprados en la Tienda, arriba del todo y con su propio separador.
+    // Se buscan igual que cualquier otro (por su nombre, en el mismo buscador de arriba): no
+    // hace falta un "ID" aparte, el name="Nika"/"Demonio Fleur"/etc. ya sirve como texto de
+    // búsqueda, exactamente igual que el nombre de cualquier personaje normal.
+    const ownedAvatarIds = (currentUserProfile && currentUserProfile.ownedAvatars) || [];
+    const ownedExclusives = SHOP_AVATARS.filter(a => ownedAvatarIds.includes(a.id));
+
+    ownedExclusives.forEach(avatarDef => {
+      const img = document.createElement("img");
+      img.src = avatarDef.img;
+      img.alt = avatarDef.name;
+      img.title = avatarDef.name;
+      img.className = "avatar-option" + (avatarDef.img === editSelectedAvatarImg ? " selected" : "");
+      img.onerror = function () { this.src = "https://dummyimage.com/100x100/334155/ffffff.png&text=?"; };
+      img.onclick = () => {
+        document.querySelectorAll("#edit-avatar-picker .avatar-option.selected").forEach(el => el.classList.remove("selected"));
+        img.classList.add("selected");
+        editSelectedAvatarImg = avatarDef.img;
+      };
+      picker.appendChild(img);
+    });
+
+    if (ownedExclusives.length > 0) {
+      const separator = document.createElement("div");
+      separator.className = "avatar-picker-separator";
+      picker.appendChild(separator);
+    }
 
     const sortedChars = [...database].sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base' }));
 
@@ -4205,6 +4334,7 @@
     awaitingNextPanel = true;
     saveInfiniteState();
     updateBestStreakIfNeeded();
+    awardPanelCoins(INFINITE_PANEL_COINS);
 
     disableGameControls();
 
@@ -4266,6 +4396,7 @@
     // handleWin() solo se llama en Novato/Supernova/Yonko (Infinito nunca "gana", sigue sin
     // parar hasta que fallas), así que este resultado siempre corresponde al reto diario.
     saveDailyResult(currentDifficulty, "win", currentCategories);
+    awardPanelCoins(DAILY_PANEL_COINS[currentDifficulty]);
 
     applyResultModalContent(true);
   }
