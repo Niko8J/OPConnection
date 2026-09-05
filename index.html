@@ -151,10 +151,10 @@
     /* Sin el fundido de entrada general: como este modal carga datos de Firestore (a veces muy
        rápido), la animación podía "tragarse" el aviso de "Cargando..." y dar sensación de que
        el modal se abría vacío un instante antes de aparecer el contenido ya cargado. */
-    .modal-content.ranking-modal-content { max-width: 420px; text-align: left; animation: none; }
+    .ranking-modal-content { max-width: 420px; text-align: left; }
     .ranking-subtitle { color: #94a3b8; font-size: 0.85rem; margin-bottom: 4px; }
     .ranking-tiebreak-note { color: #64748b; font-size: 0.75rem; font-style: italic; margin-bottom: 10px; }
-    .ranking-list { max-height: var(--ranking-list-max-h); min-height: var(--ranking-list-max-h); overflow-y: auto; }
+    .ranking-list { max-height: var(--ranking-list-max-h); overflow-y: auto; }
     .ranking-row { display: flex; align-items: center; gap: 14px; padding: 12px 6px; border-bottom: 1px solid #1e293b; cursor: pointer; border-radius: 8px; }
     @media (hover: hover) and (pointer: fine) {
       .ranking-row:hover { background: #1e293b; }
@@ -170,7 +170,7 @@
     }
     .ranking-username { flex: 1; font-weight: bold; color: #f8fafc; word-break: break-word; font-size: 1.05rem; }
     .ranking-score { font-weight: bold; color: #f59e0b; font-size: 1.05rem; flex-shrink: 0; }
-    .ranking-empty, .ranking-loading { color: #94a3b8; text-align: center; padding: 20px 0; font-size: 0.9rem; min-height: 40vh; display: flex; align-items: center; justify-content: center; }
+    .ranking-empty, .ranking-loading { color: #94a3b8; text-align: center; padding: 20px 0; font-size: 0.9rem; }
     .ranking-row.own-row { border-radius: 8px; border-bottom: none; border: 2px solid #f59e0b; box-shadow: 0 0 10px #f59e0b; }
     .ranking-ellipsis { text-align: center; color: #94a3b8; letter-spacing: 3px; padding: 4px 0; font-size: 1.1rem; }
 
@@ -182,9 +182,7 @@
        por mucho que aquí pusiéramos un valor mayor. Con ".modal-content.profile-modal-content"
        (dos clases en el mismo selector) subimos la especificidad para que este valor gane
        siempre, sin depender del orden de las reglas en el archivo. */
-    /* Mismo motivo que en .ranking-modal-content: este modal también carga datos (perfil y
-       logros), así que sin animación el "Cargando perfil..." se ve desde el primer instante. */
-    .modal-content.profile-modal-content { max-width: 1080px; animation: none; }
+    .modal-content.profile-modal-content { max-width: 1080px; }
     .profile-modal-avatar {
       width: 120px; height: 120px; border-radius: 50%; object-fit: cover; object-position: top center;
       border: 3px solid #f59e0b; display: block; margin: 4px auto 12px;
