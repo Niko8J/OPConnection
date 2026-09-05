@@ -1698,6 +1698,12 @@
       // longitud/estructura parecida ("3 días seguidos ganando", "60 días seguidos ganando"...),
       // así que ocupan siempre las mismas líneas dentro de la insignia.
       name: days === 1 ? `Gana tu primer panel en ${label}` : `${days} días seguidos ganando`,
+      // Forzamos los saltos de línea en vez de dejarlo al ajuste automático del navegador: la
+      // fuente exacta varía según dispositivo/navegador, y con textos al límite del ancho de
+      // la insignia (96px), unos dispositivos caben una palabra más por línea que otros —
+      // así, algunos logros quedaban en 2 líneas y otros en 3. Con el salto forzado, siempre
+      // son exactamente estas 3 líneas, en cualquier pantalla.
+      nameLines: days === 1 ? ["Gana tu", "primer panel", `en ${label}`] : [`${days} días`, "seguidos", "ganando"],
       description: days === 1
         ? `Supera el reto diario de ${label} una vez`
         : `Supera el reto diario de ${label} ${days} días seguidos (perder un día rompe la racha)`,
@@ -1716,6 +1722,7 @@
       // resto sigue una plantilla de longitud parecida ("Racha de 10 paneles en Infinito",
       // "Racha de 150 paneles en Infinito"...), para que todos ocupen las mismas líneas.
       name: n === 1 ? "Gana tu primer panel en Infinito" : `Racha de ${n} paneles en Infinito`,
+      nameLines: n === 1 ? ["Gana tu", "primer panel", "en Infinito"] : [`Racha de ${n}`, "paneles en", "Infinito"],
       description: n === 1
         ? "Resuelve al menos 1 panel en una racha de modo Infinito"
         : `Alcanza una racha de ${n} paneles resueltos seguidos en modo Infinito`,
@@ -1737,6 +1744,7 @@
       // "primero" especial: aquí no hay un equivalente a "juega una vez", cada puesto ya es
       // un logro en sí mismo) para igualar la longitud con las demás columnas.
       name: pos === 1 ? "Conviértete en el líder del Ranking" : `Alcanza el top ${pos} del Ranking`,
+      nameLines: pos === 1 ? ["Conviértete", "en el líder", "del Ranking"] : ["Alcanza el", `top ${pos} del`, "Ranking"],
       description: pos === 1
         ? "Alcanza el primer puesto del Ranking"
         : `Alcanza el puesto ${pos} o mejor en el Ranking`,
@@ -1764,12 +1772,13 @@
   function buildAchievementBadgeHtml(a, profile) {
     const unlocked = a.check(profile);
     const icon = ACHIEVEMENT_TIER_ICONS[a.tier] || "🏅"; // por si algún día se añade un logro sin nivel definido
+    const nameHtml = a.nameLines.map(escapeHtml).join("<br>");
     // Bloqueado: se muestra en gris/silueta (no se oculta), para que se sepa que existe y
     // anime a conseguirlo. El title (tooltip) da la descripción también cuando está bloqueado.
     return `
       <div class="achievement-badge tier-${a.tier} ${unlocked ? 'unlocked' : 'locked'}" title="${escapeHtml(a.name)}: ${escapeHtml(a.description)}">
         <div class="achievement-icon">${icon}</div>
-        <div class="achievement-name">${escapeHtml(a.name)}</div>
+        <div class="achievement-name">${nameHtml}</div>
       </div>`;
   }
 
