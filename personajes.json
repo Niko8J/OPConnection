@@ -5089,6 +5089,10 @@
     "tags": {
       "Banda": [
         {"val": "Piratas del Pelirrojo", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con gafas", "dif": "dificil"}
       ]
     }
   },
@@ -5125,6 +5129,9 @@
     "tags": {
       "Banda": [
         {"val": "Piratas del Pelirrojo", "dif": "facil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con gafas", "dif": "dificil"}
       ],
       "Especialidad": [
         {"val": "Navegantes", "dif": "dificil"},
