@@ -120,14 +120,14 @@
     .auth-icon-btn {
       width: var(--icon-size); height: var(--icon-size); border-radius: 50%; border: 2px solid #334155; background: #1e293b;
       padding: 0; cursor: pointer; overflow: hidden; display: flex; align-items: center; justify-content: center;
-      transition: transform 0.15s ease, filter 0.15s ease;
+      transition: transform 0.15s ease;
     }
     @media (hover: hover) and (pointer: fine) {
       /* Antes cambiaba a un borde naranja fijo en el hover, pero eso competiría con los marcos
          de colores de la Tienda (imagina un marco diamante que al pasar el ratón se vuelve
-         naranja de golpe). Un zoom y brillo sutiles dan la misma sensación de "esto es
-         interactivo" sin imponer ningún color por encima del marco que lleves puesto. */
-      .auth-icon-btn:hover { transform: scale(1.08); filter: brightness(1.15); }
+         naranja de golpe). Un zoom sutil da la misma sensación de "esto es interactivo" sin
+         imponer ningún color ni "lavar" la foto por encima del marco que lleves puesto. */
+      .auth-icon-btn:hover { transform: scale(1.08); }
     }
     .auth-icon-empty { width: 100%; height: 100%; }
     .auth-icon-avatar {
@@ -1220,6 +1220,7 @@
       // MEJORAR (la racha de los demás nunca baja, así que nadie te adelanta por sí solo).
       // Por eso basta con comprobarlo aquí para los logros de "Top N".
       await updateBestRankPositionIfNeeded();
+      await checkAndAwardAchievementCoins();
     } catch (e) {
       console.error("No se pudo actualizar la mejor racha:", e);
     }
@@ -1747,15 +1748,21 @@
   // columna puede haber varios logros (p. ej. 3/7/30 días seguidos), todos con el mismo icono.
   const ACHIEVEMENT_TIER_ICONS = { novato: "🥉", supernova: "🥈", yonko: "🥇", infinito: "💎", ranking: "🏆" };
 
+  // Berries que da cada logro según su POSICIÓN dentro de su columna (1º = el más fácil, 8º =
+  // el más difícil), no según el logro en sí — así todas las columnas usan la misma escala.
+  // Son valores de partida, fáciles de tocar más adelante sin afectar a nada más.
+  const ACHIEVEMENT_COIN_REWARDS = [25, 50, 75, 150, 250, 400, 600, 1000];
+
   // Días seguidos GANANDO necesarios para cada nivel de racha diaria (Novato/Supernova/Yonko).
   const DAILY_STREAK_MILESTONES = [1, 3, 5, 7, 15, 30, 45, 60];
   const DAILY_STREAK_LABELS = { facil: "Novato", media: "Supernova", dificil: "Yonko" };
 
   function buildDailyStreakAchievements(difficultyKey, tier) {
     const label = DAILY_STREAK_LABELS[difficultyKey];
-    return DAILY_STREAK_MILESTONES.map(days => ({
+    return DAILY_STREAK_MILESTONES.map((days, index) => ({
       id: `racha_diaria_${difficultyKey}_${days}`,
       tier,
+      coins: ACHIEVEMENT_COIN_REWARDS[index],
       // El nombre del modo (Novato/Supernova/Yonko) solo se repite en el PRIMER logro de la
       // columna: en los demás ya es redundante, porque la cabecera de la columna ya lo dice.
       // Quitarlo de ahí, además, hace que los nombres de esos logros tengan todos una
@@ -1779,9 +1786,10 @@
   const INFINITE_STREAK_MILESTONES = [1, 10, 25, 50, 100, 150, 200, 300];
 
   function buildInfiniteStreakAchievements() {
-    return INFINITE_STREAK_MILESTONES.map(n => ({
+    return INFINITE_STREAK_MILESTONES.map((n, index) => ({
       id: `racha_infinito_${n}`,
       tier: "infinito",
+      coins: ACHIEVEMENT_COIN_REWARDS[index],
       // Mismo patrón que en Novato/Supernova/Yonko: el primer logro presenta el modo, y el
       // resto sigue una plantilla de longitud parecida ("Racha de 10 paneles en Infinito",
       // "Racha de 150 paneles en Infinito"...), para que todos ocupen las mismas líneas.
@@ -1800,9 +1808,10 @@
   const RANKING_POSITION_MILESTONES = [50, 40, 30, 20, 10, 5, 3, 1];
 
   function buildRankingPositionAchievements() {
-    return RANKING_POSITION_MILESTONES.map(pos => ({
+    return RANKING_POSITION_MILESTONES.map((pos, index) => ({
       id: `ranking_top_${pos}`,
       tier: "ranking",
+      coins: ACHIEVEMENT_COIN_REWARDS[index],
       // Los nombres cortos ("Top 50 del Ranking") se quedaban en menos líneas que el resto de
       // columnas. Añadimos "Alcanza el..." delante (misma plantilla en todos, sin logro
       // "primero" especial: aquí no hay un equivalente a "juega una vez", cada puesto ya es
@@ -1823,6 +1832,57 @@
     ...buildDailyStreakAchievements("dificil", "yonko"),
     ...buildRankingPositionAchievements()
   ];
+
+  // ---------- Sistema de monedas (Berries) ----------
+  //
+  // Los logros no son un evento que ocurra una vez: se RECALCULAN cada vez que se pinta el
+  // perfil, comparando tus estadísticas actuales contra el umbral de cada uno. Eso significa
+  // que, para pagar Berries "la primera vez que consigues un logro", hace falta llevar la
+  // cuenta aparte de cuáles ya se han pagado (claimedAchievements) — si no, se te pagarían las
+  // mismas Berries cada vez que se recalculan.
+  //
+  // Usamos una transacción de Firestore (lee el estado actual justo antes de escribir) para
+  // que, aunque esta función se llame varias veces seguidas desde sitios distintos casi a la
+  // vez, nunca se pueda pagar el mismo logro dos veces.
+  async function checkAndAwardAchievementCoins() {
+    if (!currentUser) return null;
+
+    try {
+      const docRef = db.collection("users").doc(currentUser.uid);
+
+      const result = await db.runTransaction(async transaction => {
+        const snap = await transaction.get(docRef);
+        const data = snap.exists ? snap.data() : {};
+        const claimed = new Set(data.claimedAchievements || []);
+
+        // Comprobamos contra la mezcla de lo que hay en Firestore y lo que tengamos en memoria
+        // (por si acaso alguno de los dos estuviera más actualizado que el otro), para no
+        // dejarnos ningún logro nuevo sin detectar.
+        const mergedProfile = { ...(currentUserProfile || {}), ...data };
+        const newlyUnlocked = ACHIEVEMENTS.filter(a => !claimed.has(a.id) && a.check(mergedProfile));
+        if (newlyUnlocked.length === 0) return null;
+
+        const coinsEarned = newlyUnlocked.reduce((sum, a) => sum + (a.coins || 0), 0);
+        const newBerries = (data.berries || 0) + coinsEarned;
+        const newClaimed = [...claimed, ...newlyUnlocked.map(a => a.id)];
+
+        transaction.set(docRef, { berries: newBerries, claimedAchievements: newClaimed }, { merge: true });
+
+        return { coinsEarned, newlyUnlocked, berries: newBerries, claimedAchievements: newClaimed };
+      });
+
+      if (result) {
+        currentUserProfile = currentUserProfile || {};
+        currentUserProfile.berries = result.berries;
+        currentUserProfile.claimedAchievements = result.claimedAchievements;
+        updateAuthUI(); // refresca la cifra de Berries del menú al momento
+      }
+      return result;
+    } catch (e) {
+      console.error("No se pudo comprobar/pagar Berries por logros nuevos:", e);
+      return null;
+    }
+  }
 
   // Orden de las columnas tal y como se piden: Novato, Supernova, Yonko, Infinito, Ranking.
   const ACHIEVEMENT_COLUMNS = [
@@ -1926,6 +1986,9 @@
         // calcularse todavía (p. ej. con pocos jugadores registrados, donde cualquiera ya sería
         // top 50 de facto, pero el dato nunca se ha llegado a guardar).
         await updateBestRankPositionIfNeeded();
+        // Red de seguridad: por si algún logro se desbloqueó sin pasar por los sitios donde ya
+        // comprobamos esto (p. ej. justo tras adoptar progreso de invitado al iniciar sesión).
+        await checkAndAwardAchievementCoins();
         profile = currentUserProfile;
       } else {
         const snap = await db.collection("publicProfiles").doc(uid).get();
@@ -3201,6 +3264,7 @@
     // Refresca el "🔥 Racha actual" bajo los botones de dificultad, para que se vea al momento
     // sin tener que salir y volver a entrar en el modo.
     updateInfiniteScoreDisplay();
+    await checkAndAwardAchievementCoins();
   }
 
   // Si jugaste el diario de hoy COMO INVITADO en este mismo navegador y luego inicias sesión,
@@ -3248,6 +3312,7 @@
         console.error("No se pudo adoptar el progreso diario de invitado:", e);
       }
     }
+    await checkAndAwardAchievementCoins();
   }
 
   // Igual que el puente anterior, pero para Infinito: si justo en el momento de registrarte o
