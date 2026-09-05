@@ -191,6 +191,17 @@
     .achievement-column-header {
       font-weight: bold; color: #f8fafc; font-size: 0.95rem; text-align: center;
       padding-bottom: 8px; margin-bottom: 10px; border-bottom: 2px solid #334155; width: 100%;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    /* En pantallas anchas (tablet ancha, ordenador) el encabezado "🥉 Novato" a veces cabía en
+       una sola línea y a veces no, según el ancho exacto de cada columna — así que el emoji
+       quedaba unas veces al lado del nombre y otras encima, descuadrando la altura entre las
+       5 columnas. Forzamos aquí que el emoji vaya siempre encima del nombre, para que las 5
+       cabeceras midan siempre lo mismo. En móvil (una sola columna, ver el media query de
+       abajo) se dejan lado a lado, como ya funcionaba bien. */
+    @media (min-width: 861px) {
+      .achievement-column-header { flex-direction: column; gap: 2px; }
+      .achievement-column-icon { font-size: 1.3rem; line-height: 1; }
     }
     .achievement-column-badges {
       display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%;
@@ -1687,6 +1698,12 @@
       id: `racha_infinito_${n}`,
       tier: "infinito",
       name: n === 1 ? "Primer panel en Infinito" : `${n} paneles en Infinito`,
+      // Nombre corto solo para el texto visible dentro de la insignia: "Primer panel en
+      // Infinito" es más largo que el resto de nombres de esta columna ("10 paneles en
+      // Infinito", etc.) y, dentro de los 96px de ancho de la insignia, era el único que no
+      // cabía en una sola línea, descuadrando la fila en móvil. El nombre completo se sigue
+      // usando en el "title" (tooltip), así que no se pierde información.
+      displayName: n === 1 ? "Primer panel" : undefined,
       description: n === 1
         ? "Resuelve al menos 1 panel en una racha de modo Infinito."
         : `Alcanza una racha de ${n} paneles resueltos seguidos en modo Infinito.`,
@@ -1733,7 +1750,7 @@
     return `
       <div class="achievement-badge tier-${a.tier} ${unlocked ? 'unlocked' : 'locked'}" title="${escapeHtml(a.name)}: ${escapeHtml(a.description)}">
         <div class="achievement-icon">${icon}</div>
-        <div class="achievement-name">${escapeHtml(a.name)}</div>
+        <div class="achievement-name">${escapeHtml(a.displayName || a.name)}</div>
       </div>`;
   }
 
@@ -1746,7 +1763,7 @@
         .join("");
       return `
         <div class="achievement-column">
-          <div class="achievement-column-header">${icon} ${escapeHtml(col.label)}</div>
+          <div class="achievement-column-header"><span class="achievement-column-icon">${icon}</span><span class="achievement-column-label">${escapeHtml(col.label)}</span></div>
           <div class="achievement-column-badges">${badgesHtml}</div>
         </div>`;
     }).join("");
