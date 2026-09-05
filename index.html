@@ -598,7 +598,8 @@
 
     .close-btn {
       position: absolute;
-      top: 12px; right: 15px;
+      top: 12px; left: 15px; /* a la izquierda a propósito: a la derecha, en ordenador, puede
+                                  quedar tapada por la barra de scroll vertical */
       background: none; border: none;
       color: #94a3b8; font-size: 1.5rem;
       font-weight: bold; cursor: pointer;
@@ -634,7 +635,7 @@
       .solutions-list { gap: 8px; margin-top: 10px; margin-bottom: 14px; }
       .solution-img { width: 54px; height: 54px; }
       .solution-row { padding: 8px; gap: 6px; }
-      .close-btn { top: 8px; right: 10px; font-size: 1.3rem; }
+      .close-btn { top: 8px; left: 10px; font-size: 1.3rem; }
     }
 
     /* Ventanas con poco ALTO de verdad (portátil con escalado de Windows alto, barra de
