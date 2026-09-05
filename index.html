@@ -2112,9 +2112,58 @@
   // a ser directamente tu foto de perfil normal (el mismo campo "avatar" de toda la vida), así
   // que se ven en cualquier sitio sin tener que tocar nada más.
   const SHOP_AVATARS = [
+    // Luffy (6)
     { id: "nika", name: "Nika", price: 1500, img: "imagenes/exclusivas/Nika.webp" },
+    { id: "luffy_gear2", name: "Gear Segundo", price: 900, img: "imagenes/exclusivas/GearSegundo.webp" },
+    { id: "luffy_gear3", name: "Gear Tercero", price: 900, img: "imagenes/exclusivas/GearTercero.webp" },
+    { id: "luffy_gear4_snakeman", name: "Gear Cuarto: Snakeman", price: 1200, img: "imagenes/exclusivas/GearCuartoSnakeman.webp" },
+    { id: "luffy_traje_boda", name: "Traje de boda", price: 600, img: "imagenes/exclusivas/TrajeDeBoda.webp" },
+    { id: "luffy_joy_boy", name: "Joy Boy", price: 1000, img: "imagenes/exclusivas/JoyBoy.webp" },
+    // Zoro (3)
+    { id: "zoro_asura", name: "Zoro Asura", price: 900, img: "imagenes/exclusivas/ZoroAsura.webp" },
+    { id: "zoro_enma", name: "Zoro Enma", price: 800, img: "imagenes/exclusivas/ZoroEnma.webp" },
+    { id: "zoro_tres_espadas", name: "Zoro Tres Espadas", price: 500, img: "imagenes/exclusivas/ZoroTresEspadas.webp" },
+    // Nami (3)
+    { id: "nami_zeus", name: "Nami y Zeus", price: 800, img: "imagenes/exclusivas/NamiZeus.webp" },
+    { id: "nami_ladrona_gatos", name: "Nami Ladrona de Gatos", price: 600, img: "imagenes/exclusivas/NamiLadronaDeGatos.webp" },
+    { id: "nami_navegante", name: "Nami Navegante", price: 450, img: "imagenes/exclusivas/NamiNavegante.webp" },
+    // Usopp (6)
+    { id: "usopp_sogeking", name: "Sogeking", price: 900, img: "imagenes/exclusivas/Sogeking.webp" },
+    { id: "usopp_god", name: "God Usopp", price: 800, img: "imagenes/exclusivas/GodUsopp.webp" },
+    { id: "usopp_pop_green", name: "Usopp Pop Green", price: 600, img: "imagenes/exclusivas/UsoppPopGreen.webp" },
+    { id: "usopp_green_star", name: "Usopp Green Star", price: 550, img: "imagenes/exclusivas/UsoppGreenStar.webp" },
+    { id: "usopp_menaza", name: "Usopp Menaza", price: 450, img: "imagenes/exclusivas/UsoppMenaza.webp" },
+    { id: "usopp_rey_tiradores", name: "Usopp Rey de los Tiradores", price: 400, img: "imagenes/exclusivas/UsoppReyDeLosTiradores.webp" },
+    // Sanji (6)
+    { id: "sanji_ifrit_jambe", name: "Sanji Ifrit Jambe", price: 1000, img: "imagenes/exclusivas/SanjiIfritJambe.webp" },
+    { id: "sanji_diable_jambe", name: "Sanji Diable Jambe", price: 900, img: "imagenes/exclusivas/SanjiDiableJambe.webp" },
+    { id: "sanji_raid_suit", name: "Sanji Raid Suit", price: 800, img: "imagenes/exclusivas/SanjiRaidSuit.webp" },
+    { id: "sanji_sky_walk", name: "Sanji Sky Walk", price: 650, img: "imagenes/exclusivas/SanjiSkyWalk.webp" },
+    { id: "sanji_vinsmoke", name: "Sanji Vinsmoke", price: 550, img: "imagenes/exclusivas/SanjiVinsmoke.webp" },
+    { id: "sanji_pierna_negra", name: "Sanji Pierna Negra", price: 450, img: "imagenes/exclusivas/SanjiPiernaNegra.webp" },
+    // Robin (6)
     { id: "demonio_fleur", name: "Demonio Fleur", price: 800, img: "imagenes/exclusivas/DemonioFleur.webp" },
-    { id: "vivi_karoo", name: "Vivi y Karoo", price: 500, img: "imagenes/exclusivas/ViviKaroo.webp" }
+    { id: "robin_gigantesco_fleur", name: "Robin Gigantesco Fleur", price: 1400, img: "imagenes/exclusivas/RobinGigantescoFleur.webp" },
+    { id: "robin_cien_fleur", name: "Robin Cien Fleur", price: 1000, img: "imagenes/exclusivas/RobinCienFleur.webp" },
+    { id: "robin_ojo_historia", name: "Robin Ojo de la Historia", price: 650, img: "imagenes/exclusivas/RobinOjoDeLaHistoria.webp" },
+    { id: "robin_arqueologa", name: "Robin Arqueóloga", price: 500, img: "imagenes/exclusivas/RobinArqueologa.webp" },
+    { id: "robin_diez_fleur", name: "Robin Diez Fleur", price: 380, img: "imagenes/exclusivas/RobinDiezFleur.webp" },
+    // Franky (3)
+    { id: "franky_general", name: "Franky General", price: 900, img: "imagenes/exclusivas/FrankyGeneral.webp" },
+    { id: "franky_radical_beam", name: "Franky Radical Beam", price: 650, img: "imagenes/exclusivas/FrankyRadicalBeam.webp" },
+    { id: "franky_muscle_point", name: "Franky Muscle Point", price: 450, img: "imagenes/exclusivas/FrankyMusclePoint.webp" },
+    // Brook (3)
+    { id: "brook_soul_solid", name: "Brook Soul Solid", price: 800, img: "imagenes/exclusivas/BrookSoulSolid.webp" },
+    { id: "brook_gigant_soul", name: "Brook Gigant Soul", price: 650, img: "imagenes/exclusivas/BrookGigantSoul.webp" },
+    { id: "brook_musico_alma", name: "Brook Músico del Alma", price: 450, img: "imagenes/exclusivas/BrookMusicoDelAlma.webp" },
+    // Jinbe (3)
+    { id: "jinbe_karate", name: "Jinbe Karate de Pez Hombre", price: 800, img: "imagenes/exclusivas/JinbeKarate.webp" },
+    { id: "jinbe_onda_choque", name: "Jinbe Onda de Choque", price: 650, img: "imagenes/exclusivas/JinbeOndaDeChoque.webp" },
+    { id: "jinbe_timonel", name: "Jinbe Timonel", price: 450, img: "imagenes/exclusivas/JinbeTimonel.webp" },
+    // Vivi (3)
+    { id: "vivi_karoo", name: "Vivi y Karoo", price: 500, img: "imagenes/exclusivas/ViviKaroo.webp" },
+    { id: "vivi_princesa_alabasta", name: "Vivi Princesa de Alabasta", price: 800, img: "imagenes/exclusivas/ViviPrincesaDeAlabasta.webp" },
+    { id: "vivi_nefertari", name: "Vivi Nefertari", price: 550, img: "imagenes/exclusivas/ViviNefertari.webp" }
   ];
 
   const SHOP_TITLES = [
