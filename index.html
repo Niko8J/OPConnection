@@ -148,7 +148,10 @@
     .auth-dropdown-best-streak { color: #94a3b8; font-size: 0.8rem; margin-top: 2px; }
     .auth-dropdown-separator { height: 1px; background: #334155; margin: 6px 2px; }
 
-    .ranking-modal-content { max-width: 420px; text-align: left; }
+    /* Sin el fundido de entrada general: como este modal carga datos de Firestore (a veces muy
+       rápido), la animación podía "tragarse" el aviso de "Cargando..." y dar sensación de que
+       el modal se abría vacío un instante antes de aparecer el contenido ya cargado. */
+    .modal-content.ranking-modal-content { max-width: 420px; text-align: left; animation: none; }
     .ranking-subtitle { color: #94a3b8; font-size: 0.85rem; margin-bottom: 4px; }
     .ranking-tiebreak-note { color: #64748b; font-size: 0.75rem; font-style: italic; margin-bottom: 10px; }
     .ranking-list { max-height: var(--ranking-list-max-h); overflow-y: auto; }
@@ -179,7 +182,9 @@
        por mucho que aquí pusiéramos un valor mayor. Con ".modal-content.profile-modal-content"
        (dos clases en el mismo selector) subimos la especificidad para que este valor gane
        siempre, sin depender del orden de las reglas en el archivo. */
-    .modal-content.profile-modal-content { max-width: 1080px; }
+    /* Mismo motivo que en .ranking-modal-content: este modal también carga datos (perfil y
+       logros), así que sin animación el "Cargando perfil..." se ve desde el primer instante. */
+    .modal-content.profile-modal-content { max-width: 1080px; animation: none; }
     .profile-modal-avatar {
       width: 120px; height: 120px; border-radius: 50%; object-fit: cover; object-position: top center;
       border: 3px solid #f59e0b; display: block; margin: 4px auto 12px;
