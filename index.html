@@ -171,7 +171,18 @@
     .ranking-row.own-row { border-radius: 8px; border-bottom: none; border: 2px solid #f59e0b; box-shadow: 0 0 10px #f59e0b; }
     .ranking-ellipsis { text-align: center; color: #94a3b8; letter-spacing: 3px; padding: 4px 0; font-size: 1.1rem; }
 
-    .profile-modal-content { max-width: 900px; }
+    .profile-modal-content {
+      max-width: 900px;
+      /* El scroll de verdad vive en .profile-modal-scroll-area, no aquí: así el botón de
+         cerrar (hijo directo de este contenedor, position:absolute) se queda fijo arriba a
+         la derecha aunque el contenido de dentro se desplace por debajo. */
+      display: flex; flex-direction: column;
+      max-height: var(--modal-max-h); overflow-y: visible;
+    }
+    .profile-modal-scroll-area {
+      overflow-y: auto; overflow-x: hidden;
+      flex: 1 1 auto; min-height: 0; /* imprescindible para que un hijo flex pueda encogerse y scrollear */
+    }
     .profile-modal-avatar {
       width: 120px; height: 120px; border-radius: 50%; object-fit: cover; object-position: top center;
       border: 3px solid #f59e0b; display: block; margin: 4px auto 12px;
@@ -888,16 +899,21 @@
 <div id="profile-modal" class="modal-overlay" onclick="closeProfileModalOnOverlay(event)">
   <div class="modal-content profile-modal-content">
     <button class="close-btn" onclick="closeProfileModal()">&times;</button>
-    <div id="profile-modal-loading" class="ranking-loading">Cargando perfil...</div>
-    <div id="profile-modal-error" class="ranking-empty" style="display: none;"></div>
-    <div id="profile-modal-body" style="display: none;">
-      <img id="profile-modal-avatar" class="profile-modal-avatar" src="" alt="Foto de perfil"
-           onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'">
-      <h2 id="profile-modal-username" class="profile-modal-username"></h2>
-      <div id="profile-modal-streak" class="profile-modal-streak"></div>
-      <button id="profile-modal-edit-btn" class="action-btn" onclick="openProfileEditFromProfile()" style="display: none;">✏️ Editar perfil</button>
-      <div class="profile-modal-achievements-title">🏆 Logros</div>
-      <div id="profile-modal-achievements" class="achievements-columns"></div>
+    <!-- El scroll vive AQUÍ (no en .profile-modal-content), para que el botón de cerrar de
+         arriba, al ser hijo directo del contenedor de fuera, se quede fijo en su sitio aunque
+         este contenido se desplace por debajo. -->
+    <div class="profile-modal-scroll-area">
+      <div id="profile-modal-loading" class="ranking-loading">Cargando perfil...</div>
+      <div id="profile-modal-error" class="ranking-empty" style="display: none;"></div>
+      <div id="profile-modal-body" style="display: none;">
+        <img id="profile-modal-avatar" class="profile-modal-avatar" src="" alt="Foto de perfil"
+             onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'">
+        <h2 id="profile-modal-username" class="profile-modal-username"></h2>
+        <div id="profile-modal-streak" class="profile-modal-streak"></div>
+        <button id="profile-modal-edit-btn" class="action-btn" onclick="openProfileEditFromProfile()" style="display: none;">✏️ Editar perfil</button>
+        <div class="profile-modal-achievements-title">Logros</div>
+        <div id="profile-modal-achievements" class="achievements-columns"></div>
+      </div>
     </div>
   </div>
 </div>
