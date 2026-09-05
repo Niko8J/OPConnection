@@ -9447,6 +9447,11 @@
       "Fruta": [
         {"val": "Fruta del diablo: Zoan", "dif": "media"}
       ],
+      "Raza": [
+        {"val": "Gigantes", "dif": "facil"}
+        {"val": "Gigantes ancestrales", "dif": "media"},
+        {"val": "Gigantes artificiales", "dif": "dificil"}
+      ],
       "SMILE": [
         {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
       ],
@@ -11870,7 +11875,8 @@
       "Raza": [
         {"val": "Zombies", "dif": "facil"},
         {"val": "Zombies", "dif": "dificil"},
-        {"val": "Gigantes", "dif": "facil"}
+        {"val": "Gigantes", "dif": "facil"},
+        {"val": "Gigantes ancestrales", "dif": "media"}
       ],
       "Peleas": [
         {"val": "Peleas de Luffy", "dif": "dificil"}
@@ -12290,7 +12296,8 @@
         {"val": "Piratas de Barbablanca", "dif": "facil"}
       ],
       "Raza": [
-        {"val": "Gigantes", "dif": "facil"}
+        {"val": "Gigantes", "dif": "facil"},
+        {"val": "Gigantes ancestrales", "dif": "media"}
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
@@ -13604,6 +13611,11 @@
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
       ],
+      "Raza": [
+        {"val": "Gigantes", "dif": "facil"},
+        {"val": "Gigantes ancestrales", "dif": "media"},
+        {"val": "Gigantes artificiales", "dif": "dificil"}
+      ],
       "Marcas": [
         {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
@@ -13616,6 +13628,11 @@
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"}
+      ],
+      "Raza": [
+        {"val": "Gigantes", "dif": "facil"},
+        {"val": "Gigantes ancestrales", "dif": "media"},
+        {"val": "Gigantes artificiales", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con cuernos", "dif": "dificil"}
@@ -14087,6 +14104,23 @@
       ],
       "Peleas": [
         {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "mocha",
+    "name": "Mocha",
+    "img": "imagenes/Mocha.webp",
+    "tags": {
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "dificil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Gigantes", "dif": "facil"}
+        {"val": "Gigantes artificiales", "dif": "dificil"}
       ]
     }
   }
