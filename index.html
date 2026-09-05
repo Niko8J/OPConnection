@@ -1212,10 +1212,13 @@
 
     try {
       const myStreak = (currentUserProfile && currentUserProfile.bestStreak) || 0;
-      const higherCountSnap = await db.collection("publicProfiles")
+      // NOTA: la versión de Firestore de esta web no soporta el método .count() (falla con
+      // "count is not a function"), así que contamos con un .get() normal y usamos ".size",
+      // que sí funciona en cualquier versión.
+      const higherSnap = await db.collection("publicProfiles")
         .where("bestStreak", ">", myStreak)
-        .count().get();
-      const myPosition = higherCountSnap.data().count + 1;
+        .get();
+      const myPosition = higherSnap.size + 1;
 
       const currentBestPosition = (currentUserProfile && currentUserProfile.bestRankPosition) || Infinity;
       if (myPosition >= currentBestPosition) return; // no mejora nada, no hace falta escribir
@@ -1615,10 +1618,11 @@
       // añadimos al final, con puntos suspensivos de por medio.
       if (currentUser && !currentUserInTop50 && currentUserProfile) {
         const myStreak = currentUserProfile.bestStreak || 0;
-        const higherCountSnap = await db.collection("publicProfiles")
+        // Mismo arreglo que en updateBestRankPositionIfNeeded: sin .count(), con .get() + .size.
+        const higherSnap = await db.collection("publicProfiles")
           .where("bestStreak", ">", myStreak)
-          .count().get();
-        const myPosition = higherCountSnap.data().count + 1;
+          .get();
+        const myPosition = higherSnap.size + 1;
 
         html += '<div class="ranking-ellipsis">⋯</div>';
         html += buildRankingRowHtml(myPosition, {
@@ -1712,7 +1716,7 @@
   }
 
   // Paneles resueltos seguidos en modo Infinito necesarios para cada nivel de logro.
-  const INFINITE_STREAK_MILESTONES = [1, 10, 25, 50, 100, 150];
+  const INFINITE_STREAK_MILESTONES = [1, 10, 25, 50, 100, 150, 200, 300];
 
   function buildInfiniteStreakAchievements() {
     return INFINITE_STREAK_MILESTONES.map(n => ({
@@ -1733,7 +1737,7 @@
   // Puestos del Ranking que dan logro, de más fácil a más difícil. Se basan en la MEJOR
   // posición alcanzada alguna vez (bestRankPosition), no en la posición actual: si algún día
   // bajas del Top 10, no pierdes el logro de haber llegado a estar ahí.
-  const RANKING_POSITION_MILESTONES = [50, 40, 30, 25, 20, 10, 5, 3, 1];
+  const RANKING_POSITION_MILESTONES = [50, 40, 30, 20, 10, 5, 3, 1];
 
   function buildRankingPositionAchievements() {
     return RANKING_POSITION_MILESTONES.map(pos => ({
@@ -1832,6 +1836,12 @@
       let profile;
       if (isOwnProfile) {
         if (!currentUser || !currentUserProfile) { closeProfileModal(); return; }
+        // La posición en el Ranking normalmente solo se recalcula al batir una racha nueva en
+        // Infinito. Aprovechamos que se está mirando el propio perfil para refrescarla también
+        // aquí, así los logros de Ranking no se quedan bloqueados solo por no haber llegado a
+        // calcularse todavía (p. ej. con pocos jugadores registrados, donde cualquiera ya sería
+        // top 50 de facto, pero el dato nunca se ha llegado a guardar).
+        await updateBestRankPositionIfNeeded();
         profile = currentUserProfile;
       } else {
         const snap = await db.collection("publicProfiles").doc(uid).get();
