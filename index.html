@@ -193,13 +193,14 @@
       padding-bottom: 8px; margin-bottom: 10px; border-bottom: 2px solid #334155; width: 100%;
       display: flex; align-items: center; justify-content: center; gap: 6px;
     }
-    /* En pantallas anchas (tablet ancha, ordenador) el encabezado "🥉 Novato" a veces cabía en
-       una sola línea y a veces no, según el ancho exacto de cada columna — así que el emoji
-       quedaba unas veces al lado del nombre y otras encima, descuadrando la altura entre las
-       5 columnas. Forzamos aquí que el emoji vaya siempre encima del nombre, para que las 5
-       cabeceras midan siempre lo mismo. En móvil (una sola columna, ver el media query de
-       abajo) se dejan lado a lado, como ya funcionaba bien. */
-    @media (min-width: 861px) {
+    /* En pantallas anchas (justo por debajo del ancho máximo del modal) el encabezado
+       "🥉 Novato" a veces cabía en una sola línea y a veces no, según el ancho exacto de cada
+       columna — así que el emoji quedaba unas veces al lado del nombre y otras encima,
+       descuadrando la altura entre las 5 columnas. Forzamos aquí que el emoji vaya siempre
+       encima del nombre, para que las 5 cabeceras midan siempre lo mismo. Coincide con el
+       punto de corte de las 5 columnas de más abajo: por debajo de él se usa el otro modo
+       (una columna, filas con wrap), donde el emoji ya iba al lado del nombre sin problema. */
+    @media (min-width: 1100px) {
       .achievement-column-header { flex-direction: column; gap: 2px; }
       .achievement-column-icon { font-size: 1.3rem; line-height: 1; }
     }
@@ -207,9 +208,13 @@
       display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%;
     }
     /* 5 columnas de 96px de ancho fijo (más los huecos) necesitan bastante más de 700px de
-       verdad para no quedar apretadas; de ahí el corte más generoso (860px, justo por debajo
-       del ancho máximo del propio modal) para no arriesgarnos a un scroll horizontal. */
-    @media (max-width: 860px) {
+       verdad para no quedar apretadas. En vez de intentar que quepan igualmente en anchos
+       intermedios (encogiendo insignias o columnas), directamente reservamos el modo de 5
+       columnas para cuando el modal pueda mostrarse a su ancho de sobra (ver max-width de
+       ".profile-modal-content", 1080px): así, entre este punto de corte y ese ancho máximo,
+       las 5 columnas siempre tienen espacio de sobra. Por debajo, usamos el otro modo (una
+       columna, filas con wrap), que ya funciona bien en pantallas más estrechas. */
+    @media (max-width: 1099px) {
       .achievements-columns { grid-template-columns: 1fr; gap: 22px; }
       .achievement-column-badges { flex-direction: row; flex-wrap: wrap; justify-content: center; }
     }
@@ -217,15 +222,6 @@
       display: flex; flex-direction: column; align-items: center; gap: 4px;
       width: 96px; flex-shrink: 0;
       padding: 10px 4px; border-radius: 10px; background: #0f172a; border: 2px solid #334155;
-    }
-    /* En la disposición de 5 columnas (pantallas anchas) la insignia debe poder encogerse si la
-       columna se queda sin los 96px completos (p. ej. un modal que aún no ha alcanzado su nuevo
-       ancho máximo de 1080px); si no, con "flex-shrink: 0" fijo, la insignia se salía de su
-       columna y se solapaba visualmente con la de al lado. En móvil (fila con wrap, ver el
-       media query de más abajo) SÍ interesa mantener el ancho fijo, para que las insignias se
-       acomoden en filas ordenadas. */
-    @media (min-width: 861px) {
-      .achievement-badge { width: 100%; max-width: 96px; flex-shrink: 1; min-width: 0; }
     }
     /* Colores por nivel de medalla (mismos que ya usa el Ranking para 🥇🥈🥉), para que un
        logro de oro se note más de un vistazo que uno de bronce. */
