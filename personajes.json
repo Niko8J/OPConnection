@@ -118,10 +118,12 @@
     "tags": {
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "facil"},
-        {"val": "Banda: Sombrero de Paja", "dif": "media"}
+        {"val": "Banda: Sombrero de Paja", "dif": "media"},
+        {"val": "Piratas de Usopp", "dif": "media"}
       ],
       "Origen": [
-        {"val": "Origen: East Blue", "dif": "dificil"}
+        {"val": "Origen: East Blue", "dif": "dificil"},
+        {"val": "Origen: Villa Syrup", "dif": "media"}
       ],
       "Haki": [
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
@@ -494,7 +496,8 @@
         {"val": "Banda: Sombrero de Paja", "dif": "media"}
       ],
       "Origen": [
-        {"val": "Origen: East Blue", "dif": "dificil"}
+        {"val": "Origen: East Blue", "dif": "dificil"},
+        {"val": "Origen: Villa Syrup", "dif": "media"}
       ],
       "Raza": [
         {"val": "Barcos", "dif": "media"}
@@ -611,7 +614,8 @@
         {"val": "Piratas del Pelirrojo", "dif": "facil"}
       ],
       "Origen": [
-        {"val": "Origen: East Blue", "dif": "dificil"}
+        {"val": "Origen: East Blue", "dif": "dificil"},
+        {"val": "Origen: Villa Syrup", "dif": "media"}
       ],
       "Haki": [
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
@@ -7975,6 +7979,9 @@
         {"val": "Piratas de Big Mom", "dif": "facil"},
         {"val": "Familia Charlotte", "dif": "media"}
       ],
+      "Especialidad": [
+        {"val": "Cocineros", "dif": "dificil"}
+      ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ]
@@ -9448,7 +9455,7 @@
         {"val": "Fruta del diablo: Zoan", "dif": "media"}
       ],
       "Raza": [
-        {"val": "Gigantes", "dif": "facil"}
+        {"val": "Gigantes", "dif": "facil"},
         {"val": "Gigantes ancestrales", "dif": "media"},
         {"val": "Gigantes artificiales", "dif": "dificil"}
       ],
@@ -10781,7 +10788,8 @@
     "img": "imagenes/Banchina.webp",
     "tags": {
       "Origen": [
-        {"val": "Origen: East Blue", "dif": "dificil"}
+        {"val": "Origen: East Blue", "dif": "dificil"},
+        {"val": "Origen: Villa Syrup", "dif": "media"}
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
@@ -11733,6 +11741,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
+      ],
+      "Especialidad": [
+        {"val": "Cocineros", "dif": "dificil"}
       ],
       "Haki": [
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
@@ -13538,7 +13549,8 @@
     "img": "imagenes/Kaya.webp",
     "tags": {
       "Origen": [
-        {"val": "Origen: East Blue", "dif": "dificil"}
+        {"val": "Origen: East Blue", "dif": "dificil"},
+        {"val": "Origen: Villa Syrup", "dif": "media"}
       ],
       "Especialidad": [
         {"val": "Médicos", "dif": "dificil"}
@@ -14119,8 +14131,92 @@
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
       "Raza": [
-        {"val": "Gigantes", "dif": "facil"}
+        {"val": "Gigantes", "dif": "facil"},
         {"val": "Gigantes artificiales", "dif": "dificil"}
+      ],
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "kuina",
+    "name": "Kuina",
+    "img": "imagenes/Kuina.webp",
+    "tags": {
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"}
+      ],
+      "Estado": [
+        {"val": "Personajes fallecidos", "dif": "facil"}
+      ],
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "tamanegi",
+    "name": "Tamanegi",
+    "img": "imagenes/Tamanegi.webp",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Usopp", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"},
+        {"val": "Origen: Villa Syrup", "dif": "media"}
+      ],
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "ninjin",
+    "name": "Ninjin",
+    "img": "imagenes/Ninjin.webp",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Usopp", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"},
+        {"val": "Origen: Villa Syrup", "dif": "media"}
+      ],
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "piiman",
+    "name": "Piiman",
+    "img": "imagenes/Piiman.webp",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas de Usopp", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: East Blue", "dif": "dificil"},
+        {"val": "Origen: Villa Syrup", "dif": "media"}
+      ],
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "pez",
+    "name": "Pez",
+    "img": "imagenes/Pez.webp",
+    "tags": {
+      "Banda": [
+        {"val": "Piratas Fire Tank", "dif": "facil"},
+        {"val": "Familia Charlotte", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
       "Edad": [
         {"val": "Menores de edad", "dif": "dificil"}
