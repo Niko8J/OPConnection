@@ -185,7 +185,7 @@
       border: 3px solid #f59e0b; display: block; margin: 4px auto 12px;
     }
     .profile-modal-username { margin-bottom: 4px; font-size: 1.4rem; word-break: break-word; }
-    .profile-modal-streak { color: #94a3b8; font-size: 0.95rem; margin-bottom: 14px; }
+    .profile-modal-streak { color: #94a3b8; font-size: 0.95rem; margin-bottom: 14px; line-height: 1.6; }
     #profile-modal-edit-btn { margin-bottom: 20px; }
     .profile-modal-achievements-title { font-weight: bold; color: #f59e0b; font-size: 1.1rem; margin-bottom: 12px; }
     /* Una columna por modo (Novato/Supernova/Yonko/Infinito/Ranking), lado a lado en pantallas
@@ -1786,6 +1786,20 @@
       </div>`;
   }
 
+  // Aprovechamos el hueco donde ya se mostraba la racha de Infinito para mostrar también la
+  // racha ACTUAL (días seguidos ganando, ahora mismo) de cada uno de los tres retos diarios,
+  // con el mismo icono de medalla que ya se usa en las columnas de logros.
+  function buildProfileStreaksHtml(profile) {
+    const daily = profile.dailyStreaks || {};
+    const rows = [
+      `🔥 Mejor racha en Infinito: ${profile.bestStreak || 0}`,
+      `🥉 Racha actual en Novato: ${(daily.facil && daily.facil.current) || 0} día(s)`,
+      `🥈 Racha actual en Supernova: ${(daily.media && daily.media.current) || 0} día(s)`,
+      `🥇 Racha actual en Yonko: ${(daily.dificil && daily.dificil.current) || 0} día(s)`
+    ];
+    return rows.map(escapeHtml).join("<br>");
+  }
+
   function buildAchievementsHtml(profile) {
     return ACHIEVEMENT_COLUMNS.map(col => {
       const icon = ACHIEVEMENT_TIER_ICONS[col.tier] || "🏅";
@@ -1852,7 +1866,7 @@
       document.getElementById("profile-modal-avatar").src =
         profile.avatar || "https://dummyimage.com/100x100/334155/ffffff.png&text=?";
       document.getElementById("profile-modal-username").innerText = profile.username || "Jugador";
-      document.getElementById("profile-modal-streak").innerText = `🔥 Mejor racha: ${profile.bestStreak || 0}`;
+      document.getElementById("profile-modal-streak").innerHTML = buildProfileStreaksHtml(profile);
       document.getElementById("profile-modal-achievements").innerHTML = buildAchievementsHtml(profile);
       document.getElementById("profile-modal-edit-btn").style.display = isOwnProfile ? "inline-block" : "none";
 
@@ -3017,7 +3031,13 @@
   // juegas como invitado. Se llama desde handleWin()/handleGameOver().
   async function saveDailyResult(difficulty, result, groups) {
     const todayKey = getMadridDailyKey();
-    const entry = { date: todayKey, result, groups: serializeBoardGroups(groups) };
+    // Guardamos también en qué orden se resolvieron las categorías y cuántas vidas quedaban,
+    // para poder reconstruir el tablero exactamente como quedó si el jugador vuelve más tarde
+    // (recarga la página, cambia de dificultad y vuelve...), en vez de mostrarlo en blanco.
+    const entry = {
+      date: todayKey, result, groups: serializeBoardGroups(groups),
+      solvedOrder: [...solvedOrder], lives
+    };
 
     if (currentUser) {
       try {
@@ -3157,7 +3177,7 @@
       : loadDailyProgressState()[difficulty];
 
     if (stored && stored.date === todayKey) {
-      showDailyLockedModal(difficulty, stored);
+      renderFinishedDailyPanel(difficulty, stored);
       return;
     }
 
@@ -3176,41 +3196,49 @@
   // Ya jugaste esta dificultad hoy: reconstruimos el panel de ese intento (para poder mostrar
   // la solución) y avisamos de que hay que esperar al día siguiente, reutilizando el mismo
   // modal de fin de partida que ya existe para ganar/perder.
-  function showDailyLockedModal(difficulty, storedEntry) {
+  // Reconstruye el tablero de un reto diario que ya se jugó hoy, exactamente como quedó al
+  // terminarlo: las categorías acertadas colocadas y coloreadas en el mismo orden en que se
+  // resolvieron, las que no se llegaron a acertar (en una derrota) como tarjetas normales
+  // sueltas por el tablero, las vidas tal y como quedaron, y el botón de "Resultados" abajo —
+  // ni más ni menos que como se ve justo después de terminar una partida en vivo. El modal de
+  // resultados NO se abre solo: se deja preparado (con el título/solución ya rellenos) para
+  // que se abra al pulsar "Resultados", igual que si acabaras de cerrarlo tú mismo.
+  function renderFinishedDailyPanel(difficulty, storedEntry) {
     currentDifficulty = difficulty;
     isInfiniteMode = false;
     currentCategories = hydrateBoardGroups(storedEntry.groups);
 
-    // initGame() va PRIMERO: pinta el tablero, pero también resetea gameOver, vuelve a activar
-    // los controles y oculta el modal de fin de partida. Por eso todo lo que "congela" este
-    // estado (gameOver, controles deshabilitados, el modal con la solución) va DESPUÉS, para
-    // que no se deshaga.
-    initGame();
-
     const won = storedEntry.result === "win";
-    solvedOrder = won ? currentCategories.map(c => c.name) : [];
+    // Compatibilidad con resultados guardados ANTES de este cambio (sin solvedOrder ni lives):
+    // en una victoria antigua asumimos que se resolvieron las 4 (aunque no sepamos el orden
+    // exacto en que se hizo en su momento); en una derrota antigua, ninguna.
+    solvedOrder = storedEntry.solvedOrder || (won ? currentCategories.map(c => c.name) : []);
+    lives = (typeof storedEntry.lives === "number") ? storedEntry.lives : (won ? MAX_LIVES : 0);
+
+    const solvedNames = new Set(solvedOrder);
+    cards = [];
+    currentCategories.forEach(cat => {
+      if (solvedNames.has(cat.name)) return; // ya está como bloque resuelto, no como carta suelta
+      cat.items.forEach(item => cards.push({ name: item.name, img: item.img, category: cat.name }));
+    });
+    cards = shuffle(cards);
+    selectedCards = [];
+
     gameOver = true;
     awaitingNextPanel = false;
-    disableGameControls();
 
-    const modalContent = document.querySelector("#gameover-modal .modal-content");
-    modalContent.style.borderColor = won ? "#22c55e" : "#ef4444";
+    document.getElementById("warning-msg").innerText = "";
+    showResultsControl();
+    document.getElementById("gameover-modal").style.display = "none";
 
-    const titleEl = document.getElementById("modal-title");
-    titleEl.innerText = won ? "🏆 ¡Ya superaste el diario de hoy!" : "🏴‍☠️ Ya jugaste el diario de hoy";
-    titleEl.style.color = won ? "#22c55e" : "#ef4444";
+    renderAllSolvedBlocks();
+    renderLives();
+    renderGrid();
 
-    document.getElementById("modal-text").innerText =
-      "Vuelve mañana a las 00:01 (hora de España) para un panel nuevo. Solución de hoy:";
-
-    const actionBtn = document.getElementById("modal-action-btn");
-    actionBtn.innerText = "Entendido";
-    actionBtn.onclick = closeModal;
-
-    // El tablero queda de fondo mezclado (sin colorear como resuelto: mejora visual pendiente,
-    // no afecta a que el bloqueo funcione), pero inutilizado por disableGameControls() de
-    // arriba, para que si cierran el modal no puedan intentarlo de nuevo sin reabrirlo.
-    renderModalSolutions();
+    // applyResultModalContent() rellena el modal Y lo abre (mismo camino que un final en vivo);
+    // lo volvemos a cerrar justo después para dejarlo preparado sin mostrarlo automáticamente.
+    applyResultModalContent(won);
+    document.getElementById("gameover-modal").style.display = "none";
   }
 
   // Alterna entre "Enviar/Limpiar" (partida en curso) y "Resultados" (partida en pausa:
@@ -3558,6 +3586,33 @@
     generateNewBoard();
   }
 
+  // Rellena el título, el borde de color, el texto y las soluciones del modal de resultados
+  // para una victoria o derrota del reto diario (Novato/Supernova/Yonko). No lo usa Infinito,
+  // que tiene su propio texto (menciona cuántos paneles se resolvieron antes de perder).
+  //
+  // Se reutiliza en dos sitios: al terminar la partida EN VIVO (handleWin/handleGameOver) y al
+  // reconstruir un panel diario que ya se jugó hoy (renderFinishedDailyPanel), para que el
+  // contenido del modal sea idéntico en ambos casos sin duplicar el texto en dos sitios.
+  function applyResultModalContent(won) {
+    const modalContent = document.querySelector("#gameover-modal .modal-content");
+    modalContent.style.borderColor = won ? "#22c55e" : "#ef4444";
+
+    const titleEl = document.getElementById("modal-title");
+    titleEl.innerText = won ? "🏆 ¡VICTORIA!" : "🏴‍☠️ ¡DERROTADO!";
+    titleEl.style.color = won ? "#22c55e" : "#ef4444";
+
+    const textEl = document.getElementById("modal-text");
+    textEl.innerText = won
+      ? "¡Has descubierto todas las conexiones correctamente!"
+      : "Has agotado todas tus vidas. Solución de esta partida:";
+
+    const actionBtn = document.getElementById("modal-action-btn");
+    actionBtn.innerText = "Entendido";
+    actionBtn.onclick = closeModal;
+
+    renderModalSolutions();
+  }
+
   function handleWin() {
     gameOver = true;
     awaitingNextPanel = false;
@@ -3567,21 +3622,7 @@
     // parar hasta que fallas), así que este resultado siempre corresponde al reto diario.
     saveDailyResult(currentDifficulty, "win", currentCategories);
 
-    const modalContent = document.querySelector("#gameover-modal .modal-content");
-    modalContent.style.borderColor = "#22c55e";
-
-    const titleEl = document.getElementById("modal-title");
-    titleEl.innerText = "🏆 ¡VICTORIA!";
-    titleEl.style.color = "#22c55e";
-
-    const textEl = document.getElementById("modal-text");
-    textEl.innerText = "¡Has descubierto todas las conexiones correctamente!";
-
-    const actionBtn = document.getElementById("modal-action-btn");
-    actionBtn.innerText = "Entendido";
-    actionBtn.onclick = closeModal;
-
-    renderModalSolutions();
+    applyResultModalContent(true);
   }
 
   function handleGameOver() {
@@ -3589,32 +3630,25 @@
     awaitingNextPanel = false;
     if (isInfiniteMode) {
       disableGameControls();
+      clearInfiniteStorage(); // La partida Infinito termina: la próxima vez se empieza de cero.
+
+      const modalContent = document.querySelector("#gameover-modal .modal-content");
+      modalContent.style.borderColor = "#ef4444";
+      const titleEl = document.getElementById("modal-title");
+      titleEl.innerText = "🏴‍☠️ ¡DERROTADO!";
+      titleEl.style.color = "#ef4444";
+      const textEl = document.getElementById("modal-text");
+      textEl.innerText = `Has agotado tus vidas tras resolver ${infiniteSolvedCount} panel(es) en modo Infinito. Solución de este panel:`;
+      const actionBtn = document.getElementById("modal-action-btn");
+      actionBtn.innerText = "Entendido";
+      actionBtn.onclick = closeModal;
+      renderModalSolutions();
     } else {
       showResultsControl();
       // Igual que en handleWin(): esta rama es siempre el reto diario, nunca Infinito.
       saveDailyResult(currentDifficulty, "lose", currentCategories);
+      applyResultModalContent(false);
     }
-
-    const modalContent = document.querySelector("#gameover-modal .modal-content");
-    modalContent.style.borderColor = "#ef4444";
-
-    const titleEl = document.getElementById("modal-title");
-    titleEl.innerText = "🏴‍☠️ ¡DERROTADO!";
-    titleEl.style.color = "#ef4444";
-
-    const textEl = document.getElementById("modal-text");
-    if (isInfiniteMode) {
-      clearInfiniteStorage(); // La partida Infinito termina: la próxima vez se empieza de cero.
-      textEl.innerText = `Has agotado tus vidas tras resolver ${infiniteSolvedCount} panel(es) en modo Infinito. Solución de este panel:`;
-    } else {
-      textEl.innerText = "Has agotado todas tus vidas. Solución de esta partida:";
-    }
-
-    const actionBtn = document.getElementById("modal-action-btn");
-    actionBtn.innerText = "Entendido";
-    actionBtn.onclick = closeModal;
-
-    renderModalSolutions();
   }
 
   function renderModalSolutions() {
