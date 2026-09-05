@@ -120,9 +120,14 @@
     .auth-icon-btn {
       width: var(--icon-size); height: var(--icon-size); border-radius: 50%; border: 2px solid #334155; background: #1e293b;
       padding: 0; cursor: pointer; overflow: hidden; display: flex; align-items: center; justify-content: center;
+      transition: transform 0.15s ease, filter 0.15s ease;
     }
     @media (hover: hover) and (pointer: fine) {
-      .auth-icon-btn:hover { border-color: #f59e0b; }
+      /* Antes cambiaba a un borde naranja fijo en el hover, pero eso competiría con los marcos
+         de colores de la Tienda (imagina un marco diamante que al pasar el ratón se vuelve
+         naranja de golpe). Un zoom y brillo sutiles dan la misma sensación de "esto es
+         interactivo" sin imponer ningún color por encima del marco que lleves puesto. */
+      .auth-icon-btn:hover { transform: scale(1.08); filter: brightness(1.15); }
     }
     .auth-icon-empty { width: 100%; height: 100%; }
     .auth-icon-avatar {
@@ -144,8 +149,16 @@
     .auth-dropdown-user-info {
       padding: 6px 10px 8px;
     }
+    .auth-dropdown-name-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .auth-dropdown-username { font-weight: bold; color: #f59e0b; font-size: 0.9rem; word-break: break-word; }
-    .auth-dropdown-best-streak { color: #94a3b8; font-size: 0.8rem; margin-top: 2px; }
+    .auth-dropdown-berries {
+      display: flex; align-items: center; gap: 4px; color: #f59e0b; font-size: 0.85rem;
+      font-weight: bold; flex-shrink: 0;
+    }
+    .auth-dropdown-berries-icon { width: 16px; height: 16px; object-fit: contain; }
+    /* Título equipado (comprado en la Tienda). Si no tienes ninguno, esta línea se queda
+       vacía y no ocupa hueco (ver display:none puesto por JS cuando no hay título). */
+    .auth-dropdown-title { color: #94a3b8; font-size: 0.8rem; margin-top: 2px; font-style: italic; }
     .auth-dropdown-separator { height: 1px; background: #334155; margin: 6px 2px; }
 
     /* Sin el fundido de entrada general: como este modal carga datos de Firestore (a veces muy
@@ -727,8 +740,14 @@
       </div>
       <div id="auth-dropdown-user" style="display: none;">
         <div class="auth-dropdown-user-info">
-          <div id="auth-dropdown-username" class="auth-dropdown-username"></div>
-          <div id="auth-dropdown-best-streak" class="auth-dropdown-best-streak"></div>
+          <div class="auth-dropdown-name-row">
+            <div id="auth-dropdown-username" class="auth-dropdown-username"></div>
+            <div class="auth-dropdown-berries">
+              <img src="berries.webp" alt="" class="auth-dropdown-berries-icon" onerror="this.style.display='none'">
+              <span id="auth-dropdown-berries-count">0</span>
+            </div>
+          </div>
+          <div id="auth-dropdown-title" class="auth-dropdown-title"></div>
         </div>
         <button class="auth-dropdown-item" onclick="openRankingModal()">🏆 Ranking</button>
         <div class="auth-dropdown-separator"></div>
@@ -1282,8 +1301,20 @@
       dropdownUser.style.display = "block";
       document.getElementById("auth-dropdown-username").innerText = (currentUserProfile && currentUserProfile.username) || currentUser.email;
 
-      const bestStreak = (currentUserProfile && currentUserProfile.bestStreak) || 0;
-      document.getElementById("auth-dropdown-best-streak").innerText = `🔥 Mejor racha: ${bestStreak}`;
+      // "berries" (monedas) y "equippedTitle" (título comprado en la Tienda) todavía no existen
+      // como sistema real: de momento se muestran con su valor por defecto (0 y sin título),
+      // listos para cuando construyamos la Tienda de verdad sin tener que volver a tocar esto.
+      document.getElementById("auth-dropdown-berries-count").innerText = (currentUserProfile && currentUserProfile.berries) || 0;
+
+      const titleEl = document.getElementById("auth-dropdown-title");
+      const equippedTitle = currentUserProfile && currentUserProfile.equippedTitle;
+      if (equippedTitle) {
+        titleEl.innerText = equippedTitle;
+        titleEl.style.display = "block";
+      } else {
+        titleEl.innerText = "";
+        titleEl.style.display = "none";
+      }
     } else {
       emptyIcon.style.display = "block";
       avatarIcon.style.display = "none";
