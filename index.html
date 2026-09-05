@@ -152,7 +152,10 @@
     .ranking-subtitle { color: #94a3b8; font-size: 0.85rem; margin-bottom: 4px; }
     .ranking-tiebreak-note { color: #64748b; font-size: 0.75rem; font-style: italic; margin-bottom: 10px; }
     .ranking-list { max-height: var(--ranking-list-max-h); overflow-y: auto; }
-    .ranking-row { display: flex; align-items: center; gap: 14px; padding: 12px 6px; border-bottom: 1px solid #1e293b; }
+    .ranking-row { display: flex; align-items: center; gap: 14px; padding: 12px 6px; border-bottom: 1px solid #1e293b; cursor: pointer; border-radius: 8px; }
+    @media (hover: hover) and (pointer: fine) {
+      .ranking-row:hover { background: #1e293b; }
+    }
     .ranking-row:last-child { border-bottom: none; }
     .ranking-position { width: 34px; text-align: center; font-weight: bold; color: #94a3b8; flex-shrink: 0; font-size: 1.1rem; }
     .ranking-position.gold { font-size: 1.5rem; color: #facc15; }
@@ -167,6 +170,30 @@
     .ranking-empty, .ranking-loading { color: #94a3b8; text-align: center; padding: 20px 0; font-size: 0.9rem; }
     .ranking-row.own-row { border-radius: 8px; border-bottom: none; border: 2px solid #f59e0b; box-shadow: 0 0 10px #f59e0b; }
     .ranking-ellipsis { text-align: center; color: #94a3b8; letter-spacing: 3px; padding: 4px 0; font-size: 1.1rem; }
+
+    .profile-modal-content { max-width: 420px; }
+    .profile-modal-avatar {
+      width: 120px; height: 120px; border-radius: 50%; object-fit: cover; object-position: top center;
+      border: 3px solid #f59e0b; display: block; margin: 4px auto 12px;
+    }
+    .profile-modal-username { margin-bottom: 4px; font-size: 1.4rem; word-break: break-word; }
+    .profile-modal-streak { color: #94a3b8; font-size: 0.95rem; margin-bottom: 14px; }
+    #profile-modal-edit-btn { margin-bottom: 20px; }
+    .profile-modal-achievements-title { font-weight: bold; color: #f59e0b; font-size: 1.1rem; margin-bottom: 12px; }
+    .achievements-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 12px;
+    }
+    .achievement-badge {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      padding: 10px 4px; border-radius: 10px; background: #0f172a; border: 2px solid #334155;
+    }
+    .achievement-badge.unlocked { border-color: #f59e0b; }
+    .achievement-icon { font-size: 2rem; line-height: 1; }
+    /* Logro bloqueado: se ve en gris/silueta (en vez de ocultarse del todo), para que el
+       jugador sepa que existe y qué tiene que hacer para conseguirlo. */
+    .achievement-badge.locked .achievement-icon { filter: grayscale(100%); opacity: 0.35; }
+    .achievement-badge.locked .achievement-name { color: #64748b; }
+    .achievement-name { font-size: 0.75rem; font-weight: bold; text-align: center; color: #f8fafc; word-break: break-word; }
 
     .howto-modal-content { max-width: 440px; text-align: left; }
     .howto-content p { margin-bottom: 10px; color: #cbd5e1; font-size: 0.9rem; line-height: 1.5; }
@@ -638,7 +665,7 @@
         </div>
         <button class="auth-dropdown-item" onclick="openRankingModal()">🏆 Ranking</button>
         <div class="auth-dropdown-separator"></div>
-        <button class="auth-dropdown-item" onclick="openEditProfileModal()">✏️ Editar perfil</button>
+        <button class="auth-dropdown-item" onclick="openProfileModal()">👤 Perfil</button>
         <button class="auth-dropdown-item" onclick="doLogout()">Cerrar sesión</button>
       </div>
 
@@ -821,6 +848,27 @@
     <p id="edit-google-note" class="auth-avatar-label" style="display: none;">
       Iniciaste sesión con Google, así que tu contraseña se gestiona desde tu cuenta de Google, no desde aquí.
     </p>
+  </div>
+</div>
+
+<!-- Modal de Perfil: sirve tanto para ver tu propio perfil (con botón para editar) como el
+     perfil PÚBLICO de otro jugador al pulsar su fila en el Ranking (sin ese botón). Los logros
+     que se muestran aquí son públicos: se calculan igual a partir del mismo documento que ya
+     usa el Ranking, así que cualquier jugador puede ver los logros de cualquier otro. -->
+<div id="profile-modal" class="modal-overlay" onclick="closeProfileModalOnOverlay(event)">
+  <div class="modal-content profile-modal-content">
+    <button class="close-btn" onclick="closeProfileModal()">&times;</button>
+    <div id="profile-modal-loading" class="ranking-loading">Cargando perfil...</div>
+    <div id="profile-modal-error" class="ranking-empty" style="display: none;"></div>
+    <div id="profile-modal-body" style="display: none;">
+      <img id="profile-modal-avatar" class="profile-modal-avatar" src="" alt="Foto de perfil"
+           onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'">
+      <h2 id="profile-modal-username" class="profile-modal-username"></h2>
+      <div id="profile-modal-streak" class="profile-modal-streak"></div>
+      <button id="profile-modal-edit-btn" class="action-btn" onclick="openProfileEditFromProfile()" style="display: none;">✏️ Editar perfil</button>
+      <div class="profile-modal-achievements-title">🏆 Logros</div>
+      <div id="profile-modal-achievements" class="achievements-grid"></div>
+    </div>
   </div>
 </div>
 
@@ -1439,7 +1487,7 @@
         const data = doc.data();
         const isOwnRow = currentUser && doc.id === currentUser.uid;
         if (isOwnRow) currentUserInTop50 = true;
-        html += buildRankingRowHtml(position, data, medals, posClasses, isOwnRow);
+        html += buildRankingRowHtml(position, data, medals, posClasses, isOwnRow, doc.id);
       });
 
       // Si el usuario ha iniciado sesión y no está entre los mostrados, buscamos su
@@ -1457,7 +1505,7 @@
           username: currentUserProfile.username,
           avatar: currentUserProfile.avatar,
           bestStreak: myStreak
-        }, medals, posClasses, true);
+        }, medals, posClasses, true, currentUser.uid);
       }
 
       list.innerHTML = html;
@@ -1467,13 +1515,15 @@
     }
   }
 
-  function buildRankingRowHtml(position, data, medals, posClasses, isOwnRow) {
+  function buildRankingRowHtml(position, data, medals, posClasses, isOwnRow, uid) {
     const posLabel = medals[position - 1] || position;
     const posClass = posClasses[position - 1] || "";
     const avatarSrc = data.avatar || "https://dummyimage.com/100x100/334155/ffffff.png&text=?";
     const streak = data.bestStreak || 0;
+    // Los IDs de usuario de Firebase son siempre alfanuméricos (sin comillas ni caracteres
+    // especiales), así que es seguro interpolarlos directamente en el onclick.
     return `
-      <div class="ranking-row${isOwnRow ? ' own-row' : ''}">
+      <div class="ranking-row${isOwnRow ? ' own-row' : ''}" onclick="openProfileModal('${uid}')">
         <div class="ranking-position ${posClass}">${posLabel}</div>
         <img class="ranking-avatar" src="${escapeHtml(avatarSrc)}" alt="" onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'">
         <div class="ranking-username">${escapeHtml(data.username || "Jugador")}</div>
@@ -1487,6 +1537,115 @@
 
   function closeRankingModalOnOverlay(event) {
     if (event.target.id === "ranking-modal") closeRankingModal();
+  }
+
+  // ---------- Sistema de logros ----------
+  //
+  // Estos 3 son de ejemplo para arrancar el sistema (los iremos ampliando y afinando). Cada
+  // logro se calcula con una función "check" a partir del perfil PÚBLICO del jugador (el mismo
+  // documento "publicProfiles" que ya usa el Ranking), así que no hace falta guardar nada nuevo
+  // en Firestore para estos: el logro se "tiene" o "no se tiene" según datos que ya existían.
+  // El día que definamos un logro que dependa de un dato que hoy no guardamos, ahí sí habrá que
+  // ampliar lo que se escribe en "users"/"publicProfiles" — pero estos tres no lo necesitan.
+  const ACHIEVEMENTS = [
+    {
+      id: "racha_1",
+      icon: "🏴‍☠️",
+      name: "Novato",
+      description: "Resuelve al menos 1 panel en una racha de modo Infinito.",
+      check: profile => (profile.bestStreak || 0) >= 1
+    },
+    {
+      id: "racha_10",
+      icon: "⚔️",
+      name: "Supernova",
+      description: "Alcanza una racha de 10 paneles resueltos seguidos en modo Infinito.",
+      check: profile => (profile.bestStreak || 0) >= 10
+    },
+    {
+      id: "racha_25",
+      icon: "👑",
+      name: "Yonko",
+      description: "Alcanza una racha de 25 paneles resueltos seguidos en modo Infinito.",
+      check: profile => (profile.bestStreak || 0) >= 25
+    }
+  ];
+
+  function buildAchievementsHtml(profile) {
+    return ACHIEVEMENTS.map(a => {
+      const unlocked = a.check(profile);
+      // Bloqueado: se muestra en gris/silueta (no se oculta), para que se sepa que existe y
+      // anime a conseguirlo. El title (tooltip) da la descripción también cuando está bloqueado.
+      return `
+        <div class="achievement-badge ${unlocked ? 'unlocked' : 'locked'}" title="${escapeHtml(a.name)}: ${escapeHtml(a.description)}">
+          <div class="achievement-icon">${a.icon}</div>
+          <div class="achievement-name">${escapeHtml(a.name)}</div>
+        </div>`;
+    }).join("");
+  }
+
+  // ---------- Perfil (el tuyo o el público de otro jugador) ----------
+  //
+  // Un mismo modal sirve para las dos cosas. Sin "uid" (o con tu propio uid) se muestra tu
+  // perfil, con el botón de "Editar perfil"; con el uid de otro jugador (al pulsar su fila en
+  // el Ranking) se muestra su perfil público de solo lectura, sin ese botón. Los logros salen
+  // igual en ambos casos porque se calculan a partir del mismo documento público.
+
+  function closeProfileModal() {
+    document.getElementById("profile-modal").style.display = "none";
+  }
+
+  function closeProfileModalOnOverlay(event) {
+    if (event.target.id === "profile-modal") closeProfileModal();
+  }
+
+  async function openProfileModal(uid) {
+    document.getElementById("auth-dropdown").style.display = "none";
+    closeRankingModal(); // si se abrió desde una fila del Ranking, no dejamos los dos modales superpuestos
+
+    const modal = document.getElementById("profile-modal");
+    const loadingEl = document.getElementById("profile-modal-loading");
+    const errorEl = document.getElementById("profile-modal-error");
+    const bodyEl = document.getElementById("profile-modal-body");
+
+    loadingEl.style.display = "block";
+    errorEl.style.display = "none";
+    bodyEl.style.display = "none";
+    modal.style.display = "flex";
+
+    const isOwnProfile = !uid || (currentUser && uid === currentUser.uid);
+
+    try {
+      let profile;
+      if (isOwnProfile) {
+        if (!currentUser || !currentUserProfile) { closeProfileModal(); return; }
+        profile = currentUserProfile;
+      } else {
+        const snap = await db.collection("publicProfiles").doc(uid).get();
+        if (!snap.exists) throw new Error("No existe ese perfil público");
+        profile = snap.data();
+      }
+
+      document.getElementById("profile-modal-avatar").src =
+        profile.avatar || "https://dummyimage.com/100x100/334155/ffffff.png&text=?";
+      document.getElementById("profile-modal-username").innerText = profile.username || "Jugador";
+      document.getElementById("profile-modal-streak").innerText = `🔥 Mejor racha: ${profile.bestStreak || 0}`;
+      document.getElementById("profile-modal-achievements").innerHTML = buildAchievementsHtml(profile);
+      document.getElementById("profile-modal-edit-btn").style.display = isOwnProfile ? "inline-block" : "none";
+
+      loadingEl.style.display = "none";
+      bodyEl.style.display = "block";
+    } catch (e) {
+      loadingEl.style.display = "none";
+      errorEl.style.display = "block";
+      errorEl.innerText = "No se pudo cargar este perfil. Inténtalo más tarde.";
+      console.error("Error cargando el perfil:", e);
+    }
+  }
+
+  function openProfileEditFromProfile() {
+    closeProfileModal();
+    openEditProfileModal();
   }
 
   // ---------- Editar perfil (foto, nombre de usuario, contraseña) ----------
