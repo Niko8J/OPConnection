@@ -171,7 +171,7 @@
     .ranking-row.own-row { border-radius: 8px; border-bottom: none; border: 2px solid #f59e0b; box-shadow: 0 0 10px #f59e0b; }
     .ranking-ellipsis { text-align: center; color: #94a3b8; letter-spacing: 3px; padding: 4px 0; font-size: 1.1rem; }
 
-    .profile-modal-content { max-width: 420px; }
+    .profile-modal-content { max-width: 900px; }
     .profile-modal-avatar {
       width: 120px; height: 120px; border-radius: 50%; object-fit: cover; object-position: top center;
       border: 3px solid #f59e0b; display: block; margin: 4px auto 12px;
@@ -180,8 +180,23 @@
     .profile-modal-streak { color: #94a3b8; font-size: 0.95rem; margin-bottom: 14px; }
     #profile-modal-edit-btn { margin-bottom: 20px; }
     .profile-modal-achievements-title { font-weight: bold; color: #f59e0b; font-size: 1.1rem; margin-bottom: 12px; }
-    .achievements-grid {
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+    /* Una columna por modo (Novato/Supernova/Yonko/Infinito/Ranking), lado a lado en pantallas
+       anchas. En pantallas estrechas (móvil) no caben 5 columnas legibles, así que se apilan
+       una debajo de otra, cada una con sus logros en fila (como el diseño original). */
+    .achievements-columns {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; align-items: start;
+    }
+    .achievement-column { display: flex; flex-direction: column; align-items: center; }
+    .achievement-column-header {
+      font-weight: bold; color: #f8fafc; font-size: 0.95rem; text-align: center;
+      padding-bottom: 8px; margin-bottom: 10px; border-bottom: 2px solid #334155; width: 100%;
+    }
+    .achievement-column-badges {
+      display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%;
+    }
+    @media (max-width: 700px) {
+      .achievements-columns { grid-template-columns: 1fr; gap: 22px; }
+      .achievement-column-badges { flex-direction: row; flex-wrap: wrap; justify-content: center; }
     }
     .achievement-badge {
       display: flex; flex-direction: column; align-items: center; gap: 4px;
@@ -875,7 +890,7 @@
       <div id="profile-modal-streak" class="profile-modal-streak"></div>
       <button id="profile-modal-edit-btn" class="action-btn" onclick="openProfileEditFromProfile()" style="display: none;">✏️ Editar perfil</button>
       <div class="profile-modal-achievements-title">🏆 Logros</div>
-      <div id="profile-modal-achievements" class="achievements-grid"></div>
+      <div id="profile-modal-achievements" class="achievements-columns"></div>
     </div>
   </div>
 </div>
@@ -1668,16 +1683,38 @@
     ...buildRankingPositionAchievements()
   ];
 
+  // Orden de las columnas tal y como se piden: Novato, Supernova, Yonko, Infinito, Ranking.
+  const ACHIEVEMENT_COLUMNS = [
+    { tier: "novato", label: "Novato" },
+    { tier: "supernova", label: "Supernova" },
+    { tier: "yonko", label: "Yonko" },
+    { tier: "infinito", label: "Infinito" },
+    { tier: "ranking", label: "Ranking" }
+  ];
+
+  function buildAchievementBadgeHtml(a, profile) {
+    const unlocked = a.check(profile);
+    const icon = ACHIEVEMENT_TIER_ICONS[a.tier] || "🏅"; // por si algún día se añade un logro sin nivel definido
+    // Bloqueado: se muestra en gris/silueta (no se oculta), para que se sepa que existe y
+    // anime a conseguirlo. El title (tooltip) da la descripción también cuando está bloqueado.
+    return `
+      <div class="achievement-badge tier-${a.tier} ${unlocked ? 'unlocked' : 'locked'}" title="${escapeHtml(a.name)}: ${escapeHtml(a.description)}">
+        <div class="achievement-icon">${icon}</div>
+        <div class="achievement-name">${escapeHtml(a.name)}</div>
+      </div>`;
+  }
+
   function buildAchievementsHtml(profile) {
-    return ACHIEVEMENTS.map(a => {
-      const unlocked = a.check(profile);
-      const icon = ACHIEVEMENT_TIER_ICONS[a.tier] || "🏅"; // por si algún día se añade un logro sin nivel definido
-      // Bloqueado: se muestra en gris/silueta (no se oculta), para que se sepa que existe y
-      // anime a conseguirlo. El title (tooltip) da la descripción también cuando está bloqueado.
+    return ACHIEVEMENT_COLUMNS.map(col => {
+      const icon = ACHIEVEMENT_TIER_ICONS[col.tier] || "🏅";
+      const badgesHtml = ACHIEVEMENTS
+        .filter(a => a.tier === col.tier)
+        .map(a => buildAchievementBadgeHtml(a, profile))
+        .join("");
       return `
-        <div class="achievement-badge tier-${a.tier} ${unlocked ? 'unlocked' : 'locked'}" title="${escapeHtml(a.name)}: ${escapeHtml(a.description)}">
-          <div class="achievement-icon">${icon}</div>
-          <div class="achievement-name">${escapeHtml(a.name)}</div>
+        <div class="achievement-column">
+          <div class="achievement-column-header">${icon} ${escapeHtml(col.label)}</div>
+          <div class="achievement-column-badges">${badgesHtml}</div>
         </div>`;
     }).join("");
   }
