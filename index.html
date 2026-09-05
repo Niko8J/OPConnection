@@ -2636,6 +2636,23 @@
   });
 
   async function setDifficulty(level, event) {
+    if (isInfiniteMode && level === "infinito") {
+      // Ya estabas en Infinito y has vuelto a pulsar Infinito: en vez de no hacer nada,
+      // barajamos de nuevo el orden de las tarjetas SIN resolver del panel actual — igual que
+      // ya pasa en Novato/Supernova/Yonko al repulsar la misma dificultad. Ver el panel
+      // reordenado a veces ayuda a verlo más sencillo. No tocamos lo ya acertado, las vidas, ni
+      // las categorías: solo el orden visual de lo que queda por resolver.
+      if (!gameOver && !awaitingNextPanel) {
+        clearHintColors();
+        cards = shuffle(cards);
+        selectedCards = [];
+        document.getElementById("warning-msg").innerText = "";
+        renderGrid();
+        saveInfiniteState();
+      }
+      return;
+    }
+
     if (isInfiniteMode && level !== "infinito") {
       // Si dejamos un panel ya resuelto sin pulsar "Siguiente", lo avanzamos en silencio
       // para no dejar un panel a medio cerrar guardado.
