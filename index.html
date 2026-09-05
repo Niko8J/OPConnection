@@ -1581,12 +1581,14 @@
   async function openRankingModal() {
     document.getElementById("auth-dropdown").style.display = "none";
     const list = document.getElementById("ranking-list");
-    list.innerHTML = '<div class="ranking-loading">Cargando ranking...</div>';
-    document.getElementById("ranking-modal").style.display = "flex";
+    const modal = document.getElementById("ranking-modal");
 
     const RANKING_TARGET = 50;
     const RANKING_BUFFER = 70; // margen extra por si hay que extender la lista en un empate
 
+    // Cargamos todo ANTES de mostrar el modal (en vez de abrirlo con un "Cargando..." y
+    // rellenarlo después), para que aparezca ya con el contenido completo puesto de una vez,
+    // sin ese salto de tamaño al pasar de un aviso corto a la lista real.
     try {
       const snap = await db.collection("publicProfiles")
         .orderBy("bestStreak", "desc")
@@ -1596,6 +1598,7 @@
 
       if (snap.empty) {
         list.innerHTML = '<div class="ranking-empty">Todavía no hay rachas registradas.</div>';
+        modal.style.display = "flex";
         return;
       }
 
@@ -1642,8 +1645,12 @@
       }
 
       list.innerHTML = html;
+      modal.style.display = "flex";
     } catch (e) {
+      // Aun si falla la carga, mostramos el modal igualmente (con el aviso de error): si no,
+      // al pulsar "Ranking" no pasaría nada visible y parecería que el botón no responde.
       list.innerHTML = '<div class="ranking-empty">No se pudo cargar el ranking. Inténtalo más tarde.</div>';
+      modal.style.display = "flex";
       console.error("Error cargando el ranking:", e);
     }
   }
@@ -1848,17 +1855,15 @@
     const errorEl = document.getElementById("profile-modal-error");
     const bodyEl = document.getElementById("profile-modal-body");
 
-    loadingEl.style.display = "block";
-    errorEl.style.display = "none";
-    bodyEl.style.display = "none";
-    modal.style.display = "flex";
-
     const isOwnProfile = !uid || (currentUser && uid === currentUser.uid);
 
+    // Cargamos todo ANTES de mostrar el modal (en vez de abrirlo con un "Cargando..." y
+    // rellenarlo después), para que aparezca ya con el contenido completo puesto de una vez,
+    // sin ese salto de tamaño al pasar de un aviso corto al perfil real.
     try {
       let profile;
       if (isOwnProfile) {
-        if (!currentUser || !currentUserProfile) { closeProfileModal(); return; }
+        if (!currentUser || !currentUserProfile) return; // no hay perfil que mostrar; no abrimos nada
         // La posición en el Ranking normalmente solo se recalcula al batir una racha nueva en
         // Infinito. Aprovechamos que se está mirando el propio perfil para refrescarla también
         // aquí, así los logros de Ranking no se quedan bloqueados solo por no haber llegado a
@@ -1880,11 +1885,17 @@
       document.getElementById("profile-modal-edit-btn").style.display = isOwnProfile ? "inline-block" : "none";
 
       loadingEl.style.display = "none";
+      errorEl.style.display = "none";
       bodyEl.style.display = "block";
+      modal.style.display = "flex";
     } catch (e) {
+      // Aun si falla la carga, mostramos el modal igualmente (con el aviso de error): si no,
+      // al pulsar "Perfil" no pasaría nada visible y parecería que el botón no responde.
       loadingEl.style.display = "none";
+      bodyEl.style.display = "none";
       errorEl.style.display = "block";
       errorEl.innerText = "No se pudo cargar este perfil. Inténtalo más tarde.";
+      modal.style.display = "flex";
       console.error("Error cargando el perfil:", e);
     }
   }
