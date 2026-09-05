@@ -202,7 +202,42 @@
     }
     .profile-modal-username { margin-bottom: 4px; font-size: 1.4rem; word-break: break-word; }
     .profile-modal-streak { color: #94a3b8; font-size: 0.95rem; margin-bottom: 14px; line-height: 1.6; }
-    #profile-modal-edit-btn { margin-bottom: 20px; }
+    .profile-modal-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+
+    /* ---------- Tienda ---------- */
+    .shop-modal-content { max-width: 640px; }
+    .shop-berries-balance {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      font-size: 1.1rem; font-weight: bold; color: #f59e0b; margin-bottom: 16px;
+    }
+    .shop-berries-icon { width: 20px; height: 20px; object-fit: contain; }
+    .shop-section-title { color: #f59e0b; font-size: 1.05rem; margin: 20px 0 6px; text-align: left; }
+    .shop-unequip-link {
+      color: #94a3b8; font-size: 0.8rem; text-align: right; margin: 0 0 8px; cursor: pointer;
+      text-decoration: underline;
+    }
+    .shop-frames-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 14px;
+    }
+    .shop-item {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      background: #0f172a; border: 2px solid #334155; border-radius: 10px; padding: 12px 8px;
+    }
+    .shop-frame-preview {
+      width: 64px; height: 64px; border-radius: 50%; padding: 4px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .shop-frame-preview-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: top center; }
+    .shop-item-name { font-size: 0.8rem; font-weight: bold; text-align: center; color: #f8fafc; }
+    .shop-item .action-btn { font-size: 0.8rem; padding: 6px 10px; white-space: nowrap; }
+    .shop-btn-berries-icon { width: 13px; height: 13px; object-fit: contain; vertical-align: -2px; }
+    .shop-item-equipped-btn { opacity: 0.7; cursor: default; }
+    .shop-titles-list { display: flex; flex-direction: column; gap: 8px; }
+    .shop-title-item {
+      flex-direction: row; justify-content: space-between; align-items: center;
+      padding: 10px 14px; text-align: left;
+    }
+    .shop-title-item .shop-item-name { text-align: left; font-size: 0.9rem; }
     .profile-modal-achievements-title { font-weight: bold; color: #f59e0b; font-size: 1.1rem; margin-bottom: 12px; }
     /* Una columna por modo (Novato/Supernova/Yonko/Infinito/Ranking), lado a lado en pantallas
        anchas. En pantallas estrechas (móvil) no caben 5 columnas legibles, así que se apilan
@@ -971,10 +1006,37 @@
              onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'">
         <h2 id="profile-modal-username" class="profile-modal-username"></h2>
         <div id="profile-modal-streak" class="profile-modal-streak"></div>
-        <button id="profile-modal-edit-btn" class="action-btn" onclick="openProfileEditFromProfile()" style="display: none;">✏️ Editar perfil</button>
+        <div class="profile-modal-actions">
+          <button id="profile-modal-edit-btn" class="action-btn" onclick="openProfileEditFromProfile()" style="display: none;">✏️ Editar perfil</button>
+          <button id="profile-modal-shop-btn" class="action-btn" onclick="openShopFromProfile()" style="display: none;">🛒 Tienda</button>
+        </div>
         <div class="profile-modal-achievements-title">Logros</div>
         <div id="profile-modal-achievements" class="achievements-columns"></div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tienda: comprar y equipar marcos y títulos con Berries. Solo accesible con sesión iniciada
+     (se abre desde el propio Perfil), nunca viendo el perfil de otro jugador. -->
+<div id="shop-modal" class="modal-overlay" onclick="closeShopModalOnOverlay(event)">
+  <div class="modal-content shop-modal-content">
+    <button class="close-btn" onclick="closeShopModal()">&times;</button>
+    <div class="modal-scroll-area">
+      <h2>🛒 Tienda</h2>
+      <div class="shop-berries-balance">
+        <img src="berries.webp" alt="" class="shop-berries-icon" onerror="this.style.display='none'">
+        <span id="shop-berries-balance-count">0</span> Berries
+      </div>
+      <div id="shop-error" class="auth-error"></div>
+
+      <h3 class="shop-section-title">🖼️ Marcos</h3>
+      <p class="shop-unequip-link" id="shop-frames-unequip" style="display: none;" onclick="handleEquipClick('frames', null)">Quitar marco</p>
+      <div id="shop-frames-list" class="shop-frames-grid"></div>
+
+      <h3 class="shop-section-title">🏷️ Títulos</h3>
+      <p class="shop-unequip-link" id="shop-titles-unequip" style="display: none;" onclick="handleEquipClick('titles', null)">Quitar título</p>
+      <div id="shop-titles-list" class="shop-titles-list"></div>
     </div>
   </div>
 </div>
@@ -1310,15 +1372,13 @@
       dropdownUser.style.display = "block";
       document.getElementById("auth-dropdown-username").innerText = (currentUserProfile && currentUserProfile.username) || currentUser.email;
 
-      // "berries" (monedas) y "equippedTitle" (título comprado en la Tienda) todavía no existen
-      // como sistema real: de momento se muestran con su valor por defecto (0 y sin título),
-      // listos para cuando construyamos la Tienda de verdad sin tener que volver a tocar esto.
       document.getElementById("auth-dropdown-berries-count").innerText = (currentUserProfile && currentUserProfile.berries) || 0;
 
       const titleEl = document.getElementById("auth-dropdown-title");
-      const equippedTitle = currentUserProfile && currentUserProfile.equippedTitle;
-      if (equippedTitle) {
-        titleEl.innerText = equippedTitle;
+      const equippedTitleId = currentUserProfile && currentUserProfile.equippedTitleId;
+      const equippedTitleDef = equippedTitleId && SHOP_TITLES.find(t => t.id === equippedTitleId);
+      if (equippedTitleDef) {
+        titleEl.innerText = equippedTitleDef.name;
         titleEl.style.display = "block";
       } else {
         titleEl.innerText = "";
@@ -1892,6 +1952,240 @@
     }
   }
 
+  // ---------- Tienda (marcos y títulos) ----------
+  //
+  // Precios y nombres de ejemplo, fáciles de tocar más adelante sin afectar a nada más (basta
+  // con cambiar los valores de aquí abajo). El degradado y el resplandor de cada marco son los
+  // que acordamos viendo los ejemplos: el bronce se deja apagado a propósito, para que se note
+  // el salto hacia los demás.
+  const SHOP_FRAMES = [
+    {
+      id: "bronce", name: "Marco de bronce", price: 100,
+      gradient: "linear-gradient(135deg, #78350f, #a16207, #78350f)", glow: "none"
+    },
+    {
+      id: "plata", name: "Marco de plata", price: 250,
+      gradient: "linear-gradient(135deg, #94a3b8, #f8fafc, #94a3b8)", glow: "0 0 12px 2px rgba(226, 232, 240, 0.55)"
+    },
+    {
+      id: "oro", name: "Marco de oro", price: 500,
+      gradient: "linear-gradient(135deg, #ca8a04, #fef9c3, #eab308)", glow: "0 0 12px 2px rgba(250, 204, 21, 0.6)"
+    },
+    {
+      id: "diamante", name: "Marco de diamante", price: 1000,
+      gradient: "linear-gradient(135deg, #0ea5e9, #e0f7ff, #22d3ee, #0ea5e9)", glow: "0 0 14px 3px rgba(34, 211, 238, 0.65)"
+    },
+    {
+      id: "arcoiris", name: "Marco arcoíris", price: 2500,
+      gradient: "conic-gradient(from 0deg, #f43f5e, #f59e0b, #eab308, #22c55e, #38bdf8, #8b5cf6, #f43f5e)",
+      glow: "0 0 14px 3px rgba(168, 85, 247, 0.5)", animated: true
+    }
+  ];
+
+  const SHOP_TITLES = [
+    { id: "novato_grand_line", name: "Novato de la Grand Line", price: 100 },
+    { id: "cazarrecompensas", name: "Cazarrecompensas", price: 200 },
+    { id: "vicealmirante", name: "Vicealmirante", price: 350 },
+    { id: "shichibukai", name: "Shichibukai", price: 500 },
+    { id: "superviviente_marineford", name: "Superviviente de Marineford", price: 750 },
+    { id: "maestro_haki", name: "Maestro del Haki", price: 1000 },
+    { id: "leyenda_nuevo_mundo", name: "Leyenda del Nuevo Mundo", price: 1500 },
+    { id: "rey_piratas", name: "Rey de los Piratas", price: 3000 }
+  ];
+
+  // Devuelve la lista de artículos y los nombres de campo (Firestore) que le corresponden a
+  // una categoría de la Tienda, para no repetir esta lógica en cada función.
+  function getShopCategoryInfo(category) {
+    if (category === "frames") {
+      return { list: SHOP_FRAMES, ownedField: "ownedFrames", equippedField: "equippedFrameId" };
+    }
+    return { list: SHOP_TITLES, ownedField: "ownedTitles", equippedField: "equippedTitleId" };
+  }
+
+  // Compra un artículo con una transacción (lee tus Berries y lo que ya tienes justo antes de
+  // escribir), para que nunca puedas comprar algo dos veces ni gastar más Berries de las que
+  // tenías en el momento exacto de la compra, aunque pulses varias veces seguidas muy rápido.
+  async function purchaseShopItem(category, itemId) {
+    if (!currentUser || !currentUserProfile) return { error: "sin_sesion" };
+
+    const { list, ownedField } = getShopCategoryInfo(category);
+    const item = list.find(i => i.id === itemId);
+    if (!item) return { error: "no_existe" };
+
+    try {
+      const docRef = db.collection("users").doc(currentUser.uid);
+      const result = await db.runTransaction(async transaction => {
+        const snap = await transaction.get(docRef);
+        const data = snap.exists ? snap.data() : {};
+        const currentBerries = data.berries || 0;
+        const currentOwned = data[ownedField] || [];
+
+        if (currentOwned.includes(itemId)) return { error: "ya_comprado" };
+        if (currentBerries < item.price) return { error: "sin_berries" };
+
+        const newBerries = currentBerries - item.price;
+        const newOwned = [...currentOwned, itemId];
+        transaction.set(docRef, { berries: newBerries, [ownedField]: newOwned }, { merge: true });
+        return { berries: newBerries, owned: newOwned };
+      });
+
+      if (!result.error) {
+        currentUserProfile.berries = result.berries;
+        currentUserProfile[ownedField] = result.owned;
+        updateAuthUI();
+      }
+      return result;
+    } catch (e) {
+      console.error("No se pudo completar la compra:", e);
+      return { error: "fallo" };
+    }
+  }
+
+  // Equipa (o quita, con itemId=null) un marco o título ya comprado. A diferencia de lo que
+  // POSEES (privado, solo tuyo), lo EQUIPADO es público: se ve en tu perfil y en el Ranking,
+  // así que se guarda también en publicProfiles.
+  async function equipShopItem(category, itemId) {
+    if (!currentUser || !currentUserProfile) return;
+
+    const { ownedField, equippedField } = getShopCategoryInfo(category);
+    const owned = currentUserProfile[ownedField] || [];
+    if (itemId && !owned.includes(itemId)) return; // no lo tienes, no se puede equipar
+
+    try {
+      await Promise.all([
+        db.collection("users").doc(currentUser.uid).set({ [equippedField]: itemId }, { merge: true }),
+        db.collection("publicProfiles").doc(currentUser.uid).set({ [equippedField]: itemId }, { merge: true })
+      ]);
+      currentUserProfile[equippedField] = itemId;
+      updateAuthUI();
+    } catch (e) {
+      console.error("No se pudo equipar:", e);
+    }
+  }
+
+  function buildShopFrameItemHtml(frame, profile) {
+    const owned = (profile.ownedFrames || []).includes(frame.id);
+    const equipped = profile.equippedFrameId === frame.id;
+    const avatarSrc = profile.avatar || "https://dummyimage.com/100x100/334155/ffffff.png&text=?";
+
+    let actionHtml;
+    if (equipped) {
+      actionHtml = `<button class="action-btn shop-item-equipped-btn" disabled>Equipado</button>`;
+    } else if (owned) {
+      actionHtml = `<button class="action-btn" onclick="handleEquipClick('frames', '${frame.id}')">Equipar</button>`;
+    } else {
+      const canAfford = (profile.berries || 0) >= frame.price;
+      actionHtml = `
+        <button class="action-btn submit shop-buy-btn" ${canAfford ? "" : "disabled"} onclick="handlePurchaseClick('frames', '${frame.id}')">
+          Comprar (${frame.price} <img src="berries.webp" class="shop-btn-berries-icon" onerror="this.style.display='none'">)
+        </button>`;
+    }
+
+    return `
+      <div class="shop-item shop-frame-item">
+        <div class="shop-frame-preview tier-${frame.id}" style="background: ${frame.gradient}; box-shadow: ${frame.glow};">
+          <img src="${escapeHtml(avatarSrc)}" class="shop-frame-preview-img" onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'">
+        </div>
+        <div class="shop-item-name">${escapeHtml(frame.name)}</div>
+        ${actionHtml}
+      </div>`;
+  }
+
+  function buildShopTitleItemHtml(title, profile) {
+    const owned = (profile.ownedTitles || []).includes(title.id);
+    const equipped = profile.equippedTitleId === title.id;
+
+    let actionHtml;
+    if (equipped) {
+      actionHtml = `<button class="action-btn shop-item-equipped-btn" disabled>Equipado</button>`;
+    } else if (owned) {
+      actionHtml = `<button class="action-btn" onclick="handleEquipClick('titles', '${title.id}')">Equipar</button>`;
+    } else {
+      const canAfford = (profile.berries || 0) >= title.price;
+      actionHtml = `
+        <button class="action-btn submit shop-buy-btn" ${canAfford ? "" : "disabled"} onclick="handlePurchaseClick('titles', '${title.id}')">
+          Comprar (${title.price} <img src="berries.webp" class="shop-btn-berries-icon" onerror="this.style.display='none'">)
+        </button>`;
+    }
+
+    return `
+      <div class="shop-item shop-title-item">
+        <div class="shop-item-name">${escapeHtml(title.name)}</div>
+        ${actionHtml}
+      </div>`;
+  }
+
+  function renderShopContent() {
+    const profile = currentUserProfile || {};
+    document.getElementById("shop-berries-balance-count").innerText = profile.berries || 0;
+    document.getElementById("shop-frames-list").innerHTML = SHOP_FRAMES.map(f => buildShopFrameItemHtml(f, profile)).join("");
+    document.getElementById("shop-titles-list").innerHTML = SHOP_TITLES.map(t => buildShopTitleItemHtml(t, profile)).join("");
+    document.getElementById("shop-frames-unequip").style.display = profile.equippedFrameId ? "block" : "none";
+    document.getElementById("shop-titles-unequip").style.display = profile.equippedTitleId ? "block" : "none";
+    document.getElementById("shop-error").innerText = "";
+  }
+
+  async function handlePurchaseClick(category, itemId) {
+    const result = await purchaseShopItem(category, itemId);
+    const errorEl = document.getElementById("shop-error");
+    if (result && result.error === "sin_berries") {
+      errorEl.innerText = "No tienes suficientes Berries todavía.";
+    } else if (result && result.error && result.error !== "ya_comprado") {
+      errorEl.innerText = "No se pudo completar la compra. Inténtalo más tarde.";
+    }
+    renderShopContent();
+  }
+
+  async function handleEquipClick(category, itemId) {
+    await equipShopItem(category, itemId);
+    renderShopContent();
+  }
+
+  function openShopModal() {
+    if (!currentUser || !currentUserProfile) return;
+    renderShopContent();
+    document.getElementById("shop-modal").style.display = "flex";
+    startShopRainbowAnimation();
+  }
+
+  // Se abre desde dentro del modal de Perfil: lo cerramos primero para no dejar los dos
+  // superpuestos (mismo patrón que ya usamos para "Editar perfil").
+  function openShopFromProfile() {
+    closeProfileModal();
+    openShopModal();
+  }
+
+  function closeShopModal() {
+    document.getElementById("shop-modal").style.display = "none";
+    stopShopRainbowAnimation();
+  }
+
+  function closeShopModalOnOverlay(event) {
+    if (event.target.id === "shop-modal") closeShopModal();
+  }
+
+  // Gira el degradado cónico del marco arcoíris mientras la Tienda está abierta. Se para al
+  // cerrar (closeShopModal) para no dejar un intervalo corriendo de fondo sin necesidad.
+  let shopRainbowAnimId = null;
+
+  function startShopRainbowAnimation() {
+    stopShopRainbowAnimation();
+    let deg = 0;
+    shopRainbowAnimId = setInterval(() => {
+      deg = (deg + 2) % 360;
+      document.querySelectorAll(".shop-frame-preview.tier-arcoiris").forEach(el => {
+        el.style.background = `conic-gradient(from ${deg}deg, #f43f5e, #f59e0b, #eab308, #22c55e, #38bdf8, #8b5cf6, #f43f5e)`;
+      });
+    }, 40);
+  }
+
+  function stopShopRainbowAnimation() {
+    if (shopRainbowAnimId) {
+      clearInterval(shopRainbowAnimId);
+      shopRainbowAnimId = null;
+    }
+  }
+
   // Orden de las columnas tal y como se piden: Novato, Supernova, Yonko, Infinito, Ranking.
   const ACHIEVEMENT_COLUMNS = [
     { tier: "novato", label: "Novato" },
@@ -2016,6 +2310,7 @@
       document.getElementById("profile-modal-streak").innerHTML = buildProfileStreaksHtml(profile);
       document.getElementById("profile-modal-achievements").innerHTML = buildAchievementsHtml(profile);
       document.getElementById("profile-modal-edit-btn").style.display = isOwnProfile ? "inline-block" : "none";
+      document.getElementById("profile-modal-shop-btn").style.display = isOwnProfile ? "inline-block" : "none";
 
       clearTimeout(loadingTimer);
       loadingEl.style.display = "none";
@@ -3966,6 +4261,7 @@
       { id: "ranking-modal", close: closeRankingModal },
       { id: "edit-profile-modal", close: closeEditProfileModal },
       { id: "profile-modal", close: closeProfileModal },
+      { id: "shop-modal", close: closeShopModal },
       { id: "howto-modal", close: closeHowToModal },
       { id: "contact-modal", close: closeContactModal },
       { id: "about-modal", close: closeAboutModal },
