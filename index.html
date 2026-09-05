@@ -1116,8 +1116,40 @@
       ]);
       currentUserProfile = { ...(currentUserProfile || {}), bestStreak: infiniteSolvedCount };
       updateAuthUI();
+
+      // Superar una racha personal es el ÚNICO momento en que tu posición en el Ranking puede
+      // MEJORAR (la racha de los demás nunca baja, así que nadie te adelanta por sí solo).
+      // Por eso basta con comprobarlo aquí para los logros de "Top N".
+      await updateBestRankPositionIfNeeded();
     } catch (e) {
       console.error("No se pudo actualizar la mejor racha:", e);
+    }
+  }
+
+  // Calcula tu posición actual en el Ranking (igual que hace el propio Ranking: cuántos
+  // jugadores tienen una racha estrictamente mayor que la tuya, +1) y, si es mejor que tu
+  // mejor posición guardada hasta ahora, la actualiza — para los logros de "Top N" de la
+  // columna Ranking, que se basan en la MEJOR posición alcanzada alguna vez, no en la actual.
+  async function updateBestRankPositionIfNeeded() {
+    if (!currentUser) return;
+
+    try {
+      const myStreak = (currentUserProfile && currentUserProfile.bestStreak) || 0;
+      const higherCountSnap = await db.collection("publicProfiles")
+        .where("bestStreak", ">", myStreak)
+        .count().get();
+      const myPosition = higherCountSnap.data().count + 1;
+
+      const currentBestPosition = (currentUserProfile && currentUserProfile.bestRankPosition) || Infinity;
+      if (myPosition >= currentBestPosition) return; // no mejora nada, no hace falta escribir
+
+      await Promise.all([
+        db.collection("users").doc(currentUser.uid).set({ bestRankPosition: myPosition }, { merge: true }),
+        db.collection("publicProfiles").doc(currentUser.uid).set({ bestRankPosition: myPosition }, { merge: true })
+      ]);
+      currentUserProfile = { ...(currentUserProfile || {}), bestRankPosition: myPosition };
+    } catch (e) {
+      console.error("No se pudo actualizar tu mejor posición en el Ranking:", e);
     }
   }
 
@@ -1591,6 +1623,23 @@
     }));
   }
 
+  // Puestos del Ranking que dan logro, de más fácil a más difícil. Se basan en la MEJOR
+  // posición alcanzada alguna vez (bestRankPosition), no en la posición actual: si algún día
+  // bajas del Top 10, no pierdes el logro de haber llegado a estar ahí.
+  const RANKING_POSITION_MILESTONES = [50, 40, 30, 25, 20, 10, 5, 3, 1];
+
+  function buildRankingPositionAchievements() {
+    return RANKING_POSITION_MILESTONES.map(pos => ({
+      id: `ranking_top_${pos}`,
+      tier: "ranking",
+      name: pos === 1 ? "1ª posición en el Ranking" : `Top ${pos} del Ranking`,
+      description: pos === 1
+        ? "Alcanza el primer puesto del Ranking."
+        : `Alcanza el puesto ${pos} o mejor en el Ranking.`,
+      check: profile => typeof profile.bestRankPosition === "number" && profile.bestRankPosition <= pos
+    }));
+  }
+
   const ACHIEVEMENTS = [
     {
       id: "racha_1",
@@ -1615,7 +1664,8 @@
     },
     ...buildDailyStreakAchievements("facil", "novato"),
     ...buildDailyStreakAchievements("media", "supernova"),
-    ...buildDailyStreakAchievements("dificil", "yonko")
+    ...buildDailyStreakAchievements("dificil", "yonko"),
+    ...buildRankingPositionAchievements()
   ];
 
   function buildAchievementsHtml(profile) {
