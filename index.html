@@ -2558,6 +2558,11 @@
           document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
           const activeBtn = document.querySelector(`.diff-btn[onclick*="${lastDifficulty}"]`);
           if (activeBtn) activeBtn.classList.add('active');
+          // setDifficulty() (el click normal en un botón de dificultad) llama a esto antes de
+          // cargar el reto diario; este otro camino del arranque (recargar la página) se había
+          // quedado sin la misma llamada, así que el "🔥 Racha actual" nunca llegaba a mostrarse
+          // al recargar, aunque el panel sí se cargara bien.
+          updateInfiniteScoreDisplay();
           await loadDailyChallenge(lastDifficulty);
           hideBoardLoading();
           return;
@@ -2578,6 +2583,7 @@
           resumeInfiniteFromSaved(saved);
         } else {
           // currentDifficulty conserva su valor por defecto ("facil") y no estamos en Infinito.
+          updateInfiniteScoreDisplay(); // mismo motivo que en la otra rama de arriba
           await loadDailyChallenge(currentDifficulty);
         }
         hideBoardLoading();
