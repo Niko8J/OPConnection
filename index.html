@@ -2618,9 +2618,21 @@
       el.style.visibility = "visible";
       el.innerText = `🔥 Paneles resueltos: ${infiniteSolvedCount}`;
       hintBtn.style.display = "";
+      return;
+    }
+
+    hintBtn.style.display = "none";
+
+    // Reutilizamos este mismo hueco para mostrar la racha actual del modo diario en curso
+    // (Novato/Supernova/Yonko). Los invitados no tienen racha guardada en ninguna cuenta, así
+    // que para ellos lo dejamos oculto, igual que ya se hacía antes de tener sesión iniciada.
+    if (currentUser && currentUserProfile) {
+      const streakData = currentUserProfile.dailyStreaks && currentUserProfile.dailyStreaks[currentDifficulty];
+      const current = (streakData && streakData.current) || 0;
+      el.style.visibility = "visible";
+      el.innerText = `🔥 Racha actual: ${current} día(s)`;
     } else {
       el.style.visibility = "hidden";
-      hintBtn.style.display = "none";
     }
   }
 
@@ -3031,12 +3043,14 @@
   // juegas como invitado. Se llama desde handleWin()/handleGameOver().
   async function saveDailyResult(difficulty, result, groups) {
     const todayKey = getMadridDailyKey();
-    // Guardamos también en qué orden se resolvieron las categorías y cuántas vidas quedaban,
-    // para poder reconstruir el tablero exactamente como quedó si el jugador vuelve más tarde
-    // (recarga la página, cambia de dificultad y vuelve...), en vez de mostrarlo en blanco.
+    // Guardamos también en qué orden se resolvieron las categorías, cuántas vidas quedaban, y
+    // el orden exacto de las tarjetas que quedaron SIN resolver (para una derrota), para poder
+    // reconstruir el tablero exactamente como quedó si el jugador vuelve más tarde (recarga la
+    // página, cambia de dificultad y vuelve...), en vez de mostrarlo en blanco o barajado de
+    // nuevo cada vez (las resueltas quedaban fijas, pero las demás "bailaban" en cada visita).
     const entry = {
       date: todayKey, result, groups: serializeBoardGroups(groups),
-      solvedOrder: [...solvedOrder], lives
+      solvedOrder: [...solvedOrder], lives, cardOrder: cards.map(c => c.name)
     };
 
     if (currentUser) {
@@ -3071,6 +3085,10 @@
     } else {
       saveDailyProgressState(difficulty, entry);
     }
+
+    // Refresca el "🔥 Racha actual" bajo los botones de dificultad, para que se vea al momento
+    // sin tener que salir y volver a entrar en el modo.
+    updateInfiniteScoreDisplay();
   }
 
   // Si jugaste el diario de hoy COMO INVITADO en este mismo navegador y luego inicias sesión,
@@ -3221,7 +3239,20 @@
       if (solvedNames.has(cat.name)) return; // ya está como bloque resuelto, no como carta suelta
       cat.items.forEach(item => cards.push({ name: item.name, img: item.img, category: cat.name }));
     });
-    cards = shuffle(cards);
+
+    // Usamos el orden EXACTO en que quedaron las tarjetas sin resolver al terminar la partida
+    // (guardado en cardOrder), en vez de barajarlas de nuevo cada vez: así no "bailan" al
+    // volver a entrar, igual que las resueltas ya se quedaban fijas.
+    if (storedEntry.cardOrder && storedEntry.cardOrder.length) {
+      const byName = new Map(cards.map(c => [c.name, c]));
+      const ordered = storedEntry.cardOrder.map(name => byName.get(name)).filter(Boolean);
+      ordered.forEach(c => byName.delete(c.name));
+      // Por si el orden guardado no coincidiera del todo con las tarjetas reconstruidas (no
+      // debería pasar nunca, pero así no se pierde ninguna tarjeta por seguridad):
+      cards = [...ordered, ...byName.values()];
+    } else {
+      cards = shuffle(cards); // resultado antiguo, guardado antes de tener este dato
+    }
     selectedCards = [];
 
     gameOver = true;
