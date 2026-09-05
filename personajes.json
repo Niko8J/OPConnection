@@ -8409,6 +8409,22 @@
       ]
     }
   },
+ {
+    "id": "jean_noueilles",
+    "name": "Jean Noueilles",
+    "img": "imagenes/JeanNoueilles.webp",
+    "tags": {
+      "Banda": [
+        {"val": "Nuevos Piratas Gyojin", "dif": "media"}
+      ],
+      "Raza": [
+        {"val": "Gyojins", "dif": "facil"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ]
+    }
+  },
   {
     "id": "hammond",
     "name": "Hammond",
