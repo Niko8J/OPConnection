@@ -4929,6 +4929,9 @@
         {"val": "Piratas Gigantes Guerreros", "dif": "media"},
         {"val": "Elbaf", "dif": "facil"}
       ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
@@ -4948,6 +4951,10 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ],
       "Raza": [
         {"val": "Gigantes", "dif": "facil"}
@@ -5032,6 +5039,10 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ],
       "Raza": [
         {"val": "Gigantes", "dif": "media"}
@@ -10161,7 +10172,8 @@
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con gafas", "dif": "dificil"}
+        {"val": "Personajes con gafas", "dif": "dificil"},
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ],
       "Cárcel": [
         {"val": "Presos de Impel Down", "dif": "dificil"}
@@ -10844,6 +10856,10 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
