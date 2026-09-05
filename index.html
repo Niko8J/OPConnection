@@ -184,9 +184,10 @@
        anchas. En pantallas estrechas (móvil) no caben 5 columnas legibles, así que se apilan
        una debajo de otra, cada una con sus logros en fila (como el diseño original). */
     .achievements-columns {
-      display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; align-items: start;
+      display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; align-items: start;
+      max-width: 100%;
     }
-    .achievement-column { display: flex; flex-direction: column; align-items: center; }
+    .achievement-column { display: flex; flex-direction: column; align-items: center; min-width: 0; }
     .achievement-column-header {
       font-weight: bold; color: #f8fafc; font-size: 0.95rem; text-align: center;
       padding-bottom: 8px; margin-bottom: 10px; border-bottom: 2px solid #334155; width: 100%;
@@ -194,7 +195,10 @@
     .achievement-column-badges {
       display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%;
     }
-    @media (max-width: 700px) {
+    /* 5 columnas de 96px de ancho fijo (más los huecos) necesitan bastante más de 700px de
+       verdad para no quedar apretadas; de ahí el corte más generoso (860px, justo por debajo
+       del ancho máximo del propio modal) para no arriesgarnos a un scroll horizontal. */
+    @media (max-width: 860px) {
       .achievements-columns { grid-template-columns: 1fr; gap: 22px; }
       .achievement-column-badges { flex-direction: row; flex-wrap: wrap; justify-content: center; }
     }
@@ -548,6 +552,9 @@
       align-items: flex-start;
       padding: 30px 15px;
       overflow-y: auto;
+      overflow-x: hidden; /* ningún modal necesita scroll horizontal; esto es un cerrojo de
+                              seguridad para que un desbordamiento puntual de contenido nunca
+                              se traduzca en scroll horizontal de toda la página */
       z-index: 100;
     }
     .modal-content {
@@ -1630,7 +1637,7 @@
     return DAILY_STREAK_MILESTONES.map(days => ({
       id: `racha_diaria_${difficultyKey}_${days}`,
       tier,
-      name: days === 1 ? `Gana el diario de ${label}` : `${days} días seguidos ganando ${label}`,
+      name: days === 1 ? `Gana tu primer panel de ${label}` : `${days} días seguidos ganando ${label}`,
       description: days === 1
         ? `Supera el reto diario de ${label} una vez.`
         : `Supera el reto diario de ${label} ${days} días seguidos (perder un día rompe la racha).`,
@@ -1641,13 +1648,28 @@
   // Puestos del Ranking que dan logro, de más fácil a más difícil. Se basan en la MEJOR
   // posición alcanzada alguna vez (bestRankPosition), no en la posición actual: si algún día
   // bajas del Top 10, no pierdes el logro de haber llegado a estar ahí.
+  // Paneles resueltos seguidos en modo Infinito necesarios para cada nivel de logro.
+  const INFINITE_STREAK_MILESTONES = [1, 10, 25, 50, 100, 150];
+
+  function buildInfiniteStreakAchievements() {
+    return INFINITE_STREAK_MILESTONES.map(n => ({
+      id: `racha_infinito_${n}`,
+      tier: "infinito",
+      name: n === 1 ? "Primer panel en Infinito" : `${n} paneles en Infinito`,
+      description: n === 1
+        ? "Resuelve al menos 1 panel en una racha de modo Infinito."
+        : `Alcanza una racha de ${n} paneles resueltos seguidos en modo Infinito.`,
+      check: profile => (profile.bestStreak || 0) >= n
+    }));
+  }
+
   const RANKING_POSITION_MILESTONES = [50, 40, 30, 25, 20, 10, 5, 3, 1];
 
   function buildRankingPositionAchievements() {
     return RANKING_POSITION_MILESTONES.map(pos => ({
       id: `ranking_top_${pos}`,
       tier: "ranking",
-      name: pos === 1 ? "1ª posición en el Ranking" : `Top ${pos} del Ranking`,
+      name: pos === 1 ? "Líder del Ranking" : `Top ${pos} del Ranking`,
       description: pos === 1
         ? "Alcanza el primer puesto del Ranking."
         : `Alcanza el puesto ${pos} o mejor en el Ranking.`,
@@ -1656,27 +1678,7 @@
   }
 
   const ACHIEVEMENTS = [
-    {
-      id: "racha_1",
-      tier: "infinito",
-      name: "Primer panel en modo Infinito",
-      description: "Resuelve al menos 1 panel en una racha de modo Infinito.",
-      check: profile => (profile.bestStreak || 0) >= 1
-    },
-    {
-      id: "racha_10",
-      tier: "infinito",
-      name: "10 paneles en modo Infinito",
-      description: "Alcanza una racha de 10 paneles resueltos seguidos en modo Infinito.",
-      check: profile => (profile.bestStreak || 0) >= 10
-    },
-    {
-      id: "racha_25",
-      tier: "infinito",
-      name: "25 paneles en modo Infinito",
-      description: "Alcanza una racha de 25 paneles resueltos seguidos en modo Infinito.",
-      check: profile => (profile.bestStreak || 0) >= 25
-    },
+    ...buildInfiniteStreakAchievements(),
     ...buildDailyStreakAchievements("facil", "novato"),
     ...buildDailyStreakAchievements("media", "supernova"),
     ...buildDailyStreakAchievements("dificil", "yonko"),
