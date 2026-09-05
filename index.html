@@ -261,6 +261,14 @@
     .achievement-badge.locked .achievement-icon { filter: grayscale(100%); opacity: 0.35; }
     .achievement-badge.locked .achievement-name { color: #64748b; }
     .achievement-name { font-size: 0.75rem; font-weight: bold; text-align: center; color: #f8fafc; word-break: break-word; }
+    .achievement-coins {
+      display: flex; align-items: center; gap: 3px; margin-top: 4px;
+      font-size: 0.7rem; font-weight: bold; color: #f59e0b;
+    }
+    /* Bloqueado: la cifra se atenúa igual que el resto de la insignia, pero se sigue viendo
+       (a propósito no la ocultamos) para que el jugador sepa cuánto ganaría al conseguirlo. */
+    .achievement-badge.locked .achievement-coins { color: #92702f; }
+    .achievement-coins-icon { width: 12px; height: 12px; object-fit: contain; }
 
     .howto-modal-content { max-width: 440px; text-align: left; }
     .howto-content p { margin-bottom: 10px; color: #cbd5e1; font-size: 0.9rem; line-height: 1.5; }
@@ -1899,10 +1907,16 @@
     const nameHtml = a.nameLines.map(escapeHtml).join("<br>");
     // Bloqueado: se muestra en gris/silueta (no se oculta), para que se sepa que existe y
     // anime a conseguirlo. El title (tooltip) da la descripción también cuando está bloqueado.
+    // Las Berries se muestran SIEMPRE, aunque esté bloqueado: así el jugador ve de un vistazo
+    // cuánto le daría conseguirlo, en vez de tener que desbloquearlo primero para saberlo.
     return `
       <div class="achievement-badge tier-${a.tier} ${unlocked ? 'unlocked' : 'locked'}" title="${escapeHtml(a.name)}: ${escapeHtml(a.description)}">
         <div class="achievement-icon">${icon}</div>
         <div class="achievement-name">${nameHtml}</div>
+        <div class="achievement-coins">
+          +${a.coins || 0}
+          <img src="berries.webp" alt="" class="achievement-coins-icon" onerror="this.style.display='none'">
+        </div>
       </div>`;
   }
 
