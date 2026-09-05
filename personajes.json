@@ -4183,7 +4183,7 @@
         {"val": "Fruta del diablo: Zoan", "dif": "media"}
       ],
       "Raza": [
-        {"val": "Objetos que se han comido una fruta", "dif": "media"}
+        {"val": "Objetos que han consumido una fruta", "dif": "media"}
       ]
     }
   },
@@ -4202,7 +4202,7 @@
         {"val": "Fruta del diablo: Zoan", "dif": "media"}
       ],
       "Raza": [
-        {"val": "Objetos que se han comido una fruta", "dif": "media"}
+        {"val": "Objetos que han consumido una fruta", "dif": "media"}
       ]
     }
   },
@@ -4215,7 +4215,7 @@
         {"val": "Fruta del diablo: Zoan", "dif": "media"}
       ],
       "Raza": [
-        {"val": "Objetos que se han comido una fruta", "dif": "media"}
+        {"val": "Objetos que han consumido una fruta", "dif": "media"}
       ]
     }
   },
@@ -4231,7 +4231,7 @@
         {"val": "Fruta del diablo: Zoan", "dif": "media"}
       ],
       "Raza": [
-        {"val": "Objetos que se han comido una fruta", "dif": "media"}
+        {"val": "Objetos que han consumido una fruta", "dif": "media"}
       ]
     }
   },
@@ -4247,7 +4247,7 @@
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
       ],
       "Raza": [
-        {"val": "Objetos que se han comido una fruta", "dif": "media"}
+        {"val": "Objetos que han consumido una fruta", "dif": "media"}
       ]
     }
   },
@@ -4257,7 +4257,7 @@
     "img": "imagenes/Cerberus.webp",
     "tags": {
       "Raza": [
-        {"val": "Objetos que se han comido una fruta", "dif": "media"}
+        {"val": "Objetos que han consumido una fruta", "dif": "media"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
@@ -7968,7 +7968,8 @@
         {"val": "Origen: West Blue", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -12943,6 +12944,9 @@
       ],
       "Especialidad": [
         {"val": "Médicos", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
   },
@@ -12978,6 +12982,9 @@
       ],
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
       ]
     }
   },
