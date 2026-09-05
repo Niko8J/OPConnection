@@ -171,7 +171,15 @@
     .ranking-row.own-row { border-radius: 8px; border-bottom: none; border: 2px solid #f59e0b; box-shadow: 0 0 10px #f59e0b; }
     .ranking-ellipsis { text-align: center; color: #94a3b8; letter-spacing: 3px; padding: 4px 0; font-size: 1.1rem; }
 
-    .profile-modal-content { max-width: 1080px; } /* más ancha, para caber las 5 columnas de logros sin apretarlas */
+    /* Especificidad reforzada (combinando las dos clases) a propósito: la regla genérica
+       ".modal-content" (más abajo en este archivo) también fija un "max-width" (520px) con la
+       misma especificidad que un simple ".profile-modal-content", así que al tener las dos
+       exactamente la misma "fuerza", ganaba la que apareciera más abajo en el CSS -en este
+       caso, la genérica de 520px-, dejando el modal de perfil siempre atrapado en ese ancho
+       por mucho que aquí pusiéramos un valor mayor. Con ".modal-content.profile-modal-content"
+       (dos clases en el mismo selector) subimos la especificidad para que este valor gane
+       siempre, sin depender del orden de las reglas en el archivo. */
+    .modal-content.profile-modal-content { max-width: 1080px; }
     .profile-modal-avatar {
       width: 120px; height: 120px; border-radius: 50%; object-fit: cover; object-position: top center;
       border: 3px solid #f59e0b; display: block; margin: 4px auto 12px;
