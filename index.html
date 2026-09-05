@@ -70,6 +70,7 @@
       animation: toastIn 0.25s ease, toastOut 0.25s ease 2.55s forwards;
     }
     .toast-achievement { border-color: #a855f7; }
+    .toast-achievement-content { display: flex; flex-direction: column; align-items: center; }
     .toast-berries-icon { width: 15px; height: 15px; object-fit: contain; }
     .toast-achievement-name { display: block; font-size: 0.85rem; font-weight: normal; color: #d8b4fe; }
     @keyframes toastIn { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
@@ -2026,7 +2027,13 @@
   }
 
   function showAchievementToast(achievement) {
-    showToast(`🏆 ¡Logro conseguido!<span class="toast-achievement-name">${escapeHtml(achievement.name)}</span>`, "toast-achievement");
+    // El .toast exterior es flex en FILA (para que el de monedas quede "+2 🪙" en horizontal),
+    // así que aquí hace falta este contenedor propio en columna para que el título y el
+    // nombre del logro queden uno debajo del otro, en vez de en la misma línea.
+    showToast(
+      `<div class="toast-achievement-content">🏆 ¡Logro conseguido!<span class="toast-achievement-name">${escapeHtml(achievement.name)}</span></div>`,
+      "toast-achievement"
+    );
   }
 
   // Envoltorio de checkAndAwardAchievementCoins que además muestra un aviso por cada logro
