@@ -38,7 +38,6 @@
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
-        {"val": "Personajes con tatuajes", "dif": "dificil"},
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
         {"val": "Personajes a los que Moriah robó su sombra", "dif": "dificil"}
       ],
@@ -10994,7 +10993,8 @@
         {"val": "Monarcas", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
