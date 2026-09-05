@@ -253,7 +253,11 @@
     .shop-item-name { font-size: 0.8rem; font-weight: bold; text-align: center; color: #f8fafc; }
     .shop-item .action-btn { font-size: 0.8rem; padding: 6px 4px; white-space: nowrap; width: 84px; text-align: center; }
     .shop-btn-berries-icon { height: 1em; width: auto; object-fit: contain; vertical-align: -0.15em; }
-    .shop-item-equipped-btn { opacity: 0.7; cursor: default; }
+    /* Más específica que "button.action-btn:disabled" (que si no, le ganaba y dejaba
+       "Equipado" con el mismo aspecto apagado que un "no puedes comprar esto"). */
+    button.action-btn.shop-item-equipped-btn:disabled {
+      background: #14532d; border-color: #22c55e; color: #86efac; opacity: 1; cursor: default;
+    }
     .shop-titles-list { display: flex; flex-direction: column; gap: 8px; }
     .shop-title-item {
       flex-direction: row; justify-content: space-between; align-items: center;
