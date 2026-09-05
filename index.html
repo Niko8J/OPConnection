@@ -1489,8 +1489,9 @@
         await db.collection("publicProfiles").doc(pendingGoogleUser.uid).set({ username, avatar: selectedAvatarImg, bestStreak: 0 });
         currentUserProfile = profile;
         // Este flujo no vuelve a pasar por onAuthStateChanged (la sesión de Google ya existía;
-        // solo acabamos de completar el perfil), así que el puente hay que llamarlo aquí.
+        // solo acabamos de completar el perfil), así que los puentes hay que llamarlos aquí.
         await bridgeGuestDailyProgressToAccount(pendingGoogleUser.uid);
+        await bridgeGuestInfiniteProgress();
         pendingGoogleUser = null;
         updateAuthUI();
         closeAuthModal();
@@ -1549,6 +1550,11 @@
       await db.collection("users").doc(cred.user.uid).set({ username, avatar: selectedAvatarImg, email });
       await db.collection("publicProfiles").doc(cred.user.uid).set({ username, avatar: selectedAvatarImg, bestStreak: 0 });
       currentUserProfile = { username, avatar: selectedAvatarImg, email };
+      // No dejamos esto solo en manos de onAuthStateChanged: la escritura de arriba y su propia
+      // lectura podrían solaparse en el tiempo, y en ese caso no vería el perfil recién creado
+      // todavía. Llamamos aquí a los dos puentes directamente, ya con el perfil en memoria.
+      await bridgeGuestDailyProgressToAccount(cred.user.uid);
+      await bridgeGuestInfiniteProgress();
       updateAuthUI();
       closeAuthModal();
     } catch (e) {
@@ -2178,6 +2184,8 @@
         // Si jugaste el diario de hoy como invitado en este navegador antes de iniciar sesión,
         // lo adoptamos en la cuenta ahora (ver "bridgeGuestDailyProgressToAccount" más abajo).
         await bridgeGuestDailyProgressToAccount(user.uid);
+        // Mismo puente, pero para una racha de Infinito en curso ahora mismo como invitado.
+        await bridgeGuestInfiniteProgress();
       }
     } else {
       currentUserProfile = null;
@@ -3135,6 +3143,22 @@
       } catch (e) {
         console.error("No se pudo adoptar el progreso diario de invitado:", e);
       }
+    }
+  }
+
+  // Igual que el puente anterior, pero para Infinito: si justo en el momento de registrarte o
+  // iniciar sesión estás jugando una racha de Infinito como invitado (que nunca se guarda en la
+  // nube hasta tener sesión), aprovechamos para que esa racha en curso cuente ya mismo, en vez
+  // de esperar a que completes otro panel más para que se detecte por primera vez. Sin esto, si
+  // justo después de registrarte pierdes ese mismo panel sin completarlo, esa racha se perdía
+  // del todo sin haber llegado a guardarse nunca.
+  //
+  // Solo se comprueba si "isInfiniteMode" es true (estás en esa pestaña ahora mismo): así no se
+  // usa por error un valor de "infiniteSolvedCount" que hubiera quedado de una sesión anterior
+  // y ya no tenga que ver con lo que se está jugando en este momento.
+  async function bridgeGuestInfiniteProgress() {
+    if (isInfiniteMode) {
+      await updateBestStreakIfNeeded();
     }
   }
 
