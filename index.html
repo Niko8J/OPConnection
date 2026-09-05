@@ -192,7 +192,7 @@
        anchas. En pantallas estrechas (móvil) no caben 5 columnas legibles, así que se apilan
        una debajo de otra, cada una con sus logros en fila (como el diseño original). */
     .achievements-columns {
-      display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; align-items: start;
+      display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; align-items: start;
       max-width: 100%;
     }
     .achievement-column { display: flex; flex-direction: column; align-items: center; min-width: 0; }
@@ -1692,7 +1692,12 @@
     return DAILY_STREAK_MILESTONES.map(days => ({
       id: `racha_diaria_${difficultyKey}_${days}`,
       tier,
-      name: days === 1 ? `Gana tu primer panel de ${label}` : `${days} días seguidos ganando ${label}`,
+      // El nombre del modo (Novato/Supernova/Yonko) solo se repite en el PRIMER logro de la
+      // columna: en los demás ya es redundante, porque la cabecera de la columna ya lo dice.
+      // Quitarlo de ahí, además, hace que los nombres de esos logros tengan todos una
+      // longitud/estructura parecida ("3 días seguidos ganando", "60 días seguidos ganando"...),
+      // así que ocupan siempre las mismas líneas dentro de la insignia.
+      name: days === 1 ? `Gana tu primer panel en ${label}` : `${days} días seguidos ganando`,
       description: days === 1
         ? `Supera el reto diario de ${label} una vez`
         : `Supera el reto diario de ${label} ${days} días seguidos (perder un día rompe la racha)`,
@@ -1700,9 +1705,6 @@
     }));
   }
 
-  // Puestos del Ranking que dan logro, de más fácil a más difícil. Se basan en la MEJOR
-  // posición alcanzada alguna vez (bestRankPosition), no en la posición actual: si algún día
-  // bajas del Top 10, no pierdes el logro de haber llegado a estar ahí.
   // Paneles resueltos seguidos en modo Infinito necesarios para cada nivel de logro.
   const INFINITE_STREAK_MILESTONES = [1, 10, 25, 50, 100, 150];
 
@@ -1710,13 +1712,10 @@
     return INFINITE_STREAK_MILESTONES.map(n => ({
       id: `racha_infinito_${n}`,
       tier: "infinito",
-      // "Primer panel en Infinito" es más largo que el resto de nombres de esta columna ("10
-      // paneles en Infinito", etc.) y, dentro de los 96px de ancho de la insignia, el salto de
-      // línea automático podía caer entre "Primer" y "panel" en vez de después de "panel".
-      // Usamos un espacio irrompible (\u00A0) entre esas dos palabras para forzar que el
-      // navegador salte de línea después de "panel" (dejando "Primer panel" en la primera
-      // línea) y no a mitad de esas dos palabras.
-      name: n === 1 ? "Primer\u00A0panel en Infinito" : `${n} paneles en Infinito`,
+      // Mismo patrón que en Novato/Supernova/Yonko: el primer logro presenta el modo, y el
+      // resto sigue una plantilla de longitud parecida ("Racha de 10 paneles en Infinito",
+      // "Racha de 150 paneles en Infinito"...), para que todos ocupen las mismas líneas.
+      name: n === 1 ? "Gana tu primer panel en Infinito" : `Racha de ${n} paneles en Infinito`,
       description: n === 1
         ? "Resuelve al menos 1 panel en una racha de modo Infinito"
         : `Alcanza una racha de ${n} paneles resueltos seguidos en modo Infinito`,
@@ -1724,13 +1723,20 @@
     }));
   }
 
+  // Puestos del Ranking que dan logro, de más fácil a más difícil. Se basan en la MEJOR
+  // posición alcanzada alguna vez (bestRankPosition), no en la posición actual: si algún día
+  // bajas del Top 10, no pierdes el logro de haber llegado a estar ahí.
   const RANKING_POSITION_MILESTONES = [50, 40, 30, 25, 20, 10, 5, 3, 1];
 
   function buildRankingPositionAchievements() {
     return RANKING_POSITION_MILESTONES.map(pos => ({
       id: `ranking_top_${pos}`,
       tier: "ranking",
-      name: pos === 1 ? "Líder del Ranking" : `Top ${pos} del Ranking`,
+      // Los nombres cortos ("Top 50 del Ranking") se quedaban en menos líneas que el resto de
+      // columnas. Añadimos "Alcanza el..." delante (misma plantilla en todos, sin logro
+      // "primero" especial: aquí no hay un equivalente a "juega una vez", cada puesto ya es
+      // un logro en sí mismo) para igualar la longitud con las demás columnas.
+      name: pos === 1 ? "Alcanza el liderato del Ranking" : `Alcanza el Top ${pos} del Ranking`,
       description: pos === 1
         ? "Alcanza el primer puesto del Ranking"
         : `Alcanza el puesto ${pos} o mejor en el Ranking`,
