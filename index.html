@@ -2541,9 +2541,18 @@
         try { lastDifficulty = localStorage.getItem(STORAGE_KEY_LAST_DIFFICULTY); } catch (e) {}
 
         if (lastDifficulty && lastDifficulty !== "infinito") {
-          // La última vez que se jugó fue en un modo normal: no depende de la sesión del usuario,
-          // así que cargamos el reto diario ya mismo sin esperar a que Firebase confirme el login
-          // (el reto diario en sí sí necesita a Firestore, pero no necesita saber quién eres).
+          // OJO: este comentario decía antes que no hacía falta esperar a Firebase aquí, porque
+          // el reto diario "no necesita saber quién eres" — pero eso dejó de ser cierto en
+          // cuanto el bloqueo de "ya has jugado hoy" empezó a mirar tu cuenta (currentUserProfile)
+          // en vez de solo el localStorage de este navegador. Si no esperamos, currentUser
+          // todavía es null en este punto (Firebase no ha confirmado la sesión), así que
+          // loadDailyChallenge() comprobaba el localStorage en vez de tu cuenta, y con sesión
+          // iniciada te enseñaba el panel en blanco aunque ya lo hubieras jugado hoy — se
+          // arreglaba solo al volver a pulsar el botón de dificultad, porque para entonces
+          // Firebase ya había confirmado la sesión. Con un límite de tiempo, por si Firebase no
+          // llega a responder nunca.
+          await withTimeout(authReadyPromise, 4000);
+
           currentDifficulty = lastDifficulty;
           isInfiniteMode = false;
           document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
