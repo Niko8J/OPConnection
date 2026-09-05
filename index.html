@@ -1681,8 +1681,8 @@
       tier,
       name: days === 1 ? `Gana tu primer panel de ${label}` : `${days} días seguidos ganando ${label}`,
       description: days === 1
-        ? `Supera el reto diario de ${label} una vez.`
-        : `Supera el reto diario de ${label} ${days} días seguidos (perder un día rompe la racha).`,
+        ? `Supera el reto diario de ${label} una vez`
+        : `Supera el reto diario de ${label} ${days} días seguidos (perder un día rompe la racha)`,
       check: profile => ((profile.dailyStreaks && profile.dailyStreaks[difficultyKey] && profile.dailyStreaks[difficultyKey].longest) || 0) >= days
     }));
   }
@@ -1697,16 +1697,16 @@
     return INFINITE_STREAK_MILESTONES.map(n => ({
       id: `racha_infinito_${n}`,
       tier: "infinito",
-      name: n === 1 ? "Primer panel en Infinito" : `${n} paneles en Infinito`,
-      // Nombre corto solo para el texto visible dentro de la insignia: "Primer panel en
-      // Infinito" es más largo que el resto de nombres de esta columna ("10 paneles en
-      // Infinito", etc.) y, dentro de los 96px de ancho de la insignia, era el único que no
-      // cabía en una sola línea, descuadrando la fila en móvil. El nombre completo se sigue
-      // usando en el "title" (tooltip), así que no se pierde información.
-      displayName: n === 1 ? "Primer panel" : undefined,
+      // "Primer panel en Infinito" es más largo que el resto de nombres de esta columna ("10
+      // paneles en Infinito", etc.) y, dentro de los 96px de ancho de la insignia, el salto de
+      // línea automático podía caer entre "Primer" y "panel" en vez de después de "panel".
+      // Usamos un espacio irrompible (\u00A0) entre esas dos palabras para forzar que el
+      // navegador salte de línea después de "panel" (dejando "Primer panel" en la primera
+      // línea) y no a mitad de esas dos palabras.
+      name: n === 1 ? "Primer\u00A0panel en Infinito" : `${n} paneles en Infinito`,
       description: n === 1
-        ? "Resuelve al menos 1 panel en una racha de modo Infinito."
-        : `Alcanza una racha de ${n} paneles resueltos seguidos en modo Infinito.`,
+        ? "Resuelve al menos 1 panel en una racha de modo Infinito"
+        : `Alcanza una racha de ${n} paneles resueltos seguidos en modo Infinito`,
       check: profile => (profile.bestStreak || 0) >= n
     }));
   }
@@ -1719,8 +1719,8 @@
       tier: "ranking",
       name: pos === 1 ? "Líder del Ranking" : `Top ${pos} del Ranking`,
       description: pos === 1
-        ? "Alcanza el primer puesto del Ranking."
-        : `Alcanza el puesto ${pos} o mejor en el Ranking.`,
+        ? "Alcanza el primer puesto del Ranking"
+        : `Alcanza el puesto ${pos} o mejor en el Ranking`,
       check: profile => typeof profile.bestRankPosition === "number" && profile.bestRankPosition <= pos
     }));
   }
@@ -1750,7 +1750,7 @@
     return `
       <div class="achievement-badge tier-${a.tier} ${unlocked ? 'unlocked' : 'locked'}" title="${escapeHtml(a.name)}: ${escapeHtml(a.description)}">
         <div class="achievement-icon">${icon}</div>
-        <div class="achievement-name">${escapeHtml(a.displayName || a.name)}</div>
+        <div class="achievement-name">${escapeHtml(a.name)}</div>
       </div>`;
   }
 
