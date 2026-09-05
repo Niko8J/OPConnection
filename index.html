@@ -56,6 +56,25 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     html { height: 100%; }
 
+    /* ---------- Avisos flotantes (monedas ganadas, logros conseguidos) ---------- */
+    .toast-container {
+      position: fixed; top: 70px; left: 50%; transform: translateX(-50%);
+      z-index: 300; display: flex; flex-direction: column; gap: 8px; align-items: center;
+      pointer-events: none; width: 100%; max-width: 90vw;
+    }
+    .toast {
+      background: #1e293b; border: 2px solid #f59e0b; border-radius: 20px;
+      padding: 8px 18px; color: #f8fafc; font-weight: bold; font-size: 0.95rem;
+      display: flex; align-items: center; gap: 6px; text-align: center;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+      animation: toastIn 0.25s ease, toastOut 0.25s ease 2.55s forwards;
+    }
+    .toast-achievement { border-color: #a855f7; }
+    .toast-berries-icon { width: 15px; height: 15px; object-fit: contain; }
+    .toast-achievement-name { display: block; font-size: 0.85rem; font-weight: normal; color: #d8b4fe; }
+    @keyframes toastIn { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes toastOut { to { opacity: 0; transform: translateY(-12px); } }
+
     .rotate-overlay { display: none; }
     /* "orientation: landscape" + poco alto identifica un MÓVIL en horizontal: en esa
        orientación, el alto de pantalla pasa a ser el lado corto del dispositivo, que en
@@ -762,6 +781,11 @@
 </head>
 <body>
 
+<!-- Contenedor de avisos flotantes (monedas ganadas, logros conseguidos): position:fixed a
+     nivel de body, para que se vea por encima de cualquier modal o pantalla, sin importar en
+     qué modo se esté jugando. -->
+<div id="toast-container" class="toast-container"></div>
+
 <div class="rotate-overlay">
   <div class="rotate-overlay-icon">📱</div>
   <p>Pon el dispositivo en vertical para seguir jugando</p>
@@ -1310,7 +1334,7 @@
       // MEJORAR (la racha de los demás nunca baja, así que nadie te adelanta por sí solo).
       // Por eso basta con comprobarlo aquí para los logros de "Top N".
       await updateBestRankPositionIfNeeded();
-      await checkAndAwardAchievementCoins();
+      await checkAndAwardAchievementCoinsWithToast();
     } catch (e) {
       console.error("No se pudo actualizar la mejor racha:", e);
     }
@@ -1981,6 +2005,41 @@
     }
   }
 
+  // ---------- Avisos flotantes (monedas ganadas, logros conseguidos) ----------
+  //
+  // Aviso genérico: crea el elemento, lo añade al contenedor, y lo quita del DOM cuando termina
+  // su propia animación de entrada/salida (definida en el CSS: 0.25s + 2.55s + 0.25s = 2.8s en
+  // total). Si se disparan varios a la vez (p. ej. monedas + logro en el mismo panel), se
+  // apilan uno debajo del otro gracias al contenedor en columna.
+  function showToast(innerHtml, extraClass) {
+    const container = document.getElementById("toast-container");
+    if (!container) return;
+    const toast = document.createElement("div");
+    toast.className = "toast" + (extraClass ? ` ${extraClass}` : "");
+    toast.innerHTML = innerHtml;
+    container.appendChild(toast);
+    setTimeout(() => toast.remove(), 2800);
+  }
+
+  function showCoinToast(amount) {
+    showToast(`+${amount} <img src="berries.webp" class="toast-berries-icon" onerror="this.style.display='none'">`);
+  }
+
+  function showAchievementToast(achievement) {
+    showToast(`🏆 ¡Logro conseguido!<span class="toast-achievement-name">${escapeHtml(achievement.name)}</span>`, "toast-achievement");
+  }
+
+  // Envoltorio de checkAndAwardAchievementCoins que además muestra un aviso por cada logro
+  // NUEVO (nunca por los que ya tenías): reutilizado en los 4 sitios donde se comprueba, para
+  // no repetir esta misma lógica en cada uno.
+  async function checkAndAwardAchievementCoinsWithToast() {
+    const result = await checkAndAwardAchievementCoins();
+    if (result && result.newlyUnlocked) {
+      result.newlyUnlocked.forEach(a => showAchievementToast(a));
+    }
+    return result;
+  }
+
   // Berries que se ganan por acertar/resolver un panel, aparte de los logros: un pequeño
   // goteo constante por el simple hecho de jugar, distinto del premio gordo (y puntual) de
   // los logros. Uno en Novato, dos en Supernova, tres en Yonko (cuanto más difícil, más da),
@@ -2001,6 +2060,7 @@
       currentUserProfile = currentUserProfile || {};
       currentUserProfile.berries = (currentUserProfile.berries || 0) + amount;
       updateAuthUI();
+      showCoinToast(amount);
     } catch (e) {
       console.error("No se pudieron sumar las Berries del panel:", e);
     }
@@ -2491,7 +2551,7 @@
         await updateBestRankPositionIfNeeded();
         // Red de seguridad: por si algún logro se desbloqueó sin pasar por los sitios donde ya
         // comprobamos esto (p. ej. justo tras adoptar progreso de invitado al iniciar sesión).
-        await checkAndAwardAchievementCoins();
+        await checkAndAwardAchievementCoinsWithToast();
         profile = currentUserProfile;
       } else {
         const snap = await db.collection("publicProfiles").doc(uid).get();
@@ -3814,7 +3874,7 @@
     // Refresca el "🔥 Racha actual" bajo los botones de dificultad, para que se vea al momento
     // sin tener que salir y volver a entrar en el modo.
     updateInfiniteScoreDisplay();
-    await checkAndAwardAchievementCoins();
+    await checkAndAwardAchievementCoinsWithToast();
   }
 
   // Si jugaste el diario de hoy COMO INVITADO en este mismo navegador y luego inicias sesión,
@@ -3862,7 +3922,7 @@
         console.error("No se pudo adoptar el progreso diario de invitado:", e);
       }
     }
-    await checkAndAwardAchievementCoins();
+    await checkAndAwardAchievementCoinsWithToast();
   }
 
   // Igual que el puente anterior, pero para Infinito: si justo en el momento de registrarte o
