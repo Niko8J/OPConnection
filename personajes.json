@@ -14121,6 +14121,9 @@
       "Raza": [
         {"val": "Gigantes", "dif": "facil"}
         {"val": "Gigantes artificiales", "dif": "dificil"}
+      ],
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
       ]
     }
   }
