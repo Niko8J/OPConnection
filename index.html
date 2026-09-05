@@ -1587,8 +1587,18 @@
     const RANKING_BUFFER = 70; // margen extra por si hay que extender la lista en un empate
 
     // Cargamos todo ANTES de mostrar el modal (en vez de abrirlo con un "Cargando..." y
-    // rellenarlo después), para que aparezca ya con el contenido completo puesto de una vez,
-    // sin ese salto de tamaño al pasar de un aviso corto a la lista real.
+    // rellenarlo después), para que en el caso normal (carga rápida) aparezca ya con el
+    // contenido completo puesto de una vez, sin salto de tamaño. Pero si la carga tarda más de
+    // LOADING_DELAY_MS (conexión lenta, Ranking con muchas filas...), mostramos igualmente el
+    // modal con "Cargando..." mientras tanto, para que el botón no se quede "sin responder" un
+    // buen rato. Si la carga termina antes de que salte el temporizador, este se cancela y el
+    // aviso nunca llega a verse.
+    const LOADING_DELAY_MS = 400;
+    const loadingTimer = setTimeout(() => {
+      list.innerHTML = '<div class="ranking-loading">Cargando ranking...</div>';
+      modal.style.display = "flex";
+    }, LOADING_DELAY_MS);
+
     try {
       const snap = await db.collection("publicProfiles")
         .orderBy("bestStreak", "desc")
@@ -1597,6 +1607,7 @@
         .get();
 
       if (snap.empty) {
+        clearTimeout(loadingTimer);
         list.innerHTML = '<div class="ranking-empty">Todavía no hay rachas registradas.</div>';
         modal.style.display = "flex";
         return;
@@ -1644,11 +1655,13 @@
         }, medals, posClasses, true, currentUser.uid);
       }
 
+      clearTimeout(loadingTimer);
       list.innerHTML = html;
       modal.style.display = "flex";
     } catch (e) {
       // Aun si falla la carga, mostramos el modal igualmente (con el aviso de error): si no,
       // al pulsar "Ranking" no pasaría nada visible y parecería que el botón no responde.
+      clearTimeout(loadingTimer);
       list.innerHTML = '<div class="ranking-empty">No se pudo cargar el ranking. Inténtalo más tarde.</div>';
       modal.style.display = "flex";
       console.error("Error cargando el ranking:", e);
@@ -1858,12 +1871,24 @@
     const isOwnProfile = !uid || (currentUser && uid === currentUser.uid);
 
     // Cargamos todo ANTES de mostrar el modal (en vez de abrirlo con un "Cargando..." y
-    // rellenarlo después), para que aparezca ya con el contenido completo puesto de una vez,
-    // sin ese salto de tamaño al pasar de un aviso corto al perfil real.
+    // rellenarlo después), para que en el caso normal (carga rápida) aparezca ya con el
+    // contenido completo puesto de una vez, sin salto de tamaño. Pero si la carga tarda más de
+    // LOADING_DELAY_MS (conexión lenta...), mostramos igualmente el modal con "Cargando
+    // perfil..." mientras tanto, para que el botón no se quede "sin responder" un buen rato. Si
+    // la carga termina antes de que salte el temporizador, este se cancela y el aviso nunca
+    // llega a verse.
+    const LOADING_DELAY_MS = 400;
+    const loadingTimer = setTimeout(() => {
+      errorEl.style.display = "none";
+      bodyEl.style.display = "none";
+      loadingEl.style.display = "block";
+      modal.style.display = "flex";
+    }, LOADING_DELAY_MS);
+
     try {
       let profile;
       if (isOwnProfile) {
-        if (!currentUser || !currentUserProfile) return; // no hay perfil que mostrar; no abrimos nada
+        if (!currentUser || !currentUserProfile) { clearTimeout(loadingTimer); return; } // no hay perfil que mostrar; no abrimos nada
         // La posición en el Ranking normalmente solo se recalcula al batir una racha nueva en
         // Infinito. Aprovechamos que se está mirando el propio perfil para refrescarla también
         // aquí, así los logros de Ranking no se quedan bloqueados solo por no haber llegado a
@@ -1884,6 +1909,7 @@
       document.getElementById("profile-modal-achievements").innerHTML = buildAchievementsHtml(profile);
       document.getElementById("profile-modal-edit-btn").style.display = isOwnProfile ? "inline-block" : "none";
 
+      clearTimeout(loadingTimer);
       loadingEl.style.display = "none";
       errorEl.style.display = "none";
       bodyEl.style.display = "block";
@@ -1891,6 +1917,7 @@
     } catch (e) {
       // Aun si falla la carga, mostramos el modal igualmente (con el aviso de error): si no,
       // al pulsar "Perfil" no pasaría nada visible y parecería que el botón no responde.
+      clearTimeout(loadingTimer);
       loadingEl.style.display = "none";
       bodyEl.style.display = "none";
       errorEl.style.display = "block";
