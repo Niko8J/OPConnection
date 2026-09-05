@@ -171,18 +171,7 @@
     .ranking-row.own-row { border-radius: 8px; border-bottom: none; border: 2px solid #f59e0b; box-shadow: 0 0 10px #f59e0b; }
     .ranking-ellipsis { text-align: center; color: #94a3b8; letter-spacing: 3px; padding: 4px 0; font-size: 1.1rem; }
 
-    .profile-modal-content {
-      max-width: 900px;
-      /* El scroll de verdad vive en .profile-modal-scroll-area, no aquí: así el botón de
-         cerrar (hijo directo de este contenedor, position:absolute) se queda fijo arriba a
-         la derecha aunque el contenido de dentro se desplace por debajo. */
-      display: flex; flex-direction: column;
-      max-height: var(--modal-max-h); overflow-y: visible;
-    }
-    .profile-modal-scroll-area {
-      overflow-y: auto; overflow-x: hidden;
-      flex: 1 1 auto; min-height: 0; /* imprescindible para que un hijo flex pueda encogerse y scrollear */
-    }
+    .profile-modal-content { max-width: 900px; } /* más ancha, para caber las 5 columnas de logros */
     .profile-modal-avatar {
       width: 120px; height: 120px; border-radius: 50%; object-fit: cover; object-position: top center;
       border: 3px solid #f59e0b; display: block; margin: 4px auto 12px;
@@ -580,8 +569,17 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.5);
       animation: fadeIn 0.3s ease;
       position: relative;
-      max-height: var(--modal-max-h);
-      overflow-y: auto;
+      /* El scroll de verdad vive en .modal-scroll-area (dentro), no aquí: así el botón de
+         cerrar, al ser hijo directo de este contenedor, se queda fijo arriba a la derecha
+         aunque el contenido de dentro se desplace por debajo. Aplica a TODOS los modales,
+         por si a alguno (Ranking con muchos usuarios, resultados de un panel largo...) le
+         llega a hacer falta scroll alguna vez, aunque hoy no lo necesite. */
+      display: flex; flex-direction: column;
+      max-height: var(--modal-max-h); overflow-y: visible;
+    }
+    .modal-scroll-area {
+      overflow-y: auto; overflow-x: hidden;
+      flex: 1 1 auto; min-height: 0; /* imprescindible para que un hijo flex pueda encogerse y scrollear */
     }
     .modal-content h2 { margin-bottom: 10px; font-size: 1.6rem; }
     .solutions-list { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; margin-bottom: 20px; text-align: left; }
@@ -800,95 +798,103 @@
 <div id="gameover-modal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
   <div class="modal-content">
     <button class="close-btn" onclick="closeModalViaX()">&times;</button>
-    <h2 id="modal-title"></h2>
-    <p id="modal-text"></p>
-    <div id="solutions-container" class="solutions-list"></div>
-    <button class="action-btn" id="modal-action-btn" onclick="closeModal()">Entendido</button>
+    <div class="modal-scroll-area">
+      <h2 id="modal-title"></h2>
+      <p id="modal-text"></p>
+      <div id="solutions-container" class="solutions-list"></div>
+      <button class="action-btn" id="modal-action-btn" onclick="closeModal()">Entendido</button>
+    </div>
   </div>
 </div>
 
 <div id="auth-modal" class="modal-overlay" onclick="closeAuthModalOnOverlay(event)">
   <div class="modal-content auth-modal-content">
     <button class="close-btn" onclick="closeAuthModal()">&times;</button>
-    <h2 id="auth-modal-title">Iniciar sesión</h2>
+    <div class="modal-scroll-area">
+      <h2 id="auth-modal-title">Iniciar sesión</h2>
 
-    <div id="auth-error" class="auth-error"></div>
+      <div id="auth-error" class="auth-error"></div>
 
-    <div id="auth-credentials">
-      <input type="email" id="auth-email" class="auth-input" placeholder="Correo electrónico" autocomplete="email">
-      <input type="password" id="auth-password" class="auth-input" placeholder="Contraseña" autocomplete="current-password">
+      <div id="auth-credentials">
+        <input type="email" id="auth-email" class="auth-input" placeholder="Correo electrónico" autocomplete="email">
+        <input type="password" id="auth-password" class="auth-input" placeholder="Contraseña" autocomplete="current-password">
 
-      <div id="auth-register-extra" style="display:none;">
-        <input type="password" id="auth-password-confirm" class="auth-input" placeholder="Confirma tu contraseña" autocomplete="new-password">
+        <div id="auth-register-extra" style="display:none;">
+          <input type="password" id="auth-password-confirm" class="auth-input" placeholder="Confirma tu contraseña" autocomplete="new-password">
+        </div>
       </div>
+
+      <div id="auth-profile-extra" style="display:none;">
+        <input type="text" id="auth-username" class="auth-input" placeholder="Nombre de usuario">
+        <p class="auth-avatar-label">Elige tu foto de perfil:</p>
+        <input type="text" id="avatar-search-input" class="auth-input avatar-search-input"
+               placeholder="🔍 Buscar por nombre..." oninput="filterAvatarOptions('avatar-picker', this.value)">
+        <div id="avatar-picker" class="avatar-picker"></div>
+      </div>
+
+      <button class="action-btn submit" id="auth-submit-btn" onclick="submitAuthForm()">Entrar</button>
+
+      <div id="auth-google-section">
+        <div class="auth-divider"><span>o</span></div>
+        <button type="button" id="auth-google-btn" class="auth-google-btn" onclick="signInWithGoogle()">
+          <svg class="auth-google-icon" viewBox="0 0 48 48" width="18" height="18">
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.9-2.26 5.36-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+          </svg>
+          Continuar con Google
+        </button>
+      </div>
+
+      <p class="auth-switch" id="auth-switch-p">
+        <span id="auth-switch-text">¿No tienes cuenta?</span>
+        <a href="#" id="auth-switch-link" onclick="toggleAuthMode(event)">Regístrate</a>
+      </p>
     </div>
-
-    <div id="auth-profile-extra" style="display:none;">
-      <input type="text" id="auth-username" class="auth-input" placeholder="Nombre de usuario">
-      <p class="auth-avatar-label">Elige tu foto de perfil:</p>
-      <input type="text" id="avatar-search-input" class="auth-input avatar-search-input"
-             placeholder="🔍 Buscar por nombre..." oninput="filterAvatarOptions('avatar-picker', this.value)">
-      <div id="avatar-picker" class="avatar-picker"></div>
-    </div>
-
-    <button class="action-btn submit" id="auth-submit-btn" onclick="submitAuthForm()">Entrar</button>
-
-    <div id="auth-google-section">
-      <div class="auth-divider"><span>o</span></div>
-      <button type="button" id="auth-google-btn" class="auth-google-btn" onclick="signInWithGoogle()">
-        <svg class="auth-google-icon" viewBox="0 0 48 48" width="18" height="18">
-          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.9-2.26 5.36-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-        </svg>
-        Continuar con Google
-      </button>
-    </div>
-
-    <p class="auth-switch" id="auth-switch-p">
-      <span id="auth-switch-text">¿No tienes cuenta?</span>
-      <a href="#" id="auth-switch-link" onclick="toggleAuthMode(event)">Regístrate</a>
-    </p>
   </div>
 </div>
 
 <div id="ranking-modal" class="modal-overlay" onclick="closeRankingModalOnOverlay(event)">
   <div class="modal-content ranking-modal-content">
     <button class="close-btn" onclick="closeRankingModal()">&times;</button>
-    <h2>🏆 Ranking</h2>
-    <p class="ranking-subtitle">Mejor racha de paneles resueltos en modo Infinito</p>
-    <p class="ranking-tiebreak-note">En caso de empate, queda primero quien logró esa racha antes.</p>
-    <div id="ranking-list" class="ranking-list"></div>
+    <div class="modal-scroll-area">
+      <h2>🏆 Ranking</h2>
+      <p class="ranking-subtitle">Mejor racha de paneles resueltos en modo Infinito</p>
+      <p class="ranking-tiebreak-note">En caso de empate, queda primero quien logró esa racha antes.</p>
+      <div id="ranking-list" class="ranking-list"></div>
+    </div>
   </div>
 </div>
 
 <div id="edit-profile-modal" class="modal-overlay" onclick="closeEditProfileModalOnOverlay(event)">
   <div class="modal-content auth-modal-content">
     <button class="close-btn" onclick="closeEditProfileModal()">&times;</button>
-    <h2>✏️ Editar perfil</h2>
+    <div class="modal-scroll-area">
+      <h2>✏️ Editar perfil</h2>
 
-    <div id="edit-profile-error" class="auth-error"></div>
-    <div id="edit-profile-success" class="auth-success" style="display: none;"></div>
+      <div id="edit-profile-error" class="auth-error"></div>
+      <div id="edit-profile-success" class="auth-success" style="display: none;"></div>
 
-    <input type="text" id="edit-username" class="auth-input" placeholder="Nombre de usuario">
-    <p class="auth-avatar-label">Elige tu foto de perfil:</p>
-    <input type="text" id="edit-avatar-search-input" class="auth-input avatar-search-input"
-           placeholder="🔍 Buscar por nombre..." oninput="filterAvatarOptions('edit-avatar-picker', this.value)">
-    <div id="edit-avatar-picker" class="avatar-picker"></div>
-    <button class="action-btn submit" onclick="submitProfileEdit()">Guardar cambios</button>
+      <input type="text" id="edit-username" class="auth-input" placeholder="Nombre de usuario">
+      <p class="auth-avatar-label">Elige tu foto de perfil:</p>
+      <input type="text" id="edit-avatar-search-input" class="auth-input avatar-search-input"
+             placeholder="🔍 Buscar por nombre..." oninput="filterAvatarOptions('edit-avatar-picker', this.value)">
+      <div id="edit-avatar-picker" class="avatar-picker"></div>
+      <button class="action-btn submit" onclick="submitProfileEdit()">Guardar cambios</button>
 
-    <div id="edit-password-section" style="display: none;">
-      <div class="auth-divider"><span>Cambiar contraseña</span></div>
-      <input type="password" id="edit-current-password" class="auth-input" placeholder="Contraseña actual" autocomplete="current-password">
-      <input type="password" id="edit-new-password" class="auth-input" placeholder="Nueva contraseña" autocomplete="new-password">
-      <input type="password" id="edit-new-password-confirm" class="auth-input" placeholder="Confirma la nueva contraseña" autocomplete="new-password">
-      <button class="action-btn" onclick="submitPasswordChange()">Cambiar contraseña</button>
+      <div id="edit-password-section" style="display: none;">
+        <div class="auth-divider"><span>Cambiar contraseña</span></div>
+        <input type="password" id="edit-current-password" class="auth-input" placeholder="Contraseña actual" autocomplete="current-password">
+        <input type="password" id="edit-new-password" class="auth-input" placeholder="Nueva contraseña" autocomplete="new-password">
+        <input type="password" id="edit-new-password-confirm" class="auth-input" placeholder="Confirma la nueva contraseña" autocomplete="new-password">
+        <button class="action-btn" onclick="submitPasswordChange()">Cambiar contraseña</button>
+      </div>
+
+      <p id="edit-google-note" class="auth-avatar-label" style="display: none;">
+        Iniciaste sesión con Google, así que tu contraseña se gestiona desde tu cuenta de Google, no desde aquí.
+      </p>
     </div>
-
-    <p id="edit-google-note" class="auth-avatar-label" style="display: none;">
-      Iniciaste sesión con Google, así que tu contraseña se gestiona desde tu cuenta de Google, no desde aquí.
-    </p>
   </div>
 </div>
 
@@ -902,7 +908,7 @@
     <!-- El scroll vive AQUÍ (no en .profile-modal-content), para que el botón de cerrar de
          arriba, al ser hijo directo del contenedor de fuera, se quede fijo en su sitio aunque
          este contenido se desplace por debajo. -->
-    <div class="profile-modal-scroll-area">
+    <div class="modal-scroll-area">
       <div id="profile-modal-loading" class="ranking-loading">Cargando perfil...</div>
       <div id="profile-modal-error" class="ranking-empty" style="display: none;"></div>
       <div id="profile-modal-body" style="display: none;">
@@ -921,15 +927,17 @@
 <div id="howto-modal" class="modal-overlay" onclick="closeHowToModalOnOverlay(event)">
   <div class="modal-content howto-modal-content">
     <button class="close-btn" onclick="closeHowToModal()">&times;</button>
-    <h2>❓ Cómo jugar</h2>
-    <div class="howto-content">
-      <p>El objetivo es encontrar 4 grupos de 4 personajes de One Piece que comparten algo en común: su tripulación, su origen, su fruta del diablo, algún elemento físico...</p>
-      <p>Selecciona 4 imágenes y pulsa <strong>Enviar</strong>. Si aciertas el grupo, se resuelve y sube arriba del todo. Si fallas, pierdes una vida (tienes 4 en total, representadas por las banderas 🏴‍☠️ junto a los botones). Al perderlas todas, se acaba la partida y se muestra la solución completa.</p>
-      <p><strong>Modos de dificultad:</strong></p>
-      <ul>
-        <li><strong>Novato</strong> (fácil), <strong>Supernova</strong> (normal) y <strong>Yonko</strong> (difícil): un único panel con categorías de esa dificultad concreta.</li>
-        <li><strong>Infinito:</strong> panel tras panel sin parar, mezclando todas las dificultades, hasta que te quedes sin vidas. Si has iniciado sesión, tu progreso se guarda automáticamente y tu mejor racha entra en el ranking.</li>
-      </ul>
+    <div class="modal-scroll-area">
+      <h2>❓ Cómo jugar</h2>
+      <div class="howto-content">
+        <p>El objetivo es encontrar 4 grupos de 4 personajes de One Piece que comparten algo en común: su tripulación, su origen, su fruta del diablo, algún elemento físico...</p>
+        <p>Selecciona 4 imágenes y pulsa <strong>Enviar</strong>. Si aciertas el grupo, se resuelve y sube arriba del todo. Si fallas, pierdes una vida (tienes 4 en total, representadas por las banderas 🏴‍☠️ junto a los botones). Al perderlas todas, se acaba la partida y se muestra la solución completa.</p>
+        <p><strong>Modos de dificultad:</strong></p>
+        <ul>
+          <li><strong>Novato</strong> (fácil), <strong>Supernova</strong> (normal) y <strong>Yonko</strong> (difícil): un único panel con categorías de esa dificultad concreta.</li>
+          <li><strong>Infinito:</strong> panel tras panel sin parar, mezclando todas las dificultades, hasta que te quedes sin vidas. Si has iniciado sesión, tu progreso se guarda automáticamente y tu mejor racha entra en el ranking.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -937,31 +945,35 @@
 <div id="contact-modal" class="modal-overlay" onclick="closeContactModalOnOverlay(event)">
   <div class="modal-content auth-modal-content">
     <button class="close-btn" onclick="closeContactModal()">&times;</button>
-    <h2>✉️ Contacto</h2>
+    <div class="modal-scroll-area">
+      <h2>✉️ Contacto</h2>
 
-    <p class="auth-avatar-label">
-      Aquí puedes escribirme sugerencias, dudas o quejas sobre el juego. También se agradece muchísimo cualquier fallo que hayas encontrado, ya sea en la programación del juego o en las conexiones de los personajes.
-    </p>
+      <p class="auth-avatar-label">
+        Aquí puedes escribirme sugerencias, dudas o quejas sobre el juego. También se agradece muchísimo cualquier fallo que hayas encontrado, ya sea en la programación del juego o en las conexiones de los personajes.
+      </p>
 
-    <div id="contact-error" class="auth-error"></div>
-    <div id="contact-success" class="auth-success" style="display: none;"></div>
+      <div id="contact-error" class="auth-error"></div>
+      <div id="contact-success" class="auth-success" style="display: none;"></div>
 
-    <input type="email" id="contact-email" class="auth-input" placeholder="Tu correo electrónico">
-    <textarea id="contact-message" class="auth-input contact-textarea" placeholder="Escribe aquí tu mensaje..." rows="6"></textarea>
+      <input type="email" id="contact-email" class="auth-input" placeholder="Tu correo electrónico">
+      <textarea id="contact-message" class="auth-input contact-textarea" placeholder="Escribe aquí tu mensaje..." rows="6"></textarea>
 
-    <button class="action-btn submit" id="contact-submit-btn" onclick="submitContactForm()">Enviar</button>
+      <button class="action-btn submit" id="contact-submit-btn" onclick="submitContactForm()">Enviar</button>
+    </div>
   </div>
 </div>
 
 <div id="about-modal" class="modal-overlay" onclick="closeAboutModalOnOverlay(event)">
   <div class="modal-content howto-modal-content">
     <button class="close-btn" onclick="closeAboutModal()">&times;</button>
-    <h2>🏴‍☠️ Quiénes somos</h2>
-    <div class="howto-content">
-      <p><i>One Piece Connection</i> es un proyecto fan hecho por una sola persona por afición, inspirado en el juego <i>Connections</i> del New York Times. El objetivo es puramente de entretenimiento: poner a prueba cuánto conoces a los personajes de <i>One Piece</i> a través de sus conexiones.</p>
-      <p>Este sitio no tiene ánimo de lucro más allá de cubrir sus propios gastos de mantenimiento, y no está afiliado, patrocinado ni respaldado por Toei Animation, Shueisha, Eiichiro Oda, Bandai Namco ni ningún otro titular de los derechos de <i>One Piece</i>. Todos los nombres, imágenes y demás material pertenecen a sus respectivos propietarios y se usan aquí únicamente con fines de entretenimiento y homenaje a la obra.</p>
-      <p>La mayoría de las imágenes de los personajes están sacadas del videojuego para móviles <i>One Piece: Treasure Cruise</i>; otras están editadas a partir de artes oficiales del anime.</p>
-      <p>¿Dudas, sugerencias o algún fallo? Usa el formulario de <button type="button" class="inline-link" onclick="closeAboutModal(); openContactModal();">Contacto</button>.</p>
+    <div class="modal-scroll-area">
+      <h2>🏴‍☠️ Quiénes somos</h2>
+      <div class="howto-content">
+        <p><i>One Piece Connection</i> es un proyecto fan hecho por una sola persona por afición, inspirado en el juego <i>Connections</i> del New York Times. El objetivo es puramente de entretenimiento: poner a prueba cuánto conoces a los personajes de <i>One Piece</i> a través de sus conexiones.</p>
+        <p>Este sitio no tiene ánimo de lucro más allá de cubrir sus propios gastos de mantenimiento, y no está afiliado, patrocinado ni respaldado por Toei Animation, Shueisha, Eiichiro Oda, Bandai Namco ni ningún otro titular de los derechos de <i>One Piece</i>. Todos los nombres, imágenes y demás material pertenecen a sus respectivos propietarios y se usan aquí únicamente con fines de entretenimiento y homenaje a la obra.</p>
+        <p>La mayoría de las imágenes de los personajes están sacadas del videojuego para móviles <i>One Piece: Treasure Cruise</i>; otras están editadas a partir de artes oficiales del anime.</p>
+        <p>¿Dudas, sugerencias o algún fallo? Usa el formulario de <button type="button" class="inline-link" onclick="closeAboutModal(); openContactModal();">Contacto</button>.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -969,12 +981,14 @@
 <div id="privacy-modal" class="modal-overlay" onclick="closePrivacyModalOnOverlay(event)">
   <div class="modal-content howto-modal-content">
     <button class="close-btn" onclick="closePrivacyModal()">&times;</button>
-    <h2>🔒 Privacidad</h2>
-    <div class="howto-content">
-      <p><strong>Cuenta y datos de juego:</strong> si te registras, guardamos tu email, tu nombre de usuario, tu foto de perfil (si eliges una) y tu progreso/racha en el modo Infinito, usando Firebase Authentication y Firestore (Google). Puedes pedir que borremos tu cuenta y tus datos escribiendo por el formulario de Contacto.</p>
-      <p><strong>Formulario de contacto:</strong> el email y el mensaje que envíes se procesan a través de EmailJS únicamente para poder responderte, y no se usan con ningún otro fin.</p>
-      <p><strong>Cookies y medición:</strong> usamos Firebase Analytics (Google) para saber, de forma agregada, cómo se usa el juego. Cuando estén activos los anuncios de Google AdSense, Google y sus proveedores podrán usar cookies para mostrar anuncios (personalizados o no, según tu configuración de consentimiento) y medir su rendimiento.</p>
-      <p><strong>Tus derechos:</strong> puedes acceder, corregir o pedir la eliminación de tus datos en cualquier momento a través del formulario de Contacto.</p>
+    <div class="modal-scroll-area">
+      <h2>🔒 Privacidad</h2>
+      <div class="howto-content">
+        <p><strong>Cuenta y datos de juego:</strong> si te registras, guardamos tu email, tu nombre de usuario, tu foto de perfil (si eliges una) y tu progreso/racha en el modo Infinito, usando Firebase Authentication y Firestore (Google). Puedes pedir que borremos tu cuenta y tus datos escribiendo por el formulario de Contacto.</p>
+        <p><strong>Formulario de contacto:</strong> el email y el mensaje que envíes se procesan a través de EmailJS únicamente para poder responderte, y no se usan con ningún otro fin.</p>
+        <p><strong>Cookies y medición:</strong> usamos Firebase Analytics (Google) para saber, de forma agregada, cómo se usa el juego. Cuando estén activos los anuncios de Google AdSense, Google y sus proveedores podrán usar cookies para mostrar anuncios (personalizados o no, según tu configuración de consentimiento) y medir su rendimiento.</p>
+        <p><strong>Tus derechos:</strong> puedes acceder, corregir o pedir la eliminación de tus datos en cualquier momento a través del formulario de Contacto.</p>
+      </div>
     </div>
   </div>
 </div>
