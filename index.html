@@ -181,13 +181,19 @@
     #profile-modal-edit-btn { margin-bottom: 20px; }
     .profile-modal-achievements-title { font-weight: bold; color: #f59e0b; font-size: 1.1rem; margin-bottom: 12px; }
     .achievements-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 12px;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
     }
     .achievement-badge {
       display: flex; flex-direction: column; align-items: center; gap: 4px;
+      width: 96px; flex-shrink: 0;
       padding: 10px 4px; border-radius: 10px; background: #0f172a; border: 2px solid #334155;
     }
-    .achievement-badge.unlocked { border-color: #f59e0b; }
+    /* Colores por nivel de medalla (mismos que ya usa el Ranking para 🥇🥈🥉), para que un
+       logro de oro se note más de un vistazo que uno de bronce. */
+    .achievement-badge.unlocked { border-color: #f59e0b; } /* genérico, por si falta el nivel */
+    .achievement-badge.unlocked.tier-bronce { border-color: #f59e0b; }
+    .achievement-badge.unlocked.tier-plata { border-color: #e2e8f0; }
+    .achievement-badge.unlocked.tier-oro { border-color: #facc15; }
     .achievement-icon { font-size: 2rem; line-height: 1; }
     /* Logro bloqueado: se ve en gris/silueta (en vez de ocultarse del todo), para que el
        jugador sepa que existe y qué tiene que hacer para conseguirlo. */
@@ -1541,31 +1547,44 @@
 
   // ---------- Sistema de logros ----------
   //
-  // Estos 3 son de ejemplo para arrancar el sistema (los iremos ampliando y afinando). Cada
-  // logro se calcula con una función "check" a partir del perfil PÚBLICO del jugador (el mismo
-  // documento "publicProfiles" que ya usa el Ranking), así que no hace falta guardar nada nuevo
-  // en Firestore para estos: el logro se "tiene" o "no se tiene" según datos que ya existían.
-  // El día que definamos un logro que dependa de un dato que hoy no guardamos, ahí sí habrá que
-  // ampliar lo que se escribe en "users"/"publicProfiles" — pero estos tres no lo necesitan.
+  // Estos 3 son de ejemplo para arrancar el sistema (los iremos ampliando y afinando).
+  //
+  // El NOMBRE de cada logro dice directamente qué hay que hacer para conseguirlo (en vez de un
+  // nombre "temático" tipo Novato/Yonko, que además confundía con los nombres de las
+  // dificultades del propio juego). Así funciona sin depender del tooltip, que en móvil casi
+  // nadie llega a ver al no existir el "hover".
+  //
+  // El ICONO es una medalla según el nivel de dificultad del logro (bronce/plata/oro), las
+  // mismas que ya usa el Ranking (🥉🥈🥇), en vez de buscar un emoji distinto para cada logro:
+  // así no nos quedamos sin iconos según vayamos añadiendo más.
+  //
+  // Cada logro se calcula con una función "check" a partir del perfil PÚBLICO del jugador (el
+  // mismo documento "publicProfiles" que ya usa el Ranking), así que no hace falta guardar nada
+  // nuevo en Firestore para estos: el logro se "tiene" o "no se tiene" según datos que ya
+  // existían. El día que definamos un logro que dependa de un dato que hoy no guardamos, ahí sí
+  // habrá que ampliar lo que se escribe en "users"/"publicProfiles" — pero estos tres no lo
+  // necesitan.
+  const ACHIEVEMENT_TIER_ICONS = { bronce: "🥉", plata: "🥈", oro: "🥇" };
+
   const ACHIEVEMENTS = [
     {
       id: "racha_1",
-      icon: "🏴‍☠️",
-      name: "Novato",
+      tier: "bronce",
+      name: "Primer panel en modo Infinito",
       description: "Resuelve al menos 1 panel en una racha de modo Infinito.",
       check: profile => (profile.bestStreak || 0) >= 1
     },
     {
       id: "racha_10",
-      icon: "⚔️",
-      name: "Supernova",
+      tier: "plata",
+      name: "10 paneles en modo Infinito",
       description: "Alcanza una racha de 10 paneles resueltos seguidos en modo Infinito.",
       check: profile => (profile.bestStreak || 0) >= 10
     },
     {
       id: "racha_25",
-      icon: "👑",
-      name: "Yonko",
+      tier: "oro",
+      name: "25 paneles en modo Infinito",
       description: "Alcanza una racha de 25 paneles resueltos seguidos en modo Infinito.",
       check: profile => (profile.bestStreak || 0) >= 25
     }
@@ -1574,11 +1593,12 @@
   function buildAchievementsHtml(profile) {
     return ACHIEVEMENTS.map(a => {
       const unlocked = a.check(profile);
+      const icon = ACHIEVEMENT_TIER_ICONS[a.tier] || "🏅"; // por si algún día se añade un logro sin nivel definido
       // Bloqueado: se muestra en gris/silueta (no se oculta), para que se sepa que existe y
       // anime a conseguirlo. El title (tooltip) da la descripción también cuando está bloqueado.
       return `
-        <div class="achievement-badge ${unlocked ? 'unlocked' : 'locked'}" title="${escapeHtml(a.name)}: ${escapeHtml(a.description)}">
-          <div class="achievement-icon">${a.icon}</div>
+        <div class="achievement-badge tier-${a.tier} ${unlocked ? 'unlocked' : 'locked'}" title="${escapeHtml(a.name)}: ${escapeHtml(a.description)}">
+          <div class="achievement-icon">${icon}</div>
           <div class="achievement-name">${escapeHtml(a.name)}</div>
         </div>`;
     }).join("");
