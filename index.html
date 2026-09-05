@@ -211,7 +211,8 @@
       font-size: 1.1rem; font-weight: bold; color: #f59e0b; margin-bottom: 16px;
     }
     .shop-berries-icon { width: 20px; height: 20px; object-fit: contain; }
-    .shop-section-title { color: #f59e0b; font-size: 1.05rem; margin: 20px 0 6px; text-align: left; }
+    .shop-section-title { color: #f59e0b; font-size: 1.05rem; margin: 20px 0 6px; text-align: center; }
+    .shop-separator { height: 1px; background: #334155; margin: 20px 0; }
     .shop-unequip-link {
       color: #94a3b8; font-size: 0.8rem; text-align: right; margin: 0 0 8px; cursor: pointer;
       text-decoration: underline;
@@ -617,6 +618,12 @@
       font-weight: bold;
       cursor: pointer;
       transition: all 0.2s;
+    }
+    /* Sin esto, un botón "Comprar" deshabilitado por falta de Berries no se distinguía casi
+       nada de uno normal (el navegador apenas lo atenúa por defecto). Con esto queda claro de
+       un vistazo que ese artículo, hoy, no se puede comprar. */
+    button.action-btn:disabled {
+      opacity: 0.45; cursor: not-allowed; background: #1e293b; border-color: #334155; color: #64748b;
     }
     @media (hover: hover) and (pointer: fine) {
       button.action-btn:hover:not(:disabled) { background: #334155; }
@@ -1030,11 +1037,15 @@
       </div>
       <div id="shop-error" class="auth-error"></div>
 
-      <h3 class="shop-section-title">🖼️ Marcos</h3>
+      <!-- Cuando se construyan los avatares exclusivos (Fase 4), su sección va AQUÍ, encima
+           de Marcos, con su propia barra separadora antes de "Marcos". -->
+      <h3 class="shop-section-title">Marcos</h3>
       <p class="shop-unequip-link" id="shop-frames-unequip" style="display: none;" onclick="handleEquipClick('frames', null)">Quitar marco</p>
       <div id="shop-frames-list" class="shop-frames-grid"></div>
 
-      <h3 class="shop-section-title">🏷️ Títulos</h3>
+      <div class="shop-separator"></div>
+
+      <h3 class="shop-section-title">Títulos</h3>
       <p class="shop-unequip-link" id="shop-titles-unequip" style="display: none;" onclick="handleEquipClick('titles', null)">Quitar título</p>
       <div id="shop-titles-list" class="shop-titles-list"></div>
     </div>
