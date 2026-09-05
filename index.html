@@ -198,7 +198,7 @@
     .modal-content.profile-modal-content { max-width: 1080px; }
     .profile-modal-avatar {
       width: 120px; height: 120px; border-radius: 50%; object-fit: cover; object-position: top center;
-      display: block; margin: 4px auto 12px;
+      border: 3px solid #334155; display: block; margin: 4px auto 12px;
     }
     .profile-modal-username { margin-bottom: 4px; font-size: 1.4rem; word-break: break-word; }
     .profile-modal-title { color: #94a3b8; font-size: 0.95rem; font-style: italic; margin-bottom: 6px; }
@@ -2400,7 +2400,7 @@
 
       document.getElementById("profile-modal-avatar").src =
         profile.avatar || "https://dummyimage.com/100x100/334155/ffffff.png&text=?";
-      applyFrameToAvatarImg(document.getElementById("profile-modal-avatar"), profile.equippedFrameId, "none");
+      applyFrameToAvatarImg(document.getElementById("profile-modal-avatar"), profile.equippedFrameId, "3px solid #334155");
       if (profile.equippedFrameId === "arcoiris") {
         startProfileRainbowAnimation();
       } else {
