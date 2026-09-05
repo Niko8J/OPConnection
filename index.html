@@ -175,7 +175,14 @@
     .auth-modal-content { max-width: 380px; text-align: left; }
     .auth-input {
       width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 6px;
-      border: 1px solid #334155; background: #1e293b; color: #f8fafc; font-size: 0.95rem;
+      border: 1px solid #334155; background: #1e293b; color: #f8fafc;
+      /* 16px es el umbral exacto de iOS Safari: por debajo de eso, al tocar el campo hace un
+         zoom automático de la página para que se vea mejor al escribir, y ese zoom no siempre
+         se deshace del todo al soltar el foco (típicamente al cerrar el modal sin elegir nada).
+         Queda un zoom residual mínimo que desincroniza los toques del resto de la pantalla
+         (p. ej. las tarjetas del juego reaccionan tarde) hasta que el usuario hace zoom manual
+         a 100%. Por eso NUNCA debe bajar de 16px en ningún campo de texto/textarea. */
+      font-size: 16px;
     }
     .contact-textarea { font-family: inherit; resize: vertical; min-height: 120px; }
     .auth-error { color: #ef4444; font-size: 0.85rem; margin-bottom: 8px; min-height: 1em; }
