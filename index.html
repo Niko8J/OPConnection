@@ -191,9 +191,11 @@
     /* Colores por nivel de medalla (mismos que ya usa el Ranking para 🥇🥈🥉), para que un
        logro de oro se note más de un vistazo que uno de bronce. */
     .achievement-badge.unlocked { border-color: #f59e0b; } /* genérico, por si falta el nivel */
-    .achievement-badge.unlocked.tier-bronce { border-color: #f59e0b; }
-    .achievement-badge.unlocked.tier-plata { border-color: #e2e8f0; }
-    .achievement-badge.unlocked.tier-oro { border-color: #facc15; }
+    .achievement-badge.unlocked.tier-novato { border-color: #f59e0b; }
+    .achievement-badge.unlocked.tier-supernova { border-color: #e2e8f0; }
+    .achievement-badge.unlocked.tier-yonko { border-color: #facc15; }
+    .achievement-badge.unlocked.tier-infinito { border-color: #38bdf8; }
+    .achievement-badge.unlocked.tier-ranking { border-color: #fbbf24; }
     .achievement-icon { font-size: 2rem; line-height: 1; }
     /* Logro bloqueado: se ve en gris/silueta (en vez de ocultarse del todo), para que el
        jugador sepa que existe y qué tiene que hacer para conseguirlo. */
@@ -1374,6 +1376,9 @@
         await db.collection("users").doc(pendingGoogleUser.uid).set(profile);
         await db.collection("publicProfiles").doc(pendingGoogleUser.uid).set({ username, avatar: selectedAvatarImg, bestStreak: 0 });
         currentUserProfile = profile;
+        // Este flujo no vuelve a pasar por onAuthStateChanged (la sesión de Google ya existía;
+        // solo acabamos de completar el perfil), así que el puente hay que llamarlo aquí.
+        await bridgeGuestDailyProgressToAccount(pendingGoogleUser.uid);
         pendingGoogleUser = null;
         updateAuthUI();
         closeAuthModal();
@@ -1564,30 +1569,52 @@
   // existían. El día que definamos un logro que dependa de un dato que hoy no guardamos, ahí sí
   // habrá que ampliar lo que se escribe en "users"/"publicProfiles" — pero estos tres no lo
   // necesitan.
-  const ACHIEVEMENT_TIER_ICONS = { bronce: "🥉", plata: "🥈", oro: "🥇" };
+  // El icono de cada logro ahora identifica la COLUMNA a la que pertenece (Novato, Supernova,
+  // Yonko, Infinito, Ranking), no el nivel de dificultad del logro en sí: dentro de una misma
+  // columna puede haber varios logros (p. ej. 3/7/30 días seguidos), todos con el mismo icono.
+  const ACHIEVEMENT_TIER_ICONS = { novato: "🥉", supernova: "🥈", yonko: "🥇", infinito: "💎", ranking: "🏆" };
+
+  // Días seguidos necesarios para cada nivel de racha diaria (Novato/Supernova/Yonko). Punto de
+  // partida fácil de ajustar si Niko quiere otros números.
+  const DAILY_STREAK_MILESTONES = [3, 7, 30];
+  const DAILY_STREAK_LABELS = { facil: "Novato", media: "Supernova", dificil: "Yonko" };
+
+  function buildDailyStreakAchievements(difficultyKey, tier) {
+    const label = DAILY_STREAK_LABELS[difficultyKey];
+    return DAILY_STREAK_MILESTONES.map(days => ({
+      id: `racha_diaria_${difficultyKey}_${days}`,
+      tier,
+      name: `${days} días seguidos jugando ${label}`,
+      description: `Juega el reto diario de ${label} durante ${days} días seguidos (da igual si lo superas o no: cuenta con jugarlo).`,
+      check: profile => ((profile.dailyStreaks && profile.dailyStreaks[difficultyKey] && profile.dailyStreaks[difficultyKey].longest) || 0) >= days
+    }));
+  }
 
   const ACHIEVEMENTS = [
     {
       id: "racha_1",
-      tier: "bronce",
+      tier: "infinito",
       name: "Primer panel en modo Infinito",
       description: "Resuelve al menos 1 panel en una racha de modo Infinito.",
       check: profile => (profile.bestStreak || 0) >= 1
     },
     {
       id: "racha_10",
-      tier: "plata",
+      tier: "infinito",
       name: "10 paneles en modo Infinito",
       description: "Alcanza una racha de 10 paneles resueltos seguidos en modo Infinito.",
       check: profile => (profile.bestStreak || 0) >= 10
     },
     {
       id: "racha_25",
-      tier: "oro",
+      tier: "infinito",
       name: "25 paneles en modo Infinito",
       description: "Alcanza una racha de 25 paneles resueltos seguidos en modo Infinito.",
       check: profile => (profile.bestStreak || 0) >= 25
-    }
+    },
+    ...buildDailyStreakAchievements("facil", "novato"),
+    ...buildDailyStreakAchievements("media", "supernova"),
+    ...buildDailyStreakAchievements("dificil", "yonko")
   ];
 
   function buildAchievementsHtml(profile) {
@@ -1957,6 +1984,10 @@
           avatar: currentUserProfile.avatar,
           bestStreak: currentUserProfile.bestStreak || 0
         }, { merge: true }).catch(() => {});
+
+        // Si jugaste el diario de hoy como invitado en este navegador antes de iniciar sesión,
+        // lo adoptamos en la cuenta ahora (ver "bridgeGuestDailyProgressToAccount" más abajo).
+        await bridgeGuestDailyProgressToAccount(user.uid);
       }
     } else {
       currentUserProfile = null;
@@ -2313,13 +2344,14 @@
 
         if (lastDifficulty && lastDifficulty !== "infinito") {
           // La última vez que se jugó fue en un modo normal: no depende de la sesión del usuario,
-          // así que generamos el panel ya mismo sin esperar a que Firebase confirme el login.
+          // así que cargamos el reto diario ya mismo sin esperar a que Firebase confirme el login
+          // (el reto diario en sí sí necesita a Firestore, pero no necesita saber quién eres).
           currentDifficulty = lastDifficulty;
           isInfiniteMode = false;
           document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
           const activeBtn = document.querySelector(`.diff-btn[onclick*="${lastDifficulty}"]`);
           if (activeBtn) activeBtn.classList.add('active');
-          generateNewBoard();
+          await loadDailyChallenge(lastDifficulty);
           hideBoardLoading();
           return;
         }
@@ -2338,7 +2370,8 @@
           if (infinitoBtn) infinitoBtn.classList.add('active');
           resumeInfiniteFromSaved(saved);
         } else {
-          generateNewBoard();
+          // currentDifficulty conserva su valor por defecto ("facil") y no estamos en Infinito.
+          await loadDailyChallenge(currentDifficulty);
         }
         hideBoardLoading();
       })
@@ -2378,10 +2411,14 @@
         return;
       }
       infiniteSolvedCount = 0;
+      updateInfiniteScoreDisplay();
+      generateNewBoard();
+      return;
     }
 
+    // Novato / Supernova / Yonko: reto diario compartido por todos (ver "Reto diario" más abajo).
     updateInfiniteScoreDisplay();
-    generateNewBoard();
+    await loadDailyChallenge(level);
   }
 
   function updateInfiniteScoreDisplay() {
@@ -2558,8 +2595,8 @@
 
   // Elige los 4 personajes de un grupo, forzando que se incluya un miembro "no evidente"
   // cuando el grupo lo requiere y el panel es difícil o Infinito.
-  function pickCharsForGroup(groupName, exclusiveChars) {
-    const mustIncludeIds = (currentDifficulty === "dificil" || currentDifficulty === "media" || isInfiniteMode)
+  function pickCharsForGroup(groupName, exclusiveChars, difficulty, isInfinite) {
+    const mustIncludeIds = (difficulty === "dificil" || difficulty === "media" || isInfinite)
       ? HARD_MODE_MUST_INCLUDE_ONE_OF[groupName]
       : null;
 
@@ -2578,10 +2615,16 @@
     return shuffle(exclusiveChars).slice(0, 4);
   }
 
-  function generateNewBoard() {
-    if (database.length === 0) return;
+  // Núcleo compartido de generación de un panel de 4 categorías sin solapamiento de personajes
+  // ni de familia repetida. Lo usan tanto generateNewBoard() (Infinito) como el reto diario más
+  // abajo. "shuffleFn" decide el orden de barajado de las categorías candidatas:
+  // - weightedShuffleGroups: evita repetir lo visto hace poco EN ESE NAVEGADOR (Infinito).
+  // - shuffle a secas: sin ese sesgo, porque el reto diario es un panel COMPARTIDO por todo el
+  //   mundo y no tendría sentido que dependiera del historial de quien lo genera.
+  function buildBoardGroups(difficulty, isInfinite, shuffleFn) {
+    if (database.length === 0) return { error: "sin-datos" };
 
-    let tagGroups = {}; 
+    let tagGroups = {};
 
     database.forEach(char => {
       if (char.tags) {
@@ -2589,7 +2632,7 @@
           const entries = parseTagEntries(tagData);
 
           entries.forEach(({ value, difficulty: tagDif }) => {
-            if (isInfiniteMode || tagDif === currentDifficulty) {
+            if (isInfinite || tagDif === difficulty) {
               const groupName = `${key}: ${value}`;
               if (!tagGroups[groupName]) tagGroups[groupName] = [];
               if (!tagGroups[groupName].some(c => c.id === char.id)) {
@@ -2604,9 +2647,7 @@
     let validGroupNames = Object.keys(tagGroups).filter(group => tagGroups[group].length >= 4);
 
     if (validGroupNames.length < 4) {
-      document.getElementById("warning-msg").innerText = 
-        `⚠️ Faltan datos en '${currentDifficulty.toUpperCase()}': Se necesitan al menos 4 categorías válidas. Hay ${validGroupNames.length}.`;
-      return;
+      return { error: "pocas-categorias", validCount: validGroupNames.length };
     }
 
     const charHasAnyTagMatch = (char, targetGroupName) => {
@@ -2624,19 +2665,13 @@
 
     let selectedGroups = null;
     let maxAttempts = 1000;
-    // Últimos intentos "de emergencia" en los que dejamos de exigir familias distintas, por
-    // si algún día (p. ej. tras editar el JSON) una dificultad concreta se queda con muy
-    // pocas familias válidas y no llegara a formarse un panel de 4 respetando esa regla.
     let relaxFamilyRuleFrom = maxAttempts - 100;
 
     for (let attempt = 0; attempt < maxAttempts; attempt++) {
       let relaxFamilyRule = attempt >= relaxFamilyRuleFrom;
-      let shuffledGroups = weightedShuffleGroups(validGroupNames);
+      let shuffledGroups = shuffleFn(validGroupNames);
       let candidateGroups = [];
       let usedCharIds = new Set();
-      // Familias ("Banda", "Titulo", "Raza"...) ya representadas en este panel: como máximo
-      // una categoría por familia, para que no salgan dos tarjetas del mismo "tipo" a la vez
-      // (p. ej. dos bandas distintas), que es justo lo que se percibía como repetición.
       let usedFamilies = new Set();
 
       for (let groupName of shuffledGroups) {
@@ -2654,7 +2689,7 @@
         });
 
         if (exclusiveChars.length >= 4) {
-          let chosenChars = pickCharsForGroup(groupName, exclusiveChars);
+          let chosenChars = pickCharsForGroup(groupName, exclusiveChars, difficulty, isInfinite);
 
           let invalidatesPrevious = false;
           for (let prevGroup of candidateGroups) {
@@ -2685,15 +2720,314 @@
       }
     }
 
-    if (!selectedGroups) {
-      document.getElementById("warning-msg").innerText = 
+    if (!selectedGroups) return { error: "sin-solucion" };
+    return { groups: selectedGroups };
+  }
+
+  function generateNewBoard() {
+    if (database.length === 0) return;
+
+    const result = buildBoardGroups(currentDifficulty, isInfiniteMode, weightedShuffleGroups);
+
+    if (result.error === "pocas-categorias") {
+      document.getElementById("warning-msg").innerText =
+        `⚠️ Faltan datos en '${currentDifficulty.toUpperCase()}': Se necesitan al menos 4 categorías válidas. Hay ${result.validCount}.`;
+      return;
+    }
+    if (result.error === "sin-solucion") {
+      document.getElementById("warning-msg").innerText =
         `⚠️ No se encontraron 4 categorías sin solapamiento en '${currentDifficulty.toUpperCase()}'. Añade más personajes al JSON o diversifica sus tags.`;
       return;
     }
+    if (result.error) return;
 
-    currentCategories = selectedGroups;
-    registerCategoryUsage(selectedGroups.map(g => g.name));
+    currentCategories = result.groups;
+    registerCategoryUsage(result.groups.map(g => g.name));
     initGame();
+  }
+
+  // ---------- Reto diario (Novato / Supernova / Yonko) ----------
+  //
+  // A diferencia de Infinito (donde cada jugador genera su propia secuencia de paneles al
+  // azar), estos tres modos comparten UN ÚNICO panel por día y dificultad, igual para todo el
+  // mundo, que cambia a las 00:01 (hora de España). El primer jugador que lo pide ese día lo
+  // genera y lo deja fijado en Firestore (colección "dailyPuzzles"); el resto simplemente lo
+  // lee. Solo hay un intento: al ganar o perder, el resultado queda así hasta el día siguiente.
+  //
+  // IMPORTANTE — esto necesita una regla nueva en Firestore (aparte de este archivo):
+  //   match /dailyPuzzles/{puzzleId} {
+  //     allow read: if true;
+  //     allow create: if !exists(/databases/$(database)/documents/dailyPuzzles/$(puzzleId));
+  //     allow update, delete: if false;
+  //   }
+  // Sin esa regla, nadie (ni con sesión ni sin ella) podrá crear ni leer el panel del día.
+  //
+  // Limitación conocida de esta primera versión: el "ya has jugado hoy" se guarda en
+  // localStorage (por dispositivo), no en tu cuenta. Si juegas hoy desde el móvil y luego
+  // abres la web en el ordenador, hoy mismo, podrías jugar el diario dos veces. Esto se
+  // resolverá solo cuando construyamos el guardado en la nube para las rachas de días (ahí sí
+  // hará falta que quede ligado a tu cuenta, no al dispositivo).
+
+  const STORAGE_KEY_DAILY_PROGRESS = "opc_daily_progress_v1";
+  const DAILY_DIFFICULTIES = ["facil", "media", "dificil"];
+
+  // Calcula la clave del "día lógico" en curso en hora de España (Europe/Madrid, gestiona el
+  // cambio de horario de verano/invierno automáticamente), con el cambio de día a las 00:01 en
+  // vez de a medianoche exacta: restamos 1 minuto antes de mirar la fecha, así entre las
+  // 00:00:00 y las 00:00:59 todavía se considera parte del día anterior.
+  function getMadridDailyKey() {
+    const adjusted = new Date(Date.now() - 60 * 1000);
+    const parts = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Europe/Madrid", year: "numeric", month: "2-digit", day: "2-digit"
+    }).formatToParts(adjusted);
+    const map = {};
+    parts.forEach(p => { map[p.type] = p.value; });
+    return `${map.year}-${map.month}-${map.day}`; // p.ej. "2026-09-06"
+  }
+
+  // Devuelve la clave del día anterior a "dateKey" (p.ej. "2026-09-06" -> "2026-09-05"),
+  // gestionando bien los cambios de mes/año. Trabajamos en UTC aquí a propósito: como
+  // "dateKey" ya es una fecha de calendario resuelta (no un instante concreto), solo hace
+  // falta aritmética de calendario normal, sin más líos de zona horaria.
+  function getPreviousDailyKey(dateKey) {
+    const [y, m, d] = dateKey.split("-").map(Number);
+    const dt = new Date(Date.UTC(y, m - 1, d));
+    dt.setUTCDate(dt.getUTCDate() - 1);
+    return dt.toISOString().slice(0, 10);
+  }
+
+  // Calcula la racha de días seguidos jugando (ganes o pierdas: "jugando", no "ganando") una
+  // dificultad concreta del reto diario, a partir de la racha que ya tuviera guardada y el día
+  // de hoy. "longest" es la mejor racha de siempre (para que los logros, una vez conseguidos,
+  // no se pierdan si luego rompes la racha actual); "current" es la racha en curso ahora mismo.
+  function computeNextStreak(existingStreak, todayKey) {
+    const streak = existingStreak || { current: 0, longest: 0, lastDate: null };
+    let newCurrent;
+    if (streak.lastDate === todayKey) {
+      newCurrent = streak.current; // ya contado hoy (no debería llegar aquí, pero por si acaso)
+    } else if (streak.lastDate === getPreviousDailyKey(todayKey)) {
+      newCurrent = streak.current + 1; // jugó ayer también: la racha sigue
+    } else {
+      newCurrent = 1; // no jugó ayer (o es la primera vez): la racha empieza de cero
+    }
+    return { current: newCurrent, longest: Math.max(streak.longest || 0, newCurrent), lastDate: todayKey };
+  }
+
+  function loadDailyProgressState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY_DAILY_PROGRESS);
+      if (raw) return JSON.parse(raw);
+    } catch (e) {}
+    return {};
+  }
+
+  function saveDailyProgressState(difficulty, entry) {
+    try {
+      const state = loadDailyProgressState();
+      state[difficulty] = entry;
+      localStorage.setItem(STORAGE_KEY_DAILY_PROGRESS, JSON.stringify(state));
+    } catch (e) {}
+  }
+
+  // Guarda el resultado del reto diario de hoy: en tu CUENTA (Firestore) si has iniciado
+  // sesión —así se ve igual en cualquier dispositivo—, o en este navegador (localStorage) si
+  // juegas como invitado. Se llama desde handleWin()/handleGameOver().
+  async function saveDailyResult(difficulty, result, groups) {
+    const todayKey = getMadridDailyKey();
+    const entry = { date: todayKey, result, groups: serializeBoardGroups(groups) };
+
+    if (currentUser) {
+      try {
+        const docRef = db.collection("users").doc(currentUser.uid);
+        const publicRef = db.collection("publicProfiles").doc(currentUser.uid);
+
+        const newStreak = await db.runTransaction(async transaction => {
+          const snap = await transaction.get(docRef);
+          const data = snap.exists ? snap.data() : {};
+          const streak = computeNextStreak(data.dailyStreaks && data.dailyStreaks[difficulty], todayKey);
+
+          transaction.set(docRef, {
+            dailyProgress: { [difficulty]: entry },
+            dailyStreaks: { [difficulty]: streak }
+          }, { merge: true });
+          // La racha también se guarda en el perfil PÚBLICO: los logros de "días seguidos
+          // jugando" son públicos, así que hace falta que cualquiera pueda verlos, no solo tú.
+          transaction.set(publicRef, { dailyStreaks: { [difficulty]: streak } }, { merge: true });
+
+          return streak;
+        });
+
+        // Actualizamos también la copia en memoria, para que si vuelve a pulsar la misma
+        // dificultad en esta misma sesión (sin recargar la página) ya lo vea bloqueado.
+        currentUserProfile = currentUserProfile || {};
+        currentUserProfile.dailyProgress = { ...(currentUserProfile.dailyProgress || {}), [difficulty]: entry };
+        currentUserProfile.dailyStreaks = { ...(currentUserProfile.dailyStreaks || {}), [difficulty]: newStreak };
+      } catch (e) {
+        console.error("No se pudo guardar el resultado del diario en tu cuenta:", e);
+      }
+    } else {
+      saveDailyProgressState(difficulty, entry);
+    }
+  }
+
+  // Si jugaste el diario de hoy COMO INVITADO en este mismo navegador y luego inicias sesión,
+  // "adoptamos" ese resultado en tu cuenta: así queda bloqueado también en otros dispositivos y
+  // ya cuenta para logros/rachas, en vez de perderse por haberlo jugado sin sesión. Se hace con
+  // una transacción para no pisar nunca un resultado que la cuenta ya tuviera guardado de hoy
+  // (por ejemplo, si ya lo habías jugado con sesión iniciada en otro dispositivo).
+  //
+  // Si inicias sesión en un dispositivo DISTINTO al que jugaste como invitado, aquí no hay nada
+  // que adoptar (el localStorage de ese navegador estará vacío), así que simplemente podrás
+  // jugarlo una vez más con la cuenta: no es un caso especial, es sencillamente lo que pasa
+  // cuando no hay nada que puentear.
+  async function bridgeGuestDailyProgressToAccount(uid) {
+    const todayKey = getMadridDailyKey();
+    const guestProgress = loadDailyProgressState();
+
+    for (const difficulty of DAILY_DIFFICULTIES) {
+      const guestEntry = guestProgress[difficulty];
+      if (!guestEntry || guestEntry.date !== todayKey) continue;
+
+      try {
+        const docRef = db.collection("users").doc(uid);
+        const publicRef = db.collection("publicProfiles").doc(uid);
+        const bridged = await db.runTransaction(async transaction => {
+          const snap = await transaction.get(docRef);
+          const data = snap.exists ? snap.data() : {};
+          const existingDaily = data.dailyProgress || {};
+          if (existingDaily[difficulty] && existingDaily[difficulty].date === todayKey) {
+            return null; // la cuenta ya tenía un resultado de hoy para esta dificultad: no lo pisamos
+          }
+          const newStreak = computeNextStreak(data.dailyStreaks && data.dailyStreaks[difficulty], todayKey);
+          transaction.set(docRef, {
+            dailyProgress: { [difficulty]: guestEntry },
+            dailyStreaks: { [difficulty]: newStreak }
+          }, { merge: true });
+          transaction.set(publicRef, { dailyStreaks: { [difficulty]: newStreak } }, { merge: true });
+          return { entry: guestEntry, streak: newStreak };
+        });
+
+        if (bridged && currentUserProfile) {
+          currentUserProfile.dailyProgress = { ...(currentUserProfile.dailyProgress || {}), [difficulty]: bridged.entry };
+          currentUserProfile.dailyStreaks = { ...(currentUserProfile.dailyStreaks || {}), [difficulty]: bridged.streak };
+        }
+      } catch (e) {
+        console.error("No se pudo adoptar el progreso diario de invitado:", e);
+      }
+    }
+  }
+
+  // Convierte los grupos ya elegidos (con los personajes completos) en algo ligero para
+  // guardar: solo el nombre de la categoría y los IDs de personaje, no sus datos completos
+  // (que ya están en personajes.json, y no queremos duplicarlos en Firestore/localStorage).
+  function serializeBoardGroups(groups) {
+    return groups.map(g => ({ name: g.name, characterIds: g.items.map(c => c.id) }));
+  }
+
+  // El proceso inverso: a partir de los IDs guardados, recupera los personajes completos desde
+  // "database" (ya cargada) y reasigna un color de categoría por posición.
+  function hydrateBoardGroups(storedGroups) {
+    return storedGroups.map((g, i) => ({
+      name: g.name,
+      color: COLORS[i % COLORS.length],
+      items: g.characterIds.map(id => database.find(c => c.id === id)).filter(Boolean)
+    }));
+  }
+
+  // Lee el panel del día para esa dificultad si ya existe en Firestore, o lo genera y lo deja
+  // fijado si es el primero en pedirlo. La transacción de Firestore es lo que garantiza que,
+  // aunque dos jugadores lleguen a la vez justo tras las 00:01, todo el mundo acabe viendo
+  // exactamente el mismo panel: si dos transacciones chocan, Firestore reintenta la perdedora
+  // automáticamente, y en el reintento ya encuentra el documento creado por la otra.
+  async function getOrCreateDailyPuzzle(difficulty, dateKey) {
+    const docRef = db.collection("dailyPuzzles").doc(`${dateKey}_${difficulty}`);
+
+    const data = await db.runTransaction(async transaction => {
+      const snap = await transaction.get(docRef);
+      if (snap.exists) return snap.data();
+
+      const result = buildBoardGroups(difficulty, false, shuffle);
+      if (result.error || !result.groups) {
+        throw new Error("No se pudo generar el panel diario (" + (result.error || "desconocido") + ")");
+      }
+      const newData = {
+        groups: serializeBoardGroups(result.groups),
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      };
+      transaction.set(docRef, newData);
+      return newData;
+    });
+
+    return hydrateBoardGroups(data.groups);
+  }
+
+  // Punto de entrada al pulsar Novato/Supernova/Yonko (o al cargar la página en uno de esos
+  // modos). Si ya jugaste hoy esa dificultad, muestra directamente el resultado guardado en
+  // vez de dejar reintentarlo; si no, carga (o genera) el panel compartido del día.
+  async function loadDailyChallenge(difficulty) {
+    const todayKey = getMadridDailyKey();
+    // Con sesión iniciada, el "ya jugaste hoy" vive en tu cuenta (currentUserProfile, ya
+    // cargada de Firestore), así que se ve igual en cualquier dispositivo. Como invitado,
+    // vive en este navegador.
+    const stored = currentUser
+      ? (currentUserProfile && currentUserProfile.dailyProgress && currentUserProfile.dailyProgress[difficulty])
+      : loadDailyProgressState()[difficulty];
+
+    if (stored && stored.date === todayKey) {
+      showDailyLockedModal(difficulty, stored);
+      return;
+    }
+
+    try {
+      const groups = await getOrCreateDailyPuzzle(difficulty, todayKey);
+      document.getElementById("warning-msg").innerText = "";
+      currentCategories = groups;
+      initGame();
+    } catch (e) {
+      document.getElementById("warning-msg").innerText =
+        "⚠️ No se pudo cargar el reto diario. Comprueba tu conexión e inténtalo de nuevo.";
+      console.error("Error cargando el reto diario:", e);
+    }
+  }
+
+  // Ya jugaste esta dificultad hoy: reconstruimos el panel de ese intento (para poder mostrar
+  // la solución) y avisamos de que hay que esperar al día siguiente, reutilizando el mismo
+  // modal de fin de partida que ya existe para ganar/perder.
+  function showDailyLockedModal(difficulty, storedEntry) {
+    currentDifficulty = difficulty;
+    isInfiniteMode = false;
+    currentCategories = hydrateBoardGroups(storedEntry.groups);
+
+    // initGame() va PRIMERO: pinta el tablero, pero también resetea gameOver, vuelve a activar
+    // los controles y oculta el modal de fin de partida. Por eso todo lo que "congela" este
+    // estado (gameOver, controles deshabilitados, el modal con la solución) va DESPUÉS, para
+    // que no se deshaga.
+    initGame();
+
+    const won = storedEntry.result === "win";
+    solvedOrder = won ? currentCategories.map(c => c.name) : [];
+    gameOver = true;
+    awaitingNextPanel = false;
+    disableGameControls();
+
+    const modalContent = document.querySelector("#gameover-modal .modal-content");
+    modalContent.style.borderColor = won ? "#22c55e" : "#ef4444";
+
+    const titleEl = document.getElementById("modal-title");
+    titleEl.innerText = won ? "🏆 ¡Ya superaste el diario de hoy!" : "🏴‍☠️ Ya jugaste el diario de hoy";
+    titleEl.style.color = won ? "#22c55e" : "#ef4444";
+
+    document.getElementById("modal-text").innerText =
+      "Vuelve mañana a las 00:01 (hora de España) para un panel nuevo. Solución de hoy:";
+
+    const actionBtn = document.getElementById("modal-action-btn");
+    actionBtn.innerText = "Entendido";
+    actionBtn.onclick = closeModal;
+
+    // El tablero queda de fondo mezclado (sin colorear como resuelto: mejora visual pendiente,
+    // no afecta a que el bloqueo funcione), pero inutilizado por disableGameControls() de
+    // arriba, para que si cierran el modal no puedan intentarlo de nuevo sin reabrirlo.
+    renderModalSolutions();
   }
 
   // Alterna entre "Enviar/Limpiar" (partida en curso) y "Resultados" (partida en pausa:
@@ -3046,6 +3380,10 @@
     awaitingNextPanel = false;
     showResultsControl();
 
+    // handleWin() solo se llama en Novato/Supernova/Yonko (Infinito nunca "gana", sigue sin
+    // parar hasta que fallas), así que este resultado siempre corresponde al reto diario.
+    saveDailyResult(currentDifficulty, "win", currentCategories);
+
     const modalContent = document.querySelector("#gameover-modal .modal-content");
     modalContent.style.borderColor = "#22c55e";
 
@@ -3070,6 +3408,8 @@
       disableGameControls();
     } else {
       showResultsControl();
+      // Igual que en handleWin(): esta rama es siempre el reto diario, nunca Infinito.
+      saveDailyResult(currentDifficulty, "lose", currentCategories);
     }
 
     const modalContent = document.querySelector("#gameover-modal .modal-content");
