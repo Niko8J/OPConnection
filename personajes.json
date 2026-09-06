@@ -175,7 +175,7 @@
         {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"},
         {"val": "Personajes a los que Moriah robó su sombra", "dif": "dificil"},
         {"val": "Personajes que fuman", "dif": "dificil"}
       ]
@@ -248,7 +248,7 @@
         {"val": "Personajes que fueron convertidos en juguetes por Sugar", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"},
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
         {"val": "Personajes a los que Moriah robó su sombra", "dif": "dificil"},
         {"val": "Personajes con gafas", "dif": "dificil"},
@@ -288,7 +288,7 @@
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
         {"val": "Personajes con tatuajes", "dif": "dificil"},
-        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"},
         {"val": "Personajes con gafas", "dif": "dificil"}
       ]
     }
@@ -394,7 +394,7 @@
         {"val": "Voluntad de la D.", "dif": "media"}
       ],
       "Luffy": [
-        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+        {"val": "Personajes a los que Luffy ha invitado a unirse a su banda", "dif": "dificil"}
       ],
       "Viaje": [
         {"val": "Personajes que viajaron con los Sombrero de Paja", "dif": "dificil"}
@@ -1007,7 +1007,7 @@
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ],
       "SMILE": [
         {"val": "Consumidores de una fruta del diablo artificial", "dif": "media"}
@@ -1240,7 +1240,7 @@
         {"val": "Carpinteros", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ],
       "Peleas": [
         {"val": "Peleas de Luffy", "dif": "dificil"}
@@ -1353,7 +1353,7 @@
         {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"},
         {"val": "Personajes con alas", "dif": "dificil"},
         {"val": "Personajes con tatuajes", "dif": "dificil"}
       ],
@@ -1644,10 +1644,10 @@
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
       ],
       "Luffy": [
-        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+        {"val": "Personajes a los que Luffy ha invitado a unirse a su banda", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"},
         {"val": "Personajes con cuernos", "dif": "dificil"}
       ]
     }
@@ -1841,7 +1841,7 @@
         {"val": "Fruta despertada", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"},
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ],
       "Peleas": [
@@ -1904,7 +1904,7 @@
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ],
       "Peleas": [
         {"val": "Peleas de Luffy", "dif": "dificil"}
@@ -1996,7 +1996,7 @@
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"},
         {"val": "Personajes con gafas", "dif": "dificil"}
       ],
       "Peleas": [
@@ -2189,7 +2189,7 @@
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ]
     }
   },
@@ -2219,7 +2219,7 @@
         {"val": "Tobiroppos de los Piratas Bestia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"},
         {"val": "Personajes con cuernos", "dif": "dificil"},
         {"val": "Personajes que fuman", "dif": "dificil"}
       ]
@@ -2253,7 +2253,7 @@
         {"val": "Personajes fallecidos", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"},
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ]
     }
@@ -2286,7 +2286,7 @@
         {"val": "Tribu de brazos largos", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"},
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ]
     }
@@ -2306,7 +2306,7 @@
         {"val": "Sin fruta del diablo", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ]
     }
   },
@@ -2335,7 +2335,7 @@
         {"val": "Usuarios de rokushiki", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ]
     }
   },
@@ -3231,7 +3231,7 @@
         {"val": "Médicos", "dif": "dificil"}
       ],
       "Luffy": [
-        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+        {"val": "Personajes a los que Luffy ha invitado a unirse a su banda", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
@@ -3533,7 +3533,7 @@
         {"val": "Tobiroppos de los Piratas Bestia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"},
         {"val": "Personajes con cuernos", "dif": "dificil"}
       ],
       "Peleas": [
@@ -3771,7 +3771,7 @@
         {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ],
       "Luffy": [
-        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+        {"val": "Personajes a los que Luffy ha invitado a unirse a su banda", "dif": "dificil"}
       ],
       "Titulo": [
         {"val": "Monarcas", "dif": "dificil"}
@@ -4121,7 +4121,7 @@
         {"val": "Sin fruta del diablo", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ],
       "Titulo": [
         {"val": "Monarcas", "dif": "dificil"}
@@ -4378,7 +4378,7 @@
         {"val": "Personajes fallecidos", "dif": "facil"}
       ],
       "Luffy": [
-        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+        {"val": "Personajes a los que Luffy ha invitado a unirse a su banda", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"},
@@ -4449,7 +4449,7 @@
         {"val": "Familia Riku", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ],
       "Peleas": [
         {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
@@ -5651,7 +5651,7 @@
         {"val": "Sin fruta del diablo", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ]
     }
   },
@@ -5703,7 +5703,7 @@
         {"val": "Voluntad de la D.", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ],
       "Titulo": [
         {"val": "Vicealmirantes de la marina", "dif": "media"}
@@ -5891,7 +5891,7 @@
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ],
       "Peleas": [
         {"val": "Participantes del Coliseo Corrida", "dif": "dificil"}
@@ -5943,7 +5943,7 @@
         {"val": "Espadachines", "dif": "dificil"}
       ],
       "Luffy": [
-        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+        {"val": "Personajes a los que Luffy ha invitado a unirse a su banda", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"}
@@ -6212,7 +6212,7 @@
         {"val": "Recompensa: menos de 100M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ],
       "Peleas": [
         {"val": "Peleas de Zoro", "dif": "dificil"}
@@ -6377,7 +6377,7 @@
         {"val": "Sin fruta del diablo", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ],
       "Peleas": [
         {"val": "Peleas de Robin", "dif": "dificil"}
@@ -7843,7 +7843,7 @@
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"},
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ]
     }
   },
@@ -8141,7 +8141,7 @@
         {"val": "Tom's Workers", "dif": "media"}
       ],
       "Luffy": [
-        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+        {"val": "Personajes a los que Luffy ha invitado a unirse a su banda", "dif": "dificil"}
       ]
     }
   },
@@ -8396,7 +8396,7 @@
         {"val": "Origen: North Blue", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ]
     }
   },
@@ -8671,7 +8671,7 @@
     "img": "imagenes/Gaimon.webp",
     "tags": {
       "Luffy": [
-        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+        {"val": "Personajes a los que Luffy ha invitado a unirse a su banda", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: East Blue", "dif": "dificil"}
@@ -8691,7 +8691,7 @@
         {"val": "Piratas de Thriller Bark", "dif": "dificil"}
       ],
       "Luffy": [
-        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+        {"val": "Personajes a los que Luffy ha invitado a unirse a su banda", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"}
@@ -8712,7 +8712,7 @@
         {"val": "Piratas de Thriller Bark", "dif": "dificil"}
       ],
       "Luffy": [
-        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+        {"val": "Personajes a los que Luffy ha invitado a unirse a su banda", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"}
@@ -8729,7 +8729,7 @@
     "img": "imagenes/Hyoutauros.webp",
     "tags": {
       "Luffy": [
-        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+        {"val": "Personajes a los que Luffy ha invitado a unirse a su banda", "dif": "dificil"}
       ]
     }
   },
@@ -8742,7 +8742,7 @@
         {"val": "Piratas de Roger", "dif": "facil"}
       ],
       "Luffy": [
-        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+        {"val": "Personajes a los que Luffy ha invitado a unirse a su banda", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -8768,7 +8768,7 @@
         {"val": "Familia Kozuki", "dif": "media"}
       ],
       "Luffy": [
-        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+        {"val": "Personajes a los que Luffy ha invitado a unirse a su banda", "dif": "dificil"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
@@ -8799,7 +8799,7 @@
         {"val": "Wano", "dif": "facil"}
       ],
       "Luffy": [
-        {"val": "Personajes a los que Luffy ha pedido unirse a su banda", "dif": "dificil"}
+        {"val": "Personajes a los que Luffy ha invitado a unirse a su banda", "dif": "dificil"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "dificil"}
@@ -8899,7 +8899,7 @@
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"},
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ]
     }
   },
@@ -10149,7 +10149,7 @@
         {"val": "Recompensa: entre 100M y 499M", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ]
     }
   },
@@ -10901,7 +10901,7 @@
         {"val": "Wano", "dif": "facil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -11781,7 +11781,7 @@
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"},
         {"val": "Personajes con gafas", "dif": "dificil"}
       ]
     }
@@ -12050,7 +12050,7 @@
         {"val": "Origen: North Blue", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ]
     }
   },
@@ -12069,7 +12069,7 @@
         {"val": "Cyborgs", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ]
     }
   },
@@ -12267,7 +12267,7 @@
         {"val": "Gobierno Mundial", "dif": "facil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ],
       "Titulo": [
         {"val": "Vicealmirantes de la marina", "dif": "media"}
@@ -12283,7 +12283,7 @@
         {"val": "Piratas de Big Mom", "dif": "facil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"},
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ]
     }
@@ -12882,7 +12882,7 @@
         {"val": "Piratas de Foxy", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ]
     }
   },
@@ -12900,7 +12900,7 @@
         {"val": "Gigantes", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ]
     }
   },
@@ -12915,7 +12915,7 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ]
     }
   },
@@ -12930,7 +12930,7 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ]
     }
   },
@@ -13432,7 +13432,7 @@
         {"val": "Vicealmirantes de la marina", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ]
     }
   },
