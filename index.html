@@ -5258,6 +5258,10 @@
 
     const solvedCount = solvedOrder.length;
     const categoryBlocks = "🟩".repeat(solvedCount) + "🟥".repeat(Math.max(0, 4 - solvedCount));
+    let solvedText;
+    if (solvedCount === 4) solvedText = `¡Acerté todas! ${solvedCount}/4`;
+    else if (solvedCount === 0) solvedText = `No he dado ni una... ${solvedCount}/4`;
+    else solvedText = `Vaya, solo acerté ${solvedCount}/4`;
 
     const fails = MAX_LIVES - lives;
     const livesBlocks = "🏴‍☠️".repeat(lives) + "❌".repeat(fails);
@@ -5268,7 +5272,7 @@
     const lines = [
       `One Piece Connections – ${label}`,
       `${d}/${m}/${y}`,
-      `${categoryBlocks} ${solvedCount}/4`,
+      `${categoryBlocks} ${solvedText}`,
       `${livesBlocks} ${failsText}`
     ];
 
@@ -5284,15 +5288,30 @@
     return lines.join("\n");
   }
 
+  // En Windows (y probablemente otros de escritorio), el panel nativo SÍ deja "copiar" la
+  // imagen, pero luego no se pega bien en WhatsApp Web/Discord — parece funcionar pero no
+  // llega nada al pegar. Como esta función solo la usamos aquí, mejor no arriesgarnos: en
+  // dispositivos sin puntero táctil (ratón/trackpad), ni lo intentamos, y vamos directos a
+  // compartir solo texto (que si sí funciona bien en ordenador).
+  function isTouchDevice() {
+    return window.matchMedia("(pointer: coarse)").matches;
+  }
+
   function shareResult() {
-    shareTextWithImage(buildShareText(), buildBoardImageBlobWithFallback(), "panel.png");
+    if (isTouchDevice()) {
+      shareTextWithImage(buildShareText(), buildBoardImageBlobWithFallback(), "panel.png");
+    } else {
+      shareText(buildShareText());
+    }
   }
 
   // Versión para Infinito: aquí no hay categorías que colorear (no es un puzle único del día,
   // sino una racha en marcha), así que el resumen es mucho más simple.
   function buildShareTextInfinite() {
+    const [y, m, d] = getMadridDailyKey().split("-");
     const lines = [
       "One Piece Connections – Infinito",
+      `${d}/${m}/${y}`,
       `🔥 Racha: ${infiniteSolvedCount} panel${infiniteSolvedCount === 1 ? "" : "es"}`,
       "https://www.opconnection.es/"
     ];
@@ -5300,7 +5319,11 @@
   }
 
   function shareResultInfinite() {
-    shareTextWithImage(buildShareTextInfinite(), buildBoardImageBlobWithFallback(), "panel.png");
+    if (isTouchDevice()) {
+      shareTextWithImage(buildShareTextInfinite(), buildBoardImageBlobWithFallback(), "panel.png");
+    } else {
+      shareText(buildShareTextInfinite());
+    }
   }
 
   function applyResultModalContent(won) {
