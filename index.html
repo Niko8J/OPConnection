@@ -3708,7 +3708,12 @@
     // (mismo patrón que Chopper con Piratas de Foxy), así que forzamos que aparezca siempre
     // que salga este grupo, para que ese dato sorprendente se vea de verdad y no dependa de
     // la suerte del sorteo.
-    "Banda: Trabajadores del Baratie": ["luffy"]
+    "Banda: Trabajadores del Baratie": ["luffy"],
+    // De los 12 Shichibukais, Hanafuda es el menos conocido (su etiqueta solo existe en
+    // dificultad "dificil", igual que Chopper con Piratas de Foxy o Luffy con Trabajadores
+    // del Baratie): forzamos que aparezca siempre que salga este grupo en dificil/Infinito,
+    // para que no quede diluido entre los otros 11 candidatos más evidentes por puro azar.
+    "Titulo: Shichibukais": ["hanafuda"]
   };
 
   // Elige los 4 personajes de un grupo, forzando que se incluya un miembro "no evidente"
