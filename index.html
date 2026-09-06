@@ -259,7 +259,7 @@
        (móvil), sin depender de un punto de corte fijo por ancho de pantalla. */
     .profile-header {
       display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
-      gap: 20px; margin-bottom: 14px;
+      gap: 20px; margin: 16px 0 14px;
     }
     .profile-identity { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; }
     .profile-modal-avatar {
@@ -781,14 +781,11 @@
     .modal-scroll-area {
       overflow-y: auto; overflow-x: hidden;
       flex: 1 1 auto; min-height: 0; /* imprescindible para que un hijo flex pueda encogerse y scrollear */
-      /* overflow-y:auto recorta cualquier cosa que se salga de este borde — sin este hueco de
-         sobra arriba, el resplandor de un marco (que se sale unos cuantos px del propio
-         avatar) chocaba contra el límite y se veía cortado por arriba en vez de verse
-         completo alrededor. Sin margen negativo compensándolo (lo tuvo antes): con
-         flex:1 1 auto, ese margen empujaba toda la caja del scroll por encima del propio
-         modal en móvil, sacando el contenido entero fuera de su borde al hacer scroll. Aquí
-         simplemente se pierden unos pocos píxeles de espacio de sobra arriba, sin ese riesgo. */
-      padding-top: 20px;
+      /* overflow-y:auto recorta cualquier cosa que se salga de este borde — el resplandor de
+         un marco de la foto de perfil (que se sale unos px del avatar) necesita hueco de
+         sobra antes de chocar con ese límite. Eso se resuelve dándole margen al propio
+         contenido (.profile-header, más abajo), no aquí: tocar la caja del área de scroll en
+         sí (con padding/margin) puede acabar sacándola de su sitio en algunos layouts. */
       /* Barra de scroll fina y del ámbar de la web, en vez de la gris por defecto del
          navegador. scrollbar-width/scrollbar-color cubren Firefox; las reglas
          ::-webkit-scrollbar de abajo cubren Chrome/Safari/Edge. */
