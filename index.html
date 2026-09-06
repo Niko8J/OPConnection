@@ -54,6 +54,13 @@
       --card-size: 70px;
       --board-height: 300px;
     }
+    /* Algunos navegadores móviles (sobre todo los basados en WebKit, como cualquier navegador
+       en iPhone) agrandan automáticamente los textos pequeños para mejorar la legibilidad,
+       sin que se les pida. Eso rompe diseños calibrados a un tamaño de letra exacto — como el
+       de las insignias de logros, pensadas para caber siempre en 3 líneas — de forma
+       inconsistente entre dispositivos. Lo desactivamos a nivel global, por si afecta a algo
+       más aparte de los logros. */
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     html { height: 100%; }
 
