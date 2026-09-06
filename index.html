@@ -292,6 +292,7 @@
       color: #94a3b8; font-size: 0.95rem; line-height: 1.6;
     }
     .profile-modal-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .gameover-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
     /* ---------- Tienda ---------- */
     /* Mismo ancho que profile-modal-content a propósito: se llega a la Tienda siempre desde
@@ -1069,7 +1070,10 @@
       <h2 id="modal-title"></h2>
       <p id="modal-text"></p>
       <div id="solutions-container" class="solutions-list"></div>
-      <button class="action-btn" id="modal-action-btn" onclick="closeModal()">Entendido</button>
+      <div class="gameover-actions">
+        <button class="action-btn" id="modal-action-btn" onclick="closeModal()">Entendido</button>
+        <button class="action-btn" id="share-result-btn" onclick="shareResult()" style="display: none;">📤 Compartir</button>
+      </div>
     </div>
   </div>
 </div>
@@ -5028,6 +5032,9 @@
     const actionBtn = document.getElementById("modal-action-btn");
     actionBtn.innerText = "Siguiente ➡️";
     actionBtn.onclick = continueInfinitePanel;
+    // Mismo motivo que en la derrota de Infinito: esto no es el reto diario, así que no hay
+    // nada que compartir aquí.
+    document.getElementById("share-result-btn").style.display = "none";
 
     renderModalSolutions();
   }
@@ -5045,6 +5052,86 @@
   // Se reutiliza en dos sitios: al terminar la partida EN VIVO (handleWin/handleGameOver) y al
   // reconstruir un panel diario que ya se jugó hoy (renderFinishedDailyPanel), para que el
   // contenido del modal sea idéntico en ambos casos sin duplicar el texto en dos sitios.
+  // Copia el texto y avisa con un toast — reutilizado tanto por el reto diario como por Infinito.
+  async function copyToClipboardWithToast(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (e) {
+      // Reserva para navegadores sin permiso/soporte para la API moderna de portapapeles.
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      try { document.execCommand("copy"); } catch (e2) { console.error("No se pudo copiar el resultado:", e2); }
+      textarea.remove();
+    }
+    showToast("📋 ¡Copiado! Ya puedes pegarlo donde quieras");
+  }
+
+  // Resumen del resultado del reto diario en emojis, al estilo Wordle: nunca revela qué
+  // personajes eran ni de qué trataba cada categoría, solo el patrón de aciertos — así no hay
+  // spoiler para quien todavía no ha jugado hoy. Solo usa datos que ya se guardan (solvedOrder,
+  // lives), sin necesitar registrar cada intento fallido por separado. El "X/4" va aparte de
+  // los propios cuadraditos de color: a diferencia de Wordle (verde/amarillo/gris siempre
+  // significan lo mismo), aquí los 4 colores no dicen nada por sí solos sin haber jugado, así
+  // que ese número sirve para que se entienda de un vistazo también sin conocer el juego.
+  function buildShareText() {
+    const colorEmojis = ["🟨", "🟩", "🟦", "🟪"];
+    const difficultyLabels = { facil: "Novato", media: "Supernova", dificil: "Yonko" };
+    const label = difficultyLabels[currentDifficulty] || currentDifficulty;
+
+    // A cada categoría le toca un color según su POSICIÓN en el tablero (no el orden en que se
+    // acertó): reconstruimos qué emoji le correspondía a cada una para pintar solvedOrder bien.
+    const colorByName = {};
+    currentCategories.forEach((cat, i) => { colorByName[cat.name] = colorEmojis[i % colorEmojis.length]; });
+
+    const solvedBlocks = solvedOrder.map(n => colorByName[n] || "⬜").join("");
+    const missingBlocks = "⬛".repeat(Math.max(0, 4 - solvedOrder.length));
+    const fails = MAX_LIVES - lives;
+
+    const [y, m, d] = getMadridDailyKey().split("-");
+
+    const lines = [
+      `One Piece Connections – ${label} 🏴‍☠️`,
+      `${d}/${m}/${y}`,
+      `${solvedOrder.length}/4`,
+      solvedBlocks + missingBlocks,
+      fails > 0 ? `${"❌".repeat(fails)} (${fails} fallo${fails === 1 ? "" : "s"})` : "¡Sin fallos! 🎯"
+    ];
+
+    // La racha solo existe para cuentas con sesión iniciada (los invitados no la tienen
+    // guardada en ningún sitio): se omite esta línea en vez de mostrar un dato inventado.
+    const streakInfo = currentUser && currentUserProfile && currentUserProfile.dailyStreaks
+      && currentUserProfile.dailyStreaks[currentDifficulty];
+    if (streakInfo && typeof streakInfo.current === "number" && streakInfo.current > 0) {
+      lines.push(`🔥 Racha: ${streakInfo.current} día${streakInfo.current === 1 ? "" : "s"}`);
+    }
+
+    lines.push("https://www.opconnection.es/");
+    return lines.join("\n");
+  }
+
+  function shareResult() {
+    copyToClipboardWithToast(buildShareText());
+  }
+
+  // Versión para Infinito: aquí no hay categorías que colorear (no es un puzle único del día,
+  // sino una racha en marcha), así que el resumen es mucho más simple.
+  function buildShareTextInfinite() {
+    const lines = [
+      "One Piece Connections – Infinito 🏴‍☠️",
+      `🔥 Racha: ${infiniteSolvedCount} panel${infiniteSolvedCount === 1 ? "" : "es"}`,
+      "https://www.opconnection.es/"
+    ];
+    return lines.join("\n");
+  }
+
+  function shareResultInfinite() {
+    copyToClipboardWithToast(buildShareTextInfinite());
+  }
+
   function applyResultModalContent(won) {
     const modalContent = document.querySelector("#gameover-modal .modal-content");
     modalContent.style.borderColor = won ? "#22c55e" : "#ef4444";
@@ -5061,6 +5148,12 @@
     const actionBtn = document.getElementById("modal-action-btn");
     actionBtn.innerText = "Entendido";
     actionBtn.onclick = closeModal;
+
+    // Solo el reto diario tiene "resultado de hoy" que compartir; Infinito no pasa por aquí
+    // (ver handleGameOver, que fija su propio onclick en su rama de Infinito).
+    const shareBtn = document.getElementById("share-result-btn");
+    shareBtn.onclick = shareResult;
+    shareBtn.style.display = "inline-block";
 
     renderModalSolutions();
   }
@@ -5096,6 +5189,11 @@
       const actionBtn = document.getElementById("modal-action-btn");
       actionBtn.innerText = "Entendido";
       actionBtn.onclick = closeModal;
+      // Aquí sí se comparte: es el cierre natural de la racha de Infinito, con su propio
+      // resumen (sin categorías que colorear, solo el nº de paneles resueltos en la racha).
+      const shareBtn = document.getElementById("share-result-btn");
+      shareBtn.onclick = shareResultInfinite;
+      shareBtn.style.display = "inline-block";
       renderModalSolutions();
     } else {
       showResultsControl();
