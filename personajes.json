@@ -337,7 +337,8 @@
         {"val": "Piratas del Sol", "dif": "media"}
       ],
       "Titulo": [
-        {"val": "Shichibukais", "dif": "facil"}
+        {"val": "Shichibukais", "dif": "facil"},
+        {"val": "Shichibukais", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -538,6 +539,7 @@
       ],
       "Titulo": [
         {"val": "Shichibukais", "dif": "facil"},
+        {"val": "Shichibukais", "dif": "dificil"},
         {"val": "Yonko", "dif": "facil"}
       ],
       "Origen": [
@@ -642,6 +644,7 @@
       ],
       "Titulo": [
         {"val": "Shichibukais", "dif": "facil"},
+        {"val": "Shichibukais", "dif": "dificil"},
         {"val": "Yonko", "dif": "facil"}
       ],
       "Origen": [
@@ -708,7 +711,8 @@
         {"val": "Banda: Cross Guild", "dif": "facil"}
       ],
       "Titulo": [
-        {"val": "Shichibukais", "dif": "facil"}
+        {"val": "Shichibukais", "dif": "facil"},
+        {"val": "Shichibukais", "dif": "dificil"}
       ],
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
@@ -742,7 +746,8 @@
         {"val": "Banda: Cross Guild", "dif": "facil"}
       ],
       "Titulo": [
-        {"val": "Shichibukais", "dif": "facil"}
+        {"val": "Shichibukais", "dif": "facil"},
+        {"val": "Shichibukais", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -839,6 +844,7 @@
       ],
       "Titulo": [
         {"val": "Shichibukais", "dif": "facil"},
+        {"val": "Shichibukais", "dif": "dificil"},
         {"val": "Supernovas", "dif": "media"}
       ],
       "Origen": [
@@ -1253,7 +1259,8 @@
         {"val": "Gobierno Mundial", "dif": "facil"}
       ],
       "Titulo": [
-        {"val": "Shichibukais", "dif": "facil"}
+        {"val": "Shichibukais", "dif": "facil"},
+        {"val": "Shichibukais", "dif": "dificil"}
       ],
       "Origen": [
         {"val": "Origen: South Blue", "dif": "dificil"}
@@ -1598,6 +1605,7 @@
       ],
       "Titulo": [
         {"val": "Shichibukais", "dif": "facil"},
+        {"val": "Shichibukais", "dif": "dificil"},
         {"val": "Emperatrices de Amazon Lilly", "dif": "media"}
       ],
       "Origen": [
@@ -1654,6 +1662,7 @@
       ],
       "Titulo": [
         {"val": "Shichibukais", "dif": "facil"},
+        {"val": "Shichibukais", "dif": "dificil"},
         {"val": "Nobles mundiales", "dif": "dificil"}
       ],
       "Origen": [
@@ -2244,7 +2253,8 @@
         {"val": "Personajes fallecidos", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ]
     }
   },
@@ -2276,7 +2286,8 @@
         {"val": "Tribu de brazos largos", "dif": "media"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara", "dif": "dificil"},
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ]
     }
   },
@@ -4034,7 +4045,8 @@
         {"val": "Piratas de Thriller Bark", "dif": "facil"}
       ],
       "Titulo": [
-        {"val": "Shichibukais", "dif": "facil"}
+        {"val": "Shichibukais", "dif": "facil"},
+        {"val": "Shichibukais", "dif": "dificil"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
@@ -4059,7 +4071,8 @@
     "img": "imagenes/Weevil.webp",
     "tags": {
       "Titulo": [
-        {"val": "Shichibukais", "dif": "facil"}
+        {"val": "Shichibukais", "dif": "facil"},
+        {"val": "Shichibukais", "dif": "dificil"}
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "dificil"}
@@ -4085,7 +4098,7 @@
     "img": "imagenes/Hanafuda.webp",
     "tags": {
       "Titulo": [
-        {"val": "Shichibukais", "dif": "facil"}
+        {"val": "Shichibukais", "dif": "dificil"}
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "facil"}
