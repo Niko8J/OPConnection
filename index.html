@@ -175,6 +175,7 @@
     .auth-icon-empty { width: 100%; height: 100%; }
     .auth-icon-avatar {
       width: 100%; height: 100%; object-fit: cover; object-position: top center; display: none;
+      border-radius: 50%;
     }
 
     .auth-dropdown {
@@ -780,6 +781,11 @@
     .modal-scroll-area {
       overflow-y: auto; overflow-x: hidden;
       flex: 1 1 auto; min-height: 0; /* imprescindible para que un hijo flex pueda encogerse y scrollear */
+      /* overflow-y:auto recorta cualquier cosa que se salga de este borde — sin este hueco de
+         sobra arriba, el resplandor de un marco (que se sale unos cuantos px del propio
+         avatar) chocaba contra el límite y se veía cortado por arriba en vez de verse
+         completo alrededor. */
+      padding-top: 20px; margin-top: -20px;
       /* Barra de scroll fina y del ámbar de la web, en vez de la gris por defecto del
          navegador. scrollbar-width/scrollbar-color cubren Firefox; las reglas
          ::-webkit-scrollbar de abajo cubren Chrome/Safari/Edge. */
