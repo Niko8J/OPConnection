@@ -37,6 +37,16 @@
   <meta name="twitter:description" content="Encuentra 4 grupos conectados por distintos atributos.">
   <meta name="twitter:image" content="https://www.opconnection.es/previsualizacion.png">
 
+  <!-- Fuente propia (Inter) en vez de depender de las fuentes instaladas en cada sistema:
+       'Segoe UI' no existe en iOS/Android, así que el navegador cae a otra distinta según el
+       dispositivo, y letras diferentes ocupan anchos diferentes para el mismo texto al mismo
+       tamaño en px — eso rompía diseños ajustados a un ancho exacto (como las insignias de
+       logros, pensadas para caber siempre en 3 líneas). Cargándola nosotros mismos, se
+       renderiza igual en cualquier sitio. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       /* Valores fijos de verdad: no se recalculan nunca por fórmula, así que el zoom del
@@ -61,7 +71,7 @@
        inconsistente entre dispositivos. Lo desactivamos a nivel global, por si afecta a algo
        más aparte de los logros. */
     html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     html { height: 100%; }
 
     /* ---------- Avisos flotantes (monedas ganadas, logros conseguidos) ---------- */
@@ -129,7 +139,7 @@
     }
     .site-logo-fallback {
       color: #f59e0b; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: bold;
+      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: bold;
       text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
     }
     p { margin-bottom: var(--v-gap-md); color: #94a3b8; flex-shrink: 0; }
