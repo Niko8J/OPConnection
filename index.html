@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>One Piece Connections</title>
+  <title>One Piece Connection</title>
   <meta name="description" content="Encuentra los 4 grupos de personajes de One Piece que comparten algo en común. Juego gratuito estilo Connections hecho por fans, con niveles de dificultad y ranking.">
   <link rel="canonical" href="https://www.opconnection.es/">
   <!-- El tablero no puede empezar a pedir ninguna imagen hasta que este JSON (bastante
@@ -21,20 +21,20 @@
   <link rel="apple-touch-icon" href="logo.png?v=2">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="OP Connections">
+  <meta name="apple-mobile-web-app-title" content="OP Connection">
 
   <!-- Icono para Android/Chrome (PWA / "Añadir a pantalla de inicio") -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0f172a">
 
-  <meta property="og:title" content="One Piece Connections">
-  <meta property="og:description" content="Encuentra 4 grupos conectados por distintos atributos.">
+  <meta property="og:title" content="One Piece Connection">
+  <meta property="og:description" content="Encuentra 4 grupos de personajes de One Piece conectados por distintos atributos.">
   <meta property="og:image" content="https://www.opconnection.es/previsualizacion.png">
   <meta property="og:url" content="https://www.opconnection.es/">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="One Piece Connections">
-  <meta name="twitter:description" content="Encuentra 4 grupos conectados por distintos atributos.">
+  <meta name="twitter:title" content="One Piece Connection">
+  <meta name="twitter:description" content="Encuentra 4 grupos de personajes de One Piece conectados por distintos atributos.">
   <meta name="twitter:image" content="https://www.opconnection.es/previsualizacion.png">
 
   <!-- Fuente propia (Inter) en vez de depender de las fuentes instaladas en cada sistema:
@@ -960,7 +960,7 @@
   </div>
 
   <main class="container">
-  <h1 class="visually-hidden">One Piece Connections: encuentra las conexiones entre personajes de One Piece</h1>
+  <h1 class="visually-hidden">One Piece Connection: encuentra las conexiones entre personajes de One Piece</h1>
   <div class="auth-corner">
     <button id="auth-icon-btn" class="auth-icon-btn" onclick="toggleAuthMenu(event)" title="Cuenta">
       <svg id="auth-icon-empty" class="auth-icon-empty" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -5112,110 +5112,14 @@
   // Se reutiliza en dos sitios: al terminar la partida EN VIVO (handleWin/handleGameOver) y al
   // reconstruir un panel diario que ya se jugó hoy (renderFinishedDailyPanel), para que el
   // contenido del modal sea idéntico en ambos casos sin duplicar el texto en dos sitios.
-  // Copia el texto y avisa con un toast — reutilizado tanto por el reto diario como por Infinito.
-  // Abre el panel nativo del sistema para elegir a qué red social/app enviarlo (disponible en
-  // la mayoría de móviles). En escritorio, la mayoría de navegadores no lo soportan todavía:
-  // ahí recurrimos a copiar al portapapeles, como alternativa razonable.
-  // Dibuja las 16 fotos del panel actual en una cuadrícula 4x4, tal y como se ven ANTES de
-  // resolver nada (barajadas, sin revelar en qué orden las acertaste ni qué categorías había),
-  // para adjuntarla como imagen al compartir un resultado. Se reconstruye a partir de
-  // currentCategories (que sigue teniendo las 4 categorías completas aunque ya hayas
-  // resuelto/perdido), no de una captura guardada de antes.
-  async function buildBoardImageBlob() {
-    const allItems = [];
-    currentCategories.forEach(cat => cat.items.forEach(item => allItems.push(item)));
-    const shuffled = shuffle([...allItems]);
-
-    const cellSize = 150;
-    const gap = 6;
-    const cols = 4;
-    const canvasSize = cols * cellSize + (cols + 1) * gap;
-
-    const canvas = document.createElement("canvas");
-    canvas.width = canvasSize;
-    canvas.height = canvasSize;
-    const ctx = canvas.getContext("2d");
-    ctx.fillStyle = "#0f172a";
-    ctx.fillRect(0, 0, canvasSize, canvasSize);
-
-    const loadImage = src => new Promise(resolve => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      // Si una foto en concreto falla al cargar, seguimos sin ella (hueco vacío) en vez de
-      // que toda la imagen se venga abajo por un solo archivo.
-      img.onerror = () => resolve(null);
-      img.src = src;
-    });
-
-    const images = await Promise.all(shuffled.map(item => loadImage(item.img)));
-
-    images.forEach((img, i) => {
-      if (!img) return;
-      const col = i % cols;
-      const row = Math.floor(i / cols);
-      const x = gap + col * (cellSize + gap);
-      const y = gap + row * (cellSize + gap);
-      // Mismo recorte que en el resto de la web (object-fit:cover, object-position:top center):
-      // rellena el cuadrado recortando por el centro horizontalmente y desde arriba.
-      const scale = Math.max(cellSize / img.width, cellSize / img.height);
-      const sw = cellSize / scale;
-      const sh = cellSize / scale;
-      const sx = (img.width - sw) / 2;
-      const sy = 0;
-      ctx.drawImage(img, sx, sy, sw, sh, x, y, cellSize, cellSize);
-    });
-
-    return new Promise(resolve => canvas.toBlob(resolve, "image/png"));
-  }
-
-  // Si por lo que sea no se puede generar la imagen del panel (fallo cargando alguna foto, el
-  // navegador no soporta bien Canvas...), usamos previsualizacion.png como imagen de reserva,
-  // en vez de quedarnos sin ninguna imagen que adjuntar. Así, esa imagen sirve para dos cosas
-  // a la vez: la vista previa al compartir la web raíz, y esta reserva.
-  async function buildBoardImageBlobWithFallback() {
-    try {
-      const blob = await buildBoardImageBlob();
-      if (blob) return blob;
-    } catch (e) {
-      console.error("No se pudo generar la imagen del panel, se usará la de reserva:", e);
-    }
-    try {
-      const response = await fetch("previsualizacion.png");
-      return await response.blob();
-    } catch (e2) {
-      console.error("Tampoco se pudo cargar la imagen de reserva:", e2);
-      return null;
-    }
-  }
-
-  // Comparte texto y, si el navegador lo permite (no todos soportan adjuntar archivos al
-  // panel nativo, sobre todo en escritorio), también la imagen del panel. Si algo del camino
-  // "con imagen" falla, no se da por vencido: sigue intentando compartir solo el texto antes
-  // de recurrir a la reserva de copiar.
-  async function shareTextWithImage(text, blobPromise, filename) {
-    if (navigator.share) {
-      const blob = await blobPromise.catch(() => null);
-      if (blob && navigator.canShare) {
-        const file = new File([blob], filename, { type: "image/png" });
-        if (navigator.canShare({ files: [file] })) {
-          try {
-            await navigator.share({ text, files: [file] });
-            return;
-          } catch (e) {
-            if (e.name === "AbortError") return;
-            console.error("No se pudo compartir con imagen, probamos solo con texto:", e);
-          }
-        }
-      }
-    }
-    // Ni había imagen, ni se pudo adjuntar: seguimos con el camino de siempre (solo texto, con
-    // su propia reserva de copiar si el navegador tampoco soporta compartir en absoluto).
-    await shareText(text);
-  }
 
   // Abre el panel nativo del sistema para elegir a qué red social/app enviarlo (disponible en
   // la mayoría de móviles). En escritorio, la mayoría de navegadores no lo soportan todavía:
-  // ahí recurrimos a copiar al portapapeles, como alternativa razonable.
+  // ahí recurrimos a copiar al portapapeles, como alternativa razonable. El propio texto ya
+  // lleva la URL raíz al final: la app receptora (WhatsApp, Discord...) genera ella sola su
+  // tarjeta de previsualización a partir de esa URL (usando las mismas etiquetas que ya
+  // tenemos puestas, incluida previsualizacion.png) — así no hace falta generar ni adjuntar
+  // ninguna imagen nuestra por separado.
   async function shareText(text) {
     if (navigator.share) {
       try {
@@ -5270,7 +5174,7 @@
     const [y, m, d] = getMadridDailyKey().split("-");
 
     const lines = [
-      `One Piece Connections – ${label}`,
+      `One Piece Connection – ${label}`,
       `${d}/${m}/${y}`,
       `${categoryBlocks} ${solvedText}`,
       `${livesBlocks} ${failsText}`
@@ -5288,30 +5192,22 @@
     return lines.join("\n");
   }
 
-  // En Windows (y probablemente otros de escritorio), el panel nativo SÍ deja "copiar" la
-  // imagen, pero luego no se pega bien en WhatsApp Web/Discord — parece funcionar pero no
-  // llega nada al pegar. Como esta función solo la usamos aquí, mejor no arriesgarnos: en
-  // dispositivos sin puntero táctil (ratón/trackpad), ni lo intentamos, y vamos directos a
-  // compartir solo texto (que si sí funciona bien en ordenador).
-  function isTouchDevice() {
-    return window.matchMedia("(pointer: coarse)").matches;
-  }
-
   function shareResult() {
-    if (isTouchDevice()) {
-      shareTextWithImage(buildShareText(), buildBoardImageBlobWithFallback(), "panel.png");
-    } else {
-      shareText(buildShareText());
-    }
+    shareText(buildShareText());
   }
 
   // Versión para Infinito: aquí no hay categorías que colorear (no es un puzle único del día,
   // sino una racha en marcha), así que el resumen es mucho más simple.
   function buildShareTextInfinite() {
     const [y, m, d] = getMadridDailyKey().split("-");
+    // Mismos cuadrados que en el diario, pero del ÚLTIMO panel (el que perdiste): cuántas de
+    // sus 4 categorías llegaste a acertar antes de quedarte sin vidas.
+    const solvedCount = solvedOrder.length;
+    const categoryBlocks = "🟩".repeat(solvedCount) + "🟥".repeat(Math.max(0, 4 - solvedCount));
     const lines = [
-      "One Piece Connections – Infinito",
+      "One Piece Connection – Infinito",
       `${d}/${m}/${y}`,
+      `${categoryBlocks} ${solvedCount}/4 en el último panel`,
       `🔥 Racha: ${infiniteSolvedCount} panel${infiniteSolvedCount === 1 ? "" : "es"}`,
       "https://www.opconnection.es/"
     ];
@@ -5319,11 +5215,7 @@
   }
 
   function shareResultInfinite() {
-    if (isTouchDevice()) {
-      shareTextWithImage(buildShareTextInfinite(), buildBoardImageBlobWithFallback(), "panel.png");
-    } else {
-      shareText(buildShareTextInfinite());
-    }
+    shareText(buildShareTextInfinite());
   }
 
   function applyResultModalContent(won) {
