@@ -741,7 +741,15 @@
     .modal-scroll-area {
       overflow-y: auto; overflow-x: hidden;
       flex: 1 1 auto; min-height: 0; /* imprescindible para que un hijo flex pueda encogerse y scrollear */
+      /* Barra de scroll fina y del ámbar de la web, en vez de la gris por defecto del
+         navegador. scrollbar-width/scrollbar-color cubren Firefox; las reglas
+         ::-webkit-scrollbar de abajo cubren Chrome/Safari/Edge. */
+      scrollbar-width: thin; scrollbar-color: #f59e0b #1e293b;
     }
+    .modal-scroll-area::-webkit-scrollbar { width: 8px; }
+    .modal-scroll-area::-webkit-scrollbar-track { background: #1e293b; border-radius: 8px; }
+    .modal-scroll-area::-webkit-scrollbar-thumb { background: #f59e0b; border-radius: 8px; }
+    .modal-scroll-area::-webkit-scrollbar-thumb:hover { background: #d97706; }
     /* Aviso de que hay más contenido por debajo sin desplazar del todo: un desvanecido pegado
        al borde inferior de CUALQUIER modal, que solo se ve mientras quede scroll por hacer (lo
        controla JS con setupModalScrollFades). pointer-events:none para no bloquear clics en lo
