@@ -920,7 +920,7 @@
         {"val": "Supernovas", "dif": "media"}
       ],
       "Origen": [
-        {"val": "Red Line", "dif": "dificil"}
+        {"val": "Origen: Red Line", "dif": "dificil"}
       ],
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"}
@@ -2217,9 +2217,9 @@
     }
   },
   {
-    "id": "guernica",
+    "id": "guernika",
     "name": "Guernika",
-    "img": "imagenes/Guernica.webp",
+    "img": "imagenes/Guernika.webp",
     "tags": {
       "Banda": [
         {"val": "CP0", "dif": "facil"}
@@ -2281,9 +2281,9 @@
     }
   },
   {
-    "id": "giso",
-    "name": "Giso",
-    "img": "imagenes/Giso.webp",
+    "id": "gismonda",
+    "name": "Gismonda",
+    "img": "imagenes/Gismonda.webp",
     "tags": {
       "Banda": [
         {"val": "CP0", "dif": "facil"}
@@ -2291,18 +2291,8 @@
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
       ],
-      "Origen": [
-        {"val": "Origen: Grand Line", "dif": "dificil"}
-      ],
-      "Haki": [
-        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
-        {"val": "Usuarios de haki de observación", "dif": "dificil"}
-      ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "dificil"}
-      ],
-      "Habilidades": [
-        {"val": "Usuarios de rokushiki", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara", "dif": "dificil"}
@@ -3256,6 +3246,9 @@
       ],
       "Marcas": [
         {"val": "Personajes con cuernos", "dif": "dificil"}
+      ],
+      "Titulo": [
+        {"val": "Monarcas", "dif": "dificil"}
       ]
     }
   },
@@ -3886,7 +3879,7 @@
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
       ],
       "Origen": [
-        {"val": "Red Line", "dif": "dificil"}
+        {"val": "Origen: Red Line", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
@@ -3917,7 +3910,7 @@
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
       ],
       "Origen": [
-        {"val": "Red Line", "dif": "dificil"}
+        {"val": "Origen: Red Line", "dif": "dificil"}
       ]
     }
   },
@@ -3944,7 +3937,7 @@
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
       ],
       "Origen": [
-        {"val": "Red Line", "dif": "dificil"}
+        {"val": "Origen: Red Line", "dif": "dificil"}
       ]
     }
   },
@@ -3971,7 +3964,7 @@
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
       ],
       "Origen": [
-        {"val": "Red Line", "dif": "dificil"}
+        {"val": "Origen: Red Line", "dif": "dificil"}
       ]
     }
   },
@@ -9054,7 +9047,7 @@
         {"val": "Gobierno Mundial", "dif": "facil"}
       ],
       "Origen": [
-        {"val": "Red Line", "dif": "dificil"}
+        {"val": "Origen: Red Line", "dif": "dificil"}
       ]
     }
   },
@@ -9073,7 +9066,7 @@
         {"val": "Sin fruta del diablo", "dif": "dificil"}
       ],
       "Origen": [
-        {"val": "Red Line", "dif": "dificil"}
+        {"val": "Origen: Red Line", "dif": "dificil"}
       ]
     }
   },
@@ -9092,7 +9085,7 @@
         {"val": "Sin fruta del diablo", "dif": "dificil"}
       ],
       "Origen": [
-        {"val": "Red Line", "dif": "dificil"}
+        {"val": "Origen: Red Line", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con gafas", "dif": "dificil"}
@@ -9114,7 +9107,7 @@
         {"val": "Sin fruta del diablo", "dif": "dificil"}
       ],
       "Origen": [
-        {"val": "Red Line", "dif": "dificil"}
+        {"val": "Origen: Red Line", "dif": "dificil"}
       ]
     }
   },
@@ -9140,7 +9133,7 @@
         {"val": "Personajes fallecidos", "dif": "media"}
       ],
       "Origen": [
-        {"val": "Red Line", "dif": "dificil"}
+        {"val": "Origen: Red Line", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
@@ -9166,7 +9159,7 @@
         {"val": "Personajes fallecidos", "dif": "media"}
       ],
       "Origen": [
-        {"val": "Red Line", "dif": "dificil"}
+        {"val": "Origen: Red Line", "dif": "dificil"}
       ]
     }
   },
@@ -9185,7 +9178,7 @@
         {"val": "Sin fruta del diablo", "dif": "dificil"}
       ],
       "Origen": [
-        {"val": "Red Line", "dif": "dificil"}
+        {"val": "Origen: Red Line", "dif": "dificil"}
       ]
     }
   },
@@ -9204,7 +9197,7 @@
         {"val": "Sin fruta del diablo", "dif": "dificil"}
       ],
       "Origen": [
-        {"val": "Red Line", "dif": "dificil"}
+        {"val": "Origen: Red Line", "dif": "dificil"}
       ]
     }
   },
@@ -13557,6 +13550,9 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con gafas", "dif": "dificil"}
       ]
     }
   },
