@@ -229,8 +229,11 @@
       width: 68px; height: 68px; border-radius: 50%; object-fit: cover; object-position: top center;
       flex-shrink: 0; border: 2px solid #334155;
     }
-    .ranking-username { flex: 1; font-weight: bold; color: #f8fafc; word-break: break-word; font-size: 1.05rem; }
-    .ranking-title { flex-shrink: 0; }
+    .ranking-name-block { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+    .ranking-username { font-weight: bold; color: #f8fafc; word-break: break-word; font-size: 1.05rem; }
+    /* Debajo del nombre, no al lado: el Ranking es bastante más estrecho que el Perfil (420px
+       de ancho máximo), así que al lado no había hueco ni en pantallas anchas de ordenador. */
+    .ranking-title { line-height: 1.2; }
     /* Versión algo más pequeña que la del Perfil/menú: aquí convive con avatar, nombre y
        puntuación en una sola fila estrecha, así que la píldora se reduce un poco para no
        apretar demasiado el resto. */
@@ -1936,8 +1939,10 @@
       <div class="ranking-row${isOwnRow ? ' own-row' : ''}" onclick="openProfileModal('${uid}')">
         <div class="ranking-position ${posClass}">${posLabel}</div>
         <img class="ranking-avatar" style="${frameStyle}" src="${escapeHtml(avatarSrc)}" alt="" onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'">
-        <div class="ranking-username">${escapeHtml(data.username || "Jugador")}</div>
-        ${titlePillHtml ? `<div class="ranking-title">${titlePillHtml}</div>` : ""}
+        <div class="ranking-name-block">
+          <div class="ranking-username">${escapeHtml(data.username || "Jugador")}</div>
+          ${titlePillHtml ? `<div class="ranking-title">${titlePillHtml}</div>` : ""}
+        </div>
         <div class="ranking-score">${streak}</div>
       </div>`;
   }
