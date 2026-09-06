@@ -1709,6 +1709,7 @@
         // Este flujo no vuelve a pasar por onAuthStateChanged (la sesión de Google ya existía;
         // solo acabamos de completar el perfil), así que los puentes hay que llamarlos aquí.
         await bridgeGuestDailyProgressToAccount(pendingGoogleUser.uid);
+        await bridgeGuestDailyInProgressToAccount(pendingGoogleUser.uid);
         await bridgeGuestInfiniteProgress();
         pendingGoogleUser = null;
         updateAuthUI();
@@ -1772,6 +1773,7 @@
       // lectura podrían solaparse en el tiempo, y en ese caso no vería el perfil recién creado
       // todavía. Llamamos aquí a los dos puentes directamente, ya con el perfil en memoria.
       await bridgeGuestDailyProgressToAccount(cred.user.uid);
+      await bridgeGuestDailyInProgressToAccount(cred.user.uid);
       await bridgeGuestInfiniteProgress();
       updateAuthUI();
       closeAuthModal();
@@ -3056,6 +3058,7 @@
         // Si jugaste el diario de hoy como invitado en este navegador antes de iniciar sesión,
         // lo adoptamos en la cuenta ahora (ver "bridgeGuestDailyProgressToAccount" más abajo).
         await bridgeGuestDailyProgressToAccount(user.uid);
+        await bridgeGuestDailyInProgressToAccount(user.uid);
         // Mismo puente, pero para una racha de Infinito en curso ahora mismo como invitado.
         await bridgeGuestInfiniteProgress();
       }
@@ -3954,11 +3957,13 @@
   // ---------- Progreso del reto diario A MEDIAS (ni ganado ni perdido todavía) ----------
   //
   // A diferencia de "dailyProgress" (el resultado ya FINALIZADO, con result: "win"/"lose"),
-  // esto es la partida en marcha: se guarda tras cada acierto/fallo, se usa para reanudar
-  // exactamente donde la dejaste si cambias de dificultad y vuelves (o recargas la página), y
-  // se borra en cuanto el panel se gana o se pierde (momento en que pasa a ser un
-  // "dailyProgress" definitivo en su lugar). Antes de esto, cambiar de dificultad y volver
-  // reiniciaba el panel del todo, perdiendo categorías acertadas y vidas.
+  // esto es la partida en marcha: se guarda tras cada acierto/fallo, y se borra en cuanto el
+  // panel se gana o se pierde (momento en que pasa a ser un "dailyProgress" definitivo en su
+  // lugar). Se conservan las categorías ya acertadas y las vidas si cambias de dificultad y
+  // vuelves (o recargas la página); las tarjetas SIN resolver se barajan de nuevo cada vez a
+  // propósito (no se guarda su posición), igual que en Infinito. Antes de esto, cambiar de
+  // dificultad y volver reiniciaba el panel del todo, perdiendo también lo ya acertado y las
+  // vidas, no solo el orden del tablero.
   const STORAGE_KEY_DAILY_IN_PROGRESS = "opc_daily_in_progress_v1";
 
   function loadDailyInProgressLocal() {
@@ -4013,8 +4018,11 @@
       groups: serializeBoardGroups(currentCategories),
       solvedOrder: [...solvedOrder],
       lives,
-      cardOrder: cards.map(c => c.name),
       hintsRemaining
+      // A propósito NO se guarda el orden de las tarjetas sin resolver: al volver a este
+      // reto, se barajan de nuevo (como toda la vida, ver la gracia de verlo desde otro orden),
+      // igual que ya pasa en Infinito. Solo se conservan las categorías ya acertadas y las
+      // vidas, no la disposición exacta del tablero.
     };
   }
 
@@ -4052,9 +4060,12 @@
   }
 
   // Reconstruye el tablero de un reto diario que dejaste A MEDIAS (sin ganar ni perder
-  // todavía) exactamente como lo dejaste: mismas categorías, las ya acertadas colocadas
-  // arriba, las demás en el MISMO orden en que las dejaste (no se "barajan" solas al volver),
-  // y las vidas tal y como quedaron.
+  // Reconstruye el tablero de un reto diario que dejaste A MEDIAS (sin ganar ni perder
+  // todavía): mismas categorías, las ya acertadas colocadas arriba, y las vidas tal y como
+  // quedaron. Las tarjetas SIN resolver se barajan de nuevo a propósito (no se restaura su
+  // posición exacta): es la misma gracia de siempre de ver el panel desde otro orden al volver
+  // a pulsar la dificultad, que ya existía antes de este arreglo y que solo queríamos
+  // conservar para las categorías acertadas y las vidas, no para la disposición del tablero.
   function resumeDailyFromSaved(difficulty, saved) {
     currentDifficulty = difficulty;
     isInfiniteMode = false;
@@ -4067,15 +4078,12 @@
     selectedCards = [];
 
     const solvedNames = new Set(solvedOrder);
-    const cardsByName = {};
+    cards = [];
     currentCategories.forEach(cat => {
       if (solvedNames.has(cat.name)) return; // ya está como bloque resuelto, no como carta suelta
-      cat.items.forEach(item => { cardsByName[item.name] = { name: item.name, img: item.img, category: cat.name }; });
+      cat.items.forEach(item => cards.push({ name: item.name, img: item.img, category: cat.name }));
     });
-
-    cards = (saved.cardOrder || Object.keys(cardsByName))
-      .map(name => cardsByName[name])
-      .filter(Boolean); // por si algún nombre ya no existiera (personaje borrado, etc.)
+    cards = shuffle(cards);
 
     document.getElementById("warning-msg").innerText = "";
     showGameControls();
@@ -4187,6 +4195,45 @@
       }
     }
     await checkAndAwardAchievementCoinsWithToast();
+  }
+
+  // Igual que el puente anterior, pero para el progreso A MEDIAS (sin ganar ni perder
+  // todavía): si dejaste un reto diario a medio jugar como invitado y luego inicias sesión, lo
+  // adoptamos en tu cuenta para poder seguir justo donde lo dejaste (categorías acertadas y
+  // vidas; las tarjetas sin resolver se barajan de nuevo al entrar, como siempre). No pisamos
+  // nunca un progreso a medias o un resultado YA FINALIZADO que la cuenta ya tuviera guardado
+  // de hoy para esa dificultad (por ejemplo, si ya lo habías jugado o empezado con sesión
+  // iniciada en otro dispositivo). No afecta a rachas ni logros: eso solo lo mueve un
+  // resultado ya finalizado (ver bridgeGuestDailyProgressToAccount).
+  async function bridgeGuestDailyInProgressToAccount(uid) {
+    const todayKey = getMadridDailyKey();
+    const guestInProgress = loadDailyInProgressLocal();
+
+    for (const difficulty of DAILY_DIFFICULTIES) {
+      const guestEntry = guestInProgress[difficulty];
+      if (!guestEntry || guestEntry.date !== todayKey) continue;
+
+      try {
+        const docRef = db.collection("users").doc(uid);
+        const bridged = await db.runTransaction(async transaction => {
+          const snap = await transaction.get(docRef);
+          const data = snap.exists ? snap.data() : {};
+          const existingInProgress = data.dailyInProgress && data.dailyInProgress[difficulty];
+          const existingFinished = data.dailyProgress && data.dailyProgress[difficulty];
+          if (existingInProgress && existingInProgress.date === todayKey) return null;
+          if (existingFinished && existingFinished.date === todayKey) return null;
+
+          transaction.set(docRef, { dailyInProgress: { [difficulty]: guestEntry } }, { merge: true });
+          return guestEntry;
+        });
+
+        if (bridged && currentUserProfile) {
+          currentUserProfile.dailyInProgress = { ...(currentUserProfile.dailyInProgress || {}), [difficulty]: bridged };
+        }
+      } catch (e) {
+        console.error("No se pudo adoptar el progreso a medias de invitado:", e);
+      }
+    }
   }
 
   // Igual que el puente anterior, pero para Infinito: si justo en el momento de registrarte o
