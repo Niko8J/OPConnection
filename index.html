@@ -63,8 +63,7 @@
       --v-gap-sm: 6px;
       --v-gap-md: 9px;
       --container-pad-top: 10px;
-      --modal-max-h: 85vh;
-      --modal-max-h-reduced: 78vh;
+      --modal-max-h: 78vh;
       --ranking-list-max-h: 55vh;
       --card-size: 70px;
       --board-height: 300px;
@@ -213,7 +212,7 @@
        Mismo ajuste de altura que en el Perfil: con muchos usuarios registrados, el Ranking
        también puede llegar a tocar el límite estándar (85vh) y dejar poco hueco alrededor en
        móvil para pulsar fuera y cerrarlo. */
-    .modal-content.ranking-modal-content { max-width: 420px; text-align: left; max-height: var(--modal-max-h-reduced); }
+    .modal-content.ranking-modal-content { max-width: 420px; text-align: left; }
     .ranking-subtitle { color: #94a3b8; font-size: 0.85rem; margin-bottom: 4px; }
     .ranking-tiebreak-note { color: #64748b; font-size: 0.75rem; font-style: italic; margin-bottom: 10px; }
     .ranking-list { max-height: var(--ranking-list-max-h); overflow-y: auto; }
@@ -244,16 +243,7 @@
        por mucho que aquí pusiéramos un valor mayor. Con ".modal-content.profile-modal-content"
        (dos clases en el mismo selector) subimos la especificidad para que este valor gane
        siempre, sin depender del orden de las reglas en el archivo. */
-    .modal-content.profile-modal-content {
-      max-width: 1080px;
-      /* Los demás modales comparten los mismos 85vh (--modal-max-h, calculado por JS), pero
-         este suele ser el que más contenido tiene (foto, título, rachas, logros) y el que más
-         a menudo llega a tocar ese límite. En móvil (pantallas altas y estrechas) eso dejaba
-         casi sin hueco alrededor para pulsar fuera y cerrarlo. Con un poco menos (78vh en vez
-         de 85vh) queda un margen tapable, sin recortar el modal de forma notoria.
-      */
-      max-height: var(--modal-max-h-reduced);
-    }
+    .modal-content.profile-modal-content { max-width: 1080px; }
     .profile-modal-avatar {
       width: 120px; height: 120px; border-radius: 50%; object-fit: cover; object-position: top center;
       border: 3px solid #334155; display: block; margin: 4px auto 12px;
@@ -264,11 +254,11 @@
     .profile-modal-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
 
     /* ---------- Tienda ---------- */
-    /* Mismo ancho y altura que profile-modal-content a propósito: se llega a la Tienda
-       siempre desde el Perfil, así que conviene que las dos se sientan como parte del mismo
-       sitio en vez de saltar a un tamaño distinto. De paso, en pantallas anchas caben más
-       marcos/avatares por fila (el grid es auto-fill, así que aprovecha el ancho extra solo). */
-    .modal-content.shop-modal-content { max-width: 1080px; max-height: var(--modal-max-h-reduced); }
+    /* Mismo ancho que profile-modal-content a propósito: se llega a la Tienda siempre desde
+       el Perfil, así que conviene que las dos se sientan como parte del mismo sitio en vez de
+       saltar a un tamaño distinto. De paso, en pantallas anchas caben más marcos/avatares por
+       fila (el grid es auto-fill, así que aprovecha el ancho extra solo). */
+    .modal-content.shop-modal-content { max-width: 1080px; }
     .shop-berries-balance {
       display: flex; align-items: center; justify-content: center; gap: 6px;
       font-size: 1.1rem; font-weight: bold; color: #f59e0b; margin-bottom: 16px;
@@ -380,7 +370,7 @@
     .achievement-badge.locked .achievement-coins { color: #92702f; }
     .achievement-coins-icon { width: 12px; height: 12px; object-fit: contain; }
 
-    .howto-modal-content { max-width: 440px; text-align: left; }
+    .modal-content.howto-modal-content { max-width: 440px; text-align: left; }
     .howto-content p { margin-bottom: 10px; color: #cbd5e1; font-size: 0.9rem; line-height: 1.5; }
     .howto-content ul { margin: 0 0 10px 18px; color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; }
 
@@ -741,13 +731,27 @@
          cerrar, al ser hijo directo de este contenedor, se queda fijo arriba a la derecha
          aunque el contenido de dentro se desplace por debajo. Aplica a TODOS los modales,
          por si a alguno (Ranking con muchos usuarios, resultados de un panel largo...) le
-         llega a hacer falta scroll alguna vez, aunque hoy no lo necesite. */
+         llega a hacer falta scroll alguna vez, aunque hoy no lo necesite.
+         max-height: 78vh (--modal-max-h, calculado por JS a partir de la altura real de la
+         pantalla) para TODOS los modales sin excepción, para que en móvil siempre quede un
+         margen alrededor donde pulsar fuera y cerrarlos, por muy alto que sea su contenido. */
       display: flex; flex-direction: column;
       max-height: var(--modal-max-h); overflow-y: visible;
     }
     .modal-scroll-area {
       overflow-y: auto; overflow-x: hidden;
       flex: 1 1 auto; min-height: 0; /* imprescindible para que un hijo flex pueda encogerse y scrollear */
+    }
+    /* Aviso de que hay más contenido por debajo sin desplazar del todo: un desvanecido pegado
+       al borde inferior de CUALQUIER modal, que solo se ve mientras quede scroll por hacer (lo
+       controla JS con setupModalScrollFades). pointer-events:none para no bloquear clics en lo
+       que haya justo debajo. El color coincide con el fondo del propio modal (#1e293b), y el
+       redondeo de las esquinas con el del modal (12px), para que se note como parte de él. */
+    .modal-scroll-fade {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 40px;
+      background: linear-gradient(to bottom, rgba(30, 41, 59, 0), rgba(30, 41, 59, 1) 85%);
+      border-radius: 0 0 12px 12px;
+      pointer-events: none; opacity: 0; transition: opacity 0.15s ease;
     }
     .modal-content h2 { margin-bottom: 10px; font-size: 1.6rem; }
     .solutions-list { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; margin-bottom: 20px; text-align: left; }
@@ -1145,7 +1149,7 @@
     <div class="modal-scroll-area">
       <h2>❓ Cómo jugar</h2>
       <div class="howto-content">
-        <p>El objetivo es encontrar 4 grupos de 4 personajes de <i>One Piece</i> que comparten algo en común: su tripulación, su origen, su fruta del diablo, algún elemento físico... Selecciona 4 imágenes y pulsa <strong>Enviar</strong>. Tienes cuatro intentos (representados por las banderas 🏴‍☠️).</p>
+        <p>El objetivo es encontrar 4 grupos de 4 personajes de <i>One Piece</i> que comparten algo en común: su tripulación, su origen, su fruta del diablo, algún elemento físico... Selecciona 4 imágenes y pulsa <strong>Enviar</strong>. Tienes cuatro vidas (representadas por las banderas 🏴‍☠️).</p>
         <p><strong>Modos de dificultad:</strong></p>
         <ul>
           <li><strong>📅 Reto diario:</strong> hay tres niveles de dificultad, <strong>Novato</strong> (fácil), <strong>Supernova</strong> (normal) y <strong>Yonko</strong> (difícil). En cada uno de ellos hay un panel nuevo cada día, igual para todos los jugadores, con un único intento por dificultad. Encadena días seguidos ganando y construye una racha.</li>
@@ -3229,8 +3233,7 @@
     // El resto de medidas (huecos, logo, icono...) ya son constantes fijas por CSS: el
     // propio zoom del navegador las escala de forma coherente con todo lo demás, sin que
     // nosotros tengamos que recalcularlas aquí.
-    root.setProperty("--modal-max-h", Math.round(h * 0.85) + "px");
-    root.setProperty("--modal-max-h-reduced", Math.round(h * 0.78) + "px");
+    root.setProperty("--modal-max-h", Math.round(h * 0.78) + "px");
     root.setProperty("--ranking-list-max-h", Math.round(h * 0.55) + "px");
     root.setProperty("--frozen-vh", h + "px");
   }
@@ -3372,7 +3375,32 @@
     viewportSettleTimer = setTimeout(handleViewportChange, delay);
   }
 
+  // Añade el desvanecido de "hay más scroll por hacer" a CUALQUIER modal que lo necesite, una
+  // sola vez al arrancar la página (no hace falta repetirlo modal por modal ni cada vez que se
+  // abre uno). Se actualiza solo: al hacer scroll, y también si el contenido cambia de tamaño
+  // después de abrirse (el Ranking o la Tienda se rellenan más tarde, con contenido variable).
+  function setupModalScrollFades() {
+    document.querySelectorAll(".modal-content").forEach(modalContent => {
+      const scrollArea = modalContent.querySelector(".modal-scroll-area");
+      if (!scrollArea) return;
+
+      const fade = document.createElement("div");
+      fade.className = "modal-scroll-fade";
+      modalContent.appendChild(fade);
+
+      function updateFadeVisibility() {
+        const quedaPorDebajo = scrollArea.scrollHeight - scrollArea.scrollTop - scrollArea.clientHeight > 4;
+        fade.style.opacity = quedaPorDebajo ? "1" : "0";
+      }
+
+      scrollArea.addEventListener("scroll", updateFadeVisibility);
+      new ResizeObserver(updateFadeVisibility).observe(scrollArea);
+      updateFadeVisibility();
+    });
+  }
+
   freezeDesign();
+  setupModalScrollFades();
   window.addEventListener("resize", () => scheduleViewportCheck(150));
   window.addEventListener("orientationchange", () => scheduleViewportCheck(400));
   window.addEventListener("pageshow", handleViewportChange);
