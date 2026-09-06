@@ -250,7 +250,11 @@
     }
     .profile-modal-username { margin-bottom: 4px; font-size: 1.4rem; word-break: break-word; }
     .profile-modal-title { color: #94a3b8; font-size: 0.95rem; font-style: italic; margin-bottom: 6px; }
-    .profile-modal-streak { color: #94a3b8; font-size: 0.95rem; margin-bottom: 14px; line-height: 1.6; }
+    .profile-modal-streak {
+      display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+      gap: 8px; color: #94a3b8; font-size: 0.95rem; margin-bottom: 14px; line-height: 1.6;
+    }
+    .profile-streak-separator { color: #475569; }
     .profile-modal-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
 
     /* ---------- Tienda ---------- */
@@ -2589,13 +2593,19 @@
   // con el mismo icono de medalla que ya se usa en las columnas de logros.
   function buildProfileStreaksHtml(profile) {
     const daily = profile.dailyStreaks || {};
-    const rows = [
+    const items = [
       `🔥 Mejor racha en Infinito: ${profile.bestStreak || 0}`,
       `🥉 Mejor racha en Novato: ${(daily.facil && daily.facil.longest) || 0} día(s)`,
       `🥈 Mejor racha en Supernova: ${(daily.media && daily.media.longest) || 0} día(s)`,
       `🥇 Mejor racha en Yonko: ${(daily.dificil && daily.dificil.longest) || 0} día(s)`
     ];
-    return rows.map(escapeHtml).join("<br>");
+    // flex-wrap: en pantallas anchas caben las 4 en una sola fila (con separadores entre
+    // ellas); si no hay sitio, pasan a la línea siguiente solas, sin depender de un punto de
+    // corte fijo por ancho de pantalla.
+    return items
+      .map(escapeHtml)
+      .map(t => `<span class="profile-streak-item">${t}</span>`)
+      .join('<span class="profile-streak-separator">|</span>');
   }
 
   function buildAchievementsHtml(profile) {
