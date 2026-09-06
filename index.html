@@ -45,7 +45,12 @@
        renderiza igual en cualquier sitio. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <!-- display=optional (en vez de swap): si Inter llega a tiempo (caché, conexión rápida), se
+       usa desde el primer instante sin cambios visibles después. Si no llega a tiempo, esa
+       carga se queda con la fuente de reserva del sistema, en vez de cambiar a medias con un
+       parpadeo notorio (que sí pasaba con "swap" en ordenador, donde la fuente de reserva
+       'Segoe UI' está instalada y aparece al instante, antes de que Inter termine de cargar). -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=optional" rel="stylesheet">
 
   <style>
     :root {
