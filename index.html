@@ -555,10 +555,16 @@
     /* Nombre del personaje, superpuesto al mantener pulsado en móvil (donde no existe ningún
        "pasar el ratón por encima" para leer el title). En ordenador no hace falta: el propio
        title del navegador ya lo muestra al pasar el cursor. */
+    /* Nombre del personaje, en una burbuja flotante al mantener pulsado en móvil (donde no
+       existe ningún "pasar el ratón por encima" para leer el title). Con position:fixed y
+       colocada por JS por ENCIMA de la tarjeta (ver attachLongPressName): así el propio dedo,
+       que tapa la tarjeta al pulsarla, no tapa también el texto. En ordenador no hace falta
+       nada de esto: el title nativo del navegador ya lo muestra al pasar el cursor. */
     .card-name-overlay {
-      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-      background: rgba(15, 23, 42, 0.88); color: #f8fafc; font-size: 0.8rem; font-weight: bold;
-      text-align: center; padding: 6px; border-radius: inherit; z-index: 5; pointer-events: none;
+      position: fixed; z-index: 50; pointer-events: none; max-width: 160px;
+      background: rgba(15, 23, 42, 0.95); color: #f8fafc; font-size: 0.8rem; font-weight: bold;
+      text-align: center; padding: 6px 10px; border-radius: 8px; border: 1px solid #f59e0b;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     }
     .solved-label {
       flex-shrink: 0; font-size: 0.85rem; min-width: 0;
@@ -4709,10 +4715,27 @@
 
     function showOverlay() {
       longPressTriggered = true;
+      const rect = el.getBoundingClientRect();
+
       overlay = document.createElement("div");
       overlay.className = "card-name-overlay";
       overlay.innerText = name;
-      el.appendChild(overlay);
+      // Se añade al body (no dentro de la tarjeta): así no lo recorta el overflow:hidden de
+      // la tarjeta, y puede colocarse POR ENCIMA de ella en vez de tapado por el propio dedo.
+      document.body.appendChild(overlay);
+
+      const overlayRect = overlay.getBoundingClientRect();
+      let top = rect.top - overlayRect.height - 8; // 8px de hueco entre la burbuja y la tarjeta
+      // Si la tarjeta está pegada arriba del todo (poco hueco por encima), la burbuja se pone
+      // debajo en su lugar, para que nunca se salga de la pantalla.
+      if (top < 4) top = rect.bottom + 8;
+      const left = Math.max(4, Math.min(
+        rect.left + rect.width / 2 - overlayRect.width / 2,
+        window.innerWidth - overlayRect.width - 4
+      ));
+
+      overlay.style.top = top + "px";
+      overlay.style.left = left + "px";
     }
 
     function removeOverlay() {
