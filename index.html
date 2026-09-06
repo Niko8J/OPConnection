@@ -249,21 +249,34 @@
        (dos clases en el mismo selector) subimos la especificidad para que este valor gane
        siempre, sin depender del orden de las reglas en el archivo. */
     .modal-content.profile-modal-content { max-width: 1080px; }
-    .profile-modal-avatar {
-      width: 120px; height: 120px; border-radius: 50%; object-fit: cover; object-position: top center;
-      border: 3px solid #334155; display: block; margin: 4px auto 12px;
+    /* Cabecera del Perfil: identidad (avatar+nombre+título) a un lado y rachas al otro. Con
+       flex-wrap, si hay sitio van lado a lado (pantallas anchas); si no, se apilan solas
+       (móvil), sin depender de un punto de corte fijo por ancho de pantalla. */
+    .profile-header {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+      gap: 20px; margin-bottom: 14px;
     }
-    .profile-modal-username { margin-bottom: 4px; font-size: 1.4rem; word-break: break-word; }
-    .profile-modal-title { margin-bottom: 6px; }
+    .profile-identity { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; }
+    .profile-modal-avatar {
+      width: 100px; height: 100px; border-radius: 50%; object-fit: cover; object-position: top center;
+      border: 3px solid #334155; display: block;
+    }
+    .profile-modal-username { font-size: 1.2rem; word-break: break-word; text-align: center; }
     .title-pill {
       display: inline-block; padding: 3px 14px; border-radius: 12px; border: 1.5px solid;
       font-size: 0.85rem; font-style: italic; background: rgba(15, 23, 42, 0.4);
     }
+    /* Solo tiene sentido cuando identidad y rachas van lado a lado: si se apilan (móvil), esta
+       línea queda sola en su propia fila del flex-wrap y se encoge a casi nada, sin dejar
+       ningún hueco raro ni artefacto visual. */
+    .profile-header-divider { width: 1px; align-self: stretch; background: #334155; }
+    /* Columna simple: cada racha en su propia línea, alineadas a la izquierda ENTRE ellas
+       (para que los emojis queden en columna), mientras que el BLOQUE entero se centra solo,
+       como una pieza más del flex-wrap de .profile-header (tanto lado a lado como apilado). */
     .profile-modal-streak {
-      display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
-      gap: 8px; color: #94a3b8; font-size: 0.95rem; margin-bottom: 14px; line-height: 1.6;
+      display: flex; flex-direction: column; gap: 6px;
+      color: #94a3b8; font-size: 0.95rem; line-height: 1.6;
     }
-    .profile-streak-separator { color: #475569; }
     .profile-modal-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
 
     /* ---------- Tienda ---------- */
@@ -1117,11 +1130,16 @@
       <div id="profile-modal-loading" class="ranking-loading">Cargando perfil...</div>
       <div id="profile-modal-error" class="ranking-empty" style="display: none;"></div>
       <div id="profile-modal-body" style="display: none;">
-        <img id="profile-modal-avatar" class="profile-modal-avatar" src="" alt="Foto de perfil"
-             onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'">
-        <h2 id="profile-modal-username" class="profile-modal-username"></h2>
-        <div id="profile-modal-title" class="profile-modal-title" style="display: none;"></div>
-        <div id="profile-modal-streak" class="profile-modal-streak"></div>
+        <div class="profile-header">
+          <div class="profile-identity">
+            <img id="profile-modal-avatar" class="profile-modal-avatar" src="" alt="Foto de perfil"
+                 onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'">
+            <h2 id="profile-modal-username" class="profile-modal-username"></h2>
+            <div id="profile-modal-title" class="profile-modal-title" style="display: none;"></div>
+          </div>
+          <div class="profile-header-divider"></div>
+          <div id="profile-modal-streak" class="profile-modal-streak"></div>
+        </div>
         <div class="profile-modal-actions">
           <button id="profile-modal-edit-btn" class="action-btn" onclick="openProfileEditFromProfile()" style="display: none;">✏️ Editar perfil</button>
           <button id="profile-modal-shop-btn" class="action-btn" onclick="openShopFromProfile()" style="display: none;">🛒 Tienda</button>
@@ -2627,13 +2645,10 @@
       `🥈 Mejor racha en Supernova: ${(daily.media && daily.media.longest) || 0} día(s)`,
       `🥇 Mejor racha en Yonko: ${(daily.dificil && daily.dificil.longest) || 0} día(s)`
     ];
-    // flex-wrap: en pantallas anchas caben las 4 en una sola fila (con separadores entre
-    // ellas); si no hay sitio, pasan a la línea siguiente solas, sin depender de un punto de
-    // corte fijo por ancho de pantalla.
-    return items
-      .map(escapeHtml)
-      .map(t => `<span class="profile-streak-item">${t}</span>`)
-      .join('<span class="profile-streak-separator">|</span>');
+    // Cada racha en su propia línea (<div>, no <br>): así, aunque el bloque entero se centre
+    // dentro de .profile-header, cada línea queda alineada a la izquierda respecto a las
+    // demás (los emojis en columna), en vez de centrada individualmente.
+    return items.map(escapeHtml).map(t => `<div>${t}</div>`).join("");
   }
 
   function buildAchievementsHtml(profile) {
