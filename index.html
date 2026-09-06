@@ -540,6 +540,7 @@
       gap: 6px;
       width: 100%; flex: 1; min-height: 0;
     }
+    .solved-img-wrap { position: relative; width: 100%; height: 100%; min-width: 0; }
     .solved-img {
       width: 100%;
       height: 100%;
@@ -549,6 +550,15 @@
       border-radius: 6px;
       border: 2px solid #0f172a;
       background-color: #1e293b;
+      display: block;
+    }
+    /* Nombre del personaje, superpuesto al mantener pulsado en móvil (donde no existe ningún
+       "pasar el ratón por encima" para leer el title). En ordenador no hace falta: el propio
+       title del navegador ya lo muestra al pasar el cursor. */
+    .card-name-overlay {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      background: rgba(15, 23, 42, 0.88); color: #f8fafc; font-size: 0.8rem; font-weight: bold;
+      text-align: center; padding: 6px; border-radius: inherit; z-index: 5; pointer-events: none;
     }
     .solved-label {
       flex-shrink: 0; font-size: 0.85rem; min-width: 0;
@@ -578,6 +588,7 @@
       transition: all 0.2s ease;
       overflow: hidden;
       padding: 4px;
+      position: relative;
     }
     .card img {
       width: 100%;
@@ -4679,6 +4690,66 @@
     });
   }
 
+  // Duración mínima (ms) para considerar una pulsación "mantenida" en vez de un toque normal.
+  const LONG_PRESS_MS = 450;
+
+  // Añade el mecanismo de "mantener pulsado para ver el nombre" a una tarjeta o foto (sirve
+  // igual para las tarjetas sin resolver y para las fotos ya resueltas). Solo hace falta en
+  // pantallas táctiles: en ordenador no pasa nada de esto, el "title" nativo del navegador ya
+  // muestra el nombre al pasar el cursor por encima.
+  //
+  // El mantener pulsado SIEMPRE gana: si se llega a mostrar el nombre, soltar el dedo no
+  // ejecuta onQuickTap (no selecciona/deselecciona la carta), pase lo que pase. Solo un toque
+  // rápido (soltar antes de que pase el tiempo) cuenta como toque normal.
+  function attachLongPressName(el, name, onQuickTap) {
+    let pressTimer = null;
+    let longPressTriggered = false;
+    let moved = false;
+    let overlay = null;
+
+    function showOverlay() {
+      longPressTriggered = true;
+      overlay = document.createElement("div");
+      overlay.className = "card-name-overlay";
+      overlay.innerText = name;
+      el.appendChild(overlay);
+    }
+
+    function removeOverlay() {
+      if (overlay) { overlay.remove(); overlay = null; }
+    }
+
+    el.addEventListener("touchstart", () => {
+      longPressTriggered = false;
+      moved = false;
+      pressTimer = setTimeout(showOverlay, LONG_PRESS_MS);
+    }, { passive: true });
+
+    el.addEventListener("touchend", e => {
+      clearTimeout(pressTimer);
+      if (longPressTriggered) {
+        e.preventDefault(); // que no dispare también el click sintético del navegador
+        removeOverlay();
+      } else if (onQuickTap && !moved) {
+        e.preventDefault(); // evita un doble disparo: el click sintético llamaría a esto otra vez
+        onQuickTap();
+      }
+    });
+
+    el.addEventListener("touchcancel", () => {
+      clearTimeout(pressTimer);
+      removeOverlay();
+    });
+
+    // Si el dedo se desplaza (p. ej. para hacer scroll), cancelamos: ni pulsación mantenida ni
+    // toque normal deben dispararse — moverse es señal de que no era una pulsación de verdad.
+    el.addEventListener("touchmove", () => {
+      moved = true;
+      clearTimeout(pressTimer);
+      removeOverlay();
+    }, { passive: true });
+  }
+
   function buildSolvedCategoryEl(catData) {
     const el = document.createElement("div");
     el.className = "solved-category";
@@ -4687,6 +4758,9 @@
     const imgsWrap = document.createElement("div");
     imgsWrap.className = "solved-items-list";
     catData.items.forEach(item => {
+      const wrap = document.createElement("div");
+      wrap.className = "solved-img-wrap";
+
       const img = document.createElement("img");
       img.src = item.img;
       img.title = item.name;
@@ -4695,7 +4769,9 @@
         this.onerror = null;
         this.src = "https://dummyimage.com/100x100/334155/ffffff.png&text=?";
       };
-      imgsWrap.appendChild(img);
+      wrap.appendChild(img);
+      attachLongPressName(wrap, item.name, null); // sin toque rápido: la foto no es clicable
+      imgsWrap.appendChild(wrap);
     });
 
     const label = document.createElement("div");
@@ -4744,6 +4820,7 @@
       const imgEl = document.createElement("img");
       imgEl.src = card.img;
       imgEl.alt = card.name;
+      imgEl.title = card.name;
       
       imgEl.onerror = function() {
         this.onerror = null;
@@ -4752,6 +4829,7 @@
 
       cardEl.appendChild(imgEl);
       cardEl.onclick = () => toggleSelect(index);
+      attachLongPressName(cardEl, card.name, () => toggleSelect(index));
       grid.appendChild(cardEl);
     });
   }
