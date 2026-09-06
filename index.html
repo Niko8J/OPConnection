@@ -3485,7 +3485,14 @@
     if (!header || !identity || !divider || !streak) return;
 
     function update() {
-      const mismaFila = Math.abs(identity.offsetTop - streak.offsetTop) < 4;
+      // Con align-items:center, identidad (más alta) y rachas (más bajas) se centran cada una
+      // según SU PROPIA altura dentro de la fila — así que su offsetTop nunca coincide, aunque
+      // estén perfectamente en la misma fila. Comparamos si sus rangos verticales se solapan en
+      // vez de si empiezan a la misma altura exacta: en la misma fila, siempre se solapan; ya
+      // apiladas (filas distintas), no se solapan nada.
+      const identityRect = identity.getBoundingClientRect();
+      const streakRect = streak.getBoundingClientRect();
+      const mismaFila = identityRect.top < streakRect.bottom && streakRect.top < identityRect.bottom;
       divider.style.display = mismaFila ? "block" : "none";
     }
 
