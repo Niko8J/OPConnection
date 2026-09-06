@@ -806,6 +806,14 @@
       border-radius: 0 0 12px 12px;
       pointer-events: none; opacity: 0; transition: opacity 0.15s ease;
     }
+    /* Mismo aviso que .modal-scroll-fade, pero al revés: que queda contenido por ENCIMA sin
+       desplazar, para cuando ya has bajado algo. */
+    .modal-scroll-fade-top {
+      position: absolute; top: 0; left: 0; right: 0; height: 52px;
+      background: linear-gradient(to top, rgba(30, 41, 59, 0), rgba(30, 41, 59, 1) 80%);
+      border-radius: 12px 12px 0 0;
+      pointer-events: none; opacity: 0; transition: opacity 0.15s ease;
+    }
     .modal-content h2 { margin-bottom: 10px; font-size: 1.6rem; }
     .solutions-list { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; margin-bottom: 20px; text-align: left; }
     .solution-row {
@@ -3492,13 +3500,19 @@
       const scrollArea = modalContent.querySelector(".modal-scroll-area");
       if (!scrollArea) return;
 
-      const fade = document.createElement("div");
-      fade.className = "modal-scroll-fade";
-      modalContent.appendChild(fade);
+      const fadeBottom = document.createElement("div");
+      fadeBottom.className = "modal-scroll-fade";
+      modalContent.appendChild(fadeBottom);
+
+      const fadeTop = document.createElement("div");
+      fadeTop.className = "modal-scroll-fade-top";
+      modalContent.appendChild(fadeTop);
 
       function updateFadeVisibility() {
         const quedaPorDebajo = scrollArea.scrollHeight - scrollArea.scrollTop - scrollArea.clientHeight > 4;
-        fade.style.opacity = quedaPorDebajo ? "1" : "0";
+        const quedaPorArriba = scrollArea.scrollTop > 4;
+        fadeBottom.style.opacity = quedaPorDebajo ? "1" : "0";
+        fadeTop.style.opacity = quedaPorArriba ? "1" : "0";
       }
 
       scrollArea.addEventListener("scroll", updateFadeVisibility);
