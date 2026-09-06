@@ -402,6 +402,22 @@
     .achievement-badge.locked .achievement-icon { filter: grayscale(100%); opacity: 0.35; }
     .achievement-badge.locked .achievement-name { color: #64748b; }
     .achievement-name { font-size: 0.75rem; font-weight: bold; text-align: center; color: #f8fafc; word-break: break-word; }
+    /* Barra de progreso: siempre presente (conseguido o no), muy fina para no agrandar la
+       insignia. El color se atenúa en bloqueados, igual que el resto de la insignia. */
+    .achievement-progress { width: 100%; margin-top: 4px; }
+    /* Conseguido: se oculta la barra (ya no aporta nada, el logro está hecho), pero con
+       visibility en vez de display:none, para que el hueco se mantenga y la insignia no
+       cambie de tamaño entre conseguido y no conseguido. */
+    .achievement-badge.unlocked .achievement-progress { visibility: hidden; }
+    .achievement-progress-track {
+      width: 100%; height: 5px; border-radius: 3px; overflow: hidden;
+      background: rgba(148, 163, 184, 0.25);
+    }
+    .achievement-progress-fill { height: 100%; border-radius: 3px; background: #f59e0b; }
+    .achievement-progress-label { font-size: 0.6rem; color: #94a3b8; text-align: center; margin-top: 2px; }
+    .achievement-badge.locked .achievement-progress-fill { background: #64748b; }
+    .achievement-badge.locked .achievement-progress-label { color: #64748b; }
+
     .achievement-coins {
       display: flex; align-items: center; gap: 3px; margin-top: 4px;
       font-size: 0.7rem; font-weight: bold; color: #f59e0b;
@@ -1072,7 +1088,7 @@
       <div id="solutions-container" class="solutions-list"></div>
       <div class="gameover-actions">
         <button class="action-btn" id="modal-action-btn" onclick="closeModal()">Entendido</button>
-        <button class="action-btn" id="share-result-btn" onclick="shareResult()" style="display: none;">📤 Compartir</button>
+        <button class="action-btn" id="share-result-btn" onclick="shareResult()" style="display: none;">Compartir</button>
       </div>
     </div>
   </div>
@@ -2059,7 +2075,14 @@
       description: days === 1
         ? `Supera el reto diario de ${label} una vez`
         : `Supera el reto diario de ${label} ${days} días seguidos (perder un día rompe la racha)`,
-      check: profile => ((profile.dailyStreaks && profile.dailyStreaks[difficultyKey] && profile.dailyStreaks[difficultyKey].longest) || 0) >= days
+      check: profile => ((profile.dailyStreaks && profile.dailyStreaks[difficultyKey] && profile.dailyStreaks[difficultyKey].longest) || 0) >= days,
+      // Cuánto llevas de esta racha en concreto, para la barrita de progreso. "Más es mejor"
+      // aquí, así que basta con comparar current contra target directamente (ver
+      // buildProgressBarHtml para el caso contrario, el del Ranking).
+      progress: profile => ({
+        current: (profile.dailyStreaks && profile.dailyStreaks[difficultyKey] && profile.dailyStreaks[difficultyKey].longest) || 0,
+        target: days
+      })
     }));
   }
 
@@ -2079,7 +2102,8 @@
       description: n === 1
         ? "Resuelve al menos 1 panel en una racha de modo Infinito"
         : `Alcanza una racha de ${n} paneles resueltos seguidos en modo Infinito`,
-      check: profile => (profile.bestStreak || 0) >= n
+      check: profile => (profile.bestStreak || 0) >= n,
+      progress: profile => ({ current: profile.bestStreak || 0, target: n })
     }));
   }
 
@@ -2102,7 +2126,14 @@
       description: pos === 1
         ? "Alcanza el primer puesto del Ranking"
         : `Alcanza el puesto ${pos} o mejor en el Ranking`,
-      check: profile => typeof profile.bestRankPosition === "number" && profile.bestRankPosition <= pos
+      check: profile => typeof profile.bestRankPosition === "number" && profile.bestRankPosition <= pos,
+      // Aquí "menos es mejor" (un puesto más bajo es mejor puesto): se marca "inverted" para
+      // que buildProgressBarHtml calcule el llenado de la barra al revés que en el resto.
+      progress: profile => ({
+        current: typeof profile.bestRankPosition === "number" ? profile.bestRankPosition : null,
+        target: pos,
+        inverted: true
+      })
     }));
   }
 
@@ -2701,18 +2732,47 @@
     { tier: "ranking", label: "Ranking" }
   ];
 
+  // Calcula el llenado de la barrita de progreso. La mayoría de logros son "más es mejor"
+  // (días de racha, paneles resueltos), pero el Ranking es al revés (un puesto más BAJO es
+  // mejor) — de ahí el caso "inverted", que invierte también la fórmula del porcentaje.
+  function buildProgressBarHtml(achievement, profile) {
+    const { current, target, inverted } = achievement.progress(profile);
+
+    if (current === null || current === undefined) {
+      // Sin ningún dato todavía (p. ej. nunca has tenido una posición en el Ranking): barra
+      // vacía con el objetivo a la vista, pero sin ningún progreso que mostrar.
+      return `
+        <div class="achievement-progress">
+          <div class="achievement-progress-track"><div class="achievement-progress-fill" style="width: 0%;"></div></div>
+          <div class="achievement-progress-label">–/${target}</div>
+        </div>`;
+    }
+
+    const percent = inverted
+      ? (current <= target ? 100 : Math.round((target / current) * 100))
+      : Math.min(100, Math.round((current / target) * 100));
+
+    return `
+      <div class="achievement-progress">
+        <div class="achievement-progress-track"><div class="achievement-progress-fill" style="width: ${percent}%;"></div></div>
+        <div class="achievement-progress-label">${current}/${target}</div>
+      </div>`;
+  }
+
   function buildAchievementBadgeHtml(a, profile) {
     const unlocked = a.check(profile);
     const icon = ACHIEVEMENT_TIER_ICONS[a.tier] || "🏅"; // por si algún día se añade un logro sin nivel definido
     const nameHtml = a.nameLines.map(escapeHtml).join("<br>");
     // Bloqueado: se muestra en gris/silueta (no se oculta), para que se sepa que existe y
     // anime a conseguirlo. El title (tooltip) da la descripción también cuando está bloqueado.
-    // Las Berries se muestran SIEMPRE, aunque esté bloqueado: así el jugador ve de un vistazo
-    // cuánto le daría conseguirlo, en vez de tener que desbloquearlo primero para saberlo.
+    // Las Berries y la barra de progreso se muestran SIEMPRE, tanto conseguido como no: así la
+    // insignia tiene siempre los mismos elementos y no cambia de tamaño ni de aspecto según el
+    // estado, solo el color se atenúa un poco si está bloqueado (ver el CSS).
     return `
       <div class="achievement-badge tier-${a.tier} ${unlocked ? 'unlocked' : 'locked'}" title="${escapeHtml(a.name)}: ${escapeHtml(a.description)}">
         <div class="achievement-icon">${icon}</div>
         <div class="achievement-name">${nameHtml}</div>
+        ${buildProgressBarHtml(a, profile)}
         <div class="achievement-coins">
           +${a.coins || 0}
           <img src="berries.webp" alt="" class="achievement-coins-icon" onerror="this.style.display='none'">
@@ -5053,52 +5113,163 @@
   // reconstruir un panel diario que ya se jugó hoy (renderFinishedDailyPanel), para que el
   // contenido del modal sea idéntico en ambos casos sin duplicar el texto en dos sitios.
   // Copia el texto y avisa con un toast — reutilizado tanto por el reto diario como por Infinito.
-  async function copyToClipboardWithToast(text) {
+  // Abre el panel nativo del sistema para elegir a qué red social/app enviarlo (disponible en
+  // la mayoría de móviles). En escritorio, la mayoría de navegadores no lo soportan todavía:
+  // ahí recurrimos a copiar al portapapeles, como alternativa razonable.
+  // Dibuja las 16 fotos del panel actual en una cuadrícula 4x4, tal y como se ven ANTES de
+  // resolver nada (barajadas, sin revelar en qué orden las acertaste ni qué categorías había),
+  // para adjuntarla como imagen al compartir un resultado. Se reconstruye a partir de
+  // currentCategories (que sigue teniendo las 4 categorías completas aunque ya hayas
+  // resuelto/perdido), no de una captura guardada de antes.
+  async function buildBoardImageBlob() {
+    const allItems = [];
+    currentCategories.forEach(cat => cat.items.forEach(item => allItems.push(item)));
+    const shuffled = shuffle([...allItems]);
+
+    const cellSize = 150;
+    const gap = 6;
+    const cols = 4;
+    const canvasSize = cols * cellSize + (cols + 1) * gap;
+
+    const canvas = document.createElement("canvas");
+    canvas.width = canvasSize;
+    canvas.height = canvasSize;
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#0f172a";
+    ctx.fillRect(0, 0, canvasSize, canvasSize);
+
+    const loadImage = src => new Promise(resolve => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      // Si una foto en concreto falla al cargar, seguimos sin ella (hueco vacío) en vez de
+      // que toda la imagen se venga abajo por un solo archivo.
+      img.onerror = () => resolve(null);
+      img.src = src;
+    });
+
+    const images = await Promise.all(shuffled.map(item => loadImage(item.img)));
+
+    images.forEach((img, i) => {
+      if (!img) return;
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      const x = gap + col * (cellSize + gap);
+      const y = gap + row * (cellSize + gap);
+      // Mismo recorte que en el resto de la web (object-fit:cover, object-position:top center):
+      // rellena el cuadrado recortando por el centro horizontalmente y desde arriba.
+      const scale = Math.max(cellSize / img.width, cellSize / img.height);
+      const sw = cellSize / scale;
+      const sh = cellSize / scale;
+      const sx = (img.width - sw) / 2;
+      const sy = 0;
+      ctx.drawImage(img, sx, sy, sw, sh, x, y, cellSize, cellSize);
+    });
+
+    return new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+  }
+
+  // Si por lo que sea no se puede generar la imagen del panel (fallo cargando alguna foto, el
+  // navegador no soporta bien Canvas...), usamos previsualizacion.png como imagen de reserva,
+  // en vez de quedarnos sin ninguna imagen que adjuntar. Así, esa imagen sirve para dos cosas
+  // a la vez: la vista previa al compartir la web raíz, y esta reserva.
+  async function buildBoardImageBlobWithFallback() {
+    try {
+      const blob = await buildBoardImageBlob();
+      if (blob) return blob;
+    } catch (e) {
+      console.error("No se pudo generar la imagen del panel, se usará la de reserva:", e);
+    }
+    try {
+      const response = await fetch("previsualizacion.png");
+      return await response.blob();
+    } catch (e2) {
+      console.error("Tampoco se pudo cargar la imagen de reserva:", e2);
+      return null;
+    }
+  }
+
+  // Comparte texto y, si el navegador lo permite (no todos soportan adjuntar archivos al
+  // panel nativo, sobre todo en escritorio), también la imagen del panel. Si algo del camino
+  // "con imagen" falla, no se da por vencido: sigue intentando compartir solo el texto antes
+  // de recurrir a la reserva de copiar.
+  async function shareTextWithImage(text, blobPromise, filename) {
+    if (navigator.share) {
+      const blob = await blobPromise.catch(() => null);
+      if (blob && navigator.canShare) {
+        const file = new File([blob], filename, { type: "image/png" });
+        if (navigator.canShare({ files: [file] })) {
+          try {
+            await navigator.share({ text, files: [file] });
+            return;
+          } catch (e) {
+            if (e.name === "AbortError") return;
+            console.error("No se pudo compartir con imagen, probamos solo con texto:", e);
+          }
+        }
+      }
+    }
+    // Ni había imagen, ni se pudo adjuntar: seguimos con el camino de siempre (solo texto, con
+    // su propia reserva de copiar si el navegador tampoco soporta compartir en absoluto).
+    await shareText(text);
+  }
+
+  // Abre el panel nativo del sistema para elegir a qué red social/app enviarlo (disponible en
+  // la mayoría de móviles). En escritorio, la mayoría de navegadores no lo soportan todavía:
+  // ahí recurrimos a copiar al portapapeles, como alternativa razonable.
+  async function shareText(text) {
+    if (navigator.share) {
+      try {
+        await navigator.share({ text });
+        return; // el usuario ya ha visto el propio panel nativo, no hace falta ningún aviso más
+      } catch (e) {
+        if (e.name === "AbortError") return; // cerró el panel sin elegir nada: no es un error
+        console.error("No se pudo abrir el panel de compartir:", e);
+        // seguimos abajo e intentamos la reserva de copiar
+      }
+    }
     try {
       await navigator.clipboard.writeText(text);
+      showToast("📋 ¡Copiado! Ya puedes pegarlo donde quieras");
     } catch (e) {
-      // Reserva para navegadores sin permiso/soporte para la API moderna de portapapeles.
       const textarea = document.createElement("textarea");
       textarea.value = text;
       textarea.style.position = "fixed";
       textarea.style.opacity = "0";
       document.body.appendChild(textarea);
       textarea.select();
-      try { document.execCommand("copy"); } catch (e2) { console.error("No se pudo copiar el resultado:", e2); }
+      try {
+        document.execCommand("copy");
+        showToast("📋 ¡Copiado! Ya puedes pegarlo donde quieras");
+      } catch (e2) {
+        console.error("No se pudo copiar el resultado:", e2);
+      }
       textarea.remove();
     }
-    showToast("📋 ¡Copiado! Ya puedes pegarlo donde quieras");
   }
 
-  // Resumen del resultado del reto diario en emojis, al estilo Wordle: nunca revela qué
-  // personajes eran ni de qué trataba cada categoría, solo el patrón de aciertos — así no hay
-  // spoiler para quien todavía no ha jugado hoy. Solo usa datos que ya se guardan (solvedOrder,
-  // lives), sin necesitar registrar cada intento fallido por separado. El "X/4" va aparte de
-  // los propios cuadraditos de color: a diferencia de Wordle (verde/amarillo/gris siempre
-  // significan lo mismo), aquí los 4 colores no dicen nada por sí solos sin haber jugado, así
-  // que ese número sirve para que se entienda de un vistazo también sin conocer el juego.
+  // Resumen del resultado del reto diario en emojis: nunca revela qué personajes eran ni de qué
+  // trataba cada categoría, solo el patrón de aciertos — así no hay spoiler para quien todavía
+  // no ha jugado hoy. Solo usa datos que ya se guardan (solvedOrder, lives), sin necesitar
+  // registrar cada intento fallido por separado. Cuadrado verde = categoría acertada, rojo =
+  // sin acertar; bandera = vida conservada, ❌ = vida perdida.
   function buildShareText() {
-    const colorEmojis = ["🟨", "🟩", "🟦", "🟪"];
     const difficultyLabels = { facil: "Novato", media: "Supernova", dificil: "Yonko" };
     const label = difficultyLabels[currentDifficulty] || currentDifficulty;
 
-    // A cada categoría le toca un color según su POSICIÓN en el tablero (no el orden en que se
-    // acertó): reconstruimos qué emoji le correspondía a cada una para pintar solvedOrder bien.
-    const colorByName = {};
-    currentCategories.forEach((cat, i) => { colorByName[cat.name] = colorEmojis[i % colorEmojis.length]; });
+    const solvedCount = solvedOrder.length;
+    const categoryBlocks = "🟩".repeat(solvedCount) + "🟥".repeat(Math.max(0, 4 - solvedCount));
 
-    const solvedBlocks = solvedOrder.map(n => colorByName[n] || "⬜").join("");
-    const missingBlocks = "⬛".repeat(Math.max(0, 4 - solvedOrder.length));
     const fails = MAX_LIVES - lives;
+    const livesBlocks = "🏴‍☠️".repeat(lives) + "❌".repeat(fails);
+    const failsText = fails > 0 ? `${fails} fallo${fails === 1 ? "" : "s"}` : "¡Sin fallos!";
 
     const [y, m, d] = getMadridDailyKey().split("-");
 
     const lines = [
-      `One Piece Connections – ${label} 🏴‍☠️`,
+      `One Piece Connections – ${label}`,
       `${d}/${m}/${y}`,
-      `${solvedOrder.length}/4`,
-      solvedBlocks + missingBlocks,
-      fails > 0 ? `${"❌".repeat(fails)} (${fails} fallo${fails === 1 ? "" : "s"})` : "¡Sin fallos! 🎯"
+      `${categoryBlocks} ${solvedCount}/4`,
+      `${livesBlocks} ${failsText}`
     ];
 
     // La racha solo existe para cuentas con sesión iniciada (los invitados no la tienen
@@ -5114,14 +5285,14 @@
   }
 
   function shareResult() {
-    copyToClipboardWithToast(buildShareText());
+    shareTextWithImage(buildShareText(), buildBoardImageBlobWithFallback(), "panel.png");
   }
 
   // Versión para Infinito: aquí no hay categorías que colorear (no es un puzle único del día,
   // sino una racha en marcha), así que el resumen es mucho más simple.
   function buildShareTextInfinite() {
     const lines = [
-      "One Piece Connections – Infinito 🏴‍☠️",
+      "One Piece Connections – Infinito",
       `🔥 Racha: ${infiniteSolvedCount} panel${infiniteSolvedCount === 1 ? "" : "es"}`,
       "https://www.opconnection.es/"
     ];
@@ -5129,7 +5300,7 @@
   }
 
   function shareResultInfinite() {
-    copyToClipboardWithToast(buildShareTextInfinite());
+    shareTextWithImage(buildShareTextInfinite(), buildBoardImageBlobWithFallback(), "panel.png");
   }
 
   function applyResultModalContent(won) {
