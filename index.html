@@ -184,7 +184,12 @@
     /* Sin el fundido de entrada general: como este modal carga datos de Firestore (a veces muy
        rápido), la animación podía "tragarse" el aviso de "Cargando..." y dar sensación de que
        el modal se abría vacío un instante antes de aparecer el contenido ya cargado. */
-    .ranking-modal-content { max-width: 420px; text-align: left; }
+    /* Combinamos las dos clases por el mismo motivo que en profile-modal-content: así esta
+       regla gana siempre a la genérica ".modal-content", sin depender del orden en el archivo.
+       Mismo ajuste de altura que en el Perfil: con muchos usuarios registrados, el Ranking
+       también puede llegar a tocar el límite estándar (85vh) y dejar poco hueco alrededor en
+       móvil para pulsar fuera y cerrarlo. */
+    .modal-content.ranking-modal-content { max-width: 420px; text-align: left; max-height: 78vh; }
     .ranking-subtitle { color: #94a3b8; font-size: 0.85rem; margin-bottom: 4px; }
     .ranking-tiebreak-note { color: #64748b; font-size: 0.75rem; font-style: italic; margin-bottom: 10px; }
     .ranking-list { max-height: var(--ranking-list-max-h); overflow-y: auto; }
@@ -215,7 +220,16 @@
        por mucho que aquí pusiéramos un valor mayor. Con ".modal-content.profile-modal-content"
        (dos clases en el mismo selector) subimos la especificidad para que este valor gane
        siempre, sin depender del orden de las reglas en el archivo. */
-    .modal-content.profile-modal-content { max-width: 1080px; }
+    .modal-content.profile-modal-content {
+      max-width: 1080px;
+      /* Los demás modales comparten los mismos 85vh (--modal-max-h, calculado por JS), pero
+         este suele ser el que más contenido tiene (foto, título, rachas, logros) y el que más
+         a menudo llega a tocar ese límite. En móvil (pantallas altas y estrechas) eso dejaba
+         casi sin hueco alrededor para pulsar fuera y cerrarlo. Con un poco menos (78vh en vez
+         de 85vh) queda un margen tapable, sin recortar el modal de forma notoria.
+      */
+      max-height: 78vh;
+    }
     .profile-modal-avatar {
       width: 120px; height: 120px; border-radius: 50%; object-fit: cover; object-position: top center;
       border: 3px solid #334155; display: block; margin: 4px auto 12px;
@@ -226,7 +240,11 @@
     .profile-modal-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
 
     /* ---------- Tienda ---------- */
-    .shop-modal-content { max-width: 640px; }
+    /* Mismo ancho y altura que profile-modal-content a propósito: se llega a la Tienda
+       siempre desde el Perfil, así que conviene que las dos se sientan como parte del mismo
+       sitio en vez de saltar a un tamaño distinto. De paso, en pantallas anchas caben más
+       marcos/avatares por fila (el grid es auto-fill, así que aprovecha el ancho extra solo). */
+    .modal-content.shop-modal-content { max-width: 1080px; max-height: 78vh; }
     .shop-berries-balance {
       display: flex; align-items: center; justify-content: center; gap: 6px;
       font-size: 1.1rem; font-weight: bold; color: #f59e0b; margin-bottom: 16px;
@@ -245,6 +263,13 @@
       display: flex; flex-direction: column; align-items: center; gap: 8px;
       background: #0f172a; border: 2px solid #334155; border-radius: 10px; padding: 12px 8px;
     }
+    /* El grid estira todas las tarjetas de una fila a la misma altura (comportamiento por
+       defecto de CSS Grid). Con nombres más largos que ocupan 2 líneas, sin esto el botón
+       quedaba pegado justo detrás del nombre en unas tarjetas y más abajo en otras. Con
+       margin-top:auto, el botón se ancla siempre al fondo de la tarjeta, alineado con el de
+       las tarjetas vecinas sea cual sea la longitud del nombre. Solo aplica a marcos/avatares
+       (grid): los títulos van en fila simple y no tienen este problema. */
+    .shop-frame-item .action-btn { margin-top: auto; }
     .shop-frame-preview {
       width: 64px; height: 64px; border-radius: 50%; padding: 4px;
       display: flex; align-items: center; justify-content: center;
@@ -1100,9 +1125,11 @@
         <p>Selecciona 4 imágenes y pulsa <strong>Enviar</strong>. Si aciertas el grupo, se resuelve y sube arriba del todo. Si fallas, pierdes una vida (tienes 4 en total, representadas por las banderas 🏴‍☠️ junto a los botones). Al perderlas todas, se acaba la partida y se muestra la solución completa.</p>
         <p><strong>Modos de dificultad:</strong></p>
         <ul>
-          <li><strong>Novato</strong> (fácil), <strong>Supernova</strong> (normal) y <strong>Yonko</strong> (difícil): un único panel con categorías de esa dificultad concreta.</li>
+          <li><strong>Novato</strong> (fácil), <strong>Supernova</strong> (normal) y <strong>Yonko</strong> (difícil): el <strong>reto diario</strong> — un panel nuevo cada día, igual para todos los jugadores, con un único intento por dificultad. Con sesión iniciada, tu resultado se guarda y encadenar días seguidos ganando construye una racha.</li>
           <li><strong>Infinito:</strong> panel tras panel sin parar, mezclando todas las dificultades, hasta que te quedes sin vidas. Si has iniciado sesión, tu progreso se guarda automáticamente y tu mejor racha entra en el ranking.</li>
         </ul>
+        <p><strong>Berries 🪙:</strong> la moneda del juego. Ganas algunas por cada panel que superes (más cuantas más difícil sea la dificultad, y también en Infinito), y bastantes más de golpe al conseguir un logro. Con sesión iniciada, puedes gastarlas en la <strong>Tienda</strong> (dentro de tu Perfil) en marcos para tu foto, títulos y avatares exclusivos de personajes — todo es cosmético, nada da ventaja jugando.</p>
+        <p><strong>Logros:</strong> en tu Perfil hay una sección con logros por racha en cada dificultad diaria, por racha en Infinito, y por posición en el Ranking. Se desbloquean solos a medida que juegas, y cada uno paga Berries la primera vez que lo consigues.</p>
       </div>
     </div>
   </div>
@@ -2034,10 +2061,18 @@
     // El .toast exterior es flex en FILA (para que el de monedas quede "+2 🪙" en horizontal),
     // así que aquí hace falta este contenedor propio en columna para que el título y el
     // nombre del logro queden uno debajo del otro, en vez de en la misma línea.
-    showToast(
-      `<div class="toast-achievement-content">🏆 ¡Logro conseguido!<span class="toast-achievement-name">${escapeHtml(achievement.name)}</span></div>`,
-      "toast-achievement"
-    );
+    //
+    // El pequeño retraso (600ms) es a propósito: awardPanelCoins() y la comprobación de logros
+    // se disparan casi a la vez, pero cada una depende de su propia llamada a Firestore, así
+    // que sin este retraso, cuál de las dos aparece antes dependería de cuál responda primero
+    // (nada fiable). Con este margen fijo, el aviso de logro sale siempre un instante después
+    // del de la moneda, de forma consistente.
+    setTimeout(() => {
+      showToast(
+        `<div class="toast-achievement-content">🏆 ¡Logro conseguido!<span class="toast-achievement-name">${escapeHtml(achievement.name)}</span></div>`,
+        "toast-achievement"
+      );
+    }, 600);
   }
 
   // Envoltorio de checkAndAwardAchievementCoins que además muestra un aviso por cada logro
@@ -2122,7 +2157,7 @@
     // Zoro (3)
     { id: "zoro_asura", name: "Zoro Asura", price: 900, img: "imagenes/exclusivas/Zoro1.webp" },
     { id: "zoro_enma", name: "Zoro Enma", price: 800, img: "imagenes/exclusivas/Zoro2.webp" },
-    { id: "zoro_tres_espadas", name: "Zoro Tres Espadas", price: 500, img: "imagenes/exclusivas/Zoro2.webp" },
+    { id: "zoro_tres_espadas", name: "Zoro Tres Espadas", price: 500, img: "imagenes/exclusivas/Zoro3.webp" },
     // Nami (3)
     { id: "nami_zeus", name: "Nami y Zeus", price: 800, img: "imagenes/exclusivas/Nami1.webp" },
     { id: "nami_ladrona_gatos", name: "Nami Ladrona de Gatos", price: 600, img: "imagenes/exclusivas/Nami2.webp" },
