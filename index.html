@@ -212,7 +212,7 @@
        Mismo ajuste de altura que en el Perfil: con muchos usuarios registrados, el Ranking
        también puede llegar a tocar el límite estándar (85vh) y dejar poco hueco alrededor en
        móvil para pulsar fuera y cerrarlo. */
-    .modal-content.ranking-modal-content { max-width: 420px; text-align: left; }
+    .modal-content.ranking-modal-content { max-width: 560px; text-align: left; }
     .ranking-subtitle { color: #94a3b8; font-size: 0.85rem; margin-bottom: 4px; }
     .ranking-tiebreak-note { color: #64748b; font-size: 0.75rem; font-style: italic; margin-bottom: 10px; }
     .ranking-list { max-height: var(--ranking-list-max-h); overflow-y: auto; }
@@ -265,6 +265,7 @@
       border: 3px solid #334155; display: block;
     }
     .profile-modal-username { font-size: 1.2rem; word-break: break-word; text-align: center; }
+    .title-plain { color: #94a3b8; font-size: 0.85rem; font-style: italic; }
     .title-pill {
       display: inline-block; padding: 3px 14px; border-radius: 12px; border: 1.5px solid;
       font-size: 0.85rem; font-style: italic; background: rgba(15, 23, 42, 0.4);
@@ -277,7 +278,7 @@
        (para que los emojis queden en columna), mientras que el BLOQUE entero se centra solo,
        como una pieza más del flex-wrap de .profile-header (tanto lado a lado como apilado). */
     .profile-modal-streak {
-      display: flex; flex-direction: column; gap: 6px;
+      display: flex; flex-direction: column; gap: 6px; text-align: left;
       color: #94a3b8; font-size: 0.95rem; line-height: 1.6;
     }
     .profile-modal-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
@@ -2230,7 +2231,6 @@
     diamante: { border: "#22d3ee", text: "#a5f3fc" },
     arcoiris: { border: "#a855f7", text: "#e9d5ff" }
   };
-  const DEFAULT_TITLE_COLORS = { border: "#f59e0b", text: "#fcd34d" };
 
   // Reutilizable en los 3 sitios donde sale el título (menú, Perfil, Ranking): si no tienes
   // ninguno equipado, devuelve "" (nada que mostrar). Los colores se calculan aquí una sola
@@ -2238,7 +2238,10 @@
   function buildTitlePillHtml(profile) {
     const titleDef = profile.equippedTitleId && SHOP_TITLES.find(t => t.id === profile.equippedTitleId);
     if (!titleDef) return "";
-    const colors = FRAME_TITLE_COLORS[profile.equippedFrameId] || DEFAULT_TITLE_COLORS;
+    const colors = FRAME_TITLE_COLORS[profile.equippedFrameId];
+    // Sin marco equipado, texto plano sin píldora: con la píldora ámbar por defecto se parecía
+    // demasiado al marco de bronce, dando la falsa impresión de tener uno equipado.
+    if (!colors) return `<span class="title-plain">${escapeHtml(titleDef.name)}</span>`;
     return `<span class="title-pill" style="border-color: ${colors.border}; color: ${colors.text};">${escapeHtml(titleDef.name)}</span>`;
   }
 
@@ -2464,6 +2467,13 @@
     const owned = (profile.ownedFrames || []).includes(frame.id);
     const equipped = profile.equippedFrameId === frame.id;
     const avatarSrc = profile.avatar || "https://dummyimage.com/100x100/334155/ffffff.png&text=?";
+    // Para que se entienda que el marco no solo cambia el círculo de la foto, también da color
+    // al título (si tienes uno equipado) — un ejemplo con la palabra "Título" y los mismos
+    // colores que tendría de verdad, en vez de dejarlo a que el jugador lo descubra solo.
+    const titlePreviewColors = FRAME_TITLE_COLORS[frame.id];
+    const titlePreviewHtml = titlePreviewColors
+      ? `<span class="title-pill" style="border-color: ${titlePreviewColors.border}; color: ${titlePreviewColors.text};">Título</span>`
+      : "";
 
     let actionHtml;
     if (equipped) {
@@ -2483,6 +2493,7 @@
         <div class="shop-frame-preview tier-${frame.id}" style="background: ${frame.gradient}; box-shadow: ${frame.glow};">
           <img src="${escapeHtml(avatarSrc)}" class="shop-frame-preview-img" onerror="this.src='https://dummyimage.com/100x100/334155/ffffff.png&text=?'">
         </div>
+        ${titlePreviewHtml}
         <div class="shop-item-name">${escapeHtml(frame.name)}</div>
         ${actionHtml}
       </div>`;
@@ -3460,8 +3471,31 @@
     });
   }
 
+  // La barra separadora de la cabecera del Perfil solo tiene sentido cuando identidad y
+  // rachas van lado a lado: si el flex-wrap las manda a filas distintas (poco ancho), se
+  // detecta comparando su posición vertical, y se oculta — así no queda flotando entre dos
+  // bloques apilados. Más fiable que adivinar un ancho de pantalla fijo, porque reacciona al
+  // ancho real disponible dentro del modal en cada momento (y al contenido, si un título más
+  // largo hiciera falta más sitio).
+  function setupProfileHeaderDividerToggle() {
+    const header = document.querySelector(".profile-header");
+    const identity = document.querySelector(".profile-identity");
+    const divider = document.querySelector(".profile-header-divider");
+    const streak = document.getElementById("profile-modal-streak");
+    if (!header || !identity || !divider || !streak) return;
+
+    function update() {
+      const mismaFila = Math.abs(identity.offsetTop - streak.offsetTop) < 4;
+      divider.style.display = mismaFila ? "block" : "none";
+    }
+
+    new ResizeObserver(update).observe(header);
+    update();
+  }
+
   freezeDesign();
   setupModalScrollFades();
+  setupProfileHeaderDividerToggle();
   window.addEventListener("resize", () => scheduleViewportCheck(150));
   window.addEventListener("orientationchange", () => scheduleViewportCheck(400));
   window.addEventListener("pageshow", handleViewportChange);
