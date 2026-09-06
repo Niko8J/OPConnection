@@ -238,6 +238,7 @@
        puntuación en una sola fila estrecha, así que la píldora se reduce un poco para no
        apretar demasiado el resto. */
     .ranking-title .title-pill { font-size: 0.7rem; padding: 2px 10px; }
+    .ranking-title .title-pill-rainbow-inner { font-size: 0.7rem; padding: 2px 10px; }
     .ranking-score { font-weight: bold; color: #f59e0b; font-size: 1.05rem; flex-shrink: 0; }
     .ranking-empty, .ranking-loading { color: #94a3b8; text-align: center; padding: 20px 0; font-size: 0.9rem; }
     .ranking-row.own-row { border-radius: 8px; border-bottom: none; border: 2px solid #f59e0b; box-shadow: 0 0 10px #f59e0b; }
@@ -269,6 +270,14 @@
     .title-pill {
       display: inline-block; padding: 3px 14px; border-radius: 12px; border: 1.5px solid;
       font-size: 0.85rem; font-style: italic; background: rgba(15, 23, 42, 0.4);
+    }
+    /* Mismo truco que el marco de la foto: un padding con el degradado de fondo hace de
+       "anillo" alrededor del contenido de dentro, con las esquinas redondeadas intactas (a
+       diferencia de border-image, que ignora border-radius). */
+    .title-pill-rainbow-wrap { display: inline-block; padding: 1.5px; border-radius: 13px; }
+    .title-pill-rainbow-inner {
+      display: block; padding: 3px 14px; border-radius: 11.5px; background: rgba(15, 23, 42, 0.9);
+      font-size: 0.85rem; font-style: italic;
     }
     /* Solo tiene sentido cuando identidad y rachas van lado a lado: si se apilan (móvil), esta
        línea queda sola en su propia fila del flex-wrap y se encoge a casi nada, sin dejar
@@ -2235,14 +2244,36 @@
   // Reutilizable en los 3 sitios donde sale el título (menú, Perfil, Ranking): si no tienes
   // ninguno equipado, devuelve "" (nada que mostrar). Los colores se calculan aquí una sola
   // vez, para no repetir esta lógica en cada sitio.
+  // Núcleo compartido: dado un texto y un ID de marco, arma la píldora con los colores y el
+  // resplandor de ese marco (o texto plano si no hay ninguno). Lo usan tanto el título de
+  // verdad (buildTitlePillHtml) como el ejemplo de la Tienda (con la palabra "Título").
+  function buildTitlePillForFrame(text, frameId) {
+    const colors = FRAME_TITLE_COLORS[frameId];
+    // Sin marco (o marco desconocido), texto plano sin píldora: con una píldora ámbar por
+    // defecto se parecía demasiado al marco de bronce, dando la falsa impresión de tener uno.
+    if (!colors) return `<span class="title-plain">${text}</span>`;
+
+    const frameDef = SHOP_FRAMES.find(f => f.id === frameId);
+    // El bronce se deja sin resplandor a propósito (igual que en el marco de la foto): el
+    // resto usa el mismo resplandor que ya tiene su marco, para que la píldora "brille" igual.
+    const glow = (frameDef && frameDef.glow !== "none") ? frameDef.glow : "none";
+
+    if (frameId === "arcoiris" && frameDef) {
+      // Un simple borde sólido no le hacía justicia al arcoíris (se veía como un morado
+      // cualquiera, sin rastro del degradado): en vez de eso, envolvemos el texto en un
+      // anillo con el mismo degradado cónico del marco, igual técnica que ya usamos para el
+      // propio marco de la foto (un padding con el degradado de fondo, y el contenido encima).
+      return `<span class="title-pill-rainbow-wrap" style="background: ${frameDef.gradient}; box-shadow: ${glow};">` +
+        `<span class="title-pill-rainbow-inner" style="color: ${colors.text};">${text}</span></span>`;
+    }
+
+    return `<span class="title-pill" style="border-color: ${colors.border}; color: ${colors.text}; box-shadow: ${glow};">${text}</span>`;
+  }
+
   function buildTitlePillHtml(profile) {
     const titleDef = profile.equippedTitleId && SHOP_TITLES.find(t => t.id === profile.equippedTitleId);
     if (!titleDef) return "";
-    const colors = FRAME_TITLE_COLORS[profile.equippedFrameId];
-    // Sin marco equipado, texto plano sin píldora: con la píldora ámbar por defecto se parecía
-    // demasiado al marco de bronce, dando la falsa impresión de tener uno equipado.
-    if (!colors) return `<span class="title-plain">${escapeHtml(titleDef.name)}</span>`;
-    return `<span class="title-pill" style="border-color: ${colors.border}; color: ${colors.text};">${escapeHtml(titleDef.name)}</span>`;
+    return buildTitlePillForFrame(escapeHtml(titleDef.name), profile.equippedFrameId);
   }
 
   // Avatares exclusivos: imágenes alternativas de personajes, solo disponibles en la Tienda.
@@ -2469,11 +2500,10 @@
     const avatarSrc = profile.avatar || "https://dummyimage.com/100x100/334155/ffffff.png&text=?";
     // Para que se entienda que el marco no solo cambia el círculo de la foto, también da color
     // al título (si tienes uno equipado) — un ejemplo con la palabra "Título" y los mismos
-    // colores que tendría de verdad, en vez de dejarlo a que el jugador lo descubra solo.
-    const titlePreviewColors = FRAME_TITLE_COLORS[frame.id];
-    const titlePreviewHtml = titlePreviewColors
-      ? `<span class="title-pill" style="border-color: ${titlePreviewColors.border}; color: ${titlePreviewColors.text};">Título</span>`
-      : "";
+    // colores/resplandor que tendría de verdad, en vez de dejarlo a que el jugador lo
+    // descubra solo. Reutiliza el mismo núcleo que el título real, así que el arcoíris
+    // también sale con su anillo, no como un morado plano.
+    const titlePreviewHtml = buildTitlePillForFrame("Título", frame.id);
 
     let actionHtml;
     if (equipped) {
