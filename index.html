@@ -5120,20 +5120,22 @@
   // tarjeta de previsualización a partir de esa URL (usando las mismas etiquetas que ya
   // tenemos puestas, incluida previsualizacion.png) — así no hace falta generar ni adjuntar
   // ninguna imagen nuestra por separado.
-  async function shareText(text) {
-    if (navigator.share) {
-      try {
-        // Separamos la URL final como su propio campo en vez de dejarla como una línea más
-        // dentro del texto: es el uso "correcto" de esta función, y podría influir en qué
-        // opciones ofrece el propio sistema (algunos tratan de forma distinta "solo texto" que
-        // "texto + un enlace reconocido"). La reserva de copiar de más abajo sigue usando el
-        // texto completo tal cual, con la URL incluida, así que esto no le afecta.
-        const lines = text.split("\n");
-        const lastLine = lines[lines.length - 1];
-        const hasUrl = lastLine.startsWith("http://") || lastLine.startsWith("https://");
-        const shareData = hasUrl ? { text: lines.slice(0, -1).join("\n"), url: lastLine } : { text };
+  // Detecta si el puntero principal es táctil (dedo) en vez de ratón/trackpad — usada para
+  // decidir si merece la pena intentar el panel nativo de compartir, nada fiable en ordenador.
+  function isTouchDevice() {
+    return window.matchMedia("(pointer: coarse)").matches;
+  }
 
-        await navigator.share(shareData);
+  async function shareText(text) {
+    // El panel nativo de Windows (y probablemente otros de escritorio) se ha demostrado poco
+    // fiable pasando el texto de cualquier forma: primero no ofrecía "Copiar" con todo junto
+    // en un bloque, y separando la URL en su propio campo, "Copiar" pasó a coger solo la URL y
+    // descartar el resto. En dispositivos táctiles, en cambio, el bloque único sí ha funcionado
+    // bien (confirmado en Android). Así que: bloque único siempre, y en ordenador ni lo
+    // intentamos con el panel nativo, vamos directos a nuestro propio copiado de más abajo.
+    if (isTouchDevice() && navigator.share) {
+      try {
+        await navigator.share({ text });
         return; // el usuario ya ha visto el propio panel nativo, no hace falta ningún aviso más
       } catch (e) {
         if (e.name === "AbortError") return; // cerró el panel sin elegir nada: no es un error
