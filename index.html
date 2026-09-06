@@ -49,6 +49,7 @@
       --v-gap-md: 9px;
       --container-pad-top: 10px;
       --modal-max-h: 85vh;
+      --modal-max-h-reduced: 78vh;
       --ranking-list-max-h: 55vh;
       --card-size: 70px;
       --board-height: 300px;
@@ -190,7 +191,7 @@
        Mismo ajuste de altura que en el Perfil: con muchos usuarios registrados, el Ranking
        también puede llegar a tocar el límite estándar (85vh) y dejar poco hueco alrededor en
        móvil para pulsar fuera y cerrarlo. */
-    .modal-content.ranking-modal-content { max-width: 420px; text-align: left; max-height: 78vh; }
+    .modal-content.ranking-modal-content { max-width: 420px; text-align: left; max-height: var(--modal-max-h-reduced); }
     .ranking-subtitle { color: #94a3b8; font-size: 0.85rem; margin-bottom: 4px; }
     .ranking-tiebreak-note { color: #64748b; font-size: 0.75rem; font-style: italic; margin-bottom: 10px; }
     .ranking-list { max-height: var(--ranking-list-max-h); overflow-y: auto; }
@@ -229,7 +230,7 @@
          casi sin hueco alrededor para pulsar fuera y cerrarlo. Con un poco menos (78vh en vez
          de 85vh) queda un margen tapable, sin recortar el modal de forma notoria.
       */
-      max-height: 78vh;
+      max-height: var(--modal-max-h-reduced);
     }
     .profile-modal-avatar {
       width: 120px; height: 120px; border-radius: 50%; object-fit: cover; object-position: top center;
@@ -245,7 +246,7 @@
        siempre desde el Perfil, así que conviene que las dos se sientan como parte del mismo
        sitio en vez de saltar a un tamaño distinto. De paso, en pantallas anchas caben más
        marcos/avatares por fila (el grid es auto-fill, así que aprovecha el ancho extra solo). */
-    .modal-content.shop-modal-content { max-width: 1080px; max-height: 78vh; }
+    .modal-content.shop-modal-content { max-width: 1080px; max-height: var(--modal-max-h-reduced); }
     .shop-berries-balance {
       display: flex; align-items: center; justify-content: center; gap: 6px;
       font-size: 1.1rem; font-weight: bold; color: #f59e0b; margin-bottom: 16px;
@@ -3197,6 +3198,7 @@
     // propio zoom del navegador las escala de forma coherente con todo lo demás, sin que
     // nosotros tengamos que recalcularlas aquí.
     root.setProperty("--modal-max-h", Math.round(h * 0.85) + "px");
+    root.setProperty("--modal-max-h-reduced", Math.round(h * 0.78) + "px");
     root.setProperty("--ranking-list-max-h", Math.round(h * 0.55) + "px");
     root.setProperty("--frozen-vh", h + "px");
   }
