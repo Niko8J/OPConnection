@@ -551,6 +551,7 @@
       border: 2px solid #0f172a;
       background-color: #1e293b;
       display: block;
+      -webkit-touch-callout: none; -webkit-user-select: none; user-select: none;
     }
     /* Nombre del personaje, superpuesto al mantener pulsado en móvil (donde no existe ningún
        "pasar el ratón por encima" para leer el title). En ordenador no hace falta: el propio
@@ -601,6 +602,10 @@
       height: 100%;
       object-fit: cover;
       object-position: top center;
+      /* Sin esto, mantener pulsado sobre la imagen (sobre todo en iPhone) hace que el propio
+         navegador saque su menú nativo ("Abrir imagen", "Guardar imagen"...) pasado un rato,
+         cortando de golpe el tiempo que se ve el nombre de nuestra propia burbuja. */
+      -webkit-touch-callout: none; -webkit-user-select: none; user-select: none;
     }
     @media (hover: hover) and (pointer: fine) {
       .card:hover { border-color: #f59e0b; }
@@ -4787,6 +4792,7 @@
       const img = document.createElement("img");
       img.src = item.img;
       img.title = item.name;
+      img.draggable = false;
       img.className = "solved-img";
       img.onerror = function () {
         this.onerror = null;
@@ -4844,6 +4850,7 @@
       imgEl.src = card.img;
       imgEl.alt = card.name;
       imgEl.title = card.name;
+      imgEl.draggable = false;
       
       imgEl.onerror = function() {
         this.onerror = null;
