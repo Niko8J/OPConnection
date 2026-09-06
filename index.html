@@ -784,8 +784,11 @@
       /* overflow-y:auto recorta cualquier cosa que se salga de este borde — sin este hueco de
          sobra arriba, el resplandor de un marco (que se sale unos cuantos px del propio
          avatar) chocaba contra el límite y se veía cortado por arriba en vez de verse
-         completo alrededor. */
-      padding-top: 20px; margin-top: -20px;
+         completo alrededor. Sin margen negativo compensándolo (lo tuvo antes): con
+         flex:1 1 auto, ese margen empujaba toda la caja del scroll por encima del propio
+         modal en móvil, sacando el contenido entero fuera de su borde al hacer scroll. Aquí
+         simplemente se pierden unos pocos píxeles de espacio de sobra arriba, sin ese riesgo. */
+      padding-top: 20px;
       /* Barra de scroll fina y del ámbar de la web, en vez de la gris por defecto del
          navegador. scrollbar-width/scrollbar-color cubren Firefox; las reglas
          ::-webkit-scrollbar de abajo cubren Chrome/Safari/Edge. */
