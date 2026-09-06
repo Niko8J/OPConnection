@@ -4793,6 +4793,7 @@
       img.src = item.img;
       img.title = item.name;
       img.draggable = false;
+      img.oncontextmenu = () => false; // mismo refuerzo que en las cartas sin resolver
       img.className = "solved-img";
       img.onerror = function () {
         this.onerror = null;
@@ -4851,6 +4852,11 @@
       imgEl.alt = card.name;
       imgEl.title = card.name;
       imgEl.draggable = false;
+      // Refuerzo para Android, donde -webkit-touch-callout (pensado para iOS) no evita el
+      // menú nativo de mantener pulsado sobre una imagen. Alcance: solo esta imagen, no toda
+      // la página — en ordenador, esto le quita el clic derecho a esta carta en concreto
+      // ("Guardar imagen como...", "Abrir imagen en pestaña nueva"), nada más.
+      imgEl.oncontextmenu = () => false;
       
       imgEl.onerror = function() {
         this.onerror = null;
