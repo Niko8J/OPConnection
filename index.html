@@ -1346,14 +1346,22 @@
     }
   }
 
-  // Guarda el progreso del modo Infinito: en Firestore si hay sesión iniciada, si no en localStorage.
+  // Guarda el progreso de la partida en curso, sea cual sea el modo — se llama desde los mismos
+  // sitios compartidos entre Infinito y el reto diario (initGame, tras cada acierto/fallo...),
+  // y decide sola qué guardar según isInfiniteMode. El nombre se quedó de cuando solo existía
+  // Infinito; ahora cubre los dos modos, pero cambiarlo tocaría 7 sitios distintos sin
+  // necesidad real (aquí dentro es donde de verdad importa la lógica).
   function saveInfiniteState() {
-    if (!isInfiniteMode || gameOver) return;
-    const state = buildInfiniteStateSnapshot();
-    if (currentUser) {
-      saveInfiniteStateCloud(state); // no bloqueamos la partida esperando la escritura
+    if (gameOver) return;
+    if (isInfiniteMode) {
+      const state = buildInfiniteStateSnapshot();
+      if (currentUser) {
+        saveInfiniteStateCloud(state); // no bloqueamos la partida esperando la escritura
+      } else {
+        saveInfiniteStateLocal(state);
+      }
     } else {
-      saveInfiniteStateLocal(state);
+      saveDailyInProgress();
     }
   }
 
@@ -3943,6 +3951,142 @@
     } catch (e) {}
   }
 
+  // ---------- Progreso del reto diario A MEDIAS (ni ganado ni perdido todavía) ----------
+  //
+  // A diferencia de "dailyProgress" (el resultado ya FINALIZADO, con result: "win"/"lose"),
+  // esto es la partida en marcha: se guarda tras cada acierto/fallo, se usa para reanudar
+  // exactamente donde la dejaste si cambias de dificultad y vuelves (o recargas la página), y
+  // se borra en cuanto el panel se gana o se pierde (momento en que pasa a ser un
+  // "dailyProgress" definitivo en su lugar). Antes de esto, cambiar de dificultad y volver
+  // reiniciaba el panel del todo, perdiendo categorías acertadas y vidas.
+  const STORAGE_KEY_DAILY_IN_PROGRESS = "opc_daily_in_progress_v1";
+
+  function loadDailyInProgressLocal() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY_DAILY_IN_PROGRESS);
+      if (raw) return JSON.parse(raw);
+    } catch (e) {}
+    return {};
+  }
+
+  function saveDailyInProgressLocal(difficulty, entry) {
+    try {
+      const state = loadDailyInProgressLocal();
+      state[difficulty] = entry;
+      localStorage.setItem(STORAGE_KEY_DAILY_IN_PROGRESS, JSON.stringify(state));
+    } catch (e) {}
+  }
+
+  function clearDailyInProgressLocal(difficulty) {
+    try {
+      const state = loadDailyInProgressLocal();
+      delete state[difficulty];
+      localStorage.setItem(STORAGE_KEY_DAILY_IN_PROGRESS, JSON.stringify(state));
+    } catch (e) {}
+  }
+
+  async function saveDailyInProgressCloud(difficulty, entry) {
+    if (!currentUser) return;
+    try {
+      await db.collection("users").doc(currentUser.uid).set(
+        { dailyInProgress: { [difficulty]: entry } }, { merge: true }
+      );
+    } catch (e) {
+      console.error("No se pudo guardar el progreso a medias del diario:", e);
+    }
+  }
+
+  async function clearDailyInProgressCloud(difficulty) {
+    if (!currentUser) return;
+    try {
+      await db.collection("users").doc(currentUser.uid).set(
+        { dailyInProgress: { [difficulty]: firebase.firestore.FieldValue.delete() } }, { merge: true }
+      );
+    } catch (e) {
+      console.error("No se pudo limpiar el progreso a medias del diario:", e);
+    }
+  }
+
+  function buildDailyInProgressSnapshot(todayKey) {
+    return {
+      date: todayKey,
+      groups: serializeBoardGroups(currentCategories),
+      solvedOrder: [...solvedOrder],
+      lives,
+      cardOrder: cards.map(c => c.name),
+      hintsRemaining
+    };
+  }
+
+  // No bloqueamos la partida esperando la escritura a Firestore, igual que en Infinito.
+  function saveDailyInProgress() {
+    const todayKey = getMadridDailyKey();
+    const entry = buildDailyInProgressSnapshot(todayKey);
+    if (currentUser) {
+      saveDailyInProgressCloud(currentDifficulty, entry);
+      currentUserProfile = currentUserProfile || {};
+      currentUserProfile.dailyInProgress = { ...(currentUserProfile.dailyInProgress || {}), [currentDifficulty]: entry };
+    } else {
+      saveDailyInProgressLocal(currentDifficulty, entry);
+    }
+  }
+
+  // Con sesión iniciada, currentUserProfile ya está cargado entero en memoria (igual que para
+  // dailyProgress), así que no hace falta una lectura aparte a Firestore aquí.
+  async function loadDailyInProgress(difficulty) {
+    if (currentUser) {
+      return (currentUserProfile && currentUserProfile.dailyInProgress && currentUserProfile.dailyInProgress[difficulty]) || null;
+    }
+    return loadDailyInProgressLocal()[difficulty] || null;
+  }
+
+  function clearDailyInProgress(difficulty) {
+    if (currentUser) {
+      clearDailyInProgressCloud(difficulty);
+      if (currentUserProfile && currentUserProfile.dailyInProgress) {
+        delete currentUserProfile.dailyInProgress[difficulty];
+      }
+    } else {
+      clearDailyInProgressLocal(difficulty);
+    }
+  }
+
+  // Reconstruye el tablero de un reto diario que dejaste A MEDIAS (sin ganar ni perder
+  // todavía) exactamente como lo dejaste: mismas categorías, las ya acertadas colocadas
+  // arriba, las demás en el MISMO orden en que las dejaste (no se "barajan" solas al volver),
+  // y las vidas tal y como quedaron.
+  function resumeDailyFromSaved(difficulty, saved) {
+    currentDifficulty = difficulty;
+    isInfiniteMode = false;
+    gameOver = false;
+    awaitingNextPanel = false;
+    currentCategories = hydrateBoardGroups(saved.groups);
+    solvedOrder = saved.solvedOrder || [];
+    lives = (typeof saved.lives === "number") ? saved.lives : MAX_LIVES;
+    hintsRemaining = (typeof saved.hintsRemaining === "number") ? saved.hintsRemaining : 1;
+    selectedCards = [];
+
+    const solvedNames = new Set(solvedOrder);
+    const cardsByName = {};
+    currentCategories.forEach(cat => {
+      if (solvedNames.has(cat.name)) return; // ya está como bloque resuelto, no como carta suelta
+      cat.items.forEach(item => { cardsByName[item.name] = { name: item.name, img: item.img, category: cat.name }; });
+    });
+
+    cards = (saved.cardOrder || Object.keys(cardsByName))
+      .map(name => cardsByName[name])
+      .filter(Boolean); // por si algún nombre ya no existiera (personaje borrado, etc.)
+
+    document.getElementById("warning-msg").innerText = "";
+    showGameControls();
+    updateHintButtonState();
+    document.getElementById("gameover-modal").style.display = "none";
+
+    renderAllSolvedBlocks();
+    renderLives();
+    renderGrid();
+  }
+
   // Guarda el resultado del reto diario de hoy: en tu CUENTA (Firestore) si has iniciado
   // sesión —así se ve igual en cualquier dispositivo—, o en este navegador (localStorage) si
   // juegas como invitado. Se llama desde handleWin()/handleGameOver().
@@ -4119,6 +4263,14 @@
 
     if (stored && stored.date === todayKey) {
       renderFinishedDailyPanel(difficulty, stored);
+      return;
+    }
+
+    // Si dejaste este mismo reto a medias hoy (sin ganar ni perder), lo retomamos justo donde
+    // lo dejaste, en vez de generar uno nuevo y perder las categorías acertadas y las vidas.
+    const inProgress = await loadDailyInProgress(difficulty);
+    if (inProgress && inProgress.date === todayKey) {
+      resumeDailyFromSaved(difficulty, inProgress);
       return;
     }
 
@@ -4575,6 +4727,7 @@
 
     // handleWin() solo se llama en Novato/Supernova/Yonko (Infinito nunca "gana", sigue sin
     // parar hasta que fallas), así que este resultado siempre corresponde al reto diario.
+    clearDailyInProgress(currentDifficulty); // ya no está "a medias": pasa a ser un resultado definitivo
     saveDailyResult(currentDifficulty, "win", currentCategories);
     awardPanelCoins(DAILY_PANEL_COINS[currentDifficulty]);
 
@@ -4602,6 +4755,7 @@
     } else {
       showResultsControl();
       // Igual que en handleWin(): esta rama es siempre el reto diario, nunca Infinito.
+      clearDailyInProgress(currentDifficulty); // ya no está "a medias": pasa a ser un resultado definitivo
       saveDailyResult(currentDifficulty, "lose", currentCategories);
       applyResultModalContent(false);
     }
