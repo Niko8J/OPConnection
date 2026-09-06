@@ -5123,7 +5123,17 @@
   async function shareText(text) {
     if (navigator.share) {
       try {
-        await navigator.share({ text });
+        // Separamos la URL final como su propio campo en vez de dejarla como una línea más
+        // dentro del texto: es el uso "correcto" de esta función, y podría influir en qué
+        // opciones ofrece el propio sistema (algunos tratan de forma distinta "solo texto" que
+        // "texto + un enlace reconocido"). La reserva de copiar de más abajo sigue usando el
+        // texto completo tal cual, con la URL incluida, así que esto no le afecta.
+        const lines = text.split("\n");
+        const lastLine = lines[lines.length - 1];
+        const hasUrl = lastLine.startsWith("http://") || lastLine.startsWith("https://");
+        const shareData = hasUrl ? { text: lines.slice(0, -1).join("\n"), url: lastLine } : { text };
+
+        await navigator.share(shareData);
         return; // el usuario ya ha visto el propio panel nativo, no hace falta ningún aviso más
       } catch (e) {
         if (e.name === "AbortError") return; // cerró el panel sin elegir nada: no es un error
