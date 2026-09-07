@@ -299,6 +299,12 @@
     .profile-stat-card { background: #1e293b; border: 2px solid #334155; border-radius: 10px; padding: 14px 10px; text-align: center; }
     .profile-stat-card-name { font-size: 0.75rem; font-weight: bold; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 10px; }
     .profile-stat-card-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 6px; }
+    /* Con sitio de sobra (ordenador/tablet), las 4 métricas caben cómodas en una sola fila —
+       probado antes en una prueba visual, tanto ancho como estrecho. En móvil, donde se veía
+       demasiado apretado sin sitio para las etiquetas, se deja el 2x2 de siempre. */
+    @media (min-width: 600px) {
+      .profile-stat-card-metrics { grid-template-columns: repeat(4, 1fr); }
+    }
     .profile-stat-metric-icon { font-size: 0.95rem; }
     .profile-stat-metric-value { font-size: 1.1rem; font-weight: bold; color: #f8fafc; }
     .profile-stat-metric-label { font-size: 0.6rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.03em; }
@@ -957,6 +963,11 @@
 
       .modal-overlay { padding: 12px 8px; }
       .modal-content { padding: 16px; }
+      /* "Berries ganados" es más largo que el resto de nombres de esta rejilla (Avatares,
+         Marcos...) y en poco ancho pasaba a dos líneas, descuadrando la altura del icono y la
+         cifra de debajo respecto a sus vecinos de la misma fila. Solo se reduce aquí (no afecta
+         a las tarjetas de modo, cuyos nombres ya son cortos de sobra). */
+      .profile-collectibles-grid .profile-stat-card-name { font-size: 0.62rem; letter-spacing: 0; }
       .modal-content h2 { font-size: 1.25rem; margin-bottom: 6px; }
       .modal-content p { font-size: 0.85rem; margin-bottom: 4px; }
       .solutions-list { gap: 5px; margin-top: 10px; margin-bottom: 14px; }
@@ -2923,12 +2934,12 @@
           <div class="profile-stat-metric">
             <div class="profile-stat-metric-icon">🔥</div>
             <div class="profile-stat-metric-value">${m.current}</div>
-            <div class="profile-stat-metric-label">Racha</div>
+            <div class="profile-stat-metric-label">Racha actual</div>
           </div>
           <div class="profile-stat-metric">
             <div class="profile-stat-metric-icon">🏆</div>
             <div class="profile-stat-metric-value">${m.best}</div>
-            <div class="profile-stat-metric-label">Mejor</div>
+            <div class="profile-stat-metric-label">Mejor racha</div>
           </div>
         </div>
       </div>`).join("");
@@ -2941,7 +2952,7 @@
       { name: "Títulos", icon: "🏷️", value: `${(profile.ownedTitles || []).length}/${SHOP_TITLES.length}` },
       { name: "Logros", icon: "🏆", value: `${claimedCount}/${ACHIEVEMENTS.length}` },
       { name: "Compartidas", icon: "📤", value: `${profile.totalShares || 0}` },
-      { name: "Berries ganadas", img: "berries.webp", value: `${profile.totalBerriesEarned || 0}` }
+      { name: "Berries ganados", img: "berries.webp", value: `${profile.totalBerriesEarned || 0}` }
     ];
     const collectiblesHtml = `
       <div class="profile-collectibles-grid">
@@ -3768,8 +3779,28 @@
     });
   }
 
+  // Cada vez que un modal pasa a mostrarse (display deja de ser "none"), le reinicia el scroll
+  // a arriba del todo — sin esto, se quedaba donde lo hubieras dejado la última vez que lo
+  // cerraste, en vez de abrirse siempre como la primera vez. Un único MutationObserver por
+  // modal, vigilando su propio atributo style: así no hace falta tocar cada función de abrir
+  // por separado (son muchas, una por cada modal), solo detectar el momento en que cualquiera
+  // de ellos se vuelve visible.
+  function setupModalScrollReset() {
+    document.querySelectorAll(".modal-overlay").forEach(modal => {
+      const scrollArea = modal.querySelector(".modal-scroll-area");
+      if (!scrollArea) return;
+
+      const observer = new MutationObserver(() => {
+        const visible = modal.style.display && modal.style.display !== "none";
+        if (visible) scrollArea.scrollTop = 0;
+      });
+      observer.observe(modal, { attributes: true, attributeFilter: ["style"] });
+    });
+  }
+
   freezeDesign();
   setupModalScrollFades();
+  setupModalScrollReset();
   window.addEventListener("resize", () => scheduleViewportCheck(150));
   window.addEventListener("orientationchange", () => scheduleViewportCheck(400));
   window.addEventListener("pageshow", handleViewportChange);
