@@ -951,7 +951,7 @@
        "andamiaje" fijo; measureCardSize() vuelve a medir el hueco real ya con estos tamaños
        aplicados, así que el tablero crece solo, sin tocar nada del JS. */
     @media (max-height: 700px) {
-      :root { --logo-h: 56px; --container-pad-top: 4px; --v-gap-sm: 4px; --v-gap-md: 5px; }
+      :root { --logo-h: var(--icon-size); --container-pad-top: 4px; --v-gap-sm: 4px; --v-gap-md: 5px; }
       .difficulty-selector { gap: 6px; }
       .diff-btn { padding: 5px 10px; font-size: 0.85rem; }
       .warning-msg { height: 14px; line-height: 14px; font-size: 0.8rem; }
