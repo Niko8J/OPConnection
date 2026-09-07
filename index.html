@@ -5449,6 +5449,13 @@
   function openModal() {
     if (gameOver || awaitingNextPanel) {
       document.getElementById("gameover-modal").style.display = "flex";
+      // Las estadísticas de la comunidad pueden haber cambiado desde que se rellenó este
+      // modal (aunque sea la primera vez que lo abres hoy, otros jugadores pueden haber
+      // terminado el panel mientras tanto): las refrescamos cada vez que se abre, no solo la
+      // primera. Solo aplica al reto diario, nunca a Infinito.
+      if (!isInfiniteMode) {
+        renderCommunityStats(currentDifficulty, getMadridDailyKey());
+      }
     }
   }
 
