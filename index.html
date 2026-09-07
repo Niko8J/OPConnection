@@ -314,18 +314,22 @@
     .profile-stat-metric-icon { font-size: 0.95rem; }
     .profile-stat-metric-value { font-size: 1.1rem; font-weight: bold; color: #f8fafc; }
     .profile-stat-metric-label { font-size: 0.6rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.03em; }
-    .profile-collectibles-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-top: 2px; }
+    /* Personajes vistos / Categorías vistas van en su propia rejilla de 2 columnas (1 fila),
+       separada de la de siempre (Avatares exclusivos, Marcos...) para no forzarla a 4 columnas
+       — en pantallas que no son de las más estrechas ya se veía apretado con 4. */
+    .profile-viewed-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin-top: 2px; margin-bottom: 6px; }
+    .profile-collectibles-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
     /* Mismo padding/tamaños que .profile-stat-card por defecto, pero aún más reducidos aquí:
-       esta cuadrícula tiene 8 tarjetas (2 filas) en vez de 2-4, así que cada px de más pesa el
-       doble en la altura total de la pestaña. */
-    .profile-collectibles-grid .profile-stat-card { padding: 6px 8px; }
-    .profile-collectibles-grid .profile-stat-card-name {
+       estas rejillas tienen varias tarjetas por fila, así que cada px de más pesa el doble en
+       la altura total de la pestaña. */
+    .profile-viewed-grid .profile-stat-card, .profile-collectibles-grid .profile-stat-card { padding: 6px 8px; }
+    .profile-viewed-grid .profile-stat-card-name, .profile-collectibles-grid .profile-stat-card-name {
       margin-bottom: 4px;
-      /* Con 4 columnas, nombres como "Personajes vistos" o "Categorías vistas" pasan a dos
-         líneas incluso en pantallas anchas (no es ya un problema exclusivo de móvil), así que
-         reservamos SIEMPRE el alto de dos líneas para el nombre de cualquier tarjeta de esta
-         rejilla: así, aunque solo una tarjeta ocupe dos líneas de verdad, el icono y la cifra
-         de sus vecinas de la misma fila bajan la misma distancia y todo queda alineado.
+      /* Algunos nombres (p. ej. "Personajes vistos", "Berries ganados") pasan a dos líneas en
+         ciertos anchos. En vez de encoger la fuente para intentar que quepan en una sola línea
+         (no siempre se consigue), reservamos SIEMPRE el alto de dos líneas para el nombre de
+         cualquier tarjeta: así, aunque solo una ocupe dos líneas de verdad, el icono y la
+         cifra de sus vecinas de la misma fila bajan la misma distancia y todo queda alineado.
          "line-height" explícito porque, si no, el cálculo de dos líneas depende del valor por
          defecto del navegador (no siempre el mismo). */
       line-height: 1.2; min-height: calc(1.2em * 2); display: flex; align-items: center; justify-content: center;
@@ -2979,25 +2983,27 @@
     const viewedCount = (profile.viewedCharacters || []).length;
     const viewedCategoriesCount = (profile.viewedCategoryValues || []).length;
 
-    const collectibles = [
+    const viewedStats = [
       { name: "Personajes vistos", icon: "👁️", value: `${viewedCount}/${database.length}` },
-      { name: "Categorías vistas", icon: "🗂️", value: `${viewedCategoriesCount}/${getTotalCategoryValues()}` },
-      { name: "Avatares", icon: "👤", value: `${(profile.ownedAvatars || []).length}/${SHOP_AVATARS.length}` },
+      { name: "Categorías vistas", icon: "🗂️", value: `${viewedCategoriesCount}/${getTotalCategoryValues()}` }
+    ];
+    const collectibles = [
+      { name: "Avatares exclusivos", icon: "👤", value: `${(profile.ownedAvatars || []).length}/${SHOP_AVATARS.length}` },
       { name: "Marcos", icon: "🖼️", value: `${(profile.ownedFrames || []).length}/${SHOP_FRAMES.length}` },
       { name: "Títulos", icon: "🏷️", value: `${(profile.ownedTitles || []).length}/${SHOP_TITLES.length}` },
       { name: "Logros", icon: "🏆", value: `${claimedCount}/${ACHIEVEMENTS.length}` },
       { name: "Compartidas", icon: "📤", value: `${profile.totalShares || 0}` },
       { name: "Berries ganados", img: "berries.webp", value: `${profile.totalBerriesEarned || 0}` }
     ];
-    const collectiblesHtml = `
-      <div class="profile-collectibles-grid">
-        ${collectibles.map(c => `
-          <div class="profile-stat-card">
-            <div class="profile-stat-card-name">${escapeHtml(c.name)}</div>
-            <div class="profile-collectible-icon">${c.img ? `<img src="${c.img}" class="profile-collectible-icon-img" onerror="this.style.display='none'">` : c.icon}</div>
-            <div class="profile-collectible-value">${c.value}</div>
-          </div>`).join("")}
+    const statCardHtml = c => `
+      <div class="profile-stat-card">
+        <div class="profile-stat-card-name">${escapeHtml(c.name)}</div>
+        <div class="profile-collectible-icon">${c.img ? `<img src="${c.img}" class="profile-collectible-icon-img" onerror="this.style.display='none'">` : c.icon}</div>
+        <div class="profile-collectible-value">${c.value}</div>
       </div>`;
+    const collectiblesHtml = `
+      <div class="profile-viewed-grid">${viewedStats.map(statCardHtml).join("")}</div>
+      <div class="profile-collectibles-grid">${collectibles.map(statCardHtml).join("")}</div>`;
 
     return `${summaryHtml}<div class="profile-stats-grid">${cardsHtml}</div>${collectiblesHtml}`;
   }
