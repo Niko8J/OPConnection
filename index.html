@@ -4613,9 +4613,17 @@
   async function fetchDailyPuzzleStats(difficulty, todayKey) {
     try {
       const puzzleId = `${todayKey}_${difficulty}`;
-      const snap = await db.collection("dailyPuzzleStats").doc(puzzleId).get();
-      if (!snap.exists) return null;
+      // "source: server" a propósito: esto se lee justo después de escribir en el mismo
+      // documento (el resultado de esta misma partida), así que forzamos ir al servidor de
+      // verdad en vez de fiarnos de la caché local, para descartar cualquier posibilidad de
+      // leer una versión todavía no sincronizada del todo.
+      const snap = await db.collection("dailyPuzzleStats").doc(puzzleId).get({ source: "server" });
+      if (!snap.exists) {
+        console.log("[debug estadísticas comunidad] documento inexistente:", puzzleId);
+        return null;
+      }
       const data = snap.data();
+      console.log("[debug estadísticas comunidad]", puzzleId, "→", data);
       return { winCount: data.winCount || 0, loseCount: data.loseCount || 0 };
     } catch (e) {
       console.error("No se pudo leer la estadística compartida del panel:", e);
@@ -4640,7 +4648,7 @@
         <div class="community-stats-header">
           <span class="community-stats-win-text">✅ ${stats.winCount} · ${winPct}%</span>
           <span class="community-stats-label">Resultados de la comunidad</span>
-          <span class="community-stats-lose-text">💀 ${stats.loseCount} · ${losePct}%</span>
+          <span class="community-stats-lose-text">${stats.loseCount} · ${losePct}% 💀</span>
         </div>
         <div class="community-stats-bar">
           <div class="community-stats-win" style="width: ${winPct}%;"></div>
