@@ -5672,6 +5672,12 @@
       showResultsControl();
       // Igual que en handleWin(): esta rama es siempre el reto diario, nunca Infinito.
       clearDailyInProgress(currentDifficulty); // ya no está "a medias": pasa a ser un resultado definitivo
+      // El botón "Limpiar" se oculta en cuanto se muestra "Resultados" (showResultsControl),
+      // así que si te quedabas con tarjetas marcadas al perder (la selección que falló y
+      // gastó la última vida), no había ya ninguna forma de quitarlas — se quedaban
+      // resaltadas para siempre en ese tablero. Las deseleccionamos aquí a propósito.
+      selectedCards = [];
+      document.querySelectorAll("#grid .card.selected").forEach(el => el.classList.remove("selected"));
       await saveDailyResult(currentDifficulty, "lose", currentCategories);
       await applyResultModalContent(false);
     }
