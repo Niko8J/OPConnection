@@ -314,26 +314,25 @@
     .profile-stat-metric-icon { font-size: 0.95rem; }
     .profile-stat-metric-value { font-size: 1.1rem; font-weight: bold; color: #f8fafc; }
     .profile-stat-metric-label { font-size: 0.6rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.03em; }
-    .profile-collectibles-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 2px; }
+    .profile-collectibles-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-top: 2px; }
     /* Mismo padding/tamaños que .profile-stat-card por defecto, pero aún más reducidos aquí:
-       esta cuadrícula tiene 6 tarjetas (2 filas) en vez de 2-4, así que cada px de más pesa el
+       esta cuadrícula tiene 8 tarjetas (2 filas) en vez de 2-4, así que cada px de más pesa el
        doble en la altura total de la pestaña. */
     .profile-collectibles-grid .profile-stat-card { padding: 6px 8px; }
-    .profile-collectibles-grid .profile-stat-card-name { margin-bottom: 4px; }
+    .profile-collectibles-grid .profile-stat-card-name {
+      margin-bottom: 4px;
+      /* Con 4 columnas, nombres como "Personajes vistos" o "Categorías vistas" pasan a dos
+         líneas incluso en pantallas anchas (no es ya un problema exclusivo de móvil), así que
+         reservamos SIEMPRE el alto de dos líneas para el nombre de cualquier tarjeta de esta
+         rejilla: así, aunque solo una tarjeta ocupe dos líneas de verdad, el icono y la cifra
+         de sus vecinas de la misma fila bajan la misma distancia y todo queda alineado.
+         "line-height" explícito porque, si no, el cálculo de dos líneas depende del valor por
+         defecto del navegador (no siempre el mismo). */
+      line-height: 1.2; min-height: calc(1.2em * 2); display: flex; align-items: center; justify-content: center;
+    }
     .profile-collectible-icon { font-size: 1.1rem; margin-bottom: 2px; }
     .profile-collectible-icon-img { width: 18px; height: 18px; object-fit: contain; vertical-align: middle; }
     .profile-collectible-value { font-size: 0.9rem; font-weight: bold; color: #f8fafc; font-family: monospace; }
-    /* "Personajes vistos": tarjeta suelta de ancho completo, en horizontal (nombre a la
-       izquierda, icono+cifra agrupados a la derecha) — al ser tan ancha, apilarlo todo en
-       vertical como las tarjetas normales dejaría muchísimo hueco vacío a los lados. */
-    .profile-stat-card-wide {
-      display: flex; align-items: center; justify-content: space-between;
-      text-align: left; margin-bottom: 8px;
-    }
-    .profile-stat-card-wide .profile-stat-card-name { margin-bottom: 0; }
-    .profile-stat-card-wide-value { display: flex; align-items: center; gap: 6px; }
-    .profile-stat-card-wide .profile-collectible-icon { margin-bottom: 0; font-size: 1.2rem; }
-    .profile-stat-card-wide .profile-collectible-value { font-size: 1rem; }
     /* Barra de "resultados de la comunidad": reparto de victorias/derrotas de todo el mundo
        hoy, en esta dificultad. Verde/rojo, a juego con el borde del propio modal (que ya usa
        esos mismos colores para victoria/derrota). */
@@ -986,18 +985,6 @@
 
       .modal-overlay { padding: 12px 8px; }
       .modal-content { padding: 16px; }
-      /* "Berries ganados" es más largo que el resto de nombres de esta rejilla (Avatares,
-         Marcos...) y en poco ancho pasa a dos líneas. En vez de encoger la fuente para intentar
-         que quepa en una sola línea (no siempre lo conseguía, p. ej. en iPhone), reservamos
-         aquí SIEMPRE el alto de dos líneas para el nombre de cualquier tarjeta de esta rejilla:
-         así, aunque solo "Berries ganados" ocupe dos líneas de verdad, el icono y la cifra de
-         sus vecinas de la misma fila (Logros, Compartidas) bajan la misma distancia y todo
-         queda alineado, sin depender de que el texto quepa justo o no en cada pantalla.
-         "line-height" explícito porque, si no, el cálculo de dos líneas depende del valor por
-         defecto del navegador (no siempre el mismo). */
-      .profile-collectibles-grid .profile-stat-card-name {
-        line-height: 1.25; min-height: calc(1.25em * 2); display: flex; align-items: center; justify-content: center;
-      }
       .modal-content h2 { font-size: 1.25rem; margin-bottom: 6px; }
       .modal-content p { font-size: 0.85rem; margin-bottom: 4px; }
       .solutions-list { gap: 5px; margin-top: 10px; margin-bottom: 14px; }
@@ -2990,8 +2977,11 @@
 
     const claimedCount = (profile.claimedAchievements || []).length;
     const viewedCount = (profile.viewedCharacters || []).length;
+    const viewedCategoriesCount = (profile.viewedCategoryValues || []).length;
 
     const collectibles = [
+      { name: "Personajes vistos", icon: "👁️", value: `${viewedCount}/${database.length}` },
+      { name: "Categorías vistas", icon: "🗂️", value: `${viewedCategoriesCount}/${getTotalCategoryValues()}` },
       { name: "Avatares", icon: "👤", value: `${(profile.ownedAvatars || []).length}/${SHOP_AVATARS.length}` },
       { name: "Marcos", icon: "🖼️", value: `${(profile.ownedFrames || []).length}/${SHOP_FRAMES.length}` },
       { name: "Títulos", icon: "🏷️", value: `${(profile.ownedTitles || []).length}/${SHOP_TITLES.length}` },
@@ -2999,19 +2989,7 @@
       { name: "Compartidas", icon: "📤", value: `${profile.totalShares || 0}` },
       { name: "Berries ganados", img: "berries.webp", value: `${profile.totalBerriesEarned || 0}` }
     ];
-    // "Personajes vistos" va aparte, como tarjeta propia de ancho completo (en vez de un
-    // séptimo elemento suelto en la rejilla de 3 columnas, que dejaría una fila coja con 2
-    // huecos vacíos). De paso, al ser la única de ancho completo, se nota un poco más.
-    const viewedCharactersHtml = `
-      <div class="profile-stat-card profile-stat-card-wide">
-        <div class="profile-stat-card-name">Personajes vistos</div>
-        <div class="profile-stat-card-wide-value">
-          <span class="profile-collectible-icon">👁️</span>
-          <span class="profile-collectible-value">${viewedCount}/${database.length}</span>
-        </div>
-      </div>`;
     const collectiblesHtml = `
-      ${viewedCharactersHtml}
       <div class="profile-collectibles-grid">
         ${collectibles.map(c => `
           <div class="profile-stat-card">
@@ -4091,6 +4069,23 @@
     return categoryName.includes(": ") ? categoryName.split(": ").slice(1).join(": ") : categoryName;
   }
 
+  // Cuántos valores de categoría distintos hay en total, para el denominador de "Categorías
+  // vistas". Se cachea porque "database" no cambia durante la sesión, así no hace falta
+  // recalcularlo cada vez que se abre el perfil.
+  let cachedTotalCategoryValues = null;
+  function getTotalCategoryValues() {
+    if (cachedTotalCategoryValues !== null) return cachedTotalCategoryValues;
+    const values = new Set();
+    database.forEach(char => {
+      if (!char.tags) return;
+      Object.entries(char.tags).forEach(([, tagData]) => {
+        parseTagEntries(tagData).forEach(({ value }) => values.add(value));
+      });
+    });
+    cachedTotalCategoryValues = values.size;
+    return cachedTotalCategoryValues;
+  }
+
   // Para algunas categorías con nombres largos, si el texto completo no cabe en una sola
   // línea (por ejemplo, en móviles con pantalla más alta que ancha), lo sustituimos por una
   // versión más corta que sigue teniendo sentido por sí sola.
@@ -4375,7 +4370,7 @@
 
     currentCategories = result.groups;
     registerCategoryUsage(result.groups.map(g => g.name));
-    recordCharactersViewed(currentCategories);
+    recordPanelSeen(currentCategories);
     initGame();
   }
 
@@ -4634,27 +4629,39 @@
   // cuentan. Se guarda en las dos colecciones a la vez (como ya hace bestStreak), para que se
   // vea tanto en tu propio Perfil como en el de otros que miren el tuyo. Solo aplica a cuentas
   // con sesión — el modal de Perfil ni siquiera se abre para invitados.
-  // Registra, para la estadística "Personajes vistos", los IDs de los personajes de un panel
-  // recién generado (diario o Infinito) que el jugador todavía no tuviera guardados. Se llama
-  // una sola vez por panel NUEVO (no al reanudar uno a medias ni al volver a ver uno ya
-  // terminado, porque esos personajes ya se registraron la primera vez que se generó ese
-  // panel) — arrayUnion, aun así, ya se encarga de no duplicar aunque se llamara de más.
-  async function recordCharactersViewed(categories) {
+  // Registra, para las estadísticas "Personajes vistos" y "Categorías vistas", los IDs de
+  // personaje y los nombres de categoría de un panel recién generado (diario o Infinito) que
+  // el jugador todavía no tuviera guardados. Se llama una sola vez por panel NUEVO (no al
+  // reanudar uno a medias ni al volver a ver uno ya terminado, porque eso ya se registró la
+  // primera vez que se generó ese panel) — arrayUnion, aun así, ya se encarga de no duplicar
+  // aunque se llamara de más.
+  //
+  // Para categorías se guarda SOLO el valor del tag (con getTagValueOnly, p. ej. "Piratas de
+  // Fuego" en vez de "Banda: Piratas de Fuego"), no el nombre completo de categoría: así, si el
+  // mismo valor pudiera aparecer bajo distintas claves, o esa misma agrupación existiera para
+  // varias dificultades a la vez, sigue contando como una sola categoría vista, no varias.
+  async function recordPanelSeen(categories) {
     if (!currentUser) return;
-    const ids = [...new Set(categories.flatMap(cat => cat.items.map(item => item.id)))];
-    if (ids.length === 0) return;
+    const characterIds = [...new Set(categories.flatMap(cat => cat.items.map(item => item.id)))];
+    const categoryValues = [...new Set(categories.map(cat => getTagValueOnly(cat.name)))];
+    if (characterIds.length === 0 && categoryValues.length === 0) return;
     try {
-      const payload = { viewedCharacters: firebase.firestore.FieldValue.arrayUnion(...ids) };
+      const payload = {};
+      if (characterIds.length > 0) payload.viewedCharacters = firebase.firestore.FieldValue.arrayUnion(...characterIds);
+      if (categoryValues.length > 0) payload.viewedCategoryValues = firebase.firestore.FieldValue.arrayUnion(...categoryValues);
       await Promise.all([
         db.collection("users").doc(currentUser.uid).set(payload, { merge: true }),
         db.collection("publicProfiles").doc(currentUser.uid).set(payload, { merge: true })
       ]);
       currentUserProfile = currentUserProfile || {};
-      const merged = new Set(currentUserProfile.viewedCharacters || []);
-      ids.forEach(id => merged.add(id));
-      currentUserProfile.viewedCharacters = [...merged];
+      const mergedChars = new Set(currentUserProfile.viewedCharacters || []);
+      characterIds.forEach(id => mergedChars.add(id));
+      currentUserProfile.viewedCharacters = [...mergedChars];
+      const mergedCats = new Set(currentUserProfile.viewedCategoryValues || []);
+      categoryValues.forEach(v => mergedCats.add(v));
+      currentUserProfile.viewedCategoryValues = [...mergedCats];
     } catch (e) {
-      console.error("No se pudieron guardar los personajes vistos:", e);
+      console.error("No se pudieron guardar los personajes/categorías vistos:", e);
     }
   }
 
@@ -5008,7 +5015,7 @@
       const groups = await getOrCreateDailyPuzzle(difficulty, todayKey);
       document.getElementById("warning-msg").innerText = "";
       currentCategories = groups;
-      recordCharactersViewed(currentCategories);
+      recordPanelSeen(currentCategories);
       initGame();
     } catch (e) {
       document.getElementById("warning-msg").innerText =
