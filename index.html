@@ -289,12 +289,18 @@
     }
     .profile-tab-btn.active { background: #f59e0b; border-color: #f59e0b; color: #0f172a; }
 
-    .profile-stats-summary-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
-    .profile-stats-summary-card { background: #1e293b; border-radius: 10px; padding: 14px 10px; text-align: center; }
-    .profile-stats-summary-value { font-size: 1.5rem; font-weight: bold; font-family: monospace; }
+    .profile-stats-summary-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 8px; }
+    .profile-stats-summary-card { background: #1e293b; border-radius: 10px; padding: 8px 10px; text-align: center; }
+    .profile-stats-summary-value { font-size: 1.15rem; font-weight: bold; font-family: monospace; }
     .profile-stats-summary-card.win .profile-stats-summary-value { color: #22c55e; }
     .profile-stats-summary-card.lose .profile-stats-summary-value { color: #ef4444; }
-    .profile-stats-summary-label { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
+    .profile-stats-summary-label { font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+    /* Los mismos "N% · N victorias" / "N derrotas · N%" de abajo de la barra, pero repartidos a
+       los dos extremos (uno pegado a la izquierda, el otro a la derecha) en vez de centrados
+       juntos como un solo bloque en medio — antes usaba una clase (.community-stats-numbers)
+       que no tenía ningún CSS definido, así que cada texto quedaba como un simple <span> en
+       línea, sin repartirse. */
+    .profile-stats-numbers-row { display: flex; justify-content: space-between; }
     .profile-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
     .profile-stat-card { background: #1e293b; border: 2px solid #334155; border-radius: 10px; padding: 14px 10px; text-align: center; }
     .profile-stat-card-name { font-size: 0.75rem; font-weight: bold; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 10px; }
@@ -2918,7 +2924,7 @@
           <div class="community-stats-win" style="width: ${winPct}%;"></div>
           <div class="community-stats-lose" style="width: ${losePct}%;"></div>
         </div>
-        <div class="community-stats-numbers" style="margin: 6px 0 16px;">
+        <div class="profile-stats-numbers-row" style="margin: 6px 0 16px;">
           <span class="community-stats-win-text">${winPct}% · ${totalWins} victorias</span>
           <span class="community-stats-lose-text">${totalLosses} derrotas · ${losePct}%</span>
         </div>`;
