@@ -4562,11 +4562,18 @@
     if (!currentUser) return;
     try {
       const field = won ? "wins" : "losses";
-      const key = `modeStats.${difficulty}.${field}`;
       const increment = firebase.firestore.FieldValue.increment(1);
+      // OJO: antes esto se escribía como una clave-cadena con puntos ("modeStats.novato.wins").
+      // set(..., {merge:true}) NO interpreta los puntos de una clave así como una ruta anidada
+      // (eso solo lo hace update()) — creaba un campo nuevo con ese nombre literal, puntos
+      // incluidos, en vez de dentro de un objeto "modeStats" de verdad. Por eso el contador
+      // nunca se leía en otro dispositivo ni sobrevivía a recargar la página: los datos reales
+      // vivían en un campo que nadie leía. Con el objeto anidado de verdad, merge:true SÍ
+      // fusiona campo a campo sin pisar a sus hermanos (la otra cifra, u otras dificultades).
+      const payload = { modeStats: { [difficulty]: { [field]: increment } } };
       await Promise.all([
-        db.collection("users").doc(currentUser.uid).set({ [key]: increment }, { merge: true }),
-        db.collection("publicProfiles").doc(currentUser.uid).set({ [key]: increment }, { merge: true })
+        db.collection("users").doc(currentUser.uid).set(payload, { merge: true }),
+        db.collection("publicProfiles").doc(currentUser.uid).set(payload, { merge: true })
       ]);
       const prevStats = (currentUserProfile && currentUserProfile.modeStats) || {};
       const prevMode = prevStats[difficulty] || { wins: 0, losses: 0 };
