@@ -1990,7 +1990,6 @@
     const modal = document.getElementById("ranking-modal");
 
     const RANKING_TARGET = 50;
-    const RANKING_BUFFER = 70; // margen extra por si hay que extender la lista en un empate
 
     // Cargamos todo ANTES de mostrar el modal (en vez de abrirlo con un "Cargando..." y
     // rellenarlo después), para que en el caso normal (carga rápida) aparezca ya con el
@@ -2009,7 +2008,7 @@
       const snap = await db.collection("publicProfiles")
         .orderBy("bestStreak", "desc")
         .orderBy("bestStreakAt", "asc") // en caso de empate en la racha, antes = más arriba
-        .limit(RANKING_BUFFER)
+        .limit(RANKING_TARGET)
         .get();
 
       if (snap.empty) {
@@ -2019,14 +2018,29 @@
         return;
       }
 
-      // Si hay empate justo en el puesto 50, extendemos la lista con los puestos siguientes
-      // que compartan esa misma racha, en vez de cortar el empate a medias arbitrariamente.
-      let cutoff = Math.min(RANKING_TARGET, snap.docs.length);
-      const boundaryStreak = snap.docs[cutoff - 1].data().bestStreak;
-      while (cutoff < snap.docs.length && snap.docs[cutoff].data().bestStreak === boundaryStreak) {
-        cutoff++;
+      let docs = snap.docs;
+
+      // Antes se pedían siempre 70 en vez de 50 "por si acaso" alguien empataba justo en el
+      // último puesto — un margen de sobra que se descargaba SIEMPRE, aunque casi nunca hiciera
+      // falta. Ahora solo pedimos los 50 que se van a mostrar, y únicamente si el último de
+      // ellos pudiera tener empate con alguien que se quedó fuera, hacemos una segunda consulta
+      // pequeña y aparte, solo para esa racha exacta (startAfter evita repetir al último ya
+      // incluido). Si esta consulta extra fallara por lo que sea, no rompemos el Ranking: se
+      // muestra el top 50 tal cual, sin extender el empate.
+      if (docs.length === RANKING_TARGET) {
+        try {
+          const boundary = docs[docs.length - 1].data();
+          const extraSnap = await db.collection("publicProfiles")
+            .where("bestStreak", "==", boundary.bestStreak)
+            .orderBy("bestStreakAt", "asc")
+            .startAfter(boundary.bestStreakAt)
+            .limit(20) // tope razonable por si el empate fuera enorme
+            .get();
+          docs = docs.concat(extraSnap.docs);
+        } catch (e) {
+          console.error("No se pudo comprobar si había empate en el último puesto del Ranking:", e);
+        }
       }
-      const docs = snap.docs.slice(0, cutoff);
 
       const medals = ["🥇", "🥈", "🥉"];
       const posClasses = ["gold", "silver", "bronze"];
