@@ -2229,16 +2229,18 @@
 
         const coinsEarned = newlyUnlocked.reduce((sum, a) => sum + (a.coins || 0), 0);
         const newBerries = (data.berries || 0) + coinsEarned;
+        const newTotalBerriesEarned = (data.totalBerriesEarned || 0) + coinsEarned;
         const newClaimed = [...claimed, ...newlyUnlocked.map(a => a.id)];
 
-        transaction.set(docRef, { berries: newBerries, claimedAchievements: newClaimed }, { merge: true });
+        transaction.set(docRef, { berries: newBerries, totalBerriesEarned: newTotalBerriesEarned, claimedAchievements: newClaimed }, { merge: true });
 
-        return { coinsEarned, newlyUnlocked, berries: newBerries, claimedAchievements: newClaimed };
+        return { coinsEarned, newlyUnlocked, berries: newBerries, totalBerriesEarned: newTotalBerriesEarned, claimedAchievements: newClaimed };
       });
 
       if (result) {
         currentUserProfile = currentUserProfile || {};
         currentUserProfile.berries = result.berries;
+        currentUserProfile.totalBerriesEarned = result.totalBerriesEarned;
         currentUserProfile.claimedAchievements = result.claimedAchievements;
         updateAuthUI(); // refresca la cifra de Berries del menú al momento
       }
@@ -2313,10 +2315,15 @@
     if (!currentUser || !amount) return;
     try {
       await db.collection("users").doc(currentUser.uid).set(
-        { berries: firebase.firestore.FieldValue.increment(amount) }, { merge: true }
+        {
+          berries: firebase.firestore.FieldValue.increment(amount),
+          totalBerriesEarned: firebase.firestore.FieldValue.increment(amount)
+        },
+        { merge: true }
       );
       currentUserProfile = currentUserProfile || {};
       currentUserProfile.berries = (currentUserProfile.berries || 0) + amount;
+      currentUserProfile.totalBerriesEarned = (currentUserProfile.totalBerriesEarned || 0) + amount;
       updateAuthUI();
       showCoinToast(amount);
     } catch (e) {
@@ -2932,10 +2939,15 @@
         </div>
       </div>`).join("");
 
+    const claimedCount = (profile.claimedAchievements || []).length;
+
     const collectibles = [
-      { name: "Avatares", icon: "🖼️", owned: (profile.ownedAvatars || []).length, total: SHOP_AVATARS.length },
-      { name: "Marcos", icon: "🖌️", owned: (profile.ownedFrames || []).length, total: SHOP_FRAMES.length },
-      { name: "Títulos", icon: "🏷️", owned: (profile.ownedTitles || []).length, total: SHOP_TITLES.length }
+      { name: "Avatares", icon: "🖼️", value: `${(profile.ownedAvatars || []).length}/${SHOP_AVATARS.length}` },
+      { name: "Marcos", icon: "🖌️", value: `${(profile.ownedFrames || []).length}/${SHOP_FRAMES.length}` },
+      { name: "Títulos", icon: "🏷️", value: `${(profile.ownedTitles || []).length}/${SHOP_TITLES.length}` },
+      { name: "Logros", icon: "🏅", value: `${claimedCount}/${ACHIEVEMENTS.length}` },
+      { name: "Compartidas", icon: "📤", value: `${profile.totalShares || 0}` },
+      { name: "Berries ganadas", icon: "🪙", value: `${profile.totalBerriesEarned || 0}` }
     ];
     const collectiblesHtml = `
       <div class="profile-collectibles-grid">
@@ -2943,7 +2955,7 @@
           <div class="profile-stat-card">
             <div class="profile-stat-card-name">${escapeHtml(c.name)}</div>
             <div class="profile-collectible-icon">${c.icon}</div>
-            <div class="profile-collectible-value">${c.owned}/${c.total}</div>
+            <div class="profile-collectible-value">${c.value}</div>
           </div>`).join("")}
       </div>`;
 
@@ -5384,6 +5396,24 @@
     return window.matchMedia("(pointer: coarse)").matches;
   }
 
+  // Cuenta una compartición como "completada" cuando de verdad ha pasado algo (se abrió una
+  // app del panel nativo, o se copió al portapapeles) — nunca si canceló el panel sin elegir
+  // nada, ni si falló por completo. No es una garantía de que el mensaje llegara a enviarse de
+  // verdad a ningún sitio (eso ya escapa a lo que la web puede saber), pero sí de que hubo una
+  // intención real de compartir, no solo un toque accidental al botón.
+  async function incrementTotalShares() {
+    if (!currentUser) return;
+    try {
+      await db.collection("users").doc(currentUser.uid).set(
+        { totalShares: firebase.firestore.FieldValue.increment(1) }, { merge: true }
+      );
+      currentUserProfile = currentUserProfile || {};
+      currentUserProfile.totalShares = (currentUserProfile.totalShares || 0) + 1;
+    } catch (e) {
+      console.error("No se pudo actualizar el contador de comparticiones:", e);
+    }
+  }
+
   async function shareText(text) {
     // El panel nativo de Windows (y probablemente otros de escritorio) se ha demostrado poco
     // fiable pasando el texto de cualquier forma: primero no ofrecía "Copiar" con todo junto
@@ -5394,6 +5424,7 @@
     if (isTouchDevice() && navigator.share) {
       try {
         await navigator.share({ text });
+        incrementTotalShares();
         return; // el usuario ya ha visto el propio panel nativo, no hace falta ningún aviso más
       } catch (e) {
         if (e.name === "AbortError") return; // cerró el panel sin elegir nada: no es un error
@@ -5404,6 +5435,7 @@
     try {
       await navigator.clipboard.writeText(text);
       showToast("📋 ¡Copiado! Ya puedes pegarlo donde quieras");
+      incrementTotalShares();
     } catch (e) {
       const textarea = document.createElement("textarea");
       textarea.value = text;
@@ -5414,6 +5446,7 @@
       try {
         document.execCommand("copy");
         showToast("📋 ¡Copiado! Ya puedes pegarlo donde quieras");
+        incrementTotalShares();
       } catch (e2) {
         console.error("No se pudo copiar el resultado:", e2);
       }
