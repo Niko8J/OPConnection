@@ -301,11 +301,11 @@
       margin-bottom: 5px;
     }
     .community-stats-label {
-      font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;
+      font-size: 0.62rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;
       text-align: center; white-space: nowrap;
     }
-    .community-stats-win-text { text-align: left; color: #4ade80; font-size: 0.8rem; font-weight: bold; }
-    .community-stats-lose-text { text-align: right; color: #f87171; font-size: 0.8rem; font-weight: bold; }
+    .community-stats-win-text { text-align: left; color: #4ade80; font-size: 0.72rem; font-weight: bold; }
+    .community-stats-lose-text { text-align: right; color: #f87171; font-size: 0.72rem; font-weight: bold; }
     .community-stats-bar {
       display: flex; width: 100%; height: 8px; border-radius: 5px; overflow: hidden;
       background: #334155;
@@ -962,6 +962,10 @@
       .ad-banner { height: 50px; }
       .site-footer { font-size: 0.7rem; }
       .footer-link { font-size: 0.7rem; padding: 1px 2px; }
+      /* Solo el padding de arriba/abajo (no el de los lados, ni el tamaño de letra del nombre
+         ni el de las fotos de los personajes): cada categoría ya resuelta ocupa un pelín menos
+         de alto, para ayudar a que quepa todo sin scroll en pantallas bajas. */
+      .solved-category { padding: 2px 8px; }
     }
 
   </style>
@@ -4464,12 +4468,33 @@
 
   // Pide y pinta la barra de forma asíncrona (el modal ya se ha abierto antes de que esto
   // termine, no le hace esperar): mientras tanto el hueco se queda vacío sin más.
+  // Si la etiqueta central llegara a tocar los números de los lados (pantallas muy estrechas),
+  // se oculta del todo en vez de dejar que se aprieten o se corten — igual filosofía que
+  // fixSolvedLabelOverflow, pero midiendo solapamiento en vez de desbordamiento de una sola
+  // etiqueta.
+  function fixCommunityStatsOverlap(containerEl) {
+    const label = containerEl.querySelector(".community-stats-label");
+    const winText = containerEl.querySelector(".community-stats-win-text");
+    const loseText = containerEl.querySelector(".community-stats-lose-text");
+    if (!label || !winText || !loseText) return;
+
+    const labelRect = label.getBoundingClientRect();
+    const winRect = winText.getBoundingClientRect();
+    const loseRect = loseText.getBoundingClientRect();
+    const overlapping = labelRect.left < winRect.right + 4 || labelRect.right > loseRect.left - 4;
+    // display:none (no visibility:hidden): así el hueco de la columna central del grid se
+    // libera de verdad, dejando que los números de los lados se repartan el espacio que
+    // quedaba ocupado por la etiqueta, en vez de quedarse igual de apretados con ella invisible.
+    label.style.display = overlapping ? "none" : "";
+  }
+
   async function renderCommunityStats(difficulty, todayKey) {
     const container = document.getElementById("community-stats-container");
     if (!container) return;
     container.innerHTML = "";
     const stats = await fetchDailyPuzzleStats(difficulty, todayKey);
     container.innerHTML = buildCommunityStatsHtml(stats);
+    fixCommunityStatsOverlap(container);
   }
 
   async function saveDailyResult(difficulty, result, groups) {
