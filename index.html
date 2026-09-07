@@ -292,6 +292,27 @@
       color: #94a3b8; font-size: 0.95rem; line-height: 1.6;
     }
     .profile-modal-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    /* Barra de "resultados de la comunidad": reparto de victorias/derrotas de todo el mundo
+       hoy, en esta dificultad. Verde/rojo, a juego con el borde del propio modal (que ya usa
+       esos mismos colores para victoria/derrota). */
+    .community-stats { margin: 4px 0 16px; }
+    .community-stats-label {
+      font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+    .community-stats-bar {
+      display: flex; width: 100%; height: 10px; border-radius: 6px; overflow: hidden;
+      background: #334155;
+    }
+    .community-stats-win { background: #22c55e; }
+    .community-stats-lose { background: #ef4444; }
+    .community-stats-numbers {
+      display: flex; justify-content: space-between; margin-top: 6px;
+      font-size: 0.85rem; font-weight: bold;
+    }
+    .community-stats-win-text { color: #4ade80; }
+    .community-stats-lose-text { color: #f87171; }
+
     .gameover-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
     /* ---------- Tienda ---------- */
@@ -409,6 +430,12 @@
        visibility en vez de display:none, para que el hueco se mantenga y la insignia no
        cambie de tamaño entre conseguido y no conseguido. */
     .achievement-badge.unlocked .achievement-progress { visibility: hidden; }
+    /* El Ranking no tiene un progreso lineal fiable (subir del 2º al 1er puesto puede ser
+       muchísimo más difícil que del 50º al 40º, al depender de lo que hagan los demás, no solo
+       de uno mismo) — una barra ahí daría una falsa sensación de "ya casi" a alguien en 2ª
+       posición. Se oculta siempre en esta columna, conseguido o no, con el mismo truco de
+       visibility (no display:none) para no descuadrar el tamaño de la insignia. */
+    .achievement-badge.tier-ranking .achievement-progress { visibility: hidden; }
     .achievement-progress-track {
       width: 100%; height: 5px; border-radius: 3px; overflow: hidden;
       background: rgba(148, 163, 184, 0.25);
@@ -853,7 +880,10 @@
       border-radius: 12px 12px 0 0;
       pointer-events: none; opacity: 0; transition: opacity 0.15s ease;
     }
-    .modal-content h2 { margin-bottom: 10px; font-size: 1.6rem; }
+    /* Centrado siempre, sin importar si el resto del modal está alineado a la izquierda (como
+       Cómo jugar o el Ranking): si no, el título heredaba esa alineación y quedaba pegado a la
+       izquierda, solapándose un poco con la X de cerrar. */
+    .modal-content h2 { margin-bottom: 10px; font-size: 1.6rem; text-align: center; }
     .solutions-list { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; margin-bottom: 20px; text-align: left; }
     .solution-row {
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
@@ -1089,6 +1119,7 @@
       <h2 id="modal-title"></h2>
       <p id="modal-text"></p>
       <div id="solutions-container" class="solutions-list"></div>
+      <div id="community-stats-container"></div>
       <div class="gameover-actions">
         <button class="action-btn" id="modal-action-btn" onclick="closeModal()">Entendido</button>
         <button class="action-btn" id="share-result-btn" onclick="shareResult()" style="display: none;">Compartir</button>
@@ -4371,6 +4402,73 @@
   // Guarda el resultado del reto diario de hoy: en tu CUENTA (Firestore) si has iniciado
   // sesión —así se ve igual en cualquier dispositivo—, o en este navegador (localStorage) si
   // juegas como invitado. Se llama desde handleWin()/handleGameOver().
+  // ---------- Estadísticas de la comunidad (victorias/derrotas de todos, por panel diario) ----------
+  //
+  // Colección aparte de dailyPuzzles a propósito: esa está bloqueada contra escrituras para
+  // proteger las respuestas del día (nadie debe poder tocarla), así que estos contadores viven
+  // en su propia colección, con sus propias reglas más permisivas.
+  //
+  // Son solo estadísticas, no algo crítico para el juego: si falla, no molestamos al jugador
+  // con ningún aviso ni bloqueamos nada, simplemente no se refleja ese resultado en el conteo.
+  async function incrementDailyPuzzleStats(difficulty, todayKey, won) {
+    try {
+      const puzzleId = `${todayKey}_${difficulty}`;
+      const field = won ? "winCount" : "loseCount";
+      await db.collection("dailyPuzzleStats").doc(puzzleId).set(
+        { [field]: firebase.firestore.FieldValue.increment(1) },
+        { merge: true }
+      );
+    } catch (e) {
+      console.error("No se pudo actualizar la estadística compartida del panel:", e);
+    }
+  }
+
+  async function fetchDailyPuzzleStats(difficulty, todayKey) {
+    try {
+      const puzzleId = `${todayKey}_${difficulty}`;
+      const snap = await db.collection("dailyPuzzleStats").doc(puzzleId).get();
+      if (!snap.exists) return null;
+      const data = snap.data();
+      return { winCount: data.winCount || 0, loseCount: data.loseCount || 0 };
+    } catch (e) {
+      console.error("No se pudo leer la estadística compartida del panel:", e);
+      return null;
+    }
+  }
+
+  // Barra verde/roja con el reparto de victorias y derrotas de todo el mundo hoy, en esta
+  // dificultad. Si nadie más ha terminado todavía (total 0) o falló la lectura, no se muestra
+  // nada — mejor un hueco vacío que una barra sin sentido a 0%/0%.
+  function buildCommunityStatsHtml(stats) {
+    if (!stats) return "";
+    const total = stats.winCount + stats.loseCount;
+    if (total === 0) return "";
+    const winPct = Math.round((stats.winCount / total) * 100);
+    const losePct = 100 - winPct;
+    return `
+      <div class="community-stats">
+        <div class="community-stats-label">Resultados de la comunidad</div>
+        <div class="community-stats-bar">
+          <div class="community-stats-win" style="width: ${winPct}%;"></div>
+          <div class="community-stats-lose" style="width: ${losePct}%;"></div>
+        </div>
+        <div class="community-stats-numbers">
+          <span class="community-stats-win-text">✅ ${stats.winCount} · ${winPct}%</span>
+          <span class="community-stats-lose-text">💀 ${stats.loseCount} · ${losePct}%</span>
+        </div>
+      </div>`;
+  }
+
+  // Pide y pinta la barra de forma asíncrona (el modal ya se ha abierto antes de que esto
+  // termine, no le hace esperar): mientras tanto el hueco se queda vacío sin más.
+  async function renderCommunityStats(difficulty, todayKey) {
+    const container = document.getElementById("community-stats-container");
+    if (!container) return;
+    container.innerHTML = "";
+    const stats = await fetchDailyPuzzleStats(difficulty, todayKey);
+    container.innerHTML = buildCommunityStatsHtml(stats);
+  }
+
   async function saveDailyResult(difficulty, result, groups) {
     const todayKey = getMadridDailyKey();
     // Guardamos también en qué orden se resolvieron las categorías, cuántas vidas quedaban, y
@@ -4420,6 +4518,12 @@
     // sin tener que salir y volver a entrar en el modo.
     updateInfiniteScoreDisplay();
     await checkAndAwardAchievementCoinsWithToast();
+
+    // Contador compartido de victorias/derrotas de HOY para esta dificultad (para la barra de
+    // "resultados de la comunidad" del modal de resultado) — cuenta a todo el mundo, invitado
+    // o con cuenta, así que va en su propia colección, no en dailyPuzzles (bloqueada a
+    // propósito contra escrituras, para proteger las respuestas del día).
+    incrementDailyPuzzleStats(difficulty, todayKey, result === "win");
   }
 
   // Si jugaste el diario de hoy COMO INVITADO en este mismo navegador y luego inicias sesión,
@@ -5096,8 +5200,9 @@
     actionBtn.innerText = "Siguiente ➡️";
     actionBtn.onclick = continueInfinitePanel;
     // Mismo motivo que en la derrota de Infinito: esto no es el reto diario, así que no hay
-    // nada que compartir aquí.
+    // nada que compartir aquí, ni estadísticas de la comunidad que mostrar.
     document.getElementById("share-result-btn").style.display = "none";
+    document.getElementById("community-stats-container").innerHTML = "";
 
     renderModalSolutions();
   }
@@ -5257,6 +5362,7 @@
     shareBtn.style.display = "inline-block";
 
     renderModalSolutions();
+    renderCommunityStats(currentDifficulty, getMadridDailyKey());
   }
 
   function handleWin() {
@@ -5292,9 +5398,11 @@
       actionBtn.onclick = closeModal;
       // Aquí sí se comparte: es el cierre natural de la racha de Infinito, con su propio
       // resumen (sin categorías que colorear, solo el nº de paneles resueltos en la racha).
+      // No hay, en cambio, estadísticas de la comunidad que mostrar (eso es solo del diario).
       const shareBtn = document.getElementById("share-result-btn");
       shareBtn.onclick = shareResultInfinite;
       shareBtn.style.display = "inline-block";
+      document.getElementById("community-stats-container").innerHTML = "";
       renderModalSolutions();
     } else {
       showResultsControl();
