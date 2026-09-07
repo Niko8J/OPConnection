@@ -964,10 +964,17 @@
       .modal-overlay { padding: 12px 8px; }
       .modal-content { padding: 16px; }
       /* "Berries ganados" es más largo que el resto de nombres de esta rejilla (Avatares,
-         Marcos...) y en poco ancho pasaba a dos líneas, descuadrando la altura del icono y la
-         cifra de debajo respecto a sus vecinos de la misma fila. Solo se reduce aquí (no afecta
-         a las tarjetas de modo, cuyos nombres ya son cortos de sobra). */
-      .profile-collectibles-grid .profile-stat-card-name { font-size: 0.62rem; letter-spacing: 0; }
+         Marcos...) y en poco ancho pasa a dos líneas. En vez de encoger la fuente para intentar
+         que quepa en una sola línea (no siempre lo conseguía, p. ej. en iPhone), reservamos
+         aquí SIEMPRE el alto de dos líneas para el nombre de cualquier tarjeta de esta rejilla:
+         así, aunque solo "Berries ganados" ocupe dos líneas de verdad, el icono y la cifra de
+         sus vecinas de la misma fila (Logros, Compartidas) bajan la misma distancia y todo
+         queda alineado, sin depender de que el texto quepa justo o no en cada pantalla.
+         "line-height" explícito porque, si no, el cálculo de dos líneas depende del valor por
+         defecto del navegador (no siempre el mismo). */
+      .profile-collectibles-grid .profile-stat-card-name {
+        line-height: 1.25; min-height: calc(1.25em * 2); display: flex; align-items: center; justify-content: center;
+      }
       .modal-content h2 { font-size: 1.25rem; margin-bottom: 6px; }
       .modal-content p { font-size: 0.85rem; margin-bottom: 4px; }
       .solutions-list { gap: 5px; margin-top: 10px; margin-bottom: 14px; }
