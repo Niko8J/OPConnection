@@ -4734,8 +4734,10 @@
     // "resultados de la comunidad" del modal de resultado) — cuenta a todo el mundo, invitado
     // o con cuenta, así que va en su propia colección, no en dailyPuzzles (bloqueada a
     // propósito contra escrituras, para proteger las respuestas del día).
-    incrementDailyPuzzleStats(difficulty, todayKey, result === "win");
-    incrementUserTotalResult(difficulty, result === "win");
+    await Promise.all([
+      incrementDailyPuzzleStats(difficulty, todayKey, result === "win"),
+      incrementUserTotalResult(difficulty, result === "win")
+    ]);
   }
 
   // Si jugaste el diario de hoy COMO INVITADO en este mismo navegador y luego inicias sesión,
@@ -4932,7 +4934,7 @@
   // ni más ni menos que como se ve justo después de terminar una partida en vivo. El modal de
   // resultados NO se abre solo: se deja preparado (con el título/solución ya rellenos) para
   // que se abra al pulsar "Resultados", igual que si acabaras de cerrarlo tú mismo.
-  function renderFinishedDailyPanel(difficulty, storedEntry) {
+  async function renderFinishedDailyPanel(difficulty, storedEntry) {
     currentDifficulty = difficulty;
     isInfiniteMode = false;
     currentCategories = hydrateBoardGroups(storedEntry.groups);
@@ -4978,8 +4980,9 @@
     renderGrid();
 
     // applyResultModalContent() rellena el modal Y lo abre (mismo camino que un final en vivo);
-    // lo volvemos a cerrar justo después para dejarlo preparado sin mostrarlo automáticamente.
-    applyResultModalContent(won);
+    // esperamos a que termine del todo (incluida la carga de la barra de estadísticas) y
+    // entonces sí lo volvemos a cerrar, para dejarlo preparado sin mostrarlo automáticamente.
+    await applyResultModalContent(won);
     document.getElementById("gameover-modal").style.display = "none";
   }
 
@@ -5570,7 +5573,7 @@
     shareText(buildShareTextInfinite());
   }
 
-  function applyResultModalContent(won) {
+  async function applyResultModalContent(won) {
     const modalContent = document.querySelector("#gameover-modal .modal-content");
     modalContent.style.borderColor = won ? "#22c55e" : "#ef4444";
 
@@ -5593,10 +5596,10 @@
     shareBtn.onclick = shareResult;
     shareBtn.style.display = "inline-block";
 
-    renderModalSolutions();
+    await renderModalSolutions();
   }
 
-  function handleWin() {
+  async function handleWin() {
     gameOver = true;
     awaitingNextPanel = false;
     showResultsControl();
@@ -5604,13 +5607,17 @@
     // handleWin() solo se llama en Novato/Supernova/Yonko (Infinito nunca "gana", sigue sin
     // parar hasta que fallas), así que este resultado siempre corresponde al reto diario.
     clearDailyInProgress(currentDifficulty); // ya no está "a medias": pasa a ser un resultado definitivo
-    saveDailyResult(currentDifficulty, "win", currentCategories);
+    // Esperamos a que el guardado (incluido el contador de la comunidad) termine ANTES de
+    // rellenar y abrir el modal: si no, la barra de "resultados de la comunidad" podía leerse
+    // antes de que esta misma partida llegara a contarse, mostrando un reparto de ayer... o de
+    // hace un instante, sin la victoria que acabas de conseguir.
+    await saveDailyResult(currentDifficulty, "win", currentCategories);
     awardPanelCoins(DAILY_PANEL_COINS[currentDifficulty]);
 
-    applyResultModalContent(true);
+    await applyResultModalContent(true);
   }
 
-  function handleGameOver() {
+  async function handleGameOver() {
     gameOver = true;
     awaitingNextPanel = false;
     if (isInfiniteMode) {
@@ -5640,12 +5647,12 @@
       showResultsControl();
       // Igual que en handleWin(): esta rama es siempre el reto diario, nunca Infinito.
       clearDailyInProgress(currentDifficulty); // ya no está "a medias": pasa a ser un resultado definitivo
-      saveDailyResult(currentDifficulty, "lose", currentCategories);
-      applyResultModalContent(false);
+      await saveDailyResult(currentDifficulty, "lose", currentCategories);
+      await applyResultModalContent(false);
     }
   }
 
-  function renderModalSolutions() {
+  async function renderModalSolutions() {
     const solutionsContainer = document.getElementById("solutions-container");
     solutionsContainer.innerHTML = "";
 
@@ -5675,7 +5682,7 @@
       fixSolvedLabelOverflow(solEl, ".solution-label");
     });
 
-    openModal();
+    await openModal();
   }
 
   async function openModal() {
