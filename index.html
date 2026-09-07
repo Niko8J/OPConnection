@@ -282,7 +282,7 @@
     }
     .profile-modal-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 14px; }
     .profile-section-divider { height: 1px; background: #334155; margin-bottom: 16px; }
-    .profile-tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 16px; }
+    .profile-tabs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 16px; }
     .profile-tab-btn {
       padding: 9px 22px; border-radius: 20px; border: 2px solid #334155; background: #1e293b;
       color: #94a3b8; font-weight: bold; font-size: 1.05rem; cursor: pointer; transition: all 0.15s ease;
@@ -304,6 +304,7 @@
     .profile-stat-metric-label { font-size: 0.6rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.03em; }
     .profile-collectibles-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 4px; }
     .profile-collectible-icon { font-size: 1.3rem; margin-bottom: 4px; }
+    .profile-collectible-icon-img { width: 22px; height: 22px; object-fit: contain; vertical-align: middle; }
     .profile-collectible-value { font-size: 1rem; font-weight: bold; color: #f8fafc; font-family: monospace; }
     /* Barra de "resultados de la comunidad": reparto de victorias/derrotas de todo el mundo
        hoy, en esta dificultad. Verde/rojo, a juego con el borde del propio modal (que ya usa
@@ -333,7 +334,6 @@
        el Perfil, así que conviene que las dos se sientan como parte del mismo sitio en vez de
        saltar a un tamaño distinto. De paso, en pantallas anchas caben más marcos/avatares por
        fila (el grid es auto-fill, así que aprovecha el ancho extra solo). */
-    .modal-content.shop-modal-content { max-width: 1080px; }
     .shop-berries-balance {
       display: flex; align-items: center; justify-content: center; gap: 6px;
       font-size: 1.1rem; font-weight: bold; color: #f59e0b; margin-bottom: 16px;
@@ -413,8 +413,14 @@
        las 5 columnas siempre tienen espacio de sobra. Por debajo, usamos el otro modo (una
        columna, filas con wrap), que ya funciona bien en pantallas más estrechas. */
     @media (max-width: 1099px) {
-      .achievements-columns { grid-template-columns: 1fr; gap: 22px; }
+      .achievements-columns { grid-template-columns: 1fr; gap: 0; }
       .achievement-column-badges { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+      /* En una sola columna (móvil), la línea ya no separa el nombre de sus propias insignias
+         (no hace falta, van juntos) — separa un grupo de dificultad del siguiente, así que se
+         mueve al final de cada columna en vez de justo debajo de su nombre. */
+      .achievement-column-header { border-bottom: none; padding-bottom: 0; margin-bottom: 10px; }
+      .achievement-column { padding-bottom: 20px; margin-bottom: 20px; border-bottom: 2px solid #334155; }
+      .achievement-column:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
     }
     .achievement-badge {
       display: flex; flex-direction: column; align-items: center; gap: 4px;
@@ -1255,12 +1261,12 @@
         </div>
         <div class="profile-modal-actions">
           <button id="profile-modal-edit-btn" class="action-btn" onclick="openProfileEditFromProfile()" style="display: none;">✏️ Editar perfil</button>
-          <button id="profile-modal-shop-btn" class="action-btn" onclick="openShopFromProfile()" style="display: none;">🛒 Tienda</button>
         </div>
         <div class="profile-section-divider"></div>
         <div class="profile-tabs">
           <button id="profile-tab-stats-btn" class="profile-tab-btn active" onclick="switchProfileTab('stats')">Estadísticas</button>
           <button id="profile-tab-achievements-btn" class="profile-tab-btn" onclick="switchProfileTab('achievements')">Logros</button>
+          <button id="profile-tab-shop-btn" class="profile-tab-btn" onclick="switchProfileTab('shop')" style="display: none;">Tienda</button>
         </div>
         <div id="profile-tab-stats-content">
           <div id="profile-stats-content"></div>
@@ -1268,38 +1274,29 @@
         <div id="profile-tab-achievements-content" style="display: none;">
           <div id="profile-modal-achievements" class="achievements-columns"></div>
         </div>
+        <div id="profile-tab-shop-content" style="display: none;">
+          <div class="shop-berries-balance">
+            <img src="berries.webp" alt="" class="shop-berries-icon" onerror="this.style.display='none'">
+            <span id="shop-berries-balance-count">0</span> Berries
+          </div>
+          <div id="shop-error" class="auth-error"></div>
+
+          <h3 class="shop-section-title">Avatares</h3>
+          <div id="shop-avatars-list" class="shop-frames-grid"></div>
+
+          <div class="shop-separator"></div>
+
+          <h3 class="shop-section-title">Marcos</h3>
+          <p class="shop-unequip-link" id="shop-frames-unequip" style="display: none;" onclick="handleEquipClick('frames', null)">Quitar marco</p>
+          <div id="shop-frames-list" class="shop-frames-grid"></div>
+
+          <div class="shop-separator"></div>
+
+          <h3 class="shop-section-title">Títulos</h3>
+          <p class="shop-unequip-link" id="shop-titles-unequip" style="display: none;" onclick="handleEquipClick('titles', null)">Quitar título</p>
+          <div id="shop-titles-list" class="shop-titles-list"></div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- Tienda: comprar y equipar marcos y títulos con Berries. Solo accesible con sesión iniciada
-     (se abre desde el propio Perfil), nunca viendo el perfil de otro jugador. -->
-<div id="shop-modal" class="modal-overlay" onclick="closeShopModalOnOverlay(event)">
-  <div class="modal-content shop-modal-content">
-    <button class="close-btn" onclick="closeShopModal()">&times;</button>
-    <div class="modal-scroll-area">
-      <h2>🛒 Tienda</h2>
-      <div class="shop-berries-balance">
-        <img src="berries.webp" alt="" class="shop-berries-icon" onerror="this.style.display='none'">
-        <span id="shop-berries-balance-count">0</span> Berries
-      </div>
-      <div id="shop-error" class="auth-error"></div>
-
-      <h3 class="shop-section-title">Avatares</h3>
-      <div id="shop-avatars-list" class="shop-frames-grid"></div>
-
-      <div class="shop-separator"></div>
-
-      <h3 class="shop-section-title">Marcos</h3>
-      <p class="shop-unequip-link" id="shop-frames-unequip" style="display: none;" onclick="handleEquipClick('frames', null)">Quitar marco</p>
-      <div id="shop-frames-list" class="shop-frames-grid"></div>
-
-      <div class="shop-separator"></div>
-
-      <h3 class="shop-section-title">Títulos</h3>
-      <p class="shop-unequip-link" id="shop-titles-unequip" style="display: none;" onclick="handleEquipClick('titles', null)">Quitar título</p>
-      <div id="shop-titles-list" class="shop-titles-list"></div>
     </div>
   </div>
 </div>
@@ -2304,7 +2301,7 @@
   // goteo constante por el simple hecho de jugar, distinto del premio gordo (y puntual) de
   // los logros. Uno en Novato, dos en Supernova, tres en Yonko (cuanto más difícil, más da),
   // y uno por cada panel resuelto en Infinito.
-  const DAILY_PANEL_COINS = { facil: 1, media: 2, dificil: 3 };
+  const DAILY_PANEL_COINS = { facil: 2, media: 3, dificil: 5 };
   const INFINITE_PANEL_COINS = 1;
 
   // A diferencia de checkAndAwardAchievementCoins, aquí no hace falta ninguna transacción ni
@@ -2738,31 +2735,9 @@
     renderShopContent();
   }
 
-  function openShopModal() {
-    if (!currentUser || !currentUserProfile) return;
-    renderShopContent();
-    document.getElementById("shop-modal").style.display = "flex";
-    startShopRainbowAnimation();
-  }
-
-  // Se abre desde dentro del modal de Perfil: lo cerramos primero para no dejar los dos
-  // superpuestos (mismo patrón que ya usamos para "Editar perfil").
-  function openShopFromProfile() {
-    closeProfileModal();
-    openShopModal();
-  }
-
-  function closeShopModal() {
-    document.getElementById("shop-modal").style.display = "none";
-    stopShopRainbowAnimation();
-  }
-
-  function closeShopModalOnOverlay(event) {
-    if (event.target.id === "shop-modal") closeShopModal();
-  }
-
-  // Gira el degradado cónico del marco arcoíris mientras la Tienda está abierta. Se para al
-  // cerrar (closeShopModal) para no dejar un intervalo corriendo de fondo sin necesidad.
+  // Gira el degradado cónico del marco arcoíris mientras la pestaña Tienda está a la vista. Se
+  // para al cambiar a otra pestaña o cerrar el modal (ver switchProfileTab y closeProfileModal),
+  // para no dejar un intervalo corriendo de fondo sin necesidad.
   let shopRainbowAnimId = null;
 
   function startShopRainbowAnimation() {
@@ -2855,12 +2830,25 @@
   // resuelto, con una sola derrota por racha rota?).
   // Cambia entre "Estadísticas" y "Logros" DENTRO del mismo modal de Perfil, sin abrir ninguno
   // nuevo: solo alterna qué bloque de contenido se ve y qué botón queda marcado como activo.
+  // Cambia entre "Estadísticas", "Logros" y "Tienda" DENTRO del mismo modal de Perfil, sin
+  // abrir ninguno nuevo: solo alterna qué bloque de contenido se ve y qué botón queda marcado
+  // como activo. La Tienda, además, necesita pintarse de nuevo cada vez que se entra (usa
+  // currentUserProfile, que puede haber cambiado desde la última vez) y el marco arcoíris solo
+  // debe animarse mientras esta pestaña esté realmente a la vista.
   function switchProfileTab(tab) {
-    const showStats = tab === "stats";
-    document.getElementById("profile-tab-stats-btn").classList.toggle("active", showStats);
-    document.getElementById("profile-tab-achievements-btn").classList.toggle("active", !showStats);
-    document.getElementById("profile-tab-stats-content").style.display = showStats ? "" : "none";
-    document.getElementById("profile-tab-achievements-content").style.display = showStats ? "none" : "";
+    document.getElementById("profile-tab-stats-btn").classList.toggle("active", tab === "stats");
+    document.getElementById("profile-tab-achievements-btn").classList.toggle("active", tab === "achievements");
+    document.getElementById("profile-tab-shop-btn").classList.toggle("active", tab === "shop");
+    document.getElementById("profile-tab-stats-content").style.display = tab === "stats" ? "" : "none";
+    document.getElementById("profile-tab-achievements-content").style.display = tab === "achievements" ? "" : "none";
+    document.getElementById("profile-tab-shop-content").style.display = tab === "shop" ? "" : "none";
+
+    if (tab === "shop") {
+      if (currentUser && currentUserProfile) renderShopContent();
+      startShopRainbowAnimation();
+    } else {
+      stopShopRainbowAnimation();
+    }
   }
 
   function buildProfileStatsHtml(profile) {
@@ -2942,19 +2930,19 @@
     const claimedCount = (profile.claimedAchievements || []).length;
 
     const collectibles = [
-      { name: "Avatares", icon: "🖼️", value: `${(profile.ownedAvatars || []).length}/${SHOP_AVATARS.length}` },
-      { name: "Marcos", icon: "🖌️", value: `${(profile.ownedFrames || []).length}/${SHOP_FRAMES.length}` },
+      { name: "Avatares", icon: "👤", value: `${(profile.ownedAvatars || []).length}/${SHOP_AVATARS.length}` },
+      { name: "Marcos", icon: "🖼️", value: `${(profile.ownedFrames || []).length}/${SHOP_FRAMES.length}` },
       { name: "Títulos", icon: "🏷️", value: `${(profile.ownedTitles || []).length}/${SHOP_TITLES.length}` },
-      { name: "Logros", icon: "🏅", value: `${claimedCount}/${ACHIEVEMENTS.length}` },
+      { name: "Logros", icon: "🏆", value: `${claimedCount}/${ACHIEVEMENTS.length}` },
       { name: "Compartidas", icon: "📤", value: `${profile.totalShares || 0}` },
-      { name: "Berries ganadas", icon: "🪙", value: `${profile.totalBerriesEarned || 0}` }
+      { name: "Berries ganadas", img: "berries.webp", value: `${profile.totalBerriesEarned || 0}` }
     ];
     const collectiblesHtml = `
       <div class="profile-collectibles-grid">
         ${collectibles.map(c => `
           <div class="profile-stat-card">
             <div class="profile-stat-card-name">${escapeHtml(c.name)}</div>
-            <div class="profile-collectible-icon">${c.icon}</div>
+            <div class="profile-collectible-icon">${c.img ? `<img src="${c.img}" class="profile-collectible-icon-img" onerror="this.style.display='none'">` : c.icon}</div>
             <div class="profile-collectible-value">${c.value}</div>
           </div>`).join("")}
       </div>`;
@@ -2987,6 +2975,7 @@
   function closeProfileModal() {
     document.getElementById("profile-modal").style.display = "none";
     stopProfileRainbowAnimation();
+    stopShopRainbowAnimation(); // por si se cierra el modal estando en la pestaña de Tienda
   }
 
   function closeProfileModalOnOverlay(event) {
@@ -3083,7 +3072,7 @@
       document.getElementById("profile-stats-content").innerHTML = buildProfileStatsHtml(profile);
       document.getElementById("profile-modal-achievements").innerHTML = buildAchievementsHtml(profile);
       document.getElementById("profile-modal-edit-btn").style.display = isOwnProfile ? "inline-block" : "none";
-      document.getElementById("profile-modal-shop-btn").style.display = isOwnProfile ? "inline-block" : "none";
+      document.getElementById("profile-tab-shop-btn").style.display = isOwnProfile ? "inline-block" : "none";
 
       clearTimeout(loadingTimer);
       loadingEl.style.display = "none";
@@ -5396,11 +5385,11 @@
     return window.matchMedia("(pointer: coarse)").matches;
   }
 
-  // Cuenta una compartición como "completada" cuando de verdad ha pasado algo (se abrió una
-  // app del panel nativo, o se copió al portapapeles) — nunca si canceló el panel sin elegir
-  // nada, ni si falló por completo. No es una garantía de que el mensaje llegara a enviarse de
-  // verdad a ningún sitio (eso ya escapa a lo que la web puede saber), pero sí de que hubo una
-  // intención real de compartir, no solo un toque accidental al botón.
+  // Cuenta una compartición solo cuando se usa el panel nativo del sistema CON ÉXITO (se eligió
+  // una app de verdad) — no cuando se copia al portapapeles, ya que copiar no garantiza ni
+  // siquiera que se llegara a pegar en algún sitio. Sigue sin ser una garantía absoluta de que
+  // el mensaje llegara a enviarse de verdad (una vez elegida la app, la web ya no puede saber
+  // qué pasó dentro de ella), pero es la señal más fiable que el navegador puede darnos.
   async function incrementTotalShares() {
     if (!currentUser) return;
     try {
@@ -5435,7 +5424,6 @@
     try {
       await navigator.clipboard.writeText(text);
       showToast("📋 ¡Copiado! Ya puedes pegarlo donde quieras");
-      incrementTotalShares();
     } catch (e) {
       const textarea = document.createElement("textarea");
       textarea.value = text;
@@ -5446,7 +5434,6 @@
       try {
         document.execCommand("copy");
         showToast("📋 ¡Copiado! Ya puedes pegarlo donde quieras");
-        incrementTotalShares();
       } catch (e2) {
         console.error("No se pudo copiar el resultado:", e2);
       }
@@ -5683,7 +5670,6 @@
       { id: "ranking-modal", close: closeRankingModal },
       { id: "edit-profile-modal", close: closeEditProfileModal },
       { id: "profile-modal", close: closeProfileModal },
-      { id: "shop-modal", close: closeShopModal },
       { id: "howto-modal", close: closeHowToModal },
       { id: "contact-modal", close: closeContactModal },
       { id: "about-modal", close: closeAboutModal },
