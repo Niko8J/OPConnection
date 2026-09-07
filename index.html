@@ -295,21 +295,21 @@
     /* Barra de "resultados de la comunidad": reparto de victorias/derrotas de todo el mundo
        hoy, en esta dificultad. Verde/rojo, a juego con el borde del propio modal (que ya usa
        esos mismos colores para victoria/derrota). */
-    .community-stats { margin: 4px 0 16px; }
+    .community-stats { margin: 2px 0 10px; }
+    .community-stats-header {
+      display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+      gap: 3px 10px; margin-bottom: 5px;
+    }
     .community-stats-label {
       font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;
-      margin-bottom: 6px;
     }
+    .community-stats-numbers { display: flex; gap: 8px; font-size: 0.8rem; font-weight: bold; }
     .community-stats-bar {
-      display: flex; width: 100%; height: 10px; border-radius: 6px; overflow: hidden;
+      display: flex; width: 100%; height: 8px; border-radius: 5px; overflow: hidden;
       background: #334155;
     }
     .community-stats-win { background: #22c55e; }
     .community-stats-lose { background: #ef4444; }
-    .community-stats-numbers {
-      display: flex; justify-content: space-between; margin-top: 6px;
-      font-size: 0.85rem; font-weight: bold;
-    }
     .community-stats-win-text { color: #4ade80; }
     .community-stats-lose-text { color: #f87171; }
 
@@ -4445,16 +4445,20 @@
     if (total === 0) return "";
     const winPct = Math.round((stats.winCount / total) * 100);
     const losePct = 100 - winPct;
+    // La etiqueta y los números van en la misma fila (con flex-wrap, por si en una pantalla
+    // muy estrecha no cupiera todo junto: baja con gracia a dos líneas, en vez de recortarse).
     return `
       <div class="community-stats">
-        <div class="community-stats-label">Resultados de la comunidad</div>
+        <div class="community-stats-header">
+          <span class="community-stats-label">Resultados de la comunidad</span>
+          <span class="community-stats-numbers">
+            <span class="community-stats-win-text">✅ ${stats.winCount} · ${winPct}%</span>
+            <span class="community-stats-lose-text">💀 ${stats.loseCount} · ${losePct}%</span>
+          </span>
+        </div>
         <div class="community-stats-bar">
           <div class="community-stats-win" style="width: ${winPct}%;"></div>
           <div class="community-stats-lose" style="width: ${losePct}%;"></div>
-        </div>
-        <div class="community-stats-numbers">
-          <span class="community-stats-win-text">✅ ${stats.winCount} · ${winPct}%</span>
-          <span class="community-stats-lose-text">💀 ${stats.loseCount} · ${losePct}%</span>
         </div>
       </div>`;
   }
