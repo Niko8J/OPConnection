@@ -3078,10 +3078,14 @@
         // aquí, así los logros de Ranking no se quedan bloqueados solo por no haber llegado a
         // calcularse todavía (p. ej. con pocos jugadores registrados, donde cualquiera ya sería
         // top 50 de facto, pero el dato nunca se ha llegado a guardar).
-        await updateBestRankPositionIfNeeded();
-        // Red de seguridad: por si algún logro se desbloqueó sin pasar por los sitios donde ya
-        // comprobamos esto (p. ej. justo tras adoptar progreso de invitado al iniciar sesión).
-        await checkAndAwardAchievementCoinsWithToast();
+        // Estas dos comprobaciones son independientes entre sí (ninguna necesita el resultado
+        // de la otra), así que las lanzamos en paralelo en vez de esperar a que termine la
+        // primera para empezar la segunda — en una conexión lenta, esto puede ahorrar
+        // fácilmente la mitad del tiempo de espera al abrir tu propio perfil.
+        await Promise.all([
+          updateBestRankPositionIfNeeded(),
+          checkAndAwardAchievementCoinsWithToast()
+        ]);
         profile = currentUserProfile;
       } else {
         const snap = await db.collection("publicProfiles").doc(uid).get();
