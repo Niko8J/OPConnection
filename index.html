@@ -284,19 +284,27 @@
     .profile-section-divider { height: 1px; background: #334155; margin-bottom: 16px; }
     .profile-tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 16px; }
     .profile-tab-btn {
-      padding: 8px 20px; border-radius: 20px; border: 2px solid #334155; background: #1e293b;
-      color: #94a3b8; font-weight: bold; cursor: pointer; transition: all 0.15s ease;
+      padding: 9px 22px; border-radius: 20px; border: 2px solid #334155; background: #1e293b;
+      color: #94a3b8; font-weight: bold; font-size: 1.05rem; cursor: pointer; transition: all 0.15s ease;
     }
     .profile-tab-btn.active { background: #f59e0b; border-color: #f59e0b; color: #0f172a; }
 
+    .profile-stats-summary-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
+    .profile-stats-summary-card { background: #1e293b; border-radius: 10px; padding: 14px 10px; text-align: center; }
+    .profile-stats-summary-value { font-size: 1.5rem; font-weight: bold; font-family: monospace; }
+    .profile-stats-summary-card.win .profile-stats-summary-value { color: #22c55e; }
+    .profile-stats-summary-card.lose .profile-stats-summary-value { color: #ef4444; }
+    .profile-stats-summary-label { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
     .profile-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
-    .profile-stat-card { background: #1e293b; border-radius: 10px; padding: 14px 10px; text-align: center; }
-    .profile-stat-card-name { font-size: 0.9rem; font-weight: bold; color: #f8fafc; margin-bottom: 4px; }
-    .profile-stat-card-icon { font-size: 1.6rem; margin-bottom: 6px; }
-    .profile-stat-card-metrics { display: flex; justify-content: space-around; }
-    .profile-stat-metric-icon { font-size: 1rem; }
-    .profile-stat-metric-value { font-size: 1.2rem; font-weight: bold; color: #f8fafc; }
-    .profile-stat-metric-label { font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.03em; }
+    .profile-stat-card { background: #1e293b; border: 2px solid #334155; border-radius: 10px; padding: 14px 10px; text-align: center; }
+    .profile-stat-card-name { font-size: 0.75rem; font-weight: bold; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 10px; }
+    .profile-stat-card-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 6px; }
+    .profile-stat-metric-icon { font-size: 0.95rem; }
+    .profile-stat-metric-value { font-size: 1.1rem; font-weight: bold; color: #f8fafc; }
+    .profile-stat-metric-label { font-size: 0.6rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.03em; }
+    .profile-collectibles-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 4px; }
+    .profile-collectible-icon { font-size: 1.3rem; margin-bottom: 4px; }
+    .profile-collectible-value { font-size: 1rem; font-weight: bold; color: #f8fafc; font-family: monospace; }
     /* Barra de "resultados de la comunidad": reparto de victorias/derrotas de todo el mundo
        hoy, en esta dificultad. Verde/rojo, a juego con el borde del propio modal (que ya usa
        esos mismos colores para victoria/derrota). */
@@ -370,7 +378,6 @@
       padding: 10px 14px; text-align: left;
     }
     .shop-title-item .shop-item-name { text-align: left; font-size: 0.9rem; }
-    .profile-modal-achievements-title { font-weight: bold; color: #f59e0b; font-size: 1.1rem; margin-bottom: 12px; }
     /* Una columna por modo (Novato/Supernova/Yonko/Infinito/Ranking), lado a lado en pantallas
        anchas. En pantallas estrechas (móvil) no caben 5 columnas legibles, así que se apilan
        una debajo de otra, cada una con sus logros en fila (como el diseño original). */
@@ -1259,7 +1266,6 @@
           <div id="profile-stats-content"></div>
         </div>
         <div id="profile-tab-achievements-content" style="display: none;">
-          <div class="profile-modal-achievements-title">Logros</div>
           <div id="profile-modal-achievements" class="achievements-columns"></div>
         </div>
       </div>
@@ -2851,35 +2857,97 @@
   }
 
   function buildProfileStatsHtml(profile) {
+    const modeStats = profile.modeStats || {};
     const daily = profile.dailyStreaks || {};
     const infiniteCurrent = (profile.infiniteState && profile.infiniteState.solvedCount) || 0;
 
     const modes = [
-      { name: "Novato", current: (daily.facil && daily.facil.current) || 0, best: (daily.facil && daily.facil.longest) || 0 },
-      { name: "Supernova", current: (daily.media && daily.media.current) || 0, best: (daily.media && daily.media.longest) || 0 },
-      { name: "Yonko", current: (daily.dificil && daily.dificil.current) || 0, best: (daily.dificil && daily.dificil.longest) || 0 },
-      { name: "Infinito", current: infiniteCurrent, best: profile.bestStreak || 0 }
-    ];
+      { key: "facil", name: "Novato", current: (daily.facil && daily.facil.current) || 0, best: (daily.facil && daily.facil.longest) || 0 },
+      { key: "media", name: "Supernova", current: (daily.media && daily.media.current) || 0, best: (daily.media && daily.media.longest) || 0 },
+      { key: "dificil", name: "Yonko", current: (daily.dificil && daily.dificil.current) || 0, best: (daily.dificil && daily.dificil.longest) || 0 },
+      { key: "infinito", name: "Infinito", current: infiniteCurrent, best: profile.bestStreak || 0 }
+    ].map(m => ({
+      ...m,
+      wins: (modeStats[m.key] && modeStats[m.key].wins) || 0,
+      losses: (modeStats[m.key] && modeStats[m.key].losses) || 0
+    }));
+
+    // El total de arriba se calcula sumando las 4 dificultades, en vez de llevar un contador
+    // aparte — así no hay dos números que pudieran desincronizarse entre sí.
+    const totalWins = modes.reduce((sum, m) => sum + m.wins, 0);
+    const totalLosses = modes.reduce((sum, m) => sum + m.losses, 0);
+    const total = totalWins + totalLosses;
+
+    // Si todavía no hay ninguna partida contada (cuenta nueva, o recién publicada esta
+    // función), no se muestra nada aquí — mejor eso que una barra vacía a 0%/0% sin sentido.
+    let summaryHtml = "";
+    if (total > 0) {
+      const winPct = Math.round((totalWins / total) * 100);
+      const losePct = 100 - winPct;
+      summaryHtml = `
+        <div class="profile-stats-summary-cards">
+          <div class="profile-stats-summary-card win">
+            <div class="profile-stats-summary-value">${totalWins}</div>
+            <div class="profile-stats-summary-label">Victorias</div>
+          </div>
+          <div class="profile-stats-summary-card lose">
+            <div class="profile-stats-summary-value">${totalLosses}</div>
+            <div class="profile-stats-summary-label">Derrotas</div>
+          </div>
+        </div>
+        <div class="community-stats-bar">
+          <div class="community-stats-win" style="width: ${winPct}%;"></div>
+          <div class="community-stats-lose" style="width: ${losePct}%;"></div>
+        </div>
+        <div class="community-stats-numbers" style="margin: 6px 0 16px;">
+          <span class="community-stats-win-text">${winPct}% · ${totalWins} victorias</span>
+          <span class="community-stats-lose-text">${totalLosses} derrotas · ${losePct}%</span>
+        </div>`;
+    }
 
     const cardsHtml = modes.map(m => `
       <div class="profile-stat-card">
         <div class="profile-stat-card-name">${escapeHtml(m.name)}</div>
-        <div class="profile-stat-card-icon">🏆</div>
         <div class="profile-stat-card-metrics">
+          <div class="profile-stat-metric">
+            <div class="profile-stat-metric-icon">⭐</div>
+            <div class="profile-stat-metric-value">${m.wins}</div>
+            <div class="profile-stat-metric-label">Victorias</div>
+          </div>
+          <div class="profile-stat-metric">
+            <div class="profile-stat-metric-icon">💀</div>
+            <div class="profile-stat-metric-value">${m.losses}</div>
+            <div class="profile-stat-metric-label">Derrotas</div>
+          </div>
           <div class="profile-stat-metric">
             <div class="profile-stat-metric-icon">🔥</div>
             <div class="profile-stat-metric-value">${m.current}</div>
             <div class="profile-stat-metric-label">Racha</div>
           </div>
           <div class="profile-stat-metric">
-            <div class="profile-stat-metric-icon">⭐</div>
+            <div class="profile-stat-metric-icon">🏆</div>
             <div class="profile-stat-metric-value">${m.best}</div>
             <div class="profile-stat-metric-label">Mejor</div>
           </div>
         </div>
       </div>`).join("");
 
-    return `<div class="profile-stats-grid">${cardsHtml}</div>`;
+    const collectibles = [
+      { name: "Avatares", icon: "🖼️", owned: (profile.ownedAvatars || []).length, total: SHOP_AVATARS.length },
+      { name: "Marcos", icon: "🖌️", owned: (profile.ownedFrames || []).length, total: SHOP_FRAMES.length },
+      { name: "Títulos", icon: "🏷️", owned: (profile.ownedTitles || []).length, total: SHOP_TITLES.length }
+    ];
+    const collectiblesHtml = `
+      <div class="profile-collectibles-grid">
+        ${collectibles.map(c => `
+          <div class="profile-stat-card">
+            <div class="profile-stat-card-name">${escapeHtml(c.name)}</div>
+            <div class="profile-collectible-icon">${c.icon}</div>
+            <div class="profile-collectible-value">${c.owned}/${c.total}</div>
+          </div>`).join("")}
+      </div>`;
+
+    return `${summaryHtml}<div class="profile-stats-grid">${cardsHtml}</div>${collectiblesHtml}`;
   }
 
   function buildAchievementsHtml(profile) {
@@ -4432,6 +4500,40 @@
   //
   // Son solo estadísticas, no algo crítico para el juego: si falla, no molestamos al jugador
   // con ningún aviso ni bloqueamos nada, simplemente no se refleja ese resultado en el conteo.
+  // Contador PERSONAL de victorias/derrotas totales (cualquier panel diario terminado, y cada
+  // panel de Infinito, resuelto o perdido — cada uno cuenta por separado). Se guarda en las dos
+  // colecciones a la vez (como ya hace bestStreak), para que se vea tanto en tu propio Perfil
+  // como en el de otros que miren el tuyo. Solo aplica a cuentas con sesión — el modal de
+  // Perfil ni siquiera se abre para invitados, así que no hace falta contemplar ese caso aquí.
+  // Contador PERSONAL de victorias/derrotas, por dificultad (para poder mostrar Victorias y
+  // Derrotas dentro de cada tarjeta de modo, no solo un total general). El total de arriba del
+  // todo se calcula sumando estas cuatro entradas, en vez de llevar un contador aparte.
+  //
+  // Cada panel diario terminado, y cada panel de Infinito (resuelto o perdido, por separado)
+  // cuentan. Se guarda en las dos colecciones a la vez (como ya hace bestStreak), para que se
+  // vea tanto en tu propio Perfil como en el de otros que miren el tuyo. Solo aplica a cuentas
+  // con sesión — el modal de Perfil ni siquiera se abre para invitados.
+  async function incrementUserTotalResult(difficulty, won) {
+    if (!currentUser) return;
+    try {
+      const field = won ? "wins" : "losses";
+      const key = `modeStats.${difficulty}.${field}`;
+      const increment = firebase.firestore.FieldValue.increment(1);
+      await Promise.all([
+        db.collection("users").doc(currentUser.uid).set({ [key]: increment }, { merge: true }),
+        db.collection("publicProfiles").doc(currentUser.uid).set({ [key]: increment }, { merge: true })
+      ]);
+      const prevStats = (currentUserProfile && currentUserProfile.modeStats) || {};
+      const prevMode = prevStats[difficulty] || { wins: 0, losses: 0 };
+      currentUserProfile = {
+        ...(currentUserProfile || {}),
+        modeStats: { ...prevStats, [difficulty]: { ...prevMode, [field]: (prevMode[field] || 0) + 1 } }
+      };
+    } catch (e) {
+      console.error("No se pudo actualizar el contador de victorias/derrotas:", e);
+    }
+  }
+
   async function incrementDailyPuzzleStats(difficulty, todayKey, won) {
     try {
       const puzzleId = `${todayKey}_${difficulty}`;
@@ -4570,6 +4672,7 @@
     // o con cuenta, así que va en su propia colección, no en dailyPuzzles (bloqueada a
     // propósito contra escrituras, para proteger las respuestas del día).
     incrementDailyPuzzleStats(difficulty, todayKey, result === "win");
+    incrementUserTotalResult(difficulty, result === "win");
   }
 
   // Si jugaste el diario de hoy COMO INVITADO en este mismo navegador y luego inicias sesión,
@@ -5229,6 +5332,7 @@
     saveInfiniteState();
     updateBestStreakIfNeeded();
     awardPanelCoins(INFINITE_PANEL_COINS);
+    incrementUserTotalResult("infinito", true); // cada panel de Infinito cuenta por separado, no solo al final de la racha
 
     disableGameControls();
 
@@ -5431,6 +5535,7 @@
     if (isInfiniteMode) {
       disableGameControls();
       clearInfiniteStorage(); // La partida Infinito termina: la próxima vez se empieza de cero.
+      incrementUserTotalResult("infinito", false); // el panel en el que te quedas sin vidas también cuenta
 
       const modalContent = document.querySelector("#gameover-modal .modal-content");
       modalContent.style.borderColor = "#ef4444";
