@@ -3917,6 +3917,27 @@
   });
 
   async function setDifficulty(level, event) {
+    if (!isInfiniteMode && currentDifficulty === level) {
+      if (gameOver) {
+        // El reto de hoy en esta dificultad ya está resuelto (ganado o perdido) y ya lo
+        // estás viendo: no hacemos nada. Antes, volver a pulsar el mismo botón pasaba otra
+        // vez por renderFinishedDailyPanel(), que reconstruye el tablero entero y hace que
+        // las categorías ya resueltas "bajen" a su sitio de nuevo, como si acabaras de
+        // terminar la partida — se veía raro estando ya en ese mismo modo.
+        return;
+      }
+      // Todavía en curso (o sin empezar): igual que ya pasa en Infinito al repulsar el mismo
+      // modo, barajamos de nuevo el orden de las tarjetas SIN resolver, sin tocar lo ya
+      // acertado ni las vidas.
+      clearHintColors();
+      cards = shuffle(cards);
+      selectedCards = [];
+      document.getElementById("warning-msg").innerText = "";
+      renderGrid();
+      saveDailyInProgress();
+      return;
+    }
+
     if (isInfiniteMode && level === "infinito") {
       // Ya estabas en Infinito y has vuelto a pulsar Infinito: en vez de no hacer nada,
       // barajamos de nuevo el orden de las tarjetas SIN resolver del panel actual — igual que
