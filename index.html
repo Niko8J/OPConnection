@@ -314,24 +314,31 @@
     .profile-stat-metric-icon { font-size: 0.95rem; }
     .profile-stat-metric-value { font-size: 1.1rem; font-weight: bold; color: #f8fafc; }
     .profile-stat-metric-label { font-size: 0.6rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.03em; }
-    /* Personajes vistos / Categorías vistas van en su propia rejilla de 2 columnas (1 fila),
-       separada de la de siempre (Avatares exclusivos, Marcos...) para no forzarla a 4 columnas
-       — en pantallas que no son de las más estrechas ya se veía apretado con 4. */
-    .profile-viewed-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin-top: 2px; margin-bottom: 6px; }
-    .profile-collectibles-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+    /* Personajes vistos / Categorías vistas van apiladas, como tarjetas de ancho completo en
+       horizontal (nombre a la izquierda, icono+cifra a la derecha) — se distinguen así de las
+       tarjetas normales (apiladas en vertical) de debajo, y quedan más alargadas. */
+    .profile-stat-card-wide {
+      display: flex; align-items: center; justify-content: space-between;
+      text-align: left; margin-bottom: 6px;
+    }
+    .profile-stat-card-wide .profile-stat-card-name { margin-bottom: 0; }
+    .profile-stat-card-wide-value { display: flex; align-items: center; gap: 6px; }
+    .profile-stat-card-wide .profile-collectible-icon { margin-bottom: 0; font-size: 1.2rem; }
+    .profile-stat-card-wide .profile-collectible-value { font-size: 1rem; }
+    .profile-collectibles-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 2px; }
     /* Mismo padding/tamaños que .profile-stat-card por defecto, pero aún más reducidos aquí:
-       estas rejillas tienen varias tarjetas por fila, así que cada px de más pesa el doble en
-       la altura total de la pestaña. */
-    .profile-viewed-grid .profile-stat-card, .profile-collectibles-grid .profile-stat-card { padding: 6px 8px; }
-    .profile-viewed-grid .profile-stat-card-name, .profile-collectibles-grid .profile-stat-card-name {
+       esta rejilla tiene varias tarjetas por fila, así que cada px de más pesa el doble en la
+       altura total de la pestaña. */
+    .profile-collectibles-grid .profile-stat-card { padding: 6px 8px; }
+    .profile-collectibles-grid .profile-stat-card-name {
       margin-bottom: 4px;
-      /* Algunos nombres (p. ej. "Personajes vistos", "Berries ganados") pasan a dos líneas en
-         ciertos anchos. En vez de encoger la fuente para intentar que quepan en una sola línea
-         (no siempre se consigue), reservamos SIEMPRE el alto de dos líneas para el nombre de
-         cualquier tarjeta: así, aunque solo una ocupe dos líneas de verdad, el icono y la
-         cifra de sus vecinas de la misma fila bajan la misma distancia y todo queda alineado.
-         "line-height" explícito porque, si no, el cálculo de dos líneas depende del valor por
-         defecto del navegador (no siempre el mismo). */
+      /* Algunos nombres (p. ej. "Berries ganados") pasan a dos líneas en ciertos anchos. En
+         vez de encoger la fuente para intentar que quepan en una sola línea (no siempre se
+         consigue), reservamos SIEMPRE el alto de dos líneas para el nombre de cualquier
+         tarjeta: así, aunque solo una ocupe dos líneas de verdad, el icono y la cifra de sus
+         vecinas de la misma fila bajan la misma distancia y todo queda alineado. "line-height"
+         explícito porque, si no, el cálculo de dos líneas depende del valor por defecto del
+         navegador (no siempre el mismo). */
       line-height: 1.2; min-height: calc(1.2em * 2); display: flex; align-items: center; justify-content: center;
     }
     .profile-collectible-icon { font-size: 1.1rem; margin-bottom: 2px; }
@@ -3001,8 +3008,16 @@
         <div class="profile-collectible-icon">${c.img ? `<img src="${c.img}" class="profile-collectible-icon-img" onerror="this.style.display='none'">` : c.icon}</div>
         <div class="profile-collectible-value">${c.value}</div>
       </div>`;
+    const wideStatCardHtml = c => `
+      <div class="profile-stat-card profile-stat-card-wide">
+        <div class="profile-stat-card-name">${escapeHtml(c.name)}</div>
+        <div class="profile-stat-card-wide-value">
+          <span class="profile-collectible-icon">${c.icon}</span>
+          <span class="profile-collectible-value">${c.value}</span>
+        </div>
+      </div>`;
     const collectiblesHtml = `
-      <div class="profile-viewed-grid">${viewedStats.map(statCardHtml).join("")}</div>
+      ${viewedStats.map(wideStatCardHtml).join("")}
       <div class="profile-collectibles-grid">${collectibles.map(statCardHtml).join("")}</div>`;
 
     return `${summaryHtml}<div class="profile-stats-grid">${cardsHtml}</div>${collectiblesHtml}`;
@@ -4671,6 +4686,46 @@
     }
   }
 
+  // Guarda un registro histórico de esta partida, en su PROPIO documento (no como un array
+  // dentro del perfil): un array así crecería sin límite con los años de uso, y Firestore no
+  // permite documentos de más de 1 MiB — con un documento pequeño por partida, ese límite deja
+  // de ser un problema. Vive en una subcolección del jugador (no en una colección aparte con un
+  // campo "uid"), para que las reglas de seguridad y las consultas por jugador sean directas.
+  //
+  // Pensado como base para dos cosas futuras que todavía NO están construidas: un menú para
+  // volver a jugar paneles de días anteriores, y un mapa de calor de actividad — por eso, de
+  // momento, esta función solo GUARDA el historial; no hay ninguna pantalla que lo lea aún.
+  //
+  // El reto diario usa un ID fijo (fecha_dificultad): como solo se puede jugar una vez por día
+  // y dificultad, el mismo documento sirve tanto para crearlo como para no duplicarlo si esta
+  // función se llamara dos veces por error. Infinito, al poder tener varios paneles en un
+  // mismo día, usa un ID autogenerado por Firestore.
+  //
+  // IMPORTANTE — esto necesita una regla nueva en Firestore (aparte de este archivo):
+  //   match /users/{uid}/gameHistory/{historyId} {
+  //     allow read, write: if request.auth != null && request.auth.uid == uid;
+  //   }
+  async function recordGameHistory(difficulty, result, categoriesSolved) {
+    if (!currentUser) return;
+    try {
+      const historyRef = db.collection("users").doc(currentUser.uid).collection("gameHistory");
+      const entry = {
+        date: getMadridDailyKey(),
+        difficulty,
+        result,
+        categoriesSolved,
+        completedAt: firebase.firestore.FieldValue.serverTimestamp()
+      };
+      if (difficulty === "infinito") {
+        await historyRef.add(entry);
+      } else {
+        await historyRef.doc(`${entry.date}_${difficulty}`).set(entry);
+      }
+    } catch (e) {
+      console.error("No se pudo guardar el historial de esta partida:", e);
+    }
+  }
+
   async function incrementUserTotalResult(difficulty, won) {
     if (!currentUser) return;
     try {
@@ -4841,7 +4896,8 @@
     // propósito contra escrituras, para proteger las respuestas del día).
     await Promise.all([
       incrementDailyPuzzleStats(difficulty, todayKey, result === "win"),
-      incrementUserTotalResult(difficulty, result === "win")
+      incrementUserTotalResult(difficulty, result === "win"),
+      recordGameHistory(difficulty, result, solvedOrder.length)
     ]);
   }
 
@@ -5505,6 +5561,7 @@
     updateBestStreakIfNeeded();
     awardPanelCoins(INFINITE_PANEL_COINS);
     incrementUserTotalResult("infinito", true); // cada panel de Infinito cuenta por separado, no solo al final de la racha
+    recordGameHistory("infinito", "win", 4); // las 4 categorías, siempre — hace falta acertarlas todas para superar el panel
 
     disableGameControls();
 
@@ -5730,6 +5787,7 @@
       disableGameControls();
       clearInfiniteStorage(); // La partida Infinito termina: la próxima vez se empieza de cero.
       incrementUserTotalResult("infinito", false); // el panel en el que te quedas sin vidas también cuenta
+      recordGameHistory("infinito", "lose", solvedOrder.length);
 
       const modalContent = document.querySelector("#gameover-modal .modal-content");
       modalContent.style.borderColor = "#ef4444";
