@@ -5594,7 +5594,6 @@
     shareBtn.style.display = "inline-block";
 
     renderModalSolutions();
-    renderCommunityStats(currentDifficulty, getMadridDailyKey());
   }
 
   function handleWin() {
@@ -5679,16 +5678,20 @@
     openModal();
   }
 
-  function openModal() {
+  async function openModal() {
     if (gameOver || awaitingNextPanel) {
-      document.getElementById("gameover-modal").style.display = "flex";
       // Las estadísticas de la comunidad pueden haber cambiado desde que se rellenó este
       // modal (aunque sea la primera vez que lo abres hoy, otros jugadores pueden haber
       // terminado el panel mientras tanto): las refrescamos cada vez que se abre, no solo la
-      // primera. Solo aplica al reto diario, nunca a Infinito.
+      // primera. Esperamos a que terminen de cargar ANTES de mostrar el modal —así el
+      // modal se abre completo desde el primer fotograma, en vez de aparecer sin la barra y
+      // que esta salte a aparecer un instante después agrandando el modal de golpe—. Solo
+      // aplica al reto diario, nunca a Infinito (que no tiene esta barra y se abre al
+      // instante, como siempre).
       if (!isInfiniteMode) {
-        renderCommunityStats(currentDifficulty, getMadridDailyKey());
+        await renderCommunityStats(currentDifficulty, getMadridDailyKey());
       }
+      document.getElementById("gameover-modal").style.display = "flex";
     }
   }
 
