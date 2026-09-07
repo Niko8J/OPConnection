@@ -4692,14 +4692,14 @@
   // de ser un problema. Vive en una subcolección del jugador (no en una colección aparte con un
   // campo "uid"), para que las reglas de seguridad y las consultas por jugador sean directas.
   //
-  // Pensado como base para dos cosas futuras que todavía NO están construidas: un menú para
-  // volver a jugar paneles de días anteriores, y un mapa de calor de actividad — por eso, de
-  // momento, esta función solo GUARDA el historial; no hay ninguna pantalla que lo lea aún.
+  // Pensado como base para un futuro menú de volver a jugar paneles de días anteriores — por
+  // eso, de momento, esta función solo GUARDA el historial; no hay ninguna pantalla que lo lea
+  // aún. Solo aplica al reto diario (Novato/Supernova/Yonko): ese menú futuro es solo para
+  // esos tres modos, Infinito no genera paneles fijos que tenga sentido "volver a jugar".
   //
-  // El reto diario usa un ID fijo (fecha_dificultad): como solo se puede jugar una vez por día
-  // y dificultad, el mismo documento sirve tanto para crearlo como para no duplicarlo si esta
-  // función se llamara dos veces por error. Infinito, al poder tener varios paneles en un
-  // mismo día, usa un ID autogenerado por Firestore.
+  // ID fijo (fecha_dificultad): como solo se puede jugar una vez por día y dificultad, el
+  // mismo documento sirve tanto para crearlo como para no duplicarlo si esta función se
+  // llamara dos veces por error.
   //
   // IMPORTANTE — esto necesita una regla nueva en Firestore (aparte de este archivo):
   //   match /users/{uid}/gameHistory/{historyId} {
@@ -4708,19 +4708,13 @@
   async function recordGameHistory(difficulty, result, categoriesSolved) {
     if (!currentUser) return;
     try {
-      const historyRef = db.collection("users").doc(currentUser.uid).collection("gameHistory");
+      const date = getMadridDailyKey();
       const entry = {
-        date: getMadridDailyKey(),
-        difficulty,
-        result,
-        categoriesSolved,
+        date, difficulty, result, categoriesSolved,
         completedAt: firebase.firestore.FieldValue.serverTimestamp()
       };
-      if (difficulty === "infinito") {
-        await historyRef.add(entry);
-      } else {
-        await historyRef.doc(`${entry.date}_${difficulty}`).set(entry);
-      }
+      await db.collection("users").doc(currentUser.uid).collection("gameHistory")
+        .doc(`${date}_${difficulty}`).set(entry);
     } catch (e) {
       console.error("No se pudo guardar el historial de esta partida:", e);
     }
@@ -5561,7 +5555,6 @@
     updateBestStreakIfNeeded();
     awardPanelCoins(INFINITE_PANEL_COINS);
     incrementUserTotalResult("infinito", true); // cada panel de Infinito cuenta por separado, no solo al final de la racha
-    recordGameHistory("infinito", "win", 4); // las 4 categorías, siempre — hace falta acertarlas todas para superar el panel
 
     disableGameControls();
 
@@ -5787,7 +5780,6 @@
       disableGameControls();
       clearInfiniteStorage(); // La partida Infinito termina: la próxima vez se empieza de cero.
       incrementUserTotalResult("infinito", false); // el panel en el que te quedas sin vidas también cuenta
-      recordGameHistory("infinito", "lose", solvedOrder.length);
 
       const modalContent = document.querySelector("#gameover-modal .modal-content");
       modalContent.style.borderColor = "#ef4444";
