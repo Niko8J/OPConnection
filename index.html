@@ -284,7 +284,7 @@
     .profile-section-divider { height: 1px; background: #334155; margin-bottom: 16px; }
     .profile-tabs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 16px; }
     .profile-tab-btn {
-      padding: 9px 22px; border-radius: 20px; border: 2px solid #334155; background: #1e293b;
+      padding: 8px 14px; border-radius: 20px; border: 2px solid #334155; background: #1e293b;
       color: #94a3b8; font-weight: bold; font-size: 1.05rem; cursor: pointer; transition: all 0.15s ease;
     }
     .profile-tab-btn.active { background: #f59e0b; border-color: #f59e0b; color: #0f172a; }
@@ -339,6 +339,10 @@
       font-size: 1.1rem; font-weight: bold; color: #f59e0b; margin-bottom: 16px;
     }
     .shop-berries-icon { width: 20px; height: 20px; object-fit: contain; }
+    /* A diferencia de un formulario (donde SÍ interesa reservar sitio, para que no salte el
+       resto al aparecer un error), aquí casi siempre está vacío: sin este ajuste, dejaba un
+       hueco sin explicación entre las Berries y "Avatares". */
+    #shop-error { min-height: 0; margin-bottom: 0; }
     .shop-section-title { color: #f59e0b; font-size: 1.05rem; margin: 20px 0 6px; text-align: center; }
     .shop-separator { height: 1px; background: #334155; margin: 20px 0; }
     .shop-unequip-link {
@@ -1287,13 +1291,13 @@
           <div class="shop-separator"></div>
 
           <h3 class="shop-section-title">Marcos</h3>
-          <p class="shop-unequip-link" id="shop-frames-unequip" style="display: none;" onclick="handleEquipClick('frames', null)">Quitar marco</p>
+          <p class="shop-unequip-link" id="shop-frames-unequip" style="visibility: hidden;" onclick="handleEquipClick('frames', null)">Quitar marco</p>
           <div id="shop-frames-list" class="shop-frames-grid"></div>
 
           <div class="shop-separator"></div>
 
           <h3 class="shop-section-title">Títulos</h3>
-          <p class="shop-unequip-link" id="shop-titles-unequip" style="display: none;" onclick="handleEquipClick('titles', null)">Quitar título</p>
+          <p class="shop-unequip-link" id="shop-titles-unequip" style="visibility: hidden;" onclick="handleEquipClick('titles', null)">Quitar título</p>
           <div id="shop-titles-list" class="shop-titles-list"></div>
         </div>
       </div>
@@ -2714,8 +2718,10 @@
     document.getElementById("shop-avatars-list").innerHTML = SHOP_AVATARS.map(a => buildShopAvatarItemHtml(a, profile)).join("");
     document.getElementById("shop-frames-list").innerHTML = SHOP_FRAMES.map(f => buildShopFrameItemHtml(f, profile)).join("");
     document.getElementById("shop-titles-list").innerHTML = SHOP_TITLES.map(t => buildShopTitleItemHtml(t, profile)).join("");
-    document.getElementById("shop-frames-unequip").style.display = profile.equippedFrameId ? "block" : "none";
-    document.getElementById("shop-titles-unequip").style.display = profile.equippedTitleId ? "block" : "none";
+    // visibility, no display: así el hueco del enlace se reserva siempre, y el resto del
+    // contenido no "salta" hacia arriba cada vez que se quita el marco/título equipado.
+    document.getElementById("shop-frames-unequip").style.visibility = profile.equippedFrameId ? "visible" : "hidden";
+    document.getElementById("shop-titles-unequip").style.visibility = profile.equippedTitleId ? "visible" : "hidden";
     document.getElementById("shop-error").innerText = "";
   }
 
