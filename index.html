@@ -280,18 +280,23 @@
       display: block; padding: 3px 14px; border-radius: 11.5px; background: rgba(15, 23, 42, 0.9);
       font-size: 0.85rem; font-style: italic;
     }
-    /* Solo tiene sentido cuando identidad y rachas van lado a lado: si se apilan (móvil), esta
-       línea queda sola en su propia fila del flex-wrap y se encoge a casi nada, sin dejar
-       ningún hueco raro ni artefacto visual. */
-    .profile-header-divider { width: 1px; align-self: stretch; background: #334155; }
-    /* Columna simple: cada racha en su propia línea, alineadas a la izquierda ENTRE ellas
-       (para que los emojis queden en columna), mientras que el BLOQUE entero se centra solo,
-       como una pieza más del flex-wrap de .profile-header (tanto lado a lado como apilado). */
-    .profile-modal-streak {
-      display: flex; flex-direction: column; gap: 6px; text-align: left;
-      color: #94a3b8; font-size: 0.95rem; line-height: 1.6;
+    .profile-modal-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 14px; }
+    .profile-section-divider { height: 1px; background: #334155; margin-bottom: 16px; }
+    .profile-tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 16px; }
+    .profile-tab-btn {
+      padding: 8px 20px; border-radius: 20px; border: 2px solid #334155; background: #1e293b;
+      color: #94a3b8; font-weight: bold; cursor: pointer; transition: all 0.15s ease;
     }
-    .profile-modal-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .profile-tab-btn.active { background: #f59e0b; border-color: #f59e0b; color: #0f172a; }
+
+    .profile-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
+    .profile-stat-card { background: #1e293b; border-radius: 10px; padding: 14px 10px; text-align: center; }
+    .profile-stat-card-name { font-size: 0.9rem; font-weight: bold; color: #f8fafc; margin-bottom: 4px; }
+    .profile-stat-card-icon { font-size: 1.6rem; margin-bottom: 6px; }
+    .profile-stat-card-metrics { display: flex; justify-content: space-around; }
+    .profile-stat-metric-icon { font-size: 1rem; }
+    .profile-stat-metric-value { font-size: 1.2rem; font-weight: bold; color: #f8fafc; }
+    .profile-stat-metric-label { font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.03em; }
     /* Barra de "resultados de la comunidad": reparto de victorias/derrotas de todo el mundo
        hoy, en esta dificultad. Verde/rojo, a juego con el borde del propio modal (que ya usa
        esos mismos colores para victoria/derrota). */
@@ -1240,15 +1245,23 @@
             <h2 id="profile-modal-username" class="profile-modal-username"></h2>
             <div id="profile-modal-title" class="profile-modal-title" style="display: none;"></div>
           </div>
-          <div class="profile-header-divider"></div>
-          <div id="profile-modal-streak" class="profile-modal-streak"></div>
         </div>
         <div class="profile-modal-actions">
           <button id="profile-modal-edit-btn" class="action-btn" onclick="openProfileEditFromProfile()" style="display: none;">✏️ Editar perfil</button>
           <button id="profile-modal-shop-btn" class="action-btn" onclick="openShopFromProfile()" style="display: none;">🛒 Tienda</button>
         </div>
-        <div class="profile-modal-achievements-title">Logros</div>
-        <div id="profile-modal-achievements" class="achievements-columns"></div>
+        <div class="profile-section-divider"></div>
+        <div class="profile-tabs">
+          <button id="profile-tab-stats-btn" class="profile-tab-btn active" onclick="switchProfileTab('stats')">Estadísticas</button>
+          <button id="profile-tab-achievements-btn" class="profile-tab-btn" onclick="switchProfileTab('achievements')">Logros</button>
+        </div>
+        <div id="profile-tab-stats-content">
+          <div id="profile-stats-content"></div>
+        </div>
+        <div id="profile-tab-achievements-content" style="display: none;">
+          <div class="profile-modal-achievements-title">Logros</div>
+          <div id="profile-modal-achievements" class="achievements-columns"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -2817,18 +2830,56 @@
   // Aprovechamos el hueco donde ya se mostraba la racha de Infinito para mostrar también la
   // racha ACTUAL (días seguidos ganando, ahora mismo) de cada uno de los tres retos diarios,
   // con el mismo icono de medalla que ya se usa en las columnas de logros.
-  function buildProfileStreaksHtml(profile) {
+  // Tarjetas de Racha actual / Mejor marca por cada modo, en la pestaña "Estadísticas" del
+  // Perfil. Usa datos que ya se guardaban de antes (dailyStreaks, bestStreak) — no hace falta
+  // ningún contador nuevo para esta parte.
+  //
+  // [PENDIENTE, a confirmar con Niko]: falta el bloque de arriba con el total de
+  // victorias/derrotas y la barra verde/roja (como en su mockup) — necesita un contador nuevo
+  // que hoy no existe en ningún sitio, así que empezaría de cero para todo el mundo en el
+  // momento de publicarse. Se añade en un siguiente paso, una vez decidido qué cuenta
+  // exactamente como "victoria"/"derrota" (¿cada panel diario? ¿cada panel de Infinito
+  // resuelto, con una sola derrota por racha rota?).
+  // Cambia entre "Estadísticas" y "Logros" DENTRO del mismo modal de Perfil, sin abrir ninguno
+  // nuevo: solo alterna qué bloque de contenido se ve y qué botón queda marcado como activo.
+  function switchProfileTab(tab) {
+    const showStats = tab === "stats";
+    document.getElementById("profile-tab-stats-btn").classList.toggle("active", showStats);
+    document.getElementById("profile-tab-achievements-btn").classList.toggle("active", !showStats);
+    document.getElementById("profile-tab-stats-content").style.display = showStats ? "" : "none";
+    document.getElementById("profile-tab-achievements-content").style.display = showStats ? "none" : "";
+  }
+
+  function buildProfileStatsHtml(profile) {
     const daily = profile.dailyStreaks || {};
-    const items = [
-      `🔥 Mejor racha en Infinito: ${profile.bestStreak || 0}`,
-      `🥉 Mejor racha en Novato: ${(daily.facil && daily.facil.longest) || 0} día(s)`,
-      `🥈 Mejor racha en Supernova: ${(daily.media && daily.media.longest) || 0} día(s)`,
-      `🥇 Mejor racha en Yonko: ${(daily.dificil && daily.dificil.longest) || 0} día(s)`
+    const infiniteCurrent = (profile.infiniteState && profile.infiniteState.solvedCount) || 0;
+
+    const modes = [
+      { name: "Novato", current: (daily.facil && daily.facil.current) || 0, best: (daily.facil && daily.facil.longest) || 0 },
+      { name: "Supernova", current: (daily.media && daily.media.current) || 0, best: (daily.media && daily.media.longest) || 0 },
+      { name: "Yonko", current: (daily.dificil && daily.dificil.current) || 0, best: (daily.dificil && daily.dificil.longest) || 0 },
+      { name: "Infinito", current: infiniteCurrent, best: profile.bestStreak || 0 }
     ];
-    // Cada racha en su propia línea (<div>, no <br>): así, aunque el bloque entero se centre
-    // dentro de .profile-header, cada línea queda alineada a la izquierda respecto a las
-    // demás (los emojis en columna), en vez de centrada individualmente.
-    return items.map(escapeHtml).map(t => `<div>${t}</div>`).join("");
+
+    const cardsHtml = modes.map(m => `
+      <div class="profile-stat-card">
+        <div class="profile-stat-card-name">${escapeHtml(m.name)}</div>
+        <div class="profile-stat-card-icon">🏆</div>
+        <div class="profile-stat-card-metrics">
+          <div class="profile-stat-metric">
+            <div class="profile-stat-metric-icon">🔥</div>
+            <div class="profile-stat-metric-value">${m.current}</div>
+            <div class="profile-stat-metric-label">Racha</div>
+          </div>
+          <div class="profile-stat-metric">
+            <div class="profile-stat-metric-icon">⭐</div>
+            <div class="profile-stat-metric-value">${m.best}</div>
+            <div class="profile-stat-metric-label">Mejor</div>
+          </div>
+        </div>
+      </div>`).join("");
+
+    return `<div class="profile-stats-grid">${cardsHtml}</div>`;
   }
 
   function buildAchievementsHtml(profile) {
@@ -2889,6 +2940,7 @@
     document.getElementById("auth-dropdown").style.display = "none";
     closeRankingModal(); // si se abrió desde una fila del Ranking, no dejamos los dos modales superpuestos
     stopProfileRainbowAnimation(); // por si quedaba corriendo de una vista anterior a esta
+    switchProfileTab("stats"); // siempre se abre en Estadísticas, aunque la última vez se dejara en Logros
 
     const modal = document.getElementById("profile-modal");
     const loadingEl = document.getElementById("profile-modal-loading");
@@ -2948,7 +3000,7 @@
       titleEl.innerHTML = titlePillHtml;
       titleEl.style.display = titlePillHtml ? "block" : "none";
 
-      document.getElementById("profile-modal-streak").innerHTML = buildProfileStreaksHtml(profile);
+      document.getElementById("profile-stats-content").innerHTML = buildProfileStatsHtml(profile);
       document.getElementById("profile-modal-achievements").innerHTML = buildAchievementsHtml(profile);
       document.getElementById("profile-modal-edit-btn").style.display = isOwnProfile ? "inline-block" : "none";
       document.getElementById("profile-modal-shop-btn").style.display = isOwnProfile ? "inline-block" : "none";
@@ -3641,38 +3693,8 @@
     });
   }
 
-  // La barra separadora de la cabecera del Perfil solo tiene sentido cuando identidad y
-  // rachas van lado a lado: si el flex-wrap las manda a filas distintas (poco ancho), se
-  // detecta comparando su posición vertical, y se oculta — así no queda flotando entre dos
-  // bloques apilados. Más fiable que adivinar un ancho de pantalla fijo, porque reacciona al
-  // ancho real disponible dentro del modal en cada momento (y al contenido, si un título más
-  // largo hiciera falta más sitio).
-  function setupProfileHeaderDividerToggle() {
-    const header = document.querySelector(".profile-header");
-    const identity = document.querySelector(".profile-identity");
-    const divider = document.querySelector(".profile-header-divider");
-    const streak = document.getElementById("profile-modal-streak");
-    if (!header || !identity || !divider || !streak) return;
-
-    function update() {
-      // Con align-items:center, identidad (más alta) y rachas (más bajas) se centran cada una
-      // según SU PROPIA altura dentro de la fila — así que su offsetTop nunca coincide, aunque
-      // estén perfectamente en la misma fila. Comparamos si sus rangos verticales se solapan en
-      // vez de si empiezan a la misma altura exacta: en la misma fila, siempre se solapan; ya
-      // apiladas (filas distintas), no se solapan nada.
-      const identityRect = identity.getBoundingClientRect();
-      const streakRect = streak.getBoundingClientRect();
-      const mismaFila = identityRect.top < streakRect.bottom && streakRect.top < identityRect.bottom;
-      divider.style.display = mismaFila ? "block" : "none";
-    }
-
-    new ResizeObserver(update).observe(header);
-    update();
-  }
-
   freezeDesign();
   setupModalScrollFades();
-  setupProfileHeaderDividerToggle();
   window.addEventListener("resize", () => scheduleViewportCheck(150));
   window.addEventListener("orientationchange", () => scheduleViewportCheck(400));
   window.addEventListener("pageshow", handleViewportChange);
