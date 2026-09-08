@@ -392,15 +392,10 @@
        hoy, en esta dificultad. Verde/rojo, a juego con el borde del propio modal (que ya usa
        esos mismos colores para victoria/derrota). */
     .community-stats { margin: 2px 0 10px; }
-    /* Aspecto neutro (gris) para el estado de carga, reutilizando la misma estructura de la
-       barra real — ver buildCommunityStatsLoadingHtml. Ancho fijo en vez de dejar que el
-       &nbsp; determine el tamaño, para que se vea como un bloque de verdad, no como un
-       espacio en blanco suelto. */
-    .community-stats-skeleton {
-      display: inline-block; width: 60px; height: 0.9em; border-radius: 3px;
-      background: #334155; color: transparent;
-    }
-    .community-stats-skeleton-fill { width: 35%; height: 100%; background: #475569; }
+    /* Los números en guion se ven en el mismo color/tamaño que sus versiones reales (herencia
+       de .community-stats-win-text/.community-stats-lose-text), solo apagados a gris — así se
+       lee como "esto mismo, todavía sin datos", no como un elemento distinto. */
+    .community-stats-placeholder-text { color: #64748b !important; }
     .community-stats-header {
       display: grid; grid-template-columns: 1fr auto 1fr; align-items: baseline; gap: 6px;
       margin-bottom: 5px;
@@ -416,8 +411,11 @@
       display: flex; width: 100%; height: 8px; border-radius: 5px; overflow: hidden;
       background: #334155;
     }
-    .community-stats-win { background: #22c55e; }
-    .community-stats-lose { background: #ef4444; }
+    /* transition en el ancho: al pasar de 0% (estado vacío) al porcentaje real, el propio
+       navegador anima el cambio solo — siempre que sea el MISMO elemento el que cambie de
+       valor (ver renderCommunityStats: reutiliza estos mismos divs, no los sustituye). */
+    .community-stats-win { background: #22c55e; transition: width 0.5s ease; }
+    .community-stats-lose { background: #ef4444; transition: width 0.5s ease; }
 
     .gameover-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
@@ -5152,32 +5150,6 @@
     }
   }
 
-  // Barra verde/roja con el reparto de victorias y derrotas de todo el mundo hoy, en esta
-  // dificultad. Si nadie más ha terminado todavía (total 0) o falló la lectura, no se muestra
-  // nada — mejor un hueco vacío que una barra sin sentido a 0%/0%.
-  function buildCommunityStatsHtml(stats) {
-    if (!stats) return "";
-    const total = stats.winCount + stats.loseCount;
-    if (total === 0) return "";
-    const winPct = Math.round((stats.winCount / total) * 100);
-    const losePct = 100 - winPct;
-    // 3 columnas: verde a la izquierda, la etiqueta centrada de verdad en medio (con grid, no
-    // flex, para que quede centrada respecto a todo el hueco y no solo entre lo que sobra a
-    // los lados), rojo a la derecha.
-    return `
-      <div class="community-stats">
-        <div class="community-stats-header">
-          <span class="community-stats-win-text">✔️ ${stats.winCount} · ${winPct}%</span>
-          <span class="community-stats-label">Resultados de la comunidad</span>
-          <span class="community-stats-lose-text">${stats.loseCount} · ${losePct}% 💀</span>
-        </div>
-        <div class="community-stats-bar">
-          <div class="community-stats-win" style="width: ${winPct}%;"></div>
-          <div class="community-stats-lose" style="width: ${losePct}%;"></div>
-        </div>
-      </div>`;
-  }
-
   // Pide y pinta la barra de forma asíncrona (el modal ya se ha abierto antes de que esto
   // termine, no le hace esperar): mientras tanto el hueco se queda vacío sin más.
   // Si la etiqueta central llegara a tocar los números de los lados (pantallas muy estrechas),
@@ -5208,14 +5180,29 @@
     return `
       <div class="community-stats">
         <div class="community-stats-header">
-          <span class="community-stats-win-text community-stats-skeleton">&nbsp;</span>
+          <span id="community-stats-win-text" class="community-stats-win-text community-stats-placeholder-text">—</span>
           <span class="community-stats-label">Resultados de la comunidad</span>
-          <span class="community-stats-lose-text community-stats-skeleton">&nbsp;</span>
+          <span id="community-stats-lose-text" class="community-stats-lose-text community-stats-placeholder-text">—</span>
         </div>
         <div class="community-stats-bar">
-          <div class="community-stats-skeleton-fill"></div>
+          <div id="community-stats-win-fill" class="community-stats-win" style="width: 0%;"></div>
+          <div id="community-stats-lose-fill" class="community-stats-lose" style="width: 0%;"></div>
         </div>
       </div>`;
+  }
+
+  // Anima un número (y su porcentaje asociado) subiendo desde 0 hasta el valor real, en vez de
+  // aparecer de golpe — con una curva que empieza rápido y frena al final (más natural que a
+  // velocidad constante). "buildText" arma el texto final con los valores de cada fotograma.
+  function animateCountUp(el, targetCount, targetPct, buildText, duration = 500) {
+    const start = performance.now();
+    function frame(now) {
+      const progress = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.innerText = buildText(Math.round(targetCount * eased), Math.round(targetPct * eased));
+      if (progress < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
   }
 
   async function renderCommunityStats(difficulty, todayKey) {
@@ -5223,8 +5210,34 @@
     if (!container) return;
     container.innerHTML = buildCommunityStatsLoadingHtml();
     const stats = await fetchDailyPuzzleStats(difficulty, todayKey);
-    container.innerHTML = buildCommunityStatsHtml(stats);
-    fixCommunityStatsOverlap(container);
+
+    const total = stats && stats.winCount + stats.loseCount;
+    if (!total) { container.innerHTML = ""; return; } // sin datos: nada que mostrar ni animar
+
+    const winPct = Math.round((stats.winCount / total) * 100);
+    const losePct = 100 - winPct;
+
+    const winFill = document.getElementById("community-stats-win-fill");
+    const loseFill = document.getElementById("community-stats-lose-fill");
+    const winText = document.getElementById("community-stats-win-text");
+    const loseText = document.getElementById("community-stats-lose-text");
+    if (!winFill || !loseFill || !winText || !loseText) return; // el modal se cerró mientras se pedía
+
+    winText.classList.remove("community-stats-placeholder-text");
+    loseText.classList.remove("community-stats-placeholder-text");
+    animateCountUp(winText, stats.winCount, winPct, (c, p) => `✔️ ${c} · ${p}%`);
+    animateCountUp(loseText, stats.loseCount, losePct, (c, p) => `${c} · ${p}% 💀`);
+
+    // Un fotograma de margen antes de cambiar el ancho: si no, el navegador podría fundir el
+    // 0% inicial y el porcentaje real en un único pintado, sin transición visible de por medio.
+    requestAnimationFrame(() => {
+      winFill.style.width = winPct + "%";
+      loseFill.style.width = losePct + "%";
+    });
+
+    // Se comprueba al terminar la animación de los números (no antes), para medir el ancho ya
+    // asentado del texto final, no uno todavía a medio contar.
+    setTimeout(() => fixCommunityStatsOverlap(container), 520);
   }
 
   async function saveDailyResult(difficulty, result, groups) {
