@@ -242,7 +242,6 @@
     .history-weekdays { margin-bottom: 6px; }
     .history-weekdays span { text-align: center; font-size: 0.7rem; color: #64748b; }
     .history-calendar-grid { margin-bottom: 14px; }
-    .history-loading { grid-column: 1 / -1; text-align: center; color: #64748b; font-size: 0.8rem; padding: 20px 0; }
     .history-day {
       aspect-ratio: 1; border-radius: 6px; display: flex; align-items: center; justify-content: center;
       font-size: 0.75rem; font-weight: bold; background: transparent; color: #334155; border: none;
@@ -2321,6 +2320,14 @@
     const prevBtn = document.getElementById("history-prev-btn");
     const nextBtn = document.getElementById("history-next-btn");
 
+    // Capturamos qué mes/año/dificultad se estaba pidiendo AL EMPEZAR, para poder comprobar más
+    // abajo (justo antes de colorear) si el jugador ha cambiado de mes o de dificultad mientras
+    // la consulta seguía en el aire — en ese caso, esta respuesta ya no correspondería a lo que
+    // se está viendo ahora mismo, y no hay que colorear encima de la rejilla equivocada.
+    const requestedYear = historyModalYear;
+    const requestedMonth = historyModalMonth;
+    const requestedDifficulty = historyModalDifficulty;
+
     const difficultyLabel = { facil: "Novato", media: "Supernova", dificil: "Yonko" }[historyModalDifficulty] || "";
     titleEl.innerText = `${MONTH_NAMES_ES[historyModalMonth]} ${historyModalYear} · ${difficultyLabel}`;
 
@@ -2340,10 +2347,41 @@
     const monthStartKey = `${historyModalYear}-${monthStr}-01`;
     const monthEndKey = `${historyModalYear}-${monthStr}-${pad2(daysInMonth)}`;
 
-    // Un solo icono de "cargando" centrado mientras llega la respuesta, para que la rejilla no
-    // se quede en blanco (o con el mes anterior todavía puesto) durante la espera.
-    grid.innerHTML = '<div class="history-loading">Cargando...</div>';
+    // Lunes primero (L M X J V S D): getDay() da 0=domingo..6=sábado; lo desplazamos para que
+    // 0=lunes..6=domingo, y ese es el número de casillas vacías antes del día 1.
+    const firstWeekday = (new Date(historyModalYear, historyModalMonth, 1).getDay() + 6) % 7;
 
+    // FASE 1: pintamos la rejilla completa AL INSTANTE, sin esperar a la consulta — nada de esto
+    // depende de datos de red (fechas, huecos antes del día 1, aro de "hoy", apagado de futuros/
+    // anteriores al inicio del historial), así que no tiene sentido dejarlo en blanco con un
+    // simple aviso de "Cargando...". Cada día que SÍ podría tener un resultado se deja de
+    // momento en su estado neutro "sin jugar" (gris) — la FASE 2, más abajo, los recolorea en
+    // verde/rojo en cuanto llega la respuesta, sin reconstruir la rejilla entera de nuevo.
+    grid.innerHTML = "";
+    for (let i = 0; i < firstWeekday; i++) {
+      grid.appendChild(document.createElement("div"));
+    }
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dateKey = `${historyModalYear}-${monthStr}-${pad2(day)}`;
+      const cell = document.createElement("div");
+      cell.className = "history-day";
+      cell.dataset.date = dateKey;
+      cell.innerText = day;
+
+      if (dateKey > todayKey || dateKey < GAME_HISTORY_START_KEY) {
+        // Día futuro, o anterior al inicio del historial: no puede haber ningún dato real en
+        // ninguno de los dos casos, así que van más apagados que un simple "sin jugar" (que si
+        // podría tener un panel, solo que no lo jugaste) — clase aparte para distinguirlos bien.
+        cell.classList.add("history-day-empty");
+      } else {
+        cell.classList.add("history-none"); // estado provisional: aún no sabemos si hay resultado
+        if (dateKey === todayKey) cell.classList.add("history-today");
+      }
+      grid.appendChild(cell);
+    }
+
+    // FASE 2: la consulta a Firestore, y el recoloreado de los días que sí tengan resultado —
+    // esto es lo único que de verdad necesita esperar a la red.
     let resultsByDate = {};
     try {
       // OJO: antes esto combinaba una igualdad (difficulty) con un rango (date) en la misma
@@ -2368,40 +2406,19 @@
       console.error("No se pudo cargar el historial de este mes:", e);
     }
 
-    // Lunes primero (L M X J V S D): getDay() da 0=domingo..6=sábado; lo desplazamos para que
-    // 0=lunes..6=domingo, y ese es el número de casillas vacías antes del día 1.
-    const firstWeekday = (new Date(historyModalYear, historyModalMonth, 1).getDay() + 6) % 7;
-
-    grid.innerHTML = "";
-    for (let i = 0; i < firstWeekday; i++) {
-      grid.appendChild(document.createElement("div"));
+    // Si mientras tanto se ha cambiado de mes o de dificultad (el jugador no ha esperado a que
+    // esta consulta termine), esta respuesta ya no corresponde a lo que se está viendo ahora
+    // mismo — la descartamos, en vez de colorear encima del mes/dificultad equivocados.
+    if (historyModalYear !== requestedYear || historyModalMonth !== requestedMonth || historyModalDifficulty !== requestedDifficulty) {
+      return;
     }
-    for (let day = 1; day <= daysInMonth; day++) {
-      const dateKey = `${historyModalYear}-${monthStr}-${pad2(day)}`;
-      const cell = document.createElement("div");
-      cell.className = "history-day";
-      cell.innerText = day;
-
-      if (dateKey > todayKey || dateKey < GAME_HISTORY_START_KEY) {
-        // Día futuro, o anterior al inicio del historial: no puede haber ningún dato real en
-        // ninguno de los dos casos, así que van más apagados que un simple "sin jugar" (que si
-        // podría tener un panel, solo que no lo jugaste) — clase aparte para distinguirlos bien.
-        cell.classList.add("history-day-empty");
-      } else {
-        const result = resultsByDate[dateKey];
-        if (result === "win") {
-          cell.classList.add("history-win");
-          cell.onclick = () => openPastDailyPanel(dateKey);
-        } else if (result === "lose") {
-          cell.classList.add("history-lose");
-          cell.onclick = () => openPastDailyPanel(dateKey);
-        } else {
-          cell.classList.add("history-none"); // sin registro ese día: no jugado (o antes de tener cuenta)
-        }
-        if (dateKey === todayKey) cell.classList.add("history-today");
-      }
-      grid.appendChild(cell);
-    }
+    Object.entries(resultsByDate).forEach(([dateKey, result]) => {
+      const cell = grid.querySelector(`[data-date="${dateKey}"]`);
+      if (!cell || cell.classList.contains("history-day-empty")) return;
+      cell.classList.remove("history-none");
+      cell.classList.add(result === "win" ? "history-win" : "history-lose");
+      cell.onclick = () => openPastDailyPanel(dateKey);
+    });
   }
 
   // Reconstruye y muestra el panel REAL de un día pasado, reutilizando renderFinishedDailyPanel
@@ -3252,6 +3269,41 @@
     }
   }
 
+  // Anima el resumen de Victorias/Derrotas del perfil desde su estado "vacío" (puesto por
+  // buildProfileStatsHtml) hasta los valores reales — números contando y barra creciendo a la
+  // vez, en los mismos 0.6s y con la misma curva que ya usa la barra de "resultados de la
+  // comunidad" del modal de resultado, para que se sienta la misma animación en toda la web.
+  function animateProfileStatsBar(totalWins, totalLosses) {
+    const total = totalWins + totalLosses;
+    if (total === 0) return;
+    const winPct = Math.round((totalWins / total) * 100);
+    const losePct = 100 - winPct;
+
+    const winValueEl = document.getElementById("profile-stats-summary-win-value");
+    const loseValueEl = document.getElementById("profile-stats-summary-lose-value");
+    const winTextEl = document.getElementById("profile-stats-win-text");
+    const loseTextEl = document.getElementById("profile-stats-lose-text");
+    const winBarEl = document.getElementById("profile-stats-win-bar");
+    const loseBarEl = document.getElementById("profile-stats-lose-bar");
+    if (!winValueEl || !loseValueEl || !winTextEl || !loseTextEl || !winBarEl || !loseBarEl) return;
+
+    winBarEl.style.width = `${winPct}%`;
+    loseBarEl.style.width = `${losePct}%`;
+
+    const durationMs = 600;
+    const start = performance.now();
+    function step(now) {
+      const t = Math.min(1, (now - start) / durationMs);
+      const eased = 1 - (1 - t) * (1 - t); // easeOutQuad, igual que en el modal de resultado
+      winValueEl.innerText = Math.round(totalWins * eased);
+      loseValueEl.innerText = Math.round(totalLosses * eased);
+      winTextEl.innerText = `${Math.round(winPct * eased)}%`;
+      loseTextEl.innerText = `${Math.round(losePct * eased)}%`;
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
   function buildProfileStatsHtml(profile) {
     const modeStats = profile.modeStats || {};
     const daily = profile.dailyStreaks || {};
@@ -3278,26 +3330,28 @@
     // función), no se muestra nada aquí — mejor eso que una barra vacía a 0%/0% sin sentido.
     let summaryHtml = "";
     if (total > 0) {
-      const winPct = Math.round((totalWins / total) * 100);
-      const losePct = 100 - winPct;
+      // Arranca en su estado "vacío" (0 victorias, toda la barra en rojo) — animateProfileStatsBar()
+      // lo anima hasta los valores reales justo después de insertarse en el DOM, a juego con la
+      // misma animación que ya tiene la barra de "resultados de la comunidad" del modal de
+      // resultado (números contando + barra creciendo), en vez de aparecer ya con todo puesto.
       summaryHtml = `
         <div class="profile-stats-summary-cards">
           <div class="profile-stats-summary-card win">
-            <div class="profile-stats-summary-value">${totalWins}</div>
+            <div id="profile-stats-summary-win-value" class="profile-stats-summary-value">0</div>
             <div class="profile-stats-summary-label">Victorias</div>
           </div>
           <div class="profile-stats-summary-card lose">
-            <div class="profile-stats-summary-value">${totalLosses}</div>
+            <div id="profile-stats-summary-lose-value" class="profile-stats-summary-value">0</div>
             <div class="profile-stats-summary-label">Derrotas</div>
           </div>
         </div>
         <div class="community-stats-bar">
-          <div class="community-stats-win" style="width: ${winPct}%;"></div>
-          <div class="community-stats-lose" style="width: ${losePct}%;"></div>
+          <div id="profile-stats-win-bar" class="community-stats-win" style="width: 0%;"></div>
+          <div id="profile-stats-lose-bar" class="community-stats-lose" style="width: 100%;"></div>
         </div>
         <div class="profile-stats-numbers-row" style="margin: 6px 0 16px;">
-          <span class="community-stats-win-text">${winPct}%</span>
-          <span class="community-stats-lose-text">${losePct}%</span>
+          <span id="profile-stats-win-text" class="community-stats-win-text">-%</span>
+          <span id="profile-stats-lose-text" class="community-stats-lose-text">-%</span>
         </div>`;
     }
 
@@ -3362,7 +3416,10 @@
       ${viewedStats.map(wideStatCardHtml).join("")}
       <div class="profile-collectibles-grid">${collectibles.map(statCardHtml).join("")}</div>`;
 
-    return `${summaryHtml}<div class="profile-stats-grid">${cardsHtml}</div>${collectiblesHtml}`;
+    return {
+      html: `${summaryHtml}<div class="profile-stats-grid">${cardsHtml}</div>${collectiblesHtml}`,
+      totalWins, totalLosses
+    };
   }
 
   function buildAchievementsHtml(profile) {
@@ -3488,7 +3545,9 @@
       titleEl.innerHTML = titlePillHtml;
       titleEl.style.display = titlePillHtml ? "block" : "none";
 
-      document.getElementById("profile-stats-content").innerHTML = buildProfileStatsHtml(profile);
+      const profileStats = buildProfileStatsHtml(profile);
+      document.getElementById("profile-stats-content").innerHTML = profileStats.html;
+      animateProfileStatsBar(profileStats.totalWins, profileStats.totalLosses);
       document.getElementById("profile-modal-achievements").innerHTML = buildAchievementsHtml(profile);
       document.getElementById("profile-modal-edit-btn").style.display = isOwnProfile ? "inline-block" : "none";
       document.getElementById("profile-tab-shop-btn").style.display = isOwnProfile ? "inline-block" : "none";
