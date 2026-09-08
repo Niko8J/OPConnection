@@ -634,7 +634,7 @@
     }
     .history-link-btn {
       background: none; border: none; padding: 0; margin: 0; font: inherit; font-weight: bold;
-      color: #f59e0b; cursor: pointer; text-decoration: underline;
+      color: #f59e0b; cursor: pointer;
     }
     /* Banner de "estás viendo un panel de un día pasado" — para que quede claro que no es el
        reto de HOY, ya que el tablero en sí se ve exactamente igual en los dos casos. Muy fino
@@ -2344,16 +2344,24 @@
 
     let resultsByDate = {};
     try {
-      // "source: server" a propósito: esto puede leerse justo después de escribir un
-      // resultado (p. ej. acabas de terminar el panel de hoy y abres el calendario al
-      // momento), así que forzamos ir al servidor de verdad en vez de fiarnos de la caché
-      // local, para no arriesgarnos a leer una versión todavía no sincronizada del todo.
+      // OJO: antes esto combinaba una igualdad (difficulty) con un rango (date) en la misma
+      // consulta, lo que exige un índice compuesto en Firestore que no existía — la consulta
+      // fallaba en silencio (atrapada por el catch), así que nunca llegaba a pintarse nada en
+      // verde/rojo, sin que se notara el motivo real. Pedimos solo por igualdad (nunca necesita
+      // índice compuesto) y filtramos el mes nosotros mismos, aquí abajo.
+      //
+      // "source: server" a propósito: esto puede leerse justo después de escribir un resultado
+      // (p. ej. acabas de terminar el panel de hoy y abres el calendario al momento), así que
+      // forzamos ir al servidor de verdad en vez de fiarnos de la caché local.
       const snap = await db.collection("users").doc(currentUser.uid).collection("gameHistory")
         .where("difficulty", "==", historyModalDifficulty)
-        .where("date", ">=", monthStartKey)
-        .where("date", "<=", monthEndKey)
         .get({ source: "server" });
-      snap.forEach(doc => { resultsByDate[doc.data().date] = doc.data().result; });
+      snap.forEach(doc => {
+        const data = doc.data();
+        if (data.date >= monthStartKey && data.date <= monthEndKey) {
+          resultsByDate[data.date] = data.result;
+        }
+      });
     } catch (e) {
       console.error("No se pudo cargar el historial de este mes:", e);
     }
@@ -3958,7 +3966,11 @@
   // v16: subimos la versión para invalidar cachés antiguas, que podían haber quedado con un
   // tamaño de tarjeta diminuto si la primerísima medición se hizo con la ventana todavía a
   // medio restaurar (ver "settle" en freezeDesign más abajo).
-  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v17";
+  // v18: subimos la versión otra vez porque se añadió un nuevo hermano permanente al diseño
+  // (el banner de "panel pasado", que reserva su hueco incluso oculto) — las medidas
+  // guardadas de antes de ese cambio ya no cuentan con ese hueco extra, y podían dejar
+  // contenido (como el pie de página) fuera de la altura fija de la página.
+  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v18";
 
   // Misma condición que activa el aviso de ".rotate-overlay" ("Pon el dispositivo en
   // vertical..."): un móvil táctil en horizontal. Mientras se cumpla, el tablero queda
