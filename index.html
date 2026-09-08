@@ -245,6 +245,9 @@
     .history-day.history-win { background: #22c55e; color: #052e16; cursor: pointer; }
     .history-day.history-lose { background: #ef4444; color: #450a0a; cursor: pointer; }
     .history-day.history-none { background: #1e293b; color: #64748b; }
+    /* Más apagados todavía que "sin jugar" (que si podría tener un panel, solo que no lo
+       jugaste): aquí no puede haber ningún dato posible, así que casi ni se ven. */
+    .history-day.history-day-empty { opacity: 0.3; }
     .history-day.history-today { box-shadow: 0 0 0 2px #f59e0b; }
     @media (hover: hover) and (pointer: fine) {
       .history-day.history-win:hover, .history-day.history-lose:hover { filter: brightness(1.15); }
@@ -629,15 +632,18 @@
       color: #f59e0b; cursor: pointer; text-decoration: underline;
     }
     /* Banner de "estás viendo un panel de un día pasado" — para que quede claro que no es el
-       reto de HOY, ya que el tablero en sí se ve exactamente igual en los dos casos. */
+       reto de HOY, ya que el tablero en sí se ve exactamente igual en los dos casos. Muy fino
+       a propósito (una sola línea, poco padding): va pegado entre el tablero y los controles,
+       y no debe llamar más la atención que el propio tablero. */
     .past-panel-banner {
-      display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;
-      background: #1e293b; border: 1px solid #f59e0b; border-radius: 8px;
-      padding: 6px 12px; margin-bottom: var(--v-gap-sm); font-size: 0.85rem; color: #f59e0b; font-weight: bold;
+      display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: nowrap;
+      background: #1e293b; border: 1px solid #f59e0b; border-radius: 6px;
+      padding: 3px 10px; margin: var(--v-gap-sm) 0; font-size: 0.72rem; color: #f59e0b; font-weight: bold;
     }
+    .past-panel-banner-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
     .past-panel-banner-btn {
-      background: #f59e0b; border: none; border-radius: 6px; padding: 3px 10px;
-      color: #0f172a; font-weight: bold; font-size: 0.78rem; cursor: pointer;
+      background: #f59e0b; border: none; border-radius: 5px; padding: 2px 8px; flex-shrink: 0;
+      color: #0f172a; font-weight: bold; font-size: 0.68rem; cursor: pointer;
     }
 
     #lives-icons { display: flex; align-items: center; gap: 8px; }
@@ -1172,11 +1178,6 @@
 
   <div id="infinite-score" class="infinite-score" style="visibility: hidden;"></div>
 
-  <div id="past-panel-banner" class="past-panel-banner" style="display: none;">
-    <span id="past-panel-banner-text"></span>
-    <button class="past-panel-banner-btn" onclick="returnToTodayPanel()">Volver a hoy</button>
-  </div>
-
   <div id="warning-msg" class="warning-msg"></div>
 
   <div class="board">
@@ -1185,6 +1186,11 @@
       <p>Cargando partida...</p>
     </div>
     <div id="grid" class="grid"></div>
+  </div>
+
+  <div id="past-panel-banner" class="past-panel-banner" style="visibility: hidden;">
+    <span id="past-panel-banner-text" class="past-panel-banner-text"></span>
+    <button class="past-panel-banner-btn" onclick="returnToTodayPanel()">Volver a hoy</button>
   </div>
 
   <div class="controls">
@@ -1730,7 +1736,7 @@
     awaitingNextPanel = false;
 
     document.getElementById("warning-msg").innerText = "";
-    document.getElementById("past-panel-banner").style.display = "none";
+    document.getElementById("past-panel-banner").style.visibility = "hidden";
     showGameControls();
     document.getElementById("gameover-modal").style.display = "none";
 
@@ -2261,7 +2267,10 @@
   // Antes de esta fecha, gameHistory ni siquiera existía (esta mecánica se añadió este día), así
   // que no puede haber ningún dato real para ningún día anterior — se apagan exactamente igual
   // que los días futuros, y no se deja navegar a un mes anterior al que la contiene.
-  const GAME_HISTORY_START_KEY = "2026-09-08";
+  // ⚠️ TEMPORAL: bajada a 09-01 solo para poder probar el día 7 con datos de prueba (ver
+  // conversación). Cuando se termine de probar, devolver a "2026-09-08" (la fecha real en la
+  // que empezó a existir gameHistory).
+  const GAME_HISTORY_START_KEY = "2026-09-01";
 
   const MONTH_NAMES_ES = [
     "enero", "febrero", "marzo", "abril", "mayo", "junio",
@@ -2354,8 +2363,10 @@
       cell.innerText = day;
 
       if (dateKey > todayKey || dateKey < GAME_HISTORY_START_KEY) {
-        // Día futuro, o anterior al inicio del historial: sin color, sin poder pulsarlo — no
-        // puede haber ningún dato real en ninguno de los dos casos.
+        // Día futuro, o anterior al inicio del historial: no puede haber ningún dato real en
+        // ninguno de los dos casos, así que van más apagados que un simple "sin jugar" (que si
+        // podría tener un panel, solo que no lo jugaste) — clase aparte para distinguirlos bien.
+        cell.classList.add("history-day-empty");
       } else {
         const result = resultsByDate[dateKey];
         if (result === "win") {
@@ -5423,13 +5434,15 @@
 
     // Si la fecha de este resultado no es la de hoy, dejamos claro con un banner que se está
     // viendo un panel de un día pasado — el tablero en sí es idéntico en los dos casos, así que
-    // sin este aviso no habría forma de distinguirlo a simple vista.
+    // sin este aviso no habría forma de distinguirlo a simple vista. "visibility", no "display":
+    // así el hueco se reserva SIEMPRE (incluso cuando no aplica), y los controles de debajo
+    // (vidas, Enviar/Limpiar) nunca saltan de sitio al entrar o salir de un panel pasado.
     const banner = document.getElementById("past-panel-banner");
     if (storedEntry.date && storedEntry.date !== getMadridDailyKey()) {
       document.getElementById("past-panel-banner-text").innerText = `📅 Panel del ${formatSpanishDate(storedEntry.date)}`;
-      banner.style.display = "flex";
+      banner.style.visibility = "visible";
     } else {
-      banner.style.display = "none";
+      banner.style.visibility = "hidden";
     }
 
     // applyResultModalContent() rellena el modal Y lo abre (mismo camino que un final en vivo);
@@ -5450,7 +5463,7 @@
   // dificultad, tal cual como si acabaras de pulsar su botón — si ya lo jugaste hoy, mostrará
   // ESE resultado (sin banner, por ser de hoy); si no, te deja jugarlo.
   function returnToTodayPanel() {
-    document.getElementById("past-panel-banner").style.display = "none";
+    document.getElementById("past-panel-banner").style.visibility = "hidden";
     loadDailyChallenge(currentDifficulty);
   }
 
@@ -5500,7 +5513,7 @@
     hintsRemaining = 1;
 
     document.getElementById("warning-msg").innerText = "";
-    document.getElementById("past-panel-banner").style.display = "none";
+    document.getElementById("past-panel-banner").style.visibility = "hidden";
     showGameControls();
     updateHintButtonState();
     document.getElementById("gameover-modal").style.display = "none";
@@ -6242,4 +6255,4 @@
 
 </script>
 </body>
-</html>
+  </html>
