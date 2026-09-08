@@ -6177,6 +6177,7 @@
     // contado) se actualiza sola en cuanto termina, sin bloquear la apertura del modal.
     const saveResultPromise = saveDailyResult(currentDifficulty, "win", currentCategories);
     awardPanelCoins(DAILY_PANEL_COINS[currentDifficulty]);
+    if (!isInfiniteMode) skipNextCommunityStatsAutoRefresh = true;
     applyResultModalContent(true);
 
     if (!isInfiniteMode) {
@@ -6222,6 +6223,7 @@
       document.querySelectorAll("#grid .card.selected").forEach(el => el.classList.remove("selected"));
       // Mismo motivo que en handleWin(): el modal se abre ya, sin esperar al guardado.
       const saveResultPromise = saveDailyResult(currentDifficulty, "lose", currentCategories);
+      skipNextCommunityStatsAutoRefresh = true;
       applyResultModalContent(false);
       saveResultPromise.then(() => renderCommunityStats(currentDifficulty, getMadridDailyKey()));
     }
@@ -6260,6 +6262,15 @@
     openModal();
   }
 
+  // Cuando hay un guardado recién lanzado en segundo plano (ver handleWin/handleGameOver), la
+  // barra de la comunidad se refresca sola en cuanto termine ESE guardado (con el dato ya
+  // correcto, incluyendo esta misma partida) — así que openModal() no debe lanzar SU PROPIA
+  // petición aparte justo antes: sin esto, se pedía dos veces seguidas (una nada más abrirse,
+  // con un dato todavía sin esta partida; otra al terminar el guardado, con el dato bueno),
+  // y la segunda volvía a mostrar "Cargando" encima de la barra que ya se veía, dando la
+  // sensación de parpadeo (barra → cargando → barra).
+  let skipNextCommunityStatsAutoRefresh = false;
+
   function openModal() {
     if (gameOver || awaitingNextPanel) {
       document.getElementById("gameover-modal").style.display = "flex";
@@ -6268,7 +6279,11 @@
       // aparece sola en cuanto está lista, con un hueco de "cargando" mientras tanto para que
       // no se note un salto de tamaño al llegar el contenido real.
       if (!isInfiniteMode) {
-        renderCommunityStats(currentDifficulty, getMadridDailyKey());
+        if (skipNextCommunityStatsAutoRefresh) {
+          skipNextCommunityStatsAutoRefresh = false;
+        } else {
+          renderCommunityStats(currentDifficulty, getMadridDailyKey());
+        }
       }
     }
   }
