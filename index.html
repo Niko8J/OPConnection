@@ -1795,19 +1795,52 @@
     dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
   }
 
-  document.addEventListener("click", (event) => {
+  // Cierra el menú de cuenta si el clic/toque fue fuera de él, y evita que ese mismo
+  // clic/toque también le llegue a lo que hubiera debajo (p. ej. una tarjeta) — se usa tanto
+  // para ratón (evento "click") como para dedo (las tarjetas usan sus propios "touchstart"/
+  // "touchend" en vez de "click", para funcionar bien en móvil: mantener pulsado para ver el
+  // nombre, evitar el menú nativo de "guardar imagen"... así que hacía falta cubrir esos dos
+  // eventos también, no solo "click", o en un móvil de verdad esto no tenía ningún efecto).
+  //
+  // Con el dedo hace falta un empujoncito extra: si cerráramos el menú ya en "touchstart", el
+  // "touchend" que viene justo después (el que de verdad dispara la selección de la tarjeta)
+  // llegaría con el menú ya cerrado, y se colaría igual hacia la tarjeta. Por eso en
+  // "touchstart" solo bloqueamos el evento y recordamos que hay que bloquear también el
+  // "touchend" que viene a continuación; el cierre de verdad ocurre ahí.
+  let suppressNextTouchEnd = false;
+  function closeAuthDropdownIfOutside(event) {
     const corner = document.querySelector(".auth-corner");
     const dropdown = document.getElementById("auth-dropdown");
-    if (dropdown && dropdown.style.display === "block" && corner && !corner.contains(event.target)) {
+    if (!dropdown) return;
+    const isOpen = dropdown.style.display === "block";
+    const outside = corner && !corner.contains(event.target);
+
+    if (event.type === "click") {
+      if (isOpen && outside) {
+        dropdown.style.display = "none";
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      return;
+    }
+    if (event.type === "touchstart") {
+      suppressNextTouchEnd = isOpen && outside;
+      if (suppressNextTouchEnd) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      return;
+    }
+    if (event.type === "touchend" && suppressNextTouchEnd) {
       dropdown.style.display = "none";
-      // Fase de CAPTURA (el "true" del final) + stopPropagation: así este primer clic fuera se
-      // "consume" solo para cerrar el menú, antes de llegar a golpear lo que hubiera debajo
-      // (p. ej. una tarjeta). Con un listener normal (fase de burbuja), el onclick de la
-      // tarjeta ya se habría disparado ANTES de que este código llegara a ejecutarse.
       event.stopPropagation();
       event.preventDefault();
+      suppressNextTouchEnd = false;
     }
-  }, true);
+  }
+  document.addEventListener("click", closeAuthDropdownIfOutside, true);
+  document.addEventListener("touchstart", closeAuthDropdownIfOutside, true);
+  document.addEventListener("touchend", closeAuthDropdownIfOutside, true);
 
   function openAuthModal(mode) {
     document.getElementById("auth-dropdown").style.display = "none";
@@ -6209,4 +6242,4 @@
 
 </script>
 </body>
-  </html>
+</html>
