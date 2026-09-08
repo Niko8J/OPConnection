@@ -392,12 +392,15 @@
        hoy, en esta dificultad. Verde/rojo, a juego con el borde del propio modal (que ya usa
        esos mismos colores para victoria/derrota). */
     .community-stats { margin: 2px 0 10px; }
-    /* Mismo alto aproximado que la barra de verdad (cabecera + barra + números), para que al
-       sustituirse por el contenido real no se note un salto de tamaño en el modal. */
-    .community-stats-loading {
-      height: 46px; display: flex; align-items: center; justify-content: center;
-      color: #64748b; font-size: 0.75rem; margin: 2px 0 10px;
+    /* Aspecto neutro (gris) para el estado de carga, reutilizando la misma estructura de la
+       barra real — ver buildCommunityStatsLoadingHtml. Ancho fijo en vez de dejar que el
+       &nbsp; determine el tamaño, para que se vea como un bloque de verdad, no como un
+       espacio en blanco suelto. */
+    .community-stats-skeleton {
+      display: inline-block; width: 60px; height: 0.9em; border-radius: 3px;
+      background: #334155; color: transparent;
     }
+    .community-stats-skeleton-fill { width: 35%; height: 100%; background: #475569; }
     .community-stats-header {
       display: grid; grid-template-columns: 1fr auto 1fr; align-items: baseline; gap: 6px;
       margin-bottom: 5px;
@@ -1020,7 +1023,7 @@
     .solution-row {
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
       border-radius: 8px; font-weight: bold; color: #0f172a; text-align: center;
-      padding: 8px; animation: fadeIn 0.3s ease;
+      padding: 8px; animation: solutionFadeIn 0.3s ease;
     }
     .solution-items { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
     .solution-img {
@@ -1048,6 +1051,14 @@
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    /* A diferencia de fadeIn (que también usan el modal entero y las categorías resueltas del
+       tablero, donde el movimiento hacia abajo queda bien), aquí solo se desvanece, sin
+       desplazarse — el movimiento hacía que, por contraste, la barra de la comunidad (que se
+       queda quieta) pareciera moverse al revés justo debajo. */
+    @keyframes solutionFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     @media (max-width: 480px) {
@@ -5189,10 +5200,28 @@
     label.style.display = overlapping ? "none" : "";
   }
 
+  // Reutiliza la MISMA estructura que la barra real (cabecera de 3 columnas + barra), solo que
+  // con aspecto neutro en vez de datos — así la altura coincide siempre de verdad con el
+  // contenido final (nada de adivinar un número de píxeles fijo), y al sustituirse no hay
+  // ningún salto de tamaño posible.
+  function buildCommunityStatsLoadingHtml() {
+    return `
+      <div class="community-stats">
+        <div class="community-stats-header">
+          <span class="community-stats-win-text community-stats-skeleton">&nbsp;</span>
+          <span class="community-stats-label">Resultados de la comunidad</span>
+          <span class="community-stats-lose-text community-stats-skeleton">&nbsp;</span>
+        </div>
+        <div class="community-stats-bar">
+          <div class="community-stats-skeleton-fill"></div>
+        </div>
+      </div>`;
+  }
+
   async function renderCommunityStats(difficulty, todayKey) {
     const container = document.getElementById("community-stats-container");
     if (!container) return;
-    container.innerHTML = '<div class="community-stats-loading">Cargando estadísticas de la comunidad…</div>';
+    container.innerHTML = buildCommunityStatsLoadingHtml();
     const stats = await fetchDailyPuzzleStats(difficulty, todayKey);
     container.innerHTML = buildCommunityStatsHtml(stats);
     fixCommunityStatsOverlap(container);
