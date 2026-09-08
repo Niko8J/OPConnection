@@ -91,7 +91,12 @@
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
       animation: toastIn 0.25s ease, toastOut 0.25s ease 2.55s forwards;
     }
-    .toast-achievement { border-color: #a855f7; }
+    .toast-achievement {
+      border-color: #a855f7;
+      /* Más tiempo en pantalla que el aviso de moneda (4.5s en vez de 2.8s en total): aquí hay
+         más texto que leer (el título más el nombre del logro), no solo una cifra. */
+      animation: toastIn 0.25s ease, toastOut 0.25s ease 4.25s forwards;
+    }
     .toast-achievement-content { display: flex; flex-direction: column; align-items: center; }
     .toast-berries-icon { width: 15px; height: 15px; object-fit: contain; }
     .howto-berries-icon { height: 1em; width: auto; object-fit: contain; vertical-align: -0.15em; }
@@ -636,14 +641,14 @@
        a propósito (una sola línea, poco padding): va pegado entre el tablero y los controles,
        y no debe llamar más la atención que el propio tablero. */
     .past-panel-banner {
-      display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: nowrap;
-      background: #1e293b; border: 1px solid #f59e0b; border-radius: 6px;
-      padding: 3px 10px; margin: var(--v-gap-sm) 0; font-size: 0.72rem; color: #f59e0b; font-weight: bold;
+      display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: nowrap;
+      background: #1e293b; border: 1px solid #f59e0b; border-radius: 5px;
+      padding: 2px 8px; margin: 4px 0; font-size: 0.65rem; color: #f59e0b; font-weight: bold;
     }
     .past-panel-banner-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
     .past-panel-banner-btn {
-      background: #f59e0b; border: none; border-radius: 5px; padding: 2px 8px; flex-shrink: 0;
-      color: #0f172a; font-weight: bold; font-size: 0.68rem; cursor: pointer;
+      background: #f59e0b; border: none; border-radius: 4px; padding: 1px 6px; flex-shrink: 0;
+      color: #0f172a; font-weight: bold; font-size: 0.6rem; cursor: pointer;
     }
 
     #lives-icons { display: flex; align-items: center; gap: 8px; }
@@ -886,6 +891,7 @@
 
     .controls-left {
       display: flex;
+      align-items: center;
       gap: 10px;
       flex-shrink: 0;
     }
@@ -2338,11 +2344,15 @@
 
     let resultsByDate = {};
     try {
+      // "source: server" a propósito: esto puede leerse justo después de escribir un
+      // resultado (p. ej. acabas de terminar el panel de hoy y abres el calendario al
+      // momento), así que forzamos ir al servidor de verdad en vez de fiarnos de la caché
+      // local, para no arriesgarnos a leer una versión todavía no sincronizada del todo.
       const snap = await db.collection("users").doc(currentUser.uid).collection("gameHistory")
         .where("difficulty", "==", historyModalDifficulty)
         .where("date", ">=", monthStartKey)
         .where("date", "<=", monthEndKey)
-        .get();
+        .get({ source: "server" });
       snap.forEach(doc => { resultsByDate[doc.data().date] = doc.data().result; });
     } catch (e) {
       console.error("No se pudo cargar el historial de este mes:", e);
@@ -2595,16 +2605,47 @@
   //
   // Aviso genérico: crea el elemento, lo añade al contenedor, y lo quita del DOM cuando termina
   // su propia animación de entrada/salida (definida en el CSS: 0.25s + 2.55s + 0.25s = 2.8s en
-  // total). Si se disparan varios a la vez (p. ej. monedas + logro en el mismo panel), se
-  // apilan uno debajo del otro gracias al contenedor en columna.
-  function showToast(innerHtml, extraClass) {
+  // total, o más para el de logro). Si se disparan varios a la vez (p. ej. monedas + logro en
+  // el mismo panel), se apilan uno debajo del otro gracias al contenedor en columna.
+  function showToast(innerHtml, extraClass, durationMs = 2800) {
     const container = document.getElementById("toast-container");
     if (!container) return;
     const toast = document.createElement("div");
     toast.className = "toast" + (extraClass ? ` ${extraClass}` : "");
     toast.innerHTML = innerHtml;
     container.appendChild(toast);
-    setTimeout(() => toast.remove(), 2800);
+    setTimeout(() => removeToastSmoothly(toast), durationMs);
+  }
+
+  // Al quitar un aviso, el hueco que deja se cierra de golpe por el propio reflujo del
+  // contenedor (flex en columna, anclado abajo) — sus vecinos "saltan" a la nueva posición sin
+  // transición. Con la técnica FLIP (First-Last-Invert-Play): medimos dónde estaba cada vecino
+  // ANTES de quitar este aviso, lo quitamos, medimos dónde ha quedado cada uno DESPUÉS, y a los
+  // que se han movido les aplicamos un desplazamiento inverso instantáneo (sin transición) que
+  // los deja visualmente en su sitio de antes — para, en el siguiente fotograma, animar ESE
+  // desplazamiento hasta 0 con una transición suave, dando la sensación de que se deslizan en
+  // vez de saltar.
+  function removeToastSmoothly(toast) {
+    const container = document.getElementById("toast-container");
+    if (!container || !container.contains(toast)) { toast.remove(); return; }
+
+    const others = [...container.children].filter(el => el !== toast);
+    const beforeRects = new Map(others.map(el => [el, el.getBoundingClientRect()]));
+
+    toast.remove();
+
+    others.forEach(el => {
+      const before = beforeRects.get(el);
+      const after = el.getBoundingClientRect();
+      const deltaY = before.top - after.top;
+      if (!deltaY) return;
+      el.style.transition = "none";
+      el.style.transform = `translateY(${deltaY}px)`;
+      requestAnimationFrame(() => {
+        el.style.transition = "transform 0.25s ease";
+        el.style.transform = "";
+      });
+    });
   }
 
   function showCoinToast(amount) {
@@ -2621,10 +2662,15 @@
     // que sin este retraso, cuál de las dos aparece antes dependería de cuál responda primero
     // (nada fiable). Con este margen fijo, el aviso de logro sale siempre un instante después
     // del de la moneda, de forma consistente.
+    //
+    // 4500ms (en vez de los 2800ms por defecto): tiene más texto que leer que el de moneda
+    // (el título más el nombre del logro), así que se queda más tiempo en pantalla — a juego
+    // con la animación CSS de .toast-achievement, que también dura 4.5s en total.
     setTimeout(() => {
       showToast(
         `<div class="toast-achievement-content">🏆 ¡Logro conseguido!<span class="toast-achievement-name">${escapeHtml(achievement.name)}</span></div>`,
-        "toast-achievement"
+        "toast-achievement",
+        4500
       );
     }, 600);
   }
@@ -6255,4 +6301,4 @@
 
 </script>
 </body>
-  </html>
+</html>
