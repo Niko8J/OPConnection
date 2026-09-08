@@ -407,8 +407,8 @@
       display: flex; width: 100%; height: 8px; border-radius: 5px; overflow: hidden;
       background: #334155;
     }
-    .community-stats-win { background: #22c55e; }
-    .community-stats-lose { background: #ef4444; }
+    .community-stats-win { background: #22c55e; transition: width 0.6s ease; }
+    .community-stats-lose { background: #ef4444; transition: width 0.6s ease; }
 
     .gameover-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
@@ -5150,15 +5150,63 @@
     return `
       <div class="community-stats">
         <div class="community-stats-header">
-          <span class="community-stats-win-text">✔️ ${stats.winCount} · ${winPct}%</span>
+          <span id="community-stats-win-text" class="community-stats-win-text">✔️ ${stats.winCount} · ${winPct}%</span>
           <span class="community-stats-label">Resultados de la comunidad</span>
-          <span class="community-stats-lose-text">${stats.loseCount} · ${losePct}% 💀</span>
+          <span id="community-stats-lose-text" class="community-stats-lose-text">${stats.loseCount} · ${losePct}% 💀</span>
         </div>
         <div class="community-stats-bar">
-          <div class="community-stats-win" style="width: ${winPct}%;"></div>
-          <div class="community-stats-lose" style="width: ${losePct}%;"></div>
+          <div id="community-stats-win-bar" class="community-stats-win" style="width: ${winPct}%;"></div>
+          <div id="community-stats-lose-bar" class="community-stats-lose" style="width: ${losePct}%;"></div>
         </div>
       </div>`;
+  }
+
+  // Versión "todavía sin datos" de la barra: MISMA estructura y sitio que la real (para no
+  // dejar el hueco vacío ni tener que reservarlo aparte), con guiones en vez de cifras y toda
+  // la barra en rojo (0% verde) — como si, de momento, no hubiera ganado nadie. En cuanto
+  // lleguen los datos de verdad, updateCommunityStatsWithData() rellena estos MISMOS elementos
+  // (no reemplaza el HTML entero), así la transición CSS de la barra anima el cambio de ancho
+  // en vez de saltar de golpe a la cifra final.
+  function buildCommunityStatsPlaceholderHtml() {
+    return `
+      <div class="community-stats">
+        <div class="community-stats-header">
+          <span id="community-stats-win-text" class="community-stats-win-text">✔️ - · -%</span>
+          <span class="community-stats-label">Resultados de la comunidad</span>
+          <span id="community-stats-lose-text" class="community-stats-lose-text">- · -% 💀</span>
+        </div>
+        <div class="community-stats-bar">
+          <div id="community-stats-win-bar" class="community-stats-win" style="width: 0%;"></div>
+          <div id="community-stats-lose-bar" class="community-stats-lose" style="width: 100%;"></div>
+        </div>
+      </div>`;
+  }
+
+  // Rellena la barra que YA está en el DOM (puesta por openModal con buildCommunityStatsPlaceholderHtml)
+  // con los datos reales, actualizando los mismos elementos en vez de reemplazarlos — necesario
+  // para que la transición CSS del ancho de la barra se anime en vez de saltar de golpe.
+  function updateCommunityStatsWithData(containerEl, stats) {
+    if (!stats || stats.winCount + stats.loseCount === 0) {
+      containerEl.innerHTML = "";
+      return;
+    }
+    const total = stats.winCount + stats.loseCount;
+    const winPct = Math.round((stats.winCount / total) * 100);
+    const losePct = 100 - winPct;
+    const winTextEl = containerEl.querySelector("#community-stats-win-text");
+    const loseTextEl = containerEl.querySelector("#community-stats-lose-text");
+    const winBarEl = containerEl.querySelector("#community-stats-win-bar");
+    const loseBarEl = containerEl.querySelector("#community-stats-lose-bar");
+    if (!winTextEl || !loseTextEl || !winBarEl || !loseBarEl) {
+      // Por si acaso el hueco no tenía puesta la versión provisional (p. ej. algún otro sitio
+      // llama a esto sin pasar por openModal antes): construimos la barra entera desde cero.
+      containerEl.innerHTML = buildCommunityStatsHtml(stats);
+      return;
+    }
+    winTextEl.innerText = `✔️ ${stats.winCount} · ${winPct}%`;
+    loseTextEl.innerText = `${stats.loseCount} · ${losePct}% 💀`;
+    winBarEl.style.width = `${winPct}%`;
+    loseBarEl.style.width = `${losePct}%`;
   }
 
   // Pide y pinta la barra de forma asíncrona (el modal ya se ha abierto antes de que esto
@@ -5186,9 +5234,8 @@
   async function renderCommunityStats(difficulty, todayKey) {
     const container = document.getElementById("community-stats-container");
     if (!container) return;
-    container.innerHTML = "";
     const stats = await fetchDailyPuzzleStats(difficulty, todayKey);
-    container.innerHTML = buildCommunityStatsHtml(stats);
+    updateCommunityStatsWithData(container, stats);
   }
 
   async function saveDailyResult(difficulty, result, groups) {
@@ -6235,23 +6282,22 @@
 
   async function openModal() {
     if (gameOver || awaitingNextPanel) {
-      // Las estadísticas de la comunidad pueden haber cambiado desde que se rellenó este
-      // modal (aunque sea la primera vez que lo abres hoy, otros jugadores pueden haber
-      // terminado el panel mientras tanto): las refrescamos cada vez que se abre, no solo la
-      // primera. Esperamos a que terminen de cargar ANTES de mostrar el modal —así el
-      // modal se abre completo desde el primer fotograma, en vez de aparecer sin la barra y
-      // que esta salte a aparecer un instante después agrandando el modal de golpe—. Solo
-      // aplica al reto diario, nunca a Infinito (que no tiene esta barra y se abre al
-      // instante, como siempre).
+      // El modal se abre AL INSTANTE (sin esperar a la barra de estadísticas): un retraso, por
+      // pequeño que sea, se nota más que dejar la barra ya puesta desde el primer momento. Por
+      // eso, en vez de dejar el hueco vacío o con un simple aviso de texto, ponemos aquí la
+      // MISMA barra que se vería con datos reales, pero en su versión provisional (guiones,
+      // toda en rojo) — renderCommunityStats() la rellena con los datos de verdad en cuanto
+      // llegan, animando el cambio de ancho en vez de aparecer de la nada.
       if (!isInfiniteMode) {
-        await renderCommunityStats(currentDifficulty, getMadridDailyKey());
+        const container = document.getElementById("community-stats-container");
+        if (container) container.innerHTML = buildCommunityStatsPlaceholderHtml();
       }
       document.getElementById("gameover-modal").style.display = "flex";
-      // Se mide AQUÍ, no antes: con el modal todavía en display:none (como estaba justo
-      // arriba, a propósito, para que la barra no aparezca de golpe tras abrirse) cualquier
-      // getBoundingClientRect() da todo a cero, así que la etiqueta se ocultaba siempre, la
-      // cupiera o no. Ahora que el modal ya es visible de verdad, la medida es real.
       if (!isInfiniteMode) {
+        await renderCommunityStats(currentDifficulty, getMadridDailyKey());
+        // Se mide DESPUÉS de rellenar la barra de verdad (no antes, con la versión provisional
+        // puesta): fixCommunityStatsOverlap() necesita medir el ancho real del texto final, no
+        // el de los guiones provisionales.
         const container = document.getElementById("community-stats-container");
         if (container) fixCommunityStatsOverlap(container);
       }
