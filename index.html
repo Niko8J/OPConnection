@@ -3285,8 +3285,14 @@
     const loseBarEl = document.getElementById("profile-stats-lose-bar");
     if (!winTextEl || !loseTextEl || !winBarEl || !loseBarEl) return;
 
-    winBarEl.style.width = `${winPct}%`;
-    loseBarEl.style.width = `${losePct}%`;
+    // Forzamos un fotograma de margen antes de cambiar el ancho al valor final: si lo
+    // hiciéramos en el mismo instante en que se inserta el HTML (con el 0%/100% inicial), el
+    // navegador puede saltarse directamente al estado final sin llegar a pintar el de en medio,
+    // y la transición CSS del ancho se queda sin ningún punto de partida visible del que animar.
+    requestAnimationFrame(() => {
+      winBarEl.style.width = `${winPct}%`;
+      loseBarEl.style.width = `${losePct}%`;
+    });
 
     const durationMs = 600;
     const start = performance.now();
