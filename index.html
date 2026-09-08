@@ -392,10 +392,6 @@
        hoy, en esta dificultad. Verde/rojo, a juego con el borde del propio modal (que ya usa
        esos mismos colores para victoria/derrota). */
     .community-stats { margin: 2px 0 10px; }
-    /* Los números en guion se ven en el mismo color/tamaño que sus versiones reales (herencia
-       de .community-stats-win-text/.community-stats-lose-text), solo apagados a gris — así se
-       lee como "esto mismo, todavía sin datos", no como un elemento distinto. */
-    .community-stats-placeholder-text { color: #64748b !important; }
     .community-stats-header {
       display: grid; grid-template-columns: 1fr auto 1fr; align-items: baseline; gap: 6px;
       margin-bottom: 5px;
@@ -411,11 +407,8 @@
       display: flex; width: 100%; height: 8px; border-radius: 5px; overflow: hidden;
       background: #334155;
     }
-    /* transition en el ancho: al pasar de 0% (estado vacío) al porcentaje real, el propio
-       navegador anima el cambio solo — siempre que sea el MISMO elemento el que cambie de
-       valor (ver renderCommunityStats: reutiliza estos mismos divs, no los sustituye). */
-    .community-stats-win { background: #22c55e; transition: width 0.5s ease; }
-    .community-stats-lose { background: #ef4444; transition: width 0.5s ease; }
+    .community-stats-win { background: #22c55e; }
+    .community-stats-lose { background: #ef4444; }
 
     .gameover-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
@@ -917,7 +910,7 @@
     button.action-btn {
       padding: 10px 20px;
       height: 36px;
-      display: inline-flex; align-items: center; justify-content: center;
+      display: inline-flex; align-items: center; justify-content: center; line-height: 1;
       border-radius: 20px;
       border: 2px solid #334155;
       background: #1e293b;
@@ -1021,7 +1014,7 @@
     .solution-row {
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
       border-radius: 8px; font-weight: bold; color: #0f172a; text-align: center;
-      padding: 8px; animation: solutionFadeIn 0.3s ease;
+      padding: 8px; animation: fadeIn 0.3s ease;
     }
     .solution-items { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
     .solution-img {
@@ -1049,14 +1042,6 @@
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-    /* A diferencia de fadeIn (que también usan el modal entero y las categorías resueltas del
-       tablero, donde el movimiento hacia abajo queda bien), aquí solo se desvanece, sin
-       desplazarse — el movimiento hacía que, por contraste, la barra de la comunidad (que se
-       queda quieta) pareciera moverse al revés justo debajo. */
-    @keyframes solutionFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
     }
 
     @media (max-width: 480px) {
@@ -5150,6 +5135,32 @@
     }
   }
 
+  // Barra verde/roja con el reparto de victorias y derrotas de todo el mundo hoy, en esta
+  // dificultad. Si nadie más ha terminado todavía (total 0) o falló la lectura, no se muestra
+  // nada — mejor un hueco vacío que una barra sin sentido a 0%/0%.
+  function buildCommunityStatsHtml(stats) {
+    if (!stats) return "";
+    const total = stats.winCount + stats.loseCount;
+    if (total === 0) return "";
+    const winPct = Math.round((stats.winCount / total) * 100);
+    const losePct = 100 - winPct;
+    // 3 columnas: verde a la izquierda, la etiqueta centrada de verdad en medio (con grid, no
+    // flex, para que quede centrada respecto a todo el hueco y no solo entre lo que sobra a
+    // los lados), rojo a la derecha.
+    return `
+      <div class="community-stats">
+        <div class="community-stats-header">
+          <span class="community-stats-win-text">✔️ ${stats.winCount} · ${winPct}%</span>
+          <span class="community-stats-label">Resultados de la comunidad</span>
+          <span class="community-stats-lose-text">${stats.loseCount} · ${losePct}% 💀</span>
+        </div>
+        <div class="community-stats-bar">
+          <div class="community-stats-win" style="width: ${winPct}%;"></div>
+          <div class="community-stats-lose" style="width: ${losePct}%;"></div>
+        </div>
+      </div>`;
+  }
+
   // Pide y pinta la barra de forma asíncrona (el modal ya se ha abierto antes de que esto
   // termine, no le hace esperar): mientras tanto el hueco se queda vacío sin más.
   // Si la etiqueta central llegara a tocar los números de los lados (pantallas muy estrechas),
@@ -5172,72 +5183,12 @@
     label.style.display = overlapping ? "none" : "";
   }
 
-  // Reutiliza la MISMA estructura que la barra real (cabecera de 3 columnas + barra), solo que
-  // con aspecto neutro en vez de datos — así la altura coincide siempre de verdad con el
-  // contenido final (nada de adivinar un número de píxeles fijo), y al sustituirse no hay
-  // ningún salto de tamaño posible.
-  function buildCommunityStatsLoadingHtml() {
-    return `
-      <div class="community-stats">
-        <div class="community-stats-header">
-          <span id="community-stats-win-text" class="community-stats-win-text community-stats-placeholder-text">—</span>
-          <span class="community-stats-label">Resultados de la comunidad</span>
-          <span id="community-stats-lose-text" class="community-stats-lose-text community-stats-placeholder-text">—</span>
-        </div>
-        <div class="community-stats-bar">
-          <div id="community-stats-win-fill" class="community-stats-win" style="width: 0%;"></div>
-          <div id="community-stats-lose-fill" class="community-stats-lose" style="width: 0%;"></div>
-        </div>
-      </div>`;
-  }
-
-  // Anima un número (y su porcentaje asociado) subiendo desde 0 hasta el valor real, en vez de
-  // aparecer de golpe — con una curva que empieza rápido y frena al final (más natural que a
-  // velocidad constante). "buildText" arma el texto final con los valores de cada fotograma.
-  function animateCountUp(el, targetCount, targetPct, buildText, duration = 500) {
-    const start = performance.now();
-    function frame(now) {
-      const progress = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.innerText = buildText(Math.round(targetCount * eased), Math.round(targetPct * eased));
-      if (progress < 1) requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  }
-
   async function renderCommunityStats(difficulty, todayKey) {
     const container = document.getElementById("community-stats-container");
     if (!container) return;
-    container.innerHTML = buildCommunityStatsLoadingHtml();
+    container.innerHTML = "";
     const stats = await fetchDailyPuzzleStats(difficulty, todayKey);
-
-    const total = stats && stats.winCount + stats.loseCount;
-    if (!total) { container.innerHTML = ""; return; } // sin datos: nada que mostrar ni animar
-
-    const winPct = Math.round((stats.winCount / total) * 100);
-    const losePct = 100 - winPct;
-
-    const winFill = document.getElementById("community-stats-win-fill");
-    const loseFill = document.getElementById("community-stats-lose-fill");
-    const winText = document.getElementById("community-stats-win-text");
-    const loseText = document.getElementById("community-stats-lose-text");
-    if (!winFill || !loseFill || !winText || !loseText) return; // el modal se cerró mientras se pedía
-
-    winText.classList.remove("community-stats-placeholder-text");
-    loseText.classList.remove("community-stats-placeholder-text");
-    animateCountUp(winText, stats.winCount, winPct, (c, p) => `✔️ ${c} · ${p}%`);
-    animateCountUp(loseText, stats.loseCount, losePct, (c, p) => `${c} · ${p}% 💀`);
-
-    // Un fotograma de margen antes de cambiar el ancho: si no, el navegador podría fundir el
-    // 0% inicial y el porcentaje real en un único pintado, sin transición visible de por medio.
-    requestAnimationFrame(() => {
-      winFill.style.width = winPct + "%";
-      loseFill.style.width = losePct + "%";
-    });
-
-    // Se comprueba al terminar la animación de los números (no antes), para medir el ancho ya
-    // asentado del texto final, no uno todavía a medio contar.
-    setTimeout(() => fixCommunityStatsOverlap(container), 520);
+    container.innerHTML = buildCommunityStatsHtml(stats);
   }
 
   async function saveDailyResult(difficulty, result, groups) {
@@ -5252,61 +5203,49 @@
       solvedOrder: [...solvedOrder], lives, cardOrder: cards.map(c => c.name)
     };
 
-    // Guarda la racha y comprueba los logros — en ESTE orden, por fuerza: el chequeo de logros
-    // lee la racha ya actualizada (currentUserProfile.dailyStreaks, puesto al final de este
-    // bloque) para saber si justo ACABAS de alcanzar un logro de "X días seguidos". Si estas
-    // dos fueran en paralelo con la comprobación de logros, podrían pillar la racha todavía sin
-    // actualizar y dejarse el logro sin detectar en el momento justo (aparecería más tarde, en
-    // la siguiente comprobación, en vez de al instante).
-    async function saveStreakAndCheckAchievements() {
-      if (currentUser) {
-        try {
-          const docRef = db.collection("users").doc(currentUser.uid);
-          const publicRef = db.collection("publicProfiles").doc(currentUser.uid);
+    if (currentUser) {
+      try {
+        const docRef = db.collection("users").doc(currentUser.uid);
+        const publicRef = db.collection("publicProfiles").doc(currentUser.uid);
 
-          const newStreak = await db.runTransaction(async transaction => {
-            const snap = await transaction.get(docRef);
-            const data = snap.exists ? snap.data() : {};
-            const streak = computeNextStreak(data.dailyStreaks && data.dailyStreaks[difficulty], todayKey, result === "win");
+        const newStreak = await db.runTransaction(async transaction => {
+          const snap = await transaction.get(docRef);
+          const data = snap.exists ? snap.data() : {};
+          const streak = computeNextStreak(data.dailyStreaks && data.dailyStreaks[difficulty], todayKey, result === "win");
 
-            transaction.set(docRef, {
-              dailyProgress: { [difficulty]: entry },
-              dailyStreaks: { [difficulty]: streak }
-            }, { merge: true });
-            // La racha también se guarda en el perfil PÚBLICO: los logros de "días seguidos
-            // jugando" son públicos, así que hace falta que cualquiera pueda verlos, no solo tú.
-            transaction.set(publicRef, { dailyStreaks: { [difficulty]: streak } }, { merge: true });
+          transaction.set(docRef, {
+            dailyProgress: { [difficulty]: entry },
+            dailyStreaks: { [difficulty]: streak }
+          }, { merge: true });
+          // La racha también se guarda en el perfil PÚBLICO: los logros de "días seguidos
+          // jugando" son públicos, así que hace falta que cualquiera pueda verlos, no solo tú.
+          transaction.set(publicRef, { dailyStreaks: { [difficulty]: streak } }, { merge: true });
 
-            return streak;
-          });
+          return streak;
+        });
 
-          // Actualizamos también la copia en memoria, para que si vuelve a pulsar la misma
-          // dificultad en esta misma sesión (sin recargar la página) ya lo vea bloqueado.
-          currentUserProfile = currentUserProfile || {};
-          currentUserProfile.dailyProgress = { ...(currentUserProfile.dailyProgress || {}), [difficulty]: entry };
-          currentUserProfile.dailyStreaks = { ...(currentUserProfile.dailyStreaks || {}), [difficulty]: newStreak };
-        } catch (e) {
-          console.error("No se pudo guardar el resultado del diario en tu cuenta:", e);
-        }
-      } else {
-        saveDailyProgressState(difficulty, entry);
+        // Actualizamos también la copia en memoria, para que si vuelve a pulsar la misma
+        // dificultad en esta misma sesión (sin recargar la página) ya lo vea bloqueado.
+        currentUserProfile = currentUserProfile || {};
+        currentUserProfile.dailyProgress = { ...(currentUserProfile.dailyProgress || {}), [difficulty]: entry };
+        currentUserProfile.dailyStreaks = { ...(currentUserProfile.dailyStreaks || {}), [difficulty]: newStreak };
+      } catch (e) {
+        console.error("No se pudo guardar el resultado del diario en tu cuenta:", e);
       }
-
-      // Refresca el "🔥 Racha actual" bajo los botones de dificultad, para que se vea al
-      // momento sin tener que salir y volver a entrar en el modo.
-      updateInfiniteScoreDisplay();
-      await checkAndAwardAchievementCoinsWithToast();
+    } else {
+      saveDailyProgressState(difficulty, entry);
     }
 
-    // El resto (contador del panel de hoy, contador personal, historial) no depende de la
-    // racha ni de los logros, ni entre sí — así que van en paralelo con todo lo anterior, en
-    // vez de esperar a que termine antes de ni siquiera empezar. Contador compartido de
-    // victorias/derrotas de HOY para esta dificultad (para la barra de "resultados de la
-    // comunidad" del modal de resultado) — cuenta a todo el mundo, invitado o con cuenta, así
-    // que va en su propia colección, no en dailyPuzzles (bloqueada a propósito contra
-    // escrituras, para proteger las respuestas del día).
+    // Refresca el "🔥 Racha actual" bajo los botones de dificultad, para que se vea al momento
+    // sin tener que salir y volver a entrar en el modo.
+    updateInfiniteScoreDisplay();
+    await checkAndAwardAchievementCoinsWithToast();
+
+    // Contador compartido de victorias/derrotas de HOY para esta dificultad (para la barra de
+    // "resultados de la comunidad" del modal de resultado) — cuenta a todo el mundo, invitado
+    // o con cuenta, así que va en su propia colección, no en dailyPuzzles (bloqueada a
+    // propósito contra escrituras, para proteger las respuestas del día).
     await Promise.all([
-      saveStreakAndCheckAchievements(),
       incrementDailyPuzzleStats(difficulty, todayKey, result === "win"),
       incrementUserTotalResult(difficulty, result === "win"),
       recordGameHistory(difficulty, entry)
@@ -5567,10 +5506,9 @@
     }
 
     // applyResultModalContent() rellena el modal Y lo abre (mismo camino que un final en vivo);
-    // lo volvemos a cerrar justo después para dejarlo preparado sin mostrarlo automáticamente.
-    // La barra de estadísticas de la comunidad se pinta sola en segundo plano (ver openModal),
-    // así que sigue actualizándose aunque el modal esté oculto de nuevo para cuando se abra.
-    applyResultModalContent(won);
+    // esperamos a que termine del todo (incluida la carga de la barra de estadísticas) y
+    // entonces sí lo volvemos a cerrar, para dejarlo preparado sin mostrarlo automáticamente.
+    await applyResultModalContent(won);
     document.getElementById("gameover-modal").style.display = "none";
   }
 
@@ -6177,7 +6115,7 @@
     shareText(buildShareTextInfinite());
   }
 
-  function applyResultModalContent(won) {
+  async function applyResultModalContent(won) {
     const modalContent = document.querySelector("#gameover-modal .modal-content");
     modalContent.style.borderColor = won ? "#22c55e" : "#ef4444";
 
@@ -6200,10 +6138,10 @@
     shareBtn.onclick = shareResult;
     shareBtn.style.display = "inline-block";
 
-    renderModalSolutions();
+    await renderModalSolutions();
   }
 
-  function handleWin() {
+  async function handleWin() {
     gameOver = true;
     awaitingNextPanel = false;
     showResultsControl();
@@ -6211,23 +6149,17 @@
     // handleWin() solo se llama en Novato/Supernova/Yonko (Infinito nunca "gana", sigue sin
     // parar hasta que fallas), así que este resultado siempre corresponde al reto diario.
     clearDailyInProgress(currentDifficulty); // ya no está "a medias": pasa a ser un resultado definitivo
-
-    // El modal se abre YA, sin esperar a ningún guardado en la nube — antes esperábamos a que
-    // terminaran 3-4 peticiones seguidas antes de mostrar nada, y eso se notaba como un
-    // retraso real al resolver un panel. El guardado sigue su curso en segundo plano; la
-    // barra de "resultados de la comunidad" (que si depende de que este resultado ya se haya
-    // contado) se actualiza sola en cuanto termina, sin bloquear la apertura del modal.
-    const saveResultPromise = saveDailyResult(currentDifficulty, "win", currentCategories);
+    // Esperamos a que el guardado (incluido el contador de la comunidad) termine ANTES de
+    // rellenar y abrir el modal: si no, la barra de "resultados de la comunidad" podía leerse
+    // antes de que esta misma partida llegara a contarse, mostrando un reparto de ayer... o de
+    // hace un instante, sin la victoria que acabas de conseguir.
+    await saveDailyResult(currentDifficulty, "win", currentCategories);
     awardPanelCoins(DAILY_PANEL_COINS[currentDifficulty]);
-    if (!isInfiniteMode) skipNextCommunityStatsAutoRefresh = true;
-    applyResultModalContent(true);
 
-    if (!isInfiniteMode) {
-      saveResultPromise.then(() => renderCommunityStats(currentDifficulty, getMadridDailyKey()));
-    }
+    await applyResultModalContent(true);
   }
 
-  function handleGameOver() {
+  async function handleGameOver() {
     gameOver = true;
     awaitingNextPanel = false;
     if (isInfiniteMode) {
@@ -6263,15 +6195,12 @@
       // resaltadas para siempre en ese tablero. Las deseleccionamos aquí a propósito.
       selectedCards = [];
       document.querySelectorAll("#grid .card.selected").forEach(el => el.classList.remove("selected"));
-      // Mismo motivo que en handleWin(): el modal se abre ya, sin esperar al guardado.
-      const saveResultPromise = saveDailyResult(currentDifficulty, "lose", currentCategories);
-      skipNextCommunityStatsAutoRefresh = true;
-      applyResultModalContent(false);
-      saveResultPromise.then(() => renderCommunityStats(currentDifficulty, getMadridDailyKey()));
+      await saveDailyResult(currentDifficulty, "lose", currentCategories);
+      await applyResultModalContent(false);
     }
   }
 
-  function renderModalSolutions() {
+  async function renderModalSolutions() {
     const solutionsContainer = document.getElementById("solutions-container");
     solutionsContainer.innerHTML = "";
 
@@ -6301,31 +6230,30 @@
       fixSolvedLabelOverflow(solEl, ".solution-label");
     });
 
-    openModal();
+    await openModal();
   }
 
-  // Cuando hay un guardado recién lanzado en segundo plano (ver handleWin/handleGameOver), la
-  // barra de la comunidad se refresca sola en cuanto termine ESE guardado (con el dato ya
-  // correcto, incluyendo esta misma partida) — así que openModal() no debe lanzar SU PROPIA
-  // petición aparte justo antes: sin esto, se pedía dos veces seguidas (una nada más abrirse,
-  // con un dato todavía sin esta partida; otra al terminar el guardado, con el dato bueno),
-  // y la segunda volvía a mostrar "Cargando" encima de la barra que ya se veía, dando la
-  // sensación de parpadeo (barra → cargando → barra).
-  let skipNextCommunityStatsAutoRefresh = false;
-
-  function openModal() {
+  async function openModal() {
     if (gameOver || awaitingNextPanel) {
-      document.getElementById("gameover-modal").style.display = "flex";
-      // Ya no se espera a este dato para abrir el modal (antes eso era justo lo que hacía que
-      // "tardara en saltar" al resolver un panel): se pide en segundo plano y la barra
-      // aparece sola en cuanto está lista, con un hueco de "cargando" mientras tanto para que
-      // no se note un salto de tamaño al llegar el contenido real.
+      // Las estadísticas de la comunidad pueden haber cambiado desde que se rellenó este
+      // modal (aunque sea la primera vez que lo abres hoy, otros jugadores pueden haber
+      // terminado el panel mientras tanto): las refrescamos cada vez que se abre, no solo la
+      // primera. Esperamos a que terminen de cargar ANTES de mostrar el modal —así el
+      // modal se abre completo desde el primer fotograma, en vez de aparecer sin la barra y
+      // que esta salte a aparecer un instante después agrandando el modal de golpe—. Solo
+      // aplica al reto diario, nunca a Infinito (que no tiene esta barra y se abre al
+      // instante, como siempre).
       if (!isInfiniteMode) {
-        if (skipNextCommunityStatsAutoRefresh) {
-          skipNextCommunityStatsAutoRefresh = false;
-        } else {
-          renderCommunityStats(currentDifficulty, getMadridDailyKey());
-        }
+        await renderCommunityStats(currentDifficulty, getMadridDailyKey());
+      }
+      document.getElementById("gameover-modal").style.display = "flex";
+      // Se mide AQUÍ, no antes: con el modal todavía en display:none (como estaba justo
+      // arriba, a propósito, para que la barra no aparezca de golpe tras abrirse) cualquier
+      // getBoundingClientRect() da todo a cero, así que la etiqueta se ocultaba siempre, la
+      // cupiera o no. Ahora que el modal ya es visible de verdad, la medida es real.
+      if (!isInfiniteMode) {
+        const container = document.getElementById("community-stats-container");
+        if (container) fixCommunityStatsOverlap(container);
       }
     }
   }
