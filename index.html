@@ -223,7 +223,7 @@
        columnas de solo un dígito o dos por casilla, no necesita mucho ancho), y con su propio
        tope de alto con scroll, para que en pantallas bajas no empuje la leyenda fuera de vista. */
     .modal-content.history-modal-content { max-width: 360px; text-align: left; }
-    .history-modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .history-modal-header { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; margin-bottom: 14px; }
     .history-modal-title { font-weight: bold; color: #f8fafc; font-size: 1rem; text-align: center; flex: 1; }
     .history-nav-btn {
       width: 32px; height: 32px; border-radius: 8px; border: 2px solid #334155; background: #1e293b;
@@ -1798,10 +1798,16 @@
   document.addEventListener("click", (event) => {
     const corner = document.querySelector(".auth-corner");
     const dropdown = document.getElementById("auth-dropdown");
-    if (dropdown && corner && !corner.contains(event.target)) {
+    if (dropdown && dropdown.style.display === "block" && corner && !corner.contains(event.target)) {
       dropdown.style.display = "none";
+      // Fase de CAPTURA (el "true" del final) + stopPropagation: así este primer clic fuera se
+      // "consume" solo para cerrar el menú, antes de llegar a golpear lo que hubiera debajo
+      // (p. ej. una tarjeta). Con un listener normal (fase de burbuja), el onclick de la
+      // tarjeta ya se habría disparado ANTES de que este código llegara a ejecutarse.
+      event.stopPropagation();
+      event.preventDefault();
     }
-  });
+  }, true);
 
   function openAuthModal(mode) {
     document.getElementById("auth-dropdown").style.display = "none";
@@ -2219,6 +2225,11 @@
   let historyModalYear = null;
   let historyModalMonth = null;
 
+  // Antes de esta fecha, gameHistory ni siquiera existía (esta mecánica se añadió este día), así
+  // que no puede haber ningún dato real para ningún día anterior — se apagan exactamente igual
+  // que los días futuros, y no se deja navegar a un mes anterior al que la contiene.
+  const GAME_HISTORY_START_KEY = "2026-09-08";
+
   const MONTH_NAMES_ES = [
     "enero", "febrero", "marzo", "abril", "mayo", "junio",
     "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
@@ -2268,6 +2279,11 @@
     // No tiene sentido navegar a un mes futuro (todavía no ha pasado nada que mostrar ahí).
     nextBtn.disabled = historyModalYear === todayYear && historyModalMonth === todayMonth - 1;
 
+    const [startYear, startMonth] = GAME_HISTORY_START_KEY.split("-").map(Number);
+    // Tampoco tiene sentido ir más atrás del mes en el que empezó a existir el historial: no
+    // podría haber ningún dato ahí, así que ni se deja intentarlo.
+    prevBtn.disabled = historyModalYear === startYear && historyModalMonth === startMonth - 1;
+
     const pad2 = n => String(n).padStart(2, "0");
     const monthStr = pad2(historyModalMonth + 1);
     const daysInMonth = new Date(historyModalYear, historyModalMonth + 1, 0).getDate();
@@ -2304,8 +2320,9 @@
       cell.className = "history-day";
       cell.innerText = day;
 
-      if (dateKey > todayKey) {
-        // Día futuro: sin color, sin poder pulsarlo — todavía no ha pasado.
+      if (dateKey > todayKey || dateKey < GAME_HISTORY_START_KEY) {
+        // Día futuro, o anterior al inicio del historial: sin color, sin poder pulsarlo — no
+        // puede haber ningún dato real en ninguno de los dos casos.
       } else {
         const result = resultsByDate[dateKey];
         if (result === "win") {
@@ -4281,7 +4298,7 @@
       const streakData = currentUserProfile.dailyStreaks && currentUserProfile.dailyStreaks[currentDifficulty];
       const current = (streakData && streakData.current) || 0;
       el.style.visibility = "visible";
-      el.innerHTML = `🔥 Racha: ${current} día(s) · <button class="history-link-btn" onclick="openHistoryModal()">📅 Paneles pasados</button>`;
+      el.innerHTML = `🔥 Racha: ${current} ${current === 1 ? "día" : "días"} · <button class="history-link-btn" onclick="openHistoryModal()">📅 Paneles pasados</button>`;
     } else {
       el.style.visibility = "hidden";
     }
@@ -6192,4 +6209,4 @@
 
 </script>
 </body>
-</html>
+  </html>
