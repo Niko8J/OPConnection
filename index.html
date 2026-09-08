@@ -5203,10 +5203,26 @@
       containerEl.innerHTML = buildCommunityStatsHtml(stats);
       return;
     }
-    winTextEl.innerText = `✔️ ${stats.winCount} · ${winPct}%`;
-    loseTextEl.innerText = `${stats.loseCount} · ${losePct}% 💀`;
     winBarEl.style.width = `${winPct}%`;
     loseBarEl.style.width = `${losePct}%`;
+    animateCommunityStatsNumbers(winTextEl, loseTextEl, stats.winCount, stats.loseCount, winPct, losePct);
+  }
+
+  // Cuenta desde 0 hasta la cifra final (victorias/derrotas y sus porcentajes a la vez), en
+  // los mismos 0.6s que tarda la barra en animarse por CSS — para que números y barra lleguen
+  // a su sitio a la vez, en vez de que los números cambien de golpe mientras la barra sigue
+  // creciendo.
+  function animateCommunityStatsNumbers(winTextEl, loseTextEl, winCount, loseCount, winPct, losePct) {
+    const durationMs = 600;
+    const start = performance.now();
+    function step(now) {
+      const t = Math.min(1, (now - start) / durationMs);
+      const eased = 1 - (1 - t) * (1 - t); // easeOutQuad, a juego con el "ease" de la barra
+      winTextEl.innerText = `✔️ ${Math.round(winCount * eased)} · ${Math.round(winPct * eased)}%`;
+      loseTextEl.innerText = `${Math.round(loseCount * eased)} · ${Math.round(losePct * eased)}% 💀`;
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
   }
 
   // Pide y pinta la barra de forma asíncrona (el modal ya se ha abierto antes de que esto
@@ -6295,11 +6311,20 @@
       document.getElementById("gameover-modal").style.display = "flex";
       if (!isInfiniteMode) {
         await renderCommunityStats(currentDifficulty, getMadridDailyKey());
-        // Se mide DESPUÉS de rellenar la barra de verdad (no antes, con la versión provisional
-        // puesta): fixCommunityStatsOverlap() necesita medir el ancho real del texto final, no
-        // el de los guiones provisionales.
-        const container = document.getElementById("community-stats-container");
-        if (container) fixCommunityStatsOverlap(container);
+        // NO esperamos aquí a que termine la animación de conteo (0.6s): eso retrasaría
+        // también a renderFinishedDailyPanel(), que abre y cierra este modal al vuelo para
+        // dejarlo preparado sin mostrarlo al cambiar de dificultad — con la espera bloqueando,
+        // se quedaba visible ese medio segundo largo antes de darle tiempo a volver a
+        // ocultarse. En su lugar, programamos la comprobación aparte (sin bloquear el resto de
+        // la función), y solo medimos si el modal SIGUE visible en ese momento: si para
+        // entonces ya se ha vuelto a ocultar (el relleno silencioso), no hace falta medir
+        // nada — se medirá bien la próxima vez que se abra de verdad (el botón "Resultados"
+        // vuelve a llamar a openModal() desde cero).
+        setTimeout(() => {
+          if (document.getElementById("gameover-modal").style.display !== "flex") return;
+          const container = document.getElementById("community-stats-container");
+          if (container) fixCommunityStatsOverlap(container);
+        }, 600);
       }
     }
   }
