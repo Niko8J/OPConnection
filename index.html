@@ -5568,11 +5568,14 @@
       banner.style.visibility = "hidden";
     }
 
-    // applyResultModalContent() rellena el modal Y lo abre (mismo camino que un final en vivo);
-    // esperamos a que termine del todo (incluida la carga de la barra de estadísticas) y
-    // entonces sí lo volvemos a cerrar, para dejarlo preparado sin mostrarlo automáticamente.
-    await applyResultModalContent(won);
-    document.getElementById("gameover-modal").style.display = "none";
+    // applyResultModalContent() rellena el modal en modo SILENCIOSO (sin mostrarlo nunca), en
+    // vez del camino normal de "mostrar y luego ocultar rápido": con ese enfoque, el modal SÍ
+    // llegaba a mostrarse un instante (con la barra de estadísticas en su versión provisional,
+    // roja con guiones) mientras se esperaba la respuesta de Firestore — no importaba lo rápido
+    // que quitáramos la espera artificial, ese hueco de red seguía ahí. Al no mostrarlo nunca en
+    // este camino, ese problema desaparece del todo: la barra de verdad se construye desde cero
+    // la próxima vez que se abra de verdad (el botón "Resultados").
+    await applyResultModalContent(won, true);
   }
 
   // Formato DD/MM/YYYY. Como "dateKey" ya viene en formato YYYY-MM-DD, basta con reordenar sus
@@ -6178,7 +6181,7 @@
     shareText(buildShareTextInfinite());
   }
 
-  async function applyResultModalContent(won) {
+  async function applyResultModalContent(won, silent = false) {
     const modalContent = document.querySelector("#gameover-modal .modal-content");
     modalContent.style.borderColor = won ? "#22c55e" : "#ef4444";
 
@@ -6201,7 +6204,7 @@
     shareBtn.onclick = shareResult;
     shareBtn.style.display = "inline-block";
 
-    await renderModalSolutions();
+    await renderModalSolutions(silent);
   }
 
   async function handleWin() {
@@ -6263,7 +6266,7 @@
     }
   }
 
-  async function renderModalSolutions() {
+  async function renderModalSolutions(silent = false) {
     const solutionsContainer = document.getElementById("solutions-container");
     solutionsContainer.innerHTML = "";
 
@@ -6293,11 +6296,13 @@
       fixSolvedLabelOverflow(solEl, ".solution-label");
     });
 
-    await openModal();
+    await openModal(silent);
   }
 
-  async function openModal() {
+  async function openModal(silent = false) {
     if (gameOver || awaitingNextPanel) {
+      if (silent) return; // relleno silencioso (renderFinishedDailyPanel): no se muestra nada
+
       // El modal se abre AL INSTANTE (sin esperar a la barra de estadísticas): un retraso, por
       // pequeño que sea, se nota más que dejar la barra ya puesta desde el primer momento. Por
       // eso, en vez de dejar el hueco vacío o con un simple aviso de texto, ponemos aquí la
@@ -6311,20 +6316,14 @@
       document.getElementById("gameover-modal").style.display = "flex";
       if (!isInfiniteMode) {
         await renderCommunityStats(currentDifficulty, getMadridDailyKey());
-        // NO esperamos aquí a que termine la animación de conteo (0.6s): eso retrasaría
-        // también a renderFinishedDailyPanel(), que abre y cierra este modal al vuelo para
-        // dejarlo preparado sin mostrarlo al cambiar de dificultad — con la espera bloqueando,
-        // se quedaba visible ese medio segundo largo antes de darle tiempo a volver a
-        // ocultarse. En su lugar, programamos la comprobación aparte (sin bloquear el resto de
-        // la función), y solo medimos si el modal SIGUE visible en ese momento: si para
-        // entonces ya se ha vuelto a ocultar (el relleno silencioso), no hace falta medir
-        // nada — se medirá bien la próxima vez que se abra de verdad (el botón "Resultados"
-        // vuelve a llamar a openModal() desde cero).
-        setTimeout(() => {
-          if (document.getElementById("gameover-modal").style.display !== "flex") return;
-          const container = document.getElementById("community-stats-container");
-          if (container) fixCommunityStatsOverlap(container);
-        }, 600);
+        // Esperamos a que termine la animación de conteo (0.6s) antes de medir el solapamiento:
+        // el texto tarda ese tiempo en llegar a su valor final. Ya no hace falta comprobar si
+        // el modal sigue visible (como antes): en modo silencioso ni siquiera llegamos hasta
+        // aquí (ver el "return" de arriba), así que si estamos en este punto, el modal SIEMPRE
+        // está realmente abierto y visible para el jugador.
+        await new Promise(resolve => setTimeout(resolve, 600));
+        const container = document.getElementById("community-stats-container");
+        if (container) fixCommunityStatsOverlap(container);
       }
     }
   }
