@@ -392,6 +392,12 @@
        hoy, en esta dificultad. Verde/rojo, a juego con el borde del propio modal (que ya usa
        esos mismos colores para victoria/derrota). */
     .community-stats { margin: 2px 0 10px; }
+    /* Mismo alto aproximado que la barra de verdad (cabecera + barra + números), para que al
+       sustituirse por el contenido real no se note un salto de tamaño en el modal. */
+    .community-stats-loading {
+      height: 46px; display: flex; align-items: center; justify-content: center;
+      color: #64748b; font-size: 0.75rem; margin: 2px 0 10px;
+    }
     .community-stats-header {
       display: grid; grid-template-columns: 1fr auto 1fr; align-items: baseline; gap: 6px;
       margin-bottom: 5px;
@@ -5186,9 +5192,10 @@
   async function renderCommunityStats(difficulty, todayKey) {
     const container = document.getElementById("community-stats-container");
     if (!container) return;
-    container.innerHTML = "";
+    container.innerHTML = '<div class="community-stats-loading">Cargando estadísticas de la comunidad…</div>';
     const stats = await fetchDailyPuzzleStats(difficulty, todayKey);
     container.innerHTML = buildCommunityStatsHtml(stats);
+    fixCommunityStatsOverlap(container);
   }
 
   async function saveDailyResult(difficulty, result, groups) {
@@ -5506,9 +5513,10 @@
     }
 
     // applyResultModalContent() rellena el modal Y lo abre (mismo camino que un final en vivo);
-    // esperamos a que termine del todo (incluida la carga de la barra de estadísticas) y
-    // entonces sí lo volvemos a cerrar, para dejarlo preparado sin mostrarlo automáticamente.
-    await applyResultModalContent(won);
+    // lo volvemos a cerrar justo después para dejarlo preparado sin mostrarlo automáticamente.
+    // La barra de estadísticas de la comunidad se pinta sola en segundo plano (ver openModal),
+    // así que sigue actualizándose aunque el modal esté oculto de nuevo para cuando se abra.
+    applyResultModalContent(won);
     document.getElementById("gameover-modal").style.display = "none";
   }
 
@@ -6115,7 +6123,7 @@
     shareText(buildShareTextInfinite());
   }
 
-  async function applyResultModalContent(won) {
+  function applyResultModalContent(won) {
     const modalContent = document.querySelector("#gameover-modal .modal-content");
     modalContent.style.borderColor = won ? "#22c55e" : "#ef4444";
 
@@ -6138,10 +6146,10 @@
     shareBtn.onclick = shareResult;
     shareBtn.style.display = "inline-block";
 
-    await renderModalSolutions();
+    renderModalSolutions();
   }
 
-  async function handleWin() {
+  function handleWin() {
     gameOver = true;
     awaitingNextPanel = false;
     showResultsControl();
@@ -6149,17 +6157,22 @@
     // handleWin() solo se llama en Novato/Supernova/Yonko (Infinito nunca "gana", sigue sin
     // parar hasta que fallas), así que este resultado siempre corresponde al reto diario.
     clearDailyInProgress(currentDifficulty); // ya no está "a medias": pasa a ser un resultado definitivo
-    // Esperamos a que el guardado (incluido el contador de la comunidad) termine ANTES de
-    // rellenar y abrir el modal: si no, la barra de "resultados de la comunidad" podía leerse
-    // antes de que esta misma partida llegara a contarse, mostrando un reparto de ayer... o de
-    // hace un instante, sin la victoria que acabas de conseguir.
-    await saveDailyResult(currentDifficulty, "win", currentCategories);
-    awardPanelCoins(DAILY_PANEL_COINS[currentDifficulty]);
 
-    await applyResultModalContent(true);
+    // El modal se abre YA, sin esperar a ningún guardado en la nube — antes esperábamos a que
+    // terminaran 3-4 peticiones seguidas antes de mostrar nada, y eso se notaba como un
+    // retraso real al resolver un panel. El guardado sigue su curso en segundo plano; la
+    // barra de "resultados de la comunidad" (que si depende de que este resultado ya se haya
+    // contado) se actualiza sola en cuanto termina, sin bloquear la apertura del modal.
+    const saveResultPromise = saveDailyResult(currentDifficulty, "win", currentCategories);
+    awardPanelCoins(DAILY_PANEL_COINS[currentDifficulty]);
+    applyResultModalContent(true);
+
+    if (!isInfiniteMode) {
+      saveResultPromise.then(() => renderCommunityStats(currentDifficulty, getMadridDailyKey()));
+    }
   }
 
-  async function handleGameOver() {
+  function handleGameOver() {
     gameOver = true;
     awaitingNextPanel = false;
     if (isInfiniteMode) {
@@ -6195,12 +6208,14 @@
       // resaltadas para siempre en ese tablero. Las deseleccionamos aquí a propósito.
       selectedCards = [];
       document.querySelectorAll("#grid .card.selected").forEach(el => el.classList.remove("selected"));
-      await saveDailyResult(currentDifficulty, "lose", currentCategories);
-      await applyResultModalContent(false);
+      // Mismo motivo que en handleWin(): el modal se abre ya, sin esperar al guardado.
+      const saveResultPromise = saveDailyResult(currentDifficulty, "lose", currentCategories);
+      applyResultModalContent(false);
+      saveResultPromise.then(() => renderCommunityStats(currentDifficulty, getMadridDailyKey()));
     }
   }
 
-  async function renderModalSolutions() {
+  function renderModalSolutions() {
     const solutionsContainer = document.getElementById("solutions-container");
     solutionsContainer.innerHTML = "";
 
@@ -6230,30 +6245,18 @@
       fixSolvedLabelOverflow(solEl, ".solution-label");
     });
 
-    await openModal();
+    openModal();
   }
 
-  async function openModal() {
+  function openModal() {
     if (gameOver || awaitingNextPanel) {
-      // Las estadísticas de la comunidad pueden haber cambiado desde que se rellenó este
-      // modal (aunque sea la primera vez que lo abres hoy, otros jugadores pueden haber
-      // terminado el panel mientras tanto): las refrescamos cada vez que se abre, no solo la
-      // primera. Esperamos a que terminen de cargar ANTES de mostrar el modal —así el
-      // modal se abre completo desde el primer fotograma, en vez de aparecer sin la barra y
-      // que esta salte a aparecer un instante después agrandando el modal de golpe—. Solo
-      // aplica al reto diario, nunca a Infinito (que no tiene esta barra y se abre al
-      // instante, como siempre).
-      if (!isInfiniteMode) {
-        await renderCommunityStats(currentDifficulty, getMadridDailyKey());
-      }
       document.getElementById("gameover-modal").style.display = "flex";
-      // Se mide AQUÍ, no antes: con el modal todavía en display:none (como estaba justo
-      // arriba, a propósito, para que la barra no aparezca de golpe tras abrirse) cualquier
-      // getBoundingClientRect() da todo a cero, así que la etiqueta se ocultaba siempre, la
-      // cupiera o no. Ahora que el modal ya es visible de verdad, la medida es real.
+      // Ya no se espera a este dato para abrir el modal (antes eso era justo lo que hacía que
+      // "tardara en saltar" al resolver un panel): se pide en segundo plano y la barra
+      // aparece sola en cuanto está lista, con un hueco de "cargando" mientras tanto para que
+      // no se note un salto de tamaño al llegar el contenido real.
       if (!isInfiniteMode) {
-        const container = document.getElementById("community-stats-container");
-        if (container) fixCommunityStatsOverlap(container);
+        renderCommunityStats(currentDifficulty, getMadridDailyKey());
       }
     }
   }
