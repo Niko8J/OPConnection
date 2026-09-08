@@ -4680,7 +4680,13 @@
   // - weightedShuffleGroups: evita repetir lo visto hace poco EN ESE NAVEGADOR (Infinito).
   // - shuffle a secas: sin ese sesgo, porque el reto diario es un panel COMPARTIDO por todo el
   //   mundo y no tendría sentido que dependiera del historial de quien lo genera.
-  function buildBoardGroups(difficulty, isInfinite, shuffleFn) {
+  // excludedGroupNames/excludedCharIds son opcionales (Infinito nunca los usa, no tiene
+  // sentido "evitar repetir" ahí): sirven para que el reto diario pueda evitar repetir
+  // categorías/personajes que ya usen las otras dificultades ese mismo día, si es posible.
+  function buildBoardGroups(difficulty, isInfinite, shuffleFn, excludedGroupNames, excludedCharIds) {
+    excludedGroupNames = excludedGroupNames || new Set();
+    excludedCharIds = excludedCharIds || new Set();
+
     if (database.length === 0) return { error: "sin-datos" };
 
     let tagGroups = {};
@@ -4703,7 +4709,9 @@
       }
     });
 
-    let validGroupNames = Object.keys(tagGroups).filter(group => tagGroups[group].length >= 4);
+    let validGroupNames = Object.keys(tagGroups).filter(group =>
+      tagGroups[group].length >= 4 && !excludedGroupNames.has(group)
+    );
 
     if (validGroupNames.length < 4) {
       return { error: "pocas-categorias", validCount: validGroupNames.length };
@@ -4740,6 +4748,7 @@
 
         let exclusiveChars = tagGroups[groupName].filter(char => {
           if (usedCharIds.has(char.id)) return false;
+          if (excludedCharIds.has(char.id)) return false;
 
           for (let prevGroup of candidateGroups) {
             if (charHasAnyTagMatch(char, prevGroup.name)) return false;
@@ -5509,14 +5518,61 @@
   // aunque dos jugadores lleguen a la vez justo tras las 00:01, todo el mundo acabe viendo
   // exactamente el mismo panel: si dos transacciones chocan, Firestore reintenta la perdedora
   // automáticamente, y en el reintento ya encuentra el documento creado por la otra.
+  // Mira si las OTRAS dos dificultades de hoy ya tienen panel generado, y si es así, reúne qué
+  // categorías y personajes usan — para que la que se está generando ahora intente evitarlos.
+  // Se leen fuera de cualquier transacción a propósito: un panel diario, una vez creado, es
+  // inmutable (las reglas de Firestore prohíben tocarlo después), así que no hace falta ninguna
+  // garantía extra de consistencia para esta lectura. Si alguna sigue sin existir todavía
+  // (nadie la ha pedido hoy), simplemente no hay nada suyo que evitar todavía.
+  async function fetchSiblingDailyUsage(difficulty, dateKey) {
+    const siblings = DAILY_DIFFICULTIES.filter(d => d !== difficulty);
+    const excludedGroupNames = new Set();
+    const excludedCharIds = new Set();
+
+    await Promise.all(siblings.map(async sibling => {
+      try {
+        const snap = await db.collection("dailyPuzzles").doc(`${dateKey}_${sibling}`).get();
+        if (!snap.exists) return;
+        (snap.data().groups || []).forEach(g => {
+          excludedGroupNames.add(g.name);
+          (g.characterIds || []).forEach(id => excludedCharIds.add(id));
+        });
+      } catch (e) {
+        console.error(`No se pudo comprobar el panel de ${sibling} para evitar repeticiones:`, e);
+        // Sin ese dato, sencillamente no se evita nada de esa dificultad hermana en concreto.
+      }
+    }));
+
+    return { excludedGroupNames, excludedCharIds };
+  }
+
   async function getOrCreateDailyPuzzle(difficulty, dateKey) {
     const docRef = db.collection("dailyPuzzles").doc(`${dateKey}_${difficulty}`);
 
+    // Primero miramos si ya existe, SIN transacción (más barato): la inmensa mayoría de visitas
+    // del día son solo lectura de un panel que ya generó otra persona antes, así que no tiene
+    // sentido comprobar las hermanas cada vez si no vamos a generar nada.
+    const existingSnap = await docRef.get();
+    if (existingSnap.exists) {
+      return hydrateBoardGroups(existingSnap.data().groups);
+    }
+
+    // No existe todavía: probablemente eres de los primeros en pedir esta dificultad hoy.
+    // Miramos qué usan ya las otras dos, para evitar repetir categorías/personajes si se puede
+    // — sin garantías: si dos dificultades se generan casi a la vez, ninguna verá todavía a la
+    // otra, y en ese caso concreto sí podría repetirse algo, sin más.
+    const { excludedGroupNames, excludedCharIds } = await fetchSiblingDailyUsage(difficulty, dateKey);
+
     const data = await db.runTransaction(async transaction => {
       const snap = await transaction.get(docRef);
-      if (snap.exists) return snap.data();
+      if (snap.exists) return snap.data(); // alguien se adelantó justo ahora, entre la lectura de arriba y esta transacción
 
-      const result = buildBoardGroups(difficulty, false, shuffle);
+      let result = buildBoardGroups(difficulty, false, shuffle, excludedGroupNames, excludedCharIds);
+      if (result.error) {
+        // No se pudo evitar del todo (o no había nada que evitar): se genera como siempre,
+        // permitiendo repeticiones, antes que dejar a alguien sin panel jugable hoy.
+        result = buildBoardGroups(difficulty, false, shuffle);
+      }
       if (result.error || !result.groups) {
         throw new Error("No se pudo generar el panel diario (" + (result.error || "desconocido") + ")");
       }
