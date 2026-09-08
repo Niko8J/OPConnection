@@ -5210,49 +5210,61 @@
       solvedOrder: [...solvedOrder], lives, cardOrder: cards.map(c => c.name)
     };
 
-    if (currentUser) {
-      try {
-        const docRef = db.collection("users").doc(currentUser.uid);
-        const publicRef = db.collection("publicProfiles").doc(currentUser.uid);
+    // Guarda la racha y comprueba los logros — en ESTE orden, por fuerza: el chequeo de logros
+    // lee la racha ya actualizada (currentUserProfile.dailyStreaks, puesto al final de este
+    // bloque) para saber si justo ACABAS de alcanzar un logro de "X días seguidos". Si estas
+    // dos fueran en paralelo con la comprobación de logros, podrían pillar la racha todavía sin
+    // actualizar y dejarse el logro sin detectar en el momento justo (aparecería más tarde, en
+    // la siguiente comprobación, en vez de al instante).
+    async function saveStreakAndCheckAchievements() {
+      if (currentUser) {
+        try {
+          const docRef = db.collection("users").doc(currentUser.uid);
+          const publicRef = db.collection("publicProfiles").doc(currentUser.uid);
 
-        const newStreak = await db.runTransaction(async transaction => {
-          const snap = await transaction.get(docRef);
-          const data = snap.exists ? snap.data() : {};
-          const streak = computeNextStreak(data.dailyStreaks && data.dailyStreaks[difficulty], todayKey, result === "win");
+          const newStreak = await db.runTransaction(async transaction => {
+            const snap = await transaction.get(docRef);
+            const data = snap.exists ? snap.data() : {};
+            const streak = computeNextStreak(data.dailyStreaks && data.dailyStreaks[difficulty], todayKey, result === "win");
 
-          transaction.set(docRef, {
-            dailyProgress: { [difficulty]: entry },
-            dailyStreaks: { [difficulty]: streak }
-          }, { merge: true });
-          // La racha también se guarda en el perfil PÚBLICO: los logros de "días seguidos
-          // jugando" son públicos, así que hace falta que cualquiera pueda verlos, no solo tú.
-          transaction.set(publicRef, { dailyStreaks: { [difficulty]: streak } }, { merge: true });
+            transaction.set(docRef, {
+              dailyProgress: { [difficulty]: entry },
+              dailyStreaks: { [difficulty]: streak }
+            }, { merge: true });
+            // La racha también se guarda en el perfil PÚBLICO: los logros de "días seguidos
+            // jugando" son públicos, así que hace falta que cualquiera pueda verlos, no solo tú.
+            transaction.set(publicRef, { dailyStreaks: { [difficulty]: streak } }, { merge: true });
 
-          return streak;
-        });
+            return streak;
+          });
 
-        // Actualizamos también la copia en memoria, para que si vuelve a pulsar la misma
-        // dificultad en esta misma sesión (sin recargar la página) ya lo vea bloqueado.
-        currentUserProfile = currentUserProfile || {};
-        currentUserProfile.dailyProgress = { ...(currentUserProfile.dailyProgress || {}), [difficulty]: entry };
-        currentUserProfile.dailyStreaks = { ...(currentUserProfile.dailyStreaks || {}), [difficulty]: newStreak };
-      } catch (e) {
-        console.error("No se pudo guardar el resultado del diario en tu cuenta:", e);
+          // Actualizamos también la copia en memoria, para que si vuelve a pulsar la misma
+          // dificultad en esta misma sesión (sin recargar la página) ya lo vea bloqueado.
+          currentUserProfile = currentUserProfile || {};
+          currentUserProfile.dailyProgress = { ...(currentUserProfile.dailyProgress || {}), [difficulty]: entry };
+          currentUserProfile.dailyStreaks = { ...(currentUserProfile.dailyStreaks || {}), [difficulty]: newStreak };
+        } catch (e) {
+          console.error("No se pudo guardar el resultado del diario en tu cuenta:", e);
+        }
+      } else {
+        saveDailyProgressState(difficulty, entry);
       }
-    } else {
-      saveDailyProgressState(difficulty, entry);
+
+      // Refresca el "🔥 Racha actual" bajo los botones de dificultad, para que se vea al
+      // momento sin tener que salir y volver a entrar en el modo.
+      updateInfiniteScoreDisplay();
+      await checkAndAwardAchievementCoinsWithToast();
     }
 
-    // Refresca el "🔥 Racha actual" bajo los botones de dificultad, para que se vea al momento
-    // sin tener que salir y volver a entrar en el modo.
-    updateInfiniteScoreDisplay();
-    await checkAndAwardAchievementCoinsWithToast();
-
-    // Contador compartido de victorias/derrotas de HOY para esta dificultad (para la barra de
-    // "resultados de la comunidad" del modal de resultado) — cuenta a todo el mundo, invitado
-    // o con cuenta, así que va en su propia colección, no en dailyPuzzles (bloqueada a
-    // propósito contra escrituras, para proteger las respuestas del día).
+    // El resto (contador del panel de hoy, contador personal, historial) no depende de la
+    // racha ni de los logros, ni entre sí — así que van en paralelo con todo lo anterior, en
+    // vez de esperar a que termine antes de ni siquiera empezar. Contador compartido de
+    // victorias/derrotas de HOY para esta dificultad (para la barra de "resultados de la
+    // comunidad" del modal de resultado) — cuenta a todo el mundo, invitado o con cuenta, así
+    // que va en su propia colección, no en dailyPuzzles (bloqueada a propósito contra
+    // escrituras, para proteger las respuestas del día).
     await Promise.all([
+      saveStreakAndCheckAchievements(),
       incrementDailyPuzzleStats(difficulty, todayKey, result === "win"),
       incrementUserTotalResult(difficulty, result === "win"),
       recordGameHistory(difficulty, entry)
