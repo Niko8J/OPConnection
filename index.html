@@ -218,6 +218,42 @@
     .ranking-tiebreak-note { color: #64748b; font-size: 0.75rem; font-style: italic; margin-bottom: 10px; }
     .ranking-list { max-height: var(--ranking-list-max-h); overflow-y: auto; }
     .ranking-row { display: flex; align-items: center; gap: 14px; padding: 12px 6px; border-bottom: 1px solid #1e293b; cursor: pointer; border-radius: 8px; }
+
+    /* Modal del calendario de paneles pasados. Más estrecho que el resto (es una rejilla de 7
+       columnas de solo un dígito o dos por casilla, no necesita mucho ancho), y con su propio
+       tope de alto con scroll, para que en pantallas bajas no empuje la leyenda fuera de vista. */
+    .modal-content.history-modal-content { max-width: 360px; text-align: left; }
+    .history-modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .history-modal-title { font-weight: bold; color: #f8fafc; font-size: 1rem; text-align: center; flex: 1; }
+    .history-nav-btn {
+      width: 32px; height: 32px; border-radius: 8px; border: 2px solid #334155; background: #1e293b;
+      color: #f8fafc; font-size: 1.1rem; line-height: 1; cursor: pointer; flex-shrink: 0;
+    }
+    .history-nav-btn:disabled { color: #334155; cursor: default; }
+    @media (hover: hover) and (pointer: fine) {
+      .history-nav-btn:hover:not(:disabled) { border-color: #f59e0b; }
+    }
+    .history-weekdays, .history-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+    .history-weekdays { margin-bottom: 6px; }
+    .history-weekdays span { text-align: center; font-size: 0.7rem; color: #64748b; }
+    .history-calendar-grid { margin-bottom: 14px; }
+    .history-loading { grid-column: 1 / -1; text-align: center; color: #64748b; font-size: 0.8rem; padding: 20px 0; }
+    .history-day {
+      aspect-ratio: 1; border-radius: 6px; display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: bold; background: transparent; color: #334155; border: none;
+    }
+    .history-day.history-win { background: #22c55e; color: #052e16; cursor: pointer; }
+    .history-day.history-lose { background: #ef4444; color: #450a0a; cursor: pointer; }
+    .history-day.history-none { background: #1e293b; color: #64748b; }
+    .history-day.history-today { box-shadow: 0 0 0 2px #f59e0b; }
+    @media (hover: hover) and (pointer: fine) {
+      .history-day.history-win:hover, .history-day.history-lose:hover { filter: brightness(1.15); }
+    }
+    .history-legend { display: flex; align-items: center; gap: 12px; font-size: 0.72rem; color: #94a3b8; flex-wrap: wrap; }
+    .history-legend-dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; margin-right: 4px; vertical-align: middle; }
+    .history-legend-dot.history-win { background: #22c55e; }
+    .history-legend-dot.history-lose { background: #ef4444; }
+    .history-legend-dot.history-none { background: #1e293b; border: 1px solid #334155; }
     @media (hover: hover) and (pointer: fine) {
       .ranking-row:hover { background: #1e293b; }
     }
@@ -587,6 +623,21 @@
       text-overflow: ellipsis;
       min-width: 0;
       flex-shrink: 0;
+    }
+    .history-link-btn {
+      background: none; border: none; padding: 0; margin: 0; font: inherit; font-weight: bold;
+      color: #f59e0b; cursor: pointer; text-decoration: underline;
+    }
+    /* Banner de "estás viendo un panel de un día pasado" — para que quede claro que no es el
+       reto de HOY, ya que el tablero en sí se ve exactamente igual en los dos casos. */
+    .past-panel-banner {
+      display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;
+      background: #1e293b; border: 1px solid #f59e0b; border-radius: 8px;
+      padding: 6px 12px; margin-bottom: var(--v-gap-sm); font-size: 0.85rem; color: #f59e0b; font-weight: bold;
+    }
+    .past-panel-banner-btn {
+      background: #f59e0b; border: none; border-radius: 6px; padding: 3px 10px;
+      color: #0f172a; font-weight: bold; font-size: 0.78rem; cursor: pointer;
     }
 
     #lives-icons { display: flex; align-items: center; gap: 8px; }
@@ -1121,6 +1172,11 @@
 
   <div id="infinite-score" class="infinite-score" style="visibility: hidden;"></div>
 
+  <div id="past-panel-banner" class="past-panel-banner" style="display: none;">
+    <span id="past-panel-banner-text"></span>
+    <button class="past-panel-banner-btn" onclick="returnToTodayPanel()">Volver a hoy</button>
+  </div>
+
   <div id="warning-msg" class="warning-msg"></div>
 
   <div class="board">
@@ -1249,6 +1305,28 @@
   </div>
 </div>
 
+<div id="history-modal" class="modal-overlay" onclick="closeHistoryModalOnOverlay(event)">
+  <div class="modal-content history-modal-content">
+    <button class="close-btn" onclick="closeHistoryModal()">&times;</button>
+    <div class="modal-scroll-area">
+      <div class="history-modal-header">
+        <button id="history-prev-btn" class="history-nav-btn" onclick="changeHistoryMonth(-1)" aria-label="Mes anterior">‹</button>
+        <span id="history-modal-title" class="history-modal-title"></span>
+        <button id="history-next-btn" class="history-nav-btn" onclick="changeHistoryMonth(1)" aria-label="Mes siguiente">›</button>
+      </div>
+      <div class="history-weekdays">
+        <span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span>
+      </div>
+      <div id="history-calendar-grid" class="history-calendar-grid"></div>
+      <div class="history-legend">
+        <span><span class="history-legend-dot history-win"></span>Ganado</span>
+        <span><span class="history-legend-dot history-lose"></span>Perdido</span>
+        <span><span class="history-legend-dot history-none"></span>Sin jugar</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="edit-profile-modal" class="modal-overlay" onclick="closeEditProfileModalOnOverlay(event)">
   <div class="modal-content auth-modal-content">
     <button class="close-btn" onclick="closeEditProfileModal()">&times;</button>
@@ -1257,6 +1335,7 @@
 
       <div id="edit-profile-error" class="auth-error"></div>
       <div id="edit-profile-success" class="auth-success" style="display: none;"></div>
+
 
       <input type="text" id="edit-username" class="auth-input" placeholder="Nombre de usuario">
       <p class="auth-avatar-label">Elige tu foto de perfil:</p>
@@ -1651,6 +1730,7 @@
     awaitingNextPanel = false;
 
     document.getElementById("warning-msg").innerText = "";
+    document.getElementById("past-panel-banner").style.display = "none";
     showGameControls();
     document.getElementById("gameover-modal").style.display = "none";
 
@@ -2126,6 +2206,151 @@
 
   function closeRankingModalOnOverlay(event) {
     if (event.target.id === "ranking-modal") closeRankingModal();
+  }
+
+  // ---------- Calendario de paneles anteriores ----------
+  //
+  // Solo para cuentas registradas (nunca invitados) y solo para el reto diario (Novato/
+  // Supernova/Yonko) — Infinito no tiene paneles fijos que tenga sentido "volver a jugar", así
+  // que ni siquiera se ofrece el enlace para abrir esto en ese modo (ver updateInfiniteScoreDisplay).
+  //
+  // Guarda qué dificultad y qué mes (año + mes, 0-11) se está viendo ahora mismo en el modal.
+  let historyModalDifficulty = null;
+  let historyModalYear = null;
+  let historyModalMonth = null;
+
+  const MONTH_NAMES_ES = [
+    "enero", "febrero", "marzo", "abril", "mayo", "junio",
+    "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+  ];
+
+  function openHistoryModal() {
+    if (!currentUser || isInfiniteMode) return;
+    const todayKey = getMadridDailyKey();
+    const [todayYear, todayMonth] = todayKey.split("-").map(Number);
+    historyModalDifficulty = currentDifficulty;
+    historyModalYear = todayYear;
+    historyModalMonth = todayMonth - 1; // el mes en JS es 0-indexado, el de la fecha no
+    document.getElementById("history-modal").style.display = "flex";
+    renderHistoryCalendar();
+  }
+
+  function closeHistoryModal() {
+    document.getElementById("history-modal").style.display = "none";
+  }
+
+  function closeHistoryModalOnOverlay(event) {
+    if (event.target.id === "history-modal") closeHistoryModal();
+  }
+
+  function changeHistoryMonth(delta) {
+    historyModalMonth += delta;
+    if (historyModalMonth < 0) { historyModalMonth = 11; historyModalYear--; }
+    if (historyModalMonth > 11) { historyModalMonth = 0; historyModalYear++; }
+    renderHistoryCalendar();
+  }
+
+  // Pide a Firestore los resultados del mes que se está viendo (un rango de fechas, filtrado
+  // por esta dificultad) y pinta la rejilla del calendario: cabecera con el mes+año, casillas
+  // en verde/rojo/gris según ganado/perdido/sin jugar, día de hoy con un aro, y los días
+  // futuros del mes bloqueados y sin color (no ha pasado ese día todavía).
+  async function renderHistoryCalendar() {
+    const grid = document.getElementById("history-calendar-grid");
+    const titleEl = document.getElementById("history-modal-title");
+    const prevBtn = document.getElementById("history-prev-btn");
+    const nextBtn = document.getElementById("history-next-btn");
+
+    const difficultyLabel = { facil: "Novato", media: "Supernova", dificil: "Yonko" }[historyModalDifficulty] || "";
+    titleEl.innerText = `${MONTH_NAMES_ES[historyModalMonth]} ${historyModalYear} · ${difficultyLabel}`;
+
+    const todayKey = getMadridDailyKey();
+    const [todayYear, todayMonth] = todayKey.split("-").map(Number);
+    // No tiene sentido navegar a un mes futuro (todavía no ha pasado nada que mostrar ahí).
+    nextBtn.disabled = historyModalYear === todayYear && historyModalMonth === todayMonth - 1;
+
+    const pad2 = n => String(n).padStart(2, "0");
+    const monthStr = pad2(historyModalMonth + 1);
+    const daysInMonth = new Date(historyModalYear, historyModalMonth + 1, 0).getDate();
+    const monthStartKey = `${historyModalYear}-${monthStr}-01`;
+    const monthEndKey = `${historyModalYear}-${monthStr}-${pad2(daysInMonth)}`;
+
+    // Un solo icono de "cargando" centrado mientras llega la respuesta, para que la rejilla no
+    // se quede en blanco (o con el mes anterior todavía puesto) durante la espera.
+    grid.innerHTML = '<div class="history-loading">Cargando...</div>';
+
+    let resultsByDate = {};
+    try {
+      const snap = await db.collection("users").doc(currentUser.uid).collection("gameHistory")
+        .where("difficulty", "==", historyModalDifficulty)
+        .where("date", ">=", monthStartKey)
+        .where("date", "<=", monthEndKey)
+        .get();
+      snap.forEach(doc => { resultsByDate[doc.data().date] = doc.data().result; });
+    } catch (e) {
+      console.error("No se pudo cargar el historial de este mes:", e);
+    }
+
+    // Lunes primero (L M X J V S D): getDay() da 0=domingo..6=sábado; lo desplazamos para que
+    // 0=lunes..6=domingo, y ese es el número de casillas vacías antes del día 1.
+    const firstWeekday = (new Date(historyModalYear, historyModalMonth, 1).getDay() + 6) % 7;
+
+    grid.innerHTML = "";
+    for (let i = 0; i < firstWeekday; i++) {
+      grid.appendChild(document.createElement("div"));
+    }
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dateKey = `${historyModalYear}-${monthStr}-${pad2(day)}`;
+      const cell = document.createElement("div");
+      cell.className = "history-day";
+      cell.innerText = day;
+
+      if (dateKey > todayKey) {
+        // Día futuro: sin color, sin poder pulsarlo — todavía no ha pasado.
+      } else {
+        const result = resultsByDate[dateKey];
+        if (result === "win") {
+          cell.classList.add("history-win");
+          cell.onclick = () => openPastDailyPanel(dateKey);
+        } else if (result === "lose") {
+          cell.classList.add("history-lose");
+          cell.onclick = () => openPastDailyPanel(dateKey);
+        } else {
+          cell.classList.add("history-none"); // sin registro ese día: no jugado (o antes de tener cuenta)
+        }
+        if (dateKey === todayKey) cell.classList.add("history-today");
+      }
+      grid.appendChild(cell);
+    }
+  }
+
+  // Reconstruye y muestra el panel REAL de un día pasado, reutilizando renderFinishedDailyPanel
+  // (la misma función que ya se usa para ver el resultado de HOY si ya jugaste). El panel en sí
+  // (las 4 categorías con sus personajes) vive en dailyPuzzles, compartido por todos los
+  // jugadores; el resultado de ESTE jugador ese día (ganó/perdió, en qué orden, con cuántas
+  // vidas...) vive en su gameHistory — juntamos los dos para reconstruir la vista exacta.
+  async function openPastDailyPanel(dateKey) {
+    const difficulty = historyModalDifficulty;
+    try {
+      const [historyDoc, groups] = await Promise.all([
+        db.collection("users").doc(currentUser.uid).collection("gameHistory")
+          .doc(`${dateKey}_${difficulty}`).get(),
+        getOrCreateDailyPuzzle(difficulty, dateKey)
+      ]);
+      if (!historyDoc.exists) return; // no debería pasar (solo se puede pulsar un día con resultado), pero por seguridad
+      const historyData = historyDoc.data();
+
+      closeHistoryModal();
+      await renderFinishedDailyPanel(difficulty, {
+        date: dateKey,
+        result: historyData.result,
+        solvedOrder: historyData.solvedOrder || [],
+        lives: historyData.lives,
+        cardOrder: historyData.cardOrder || [],
+        groups: serializeBoardGroups(groups)
+      });
+    } catch (e) {
+      console.error("No se pudo cargar el panel de ese día:", e);
+    }
   }
 
   // ---------- Sistema de logros ----------
@@ -4050,11 +4275,13 @@
     // Reutilizamos este mismo hueco para mostrar la racha actual del modo diario en curso
     // (Novato/Supernova/Yonko). Los invitados no tienen racha guardada en ninguna cuenta, así
     // que para ellos lo dejamos oculto, igual que ya se hacía antes de tener sesión iniciada.
+    // El calendario de paneles anteriores es también solo para cuentas registradas, así que
+    // aprovechamos esta misma condición para mostrar su enlace pegado a la racha.
     if (currentUser && currentUserProfile) {
       const streakData = currentUserProfile.dailyStreaks && currentUserProfile.dailyStreaks[currentDifficulty];
       const current = (streakData && streakData.current) || 0;
       el.style.visibility = "visible";
-      el.innerText = `🔥 Racha actual: ${current} día(s)`;
+      el.innerHTML = `🔥 Racha: ${current} día(s) · <button class="history-link-btn" onclick="openHistoryModal()">📅 Paneles pasados</button>`;
     } else {
       el.style.visibility = "hidden";
     }
@@ -4692,29 +4919,38 @@
   // de ser un problema. Vive en una subcolección del jugador (no en una colección aparte con un
   // campo "uid"), para que las reglas de seguridad y las consultas por jugador sean directas.
   //
-  // Pensado como base para un futuro menú de volver a jugar paneles de días anteriores — por
-  // eso, de momento, esta función solo GUARDA el historial; no hay ninguna pantalla que lo lea
-  // aún. Solo aplica al reto diario (Novato/Supernova/Yonko): ese menú futuro es solo para
-  // esos tres modos, Infinito no genera paneles fijos que tenga sentido "volver a jugar".
+  // Pensado como base para un futuro menú de volver a jugar paneles de días anteriores — ya
+  // implementado (ver openHistoryModal / openPastDailyPanel más abajo, en la sección "Calendario
+  // de paneles anteriores"). Solo aplica al reto diario (Novato/Supernova/Yonko): ese menú es
+  // solo para esos tres modos, Infinito no genera paneles fijos que tenga sentido "volver a
+  // jugar".
   //
   // ID fijo (fecha_dificultad): como solo se puede jugar una vez por día y dificultad, el
   // mismo documento sirve tanto para crearlo como para no duplicarlo si esta función se
   // llamara dos veces por error.
   //
+  // Recibe el mismo objeto "entry" que ya se construye en saveDailyResult (con solvedOrder,
+  // lives y cardOrder incluidos) en vez de recalcular esos datos aquí: así nunca pueden
+  // desincronizarse entre lo que se guarda en el perfil y lo que se guarda en el historial.
+  // "groups" se deja fuera a propósito: el panel en sí ya vive por separado en dailyPuzzles
+  // (compartido por todos los jugadores), así que guardarlo también aquí sería duplicar datos
+  // sin necesidad.
+  //
   // IMPORTANTE — esto necesita una regla nueva en Firestore (aparte de este archivo):
   //   match /users/{uid}/gameHistory/{historyId} {
   //     allow read, write: if request.auth != null && request.auth.uid == uid;
   //   }
-  async function recordGameHistory(difficulty, result, categoriesSolved) {
+  async function recordGameHistory(difficulty, entry) {
     if (!currentUser) return;
     try {
-      const date = getMadridDailyKey();
-      const entry = {
-        date, difficulty, result, categoriesSolved,
+      const historyEntry = {
+        date: entry.date, difficulty, result: entry.result,
+        solvedOrder: entry.solvedOrder, lives: entry.lives, cardOrder: entry.cardOrder,
+        categoriesSolved: entry.solvedOrder.length,
         completedAt: firebase.firestore.FieldValue.serverTimestamp()
       };
       await db.collection("users").doc(currentUser.uid).collection("gameHistory")
-        .doc(`${date}_${difficulty}`).set(entry);
+        .doc(`${entry.date}_${difficulty}`).set(historyEntry);
     } catch (e) {
       console.error("No se pudo guardar el historial de esta partida:", e);
     }
@@ -4891,7 +5127,7 @@
     await Promise.all([
       incrementDailyPuzzleStats(difficulty, todayKey, result === "win"),
       incrementUserTotalResult(difficulty, result === "win"),
-      recordGameHistory(difficulty, result, solvedOrder.length)
+      recordGameHistory(difficulty, entry)
     ]);
   }
 
@@ -5135,11 +5371,37 @@
     renderLives();
     renderGrid();
 
+    // Si la fecha de este resultado no es la de hoy, dejamos claro con un banner que se está
+    // viendo un panel de un día pasado — el tablero en sí es idéntico en los dos casos, así que
+    // sin este aviso no habría forma de distinguirlo a simple vista.
+    const banner = document.getElementById("past-panel-banner");
+    if (storedEntry.date && storedEntry.date !== getMadridDailyKey()) {
+      document.getElementById("past-panel-banner-text").innerText = `📅 Panel del ${formatSpanishDate(storedEntry.date)}`;
+      banner.style.display = "flex";
+    } else {
+      banner.style.display = "none";
+    }
+
     // applyResultModalContent() rellena el modal Y lo abre (mismo camino que un final en vivo);
     // esperamos a que termine del todo (incluida la carga de la barra de estadísticas) y
     // entonces sí lo volvemos a cerrar, para dejarlo preparado sin mostrarlo automáticamente.
     await applyResultModalContent(won);
     document.getElementById("gameover-modal").style.display = "none";
+  }
+
+  // Formato DD/MM/YYYY. Como "dateKey" ya viene en formato YYYY-MM-DD, basta con reordenar sus
+  // partes — sin pasar por Date ni por locales, así que no hay ninguna ambigüedad posible.
+  function formatSpanishDate(dateKey) {
+    const [y, m, d] = dateKey.split("-");
+    return `${d}/${m}/${y}`;
+  }
+
+  // Botón "Volver a hoy" del banner: simplemente recarga el reto diario de hoy para esta
+  // dificultad, tal cual como si acabaras de pulsar su botón — si ya lo jugaste hoy, mostrará
+  // ESE resultado (sin banner, por ser de hoy); si no, te deja jugarlo.
+  function returnToTodayPanel() {
+    document.getElementById("past-panel-banner").style.display = "none";
+    loadDailyChallenge(currentDifficulty);
   }
 
   // Alterna entre "Enviar/Limpiar" (partida en curso) y "Resultados" (partida en pausa:
@@ -5188,6 +5450,7 @@
     hintsRemaining = 1;
 
     document.getElementById("warning-msg").innerText = "";
+    document.getElementById("past-panel-banner").style.display = "none";
     showGameControls();
     updateHintButtonState();
     document.getElementById("gameover-modal").style.display = "none";
