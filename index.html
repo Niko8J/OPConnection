@@ -2280,8 +2280,8 @@
   const GAME_HISTORY_START_KEY = "2026-09-01";
 
   const MONTH_NAMES_ES = [
-    "enero", "febrero", "marzo", "abril", "mayo", "junio",
-    "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
   ];
 
   function openHistoryModal() {
@@ -3279,13 +3279,11 @@
     const winPct = Math.round((totalWins / total) * 100);
     const losePct = 100 - winPct;
 
-    const winValueEl = document.getElementById("profile-stats-summary-win-value");
-    const loseValueEl = document.getElementById("profile-stats-summary-lose-value");
     const winTextEl = document.getElementById("profile-stats-win-text");
     const loseTextEl = document.getElementById("profile-stats-lose-text");
     const winBarEl = document.getElementById("profile-stats-win-bar");
     const loseBarEl = document.getElementById("profile-stats-lose-bar");
-    if (!winValueEl || !loseValueEl || !winTextEl || !loseTextEl || !winBarEl || !loseBarEl) return;
+    if (!winTextEl || !loseTextEl || !winBarEl || !loseBarEl) return;
 
     winBarEl.style.width = `${winPct}%`;
     loseBarEl.style.width = `${losePct}%`;
@@ -3295,12 +3293,7 @@
     function step(now) {
       const t = Math.min(1, (now - start) / durationMs);
       const eased = 1 - (1 - t) * (1 - t); // easeOutQuad, igual que en el modal de resultado
-      // Las victorias SUBEN desde 0 (a juego con la barra verde, que crece); las derrotas
-      // BAJAN desde el total (a juego con la barra roja, que encoge).
-      const win = Math.round(totalWins * eased);
       const winP = Math.round(winPct * eased);
-      winValueEl.innerText = win;
-      loseValueEl.innerText = total - win;
       winTextEl.innerText = `${winP}%`;
       loseTextEl.innerText = `${100 - winP}%`;
       if (t < 1) requestAnimationFrame(step);
@@ -3334,18 +3327,19 @@
     // función), no se muestra nada aquí — mejor eso que una barra vacía a 0%/0% sin sentido.
     let summaryHtml = "";
     if (total > 0) {
-      // Arranca en su estado "vacío" (0 victorias, toda la barra en rojo) — animateProfileStatsBar()
-      // lo anima hasta los valores reales justo después de insertarse en el DOM, a juego con la
-      // misma animación que ya tiene la barra de "resultados de la comunidad" del modal de
-      // resultado (números contando + barra creciendo), en vez de aparecer ya con todo puesto.
+      // Las cifras grandes de arriba (Victorias/Derrotas) van con su valor final desde el
+      // principio, sin animar. Solo la barra y los porcentajes de abajo arrancan en su estado
+      // "vacío" (0%, toda la barra en rojo) — animateProfileStatsBar() los anima hasta los
+      // valores reales justo después de insertarse en el DOM, a juego con la misma animación
+      // que ya tiene la barra de "resultados de la comunidad" del modal de resultado.
       summaryHtml = `
         <div class="profile-stats-summary-cards">
           <div class="profile-stats-summary-card win">
-            <div id="profile-stats-summary-win-value" class="profile-stats-summary-value">0</div>
+            <div class="profile-stats-summary-value">${totalWins}</div>
             <div class="profile-stats-summary-label">Victorias</div>
           </div>
           <div class="profile-stats-summary-card lose">
-            <div id="profile-stats-summary-lose-value" class="profile-stats-summary-value">0</div>
+            <div class="profile-stats-summary-value">${totalLosses}</div>
             <div class="profile-stats-summary-label">Derrotas</div>
           </div>
         </div>
@@ -5213,7 +5207,7 @@
     return `
       <div class="community-stats">
         <div class="community-stats-header">
-          <span id="community-stats-win-text" class="community-stats-win-text">✔️ ${stats.winCount} · ${winPct}%</span>
+          <span id="community-stats-win-text" class="community-stats-win-text">✔️ ${winPct}% · ${stats.winCount}</span>
           <span class="community-stats-label">Resultados de la comunidad</span>
           <span id="community-stats-lose-text" class="community-stats-lose-text">${stats.loseCount} · ${losePct}% 💀</span>
         </div>
@@ -5234,7 +5228,7 @@
     return `
       <div class="community-stats">
         <div class="community-stats-header">
-          <span id="community-stats-win-text" class="community-stats-win-text">✔️ 0 · 0%</span>
+          <span id="community-stats-win-text" class="community-stats-win-text">✔️ 0% · 0</span>
           <span class="community-stats-label">Resultados de la comunidad</span>
           <span id="community-stats-lose-text" class="community-stats-lose-text">- · 100% 💀</span>
         </div>
@@ -5287,7 +5281,7 @@
       // sube mientras su propia barra se hace más pequeña, que quedaba contradictorio.
       const win = Math.round(winCount * eased);
       const winP = Math.round(winPct * eased);
-      winTextEl.innerText = `✔️ ${win} · ${winP}%`;
+      winTextEl.innerText = `✔️ ${winP}% · ${win}`;
       loseTextEl.innerText = `${total - win} · ${100 - winP}% 💀`;
       if (t < 1) requestAnimationFrame(step);
     }
