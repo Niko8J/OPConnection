@@ -2400,14 +2400,17 @@
         if (dateKey === currentViewedDailyDate && historyModalDifficulty === currentDifficulty) {
           cell.classList.add("history-viewing");
         }
-        // El día de HOY siempre debe poder pulsarse, aunque todavía no lo hayas jugado (si no,
-        // se quedaba sin ningún onclick hasta que hubiera un resultado guardado — pasaba en
-        // cualquier dificultad sin jugar todavía hoy, no solo en Novato). Por defecto, vuelve al
-        // panel de hoy tal cual (mismo camino que el botón "Volver a hoy"); si más abajo (FASE 2)
-        // resulta que sí hay resultado, ese clic se sustituye por el normal de ver la solución.
+        // Cualquier día sin jugar dentro del historial (incluido hoy) debe poder pulsarse — si
+        // no, se quedaba sin ningún onclick hasta que hubiera un resultado guardado. El de HOY
+        // vuelve al panel tal cual (mismo camino que "Volver a hoy"); cualquier otro día pasado
+        // sin jugar se abre para jugarlo de verdad (o retomarlo, si se había dejado a medias) —
+        // sin que esto afecte nunca a la racha (ver saveDailyResult). Si más abajo (FASE 2)
+        // resulta que sí hay resultado guardado, ese clic se sustituye por el de ver la solución.
+        cell.style.cursor = "pointer";
         if (dateKey === todayKey) {
-          cell.style.cursor = "pointer";
           cell.onclick = () => { closeHistoryModal(); returnToTodayPanel(); };
+        } else {
+          cell.onclick = () => openPastDailyPanelToPlay(dateKey);
         }
       }
       grid.appendChild(cell);
@@ -2481,6 +2484,45 @@
       });
     } catch (e) {
       console.error("No se pudo cargar el panel de ese día:", e);
+    }
+  }
+
+  // Jugar de verdad un día pasado que se quedó sin jugar (o retomarlo, si ya se había empezado
+  // y se dejó a medias) — a diferencia de openPastDailyPanel, aquí el panel es interactivo, no
+  // una foto fija del resultado. La racha nunca se ve afectada por esto (ver saveDailyResult,
+  // que solo la toca si la fecha es la de hoy): jugar un atrasado ni la suma ni la rompe.
+  async function openPastDailyPanelToPlay(dateKey) {
+    const difficulty = historyModalDifficulty;
+    try {
+      // Si el panel que hay puesto ahora mismo en el tablero se queda a medias (no ha
+      // terminado), lo guardamos antes de saltar a este otro día — mismo cuidado que al
+      // cambiar de dificultad, para no perder ese progreso por el camino.
+      if (!isInfiniteMode && !gameOver && currentViewedDailyDate) {
+        saveDailyInProgress();
+      }
+
+      const inProgress = loadDailyInProgress(dateKey, difficulty);
+      const groups = await getOrCreateDailyPuzzle(difficulty, dateKey);
+
+      closeHistoryModal();
+
+      currentDifficulty = difficulty;
+      isInfiniteMode = false;
+      document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
+      const diffBtn = document.querySelector(`.diff-btn[onclick*="'${difficulty}'"]`);
+      if (diffBtn) diffBtn.classList.add('active');
+      try { localStorage.setItem(STORAGE_KEY_LAST_DIFFICULTY, difficulty); } catch (e) {}
+
+      if (inProgress && inProgress.date === dateKey) {
+        resumeDailyFromSaved(difficulty, inProgress);
+      } else {
+        currentViewedDailyDate = dateKey;
+        currentCategories = groups;
+        recordPanelSeen(currentCategories);
+        initGame();
+      }
+    } catch (e) {
+      console.error("No se pudo cargar el panel de ese día para jugarlo:", e);
     }
   }
 
@@ -4431,6 +4473,14 @@
       return;
     }
 
+    if (!isInfiniteMode && currentDifficulty !== level && !gameOver) {
+      // Si dejamos un reto diario a medias sin terminar (de hoy, o de un día pasado que se
+      // estuviera jugando desde el calendario) al cambiar de dificultad, lo guardamos antes de
+      // irnos — mismo cuidado que ya se tenía con Infinito unas líneas más abajo, que hasta
+      // ahora era el único de los dos que lo hacía.
+      saveDailyInProgress();
+    }
+
     if (isInfiniteMode && level === "infinito") {
       // Ya estabas en Infinito y has vuelto a pulsar Infinito: en vez de no hacer nada,
       // barajamos de nuevo el orden de las tarjetas SIN resolver del panel actual — igual que
@@ -4985,6 +5035,13 @@
   // vidas, no solo el orden del tablero.
   const STORAGE_KEY_DAILY_IN_PROGRESS = "opc_daily_in_progress_v1";
 
+  // Clave compuesta fecha+dificultad (igual que ya se hace en gameHistory): así puede haber a
+  // la vez progreso a medias de HOY y de algún día pasado que hayas empezado a jugar sin
+  // terminar, sin que uno se pise con el otro.
+  function dailyInProgressKey(dateKey, difficulty) {
+    return `${dateKey}_${difficulty}`;
+  }
+
   function loadDailyInProgressLocal() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY_DAILY_IN_PROGRESS);
@@ -4993,47 +5050,47 @@
     return {};
   }
 
-  function saveDailyInProgressLocal(difficulty, entry) {
+  function saveDailyInProgressLocal(dateKey, difficulty, entry) {
     try {
       const state = loadDailyInProgressLocal();
-      state[difficulty] = entry;
+      state[dailyInProgressKey(dateKey, difficulty)] = entry;
       localStorage.setItem(STORAGE_KEY_DAILY_IN_PROGRESS, JSON.stringify(state));
     } catch (e) {}
   }
 
-  function clearDailyInProgressLocal(difficulty) {
+  function clearDailyInProgressLocal(dateKey, difficulty) {
     try {
       const state = loadDailyInProgressLocal();
-      delete state[difficulty];
+      delete state[dailyInProgressKey(dateKey, difficulty)];
       localStorage.setItem(STORAGE_KEY_DAILY_IN_PROGRESS, JSON.stringify(state));
     } catch (e) {}
   }
 
-  async function saveDailyInProgressCloud(difficulty, entry) {
+  async function saveDailyInProgressCloud(dateKey, difficulty, entry) {
     if (!currentUser) return;
     try {
       await db.collection("users").doc(currentUser.uid).set(
-        { dailyInProgress: { [difficulty]: entry } }, { merge: true }
+        { dailyInProgress: { [dailyInProgressKey(dateKey, difficulty)]: entry } }, { merge: true }
       );
     } catch (e) {
       console.error("No se pudo guardar el progreso a medias del diario:", e);
     }
   }
 
-  async function clearDailyInProgressCloud(difficulty) {
+  async function clearDailyInProgressCloud(dateKey, difficulty) {
     if (!currentUser) return;
     try {
       await db.collection("users").doc(currentUser.uid).set(
-        { dailyInProgress: { [difficulty]: firebase.firestore.FieldValue.delete() } }, { merge: true }
+        { dailyInProgress: { [dailyInProgressKey(dateKey, difficulty)]: firebase.firestore.FieldValue.delete() } }, { merge: true }
       );
     } catch (e) {
       console.error("No se pudo limpiar el progreso a medias del diario:", e);
     }
   }
 
-  function buildDailyInProgressSnapshot(todayKey) {
+  function buildDailyInProgressSnapshot(dateKey) {
     return {
-      date: todayKey,
+      date: dateKey,
       groups: serializeBoardGroups(currentCategories),
       solvedOrder: [...solvedOrder],
       lives,
@@ -5045,36 +5102,42 @@
     };
   }
 
-  // No bloqueamos la partida esperando la escritura a Firestore, igual que en Infinito.
+  // No bloqueamos la partida esperando la escritura a Firestore, igual que en Infinito. Guarda
+  // el progreso del día que se esté viendo AHORA MISMO (currentViewedDailyDate) — no siempre
+  // "hoy": si se está jugando un panel pasado atrasado, se guarda con SU fecha, no la de hoy.
   function saveDailyInProgress() {
-    const todayKey = getMadridDailyKey();
-    const entry = buildDailyInProgressSnapshot(todayKey);
+    const dateKey = currentViewedDailyDate || getMadridDailyKey();
+    const entry = buildDailyInProgressSnapshot(dateKey);
     if (currentUser) {
-      saveDailyInProgressCloud(currentDifficulty, entry);
+      saveDailyInProgressCloud(dateKey, currentDifficulty, entry);
       currentUserProfile = currentUserProfile || {};
-      currentUserProfile.dailyInProgress = { ...(currentUserProfile.dailyInProgress || {}), [currentDifficulty]: entry };
+      currentUserProfile.dailyInProgress = {
+        ...(currentUserProfile.dailyInProgress || {}),
+        [dailyInProgressKey(dateKey, currentDifficulty)]: entry
+      };
     } else {
-      saveDailyInProgressLocal(currentDifficulty, entry);
+      saveDailyInProgressLocal(dateKey, currentDifficulty, entry);
     }
   }
 
   // Con sesión iniciada, currentUserProfile ya está cargado entero en memoria (igual que para
   // dailyProgress), así que no hace falta una lectura aparte a Firestore aquí.
-  async function loadDailyInProgress(difficulty) {
+  function loadDailyInProgress(dateKey, difficulty) {
+    const key = dailyInProgressKey(dateKey, difficulty);
     if (currentUser) {
-      return (currentUserProfile && currentUserProfile.dailyInProgress && currentUserProfile.dailyInProgress[difficulty]) || null;
+      return (currentUserProfile && currentUserProfile.dailyInProgress && currentUserProfile.dailyInProgress[key]) || null;
     }
-    return loadDailyInProgressLocal()[difficulty] || null;
+    return loadDailyInProgressLocal()[key] || null;
   }
 
-  function clearDailyInProgress(difficulty) {
+  function clearDailyInProgress(dateKey, difficulty) {
     if (currentUser) {
-      clearDailyInProgressCloud(difficulty);
+      clearDailyInProgressCloud(dateKey, difficulty);
       if (currentUserProfile && currentUserProfile.dailyInProgress) {
-        delete currentUserProfile.dailyInProgress[difficulty];
+        delete currentUserProfile.dailyInProgress[dailyInProgressKey(dateKey, difficulty)];
       }
     } else {
-      clearDailyInProgressLocal(difficulty);
+      clearDailyInProgressLocal(dateKey, difficulty);
     }
   }
 
@@ -5088,7 +5151,10 @@
   function resumeDailyFromSaved(difficulty, saved) {
     currentDifficulty = difficulty;
     isInfiniteMode = false;
-    currentViewedDailyDate = getMadridDailyKey(); // a medias solo puede ser el reto de hoy
+    // Antes esto asumía que un progreso a medias solo podía ser el de hoy — ya no: puede ser
+    // un panel atrasado que se dejó a medias y se ha vuelto a abrir desde el calendario. Se usa
+    // la fecha que trae el propio progreso guardado, no una fecha fija.
+    currentViewedDailyDate = saved.date || getMadridDailyKey();
     gameOver = false;
     awaitingNextPanel = false;
     currentCategories = hydrateBoardGroups(saved.groups);
@@ -5106,10 +5172,19 @@
     cards = shuffle(cards);
 
     document.getElementById("warning-msg").innerText = "";
-    document.getElementById("past-panel-banner").style.visibility = "hidden";
     showGameControls();
     updateHintButtonState();
     document.getElementById("gameover-modal").style.display = "none";
+
+    // Mismo aviso que en renderFinishedDailyPanel, y por el mismo motivo: si esto no es hoy,
+    // hace falta dejarlo claro, porque el tablero en sí es idéntico en los dos casos.
+    const banner = document.getElementById("past-panel-banner");
+    if (currentViewedDailyDate !== getMadridDailyKey()) {
+      document.getElementById("past-panel-banner-text").innerText = `📅 Panel del ${formatSpanishDate(currentViewedDailyDate)}`;
+      banner.style.visibility = "visible";
+    } else {
+      banner.style.visibility = "hidden";
+    }
 
     renderAllSolvedBlocks();
     renderLives();
@@ -5402,15 +5477,21 @@
     updateCommunityStatsWithData(container, stats);
   }
 
-  async function saveDailyResult(difficulty, result, groups) {
-    const todayKey = getMadridDailyKey();
+  // "dateKey" ahora es explícito (antes siempre asumía "hoy"): así puede guardar tanto el
+  // resultado de hoy como el de un panel atrasado que acabes de completar desde el calendario.
+  // "isToday" decide qué partes se tocan: dailyProgress (el "ya jugaste hoy" rápido) y
+  // dailyStreaks SOLO se actualizan si de verdad es hoy — completar un panel atrasado no debe
+  // alterar la racha para nada (ni sumarla ni romperla), tal como se pidió expresamente. El
+  // resto (Berries, logros, contadores, historial) sí se actualiza siempre, sea hoy o no.
+  async function saveDailyResult(dateKey, difficulty, result, groups) {
+    const isToday = dateKey === getMadridDailyKey();
     // Guardamos también en qué orden se resolvieron las categorías, cuántas vidas quedaban, y
     // el orden exacto de las tarjetas que quedaron SIN resolver (para una derrota), para poder
     // reconstruir el tablero exactamente como quedó si el jugador vuelve más tarde (recarga la
     // página, cambia de dificultad y vuelve...), en vez de mostrarlo en blanco o barajado de
     // nuevo cada vez (las resueltas quedaban fijas, pero las demás "bailaban" en cada visita).
     const entry = {
-      date: todayKey, result, groups: serializeBoardGroups(groups),
+      date: dateKey, result, groups: serializeBoardGroups(groups),
       solvedOrder: [...solvedOrder], lives, cardOrder: cards.map(c => c.name)
     };
 
@@ -5419,45 +5500,55 @@
         const docRef = db.collection("users").doc(currentUser.uid);
         const publicRef = db.collection("publicProfiles").doc(currentUser.uid);
 
-        const newStreak = await db.runTransaction(async transaction => {
-          const snap = await transaction.get(docRef);
-          const data = snap.exists ? snap.data() : {};
-          const streak = computeNextStreak(data.dailyStreaks && data.dailyStreaks[difficulty], todayKey, result === "win");
+        if (isToday) {
+          const newStreak = await db.runTransaction(async transaction => {
+            const snap = await transaction.get(docRef);
+            const data = snap.exists ? snap.data() : {};
+            const streak = computeNextStreak(data.dailyStreaks && data.dailyStreaks[difficulty], dateKey, result === "win");
 
-          transaction.set(docRef, {
-            dailyProgress: { [difficulty]: entry },
-            dailyStreaks: { [difficulty]: streak }
-          }, { merge: true });
-          // La racha también se guarda en el perfil PÚBLICO: los logros de "días seguidos
-          // jugando" son públicos, así que hace falta que cualquiera pueda verlos, no solo tú.
-          transaction.set(publicRef, { dailyStreaks: { [difficulty]: streak } }, { merge: true });
+            transaction.set(docRef, {
+              dailyProgress: { [difficulty]: entry },
+              dailyStreaks: { [difficulty]: streak }
+            }, { merge: true });
+            // La racha también se guarda en el perfil PÚBLICO: los logros de "días seguidos
+            // jugando" son públicos, así que hace falta que cualquiera pueda verlos, no solo tú.
+            transaction.set(publicRef, { dailyStreaks: { [difficulty]: streak } }, { merge: true });
 
-          return streak;
-        });
+            return streak;
+          });
 
-        // Actualizamos también la copia en memoria, para que si vuelve a pulsar la misma
-        // dificultad en esta misma sesión (sin recargar la página) ya lo vea bloqueado.
-        currentUserProfile = currentUserProfile || {};
-        currentUserProfile.dailyProgress = { ...(currentUserProfile.dailyProgress || {}), [difficulty]: entry };
-        currentUserProfile.dailyStreaks = { ...(currentUserProfile.dailyStreaks || {}), [difficulty]: newStreak };
+          // Actualizamos también la copia en memoria, para que si vuelve a pulsar la misma
+          // dificultad en esta misma sesión (sin recargar la página) ya lo vea bloqueado.
+          currentUserProfile = currentUserProfile || {};
+          currentUserProfile.dailyProgress = { ...(currentUserProfile.dailyProgress || {}), [difficulty]: entry };
+          currentUserProfile.dailyStreaks = { ...(currentUserProfile.dailyStreaks || {}), [difficulty]: newStreak };
+        }
+        // Si NO es hoy (panel atrasado completado desde el calendario), no se toca ni
+        // dailyProgress ni dailyStreaks a propósito: dailyProgress es solo el chequeo rápido de
+        // "¿ya jugaste HOY?", y tocarlo aquí lo dejaría apuntando al día equivocado; la racha,
+        // como se ha dicho, no debe verse afectada en absoluto por un panel atrasado.
       } catch (e) {
         console.error("No se pudo guardar el resultado del diario en tu cuenta:", e);
       }
-    } else {
+    } else if (isToday) {
       saveDailyProgressState(difficulty, entry);
     }
 
-    // Refresca el "🔥 Racha actual" bajo los botones de dificultad, para que se vea al momento
-    // sin tener que salir y volver a entrar en el modo.
-    updateInfiniteScoreDisplay();
+    if (isToday) {
+      // Refresca el "🔥 Racha actual" bajo los botones de dificultad, para que se vea al
+      // momento sin tener que salir y volver a entrar en el modo.
+      updateInfiniteScoreDisplay();
+    }
     await checkAndAwardAchievementCoinsWithToast();
 
-    // Contador compartido de victorias/derrotas de HOY para esta dificultad (para la barra de
-    // "resultados de la comunidad" del modal de resultado) — cuenta a todo el mundo, invitado
-    // o con cuenta, así que va en su propia colección, no en dailyPuzzles (bloqueada a
-    // propósito contra escrituras, para proteger las respuestas del día).
+    // Esto SÍ pasa siempre, sea hoy o un panel atrasado: contador compartido de
+    // victorias/derrotas de ESE día para esta dificultad (para la barra de "resultados de la
+    // comunidad" del modal de resultado) — cuenta a todo el mundo, invitado o con cuenta, así
+    // que va en su propia colección, no en dailyPuzzles (bloqueada a propósito contra
+    // escrituras, para proteger las respuestas del día). Berries, contador personal e
+    // historial tampoco dependen de si es hoy o no.
     await Promise.all([
-      incrementDailyPuzzleStats(difficulty, todayKey, result === "win"),
+      incrementDailyPuzzleStats(difficulty, dateKey, result === "win"),
       incrementUserTotalResult(difficulty, result === "win"),
       recordGameHistory(difficulty, entry)
     ]);
@@ -5676,7 +5767,7 @@
 
     // Si dejaste este mismo reto a medias hoy (sin ganar ni perder), lo retomamos justo donde
     // lo dejaste, en vez de generar uno nuevo y perder las categorías acertadas y las vidas.
-    const inProgress = await loadDailyInProgress(difficulty);
+    const inProgress = loadDailyInProgress(todayKey, difficulty);
     if (inProgress && inProgress.date === todayKey) {
       resumeDailyFromSaved(difficulty, inProgress);
       return;
@@ -5836,10 +5927,20 @@
     hintsRemaining = 1;
 
     document.getElementById("warning-msg").innerText = "";
-    document.getElementById("past-panel-banner").style.visibility = "hidden";
     showGameControls();
     updateHintButtonState();
     document.getElementById("gameover-modal").style.display = "none";
+
+    // Mismo aviso que en renderFinishedDailyPanel/resumeDailyFromSaved, y por el mismo motivo:
+    // si currentViewedDailyDate no es hoy (empezando un panel atrasado desde cero, nunca antes
+    // tocado), hace falta dejarlo claro con el mismo aviso — el tablero en sí es idéntico.
+    const banner = document.getElementById("past-panel-banner");
+    if (!isInfiniteMode && currentViewedDailyDate && currentViewedDailyDate !== getMadridDailyKey()) {
+      document.getElementById("past-panel-banner-text").innerText = `📅 Panel del ${formatSpanishDate(currentViewedDailyDate)}`;
+      banner.style.visibility = "visible";
+    } else {
+      banner.style.visibility = "hidden";
+    }
 
     currentCategories.forEach(cat => {
       cat.items.forEach(item => {
@@ -6417,21 +6518,23 @@
     showResultsControl();
 
     // handleWin() solo se llama en Novato/Supernova/Yonko (Infinito nunca "gana", sigue sin
-    // parar hasta que fallas), así que este resultado siempre corresponde al reto diario.
-    clearDailyInProgress(currentDifficulty); // ya no está "a medias": pasa a ser un resultado definitivo
+    // parar hasta que fallas), así que este resultado siempre corresponde al reto diario —
+    // puede ser el de hoy, o uno atrasado si se ha entrado a jugarlo desde el calendario.
+    const dateKey = currentViewedDailyDate;
+    clearDailyInProgress(dateKey, currentDifficulty); // ya no está "a medias": pasa a ser un resultado definitivo
 
     // El modal se abre YA, sin esperar a ningún guardado en la nube — antes esperábamos a que
     // terminaran 3-4 peticiones seguidas antes de mostrar nada, y eso se notaba como un
     // retraso real al resolver un panel. El guardado sigue su curso en segundo plano; la
     // barra de "resultados de la comunidad" (que sí depende de que este resultado ya se haya
     // contado) se actualiza sola en cuanto termina, sin bloquear la apertura del modal.
-    const saveResultPromise = saveDailyResult(currentDifficulty, "win", currentCategories);
+    const saveResultPromise = saveDailyResult(dateKey, currentDifficulty, "win", currentCategories);
     awardPanelCoins(DAILY_PANEL_COINS[currentDifficulty]);
 
     skipNextCommunityStatsAutoRefresh = true;
     await applyResultModalContent(true);
 
-    saveResultPromise.then(() => renderCommunityStats(currentDifficulty, getMadridDailyKey()));
+    saveResultPromise.then(() => renderCommunityStats(currentDifficulty, dateKey));
   }
 
   async function handleGameOver() {
@@ -6463,7 +6566,8 @@
     } else {
       showResultsControl();
       // Igual que en handleWin(): esta rama es siempre el reto diario, nunca Infinito.
-      clearDailyInProgress(currentDifficulty); // ya no está "a medias": pasa a ser un resultado definitivo
+      const dateKey = currentViewedDailyDate;
+      clearDailyInProgress(dateKey, currentDifficulty); // ya no está "a medias": pasa a ser un resultado definitivo
       // El botón "Limpiar" se oculta en cuanto se muestra "Resultados" (showResultsControl),
       // así que si te quedabas con tarjetas marcadas al perder (la selección que falló y
       // gastó la última vida), no había ya ninguna forma de quitarlas — se quedaban
@@ -6471,10 +6575,10 @@
       selectedCards = [];
       document.querySelectorAll("#grid .card.selected").forEach(el => el.classList.remove("selected"));
       // Mismo motivo que en handleWin(): el modal se abre ya, sin esperar al guardado.
-      const saveResultPromise = saveDailyResult(currentDifficulty, "lose", currentCategories);
+      const saveResultPromise = saveDailyResult(dateKey, currentDifficulty, "lose", currentCategories);
       skipNextCommunityStatsAutoRefresh = true;
       await applyResultModalContent(false);
-      saveResultPromise.then(() => renderCommunityStats(currentDifficulty, getMadridDailyKey()));
+      saveResultPromise.then(() => renderCommunityStats(currentDifficulty, dateKey));
     }
   }
 
@@ -6530,7 +6634,7 @@
         if (skipNextCommunityStatsAutoRefresh) {
           skipNextCommunityStatsAutoRefresh = false;
         } else {
-          await renderCommunityStats(currentDifficulty, getMadridDailyKey());
+          await renderCommunityStats(currentDifficulty, currentViewedDailyDate);
           // Esperamos a que termine la animación de conteo (0.6s) antes de medir el solapamiento:
           // el texto tarda ese tiempo en llegar a su valor final. Ya no hace falta comprobar si
           // el modal sigue visible (como antes): en modo silencioso ni siquiera llegamos hasta
