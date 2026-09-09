@@ -1620,14 +1620,15 @@
   }
 
   async function loadInfiniteStateCloud() {
-    if (!currentUser) return null;
+    if (!currentUser) return { state: null, timedOut: false };
     try {
       const snap = await withTimeout(db.collection("users").doc(currentUser.uid).get(), 5000);
-      if (!snap) return null; // se agotó el tiempo de espera sin respuesta
-      return snap.exists && snap.data().infiniteState ? snap.data().infiniteState : null;
+      if (!snap) return { state: null, timedOut: true }; // se agotó el tiempo de espera sin respuesta: no sabemos si había progreso o no
+      const state = snap.exists && snap.data().infiniteState ? snap.data().infiniteState : null;
+      return { state, timedOut: false }; // esto sí es una respuesta real de Firestore: si no hay estado, es que de verdad no lo hay
     } catch (e) {
       console.error("No se pudo cargar el progreso de la nube:", e);
-      return null;
+      return { state: null, timedOut: true }; // fallo de red: mismo caso que el timeout, tampoco lo sabemos
     }
   }
 
@@ -1662,7 +1663,8 @@
   }
 
   async function loadInfiniteState() {
-    return currentUser ? await loadInfiniteStateCloud() : loadInfiniteStateLocal();
+    if (!currentUser) return { state: loadInfiniteStateLocal(), timedOut: false };
+    return await loadInfiniteStateCloud();
   }
 
   function clearInfiniteStorage() {
@@ -4344,7 +4346,7 @@
         // si hay sesión iniciada antes de decidir qué partida recuperar. Con un límite de
         // tiempo, por si Firebase no llega a responder nunca.
         await withTimeout(authReadyPromise, 4000);
-        const saved = await loadInfiniteState();
+        const { state: saved } = await loadInfiniteState();
 
         if (saved) {
           currentDifficulty = "infinito";
@@ -4354,6 +4356,10 @@
           if (infinitoBtn) infinitoBtn.classList.add('active');
           resumeInfiniteFromSaved(saved);
         } else {
+          // No se pudo confirmar progreso de Infinito (o de verdad no lo hay): caemos al reto
+          // diario como opción segura, sin arriesgarnos a tocar nada de Infinito por si el
+          // "no" fuera en realidad un simple fallo de red — si de verdad tenías una partida en
+          // curso, seguirá ahí la próxima vez que pulses Infinito a mano.
           // currentDifficulty conserva su valor por defecto ("facil") y no estamos en Infinito.
           updateInfiniteScoreDisplay(); // mismo motivo que en la otra rama de arriba
           await loadDailyChallenge(currentDifficulty);
@@ -4420,24 +4426,45 @@
       }
     }
 
+    if (level === "infinito") {
+      // Entrando en Infinito desde otro modo: NO cambiamos currentDifficulty/isInfiniteMode ni
+      // marcamos el botón activo todavía — solo si de verdad conseguimos confirmar tu progreso
+      // (o la ausencia real de él). Así, si la conexión va lenta o falla, el juego se queda tal
+      // cual estaba antes de pulsar, en vez de quedarse a medias con "Infinito" ya marcado pero
+      // mostrando el tablero de otro modo por debajo — y, sobre todo, sin arriesgarnos a borrar
+      // una racha real solo porque no nos dio tiempo a confirmarla.
+      document.getElementById("warning-msg").innerText = "Cargando tu partida de Infinito…";
+      const { state: saved, timedOut } = await loadInfiniteState();
+
+      if (timedOut) {
+        document.getElementById("warning-msg").innerText =
+          "⚠️ No se pudo comprobar tu progreso de Infinito (conexión lenta o caída). Vuelve a pulsar Infinito para reintentarlo.";
+        return;
+      }
+      document.getElementById("warning-msg").innerText = "";
+
+      currentDifficulty = level;
+      isInfiniteMode = true;
+      document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      try { localStorage.setItem(STORAGE_KEY_LAST_DIFFICULTY, level); } catch (e) {}
+
+      if (saved) {
+        resumeInfiniteFromSaved(saved);
+      } else {
+        infiniteSolvedCount = 0;
+        updateInfiniteScoreDisplay();
+        generateNewBoard();
+      }
+      return;
+    }
+
     currentDifficulty = level;
-    isInfiniteMode = (level === "infinito");
+    isInfiniteMode = false;
     document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');
 
     try { localStorage.setItem(STORAGE_KEY_LAST_DIFFICULTY, level); } catch (e) {}
-
-    if (isInfiniteMode) {
-      const saved = await loadInfiniteState();
-      if (saved) {
-        resumeInfiniteFromSaved(saved);
-        return;
-      }
-      infiniteSolvedCount = 0;
-      updateInfiniteScoreDisplay();
-      generateNewBoard();
-      return;
-    }
 
     // Novato / Supernova / Yonko: reto diario compartido por todos (ver "Reto diario" más abajo).
     updateInfiniteScoreDisplay();
