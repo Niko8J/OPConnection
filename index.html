@@ -4440,7 +4440,11 @@
     computeDesignVars(w, h);
 
     const saved = loadCardReference();
-    const savedStillValid = saved && Math.abs(currentAspect - saved.aspect) / saved.aspect <= 0.15;
+    // Si la referencia guardada es de antes de este cambio, no tiene "containerMaxWidth" —
+    // la tratamos como inválida a propósito, para forzar un recálculo con la lógica nueva en
+    // vez de quedarse pillada para siempre con el ancho de reserva de 650px de toda la vida.
+    const savedStillValid = saved && saved.containerMaxWidth !== undefined
+      && Math.abs(currentAspect - saved.aspect) / saved.aspect <= 0.15;
 
     if (savedStillValid) {
       // Reutilizamos el tamaño ya calculado antes para esta misma "forma" de pantalla, en
