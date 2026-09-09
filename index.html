@@ -205,6 +205,7 @@
     .auth-dropdown-item:hover { background: #334155; }
     .auth-dropdown-item-disabled { opacity: 0.5; cursor: not-allowed; }
     .auth-dropdown-item-disabled:hover { background: none; }
+    .email-verify-warning { float: right; cursor: pointer; }
     .auth-dropdown-user-info {
       padding: 6px 10px 8px;
     }
@@ -1166,7 +1167,11 @@
         </div>
         <button class="auth-dropdown-item" onclick="openRankingModal()">🏆 Ranking</button>
         <div class="auth-dropdown-separator"></div>
-        <button class="auth-dropdown-item" onclick="openProfileModal()">👤 Perfil</button>
+        <button class="auth-dropdown-item" onclick="openProfileModal()">
+          👤 Perfil
+          <span id="email-verify-warning" class="email-verify-warning" title="Debes verificar tu cuenta"
+                style="display: none;" onclick="event.stopPropagation(); showToast('⚠️ Debes verificar tu cuenta');">⚠️</span>
+        </button>
         <button class="auth-dropdown-item" onclick="doLogout()">Cerrar sesión</button>
       </div>
 
@@ -1818,6 +1823,11 @@
       const dropdownTitlePillHtml = buildTitlePillHtml(currentUserProfile || {});
       titleEl.innerHTML = dropdownTitlePillHtml;
       titleEl.style.display = dropdownTitlePillHtml ? "block" : "none";
+
+      // Cuentas de Google llegan ya verificadas por Google mismo (emailVerified es true de
+      // fábrica) — este aviso solo puede llegar a verse con cuentas de correo y contraseña
+      // que todavía no hayan confirmado el enlace que se les mandó al registrarse.
+      document.getElementById("email-verify-warning").style.display = currentUser.emailVerified ? "none" : "inline";
     } else {
       emptyIcon.style.display = "block";
       avatarIcon.style.display = "none";
@@ -2176,6 +2186,15 @@
       await db.collection("users").doc(cred.user.uid).set({ username, avatar: selectedAvatarImg, email });
       await db.collection("publicProfiles").doc(cred.user.uid).set({ username, avatar: selectedAvatarImg, bestStreak: 0 });
       currentUserProfile = { username, avatar: selectedAvatarImg, email };
+      // Aparte, sin bloquear el registro si esto en concreto fallara (p. ej. por un aviso de
+      // "demasiadas peticiones" de Firebase): es una comprobación blanda, no obligatoria para
+      // poder jugar — si el correo estuviera mal escrito, este enlace nunca llegaría, y el
+      // aviso junto a "Perfil" (ver updateAuthUI) se lo recordará hasta que lo confirme.
+      try {
+        await cred.user.sendEmailVerification();
+      } catch (e) {
+        console.error("No se pudo enviar el correo de verificación:", e);
+      }
       // No dejamos esto solo en manos de onAuthStateChanged: la escritura de arriba y su propia
       // lectura podrían solaparse en el tiempo, y en ese caso no vería el perfil recién creado
       // todavía. Llamamos aquí a los dos puentes directamente, ya con el perfil en memoria.
