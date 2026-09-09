@@ -248,11 +248,18 @@
     }
     .history-day.history-win { background: #22c55e; color: #052e16; cursor: pointer; }
     .history-day.history-lose { background: #ef4444; color: #450a0a; cursor: pointer; }
-    .history-day.history-none { background: #1e293b; color: #64748b; }
+    /* Relleno gris de verdad (no solo un fondo oscuro apenas distinguible del hueco): así se
+       nota a simple vista la diferencia entre "hay panel pero no lo has jugado" (gris) y "aquí
+       no existe ningún panel" (history-day-empty, casi invisible). */
+    .history-day.history-none { background: #475569; color: #f1f5f9; }
     /* Más apagados todavía que "sin jugar" (que si podría tener un panel, solo que no lo
        jugaste): aquí no puede haber ningún dato posible, así que casi ni se ven. */
     .history-day.history-day-empty { opacity: 0.5; }
-    .history-day.history-today { box-shadow: 0 0 0 2px #f59e0b; }
+    /* El aro naranja marca el panel que estás viendo AHORA MISMO en el tablero, no "hoy" — así
+       puede caer sobre un día ya en verde/rojo/gris, si has entrado a ver un panel concreto
+       desde este mismo calendario. Con esto, "hoy" se identifica solo (es el último día en
+       verde/rojo/gris de la lista, antes de que empiecen los apagados de "sin panel todavía"). */
+    .history-day.history-viewing { box-shadow: 0 0 0 2px #f59e0b; }
     @media (hover: hover) and (pointer: fine) {
       .history-day.history-win:hover, .history-day.history-lose:hover { filter: brightness(1.15); }
     }
@@ -1560,6 +1567,11 @@
   let database = [];
   let currentDifficulty = "facil";
   let currentCategories = [];
+  // Qué día del reto diario está mostrando el tablero ahora mismo — no siempre es "hoy": puede
+  // ser un día pasado, si se ha entrado desde el calendario de "Paneles pasados". Solo tiene
+  // sentido en los modos diarios (Novato/Supernova/Yonko), nunca en Infinito. Se usa para saber
+  // sobre qué casilla del calendario poner el aro de "estás viendo este panel ahora mismo".
+  let currentViewedDailyDate = null;
   let cards = [];
   let selectedCards = [];
   let hintsRemaining = 1; // una pista por panel, solo aplica en modo Infinito
@@ -2380,7 +2392,14 @@
         cell.classList.add("history-day-empty");
       } else {
         cell.classList.add("history-none"); // estado provisional: aún no sabemos si hay resultado
-        if (dateKey === todayKey) cell.classList.add("history-today");
+        // El aro marca el panel que se está viendo AHORA MISMO en el tablero (puede ser un día
+        // pasado, si se entró desde este mismo calendario) — y solo tiene sentido si además
+        // estamos mirando el calendario de la MISMA dificultad que hay puesta en el tablero: si
+        // has cambiado a otra dificultad dentro del propio calendario, ningún día de esta vista
+        // es "el que estás viendo" de verdad.
+        if (dateKey === currentViewedDailyDate && historyModalDifficulty === currentDifficulty) {
+          cell.classList.add("history-viewing");
+        }
       }
       grid.appendChild(cell);
     }
@@ -5054,6 +5073,7 @@
   function resumeDailyFromSaved(difficulty, saved) {
     currentDifficulty = difficulty;
     isInfiniteMode = false;
+    currentViewedDailyDate = getMadridDailyKey(); // a medias solo puede ser el reto de hoy
     gameOver = false;
     awaitingNextPanel = false;
     currentCategories = hydrateBoardGroups(saved.groups);
@@ -5651,6 +5671,7 @@
       const groups = await getOrCreateDailyPuzzle(difficulty, todayKey);
       document.getElementById("warning-msg").innerText = "";
       currentCategories = groups;
+      currentViewedDailyDate = todayKey;
       recordPanelSeen(currentCategories);
       initGame();
     } catch (e) {
@@ -5673,6 +5694,7 @@
   async function renderFinishedDailyPanel(difficulty, storedEntry) {
     currentDifficulty = difficulty;
     isInfiniteMode = false;
+    currentViewedDailyDate = storedEntry.date;
     currentCategories = hydrateBoardGroups(storedEntry.groups);
 
     const won = storedEntry.result === "win";
