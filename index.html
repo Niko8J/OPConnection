@@ -1197,7 +1197,7 @@
   <div class="board">
     <div id="board-loading" class="board-loading">
       <div class="board-loading-spinner"></div>
-      <p>Cargando partida...</p>
+      <p id="board-loading-text">Cargando partida...</p>
     </div>
     <div id="grid" class="grid"></div>
   </div>
@@ -4019,6 +4019,17 @@
     if (el) el.style.display = "none";
   }
 
+  // Pareja de hideBoardLoading: hasta ahora este spinner solo se mostraba una vez, al cargar la
+  // página por primera vez (y arrancaba visible por defecto en el propio HTML) — nunca hacía
+  // falta "volver a mostrarlo" después. Ahora también se reutiliza al entrar en Infinito, así
+  // que sí hace falta poder encenderlo de nuevo bajo demanda.
+  function showBoardLoading(text) {
+    const el = document.getElementById("board-loading");
+    if (!el) return;
+    document.getElementById("board-loading-text").innerText = text || "Cargando partida...";
+    el.style.display = "flex";
+  }
+
   // Evita que la carga se quede colgada para siempre si Firebase Auth no llega a confirmar
   // la sesión (por ejemplo, por datos de sesión dañados tras un borrado de caché en el
   // navegador). Pasado ese tiempo, seguimos adelante como si no hubiera sesión iniciada.
@@ -4524,17 +4535,18 @@
       document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
 
-      document.getElementById("warning-msg").innerText = "Cargando tu partida de Infinito…";
+      showBoardLoading("Cargando tu partida de Infinito…");
       const { state: saved, timedOut } = await loadInfiniteState();
 
       if (timedOut) {
         document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
         if (previousActiveBtn) previousActiveBtn.classList.add('active');
+        hideBoardLoading();
         document.getElementById("warning-msg").innerText =
           "⚠️ No se pudo comprobar tu progreso de Infinito (sin conexión, o hubo un error). Vuelve a pulsar Infinito para reintentarlo.";
         return;
       }
-      document.getElementById("warning-msg").innerText = "";
+      hideBoardLoading();
 
       currentDifficulty = level;
       isInfiniteMode = true;
