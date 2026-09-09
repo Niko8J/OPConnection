@@ -251,7 +251,7 @@
     .history-day.history-none { background: #1e293b; color: #64748b; }
     /* Más apagados todavía que "sin jugar" (que si podría tener un panel, solo que no lo
        jugaste): aquí no puede haber ningún dato posible, así que casi ni se ven. */
-    .history-day.history-day-empty { opacity: 0.3; }
+    .history-day.history-day-empty { opacity: 0.5; }
     .history-day.history-today { box-shadow: 0 0 0 2px #f59e0b; }
     @media (hover: hover) and (pointer: fine) {
       .history-day.history-win:hover, .history-day.history-lose:hover { filter: brightness(1.15); }
@@ -1622,13 +1622,16 @@
   async function loadInfiniteStateCloud() {
     if (!currentUser) return { state: null, timedOut: false };
     try {
-      const snap = await withTimeout(db.collection("users").doc(currentUser.uid).get(), 5000);
-      if (!snap) return { state: null, timedOut: true }; // se agotó el tiempo de espera sin respuesta: no sabemos si había progreso o no
+      // Sin límite de tiempo artificial a propósito: mejor esperar de verdad a la respuesta
+      // (aunque tarde) que dar por perdido tu progreso solo porque la conexión iba lenta ese
+      // momento. "timedOut" se queda como nombre por comodidad, pero aquí ya solo significa un
+      // fallo genuino (sin conexión de ningún tipo, permiso denegado...), no una simple demora.
+      const snap = await db.collection("users").doc(currentUser.uid).get();
       const state = snap.exists && snap.data().infiniteState ? snap.data().infiniteState : null;
-      return { state, timedOut: false }; // esto sí es una respuesta real de Firestore: si no hay estado, es que de verdad no lo hay
+      return { state, timedOut: false };
     } catch (e) {
       console.error("No se pudo cargar el progreso de la nube:", e);
-      return { state: null, timedOut: true }; // fallo de red: mismo caso que el timeout, tampoco lo sabemos
+      return { state: null, timedOut: true }; // fallo real, no solo lento: aquí sí hace falta avisar
     }
   }
 
@@ -2279,7 +2282,7 @@
   // ⚠️ TEMPORAL: bajada a 09-01 solo para poder probar el día 7 con datos de prueba (ver
   // conversación). Cuando se termine de probar, devolver a "2026-09-08" (la fecha real en la
   // que empezó a existir gameHistory).
-  const GAME_HISTORY_START_KEY = "2026-09-01";
+  const GAME_HISTORY_START_KEY = "2026-09-08";
 
   const MONTH_NAMES_ES = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -4427,26 +4430,30 @@
     }
 
     if (level === "infinito") {
-      // Entrando en Infinito desde otro modo: NO cambiamos currentDifficulty/isInfiniteMode ni
-      // marcamos el botón activo todavía — solo si de verdad conseguimos confirmar tu progreso
-      // (o la ausencia real de él). Así, si la conexión va lenta o falla, el juego se queda tal
-      // cual estaba antes de pulsar, en vez de quedarse a medias con "Infinito" ya marcado pero
-      // mostrando el tablero de otro modo por debajo — y, sobre todo, sin arriesgarnos a borrar
-      // una racha real solo porque no nos dio tiempo a confirmarla.
+      // El botón se marca activo AL INSTANTE (solo algo visual: currentDifficulty/isInfiniteMode
+      // no cambian todavía, ni se genera o reanuda nada) — así el aviso de "Cargando" aparece ya
+      // dentro de la propia pestaña de Infinito, no debajo de la anterior. Si luego se agota el
+      // tiempo, devolvemos el marcado a la pestaña de antes: como el juego en sí no ha cambiado
+      // de modo hasta confirmar tu progreso (o la ausencia real de él), no hay ningún riesgo de
+      // borrar nada, solo se deshace este detalle visual.
+      const previousActiveBtn = document.querySelector('.diff-btn.active');
+      document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
       document.getElementById("warning-msg").innerText = "Cargando tu partida de Infinito…";
       const { state: saved, timedOut } = await loadInfiniteState();
 
       if (timedOut) {
+        document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
+        if (previousActiveBtn) previousActiveBtn.classList.add('active');
         document.getElementById("warning-msg").innerText =
-          "⚠️ No se pudo comprobar tu progreso de Infinito (conexión lenta o caída). Vuelve a pulsar Infinito para reintentarlo.";
+          "⚠️ No se pudo comprobar tu progreso de Infinito (sin conexión, o hubo un error). Vuelve a pulsar Infinito para reintentarlo.";
         return;
       }
       document.getElementById("warning-msg").innerText = "";
 
       currentDifficulty = level;
       isInfiniteMode = true;
-      document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
       try { localStorage.setItem(STORAGE_KEY_LAST_DIFFICULTY, level); } catch (e) {}
 
       if (saved) {
@@ -5064,6 +5071,7 @@
     cards = shuffle(cards);
 
     document.getElementById("warning-msg").innerText = "";
+    document.getElementById("past-panel-banner").style.visibility = "hidden";
     showGameControls();
     updateHintButtonState();
     document.getElementById("gameover-modal").style.display = "none";
