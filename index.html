@@ -201,6 +201,7 @@
     .auth-dropdown-item {
       display: block; width: 100%; text-align: left; background: none; border: none;
       color: #f8fafc; padding: 8px 10px; border-radius: 6px; cursor: pointer; font-size: 0.9rem;
+      text-decoration: none;
     }
     .auth-dropdown-item:hover { background: #334155; }
     .auth-dropdown-item-disabled { opacity: 0.5; cursor: not-allowed; }
@@ -845,12 +846,20 @@
     .ad-banner.ad-empty {
       display: none;
     }
+    /* Mientras se muestra la pantalla de carga (spinner + un texto, sin contenido real), los
+       anuncios no deben verse en absoluto — las políticas de AdSense prohíben mostrarlos en
+       pantallas sin contenido. Con !important para que mande por encima de cualquier otro
+       estado del anuncio (incluido si ya se rellenó de verdad). */
+    body.hide-ads-during-loading .ad-banner,
+    body.hide-ads-during-loading .ad-side {
+      display: none !important;
+    }
 
     /* Pie de página: enlaces siempre visibles a "Quiénes somos", "Contacto" y "Privacidad"
        (antes solo estaban escondidos dentro del menú de la esquina), para que cualquiera
        (usuarios o quien revise la web) los encuentre sin tener que buscarlos. */
     .site-footer {
-      display: flex; justify-content: center; align-items: center; gap: 8px;
+      display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap;
       margin-top: var(--v-gap-sm); flex-shrink: 0;
       font-size: 0.8rem; color: #64748b;
     }
@@ -1125,7 +1134,7 @@
        crees uno por uno en Anuncios → Por bloque de anuncios. -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5804898129171496" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="hide-ads-during-loading">
 
 <!-- Contenedor de avisos flotantes (monedas ganadas, logros conseguidos): position:fixed a
      nivel de body, para que se vea por encima de cualquier modal o pantalla, sin importar en
@@ -1184,7 +1193,7 @@
 
       <div class="auth-dropdown-separator"></div>
 
-      <button class="auth-dropdown-item" onclick="openHowToPlayModal()">❓ Cómo jugar</button>
+      <a class="auth-dropdown-item" href="como-jugar.html" onclick="openHowToPlayModal(); return false;">❓ Cómo jugar</a>
       <button class="auth-dropdown-item auth-dropdown-item-disabled" disabled title="Disponible próximamente">🌐 Idioma (próximamente)</button>
     </div>
   </div>
@@ -1256,11 +1265,13 @@
   </div>
 
   <footer class="site-footer">
-    <button type="button" class="footer-link" onclick="openAboutModal()">Quiénes somos</button>
+    <a href="quienes-somos.html" class="footer-link" onclick="openAboutModal(); return false;">Quiénes somos</a>
+    <span class="footer-sep">·</span>
+    <a href="preguntas-frecuentes.html" class="footer-link">FAQ</a>
     <span class="footer-sep">·</span>
     <button type="button" class="footer-link" onclick="openContactModal()">Contacto</button>
     <span class="footer-sep">·</span>
-    <button type="button" class="footer-link" onclick="openPrivacyModal()">Privacidad</button>
+    <a href="privacidad.html" class="footer-link" onclick="openPrivacyModal(); return false;">Privacidad</a>
   </footer>
   </main>
 
@@ -4214,6 +4225,12 @@
   function hideBoardLoading() {
     const el = document.getElementById("board-loading");
     if (el) el.style.display = "none";
+    // Las políticas de AdSense prohíben mostrar sus anuncios en pantallas sin contenido real
+    // (p. ej. mientras se está cargando). En cuanto el tablero ya tiene contenido de verdad,
+    // volvemos a permitir que se vean (si es que llegaron a rellenarse; eso lo decide aparte
+    // watchAdSlot(), con su propia clase "ad-empty" — esta de aquí es independiente y manda
+    // por encima mientras esté puesta, sin pisarle el resultado a esa otra).
+    document.body.classList.remove("hide-ads-during-loading");
   }
 
   // Pareja de hideBoardLoading: hasta ahora este spinner solo se mostraba una vez, al cargar la
@@ -4225,6 +4242,10 @@
     if (!el) return;
     document.getElementById("board-loading-text").innerText = text || "Cargando partida...";
     el.style.display = "flex";
+    // Ver el comentario de hideBoardLoading(): esta pantalla (spinner + un texto) no cuenta
+    // como "contenido real" a efectos de las políticas de AdSense, así que ocultamos los tres
+    // anuncios mientras esté puesta, sea cual sea su propio estado de relleno.
+    document.body.classList.add("hide-ads-during-loading");
   }
 
   // Evita que la carga se quede colgada para siempre si Firebase Auth no llega a confirmar
