@@ -1969,14 +1969,50 @@
   // Comprueba si un nombre de usuario ya está en uso por otra cuenta.
   // excludeUid permite ignorar el propio documento (por ejemplo, al reguardar tu perfil
   // sin haber cambiado el nombre).
+  // Si una cuenta nunca llega a verificar su correo (típicamente porque se equivocó al
+  // escribirlo al registrarse) pasados 7 días, su nombre de usuario se considera libre para
+  // que otra persona pueda usarlo — así un simple error al teclear no bloquea ese nombre para
+  // siempre. Las cuentas SIN createdAt guardado (todas las creadas antes de este cambio) se
+  // protegen siempre, pase lo que pase con emailVerified: no sabemos de cuándo son, así que
+  // mejor no arriesgarse a liberar el nombre de alguien que lleve tiempo jugando de verdad.
+  const USERNAME_GRACE_PERIOD_MS = 7 * 24 * 60 * 60 * 1000;
+  function isUsernameGraceExpired(profile) {
+    if (profile.emailVerified !== false) return false; // ya verificado, o no lo sabemos: protegido
+    if (!profile.createdAt || typeof profile.createdAt.toMillis !== "function") return false; // cuenta antigua, sin fecha: protegida
+    return (Date.now() - profile.createdAt.toMillis()) > USERNAME_GRACE_PERIOD_MS;
+  }
+
+  // isUsernameTaken() solo IGNORA las cuentas caducadas al comprobar disponibilidad, pero no
+  // las toca — así que, si alguien reclama después ese mismo nombre, la cuenta vieja seguiría
+  // existiendo con el nombre igual, y acabaríamos con dos perfiles distintos mostrando el
+  // mismo nombre de usuario a la vez. Esta función sí las renombra de verdad, para que el
+  // nombre quede realmente libre y no solo "de mentira" en la comprobación. No se borra nada
+  // de su progreso (Berries, logros...) — solo deja de llamarse igual.
+  async function releaseExpiredUsername(username) {
+    try {
+      const snap = await db.collection("publicProfiles").where("username", "==", username).limit(5).get();
+      const expiradas = snap.docs.filter(doc => isUsernameGraceExpired(doc.data()));
+      await Promise.all(expiradas.map(doc => {
+        const nuevoNombre = `${username}_sinverificar_${doc.id.slice(0, 6)}`;
+        return Promise.all([
+          db.collection("publicProfiles").doc(doc.id).update({ username: nuevoNombre }),
+          db.collection("users").doc(doc.id).update({ username: nuevoNombre })
+        ]);
+      }));
+    } catch (e) {
+      console.error("No se pudo liberar el nombre de usuario expirado:", e);
+    }
+  }
+
   async function isUsernameTaken(username, excludeUid) {
     try {
       const snap = await db.collection("publicProfiles").where("username", "==", username).limit(5).get();
       if (snap.empty) return false;
-      if (excludeUid) {
-        return snap.docs.some(doc => doc.id !== excludeUid);
-      }
-      return true;
+      return snap.docs.some(doc => {
+        if (excludeUid && doc.id === excludeUid) return false;
+        if (isUsernameGraceExpired(doc.data())) return false; // nunca se verificó y ya pasó el plazo: no cuenta como ocupado
+        return true;
+      });
     } catch (e) {
       console.error("No se pudo comprobar si el nombre de usuario está en uso:", e);
       return false; // si falla la comprobación por un problema de red, no bloqueamos sin más
@@ -2117,11 +2153,19 @@
         errorEl.innerText = "Ese nombre de usuario ya está en uso. Elige otro.";
         return;
       }
+      await releaseExpiredUsername(username); // por si estaba libre solo por caducidad de otra cuenta
 
       try {
         const profile = { username, avatar: selectedAvatarImg, email: pendingGoogleUser.email || "" };
         await db.collection("users").doc(pendingGoogleUser.uid).set(profile);
-        await db.collection("publicProfiles").doc(pendingGoogleUser.uid).set({ username, avatar: selectedAvatarImg, bestStreak: 0 });
+        // emailVerified true de entrada (Google ya lo verifica por su cuenta) y createdAt para
+        // el mismo motivo que en el registro normal (ver más abajo): saber cuándo liberar un
+        // nombre de usuario si la cuenta nunca llega a verificarse — aquí nunca hará falta,
+        // pero se guarda igual por si el día de mañana se necesita para cualquier otra cosa.
+        await db.collection("publicProfiles").doc(pendingGoogleUser.uid).set({
+          username, avatar: selectedAvatarImg, bestStreak: 0,
+          emailVerified: true, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
         currentUserProfile = profile;
         // Este flujo no vuelve a pasar por onAuthStateChanged (la sesión de Google ya existía;
         // solo acabamos de completar el perfil), así que los puentes hay que llamarlos aquí.
@@ -2180,11 +2224,19 @@
       errorEl.innerText = "Ese nombre de usuario ya está en uso. Elige otro.";
       return;
     }
+    await releaseExpiredUsername(username); // por si estaba libre solo por caducidad de otra cuenta
 
     try {
       const cred = await auth.createUserWithEmailAndPassword(email, password);
       await db.collection("users").doc(cred.user.uid).set({ username, avatar: selectedAvatarImg, email });
-      await db.collection("publicProfiles").doc(cred.user.uid).set({ username, avatar: selectedAvatarImg, bestStreak: 0 });
+      // emailVerified y createdAt: para saber, si alguien escribió mal su correo y nunca llega
+      // a confirmarlo, cuándo liberar su nombre de usuario para que no quede bloqueado para
+      // siempre (ver isUsernameTaken) — se actualiza a true en cuanto Firebase confirme que sí
+      // verificó el correo (ver el propio onAuthStateChanged, más abajo en el archivo).
+      await db.collection("publicProfiles").doc(cred.user.uid).set({
+        username, avatar: selectedAvatarImg, bestStreak: 0,
+        emailVerified: false, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
       currentUserProfile = { username, avatar: selectedAvatarImg, email };
       // Aparte, sin bloquear el registro si esto en concreto fallara (p. ej. por un aviso de
       // "demasiadas peticiones" de Firebase): es una comprobación blanda, no obligatoria para
@@ -3854,6 +3906,7 @@
       errorEl.innerText = "Ese nombre de usuario ya está en uso. Elige otro.";
       return;
     }
+    await releaseExpiredUsername(username); // por si estaba libre solo por caducidad de otra cuenta
 
     try {
       await db.collection("users").doc(currentUser.uid).set({ username, avatar: editSelectedAvatarImg }, { merge: true });
@@ -4057,11 +4110,16 @@
         pendingGoogleUser = user;
       } else {
         // Compatibilidad: cuentas creadas antes de que existiera el Ranking no tienen publicProfiles todavía.
-        // Lo creamos/actualizamos en silencio para que también aparezcan.
+        // Lo creamos/actualizamos en silencio para que también aparezcan. Aprovechamos esta misma
+        // escritura (se ejecuta en cada inicio de sesión) para mantener emailVerified al día: en
+        // cuanto Firebase confirme que sí verificó el correo, se refleja aquí — así isUsernameTaken
+        // no llega a liberar por error el nombre de alguien que sí llegó a confirmar su cuenta,
+        // aunque tardara unos días en volver a entrar.
         db.collection("publicProfiles").doc(user.uid).set({
           username: currentUserProfile.username,
           avatar: currentUserProfile.avatar,
-          bestStreak: currentUserProfile.bestStreak || 0
+          bestStreak: currentUserProfile.bestStreak || 0,
+          emailVerified: user.emailVerified
         }, { merge: true }).catch(() => {});
 
         // Si jugaste el diario de hoy como invitado en este navegador antes de iniciar sesión,
