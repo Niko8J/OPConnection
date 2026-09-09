@@ -2,6 +2,15 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <!-- Lo antes posible, antes de que el navegador tenga ocasión de restaurar por su cuenta
+       una posición de scroll de la visita anterior: en móvil, si la recarga encontraba el
+       contenido más alto de lo normal (mientras el hueco del anuncio seguía reservado, antes
+       de saber si se rellena o se colapsa), esa restauración dejaba el título y la foto de
+       perfil fuera de la pantalla, mostrando solo la parte de abajo. -->
+  <script>
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>One Piece Connection</title>
   <meta name="description" content="Encuentra los 4 grupos de personajes de One Piece que comparten algo en común. Juego gratuito estilo Connections hecho por fans, con niveles de dificultad y ranking.">
@@ -129,6 +138,7 @@
     body {
       background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: flex-start;
       height: var(--frozen-vh, 100dvh); padding: 12px;
+      overflow-anchor: none; /* que el navegador no reajuste el scroll por su cuenta cuando cambie la altura del contenido (p. ej. al colapsar el hueco del anuncio) */
     }
     .container {
       max-width: 650px; width: 100%; text-align: center; position: relative;
