@@ -141,9 +141,9 @@
       overflow-anchor: none; /* que el navegador no reajuste el scroll por su cuenta cuando cambie la altura del contenido (p. ej. al colapsar el hueco del anuncio) */
     }
     .container {
-      max-width: 650px; width: 100%; text-align: center; position: relative;
+      max-width: var(--container-max-width, 650px); width: 100%; text-align: center; position: relative;
       display: flex; flex-direction: column; height: 100%; padding-top: var(--container-pad-top);
-      flex: 0 1 650px;
+      flex: 0 1 var(--container-max-width, 650px);
     }
 
     .site-title { display: flex; flex-direction: column; align-items: center; margin-bottom: var(--v-gap-sm); flex-shrink: 0; }
@@ -4373,6 +4373,12 @@
   // Mide el hueco real que le queda al tablero (después de restar título, botones, etc.) y
   // calcula el tamaño de tarjeta cuadrada más grande que cabe en 4 columnas y 4 filas a la
   // vez. Devuelve el resultado en vez de solo aplicarlo, para poder guardarlo aparte.
+  // Ancho de referencia de siempre (nunca se baja de aquí) y tope máximo hasta el que se deja
+  // crecer en pantallas con mucho alto de sobra — para que el tablero se vea más grande de
+  // forma proporcionada, sin llegar nunca a verse absurdamente ancho.
+  const CONTAINER_BASE_MAX_WIDTH = 650;
+  const CONTAINER_GROWTH_CAP = 900;
+
   function measureCardSize() {
     const board = document.querySelector(".board");
     const container = document.querySelector(".container");
@@ -4394,6 +4400,16 @@
     });
 
     const availableHeight = Math.max(0, container.clientHeight - siblingsHeight - 40); // -40px: margen de seguridad amplio ante redondeos/imprecisiones de medición
+
+    // Si sobra alto respecto a lo que el ancho de 650px llega a aprovechar (pantallas grandes
+    // y no muy anchas), antes se quedaba un hueco vacío debajo, porque todo se alinea arriba.
+    // Calculamos cuánto ancho haría falta para aprovechar ESE alto, y ensanchamos el
+    // contenedor hasta ahí — nunca por debajo del ancho de siempre, ni por encima del tope.
+    const sizeByHeightAlone = (availableHeight - (rows - 1) * gapPx) / rows;
+    const widthNeededForHeight = Math.round(sizeByHeightAlone * cols + (cols - 1) * gapPx);
+    const containerMaxWidth = Math.min(Math.max(widthNeededForHeight, CONTAINER_BASE_MAX_WIDTH), CONTAINER_GROWTH_CAP);
+    document.documentElement.style.setProperty("--container-max-width", containerMaxWidth + "px");
+
     const availableWidth = board.clientWidth;
 
     const sizeByWidth = (availableWidth - (cols - 1) * gapPx) / cols;
@@ -4401,12 +4417,15 @@
     const cardSize = Math.max(30, Math.floor(Math.min(sizeByWidth, sizeByHeight)));
     const boardHeight = cardSize * rows + (rows - 1) * gapPx;
 
-    return { cardSize, boardHeight };
+    return { cardSize, boardHeight, containerMaxWidth };
   }
 
   function applyCardSize(ref) {
     document.documentElement.style.setProperty("--card-size", ref.cardSize + "px");
     document.documentElement.style.setProperty("--board-height", ref.boardHeight + "px");
+    // ref.containerMaxWidth puede faltar en una referencia guardada de antes de este cambio:
+    // en ese caso, el ancho de siempre (650px) es el valor correcto de todas formas.
+    document.documentElement.style.setProperty("--container-max-width", (ref.containerMaxWidth || CONTAINER_BASE_MAX_WIDTH) + "px");
   }
 
   // Recalcula el diseño entero para la pantalla actual. Se llama al cargar la página o
@@ -4466,9 +4485,10 @@
           applyCardSize(result); // se aplica siempre, para que no quede vacío mientras se asienta
           const stable = lastResult
             && result.cardSize === lastResult.cardSize
-            && result.boardHeight === lastResult.boardHeight;
+            && result.boardHeight === lastResult.boardHeight
+            && result.containerMaxWidth === lastResult.containerMaxWidth;
           if (stable || attempt >= 5) {
-            saveCardReference({ aspect: currentAspect, cardSize: result.cardSize, boardHeight: result.boardHeight });
+            saveCardReference({ aspect: currentAspect, cardSize: result.cardSize, boardHeight: result.boardHeight, containerMaxWidth: result.containerMaxWidth });
             return;
           }
           setTimeout(() => settle(result, attempt + 1), 150);
