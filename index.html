@@ -267,7 +267,7 @@
     .history-legend-dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; margin-right: 4px; vertical-align: middle; }
     .history-legend-dot.history-win { background: #22c55e; }
     .history-legend-dot.history-lose { background: #ef4444; }
-    .history-legend-dot.history-none { background: #1e293b; border: 1px solid #334155; }
+    .history-legend-dot.history-none { background: #475569; }
     @media (hover: hover) and (pointer: fine) {
       .ranking-row:hover { background: #1e293b; }
     }
@@ -3936,6 +3936,12 @@
     updateAuthUI();
 
     if (isFirstCall) {
+      // Si esta confirmación de sesión llega DESPUÉS de que la carga inicial se rindiera (el
+      // límite de 4 segundos de más abajo se agota antes de que Firebase responda), refrescamos
+      // aquí la racha del modo diario en curso: si no, se quedaba sin mostrar hasta que el
+      // jugador cambiaba de dificultad a mano (que sí vuelve a llamar a esta misma función).
+      // No aplica en Infinito, que usa este mismo hueco para otra cosa (paneles resueltos).
+      if (!isInfiniteMode) updateInfiniteScoreDisplay();
       resolveAuthReady();
       return;
     }
