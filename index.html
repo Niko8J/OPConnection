@@ -594,6 +594,9 @@
     .contact-textarea { font-family: inherit; resize: vertical; min-height: 120px; }
     .auth-error { color: #ef4444; font-size: 0.85rem; margin-bottom: 8px; min-height: 1em; }
     .auth-success { color: #22c55e; font-size: 0.85rem; margin-bottom: 8px; }
+    .auth-forgot-password { text-align: right; margin: -6px 0 10px; font-size: 0.8rem; }
+    .auth-forgot-password a { color: #94a3b8; text-decoration: underline; cursor: pointer; }
+    .auth-success { color: #22c55e; font-size: 0.85rem; margin-bottom: 8px; }
     .auth-avatar-label { margin: 6px 0; color: #94a3b8; font-size: 0.9rem; }
 
     .auth-divider { display: flex; align-items: center; gap: 10px; margin: 12px 0; color: #64748b; font-size: 0.85rem; }
@@ -1282,10 +1285,14 @@
       <h2 id="auth-modal-title">Iniciar sesión</h2>
 
       <div id="auth-error" class="auth-error"></div>
+      <div id="auth-success" class="auth-success" style="display: none;"></div>
 
       <div id="auth-credentials">
         <input type="email" id="auth-email" class="auth-input" placeholder="Correo electrónico" autocomplete="email">
         <input type="password" id="auth-password" class="auth-input" placeholder="Contraseña" autocomplete="current-password">
+        <p class="auth-forgot-password" id="auth-forgot-password-link" style="display: none;">
+          <a href="#" onclick="openForgotPasswordMode(event)">¿Olvidaste tu contraseña?</a>
+        </p>
 
         <div id="auth-register-extra" style="display:none;">
           <input type="password" id="auth-password-confirm" class="auth-input" placeholder="Confirma tu contraseña" autocomplete="new-password">
@@ -1886,6 +1893,7 @@
     document.getElementById("auth-dropdown").style.display = "none";
     authMode = mode;
     document.getElementById("auth-error").innerText = "";
+    document.getElementById("auth-success").style.display = "none";
     document.getElementById("auth-email").value = "";
     document.getElementById("auth-password").value = "";
     document.getElementById("auth-password-confirm").value = "";
@@ -1899,29 +1907,53 @@
   function applyAuthModeUI() {
     const isRegister = authMode === "register";
     const isGoogleSetup = authMode === "google-setup";
+    const isForgotPassword = authMode === "forgot-password";
+    const isLogin = authMode === "login";
 
     document.getElementById("auth-modal-title").innerText =
-      isGoogleSetup ? "Completa tu perfil" : (isRegister ? "Crear cuenta" : "Iniciar sesión");
+      isGoogleSetup ? "Completa tu perfil" : isForgotPassword ? "Recuperar contraseña" : (isRegister ? "Crear cuenta" : "Iniciar sesión");
 
     document.getElementById("auth-credentials").style.display = isGoogleSetup ? "none" : "block";
+    // Sin contraseña en este modo: para pedir el enlace de recuperación solo hace falta el
+    // correo. El propio enlace "¿Olvidaste tu contraseña?" tampoco tiene sentido mostrarlo
+    // aquí dentro (ya estamos en esa pantalla), y tampoco fuera de "login" (registrarte o
+    // completar tu perfil de Google no son momentos para pedir recuperarla).
+    document.getElementById("auth-password").style.display = isForgotPassword ? "none" : "block";
+    document.getElementById("auth-forgot-password-link").style.display = isLogin ? "block" : "none";
     document.getElementById("auth-register-extra").style.display = isRegister ? "block" : "none";
     document.getElementById("auth-profile-extra").style.display = (isRegister || isGoogleSetup) ? "block" : "none";
-    document.getElementById("auth-google-section").style.display = isGoogleSetup ? "none" : "block";
-    document.getElementById("auth-switch-p").style.display = isGoogleSetup ? "none" : "block";
+    document.getElementById("auth-google-section").style.display = (isGoogleSetup || isForgotPassword) ? "none" : "block";
 
     document.getElementById("auth-submit-btn").innerText =
-      isGoogleSetup ? "Guardar y continuar" : (isRegister ? "Registrarme" : "Entrar");
+      isGoogleSetup ? "Guardar y continuar" : isForgotPassword ? "Enviar enlace" : (isRegister ? "Registrarme" : "Entrar");
 
-    document.getElementById("auth-switch-text").innerText = isRegister ? "¿Ya tienes cuenta?" : "¿No tienes cuenta?";
-    document.getElementById("auth-switch-link").innerText = isRegister ? "Inicia sesión" : "Regístrate";
+    // En "Recuperar contraseña" el enlace de abajo vuelve a "Iniciar sesión" en vez de
+    // alternar entre iniciar sesión y registrarte (ver toggleAuthMode).
+    document.getElementById("auth-switch-p").style.display = isGoogleSetup ? "none" : "block";
+    document.getElementById("auth-switch-text").innerText = isForgotPassword ? "" : (isRegister ? "¿Ya tienes cuenta?" : "¿No tienes cuenta?");
+    document.getElementById("auth-switch-link").innerText = isForgotPassword ? "← Volver a iniciar sesión" : (isRegister ? "Inicia sesión" : "Regístrate");
   }
 
   function toggleAuthMode(event) {
     event.preventDefault();
-    authMode = authMode === "login" ? "register" : "login";
+    // Desde "Recuperar contraseña" este mismo enlace vuelve a "Iniciar sesión" (no tiene
+    // sentido alternar con "Registrarte" desde ahí); en cualquier otro caso, sigue alternando
+    // entre iniciar sesión y registrarte, como siempre.
+    authMode = authMode === "forgot-password" ? "login" : (authMode === "login" ? "register" : "login");
     document.getElementById("auth-error").innerText = "";
+    document.getElementById("auth-success").style.display = "none";
     applyAuthModeUI();
     if (authMode === "register") buildAvatarPicker();
+  }
+
+  // Se abre desde el enlace "¿Olvidaste tu contraseña?" dentro del propio login, sin cerrar el
+  // modal — conserva lo que ya hubiera escrito en el correo, para no hacerle escribirlo dos veces.
+  function openForgotPasswordMode(event) {
+    event.preventDefault();
+    authMode = "forgot-password";
+    document.getElementById("auth-error").innerText = "";
+    document.getElementById("auth-success").style.display = "none";
+    applyAuthModeUI();
   }
 
   // Comprueba si un nombre de usuario ya está en uso por otra cuenta.
@@ -2039,7 +2071,25 @@
 
   async function submitAuthForm() {
     const errorEl = document.getElementById("auth-error");
+    const successEl = document.getElementById("auth-success");
     errorEl.innerText = "";
+    successEl.style.display = "none";
+
+    if (authMode === "forgot-password") {
+      const email = document.getElementById("auth-email").value.trim();
+      if (!email) {
+        errorEl.innerText = "Escribe tu correo electrónico.";
+        return;
+      }
+      try {
+        await auth.sendPasswordResetEmail(email);
+        successEl.innerText = "✅ Te hemos enviado un enlace a tu correo para que elijas una contraseña nueva. Revisa también la carpeta de spam.";
+        successEl.style.display = "block";
+      } catch (e) {
+        errorEl.innerText = traduceErrorFirebase(e);
+      }
+      return;
+    }
 
     if (authMode === "google-setup") {
       const username = document.getElementById("auth-username").value.trim();
@@ -2965,13 +3015,20 @@
   ];
 
   const SHOP_TITLES = [
-    { id: "novato_grand_line", name: "Novato de la Grand Line", price: 100 },
-    { id: "cazarrecompensas", name: "Cazarrecompensas", price: 200 },
-    { id: "vicealmirante", name: "Vicealmirante", price: 350 },
-    { id: "shichibukai", name: "Shichibukai", price: 500 },
-    { id: "superviviente_marineford", name: "Superviviente de Marineford", price: 750 },
-    { id: "maestro_haki", name: "Maestro del Haki", price: 1000 },
-    { id: "leyenda_nuevo_mundo", name: "Leyenda del Nuevo Mundo", price: 1500 },
+    { id: "novato_east_blue", name: "Novato del East Blue", price: 100 },
+    { id: "cazarrecompensas", name: "Cazarrecompensas", price: 175 },
+    { id: "agente_baroque_works", name: "Agente de Baroque Works", price: 250 },
+    { id: "supernova", name: "Supernova", price: 350 },
+    { id: "asesino_cp9", name: "Asesino del CP9", price: 450 },
+    { id: "shichibukai", name: "Shichibukai", price: 550 },
+    { id: "comandante_barbablanca", name: "Comandante de Barbablanca", price: 675 },
+    { id: "superviviente_marineford", name: "Superviviente de Marineford", price: 800 },
+    { id: "samurai_wano", name: "Samurái de Wano", price: 950 },
+    { id: "almirante_marina", name: "Almirante de la Marina", price: 1150 },
+    { id: "leyenda_nuevo_mundo", name: "Leyenda del Nuevo Mundo", price: 1400 },
+    { id: "maestro_haki", name: "Maestro del Haki", price: 1650 },
+    { id: "yonko", name: "Yonko", price: 2000 },
+    { id: "gran_flota_sombrero_paja", name: "Gran Flota de Sombrero de Paja", price: 2450 },
     { id: "rey_piratas", name: "Rey de los Piratas", price: 3000 }
   ];
 
