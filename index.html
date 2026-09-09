@@ -205,7 +205,13 @@
     .auth-dropdown-item:hover { background: #334155; }
     .auth-dropdown-item-disabled { opacity: 0.5; cursor: not-allowed; }
     .auth-dropdown-item-disabled:hover { background: none; }
-    .email-verify-warning { float: right; cursor: pointer; }
+    /* Encima del propio icono de cuenta, no dentro del menú desplegable: así se ve siempre,
+       sin tener que abrirlo primero, y no queda pegada a "Cerrar sesión" (donde un toque
+       impreciso en móvil podía acabar cerrando la sesión sin querer). */
+    .email-verify-badge {
+      position: absolute; bottom: -3px; right: -3px; font-size: 0.85rem; cursor: pointer;
+      z-index: 21; filter: drop-shadow(0 0 2px #0f172a) drop-shadow(0 0 2px #0f172a);
+    }
     .auth-dropdown-user-info {
       padding: 6px 10px 8px;
     }
@@ -1149,6 +1155,8 @@
       </svg>
       <img id="auth-icon-avatar" class="auth-icon-avatar" src="" alt="Tu avatar">
     </button>
+    <span id="email-verify-badge" class="email-verify-badge" title="Debes verificar tu cuenta"
+          style="display: none;" onclick="event.stopPropagation(); showVerifyWarningBubble(this);">⚠️</span>
     <div id="auth-dropdown" class="auth-dropdown">
       <div id="auth-dropdown-guest">
         <button class="auth-dropdown-item" onclick="openAuthModal('login')">Iniciar sesión</button>
@@ -1167,11 +1175,7 @@
         </div>
         <button class="auth-dropdown-item" onclick="openRankingModal()">🏆 Ranking</button>
         <div class="auth-dropdown-separator"></div>
-        <button class="auth-dropdown-item" onclick="openProfileModal()">
-          👤 Perfil
-          <span id="email-verify-warning" class="email-verify-warning" title="Debes verificar tu cuenta"
-                style="display: none;" onclick="event.stopPropagation(); showToast('⚠️ Debes verificar tu cuenta');">⚠️</span>
-        </button>
+        <button class="auth-dropdown-item" onclick="openProfileModal()">👤 Perfil</button>
         <button class="auth-dropdown-item" onclick="doLogout()">Cerrar sesión</button>
       </div>
 
@@ -1827,7 +1831,7 @@
       // Cuentas de Google llegan ya verificadas por Google mismo (emailVerified es true de
       // fábrica) — este aviso solo puede llegar a verse con cuentas de correo y contraseña
       // que todavía no hayan confirmado el enlace que se les mandó al registrarse.
-      document.getElementById("email-verify-warning").style.display = currentUser.emailVerified ? "none" : "inline";
+      document.getElementById("email-verify-badge").style.display = currentUser.emailVerified ? "none" : "block";
     } else {
       emptyIcon.style.display = "block";
       avatarIcon.style.display = "none";
@@ -1836,6 +1840,36 @@
       dropdownGuest.style.display = "block";
       dropdownUser.style.display = "none";
     }
+  }
+
+  // Burbuja de "Debes verificar tu cuenta" al tocar la señal sobre el icono de cuenta — mismo
+  // aspecto y misma lógica de colocación que la burbuja de nombre de personaje (por encima si
+  // hay hueco; si no, por debajo — el icono de cuenta está pegado arriba del todo, así que
+  // aquí casi siempre tocará colocarla debajo). A diferencia de aquella, no hace falta esperar
+  // a una pulsación mantenida: aquí un toque normal no compite con ningún otro gesto en esta
+  // señal en concreto, así que basta con un toque simple, y se retira sola pasado un momento.
+  let verifyWarningBubbleTimer = null;
+  function showVerifyWarningBubble(el) {
+    document.querySelectorAll(".card-name-overlay").forEach(o => o.remove());
+    clearTimeout(verifyWarningBubbleTimer);
+
+    const rect = el.getBoundingClientRect();
+    const overlay = document.createElement("div");
+    overlay.className = "card-name-overlay";
+    overlay.innerText = "⚠️ Debes verificar tu cuenta";
+    document.body.appendChild(overlay);
+
+    const overlayRect = overlay.getBoundingClientRect();
+    let top = rect.top - overlayRect.height - 8;
+    if (top < 4) top = rect.bottom + 8;
+    const left = Math.max(4, Math.min(
+      rect.left + rect.width / 2 - overlayRect.width / 2,
+      window.innerWidth - overlayRect.width - 4
+    ));
+    overlay.style.top = top + "px";
+    overlay.style.left = left + "px";
+
+    verifyWarningBubbleTimer = setTimeout(() => overlay.remove(), 3000);
   }
 
   function toggleAuthMenu(event) {
