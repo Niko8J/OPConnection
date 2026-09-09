@@ -3991,8 +3991,17 @@
       // límite de 4 segundos de más abajo se agota antes de que Firebase responda), refrescamos
       // aquí la racha del modo diario en curso: si no, se quedaba sin mostrar hasta que el
       // jugador cambiaba de dificultad a mano (que sí vuelve a llamar a esta misma función).
-      // No aplica en Infinito, que usa este mismo hueco para otra cosa (paneles resueltos).
-      if (!isInfiniteMode) updateInfiniteScoreDisplay();
+      // No aplica en Infinito, que usa este mismo hueco para otra cosa (paneles resueltos) — y
+      // aquí comprobamos la preferencia guardada, no isInfiniteMode: si el último modo fue
+      // Infinito, esa variable puede que todavía no se haya puesto a true en este instante
+      // exacto (su propia carga es asíncrona y puede no haber terminado todavía), así que
+      // fiarnos de ella aquí mostraría un fogonazo de "Racha... Paneles pasados" antes de que
+      // se corrija sola un instante después.
+      let lastDifficultyPref = null;
+      try { lastDifficultyPref = localStorage.getItem(STORAGE_KEY_LAST_DIFFICULTY); } catch (e) {}
+      if (!isInfiniteMode && lastDifficultyPref !== "infinito") {
+        updateInfiniteScoreDisplay();
+      }
       resolveAuthReady();
       return;
     }
