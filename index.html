@@ -2061,7 +2061,7 @@
     const searchInput = document.getElementById("avatar-search-input");
     if (searchInput) searchInput.value = "";
 
-    const sortedChars = [...database].sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base' }));
+    const sortedChars = [...database].sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base', ignorePunctuation: true }));
 
     sortedChars.forEach(char => {
       const img = document.createElement("img");
@@ -3808,7 +3808,7 @@
       picker.appendChild(separator);
     }
 
-    const sortedChars = [...database].sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base' }));
+    const sortedChars = [...database].sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base', ignorePunctuation: true }));
 
     sortedChars.forEach(char => {
       const img = document.createElement("img");
