@@ -2191,6 +2191,12 @@
       // poder jugar — si el correo estuviera mal escrito, este enlace nunca llegaría, y el
       // aviso junto a "Perfil" (ver updateAuthUI) se lo recordará hasta que lo confirme.
       try {
+        // El cuerpo del correo de verificación usa %DISPLAY_NAME% y Firebase no deja editar
+        // ese texto (para evitar que se use como vía de spam) — pero si Firebase no tiene
+        // ningún nombre guardado para el usuario, ese hueco sale vacío ("Hola, :"). Rellenamos
+        // aquí el nombre para mostrar con el nombre de usuario elegido, así el correo se dirige
+        // a él por su nombre en vez de quedarse en blanco.
+        await cred.user.updateProfile({ displayName: username });
         await cred.user.sendEmailVerification();
       } catch (e) {
         console.error("No se pudo enviar el correo de verificación:", e);
