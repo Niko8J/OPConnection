@@ -2400,6 +2400,15 @@
         if (dateKey === currentViewedDailyDate && historyModalDifficulty === currentDifficulty) {
           cell.classList.add("history-viewing");
         }
+        // El día de HOY siempre debe poder pulsarse, aunque todavía no lo hayas jugado (si no,
+        // se quedaba sin ningún onclick hasta que hubiera un resultado guardado — pasaba en
+        // cualquier dificultad sin jugar todavía hoy, no solo en Novato). Por defecto, vuelve al
+        // panel de hoy tal cual (mismo camino que el botón "Volver a hoy"); si más abajo (FASE 2)
+        // resulta que sí hay resultado, ese clic se sustituye por el normal de ver la solución.
+        if (dateKey === todayKey) {
+          cell.style.cursor = "pointer";
+          cell.onclick = () => { closeHistoryModal(); returnToTodayPanel(); };
+        }
       }
       grid.appendChild(cell);
     }
@@ -6395,6 +6404,13 @@
     await renderModalSolutions(silent);
   }
 
+  // Cuando hay un guardado recién lanzado en segundo plano (ver handleWin/handleGameOver), la
+  // barra de la comunidad se refresca sola en cuanto termine ESE guardado (con el dato ya
+  // correcto, incluyendo esta misma partida) — así que openModal() no debe lanzar SU PROPIA
+  // petición aparte justo antes: sin esto, se pediría dos veces seguidas (una nada más abrirse,
+  // con un dato todavía sin esta partida; otra al terminar el guardado, con el dato bueno).
+  let skipNextCommunityStatsAutoRefresh = false;
+
   async function handleWin() {
     gameOver = true;
     awaitingNextPanel = false;
@@ -6403,14 +6419,19 @@
     // handleWin() solo se llama en Novato/Supernova/Yonko (Infinito nunca "gana", sigue sin
     // parar hasta que fallas), así que este resultado siempre corresponde al reto diario.
     clearDailyInProgress(currentDifficulty); // ya no está "a medias": pasa a ser un resultado definitivo
-    // Esperamos a que el guardado (incluido el contador de la comunidad) termine ANTES de
-    // rellenar y abrir el modal: si no, la barra de "resultados de la comunidad" podía leerse
-    // antes de que esta misma partida llegara a contarse, mostrando un reparto de ayer... o de
-    // hace un instante, sin la victoria que acabas de conseguir.
-    await saveDailyResult(currentDifficulty, "win", currentCategories);
+
+    // El modal se abre YA, sin esperar a ningún guardado en la nube — antes esperábamos a que
+    // terminaran 3-4 peticiones seguidas antes de mostrar nada, y eso se notaba como un
+    // retraso real al resolver un panel. El guardado sigue su curso en segundo plano; la
+    // barra de "resultados de la comunidad" (que sí depende de que este resultado ya se haya
+    // contado) se actualiza sola en cuanto termina, sin bloquear la apertura del modal.
+    const saveResultPromise = saveDailyResult(currentDifficulty, "win", currentCategories);
     awardPanelCoins(DAILY_PANEL_COINS[currentDifficulty]);
 
+    skipNextCommunityStatsAutoRefresh = true;
     await applyResultModalContent(true);
+
+    saveResultPromise.then(() => renderCommunityStats(currentDifficulty, getMadridDailyKey()));
   }
 
   async function handleGameOver() {
@@ -6449,8 +6470,11 @@
       // resaltadas para siempre en ese tablero. Las deseleccionamos aquí a propósito.
       selectedCards = [];
       document.querySelectorAll("#grid .card.selected").forEach(el => el.classList.remove("selected"));
-      await saveDailyResult(currentDifficulty, "lose", currentCategories);
+      // Mismo motivo que en handleWin(): el modal se abre ya, sin esperar al guardado.
+      const saveResultPromise = saveDailyResult(currentDifficulty, "lose", currentCategories);
+      skipNextCommunityStatsAutoRefresh = true;
       await applyResultModalContent(false);
+      saveResultPromise.then(() => renderCommunityStats(currentDifficulty, getMadridDailyKey()));
     }
   }
 
@@ -6503,15 +6527,19 @@
       }
       document.getElementById("gameover-modal").style.display = "flex";
       if (!isInfiniteMode) {
-        await renderCommunityStats(currentDifficulty, getMadridDailyKey());
-        // Esperamos a que termine la animación de conteo (0.6s) antes de medir el solapamiento:
-        // el texto tarda ese tiempo en llegar a su valor final. Ya no hace falta comprobar si
-        // el modal sigue visible (como antes): en modo silencioso ni siquiera llegamos hasta
-        // aquí (ver el "return" de arriba), así que si estamos en este punto, el modal SIEMPRE
-        // está realmente abierto y visible para el jugador.
-        await new Promise(resolve => setTimeout(resolve, 600));
-        const container = document.getElementById("community-stats-container");
-        if (container) fixCommunityStatsOverlap(container);
+        if (skipNextCommunityStatsAutoRefresh) {
+          skipNextCommunityStatsAutoRefresh = false;
+        } else {
+          await renderCommunityStats(currentDifficulty, getMadridDailyKey());
+          // Esperamos a que termine la animación de conteo (0.6s) antes de medir el solapamiento:
+          // el texto tarda ese tiempo en llegar a su valor final. Ya no hace falta comprobar si
+          // el modal sigue visible (como antes): en modo silencioso ni siquiera llegamos hasta
+          // aquí (ver el "return" de arriba), así que si estamos en este punto, el modal SIEMPRE
+          // está realmente abierto y visible para el jugador.
+          await new Promise(resolve => setTimeout(resolve, 600));
+          const container = document.getElementById("community-stats-container");
+          if (container) fixCommunityStatsOverlap(container);
+        }
       }
     }
   }
