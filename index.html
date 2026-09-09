@@ -1860,8 +1860,9 @@
     document.body.appendChild(overlay);
 
     const overlayRect = overlay.getBoundingClientRect();
-    let top = rect.top - overlayRect.height - 8;
-    if (top < 4) top = rect.bottom + 8;
+    // Siempre debajo, sin comprobar hueco por arriba: el icono de cuenta está pegado al borde
+    // superior de la pantalla, así que ahí nunca hay sitio de todas formas.
+    const top = rect.bottom + 8;
     const left = Math.max(4, Math.min(
       rect.left + rect.width / 2 - overlayRect.width / 2,
       window.innerWidth - overlayRect.width - 4
@@ -2027,7 +2028,7 @@
       const snap = await db.collection("publicProfiles").where("username", "==", username).limit(5).get();
       const expiradas = snap.docs.filter(doc => isUsernameGraceExpired(doc.data()));
       await Promise.all(expiradas.map(doc => {
-        const nuevoNombre = `${username}_sinverificar_${doc.id.slice(0, 6)}`;
+        const nuevoNombre = `${username}_sinverificar`;
         return Promise.all([
           db.collection("publicProfiles").doc(doc.id).update({ username: nuevoNombre }),
           db.collection("users").doc(doc.id).update({ username: nuevoNombre })
