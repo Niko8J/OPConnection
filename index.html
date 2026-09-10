@@ -1272,7 +1272,7 @@
   </div>
 
   <p class="site-tagline">
-    <i>One Piece Connection</i> es un juego gratuito de fans inspirado en <i>Connections</i> del New York Times: encuentra los 4 grupos de 4 personajes de <i>One Piece</i> que comparten algo en común. Tres retos diarios con distinta dificultad, y un modo Infinito para hacer la racha más larga posible. ¿Primera vez? <a href="como-jugar.html" onclick="openHowToPlayModal(); return false;">Aprende a jugar</a>.
+    Encuentra los 4 grupos de personajes de <i>One Piece</i> conectados entre sí — juego gratis hecho por fans. <a href="como-jugar.html" onclick="openHowToPlayModal(); return false;">Aprende a jugar</a>.
   </p>
 
   <footer class="site-footer">
@@ -4358,7 +4358,10 @@
   // v19: subimos la versión otra vez porque se añadió un nuevo hermano permanente al diseño
   // (el párrafo descriptivo "site-tagline", visible siempre encima del pie de página) — las
   // medidas guardadas de antes de ese cambio ya no cuentan con ese hueco extra.
-  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v19";
+  // v20: subimos la versión otra vez porque el párrafo "site-tagline" se acortó mucho (para
+  // restarle menos tamaño al tablero) — las cachés de la v19 se quedarían con cartas más
+  // pequeñas de lo necesario, calculadas para el texto largo de antes.
+  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v20";
 
   // Misma condición que activa el aviso de ".rotate-overlay" ("Pon el dispositivo en
   // vertical..."): un móvil táctil en horizontal. Mientras se cumpla, el tablero queda
