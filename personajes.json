@@ -3604,7 +3604,8 @@
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
-        {"val": "Personajes con cuernos", "dif": "dificil"}
+        {"val": "Personajes con cuernos", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ],
       "Peleas": [
         {"val": "Peleas de Franky", "dif": "dificil"}
@@ -3745,7 +3746,7 @@
     "img": "imagenes/Loki.webp",
     "tags": {
       "Banda": [
-        {"val": "Elbaf", "dif": "facil"}
+        {"val": "Origen: Elbaf", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -4282,7 +4283,7 @@
     "img": "imagenes/Ragnir.webp",
     "tags": {
       "Banda": [
-        {"val": "Elbaf", "dif": "facil"}
+        {"val": "Origen: Elbaf", "dif": "facil"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
@@ -4551,7 +4552,7 @@
       "Banda": [
         {"val": "Nuevos Piratas Gigantes Guerreros", "dif": "media"},
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "facil"},
-        {"val": "Elbaf", "dif": "facil"}
+        {"val": "Origen: Elbaf", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -4816,7 +4817,7 @@
     "tags": {
       "Banda": [
         {"val": "Piratas Gigantes Guerreros", "dif": "media"},
-        {"val": "Elbaf", "dif": "facil"}
+        {"val": "Origen: Elbaf", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -4847,7 +4848,7 @@
     "tags": {
       "Banda": [
         {"val": "Piratas Gigantes Guerreros", "dif": "media"},
-        {"val": "Elbaf", "dif": "facil"}
+        {"val": "Origen: Elbaf", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -4924,7 +4925,7 @@
     "tags": {
       "Banda": [
         {"val": "Piratas Gigantes Guerreros", "dif": "media"},
-        {"val": "Elbaf", "dif": "facil"}
+        {"val": "Origen: Elbaf", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -4944,7 +4945,7 @@
     "tags": {
       "Banda": [
         {"val": "Piratas Gigantes Guerreros", "dif": "media"},
-        {"val": "Elbaf", "dif": "facil"}
+        {"val": "Origen: Elbaf", "dif": "facil"}
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
@@ -4964,7 +4965,7 @@
     "tags": {
       "Banda": [
         {"val": "Piratas Gigantes Guerreros", "dif": "media"},
-        {"val": "Elbaf", "dif": "facil"}
+        {"val": "Origen: Elbaf", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -4986,7 +4987,7 @@
       "Banda": [
         {"val": "Nuevos Piratas Gigantes Guerreros", "dif": "media"},
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"},
-        {"val": "Elbaf", "dif": "facil"}
+        {"val": "Origen: Elbaf", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -5007,7 +5008,7 @@
       "Banda": [
         {"val": "Nuevos Piratas Gigantes Guerreros", "dif": "media"},
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"},
-        {"val": "Elbaf", "dif": "facil"}
+        {"val": "Origen: Elbaf", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -5028,7 +5029,7 @@
       "Banda": [
         {"val": "Nuevos Piratas Gigantes Guerreros", "dif": "media"},
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"},
-        {"val": "Elbaf", "dif": "facil"}
+        {"val": "Origen: Elbaf", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -5052,7 +5053,7 @@
       "Banda": [
         {"val": "Nuevos Piratas Gigantes Guerreros", "dif": "media"},
         {"val": "Miembros de la Gran Flota de Sombrero de Paja", "dif": "dificil"},
-        {"val": "Elbaf", "dif": "facil"}
+        {"val": "Origen: Elbaf", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -10660,7 +10661,7 @@
         {"val": "Gigantes", "dif": "facil"}
       ],
       "Banda": [
-        {"val": "Elbaf", "dif": "facil"}
+        {"val": "Origen: Elbaf", "dif": "facil"}
       ],
       "Haki": [
         {"val": "Usuarios de haki del conquistador", "dif": "dificil"}
@@ -10881,7 +10882,7 @@
       ],
       "Banda": [
         {"val": "Piratas Gigantes Guerreros", "dif": "media"},
-        {"val": "Elbaf", "dif": "facil"}
+        {"val": "Origen: Elbaf", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -11683,7 +11684,7 @@
     "img": "imagenes/Biblo.webp",
     "tags": {
       "Banda": [
-        {"val": "Elbaf", "dif": "facil"}
+        {"val": "Origen: Elbaf", "dif": "facil"}
       ],
       "Raza": [
         {"val": "Animales", "dif": "media"}
@@ -12343,7 +12344,7 @@
         {"val": "Gigantes", "dif": "facil"}
       ],
       "Banda": [
-        {"val": "Elbaf", "dif": "facil"}
+        {"val": "Origen: Elbaf", "dif": "facil"}
       ]
     }
   },
@@ -13215,7 +13216,7 @@
     "img": "imagenes/JohnGiant.webp",
     "tags": {
       "Banda": [
-        {"val": "Elbaf", "dif": "facil"}
+        {"val": "Origen: Elbaf", "dif": "facil"}
       ],
       "Afiliacion": [
         {"val": "Gobierno Mundial", "dif": "facil"}
