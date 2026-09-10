@@ -1521,7 +1521,7 @@
         <p>El objetivo es encontrar 4 grupos de 4 personajes de <i>One Piece</i> que comparten algo en común: su tripulación, su origen, su fruta del diablo, algún elemento físico... Selecciona 4 imágenes y pulsa <strong>Enviar</strong>. Tienes cuatro vidas (representadas por las banderas 🏴‍☠️).</p>
         <p><strong>Modos de dificultad:</strong></p>
         <ul>
-          <li><strong>📅 Reto diario:</strong> hay tres niveles de dificultad, <strong>Novato</strong> (fácil), <strong>Supernova</strong> (normal) y <strong>Yonko</strong> (difícil). En cada uno de ellos hay un panel nuevo cada día, igual para todos los jugadores, con un único intento por dificultad. Encadena días seguidos ganando y construye una racha.</li>
+          <li><strong>🗓️ Reto diario:</strong> hay tres niveles de dificultad, <strong>Novato</strong> (fácil), <strong>Supernova</strong> (normal) y <strong>Yonko</strong> (difícil). En cada uno de ellos hay un panel nuevo cada día, igual para todos los jugadores, con un único intento por dificultad. Encadena días seguidos ganando y construye una racha.</li>
           <li><strong>♾️ Infinito:</strong> panel tras panel sin parar, mezclando todas las dificultades, hasta que te quedes sin vidas. Tienes una <strong>pista</strong> (💡) por panel que colorea los 4 personajes que hayas seleccionado según su categoría real, sin gastar ningún intento y dejándote ver las conexiones que hay entre ellos. Si estás registrado, tu progreso se guarda automáticamente y tu mejor racha entra en el <strong>Ranking</strong>.</li>
         </ul>
         <p><strong>🏆 Logros:</strong> en tu perfil hay una sección con logros por racha en cada dificultad diaria, en Infinito y por posición en el <strong>Ranking</strong>. Se desbloquean solos a medida que juegas y te recompensan con Berries la primera vez que lo consigues.</p>
@@ -4900,7 +4900,7 @@
       const streakData = currentUserProfile.dailyStreaks && currentUserProfile.dailyStreaks[currentDifficulty];
       const current = getEffectiveCurrentStreak(streakData);
       el.style.visibility = "visible";
-      el.innerHTML = `🔥 Racha: ${current} ${current === 1 ? "día" : "días"} · <button class="return-today-btn" onclick="openHistoryModal()">📅 Paneles pasados</button>`;
+      el.innerHTML = `🔥 Racha: ${current} ${current === 1 ? "día" : "días"} · <button class="return-today-btn" onclick="openHistoryModal()">🗓️ Paneles pasados</button>`;
     } else {
       el.style.visibility = "hidden";
     }
@@ -6236,7 +6236,7 @@
     if (isInfiniteMode || !dateKey || dateKey === getMadridDailyKey()) return false;
     const el = document.getElementById("infinite-score");
     el.style.visibility = "visible";
-    el.innerHTML = `Panel del ${formatSpanishDate(dateKey)} · <button class="return-today-btn" onclick="openHistoryModal()">📅 Paneles pasados</button>`;
+    el.innerHTML = `Panel del ${formatSpanishDate(dateKey)} · <button class="return-today-btn" onclick="openHistoryModal()">🗓️ Paneles pasados</button>`;
     return true;
   }
 
