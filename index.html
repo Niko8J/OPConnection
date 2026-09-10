@@ -702,20 +702,6 @@
       background: none; border: none; padding: 0; margin: 0; font: inherit; font-weight: bold;
       color: #f59e0b; cursor: pointer;
     }
-    /* Banner de "estás viendo un panel de un día pasado" — para que quede claro que no es el
-       reto de HOY, ya que el tablero en sí se ve exactamente igual en los dos casos. Muy fino
-       a propósito (una sola línea, poco padding): va pegado entre el tablero y los controles,
-       y no debe llamar más la atención que el propio tablero. */
-    .past-panel-banner {
-      display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: nowrap;
-      background: #1e293b; border: 1px solid #f59e0b; border-radius: 5px;
-      padding: 7px 10px; margin: 4px 0; font-size: 0.8rem; color: #f59e0b; font-weight: bold;
-    }
-    .past-panel-banner-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
-    .past-panel-banner-btn {
-      background: #f59e0b; border: none; border-radius: 4px; padding: 5px 10px; flex-shrink: 0;
-      color: #0f172a; font-weight: bold; font-size: 0.75rem; cursor: pointer;
-    }
 
     #lives-icons { display: flex; align-items: center; gap: 8px; }
     .life-wrapper { position: relative; display: inline-flex; justify-content: center; align-items: center; }
@@ -1276,11 +1262,6 @@
       <p id="board-loading-text">Cargando partida...</p>
     </div>
     <div id="grid" class="grid"></div>
-  </div>
-
-  <div id="past-panel-banner" class="past-panel-banner" style="visibility: hidden;">
-    <span id="past-panel-banner-text" class="past-panel-banner-text"></span>
-    <button class="past-panel-banner-btn" onclick="returnToTodayPanel()">Volver a hoy</button>
   </div>
 
   <div class="controls">
@@ -1845,7 +1826,6 @@
     awaitingNextPanel = false;
 
     document.getElementById("warning-msg").innerText = "";
-    document.getElementById("past-panel-banner").style.visibility = "hidden";
     showGameControls();
     document.getElementById("gameover-modal").style.display = "none";
 
@@ -4421,7 +4401,10 @@
   // v20: subimos la versión otra vez porque el párrafo "site-tagline" se acortó mucho (para
   // restarle menos tamaño al tablero) — las cachés de la v19 se quedarían con cartas más
   // pequeñas de lo necesario, calculadas para el texto largo de antes.
-  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v20";
+  // v21: subimos la versión otra vez porque se quitó un hermano permanente del diseño (el
+  // banner de "panel pasado" aparte, que ahora reutiliza el hueco de la racha en su lugar) —
+  // hay más espacio disponible para el tablero del que había antes.
+  const STORAGE_KEY_CARD_REFERENCE = "opc_card_reference_v21";
 
   // Misma condición que activa el aviso de ".rotate-overlay" ("Pon el dispositivo en
   // vertical..."): un móvil táctil en horizontal. Mientras se cumpla, el tablero queda
@@ -5522,13 +5505,7 @@
 
     // Mismo aviso que en renderFinishedDailyPanel, y por el mismo motivo: si esto no es hoy,
     // hace falta dejarlo claro, porque el tablero en sí es idéntico en los dos casos.
-    const banner = document.getElementById("past-panel-banner");
-    if (currentViewedDailyDate !== getMadridDailyKey()) {
-      document.getElementById("past-panel-banner-text").innerText = `📅 Panel del ${formatSpanishDate(currentViewedDailyDate)}`;
-      banner.style.visibility = "visible";
-    } else {
-      banner.style.visibility = "hidden";
-    }
+    updatePastPanelIndicator(currentViewedDailyDate);
 
     renderAllSolvedBlocks();
     renderLives();
@@ -6219,18 +6196,11 @@
     renderLives();
     renderGrid();
 
-    // Si la fecha de este resultado no es la de hoy, dejamos claro con un banner que se está
-    // viendo un panel de un día pasado — el tablero en sí es idéntico en los dos casos, así que
-    // sin este aviso no habría forma de distinguirlo a simple vista. "visibility", no "display":
-    // así el hueco se reserva SIEMPRE (incluso cuando no aplica), y los controles de debajo
-    // (vidas, Enviar/Limpiar) nunca saltan de sitio al entrar o salir de un panel pasado.
-    const banner = document.getElementById("past-panel-banner");
-    if (storedEntry.date && storedEntry.date !== getMadridDailyKey()) {
-      document.getElementById("past-panel-banner-text").innerText = `📅 Panel del ${formatSpanishDate(storedEntry.date)}`;
-      banner.style.visibility = "visible";
-    } else {
-      banner.style.visibility = "hidden";
-    }
+    // Si la fecha de este resultado no es la de hoy, dejamos claro que se está viendo un panel
+    // de un día pasado — el tablero en sí es idéntico en los dos casos, así que sin este aviso
+    // no habría forma de distinguirlo a simple vista. Reutiliza el hueco de la racha en vez de
+    // un banner aparte (ver updatePastPanelIndicator).
+    updatePastPanelIndicator(storedEntry.date);
 
     // applyResultModalContent() rellena el modal en modo SILENCIOSO (sin mostrarlo nunca), en
     // vez del camino normal de "mostrar y luego ocultar rápido": con ese enfoque, el modal SÍ
@@ -6249,11 +6219,26 @@
     return `${d}/${m}/${y}`;
   }
 
-  // Botón "Volver a hoy" del banner: simplemente recarga el reto diario de hoy para esta
-  // dificultad, tal cual como si acabaras de pulsar su botón — si ya lo jugaste hoy, mostrará
-  // ESE resultado (sin banner, por ser de hoy); si no, te deja jugarlo.
+  // Si se está viendo un panel de un día pasado, reutiliza el hueco de la línea de racha (en
+  // vez de un banner aparte con su propio hueco reservado) para mostrar la fecha y un botón de
+  // "Volver a hoy" — nunca hacen falta las dos cosas a la vez: "Paneles pasados" es solo de los
+  // modos diarios, igual que la racha, así que esa línea nunca tiene que elegir entre mostrar
+  // una cosa u otra por casualidad. Si NO corresponde (es hoy, o Infinito), no toca nada: da
+  // por hecho que updateInfiniteScoreDisplay() ya dejó puesta la racha normal justo antes, en
+  // algún punto anterior de la misma cadena de llamadas.
+  function updatePastPanelIndicator(dateKey) {
+    if (isInfiniteMode || !dateKey || dateKey === getMadridDailyKey()) return false;
+    const el = document.getElementById("infinite-score");
+    el.style.visibility = "visible";
+    el.innerHTML = `📅 Panel del ${formatSpanishDate(dateKey)} · <button class="history-link-btn" onclick="returnToTodayPanel()">Volver a hoy</button>`;
+    return true;
+  }
+
+  // Botón "Volver a hoy": primero restauramos la racha normal (para que no se quede pegado el
+  // texto de "Panel del..." ni un instante) y después recargamos el reto diario de hoy para
+  // esta dificultad — si ya lo jugaste hoy, mostrará ESE resultado; si no, te deja jugarlo.
   function returnToTodayPanel() {
-    document.getElementById("past-panel-banner").style.visibility = "hidden";
+    updateInfiniteScoreDisplay();
     loadDailyChallenge(currentDifficulty);
   }
 
@@ -6310,13 +6295,7 @@
     // Mismo aviso que en renderFinishedDailyPanel/resumeDailyFromSaved, y por el mismo motivo:
     // si currentViewedDailyDate no es hoy (empezando un panel atrasado desde cero, nunca antes
     // tocado), hace falta dejarlo claro con el mismo aviso — el tablero en sí es idéntico.
-    const banner = document.getElementById("past-panel-banner");
-    if (!isInfiniteMode && currentViewedDailyDate && currentViewedDailyDate !== getMadridDailyKey()) {
-      document.getElementById("past-panel-banner-text").innerText = `📅 Panel del ${formatSpanishDate(currentViewedDailyDate)}`;
-      banner.style.visibility = "visible";
-    } else {
-      banner.style.visibility = "hidden";
-    }
+    updatePastPanelIndicator(currentViewedDailyDate);
 
     currentCategories.forEach(cat => {
       cat.items.forEach(item => {
