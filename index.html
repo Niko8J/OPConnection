@@ -702,6 +702,13 @@
       background: none; border: none; padding: 0; margin: 0; font: inherit; font-weight: bold;
       color: #f59e0b; cursor: pointer;
     }
+    /* Pastilla sólida (recupera el aspecto de botón que tenía el banner aparte de antes), para
+       que "Volver a hoy" se note más claramente que es pulsable, ya que va dentro de una línea
+       de texto normal, no en su propia barra destacada como antes. */
+    .return-today-btn {
+      background: #f59e0b; border: none; border-radius: 10px; padding: 1px 8px;
+      color: #0f172a; font-weight: bold; font-size: 0.85em; cursor: pointer; vertical-align: middle;
+    }
 
     #lives-icons { display: flex; align-items: center; gap: 8px; }
     .life-wrapper { position: relative; display: inline-flex; justify-content: center; align-items: center; }
@@ -6230,7 +6237,7 @@
     if (isInfiniteMode || !dateKey || dateKey === getMadridDailyKey()) return false;
     const el = document.getElementById("infinite-score");
     el.style.visibility = "visible";
-    el.innerHTML = `📅 Panel del ${formatSpanishDate(dateKey)} · <button class="history-link-btn" onclick="returnToTodayPanel()">Volver a hoy</button>`;
+    el.innerHTML = `📅 Panel del ${formatSpanishDate(dateKey)} · <button class="return-today-btn" onclick="returnToTodayPanel()">Volver a hoy</button>`;
     return true;
   }
 
