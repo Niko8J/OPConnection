@@ -702,12 +702,13 @@
       background: none; border: none; padding: 0; margin: 0; font: inherit; font-weight: bold;
       color: #f59e0b; cursor: pointer;
     }
-    /* Pastilla sólida (recupera el aspecto de botón que tenía el banner aparte de antes), para
-       que "Volver a hoy" se note más claramente que es pulsable, ya que va dentro de una línea
-       de texto normal, no en su propia barra destacada como antes. */
+    /* Con borde en vez de relleno sólido: un relleno sólido se confundía visualmente con el
+       botón de la dificultad activa (justo encima, mismo color), como si "Volver a hoy" fuera
+       también un modo seleccionable. Con borde sigue notándose claramente que es pulsable, sin
+       ese parecido. */
     .return-today-btn {
-      background: #f59e0b; border: none; border-radius: 10px; padding: 1px 8px;
-      color: #0f172a; font-weight: bold; font-size: 0.85em; cursor: pointer; vertical-align: middle;
+      background: #1e293b; border: 1px solid #f59e0b; border-radius: 10px; padding: 0px 7px;
+      color: #f59e0b; font-weight: bold; font-size: 0.85em; cursor: pointer; vertical-align: middle;
     }
 
     #lives-icons { display: flex; align-items: center; gap: 8px; }
