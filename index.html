@@ -589,6 +589,7 @@
     .modal-content.howto-modal-content { max-width: 440px; text-align: left; }
     .howto-content p { margin-bottom: 10px; color: #cbd5e1; font-size: 0.9rem; line-height: 1.5; }
     .howto-content ul { margin: 0 0 10px 18px; color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; }
+    .howto-content a { color: #f59e0b; }
 
     .auth-modal-content { max-width: 380px; text-align: left; }
     .auth-input {
@@ -1494,7 +1495,8 @@
           <li><strong>♾️ Infinito:</strong> panel tras panel sin parar, mezclando todas las dificultades, hasta que te quedes sin vidas. Tienes una <strong>pista</strong> (💡) por panel que colorea los 4 personajes que hayas seleccionado según su categoría real, sin gastar ningún intento y dejándote ver las conexiones que hay entre ellos. Si estás registrado, tu progreso se guarda automáticamente y tu mejor racha entra en el <strong>Ranking</strong>.</li>
         </ul>
         <p><strong>🏆 Logros:</strong> en tu perfil hay una sección con logros por racha en cada dificultad diaria, en Infinito y por posición en el <strong>Ranking</strong>. Se desbloquean solos a medida que juegas y te recompensan con Berries la primera vez que lo consigues.</p>
-        <p><strong><img src="berries.webp" alt="Berries" class="howto-berries-icon" onerror="this.style.display='none'"> Berries:</strong> es la moneda del juego. Ganas unas pocas por cada panel que superes (en las distintas dificultades y en el modo Infinito), y bastantes más al conseguir un logro. Puedes gastarlas en la <strong>Tienda</strong> (dentro de tu perfil) en avatares exclusivos, marcos brillantes para tu foto y títulos.</p>
+        <p><strong><img src="berries.webp" alt="Berries" class="howto-berries-icon" onerror="this.style.display='none'"> Berries:</strong> es la moneda del juego. Ganas unos pocos por cada panel que superes (en las distintas dificultades y en el modo Infinito), y bastantes más al conseguir un logro. Puedes gastarlos en la <strong>Tienda</strong> (dentro de tu perfil) en avatares exclusivos, marcos brillantes para tu foto y títulos.</p>
+        <p>¿Todavía tienes dudas? Échale un vistazo también a las <a href="preguntas-frecuentes.html" target="_blank" rel="noopener">Preguntas frecuentes</a>.</p>
       </div>
     </div>
   </div>
@@ -3579,9 +3581,9 @@
     const infiniteCurrent = (profile.infiniteState && profile.infiniteState.solvedCount) || 0;
 
     const modes = [
-      { key: "facil", name: "Novato", current: (daily.facil && daily.facil.current) || 0, best: (daily.facil && daily.facil.longest) || 0 },
-      { key: "media", name: "Supernova", current: (daily.media && daily.media.current) || 0, best: (daily.media && daily.media.longest) || 0 },
-      { key: "dificil", name: "Yonko", current: (daily.dificil && daily.dificil.current) || 0, best: (daily.dificil && daily.dificil.longest) || 0 },
+      { key: "facil", name: "Novato", current: getEffectiveCurrentStreak(daily.facil), best: (daily.facil && daily.facil.longest) || 0 },
+      { key: "media", name: "Supernova", current: getEffectiveCurrentStreak(daily.media), best: (daily.media && daily.media.longest) || 0 },
+      { key: "dificil", name: "Yonko", current: getEffectiveCurrentStreak(daily.dificil), best: (daily.dificil && daily.dificil.longest) || 0 },
       { key: "infinito", name: "Infinito", current: infiniteCurrent, best: profile.bestStreak || 0 }
     ].map(m => ({
       ...m,
@@ -4833,7 +4835,7 @@
     // aprovechamos esta misma condición para mostrar su enlace pegado a la racha.
     if (currentUser && currentUserProfile) {
       const streakData = currentUserProfile.dailyStreaks && currentUserProfile.dailyStreaks[currentDifficulty];
-      const current = (streakData && streakData.current) || 0;
+      const current = getEffectiveCurrentStreak(streakData);
       el.style.visibility = "visible";
       el.innerHTML = `🔥 Racha: ${current} ${current === 1 ? "día" : "días"} · <button class="history-link-btn" onclick="openHistoryModal()">📅 Paneles pasados</button>`;
     } else {
@@ -5257,6 +5259,20 @@
       newCurrent = 1; // no ganó ayer (o es la primera vez que gana): la racha empieza ahora
     }
     return { current: newCurrent, longest: Math.max(streak.longest || 0, newCurrent), lastDate: todayKey };
+  }
+
+  // computeNextStreak() (justo arriba) solo se ejecuta al TERMINAR un panel — así que si un día
+  // no llegas a jugar, nadie llama a esa función, y la racha guardada se queda tal cual estaba,
+  // como si siguiera viva. Esta función calcula la racha REAL en el momento de mostrarla: si la
+  // última vez que ganaste no fue hoy ni ayer, ya deberías haberla perdido por no jugar, aunque
+  // ese cero nunca se haya guardado explícitamente en ningún sitio.
+  function getEffectiveCurrentStreak(streakData) {
+    if (!streakData || !streakData.current) return 0;
+    const todayKey = getMadridDailyKey();
+    if (streakData.lastDate === todayKey || streakData.lastDate === getPreviousDailyKey(todayKey)) {
+      return streakData.current;
+    }
+    return 0; // han pasado 2 días o más sin jugar desde la última victoria: racha rota
   }
 
   function loadDailyProgressState() {
@@ -6697,8 +6713,9 @@
     // guardada en ningún sitio): se omite esta línea en vez de mostrar un dato inventado.
     const streakInfo = currentUser && currentUserProfile && currentUserProfile.dailyStreaks
       && currentUserProfile.dailyStreaks[currentDifficulty];
-    if (streakInfo && typeof streakInfo.current === "number" && streakInfo.current > 0) {
-      lines.push(`🔥 Racha: ${streakInfo.current} día${streakInfo.current === 1 ? "" : "s"}`);
+    const effectiveStreak = getEffectiveCurrentStreak(streakInfo);
+    if (effectiveStreak > 0) {
+      lines.push(`🔥 Racha: ${effectiveStreak} día${effectiveStreak === 1 ? "" : "s"}`);
     }
 
     lines.push("https://www.opconnection.es/");
