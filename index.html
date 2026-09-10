@@ -285,9 +285,18 @@
     .history-day {
       aspect-ratio: 1; border-radius: 6px; display: flex; align-items: center; justify-content: center;
       font-size: 0.75rem; font-weight: bold; background: transparent; color: #334155; border: none;
+      position: relative;
     }
     .history-day.history-win { background: #22c55e; color: #052e16; cursor: pointer; }
     .history-day.history-lose { background: #ef4444; color: #450a0a; cursor: pointer; }
+    /* Un símbolo además del color (✓/✗), no en su lugar: para quien tenga dificultad para
+       distinguir el verde del rojo (el daltonismo rojo-verde es el más común), sin depender de
+       adivinar un tono exacto. */
+    .history-day.history-win::after, .history-day.history-lose::after {
+      position: absolute; top: 0; right: 1px; font-size: 0.85rem; font-weight: 900; line-height: 1;
+    }
+    .history-day.history-win::after { content: "✓"; color: #052e16; }
+    .history-day.history-lose::after { content: "✗"; color: #450a0a; }
     /* Relleno gris de verdad (no solo un fondo oscuro apenas distinguible del hueco): así se
        nota a simple vista la diferencia entre "hay panel pero no lo has jugado" (gris) y "aquí
        no existe ningún panel" (history-day-empty, casi invisible). */
@@ -304,9 +313,16 @@
       .history-day.history-win:hover, .history-day.history-lose:hover { filter: brightness(1.15); }
     }
     .history-legend { display: flex; align-items: center; gap: 12px; font-size: 0.72rem; color: #94a3b8; flex-wrap: wrap; }
-    .history-legend-dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; margin-right: 4px; vertical-align: middle; }
-    .history-legend-dot.history-win { background: #22c55e; }
-    .history-legend-dot.history-lose { background: #ef4444; }
+    /* El cuadradito lleva el símbolo (✓/✗) dentro, no solo el color — una réplica en miniatura
+       de cómo se ve un día real, en vez de un color suelto con el símbolo aparte en el texto.
+       El color del símbolo es el mismo oscuro que usan las celdas reales (no el gris del texto
+       de alrededor, que ahí no se veía casi nada). */
+    .history-legend-dot {
+      width: 15px; height: 15px; border-radius: 3px; display: inline-flex; align-items: center;
+      justify-content: center; margin-right: 4px; vertical-align: middle; font-size: 0.6rem; font-weight: 900;
+    }
+    .history-legend-dot.history-win { background: #22c55e; color: #052e16; }
+    .history-legend-dot.history-lose { background: #ef4444; color: #450a0a; }
     .history-legend-dot.history-none { background: #475569; }
     @media (hover: hover) and (pointer: fine) {
       .ranking-row:hover { background: #1e293b; }
@@ -1407,8 +1423,8 @@
       </div>
       <div id="history-calendar-grid" class="history-calendar-grid"></div>
       <div class="history-legend">
-        <span><span class="history-legend-dot history-win"></span>Ganado</span>
-        <span><span class="history-legend-dot history-lose"></span>Perdido</span>
+        <span><span class="history-legend-dot history-win">✓</span>Ganado</span>
+        <span><span class="history-legend-dot history-lose">✗</span>Perdido</span>
         <span><span class="history-legend-dot history-none"></span>Sin jugar</span>
       </div>
     </div>
@@ -4251,6 +4267,31 @@
     }
   });
 
+  // Punto único que decide si los anuncios deben estar ocultos ahora mismo, combinando los dos
+  // motivos posibles: la pantalla de carga (sin contenido real) y CUALQUIER modal abierto (las
+  // políticas de AdSense también prohíben mostrar anuncios en pantallas que se estén "creando o
+  // editando" — y aunque los modales oscurecen el fondo, no lo tapan del todo: llevan un 85% de
+  // opacidad más desenfoque, así que el anuncio de detrás sigue ahí, solo que borroso). Al
+  // combinar los dos motivos en un único sitio, no importa el orden en que se abran/cierren
+  // cosas: cada vez que cambia cualquiera de los dos, se recalcula el resultado final desde
+  // cero, en vez de que cada función añada o quite la clase por su cuenta y puedan pisarse.
+  function updateAdsHiddenState() {
+    const boardLoadingEl = document.getElementById("board-loading");
+    const isBoardLoading = boardLoadingEl && boardLoadingEl.style.display !== "none";
+    const isModalOpen = Array.from(document.querySelectorAll(".modal-overlay"))
+      .some(el => getComputedStyle(el).display !== "none");
+    document.body.classList.toggle("hide-ads-during-loading", isBoardLoading || isModalOpen);
+  }
+
+  // Vigilante automático: en vez de tener que acordarnos de tocar cada función que abre o
+  // cierra cada uno de los modales (son muchos, y sería fácil dejarse alguno), observamos
+  // directamente cualquier cambio de "style" en cualquier elemento .modal-overlay que exista
+  // en la página, y recalculamos desde ahí. Cubre también modales que se añadan más adelante,
+  // sin tener que acordarse de engancharlos aquí a mano.
+  document.querySelectorAll(".modal-overlay").forEach(el => {
+    new MutationObserver(updateAdsHiddenState).observe(el, { attributes: true, attributeFilter: ["style"] });
+  });
+
   function hideBoardLoading() {
     const el = document.getElementById("board-loading");
     if (el) el.style.display = "none";
@@ -4259,7 +4300,7 @@
     // volvemos a permitir que se vean (si es que llegaron a rellenarse; eso lo decide aparte
     // watchAdSlot(), con su propia clase "ad-empty" — esta de aquí es independiente y manda
     // por encima mientras esté puesta, sin pisarle el resultado a esa otra).
-    document.body.classList.remove("hide-ads-during-loading");
+    updateAdsHiddenState();
   }
 
   // Pareja de hideBoardLoading: hasta ahora este spinner solo se mostraba una vez, al cargar la
@@ -4274,7 +4315,7 @@
     // Ver el comentario de hideBoardLoading(): esta pantalla (spinner + un texto) no cuenta
     // como "contenido real" a efectos de las políticas de AdSense, así que ocultamos los tres
     // anuncios mientras esté puesta, sea cual sea su propio estado de relleno.
-    document.body.classList.add("hide-ads-during-loading");
+    updateAdsHiddenState();
   }
 
   // Evita que la carga se quede colgada para siempre si Firebase Auth no llega a confirmar
