@@ -698,15 +698,13 @@
       min-width: 0;
       flex-shrink: 0;
     }
-    /* Con borde en vez de relleno sólido: un relleno sólido se confundía visualmente con el
-       botón de la dificultad activa (justo encima, mismo color), como si "Paneles pasados"
-       fuera también un modo seleccionable. Con borde sigue notándose claramente que es
-       pulsable, sin ese parecido. Se usa en los dos sitios donde puede aparecer "Paneles
-       pasados" (la racha normal, y la línea de "Panel del día X" al ver uno pasado). */
+    /* Texto plano subrayado, sin caja ni borde propios: con fondo/borde, la altura exacta del
+       botón dependía del cálculo de línea de cada navegador, y en algunos (como Chrome en
+       Windows) se llegaba a cortar por abajo contra el hueco fijo de esta línea. Sin caja no
+       hay nada que pueda desbordar ni cortarse — el subrayado ya deja claro que es pulsable. */
     .return-today-btn {
-      background: #1e293b; border: 1px solid #f59e0b; border-radius: 10px; padding: 0px 7px;
-      color: #f59e0b; font-weight: bold; font-size: 0.85em; cursor: pointer; vertical-align: middle;
-      line-height: 1;
+      background: none; border: none; padding: 0; margin: 0; font: inherit; font-weight: bold;
+      color: #f59e0b; cursor: pointer; text-decoration: underline;
     }
 
     #lives-icons { display: flex; align-items: center; gap: 8px; }
@@ -6238,7 +6236,7 @@
     if (isInfiniteMode || !dateKey || dateKey === getMadridDailyKey()) return false;
     const el = document.getElementById("infinite-score");
     el.style.visibility = "visible";
-    el.innerHTML = `📅 Panel del ${formatSpanishDate(dateKey)} · <button class="return-today-btn" onclick="openHistoryModal()">Paneles pasados</button>`;
+    el.innerHTML = `Panel del ${formatSpanishDate(dateKey)} · <button class="return-today-btn" onclick="openHistoryModal()">📅 Paneles pasados</button>`;
     return true;
   }
 
