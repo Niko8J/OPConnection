@@ -5953,6 +5953,33 @@
   // inmutable (las reglas de Firestore prohíben tocarlo después), así que no hace falta ninguna
   // garantía extra de consistencia para esta lectura. Si alguna sigue sin existir todavía
   // (nadie la ha pedido hoy), simplemente no hay nada suyo que evitar todavía.
+  // A diferencia de fetchSiblingDailyUsage (que mira las OTRAS dificultades de HOY), esto mira
+  // los últimos días de ESTA MISMA dificultad, para evitar que una categoría se repita
+  // demasiado seguido de un día para otro (antes no había ningún control sobre esto: cada día
+  // se generaba sin ninguna memoria de lo usado en días anteriores).
+  async function fetchRecentDailyUsage(difficulty, dateKey, daysBack) {
+    const excludedGroupNames = new Set();
+    const dateKeys = [];
+    let cursor = dateKey;
+    for (let i = 0; i < daysBack; i++) {
+      cursor = getPreviousDailyKey(cursor);
+      dateKeys.push(cursor);
+    }
+
+    await Promise.all(dateKeys.map(async d => {
+      try {
+        const snap = await db.collection("dailyPuzzles").doc(`${d}_${difficulty}`).get();
+        if (!snap.exists) return;
+        (snap.data().groups || []).forEach(g => excludedGroupNames.add(g.name));
+      } catch (e) {
+        console.error(`No se pudo comprobar el panel del ${d} (${difficulty}) para evitar repetir categoría:`, e);
+        // Sin ese dato, sencillamente no se evita nada de ese día en concreto.
+      }
+    }));
+
+    return excludedGroupNames;
+  }
+
   async function fetchSiblingDailyUsage(difficulty, dateKey) {
     const siblings = DAILY_DIFFICULTIES.filter(d => d !== difficulty);
     const excludedGroupNames = new Set();
@@ -5987,10 +6014,15 @@
     }
 
     // No existe todavía: probablemente eres de los primeros en pedir esta dificultad hoy.
-    // Miramos qué usan ya las otras dos, para evitar repetir categorías/personajes si se puede
-    // — sin garantías: si dos dificultades se generan casi a la vez, ninguna verá todavía a la
-    // otra, y en ese caso concreto sí podría repetirse algo, sin más.
-    const { excludedGroupNames, excludedCharIds } = await fetchSiblingDailyUsage(difficulty, dateKey);
+    // Miramos qué usan ya las otras dos dificultades de hoy, Y los últimos días de esta misma
+    // dificultad, para evitar repetir categorías/personajes si se puede — sin garantías: si dos
+    // dificultades se generan casi a la vez, ninguna verá todavía a la otra, y en ese caso
+    // concreto sí podría repetirse algo, sin más.
+    const [{ excludedGroupNames: siblingGroupNames, excludedCharIds }, recentGroupNames] = await Promise.all([
+      fetchSiblingDailyUsage(difficulty, dateKey),
+      fetchRecentDailyUsage(difficulty, dateKey, 4)
+    ]);
+    const excludedGroupNames = new Set([...siblingGroupNames, ...recentGroupNames]);
 
     const data = await db.runTransaction(async transaction => {
       const snap = await transaction.get(docRef);
