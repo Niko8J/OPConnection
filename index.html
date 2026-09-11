@@ -6229,10 +6229,16 @@
   // día de hoy (esté ya jugado o no), así que no hace falta un botón de "Volver a hoy" aparte.
   // Nunca hacen falta las dos cosas a la vez: "Paneles pasados" es solo de los modos diarios,
   // igual que la racha, así que esa línea nunca tiene que elegir entre mostrar una cosa u otra
-  // por casualidad. Si NO corresponde (es hoy, o Infinito), no toca nada: da por hecho que
-  // updateInfiniteScoreDisplay() ya dejó puesta la racha normal justo antes, en algún punto
-  // anterior de la misma cadena de llamadas.
+  // por casualidad.
+  //
+  // Llama SIEMPRE primero a updateInfiniteScoreDisplay(), que reinicia esta línea a su estado
+  // normal (la racha, o "Paneles resueltos" en Infinito) — en vez de asumir que quien llama ya
+  // la había dejado bien puesta de antes. Esa suposición fallaba justo al pasar de ver un día
+  // pasado directamente a ver el de hoy ya resuelto (p. ej. desde el propio calendario): en ese
+  // caso nadie más llamaba a updateInfiniteScoreDisplay() de por medio, así que se quedaba
+  // pegado el "Panel del [fecha vieja]" de antes, sin racha ninguna.
   function updatePastPanelIndicator(dateKey) {
+    updateInfiniteScoreDisplay();
     if (isInfiniteMode || !dateKey || dateKey === getMadridDailyKey()) return false;
     const el = document.getElementById("infinite-score");
     el.style.visibility = "visible";
