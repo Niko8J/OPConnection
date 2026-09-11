@@ -1758,6 +1758,13 @@
     } else {
       clearInfiniteStateLocal();
     }
+    // El borrado de arriba solo actualiza Firestore (o localStorage) — la propia copia en
+    // memoria del navegador (currentUserProfile) no se entera sola de ese cambio. Si no la
+    // sincronizamos aquí también, abrir el perfil justo después de perder (sin recargar la
+    // página) seguiría mostrando la racha actual de Infinito antigua, en vez del 0 real.
+    if (currentUserProfile) {
+      delete currentUserProfile.infiniteState;
+    }
   }
 
   // Si el usuario ha iniciado sesión y la racha actual supera su mejor marca guardada,
