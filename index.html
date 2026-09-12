@@ -540,15 +540,12 @@
       padding-bottom: 8px; margin-bottom: 10px; border-bottom: 2px solid #334155; width: 100%;
       display: flex; align-items: center; justify-content: center; gap: 6px;
     }
-    /* Subcabecera de cada bloque dentro de una columna combinada (p. ej. "Marcos" y "Títulos"
-       dentro de la misma columna): más pequeña que la cabecera normal, y sin línea propia
-       debajo — la separación entre los dos bloques la pone la barra divisoria de más abajo. */
-    .achievement-subcolumn-header {
-      font-weight: bold; color: #cbd5e1; font-size: 0.8rem; text-align: center;
-      margin-bottom: 8px; width: 100%;
-      display: flex; align-items: center; justify-content: center; gap: 6px;
-    }
-    .achievement-subcolumn-divider { width: 100%; height: 2px; background: #334155; margin: 14px 0; }
+    /* Subgrupo dentro de una columna combinada (p. ej. "Marcos" y "Títulos" en la misma
+       columna): el margen inferior separa un subgrupo del siguiente (o de la línea divisoria
+       final, si es el último). Cada uno usa la misma cabecera que las columnas normales (con
+       su propia línea debajo), para que "Marcos" quede igual que el resto de su fila. */
+    .achievement-subcolumn { width: 100%; margin-bottom: 46px; }
+    .achievement-subcolumn-divider { width: 100%; height: 2px; background: #334155; margin-top: 14px; }
     /* En pantallas anchas (justo por debajo del ancho máximo del modal) el encabezado
        "🥉 Novato" a veces cabía en una sola línea y a veces no, según el ancho exacto de cada
        columna — así que el emoji quedaba unas veces al lado del nombre y otras encima,
@@ -557,8 +554,15 @@
        punto de corte de las 5 columnas de más abajo: por debajo de él se usa el otro modo
        (una columna, filas con wrap), donde el emoji ya iba al lado del nombre sin problema. */
     @media (min-width: 1100px) {
-      .achievement-column-header, .achievement-subcolumn-header { flex-direction: column; gap: 2px; }
+      .achievement-column-header { flex-direction: column; gap: 2px; }
       .achievement-column-icon { font-size: 1.3rem; line-height: 1; }
+      /* Los 6 logros nuevos (Compartidas, Personajes, Categorías, Avatares, Marcos y Títulos)
+         forman su propia fila, por debajo de los 5 de siempre (Novato...Ranking) — al ser 5
+         columnas más en la misma rejilla de repeat(5,...), caen solos en una segunda fila sin
+         tocar el CSS de la rejilla en sí. Este margen superior es solo para separar un poco
+         esa segunda fila de la primera, ya que si no quedaban prácticamente pegadas. Se
+         calcula con :nth-child porque son, siempre, las columnas de la 6ª en adelante. */
+      .achievement-column:nth-child(n+6) { margin-top: 24px; }
     }
     .achievement-column-badges {
       display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%;
@@ -2885,7 +2889,7 @@
   // Veces que has compartido tu resultado, necesarias para cada nivel. Sin tope natural (no
   // hay un "máximo" de veces que se pueda compartir), así que los escalones son simplemente
   // metas razonables cada vez más lejanas, como en Infinito.
-  const SHARE_MILESTONES = [1, 3, 5, 10, 20, 35, 50, 75];
+  const SHARE_MILESTONES = [1, 3, 5, 10, 20, 40, 65, 100];
 
   function buildShareAchievements() {
     return SHARE_MILESTONES.map((n, index) => ({
@@ -2965,13 +2969,13 @@
       id: `avatares_${n}`,
       tier: "avatares",
       coins: ACHIEVEMENT_COIN_REWARDS[index],
-      name: n === 1 ? "Consigue tu primer avatar exclusivo" : n >= AVATARS_OWNED_TOTAL ? "Consigue todos los avatares" : `Consigue ${n} avatares exclusivos`,
-      nameLines: n === 1 ? ["Consigue tu", "primer avatar", "exclusivo"] : n >= AVATARS_OWNED_TOTAL ? ["Consigue", "todos los", "avatares"] : [`Consigue ${n}`, "avatares", "exclusivos"],
+      name: n === 1 ? "Compra tu primer avatar exclusivo" : n >= AVATARS_OWNED_TOTAL ? "Compra todos los avatares" : `Compra ${n} avatares exclusivos`,
+      nameLines: n === 1 ? ["Compra tu", "primer avatar", "exclusivo"] : n >= AVATARS_OWNED_TOTAL ? ["Compra", "todos los", "avatares"] : [`Compra ${n}`, "avatares", "exclusivos"],
       description: n === 1
-        ? "Consigue tu primer avatar exclusivo en la Tienda"
+        ? "Compra tu primer avatar exclusivo en la Tienda"
         : n >= AVATARS_OWNED_TOTAL
-          ? `Consigue los ${AVATARS_OWNED_TOTAL} avatares exclusivos de la Tienda`
-          : `Consigue ${n} avatares exclusivos distintos de la Tienda`,
+          ? `Compra los ${AVATARS_OWNED_TOTAL} avatares exclusivos de la Tienda`
+          : `Compra ${n} avatares exclusivos distintos de la Tienda`,
       check: profile => (profile.ownedAvatars || []).length >= n,
       progress: profile => ({ current: (profile.ownedAvatars || []).length, target: n })
     }));
@@ -2990,33 +2994,33 @@
       id: `marcos_${n}`,
       tier: "marcos",
       coins: ACHIEVEMENT_COIN_REWARDS[index],
-      name: n === 1 ? "Consigue tu primer marco" : n >= FRAMES_OWNED_TOTAL ? "Consigue todos los marcos" : `Consigue ${n} marcos distintos`,
-      nameLines: n === 1 ? ["Consigue tu", "primer", "marco"] : n >= FRAMES_OWNED_TOTAL ? ["Consigue", "todos los", "marcos"] : [`Consigue ${n}`, "marcos", "distintos"],
+      name: n === 1 ? "Compra tu primer marco" : n >= FRAMES_OWNED_TOTAL ? "Compra todos los marcos" : `Compra ${n} marcos distintos`,
+      nameLines: n === 1 ? ["Compra tu", "primer", "marco"] : n >= FRAMES_OWNED_TOTAL ? ["Compra", "todos los", "marcos"] : [`Compra ${n}`, "marcos", "distintos"],
       description: n === 1
-        ? "Consigue tu primer marco para la foto de perfil"
+        ? "Compra tu primer marco para la foto de perfil"
         : n >= FRAMES_OWNED_TOTAL
-          ? `Consigue los ${FRAMES_OWNED_TOTAL} marcos de la Tienda`
-          : `Consigue ${n} marcos distintos de la Tienda`,
+          ? `Compra los ${FRAMES_OWNED_TOTAL} marcos de la Tienda`
+          : `Compra ${n} marcos distintos de la Tienda`,
       check: profile => (profile.ownedFrames || []).length >= n,
       progress: profile => ({ current: (profile.ownedFrames || []).length, target: n })
     }));
   }
 
   const TITLES_OWNED_TOTAL = 15;
-  const TITLES_OWNED_MILESTONES = [1, 4, 8, 12, TITLES_OWNED_TOTAL];
+  const TITLES_OWNED_MILESTONES = [1, 5, 10, TITLES_OWNED_TOTAL];
 
   function buildTitlesOwnedAchievements() {
     return TITLES_OWNED_MILESTONES.map((n, index) => ({
       id: `titulos_${n}`,
       tier: "titulos",
       coins: ACHIEVEMENT_COIN_REWARDS[index],
-      name: n === 1 ? "Consigue tu primer título" : n >= TITLES_OWNED_TOTAL ? "Consigue todos los títulos" : `Consigue ${n} títulos distintos`,
-      nameLines: n === 1 ? ["Consigue tu", "primer", "título"] : n >= TITLES_OWNED_TOTAL ? ["Consigue", "todos los", "títulos"] : [`Consigue ${n}`, "títulos", "distintos"],
+      name: n === 1 ? "Compra tu primer título" : n >= TITLES_OWNED_TOTAL ? "Compra todos los títulos" : `Compra ${n} títulos distintos`,
+      nameLines: n === 1 ? ["Compra tu", "primer", "título"] : n >= TITLES_OWNED_TOTAL ? ["Compra", "todos los", "títulos"] : [`Compra ${n}`, "títulos", "distintos"],
       description: n === 1
-        ? "Consigue tu primer título para el perfil"
+        ? "Compra tu primer título para el perfil"
         : n >= TITLES_OWNED_TOTAL
-          ? `Consigue los ${TITLES_OWNED_TOTAL} títulos de la Tienda`
-          : `Consigue ${n} títulos distintos de la Tienda`,
+          ? `Compra los ${TITLES_OWNED_TOTAL} títulos de la Tienda`
+          : `Compra ${n} títulos distintos de la Tienda`,
       check: profile => (profile.ownedTitles || []).length >= n,
       progress: profile => ({ current: (profile.ownedTitles || []).length, target: n })
     }));
@@ -3914,25 +3918,26 @@
     return ACHIEVEMENT_COLUMNS.map(col => {
       if (col.subColumns) {
         // Caso especial: dos progresiones separadas dentro de la MISMA columna (para no pasar
-        // de 5), con una barra en medio que deja claro que son dos cosas distintas, no una
-        // lista combinada. En móvil, esa misma barra hace de separador entre los dos "módulos".
-        // Sin cabecera combinada propia: cada subgrupo ya lleva la suya (Marcos / Títulos), así
-        // que no hace falta un rótulo extra por encima de las dos.
-        const subHtml = col.subColumns.map((sub, i) => {
+        // de 5). Cada subgrupo (Marcos, Títulos) usa la MISMA cabecera que las columnas
+        // normales (con su línea debajo), para que "Marcos" quede visualmente igual que el
+        // resto de columnas de su fila. El margen inferior de cada subgrupo los separa entre
+        // sí; la línea divisoria va al final del todo, después de Títulos.
+        const subHtml = col.subColumns.map(sub => {
           const subIcon = ACHIEVEMENT_TIER_ICONS[sub.tier] || "🏅";
           const subBadgesHtml = ACHIEVEMENTS
             .filter(a => a.tier === sub.tier)
             .map(a => buildAchievementBadgeHtml(a, profile))
             .join("");
-          const dividerHtml = i > 0 ? `<div class="achievement-subcolumn-divider"></div>` : "";
           return `
-            ${dividerHtml}
-            <div class="achievement-subcolumn-header"><span class="achievement-column-icon">${subIcon}</span><span class="achievement-column-label">${escapeHtml(sub.label)}</span></div>
-            <div class="achievement-column-badges">${subBadgesHtml}</div>`;
+            <div class="achievement-subcolumn">
+              <div class="achievement-column-header"><span class="achievement-column-icon">${subIcon}</span><span class="achievement-column-label">${escapeHtml(sub.label)}</span></div>
+              <div class="achievement-column-badges">${subBadgesHtml}</div>
+            </div>`;
         }).join("");
         return `
           <div class="achievement-column">
             ${subHtml}
+            <div class="achievement-subcolumn-divider"></div>
           </div>`;
       }
       const icon = ACHIEVEMENT_TIER_ICONS[col.tier] || "🏅";
