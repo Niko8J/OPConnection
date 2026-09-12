@@ -531,7 +531,7 @@
        anchas. En pantallas estrechas (móvil) no caben 5 columnas legibles, así que se apilan
        una debajo de otra, cada una con sus logros en fila (como el diseño original). */
     .achievements-columns {
-      display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; align-items: start;
+      display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; align-items: stretch;
       max-width: 100%;
     }
     .achievement-column { display: flex; flex-direction: column; align-items: center; min-width: 0; }
@@ -543,10 +543,8 @@
     /* Subgrupo dentro de una columna combinada (p. ej. "Marcos" y "Títulos" en la misma
        columna): el margen inferior separa un subgrupo del siguiente. Cada uno usa la misma
        cabecera que las columnas normales (con su propia línea debajo), para que "Marcos" quede
-       igual que el resto de su fila. El último subgrupo (Títulos) nunca lleva margen inferior,
-       al no haber nada después. */
+       igual que el resto de su fila. */
     .achievement-subcolumn { width: 100%; margin-bottom: 24px; }
-    .achievement-subcolumn.achievement-subcolumn-last { margin-bottom: 0; }
     /* En pantallas anchas (justo por debajo del ancho máximo del modal) el encabezado
        "🥉 Novato" a veces cabía en una sola línea y a veces no, según el ancho exacto de cada
        columna — así que el emoji quedaba unas veces al lado del nombre y otras encima,
@@ -564,11 +562,14 @@
          esa segunda fila de la primera, ya que si no quedaban prácticamente pegadas. Se
          calcula con :nth-child porque son, siempre, las columnas de la 6ª en adelante. */
       .achievement-column:nth-child(n+6) { margin-top: 24px; }
-      /* En escritorio, el margen entre Marcos y Títulos empuja a Títulos hacia abajo lo
-         justo para que su último logro termine exactamente a la misma altura que el resto de
-         columnas de su fila (que tienen 8 logros, frente a los 3+4 repartidos aquí) — en vez
-         de una línea divisoria al final. Valor calculado a mano comparando alturas reales. */
-      .achievement-subcolumn:not(.achievement-subcolumn-last) { margin-bottom: 108.203125px; }
+      /* Empuja a "Títulos" hasta pegarlo del todo abajo, para que su último logro termine
+         exactamente a la misma altura que el resto de columnas de su fila (que tienen 8 logros
+         cada una, frente a los 3+4 de aquí). No es un número calculado a mano (eso dependía de
+         la fuente/navegador exactos y se desajustaba en otros); en vez de eso, la rejilla
+         estira esta columna a la altura real de su fila (align-items: stretch, más arriba), y
+         este margen automático consume solo el hueco que sobre, sea cual sea — se ajusta solo,
+         pase lo que pase con la fuente real de cada pantalla. */
+      .achievement-subcolumn-last { margin-top: auto; margin-bottom: 0; }
     }
     .achievement-column-badges {
       display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%;
