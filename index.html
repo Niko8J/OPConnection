@@ -3916,6 +3916,8 @@
         // Caso especial: dos progresiones separadas dentro de la MISMA columna (para no pasar
         // de 5), con una barra en medio que deja claro que son dos cosas distintas, no una
         // lista combinada. En móvil, esa misma barra hace de separador entre los dos "módulos".
+        // Sin cabecera combinada propia: cada subgrupo ya lleva la suya (Marcos / Títulos), así
+        // que no hace falta un rótulo extra por encima de las dos.
         const subHtml = col.subColumns.map((sub, i) => {
           const subIcon = ACHIEVEMENT_TIER_ICONS[sub.tier] || "🏅";
           const subBadgesHtml = ACHIEVEMENTS
@@ -3930,7 +3932,6 @@
         }).join("");
         return `
           <div class="achievement-column">
-            <div class="achievement-column-header">${escapeHtml(col.label)}</div>
             ${subHtml}
           </div>`;
       }
