@@ -2906,10 +2906,8 @@
     }));
   }
 
-  // Personajes distintos vistos. Empieza en 16 (los que ya se ven en un solo panel) y el
-  // segundo escalón es justo el triple (48): con un panel de cada una de las 3 dificultades
-  // diarias en un mismo día, sin ninguno repetido, ya lo conseguirías — anima a probarlas
-  // todas, no solo la de siempre. De ahí para arriba, hasta llegar a verlos todos.
+  // Personajes distintos vistos. Empieza en 16 (los que ya se ven en un solo panel) y va
+  // doblando (32, 64) antes de crecer hacia el total real de personajes del juego.
   //
   // El total (para saber cuál es el último escalón) va fijo aquí, NO calculado con
   // database.length: en el momento en que se construye este array, personajes.json todavía no
@@ -2917,7 +2915,7 @@
   // vacío y el cálculo saldría mal. Si en el futuro personajes.json crece mucho, actualizar
   // este número a mano (y el último valor de CHARACTERS_VIEWED_MILESTONES, si hace falta).
   const CHARACTERS_VIEWED_TOTAL = 651;
-  const CHARACTERS_VIEWED_MILESTONES = [16, 48, 100, 180, 280, 400, 530, CHARACTERS_VIEWED_TOTAL];
+  const CHARACTERS_VIEWED_MILESTONES = [16, 32, 64, 100, 200, 300, 400, CHARACTERS_VIEWED_TOTAL];
 
   function buildCharactersViewedAchievements() {
     return CHARACTERS_VIEWED_MILESTONES.map((n, index) => ({
@@ -2962,7 +2960,7 @@
   // todavía no existiría — usarlo aquí habría roto el script entero. Si añades avatares
   // nuevos a la Tienda, actualiza este número a mano.
   const AVATARS_OWNED_TOTAL = 42;
-  const AVATARS_OWNED_MILESTONES = [1, 3, 6, 10, 16, 24, 33, AVATARS_OWNED_TOTAL];
+  const AVATARS_OWNED_MILESTONES = [1, 5, 10, 15, 20, 25, 30, AVATARS_OWNED_TOTAL];
 
   function buildAvatarsOwnedAchievements() {
     return AVATARS_OWNED_MILESTONES.map((n, index) => ({
