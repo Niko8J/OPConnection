@@ -540,6 +540,15 @@
       padding-bottom: 8px; margin-bottom: 10px; border-bottom: 2px solid #334155; width: 100%;
       display: flex; align-items: center; justify-content: center; gap: 6px;
     }
+    /* Subcabecera de cada bloque dentro de una columna combinada (p. ej. "Marcos" y "Títulos"
+       dentro de la misma columna): más pequeña que la cabecera normal, y sin línea propia
+       debajo — la separación entre los dos bloques la pone la barra divisoria de más abajo. */
+    .achievement-subcolumn-header {
+      font-weight: bold; color: #cbd5e1; font-size: 0.8rem; text-align: center;
+      margin-bottom: 8px; width: 100%;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .achievement-subcolumn-divider { width: 100%; height: 2px; background: #334155; margin: 14px 0; }
     /* En pantallas anchas (justo por debajo del ancho máximo del modal) el encabezado
        "🥉 Novato" a veces cabía en una sola línea y a veces no, según el ancho exacto de cada
        columna — así que el emoji quedaba unas veces al lado del nombre y otras encima,
@@ -548,7 +557,7 @@
        punto de corte de las 5 columnas de más abajo: por debajo de él se usa el otro modo
        (una columna, filas con wrap), donde el emoji ya iba al lado del nombre sin problema. */
     @media (min-width: 1100px) {
-      .achievement-column-header { flex-direction: column; gap: 2px; }
+      .achievement-column-header, .achievement-subcolumn-header { flex-direction: column; gap: 2px; }
       .achievement-column-icon { font-size: 1.3rem; line-height: 1; }
     }
     .achievement-column-badges {
@@ -584,6 +593,12 @@
     .achievement-badge.unlocked.tier-yonko { border-color: #facc15; }
     .achievement-badge.unlocked.tier-infinito { border-color: #38bdf8; }
     .achievement-badge.unlocked.tier-ranking { border-color: #fbbf24; }
+    .achievement-badge.unlocked.tier-compartidas { border-color: #34d399; }
+    .achievement-badge.unlocked.tier-personajes { border-color: #a78bfa; }
+    .achievement-badge.unlocked.tier-categorias { border-color: #fb923c; }
+    .achievement-badge.unlocked.tier-avatares { border-color: #f472b6; }
+    .achievement-badge.unlocked.tier-marcos { border-color: #2dd4bf; }
+    .achievement-badge.unlocked.tier-titulos { border-color: #a3e635; }
     .achievement-icon { font-size: 2rem; line-height: 1; }
     /* Logro bloqueado: se ve en gris/silueta (en vez de ocultarse del todo), para que el
        jugador sepa que existe y qué tiene que hacer para conseguirlo. */
@@ -1492,7 +1507,7 @@
           </div>
           <div id="shop-error" class="auth-error"></div>
 
-          <h3 class="shop-section-title">Avatares</h3>
+          <h3 class="shop-section-title">Avatares exclusivos</h3>
           <div id="shop-avatars-list" class="shop-frames-grid"></div>
 
           <div class="shop-separator"></div>
@@ -2770,7 +2785,10 @@
   // El icono de cada logro ahora identifica la COLUMNA a la que pertenece (Novato, Supernova,
   // Yonko, Infinito, Ranking), no el nivel de dificultad del logro en sí: dentro de una misma
   // columna puede haber varios logros (p. ej. 3/7/30 días seguidos), todos con el mismo icono.
-  const ACHIEVEMENT_TIER_ICONS = { novato: "🥉", supernova: "🥈", yonko: "🥇", infinito: "💎", ranking: "🏆" };
+  const ACHIEVEMENT_TIER_ICONS = {
+    novato: "🥉", supernova: "🥈", yonko: "🥇", infinito: "💎", ranking: "🏆",
+    compartidas: "📤", personajes: "👁️", categorias: "🗂️", avatares: "👤", marcos: "🖼️", titulos: "🏷️"
+  };
 
   // Berries que da cada logro según su POSICIÓN dentro de su columna (1º = el más fácil, 8º =
   // el más difícil), no según el logro en sí — así todas las columnas usan la misma escala.
@@ -2864,12 +2882,158 @@
     }));
   }
 
+  // Veces que has compartido tu resultado, necesarias para cada nivel. Sin tope natural (no
+  // hay un "máximo" de veces que se pueda compartir), así que los escalones son simplemente
+  // metas razonables cada vez más lejanas, como en Infinito.
+  const SHARE_MILESTONES = [1, 3, 5, 10, 20, 35, 50, 75];
+
+  function buildShareAchievements() {
+    return SHARE_MILESTONES.map((n, index) => ({
+      id: `compartidas_${n}`,
+      tier: "compartidas",
+      coins: ACHIEVEMENT_COIN_REWARDS[index],
+      name: n === 1 ? "Comparte tu primer resultado" : `Comparte tu resultado ${n} veces`,
+      nameLines: n === 1 ? ["Comparte tu", "primer", "resultado"] : ["Comparte tu", "resultado", `${n} veces`],
+      description: n === 1
+        ? "Comparte el resultado de un panel por primera vez"
+        : `Comparte tu resultado ${n} veces en total`,
+      check: profile => (profile.totalShares || 0) >= n,
+      progress: profile => ({ current: profile.totalShares || 0, target: n })
+    }));
+  }
+
+  // Personajes distintos vistos. Empieza en 16 (los que ya se ven en un solo panel) y el
+  // segundo escalón es justo el triple (48): con un panel de cada una de las 3 dificultades
+  // diarias en un mismo día, sin ninguno repetido, ya lo conseguirías — anima a probarlas
+  // todas, no solo la de siempre. De ahí para arriba, hasta llegar a verlos todos.
+  //
+  // El total (para saber cuál es el último escalón) va fijo aquí, NO calculado con
+  // database.length: en el momento en que se construye este array, personajes.json todavía no
+  // ha terminado de cargarse (es una petición de red, asíncrona), así que database estaría
+  // vacío y el cálculo saldría mal. Si en el futuro personajes.json crece mucho, actualizar
+  // este número a mano (y el último valor de CHARACTERS_VIEWED_MILESTONES, si hace falta).
+  const CHARACTERS_VIEWED_TOTAL = 651;
+  const CHARACTERS_VIEWED_MILESTONES = [16, 48, 100, 180, 280, 400, 530, CHARACTERS_VIEWED_TOTAL];
+
+  function buildCharactersViewedAchievements() {
+    return CHARACTERS_VIEWED_MILESTONES.map((n, index) => ({
+      id: `personajes_vistos_${n}`,
+      tier: "personajes",
+      coins: ACHIEVEMENT_COIN_REWARDS[index],
+      name: n >= CHARACTERS_VIEWED_TOTAL ? "Ve todos los personajes" : `Ve ${n} personajes distintos`,
+      nameLines: n >= CHARACTERS_VIEWED_TOTAL ? ["Ve todos", "los", "personajes"] : [`Ve ${n}`, "personajes", "distintos"],
+      description: n >= CHARACTERS_VIEWED_TOTAL
+        ? `Ve los ${CHARACTERS_VIEWED_TOTAL} personajes del juego al menos una vez`
+        : `Ve ${n} personajes distintos al menos una vez, en cualquier panel`,
+      check: profile => (profile.viewedCharacters || []).length >= n,
+      progress: profile => ({ current: (profile.viewedCharacters || []).length, target: n })
+    }));
+  }
+
+  // Igual que en personajes: 4 (lo que ya ves en un solo panel) y el segundo escalón en 4×3=12
+  // (las 3 dificultades diarias sin repetir ninguna categoría entre ellas). De ahí para arriba,
+  // hasta el total real de categorías distintas que existen. Mismo motivo que arriba para que
+  // el total vaya fijo, no calculado con getTotalCategoryValues().
+  const CATEGORIES_VIEWED_TOTAL = 156;
+  const CATEGORIES_VIEWED_MILESTONES = [4, 12, 25, 45, 70, 100, 130, CATEGORIES_VIEWED_TOTAL];
+
+  function buildCategoriesViewedAchievements() {
+    return CATEGORIES_VIEWED_MILESTONES.map((n, index) => ({
+      id: `categorias_vistas_${n}`,
+      tier: "categorias",
+      coins: ACHIEVEMENT_COIN_REWARDS[index],
+      name: n >= CATEGORIES_VIEWED_TOTAL ? "Ve todas las categorías" : `Ve ${n} categorías distintas`,
+      nameLines: n >= CATEGORIES_VIEWED_TOTAL ? ["Ve todas", "las", "categorías"] : [`Ve ${n}`, "categorías", "distintas"],
+      description: n >= CATEGORIES_VIEWED_TOTAL
+        ? "Ve todas las categorías del juego al menos una vez"
+        : `Ve ${n} categorías distintas al menos una vez, en cualquier panel`,
+      check: profile => (profile.viewedCategoryValues || []).length >= n,
+      progress: profile => ({ current: (profile.viewedCategoryValues || []).length, target: n })
+    }));
+  }
+
+  // Avatares exclusivos conseguidos en la Tienda (comprados o desbloqueados, cuenta cualquiera
+  // que aparezca en ownedAvatars). Total fijo, no SHOP_AVATARS.length: SHOP_AVATARS se declara
+  // más abajo en este mismo archivo, así que en el momento en que se construye este array
+  // todavía no existiría — usarlo aquí habría roto el script entero. Si añades avatares
+  // nuevos a la Tienda, actualiza este número a mano.
+  const AVATARS_OWNED_TOTAL = 42;
+  const AVATARS_OWNED_MILESTONES = [1, 3, 6, 10, 16, 24, 33, AVATARS_OWNED_TOTAL];
+
+  function buildAvatarsOwnedAchievements() {
+    return AVATARS_OWNED_MILESTONES.map((n, index) => ({
+      id: `avatares_${n}`,
+      tier: "avatares",
+      coins: ACHIEVEMENT_COIN_REWARDS[index],
+      name: n === 1 ? "Consigue tu primer avatar exclusivo" : n >= AVATARS_OWNED_TOTAL ? "Consigue todos los avatares" : `Consigue ${n} avatares exclusivos`,
+      nameLines: n === 1 ? ["Consigue tu", "primer avatar", "exclusivo"] : n >= AVATARS_OWNED_TOTAL ? ["Consigue", "todos los", "avatares"] : [`Consigue ${n}`, "avatares", "exclusivos"],
+      description: n === 1
+        ? "Consigue tu primer avatar exclusivo en la Tienda"
+        : n >= AVATARS_OWNED_TOTAL
+          ? `Consigue los ${AVATARS_OWNED_TOTAL} avatares exclusivos de la Tienda`
+          : `Consigue ${n} avatares exclusivos distintos de la Tienda`,
+      check: profile => (profile.ownedAvatars || []).length >= n,
+      progress: profile => ({ current: (profile.ownedAvatars || []).length, target: n })
+    }));
+  }
+
+  // Marcos y Títulos van en la misma COLUMNA de la pantalla (para no romper la rejilla de 5),
+  // pero son dos progresiones separadas, no una combinada — cada una con sus propios logros y
+  // su propio total. Marcos, al tener muy pocos artículos (5 en total), se queda con solo 3
+  // escalones en vez de forzar 8 que no tendrían sentido. Mismo motivo que en Avatares para
+  // que el total vaya fijo, no calculado con SHOP_FRAMES.length.
+  const FRAMES_OWNED_TOTAL = 5;
+  const FRAMES_OWNED_MILESTONES = [1, 3, FRAMES_OWNED_TOTAL];
+
+  function buildFramesOwnedAchievements() {
+    return FRAMES_OWNED_MILESTONES.map((n, index) => ({
+      id: `marcos_${n}`,
+      tier: "marcos",
+      coins: ACHIEVEMENT_COIN_REWARDS[index],
+      name: n === 1 ? "Consigue tu primer marco" : n >= FRAMES_OWNED_TOTAL ? "Consigue todos los marcos" : `Consigue ${n} marcos distintos`,
+      nameLines: n === 1 ? ["Consigue tu", "primer", "marco"] : n >= FRAMES_OWNED_TOTAL ? ["Consigue", "todos los", "marcos"] : [`Consigue ${n}`, "marcos", "distintos"],
+      description: n === 1
+        ? "Consigue tu primer marco para la foto de perfil"
+        : n >= FRAMES_OWNED_TOTAL
+          ? `Consigue los ${FRAMES_OWNED_TOTAL} marcos de la Tienda`
+          : `Consigue ${n} marcos distintos de la Tienda`,
+      check: profile => (profile.ownedFrames || []).length >= n,
+      progress: profile => ({ current: (profile.ownedFrames || []).length, target: n })
+    }));
+  }
+
+  const TITLES_OWNED_TOTAL = 15;
+  const TITLES_OWNED_MILESTONES = [1, 4, 8, 12, TITLES_OWNED_TOTAL];
+
+  function buildTitlesOwnedAchievements() {
+    return TITLES_OWNED_MILESTONES.map((n, index) => ({
+      id: `titulos_${n}`,
+      tier: "titulos",
+      coins: ACHIEVEMENT_COIN_REWARDS[index],
+      name: n === 1 ? "Consigue tu primer título" : n >= TITLES_OWNED_TOTAL ? "Consigue todos los títulos" : `Consigue ${n} títulos distintos`,
+      nameLines: n === 1 ? ["Consigue tu", "primer", "título"] : n >= TITLES_OWNED_TOTAL ? ["Consigue", "todos los", "títulos"] : [`Consigue ${n}`, "títulos", "distintos"],
+      description: n === 1
+        ? "Consigue tu primer título para el perfil"
+        : n >= TITLES_OWNED_TOTAL
+          ? `Consigue los ${TITLES_OWNED_TOTAL} títulos de la Tienda`
+          : `Consigue ${n} títulos distintos de la Tienda`,
+      check: profile => (profile.ownedTitles || []).length >= n,
+      progress: profile => ({ current: (profile.ownedTitles || []).length, target: n })
+    }));
+  }
+
   const ACHIEVEMENTS = [
     ...buildInfiniteStreakAchievements(),
     ...buildDailyStreakAchievements("facil", "novato"),
     ...buildDailyStreakAchievements("media", "supernova"),
     ...buildDailyStreakAchievements("dificil", "yonko"),
-    ...buildRankingPositionAchievements()
+    ...buildRankingPositionAchievements(),
+    ...buildShareAchievements(),
+    ...buildCharactersViewedAchievements(),
+    ...buildCategoriesViewedAchievements(),
+    ...buildAvatarsOwnedAchievements(),
+    ...buildFramesOwnedAchievements(),
+    ...buildTitlesOwnedAchievements()
   ];
 
   // ---------- Sistema de monedas (Berries) ----------
@@ -3448,6 +3612,10 @@
       errorEl.innerText = "No tienes suficientes Berries todavía.";
     } else if (result && result.error && result.error !== "ya_comprado") {
       errorEl.innerText = "No se pudo completar la compra. Inténtalo más tarde.";
+    } else if (result && !result.error) {
+      // Compra completada de verdad (no un error, ni "ya lo tenías"): puede haber desbloqueado
+      // algún logro de Avatares/Marcos/Títulos.
+      checkAndAwardAchievementCoinsWithToast();
     }
     renderShopContent();
   }
@@ -3480,13 +3648,25 @@
     }
   }
 
-  // Orden de las columnas tal y como se piden: Novato, Supernova, Yonko, Infinito, Ranking.
+  // Orden de las columnas tal y como se piden: Novato, Supernova, Yonko, Infinito, Ranking, y
+  // debajo (misma rejilla — al ser 5 más, forman su propia fila entera en ordenador sin tocar
+  // el CSS) Compartidas, Personajes, Categorías, Avatares, Marcos y Títulos.
+  //
+  // "Marcos y Títulos" es un caso especial: van en la MISMA columna (para no pasar de 5), pero
+  // son dos progresiones separadas, no una combinada — por eso usa "subColumns" en vez de
+  // "tier", y buildAchievementsHtml() sabe tratar ese caso de forma distinta (dos bloques con
+  // una barra en medio, en vez de una única lista de insignias).
   const ACHIEVEMENT_COLUMNS = [
     { tier: "novato", label: "Novato" },
     { tier: "supernova", label: "Supernova" },
     { tier: "yonko", label: "Yonko" },
     { tier: "infinito", label: "Infinito" },
-    { tier: "ranking", label: "Ranking" }
+    { tier: "ranking", label: "Ranking" },
+    { tier: "compartidas", label: "Compartidas" },
+    { tier: "personajes", label: "Personajes" },
+    { tier: "categorias", label: "Categorías" },
+    { tier: "avatares", label: "Avatares" },
+    { subColumns: [{ tier: "marcos", label: "Marcos" }, { tier: "titulos", label: "Títulos" }], label: "Marcos y Títulos" }
   ];
 
   // Calcula el llenado de la barrita de progreso. La mayoría de logros son "más es mejor"
@@ -3732,6 +3912,28 @@
 
   function buildAchievementsHtml(profile) {
     return ACHIEVEMENT_COLUMNS.map(col => {
+      if (col.subColumns) {
+        // Caso especial: dos progresiones separadas dentro de la MISMA columna (para no pasar
+        // de 5), con una barra en medio que deja claro que son dos cosas distintas, no una
+        // lista combinada. En móvil, esa misma barra hace de separador entre los dos "módulos".
+        const subHtml = col.subColumns.map((sub, i) => {
+          const subIcon = ACHIEVEMENT_TIER_ICONS[sub.tier] || "🏅";
+          const subBadgesHtml = ACHIEVEMENTS
+            .filter(a => a.tier === sub.tier)
+            .map(a => buildAchievementBadgeHtml(a, profile))
+            .join("");
+          const dividerHtml = i > 0 ? `<div class="achievement-subcolumn-divider"></div>` : "";
+          return `
+            ${dividerHtml}
+            <div class="achievement-subcolumn-header"><span class="achievement-column-icon">${subIcon}</span><span class="achievement-column-label">${escapeHtml(sub.label)}</span></div>
+            <div class="achievement-column-badges">${subBadgesHtml}</div>`;
+        }).join("");
+        return `
+          <div class="achievement-column">
+            <div class="achievement-column-header">${escapeHtml(col.label)}</div>
+            ${subHtml}
+          </div>`;
+      }
       const icon = ACHIEVEMENT_TIER_ICONS[col.tier] || "🏅";
       const badgesHtml = ACHIEVEMENTS
         .filter(a => a.tier === col.tier)
@@ -5578,6 +5780,7 @@
       const mergedCats = new Set(currentUserProfile.viewedCategoryValues || []);
       categoryValues.forEach(v => mergedCats.add(v));
       currentUserProfile.viewedCategoryValues = [...mergedCats];
+      checkAndAwardAchievementCoinsWithToast(); // puede haber desbloqueado un logro de Personajes/Categorías vistas
     } catch (e) {
       console.error("No se pudieron guardar los personajes/categorías vistos:", e);
     }
@@ -6743,6 +6946,7 @@
       );
       currentUserProfile = currentUserProfile || {};
       currentUserProfile.totalShares = (currentUserProfile.totalShares || 0) + 1;
+      checkAndAwardAchievementCoinsWithToast(); // puede haber desbloqueado un logro de Compartidas
     } catch (e) {
       console.error("No se pudo actualizar el contador de comparticiones:", e);
     }
