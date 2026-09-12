@@ -2918,49 +2918,73 @@
   // diarias en un mismo día, sin ninguno repetido, ya lo conseguirías — anima a probarlas
   // todas, no solo la de siempre. De ahí para arriba, hasta llegar a verlos todos.
   //
-  // El total (para saber cuál es el último escalón) va fijo aquí, NO calculado con
-  // database.length: en el momento en que se construye este array, personajes.json todavía no
-  // ha terminado de cargarse (es una petición de red, asíncrona), así que database estaría
-  // vacío y el cálculo saldría mal. Si en el futuro personajes.json crece mucho, actualizar
-  // este número a mano (y el último valor de CHARACTERS_VIEWED_MILESTONES, si hace falta).
-  const CHARACTERS_VIEWED_TOTAL = 650;
-  const CHARACTERS_VIEWED_MILESTONES = [16, 48, 64, 100, 200, 300, 400, CHARACTERS_VIEWED_TOTAL];
+  // Los 7 primeros escalones son números fijos (no dependen de cuántos personajes haya en
+  // total). El último ("ver todos") es aparte: en vez de guardar aquí el total a mano
+  // (que había que venir a actualizar cada vez que se añadía o se quitaba un personaje del
+  // JSON), su check/progress consultan database.length en el momento real de comprobarse —
+  // no aquí, al construir este array, que pasa demasiado pronto (antes de que
+  // personajes.json termine de cargarse, así que database estaría vacío si lo mirásemos
+  // ahora mismo). Así el total se ajusta solo, sin tocar nada a mano nunca más.
+  const CHARACTERS_VIEWED_MILESTONES = [16, 48, 64, 100, 200, 300, 400];
 
   function buildCharactersViewedAchievements() {
-    return CHARACTERS_VIEWED_MILESTONES.map((n, index) => ({
+    const fixedTiers = CHARACTERS_VIEWED_MILESTONES.map((n, index) => ({
       id: `personajes_vistos_${n}`,
       tier: "personajes",
       coins: ACHIEVEMENT_COIN_REWARDS[index],
-      name: n >= CHARACTERS_VIEWED_TOTAL ? "Ve todos los personajes" : `Ve ${n} personajes distintos`,
-      nameLines: n >= CHARACTERS_VIEWED_TOTAL ? ["Ve todos", "los", "personajes"] : [`Ve ${n}`, "personajes", "distintos"],
-      description: n >= CHARACTERS_VIEWED_TOTAL
-        ? `Ve los ${CHARACTERS_VIEWED_TOTAL} personajes del juego al menos una vez`
-        : `Ve ${n} personajes distintos al menos una vez, en cualquier panel`,
+      name: `Ve ${n} personajes distintos`,
+      nameLines: [`Ve ${n}`, "personajes", "distintos"],
+      description: `Ve ${n} personajes distintos al menos una vez, en cualquier panel`,
       check: profile => (profile.viewedCharacters || []).length >= n,
       progress: profile => ({ current: (profile.viewedCharacters || []).length, target: n })
     }));
+    const allTier = {
+      // ID fijo, SIN el número total dentro (a diferencia de los de arriba): si el total
+      // cambia el día de mañana, este logro debe seguir siendo "el mismo" para quien ya lo
+      // tuviera conseguido con un total distinto — si el ID cambiara con el número, se le
+      // podría volver a pagar por error al recalcularse.
+      id: "personajes_vistos_todos",
+      tier: "personajes",
+      coins: ACHIEVEMENT_COIN_REWARDS[7],
+      name: "Ve todos los personajes",
+      nameLines: ["Ve todos", "los", "personajes"],
+      description: "Ve todos los personajes del juego al menos una vez",
+      check: profile => (profile.viewedCharacters || []).length >= database.length,
+      progress: profile => ({ current: (profile.viewedCharacters || []).length, target: database.length })
+    };
+    return [...fixedTiers, allTier];
   }
 
   // Igual que en personajes: 4 (lo que ya ves en un solo panel) y el segundo escalón en 4×3=12
-  // (las 3 dificultades diarias sin repetir ninguna categoría entre ellas). De ahí para arriba,
-  // hasta el total real de categorías distintas que existen. Mismo motivo que arriba para que
-  // el total vaya fijo, no calculado con getTotalCategoryValues().
-  const CATEGORIES_VIEWED_TOTAL = 156;
-  const CATEGORIES_VIEWED_MILESTONES = [4, 12, 25, 45, 70, 100, 130, CATEGORIES_VIEWED_TOTAL];
+  // (las 3 dificultades diarias sin repetir ninguna categoría entre ellas). De ahí para arriba.
+  // Mismo motivo que en personajes para el último escalón: en vez de un total fijo a mano,
+  // consulta getTotalCategoryValues() (ya existente, con su propia caché) en el momento real
+  // de comprobarse, así se ajusta solo si el total de categorías cambia con el tiempo.
+  const CATEGORIES_VIEWED_MILESTONES = [4, 12, 25, 45, 70, 100, 130];
 
   function buildCategoriesViewedAchievements() {
-    return CATEGORIES_VIEWED_MILESTONES.map((n, index) => ({
+    const fixedTiers = CATEGORIES_VIEWED_MILESTONES.map((n, index) => ({
       id: `categorias_vistas_${n}`,
       tier: "categorias",
       coins: ACHIEVEMENT_COIN_REWARDS[index],
-      name: n >= CATEGORIES_VIEWED_TOTAL ? "Ve todas las categorías" : `Ve ${n} categorías distintas`,
-      nameLines: n >= CATEGORIES_VIEWED_TOTAL ? ["Ve todas", "las", "categorías"] : [`Ve ${n}`, "categorías", "distintas"],
-      description: n >= CATEGORIES_VIEWED_TOTAL
-        ? "Ve todas las categorías del juego al menos una vez"
-        : `Ve ${n} categorías distintas al menos una vez, en cualquier panel`,
+      name: `Ve ${n} categorías distintas`,
+      nameLines: [`Ve ${n}`, "categorías", "distintas"],
+      description: `Ve ${n} categorías distintas al menos una vez, en cualquier panel`,
       check: profile => (profile.viewedCategoryValues || []).length >= n,
       progress: profile => ({ current: (profile.viewedCategoryValues || []).length, target: n })
     }));
+    const allTier = {
+      // Mismo motivo que en personajes_vistos_todos: ID fijo, sin el número total dentro.
+      id: "categorias_vistas_todas",
+      tier: "categorias",
+      coins: ACHIEVEMENT_COIN_REWARDS[7],
+      name: "Ve todas las categorías",
+      nameLines: ["Ve todas", "las", "categorías"],
+      description: "Ve todas las categorías del juego al menos una vez",
+      check: profile => (profile.viewedCategoryValues || []).length >= getTotalCategoryValues(),
+      progress: profile => ({ current: (profile.viewedCategoryValues || []).length, target: getTotalCategoryValues() })
+    };
+    return [...fixedTiers, allTier];
   }
 
   // Avatares exclusivos conseguidos en la Tienda (comprados o desbloqueados, cuenta cualquiera
