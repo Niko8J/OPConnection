@@ -541,11 +541,12 @@
       display: flex; align-items: center; justify-content: center; gap: 6px;
     }
     /* Subgrupo dentro de una columna combinada (p. ej. "Marcos" y "Títulos" en la misma
-       columna): el margen inferior separa un subgrupo del siguiente (o de la línea divisoria
-       final, si es el último). Cada uno usa la misma cabecera que las columnas normales (con
-       su propia línea debajo), para que "Marcos" quede igual que el resto de su fila. */
-    .achievement-subcolumn { width: 100%; margin-bottom: 46px; }
-    .achievement-subcolumn-divider { width: 100%; height: 2px; background: #334155; margin-top: 14px; }
+       columna): el margen inferior separa un subgrupo del siguiente. Cada uno usa la misma
+       cabecera que las columnas normales (con su propia línea debajo), para que "Marcos" quede
+       igual que el resto de su fila. El último subgrupo (Títulos) nunca lleva margen inferior,
+       al no haber nada después. */
+    .achievement-subcolumn { width: 100%; margin-bottom: 24px; }
+    .achievement-subcolumn.achievement-subcolumn-last { margin-bottom: 0; }
     /* En pantallas anchas (justo por debajo del ancho máximo del modal) el encabezado
        "🥉 Novato" a veces cabía en una sola línea y a veces no, según el ancho exacto de cada
        columna — así que el emoji quedaba unas veces al lado del nombre y otras encima,
@@ -563,6 +564,11 @@
          esa segunda fila de la primera, ya que si no quedaban prácticamente pegadas. Se
          calcula con :nth-child porque son, siempre, las columnas de la 6ª en adelante. */
       .achievement-column:nth-child(n+6) { margin-top: 24px; }
+      /* En escritorio, el margen entre Marcos y Títulos empuja a Títulos hacia abajo lo
+         justo para que su último logro termine exactamente a la misma altura que el resto de
+         columnas de su fila (que tienen 8 logros, frente a los 3+4 repartidos aquí) — en vez
+         de una línea divisoria al final. Valor calculado a mano comparando alturas reales. */
+      .achievement-subcolumn:not(.achievement-subcolumn-last) { margin-bottom: 108px; }
     }
     .achievement-column-badges {
       display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%;
@@ -2906,8 +2912,10 @@
     }));
   }
 
-  // Personajes distintos vistos. Empieza en 16 (los que ya se ven en un solo panel) y va
-  // doblando (32, 64) antes de crecer hacia el total real de personajes del juego.
+  // Personajes distintos vistos. Empieza en 16 (los que ya se ven en un solo panel) y el
+  // segundo escalón es justo el triple (48): con un panel de cada una de las 3 dificultades
+  // diarias en un mismo día, sin ninguno repetido, ya lo conseguirías — anima a probarlas
+  // todas, no solo la de siempre. De ahí para arriba, hasta llegar a verlos todos.
   //
   // El total (para saber cuál es el último escalón) va fijo aquí, NO calculado con
   // database.length: en el momento en que se construye este array, personajes.json todavía no
@@ -2915,7 +2923,7 @@
   // vacío y el cálculo saldría mal. Si en el futuro personajes.json crece mucho, actualizar
   // este número a mano (y el último valor de CHARACTERS_VIEWED_MILESTONES, si hace falta).
   const CHARACTERS_VIEWED_TOTAL = 651;
-  const CHARACTERS_VIEWED_MILESTONES = [16, 32, 64, 100, 200, 300, 400, CHARACTERS_VIEWED_TOTAL];
+  const CHARACTERS_VIEWED_MILESTONES = [16, 48, 64, 100, 200, 300, 400, CHARACTERS_VIEWED_TOTAL];
 
   function buildCharactersViewedAchievements() {
     return CHARACTERS_VIEWED_MILESTONES.map((n, index) => ({
@@ -3918,16 +3926,19 @@
         // Caso especial: dos progresiones separadas dentro de la MISMA columna (para no pasar
         // de 5). Cada subgrupo (Marcos, Títulos) usa la MISMA cabecera que las columnas
         // normales (con su línea debajo), para que "Marcos" quede visualmente igual que el
-        // resto de columnas de su fila. El margen inferior de cada subgrupo los separa entre
-        // sí; la línea divisoria va al final del todo, después de Títulos.
-        const subHtml = col.subColumns.map(sub => {
+        // resto de columnas de su fila. El margen inferior de cada subgrupo (salvo el último)
+        // empuja al siguiente hacia abajo — así, en vez de una línea divisoria al final, el
+        // último logro de Títulos puede terminar exactamente a la misma altura que el resto de
+        // columnas de su fila (ver .achievement-subcolumn en el CSS).
+        const subHtml = col.subColumns.map((sub, i) => {
           const subIcon = ACHIEVEMENT_TIER_ICONS[sub.tier] || "🏅";
           const subBadgesHtml = ACHIEVEMENTS
             .filter(a => a.tier === sub.tier)
             .map(a => buildAchievementBadgeHtml(a, profile))
             .join("");
+          const isLast = i === col.subColumns.length - 1;
           return `
-            <div class="achievement-subcolumn">
+            <div class="achievement-subcolumn${isLast ? " achievement-subcolumn-last" : ""}">
               <div class="achievement-column-header"><span class="achievement-column-icon">${subIcon}</span><span class="achievement-column-label">${escapeHtml(sub.label)}</span></div>
               <div class="achievement-column-badges">${subBadgesHtml}</div>
             </div>`;
@@ -3935,7 +3946,6 @@
         return `
           <div class="achievement-column">
             ${subHtml}
-            <div class="achievement-subcolumn-divider"></div>
           </div>`;
       }
       const icon = ACHIEVEMENT_TIER_ICONS[col.tier] || "🏅";
