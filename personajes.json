@@ -3640,7 +3640,7 @@
     "img": "imagenes/Orochi.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -3662,7 +3662,7 @@
     "img": "imagenes/Onimaru.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -4267,7 +4267,7 @@
     "img": "imagenes/Bunbuku.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan", "dif": "media"}
@@ -5209,7 +5209,7 @@
     "img": "imagenes/Izou.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"},
+        {"val": "Origen: Wano", "dif": "facil"},
         {"val": "Piratas de Barbablanca", "dif": "facil"}
       ],
       "Origen": [
@@ -5878,6 +5878,9 @@
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
@@ -7833,10 +7836,6 @@
         {"val": "Personajes con cicatrices", "dif": "dificil"},
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ],
-      "Raza": [
-        {"val": "Zombies", "dif": "facil"},
-        {"val": "Zombies", "dif": "dificil"}
-      ],
       "Peleas": [
         {"val": "Peleas de Sanji", "dif": "dificil"}
       ]
@@ -8277,7 +8276,7 @@
     "img": "imagenes/Toko.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: SMILE defectuosa", "dif": "facil"}
@@ -8299,7 +8298,7 @@
     "img": "imagenes/YasuieShimotsuki.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: SMILE defectuosa", "dif": "facil"}
@@ -8791,7 +8790,7 @@
     "img": "imagenes/Momonosuke.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"},
+        {"val": "Origen: Wano", "dif": "facil"},
         {"val": "Familia Kozuki", "dif": "media"}
       ],
       "Luffy": [
@@ -8823,7 +8822,7 @@
     "img": "imagenes/Tama.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Luffy": [
         {"val": "Personajes a los que Luffy ha invitado a unirse a su banda", "dif": "dificil"}
@@ -8845,7 +8844,7 @@
     "img": "imagenes/Raizo.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Titulo": [
         {"val": "Vainas Rojas", "dif": "facil"}
@@ -8874,7 +8873,7 @@
     "img": "imagenes/Kanjuro.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Titulo": [
         {"val": "Vainas Rojas", "dif": "facil"}
@@ -8906,7 +8905,7 @@
     "img": "imagenes/Kiku.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Titulo": [
         {"val": "Vainas Rojas", "dif": "facil"}
@@ -8936,7 +8935,7 @@
     "img": "imagenes/Denjiro.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Titulo": [
         {"val": "Vainas Rojas", "dif": "facil"}
@@ -8965,7 +8964,7 @@
     "img": "imagenes/AshuraDoji.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Titulo": [
         {"val": "Vainas Rojas", "dif": "facil"}
@@ -8997,7 +8996,7 @@
     "img": "imagenes/Kawamatsu.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Titulo": [
         {"val": "Vainas Rojas", "dif": "facil"}
@@ -9263,7 +9262,7 @@
     "img": "imagenes/Oden.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"},
+        {"val": "Origen: Wano", "dif": "facil"},
         {"val": "Piratas de Roger", "dif": "facil"},
         {"val": "Piratas de Barbablanca", "dif": "facil"},
         {"val": "Familia Kozuki", "dif": "media"}
@@ -9317,7 +9316,7 @@
     "img": "imagenes/Shinobu.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -10911,7 +10910,7 @@
         {"val": "Piratas de Roger", "dif": "facil"},
         {"val": "Piratas de Barbablanca", "dif": "facil"},
         {"val": "Familia Kozuki", "dif": "media"},
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
@@ -10925,7 +10924,7 @@
     "tags": {
       "Banda": [
         {"val": "Familia Kozuki", "dif": "media"},
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Marcas": [
         {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
@@ -10942,7 +10941,7 @@
     "tags": {
       "Banda": [
         {"val": "Familia Kozuki", "dif": "media"},
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -11178,6 +11177,9 @@
       "Recompensa": [
         {"val": "Recompensa: entre 500M y mil millones", "dif": "dificil"}
       ],
+      "Marcas": [
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
       ],
@@ -11349,19 +11351,8 @@
         {"val": "Familia Charlotte", "dif": "media"},
         {"val": "Piratas de Big Mom", "dif": "facil"}
       ],
-      "Raza": [
-        {"val": "Tribu de cuellos de serpiente", "dif": "media"}
-      ]
-    }
-  },
-  {
-    "id": "hachee",
-    "name": "Charlotte Hachée",
-    "img": "imagenes/CharlotteHachee.webp",
-    "tags": {
-      "Banda": [
-        {"val": "Familia Charlotte", "dif": "media"},
-        {"val": "Piratas de Big Mom", "dif": "facil"}
+      "Especialidad": [
+        {"val": "Espadachines", "dif": "dificil"}
       ],
       "Raza": [
         {"val": "Tribu de cuellos de serpiente", "dif": "media"}
@@ -11376,6 +11367,13 @@
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
         {"val": "Piratas de Big Mom", "dif": "facil"}
+      ],
+      "Especialidad": [
+        {"val": "Tiradores", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que fuman", "dif": "dificil"},
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ],
       "Raza": [
         {"val": "Tribu de cuellos de serpiente", "dif": "media"}
@@ -11623,6 +11621,9 @@
     "tags": {
       "Raza": [
         {"val": "Tribu de brazos largos", "dif": "media"}
+      ],
+      "Especialidad": [
+        {"val": "Tiradores", "dif": "dificil"}
       ],
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
@@ -11919,7 +11920,7 @@
       "Banda": [
         {"val": "Piratas de Thriller Bark", "dif": "facil"},
         {"val": "Piratas de Thriller Bark", "dif": "dificil"},
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"}
@@ -12362,6 +12363,9 @@
       ],
       "Raza": [
         {"val": "Tontattas", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con alas", "dif": "dificil"}
       ]
     }
   },
@@ -12394,7 +12398,7 @@
     "img": "imagenes/Hyogoro.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -13615,7 +13619,7 @@
     "img": "imagenes/Komachiyo.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Raza": [
         {"val": "Animales", "dif": "media"}
@@ -13628,7 +13632,7 @@
     "img": "imagenes/Otsuru.webp",
     "tags": {
       "Banda": [
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -13678,7 +13682,7 @@
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"},
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Afiliacion": [
         {"val": "Espías de Orochi", "dif": "dificil"}
@@ -13698,7 +13702,7 @@
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"},
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Afiliacion": [
         {"val": "Espías de Orochi", "dif": "dificil"}
@@ -13715,7 +13719,7 @@
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"},
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Afiliacion": [
         {"val": "Espías de Orochi", "dif": "dificil"}
@@ -13732,7 +13736,7 @@
     "tags": {
       "Banda": [
         {"val": "Piratas Bestia", "dif": "facil"},
-        {"val": "Wano", "dif": "facil"}
+        {"val": "Origen: Wano", "dif": "facil"}
       ],
       "Afiliacion": [
         {"val": "Espías de Orochi", "dif": "dificil"}
