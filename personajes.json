@@ -8021,6 +8021,9 @@
     "name": "Gotti",
     "img": "imagenes/Gotti.webp",
     "tags": {
+      "Raza": [
+        {"val": "Cyborgs", "dif": "media"}
+      ],
       "Banda": [
         {"val": "Piratas Fire Tank", "dif": "facil"}
       ],
@@ -8662,6 +8665,9 @@
     "name": "Tamagon",
     "img": "imagenes/Tamagon.webp",
     "tags": {
+      "Marcas": [
+        {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
       "Banda": [
         {"val": "Franky Family", "dif": "media"}
       ],
