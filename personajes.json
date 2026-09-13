@@ -8424,6 +8424,9 @@
       ],
       "Raza": [
         {"val": "Tribu de piernas largas", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
@@ -8432,6 +8435,9 @@
     "name": "Charlotte Cinnamon",
     "img": "imagenes/CharlotteCinnamon.webp",
     "tags": {
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
+      ],
       "Banda": [
         {"val": "Piratas de Big Mom", "dif": "facil"},
         {"val": "Familia Charlotte", "dif": "media"}
@@ -11372,6 +11378,9 @@
     "name": "Charlotte Mondée",
     "img": "imagenes/CharlotteMondee.webp",
     "tags": {
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
         {"val": "Piratas de Big Mom", "dif": "facil"}
@@ -11647,6 +11656,9 @@
     "name": "Charlotte Marble",
     "img": "imagenes/CharlotteMarble.webp",
     "tags": {
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ],
       "Raza": [
         {"val": "Tribu de brazos largos", "dif": "media"}
       ],
