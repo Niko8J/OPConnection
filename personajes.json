@@ -3895,6 +3895,9 @@
       "Fruta": [
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
       ],
+      "Despertar": [
+        {"val": "Fruta despertada", "dif": "dificil"}
+      ],
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
@@ -3927,6 +3930,9 @@
       "Fruta": [
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
       ],
+      "Despertar": [
+        {"val": "Fruta despertada", "dif": "dificil"}
+      ],
       "Haki": [
         {"val": "Usuarios de haki de armadura", "dif": "dificil"},
         {"val": "Usuarios de haki de observación", "dif": "dificil"}
@@ -3950,6 +3956,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
+      ],
+      "Despertar": [
+        {"val": "Fruta despertada", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"}
@@ -3977,6 +3986,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
+      ],
+      "Despertar": [
+        {"val": "Fruta despertada", "dif": "dificil"}
       ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"},
@@ -4009,6 +4021,9 @@
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Zoan mitológica", "dif": "dificil"}
+      ],
+      "Despertar": [
+        {"val": "Fruta despertada", "dif": "dificil"}
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
