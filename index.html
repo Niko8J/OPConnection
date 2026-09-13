@@ -617,7 +617,7 @@
        un vistazo que es un estado distinto: no es que te falte conseguirlo, es que todavía no
        se puede ni intentar. */
     .achievement-badge.achievement-coming-soon {
-      border-color: #475569; justify-content: center; min-height: 90px;
+      border-color: #475569; justify-content: center;
     }
     .achievement-badge.achievement-coming-soon .achievement-icon { opacity: 0.5; }
     .achievement-badge.achievement-coming-soon .achievement-name { color: #64748b; font-style: italic; }
@@ -3769,6 +3769,14 @@
         <div class="achievement-badge tier-ranking locked achievement-coming-soon">
           <div class="achievement-icon">${icon}</div>
           <div class="achievement-name">Próximamente</div>
+          <div class="achievement-progress" style="visibility: hidden;">
+            <div class="achievement-progress-track"><div class="achievement-progress-fill" style="width: 0%;"></div></div>
+            <div class="achievement-progress-label">–/–</div>
+          </div>
+          <div class="achievement-coins" style="visibility: hidden;">
+            +0
+            <img src="berries.webp" alt="" class="achievement-coins-icon">
+          </div>
         </div>`;
     }
 
