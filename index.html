@@ -616,12 +616,17 @@
        eso es lo que determina el tamaño de la caja, exactamente igual que cualquier otra — y
        esta capa, del mismo color que el fondo de la insignia, la tapa por completo. Como es
        opaca (no necesita ocultar cada pieza suelta de dentro, ni que midan igual entre sí),
-       nunca puede descuadrarse el tamaño entre navegadores. */
-    .achievement-badge.achievement-coming-soon { position: relative; border-color: #475569; }
+       nunca puede descuadrarse el tamaño entre navegadores.
+       El !important es a propósito: si el jugador ya tiene ese logro conseguido de verdad (p.
+       ej. por ser de los pocos que juegan ahora mismo), la insignia real de debajo lleva la
+       clase "unlocked" con su borde dorado — que por sí solo gana en especificidad CSS a este
+       borde neutro. Forzamos aquí que "próximamente" mande siempre, pase lo que pese por
+       debajo: mientras esté desactivado, nunca debe parecer conseguido. */
+    .achievement-badge.achievement-coming-soon { position: relative; border-color: #475569 !important; }
     .achievement-coming-soon-overlay {
       position: absolute; inset: 0; border-radius: 8px; background: #0f172a;
-      display: flex; align-items: center; justify-content: center; text-align: center; padding: 10px;
-      color: #64748b; font-style: italic; font-weight: bold; font-size: 0.85rem;
+      display: flex; align-items: center; justify-content: center; text-align: center; padding: 12px;
+      color: #64748b; font-style: italic; font-weight: bold; font-size: 0.7rem;
     }
     /* Logro bloqueado: se ve en gris/silueta (en vez de ocultarse del todo), para que el
        jugador sepa que existe y qué tiene que hacer para conseguirlo. */
