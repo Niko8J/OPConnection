@@ -611,6 +611,16 @@
     .achievement-badge.unlocked.tier-marcos { border-color: #2dd4bf; }
     .achievement-badge.unlocked.tier-titulos { border-color: #a3e635; }
     .achievement-icon { font-size: 2rem; line-height: 1; }
+    /* Aviso de "Próximamente" (logros de Ranking desactivados, ver RANKING_ACHIEVEMENTS_ENABLED):
+       mismo tamaño de insignia que el resto, pero con un color neutro propio (ni el verde de
+       conseguido ni el gris apagado de "bloqueado, ya disponible") — para que se entienda de
+       un vistazo que es un estado distinto: no es que te falte conseguirlo, es que todavía no
+       se puede ni intentar. */
+    .achievement-badge.achievement-coming-soon {
+      border-color: #475569; justify-content: center; min-height: 90px;
+    }
+    .achievement-badge.achievement-coming-soon .achievement-icon { opacity: 0.5; }
+    .achievement-badge.achievement-coming-soon .achievement-name { color: #64748b; font-style: italic; }
     /* Logro bloqueado: se ve en gris/silueta (en vez de ocultarse del todo), para que el
        jugador sepa que existe y qué tiene que hacer para conseguirlo. */
     .achievement-badge.locked .achievement-icon { filter: grayscale(100%); opacity: 0.35; }
@@ -1656,7 +1666,7 @@
   let pendingGoogleUser = null; // usuario de Google autenticado que aún no tiene perfil (usuario+avatar) en Firestore
 
   const MAX_LIVES = 4;
-  const COLORS = ["#fef08a", "#bbf7d0", "#bfdbfe", "#e9d5ff"];
+  const COLORS = ["#fef08a", "#bbf7d0", "#bfdbfe", "#e879f9"];
   const STORAGE_KEY_STATE = "opConnectionsInfiniteState";
   const STORAGE_KEY_LAST_DIFFICULTY = "opConnectionsLastDifficulty";
 
@@ -2863,6 +2873,15 @@
     }));
   }
 
+  // Interruptor único para toda la columna de Ranking: con muy pocos jugadores compitiendo
+  // entre sí (como ahora mismo), no tiene sentido pagar estos logros — casi cualquiera puede
+  // llegar al top 1 solo por ser de los pocos que juegan. En vez de tocar o borrar los logros
+  // en sí (que ya están bien tal cual), se dejan definidos exactamente igual y solo se
+  // desactiva su comprobación/pago (ver checkAndAwardAchievementCoins) y se sustituye su
+  // aspecto por un aviso de "Próximamente" (ver buildAchievementBadgeHtml). Cuando haya
+  // suficientes jugadores, poner esto a "true" los reactiva sin tocar nada más.
+  const RANKING_ACHIEVEMENTS_ENABLED = false;
+
   // Puestos del Ranking que dan logro, de más fácil a más difícil. Se basan en la MEJOR
   // posición alcanzada alguna vez (bestRankPosition), no en la posición actual: si algún día
   // bajas del Top 10, no pierdes el logro de haber llegado a estar ahí.
@@ -3095,9 +3114,15 @@
 
         // Comprobamos contra la mezcla de lo que hay en Firestore y lo que tengamos en memoria
         // (por si acaso alguno de los dos estuviera más actualizado que el otro), para no
-        // dejarnos ningún logro nuevo sin detectar.
+        // dejarnos ningún logro nuevo sin detectar. Los de Ranking se excluyen aparte mientras
+        // estén desactivados (ver RANKING_ACHIEVEMENTS_ENABLED) — no tiene sentido pagarlos con
+        // muy pocos jugadores compitiendo entre sí.
         const mergedProfile = { ...(currentUserProfile || {}), ...data };
-        const newlyUnlocked = ACHIEVEMENTS.filter(a => !claimed.has(a.id) && a.check(mergedProfile));
+        const newlyUnlocked = ACHIEVEMENTS.filter(a =>
+          !claimed.has(a.id) &&
+          (a.tier !== "ranking" || RANKING_ACHIEVEMENTS_ENABLED) &&
+          a.check(mergedProfile)
+        );
         if (newlyUnlocked.length === 0) return null;
 
         const coinsEarned = newlyUnlocked.reduce((sum, a) => sum + (a.coins || 0), 0);
@@ -3732,8 +3757,22 @@
   }
 
   function buildAchievementBadgeHtml(a, profile) {
-    const unlocked = a.check(profile);
     const icon = ACHIEVEMENT_TIER_ICONS[a.tier] || "🏅"; // por si algún día se añade un logro sin nivel definido
+
+    // Con muy pocos jugadores compitiendo entre sí, no tiene sentido enseñar ni el nombre ni
+    // las Berries de los logros de Ranking todavía (ver RANKING_ACHIEVEMENTS_ENABLED, más
+    // arriba) — se sustituyen por un aviso de "Próximamente", sin tocar el logro en sí (sigue
+    // definido exactamente igual por debajo; en cuanto se reactive, este "if" deja de aplicar
+    // y vuelve a mostrarse tal cual estaba).
+    if (a.tier === "ranking" && !RANKING_ACHIEVEMENTS_ENABLED) {
+      return `
+        <div class="achievement-badge tier-ranking locked achievement-coming-soon">
+          <div class="achievement-icon">${icon}</div>
+          <div class="achievement-name">Próximamente</div>
+        </div>`;
+    }
+
+    const unlocked = a.check(profile);
     const nameHtml = a.nameLines.map(escapeHtml).join("<br>");
     // Bloqueado: se muestra en gris/silueta (no se oculta), para que se sepa que existe y
     // anime a conseguirlo. El title (tooltip) da la descripción también cuando está bloqueado.
