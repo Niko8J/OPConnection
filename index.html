@@ -279,9 +279,14 @@
       .history-nav-btn:hover:not(:disabled) { border-color: #f59e0b; }
     }
     .history-weekdays, .history-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-    .history-weekdays { margin-bottom: 6px; }
+    .history-weekdays { margin-bottom: 6px; padding: 0 3px; }
     .history-weekdays span { text-align: center; font-size: 0.7rem; color: #64748b; }
-    .history-calendar-grid { margin-bottom: 14px; }
+    /* El pequeño padding lateral (no lo tenía antes) reserva hueco para el aro naranja del día
+       seleccionado (box-shadow, se sale 2px del propio cuadro) en las columnas de los extremos
+       (lunes y domingo) — las de en medio ya tenían algo de aire gracias al hueco de 4px entre
+       columnas, pero las de los extremos no tenían ningún margen de sobra y el aro se cortaba
+       contra el borde del calendario. */
+    .history-calendar-grid { margin-bottom: 14px; padding: 0 3px; }
     .history-day {
       aspect-ratio: 1; border-radius: 6px; display: flex; align-items: center; justify-content: center;
       font-size: 0.75rem; font-weight: bold; background: transparent; color: #334155; border: none;
