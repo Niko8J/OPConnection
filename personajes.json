@@ -6822,6 +6822,10 @@
       ],
       "Raza": [
         {"val": "Zombies", "dif": "dificil"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con gafas", "dif": "dificil"}
       ]
     }
   },
@@ -6882,6 +6886,9 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -8032,9 +8039,6 @@
       ],
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
-      ],
-      "Raza": [
-        {"val": "Cyborgs", "dif": "media"}
       ]
     }
   },
