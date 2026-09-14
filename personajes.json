@@ -6743,7 +6743,7 @@
   {
     "id": "john",
     "name": "Capitán John",
-    "img": "imagenes/CaptainJohn.webp",
+    "img": "imagenes/CapitanJohn.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Rocks", "dif": "dificil"},
