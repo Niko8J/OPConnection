@@ -4630,7 +4630,7 @@
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"},
-        {"val": "Capitanes pirata", "dif": "media"},
+        {"val": "Capitanes pirata", "dif": "dificil"},
         {"val": "Príncipes", "dif": "facil"},
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
@@ -4667,7 +4667,7 @@
         {"val": "Fruta del diablo: Paramecia", "dif": "media"}
       ],
       "Especialidad": [
-        {"val": "Capitanes pirata", "dif": "media"},
+        {"val": "Capitanes pirata", "dif": "dificil"},
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
       "Recompensa": [
@@ -4696,7 +4696,7 @@
         {"val": "Sin fruta del diablo", "dif": "dificil"}
       ],
       "Especialidad": [
-        {"val": "Capitanes pirata", "dif": "media"},
+        {"val": "Capitanes pirata", "dif": "dificil"},
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
       "Haki": [
@@ -4729,7 +4729,7 @@
         {"val": "Sin fruta del diablo", "dif": "dificil"}
       ],
       "Especialidad": [
-        {"val": "Capitanes pirata", "dif": "media"},
+        {"val": "Capitanes pirata", "dif": "dificil"},
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
       "Raza": [
@@ -4758,7 +4758,7 @@
         {"val": "Sin fruta del diablo", "dif": "dificil"}
       ],
       "Especialidad": [
-        {"val": "Capitanes pirata", "dif": "media"},
+        {"val": "Capitanes pirata", "dif": "dificil"},
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
       "Raza": [
@@ -4784,7 +4784,7 @@
         {"val": "Sin fruta del diablo", "dif": "dificil"}
       ],
       "Especialidad": [
-        {"val": "Capitanes pirata", "dif": "media"},
+        {"val": "Capitanes pirata", "dif": "dificil"},
         {"val": "Capitanes pirata", "dif": "dificil"}
       ],
       "Recompensa": [
@@ -6743,7 +6743,7 @@
   {
     "id": "john",
     "name": "Capitán John",
-    "img": "imagenes/CapitanJohn.webp",
+    "img": "imagenes/CaptainJohn.webp",
     "tags": {
       "Banda": [
         {"val": "Piratas de Rocks", "dif": "dificil"},
@@ -6822,10 +6822,6 @@
       ],
       "Raza": [
         {"val": "Zombies", "dif": "dificil"}
-      ],
-      "Marcas": [
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
-        {"val": "Personajes con gafas", "dif": "dificil"}
       ]
     }
   },
@@ -6886,9 +6882,6 @@
       ],
       "Estado": [
         {"val": "Personajes fallecidos", "dif": "media"}
-      ],
-      "Marcas": [
-        {"val": "Personajes que fuman", "dif": "dificil"}
       ]
     }
   },
@@ -8039,6 +8032,9 @@
       ],
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Cyborgs", "dif": "media"}
       ]
     }
   },
