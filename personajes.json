@@ -140,7 +140,8 @@
         {"val": "Recompensa: entre 500M y mil millones", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con gafas", "dif": "dificil"}
       ]
     }
   },
@@ -5323,6 +5324,10 @@
     "name": "Bellamy",
     "img": "imagenes/Bellamy.webp",
     "tags": {
+      "Marcas": [
+        {"val": "Personajes con tatuajes", "dif": "dificil"},
+        {"val": "Personajes con gafas", "dif": "dificil"}
+      ],
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"}
       ],
@@ -8585,7 +8590,8 @@
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que fuman", "dif": "dificil"}
+        {"val": "Personajes que fuman", "dif": "dificil"},
+        {"val": "Personajes con gafas", "dif": "dificil"}
       ]
     }
   },
@@ -14502,6 +14508,31 @@
       ],
       "Marcas": [
         {"val": "Personajes con cuernos", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "gaban",
+    "name": "Scopper Gaban",
+    "img": "imagenes/Gaban.webp",
+    "tags": {
+      "Marcas": [
+        {"val": "Personajes con gafas", "dif": "dificil"},
+        {"val": "Personajes con cicatrices", "dif": "dificil"}
+      ],
+      "Especialidad": [
+        {"val": "Navegantes", "dif": "dificil"}
+      ],
+      "Banda": [
+        {"val": "Piratas de Roger", "dif": "facil"}
+      ],
+      "Haki": [
+        {"val": "Usuarios de haki de armadura", "dif": "dificil"},
+        {"val": "Usuarios de haki de observación", "dif": "dificil"},
+        {"val": "Usuarios de haki del conquistador", "dif": "dificil"}
+      ],
+      "Fruta": [
+        {"val": "Sin fruta del diablo", "dif": "dificil"}
       ]
     }
   }
