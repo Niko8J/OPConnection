@@ -557,6 +557,9 @@
        encima del nombre, para que las 5 cabeceras midan siempre lo mismo. Coincide con el
        punto de corte de las 5 columnas de más abajo: por debajo de él se usa el otro modo
        (una columna, filas con wrap), donde el emoji ya iba al lado del nombre sin problema. */
+    /* Por defecto (fuera de los media queries, así que aplica en cualquier ancho salvo que el
+       de abajo lo pise) se ve el texto normal/corto; el largo de móvil empieza oculto. */
+    .achievement-column-label-mobile { display: none; }
     @media (min-width: 1100px) {
       .achievement-column-header { flex-direction: column; gap: 2px; }
       .achievement-column-icon { font-size: 1.3rem; line-height: 1; }
@@ -593,8 +596,19 @@
          (no hace falta, van juntos) — separa un grupo de dificultad del siguiente, así que se
          mueve al final de cada columna en vez de justo debajo de su nombre. */
       .achievement-column-header { border-bottom: none; padding-bottom: 0; margin-bottom: 10px; }
+      /* En móvil sí cabe el texto largo de "Compartidas" (mucho más ancho al ser una sola
+         columna) — se invierte cuál de los dos se ve respecto al de escritorio. */
+      .achievement-column-label-desktop { display: none; }
+      .achievement-column-label-mobile { display: inline; }
       .achievement-column { padding-bottom: 20px; margin-bottom: 20px; border-bottom: 2px solid #334155; }
       .achievement-column:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+      /* En móvil, "Marcos" y "Títulos" (los dos subgrupos de la columna combinada) no tenían
+         ninguna línea entre ellos, solo el hueco vacío del margen — se nota mucho menos que la
+         separación entre columnas de verdad. Mismo estilo que esa, aplicado también aquí
+         dentro. */
+      .achievement-subcolumn:not(.achievement-subcolumn-last) {
+        padding-bottom: 20px; border-bottom: 2px solid #334155;
+      }
     }
     .achievement-badge {
       display: flex; flex-direction: column; align-items: center; gap: 4px;
@@ -3733,10 +3747,10 @@
     { tier: "yonko", label: "Yonko" },
     { tier: "infinito", label: "Infinito" },
     { tier: "ranking", label: "Ranking" },
-    { tier: "compartidas", label: "Compartidas" },
+    { tier: "compartidas", label: "Compartidas", mobileLabel: "Partidas compartidas" },
     { tier: "personajes", label: "Personajes" },
     { tier: "categorias", label: "Categorías" },
-    { tier: "avatares", label: "Avatares" },
+    { tier: "avatares", label: "Avatares exclusivos" },
     { subColumns: [{ tier: "marcos", label: "Marcos" }, { tier: "titulos", label: "Títulos" }], label: "Marcos y Títulos" }
   ];
 
@@ -4023,9 +4037,16 @@
         .filter(a => a.tier === col.tier)
         .map(a => buildAchievementBadgeHtml(a, profile))
         .join("");
+      // "Compartidas" tiene un texto más largo ("Partidas compartidas") que cabe bien en móvil
+      // (una sola columna, mucho ancho) pero no en escritorio (5 columnas estrechas una al lado
+      // de otra) — cuando una columna trae mobileLabel, se pintan los dos textos a la vez, y el
+      // CSS (ver .achievement-column-label-desktop/-mobile) decide cuál se ve según el ancho.
+      const labelHtml = col.mobileLabel
+        ? `<span class="achievement-column-label achievement-column-label-desktop">${escapeHtml(col.label)}</span><span class="achievement-column-label achievement-column-label-mobile">${escapeHtml(col.mobileLabel)}</span>`
+        : `<span class="achievement-column-label">${escapeHtml(col.label)}</span>`;
       return `
         <div class="achievement-column">
-          <div class="achievement-column-header"><span class="achievement-column-icon">${icon}</span><span class="achievement-column-label">${escapeHtml(col.label)}</span></div>
+          <div class="achievement-column-header"><span class="achievement-column-icon">${icon}</span>${labelHtml}</div>
           <div class="achievement-column-badges">${badgesHtml}</div>
         </div>`;
     }).join("");
