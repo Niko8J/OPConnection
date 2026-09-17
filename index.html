@@ -6207,6 +6207,41 @@
   // que adoptar (el localStorage de ese navegador estará vacío), así que simplemente podrás
   // jugarlo una vez más con la cuenta: no es un caso especial, es sencillamente lo que pasa
   // cuando no hay nada que puentear.
+  // Traslada los personajes/categorías vistos en un panel jugado como invitado (identificados
+  // por los mismos IDs que ya guarda "groups", tanto en un resultado terminado como en uno a
+  // medias) a la cuenta nueva — no depende de si el panel se llegó a resolver, ni de si ESE
+  // resultado en concreto se pudo adoptar como racha (por ejemplo, porque la cuenta ya tuviera
+  // uno de hoy para esa dificultad): haberlo visto ya cuenta, igual que si lo hubieras jugado
+  // con sesión iniciada desde el principio. A diferencia de recordPanelSeen (pensado para
+  // mientras se juega, con currentUser ya establecido), esta recibe el uid directamente, porque
+  // se usa justo en el momento de iniciar sesión/registrarte, antes de que currentUser/
+  // currentUserProfile estén del todo asentados.
+  async function bridgeGuestViewedDataToAccount(uid, groups) {
+    if (!groups || groups.length === 0) return;
+    const characterIds = [...new Set(groups.flatMap(g => g.characterIds || []))];
+    const categoryValues = [...new Set(groups.map(g => getTagValueOnly(g.name)))];
+    if (characterIds.length === 0 && categoryValues.length === 0) return;
+    try {
+      const payload = {};
+      if (characterIds.length > 0) payload.viewedCharacters = firebase.firestore.FieldValue.arrayUnion(...characterIds);
+      if (categoryValues.length > 0) payload.viewedCategoryValues = firebase.firestore.FieldValue.arrayUnion(...categoryValues);
+      await Promise.all([
+        db.collection("users").doc(uid).set(payload, { merge: true }),
+        db.collection("publicProfiles").doc(uid).set(payload, { merge: true })
+      ]);
+      if (currentUserProfile) {
+        const mergedChars = new Set(currentUserProfile.viewedCharacters || []);
+        characterIds.forEach(id => mergedChars.add(id));
+        currentUserProfile.viewedCharacters = [...mergedChars];
+        const mergedCats = new Set(currentUserProfile.viewedCategoryValues || []);
+        categoryValues.forEach(v => mergedCats.add(v));
+        currentUserProfile.viewedCategoryValues = [...mergedCats];
+      }
+    } catch (e) {
+      console.error("No se pudieron trasladar los personajes/categorías vistos como invitado:", e);
+    }
+  }
+
   async function bridgeGuestDailyProgressToAccount(uid) {
     const todayKey = getMadridDailyKey();
     const guestProgress = loadDailyProgressState();
@@ -6214,6 +6249,8 @@
     for (const difficulty of DAILY_DIFFICULTIES) {
       const guestEntry = guestProgress[difficulty];
       if (!guestEntry || guestEntry.date !== todayKey) continue;
+
+      await bridgeGuestViewedDataToAccount(uid, guestEntry.groups);
 
       try {
         const docRef = db.collection("users").doc(uid);
@@ -6251,8 +6288,10 @@
   // vidas; las tarjetas sin resolver se barajan de nuevo al entrar, como siempre). No pisamos
   // nunca un progreso a medias o un resultado YA FINALIZADO que la cuenta ya tuviera guardado
   // de hoy para esa dificultad (por ejemplo, si ya lo habías jugado o empezado con sesión
-  // iniciada en otro dispositivo). No afecta a rachas ni logros: eso solo lo mueve un
-  // resultado ya finalizado (ver bridgeGuestDailyProgressToAccount).
+  // iniciada en otro dispositivo). No afecta a rachas (eso solo lo mueve un resultado ya
+  // finalizado, ver bridgeGuestDailyProgressToAccount) — pero sí a los personajes/categorías
+  // vistos, y por tanto a los logros que dependan de ellos: el panel se ha visto igual, se haya
+  // terminado o no.
   async function bridgeGuestDailyInProgressToAccount(uid) {
     const todayKey = getMadridDailyKey();
     const guestInProgress = loadDailyInProgressLocal();
@@ -6260,6 +6299,8 @@
     for (const difficulty of DAILY_DIFFICULTIES) {
       const guestEntry = guestInProgress[difficulty];
       if (!guestEntry || guestEntry.date !== todayKey) continue;
+
+      await bridgeGuestViewedDataToAccount(uid, guestEntry.groups);
 
       try {
         const docRef = db.collection("users").doc(uid);
@@ -6282,6 +6323,7 @@
         console.error("No se pudo adoptar el progreso a medias de invitado:", e);
       }
     }
+    await checkAndAwardAchievementCoinsWithToast();
   }
 
   // Igual que el puente anterior, pero para Infinito: si justo en el momento de registrarte o
