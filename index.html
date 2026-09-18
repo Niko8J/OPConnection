@@ -3038,12 +3038,20 @@
   // nuevos a la Tienda, actualiza este número a mano.
   const AVATARS_OWNED_TOTAL = 42;
   const AVATARS_OWNED_MILESTONES = [1, 5, 10, 15, 20, 25, 30, AVATARS_OWNED_TOTAL];
+  // Escala de recompensa PROPIA (no la genérica ACHIEVEMENT_COIN_REWARDS): calculada para que
+  // cada escalón devuelva ~25% de lo que cuesta ESE TRAMO en concreto (la diferencia de precio
+  // entre este escalón y el anterior, no el acumulado desde el principio — si no, escalones
+  // consecutivos se solaparían y acabarían devolviendo bastante más del 25% real). Con la
+  // escala genérica, comprar los 42 avatares (30.580 Berries) solo devolvía 2.550 en logros
+  // (8%): apenas compensaba tener más de uno. Si cambian los precios de la Tienda, recalcular
+  // a mano — no vale la pena automatizarlo por un ajuste tan puntual.
+  const AVATARS_OWNED_REWARDS = [100, 450, 600, 700, 800, 900, 1000, 3000];
 
   function buildAvatarsOwnedAchievements() {
     return AVATARS_OWNED_MILESTONES.map((n, index) => ({
       id: `avatares_${n}`,
       tier: "avatares",
-      coins: ACHIEVEMENT_COIN_REWARDS[index],
+      coins: AVATARS_OWNED_REWARDS[index],
       name: n === 1 ? "Compra tu primer avatar exclusivo" : n >= AVATARS_OWNED_TOTAL ? "Compra todos los avatares" : `Compra ${n} avatares exclusivos`,
       nameLines: n === 1 ? ["Compra tu", "primer avatar", "exclusivo"] : n >= AVATARS_OWNED_TOTAL ? ["Compra", "todos los", "avatares"] : [`Compra ${n}`, "avatares", "exclusivos"],
       description: n === 1
@@ -3063,12 +3071,14 @@
   // que el total vaya fijo, no calculado con SHOP_FRAMES.length.
   const FRAMES_OWNED_TOTAL = 5;
   const FRAMES_OWNED_MILESTONES = [1, 3, FRAMES_OWNED_TOTAL];
+  // Mismo criterio que AVATARS_OWNED_REWARDS (~25% del coste de cada tramo, sin solaparse).
+  const FRAMES_OWNED_REWARDS = [50, 200, 900];
 
   function buildFramesOwnedAchievements() {
     return FRAMES_OWNED_MILESTONES.map((n, index) => ({
       id: `marcos_${n}`,
       tier: "marcos",
-      coins: ACHIEVEMENT_COIN_REWARDS[index],
+      coins: FRAMES_OWNED_REWARDS[index],
       name: n === 1 ? "Compra tu primer marco" : n >= FRAMES_OWNED_TOTAL ? "Compra todos los marcos" : `Compra ${n} marcos distintos`,
       nameLines: n === 1 ? ["Compra tu", "primer", "marco"] : n >= FRAMES_OWNED_TOTAL ? ["Compra", "todos los", "marcos"] : [`Compra ${n}`, "marcos", "distintos"],
       description: n === 1
@@ -3083,12 +3093,14 @@
 
   const TITLES_OWNED_TOTAL = 15;
   const TITLES_OWNED_MILESTONES = [1, 5, 10, TITLES_OWNED_TOTAL];
+  // Mismo criterio que AVATARS_OWNED_REWARDS (~25% del coste de cada tramo, sin solaparse).
+  const TITLES_OWNED_REWARDS = [50, 300, 1000, 2500];
 
   function buildTitlesOwnedAchievements() {
     return TITLES_OWNED_MILESTONES.map((n, index) => ({
       id: `titulos_${n}`,
       tier: "titulos",
-      coins: ACHIEVEMENT_COIN_REWARDS[index],
+      coins: TITLES_OWNED_REWARDS[index],
       name: n === 1 ? "Compra tu primer título" : n >= TITLES_OWNED_TOTAL ? "Compra todos los títulos" : `Compra ${n} títulos distintos`,
       nameLines: n === 1 ? ["Compra tu", "primer", "título"] : n >= TITLES_OWNED_TOTAL ? ["Compra", "todos los", "títulos"] : [`Compra ${n}`, "títulos", "distintos"],
       description: n === 1
