@@ -7634,10 +7634,14 @@
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
       ],
+      "Especialidad": [
+        {"val": "Tiradores", "dif": "dificil"}
+      ],
       "Marcas": [
         {"val": "Personajes con tatuajes", "dif": "dificil"},
         {"val": "Personajes con alas", "dif": "dificil"},
-        {"val": "Personajes que fuman", "dif": "dificil"}
+        {"val": "Personajes que fuman", "dif": "dificil"},
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ]
     }
   },
