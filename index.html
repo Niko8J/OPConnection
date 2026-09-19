@@ -1698,6 +1698,21 @@
 
   const MAX_LIVES = 4;
   const COLORS = ["#fef08a", "#fca5a5", "#bbf7d0", "#eab8f2"];
+
+  // El selector de foto de perfil (tanto al registrarte como en "Editar perfil") solo ofrece
+  // los personajes que el jugador ya ha visto en algún panel — no toda la base de datos entera.
+  // Como invitado (antes de tener cuenta) nunca se guarda ningún personaje visto, y al
+  // registrarte todavía no has jugado nada con la cuenta nueva, el selector se quedaría vacío
+  // del todo en ese momento — para que eso nunca pase, estos 10 (la tripulación principal de
+  // los Sombrero de Paja) están SIEMPRE disponibles, se hayan visto o no, de mínimo garantizado.
+  const STARTER_AVATAR_CHARACTER_IDS = ["luffy", "zoro", "nami", "usopp", "sanji", "chopper", "robin", "franky", "brook", "jinbe"];
+
+  function getAvailableAvatarCharacters(viewedCharacterIds) {
+    const allowedIds = new Set([...STARTER_AVATAR_CHARACTER_IDS, ...(viewedCharacterIds || [])]);
+    return database
+      .filter(char => allowedIds.has(char.id))
+      .sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base', ignorePunctuation: true }));
+  }
   const STORAGE_KEY_STATE = "opConnectionsInfiniteState";
   const STORAGE_KEY_LAST_DIFFICULTY = "opConnectionsLastDifficulty";
 
@@ -2249,7 +2264,11 @@
     const searchInput = document.getElementById("avatar-search-input");
     if (searchInput) searchInput.value = "";
 
-    const sortedChars = [...database].sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base', ignorePunctuation: true }));
+    // Al registrarte, todavía no has visto ningún personaje con esta cuenta nueva (y, si
+    // jugaste algo como invitado antes, eso tampoco se guarda en ningún sitio) — así que aquí
+    // siempre se ven exactamente los 10 de mínimo garantizado, ni uno más. Se irán sumando más
+    // opciones la próxima vez que entres a "Editar perfil", según vayas jugando.
+    const sortedChars = getAvailableAvatarCharacters(null);
 
     sortedChars.forEach(char => {
       const img = document.createElement("img");
@@ -4302,7 +4321,9 @@
       picker.appendChild(separator);
     }
 
-    const sortedChars = [...database].sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base', ignorePunctuation: true }));
+    // Solo los personajes que ya has visto en algún panel (más los 10 de mínimo garantizado,
+    // ver STARTER_AVATAR_CHARACTER_IDS), no toda la base de datos entera.
+    const sortedChars = getAvailableAvatarCharacters(currentUserProfile && currentUserProfile.viewedCharacters);
 
     sortedChars.forEach(char => {
       const img = document.createElement("img");
