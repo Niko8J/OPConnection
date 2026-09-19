@@ -4462,7 +4462,9 @@
     document.getElementById("contact-error").innerText = "";
     document.getElementById("contact-success").style.display = "none";
     document.getElementById("contact-email").value = (currentUser && currentUser.email) || "";
-    document.getElementById("contact-message").value = "";
+    // El mensaje NO se borra aquí: si lo dejas a medias y cierras el modal sin querer, se
+    // mantiene tal cual lo dejaste la próxima vez que lo abras. Solo se borra al enviarse con
+    // éxito (ver submitContactForm) o al recargar la página entera.
     document.getElementById("contact-modal").style.display = "flex";
   }
 
