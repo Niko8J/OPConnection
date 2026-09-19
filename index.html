@@ -373,9 +373,14 @@
     .modal-content.edit-profile-modal-content { min-height: var(--modal-max-h); }
     /* Un poco más de alto en ordenadores para Registrarse/completar perfil de Google (donde se
        ve el selector de avatares) — en móvil no hace falta, ya usa la mayoría de la pantalla
-       de por sí. En "Iniciar sesión" nunca se aplica (esa clase no se pone en ese modo). */
+       de por sí. En "Iniciar sesión" nunca se aplica (esa clase no se pone en ese modo).
+       min(520px, var(--modal-max-h)), no 520px a secas: si la pantalla es más baja de lo
+       habitual (una ventana de navegador no muy alta, por ejemplo), 520px podría superar el
+       tope máximo ya calculado para esa pantalla (var(--modal-max-h)) — y min-height siempre
+       gana sobre max-height cuando chocan, así que el modal se saldría por debajo de la
+       pantalla. Con min(), nunca pide más de lo que el propio tope ya permite. */
     @media (min-width: 481px) {
-      .auth-modal-content.auth-modal-with-avatars { min-height: 520px; }
+      .auth-modal-content.auth-modal-with-avatars { min-height: min(520px, var(--modal-max-h)); }
     }
     /* Cabecera del Perfil: identidad (avatar+nombre+título) a un lado y rachas al otro. Con
        flex-wrap, si hay sitio van lado a lado (pantallas anchas); si no, se apilan solas
