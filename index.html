@@ -741,14 +741,9 @@
          donde sí tiene sentido. */
       align-content: start;
     }
-    /* Difuminado inferior (ver updateAvatarPickerFade): un degradado que desvanece la última
-       fila visible, para avisar de que hay más fotos si se hace scroll. mask-image (no
-       opacity/gradiente de color) porque así se difumina hacia LO QUE HAYA DEBAJO del propio
-       recuadro (su fondo oscuro), sin depender de que ese fondo sea siempre el mismo color. */
-    .avatar-picker.avatar-picker-fade-bottom {
-      mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent 100%);
-      -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent 100%);
-    }
+    /* Difuminado inferior/superior: ver updateAvatarPickerFade, que calcula y aplica
+       directamente el mask-image (arriba y/o abajo según haga falta cada uno) por JS, no por
+       clases CSS sueltas. */
     /* Separa los avatares exclusivos (arriba del todo, si tienes alguno) del resto de
        personajes normales. Ocupa toda la fila (grid-column: 1/-1) sea cual sea el nº de
        columnas del grid en cada tamaño de pantalla. */
@@ -1741,16 +1736,31 @@
       .sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base', ignorePunctuation: true }));
   }
 
-  // Difuminado inferior de un selector de avatares (Registrarse o Editar perfil): solo se
-  // muestra si hace falta scroll de verdad Y todavía no se ha llegado al final — así avisa de
-  // que hay más fotos por ver más abajo, y desaparece solo en cuanto ya no hace falta (ni si
-  // todo cabe sin scroll, ni una vez llegado al final).
+  // Difuminado de un selector de avatares (Registrarse o Editar perfil), arriba y/o abajo
+  // según haga falta cada uno por separado: el de abajo avisa de que hay más fotos si se hace
+  // scroll hacia abajo, el de arriba de que hay más si se sube (una vez ya se ha bajado algo).
+  // Se calcula la máscara combinada aquí mismo, en vez de con dos clases CSS sueltas: un
+  // elemento solo puede tener UN mask-image a la vez, así que dos clases independientes se
+  // pisarían entre sí en vez de sumarse cuando hicieran falta las dos a la vez (a mitad de
+  // scroll, con más contenido tanto arriba como abajo).
+  const AVATAR_PICKER_FADE_SIZE = 28; // px de desvanecido en cada borde que lo necesite
   function updateAvatarPickerFade(pickerId) {
     const picker = document.getElementById(pickerId);
     if (!picker) return;
     const needsScroll = picker.scrollHeight > picker.clientHeight + 1; // +1: margen ante redondeos
-    const atBottom = picker.scrollTop + picker.clientHeight >= picker.scrollHeight - 1;
-    picker.classList.toggle("avatar-picker-fade-bottom", needsScroll && !atBottom);
+    const needsTop = needsScroll && picker.scrollTop > 1;
+    const needsBottom = needsScroll && picker.scrollTop + picker.clientHeight < picker.scrollHeight - 1;
+
+    let mask = null;
+    if (needsTop && needsBottom) {
+      mask = `linear-gradient(to bottom, transparent 0, #000 ${AVATAR_PICKER_FADE_SIZE}px, #000 calc(100% - ${AVATAR_PICKER_FADE_SIZE}px), transparent 100%)`;
+    } else if (needsTop) {
+      mask = `linear-gradient(to bottom, transparent 0, #000 ${AVATAR_PICKER_FADE_SIZE}px)`;
+    } else if (needsBottom) {
+      mask = `linear-gradient(to bottom, #000 calc(100% - ${AVATAR_PICKER_FADE_SIZE}px), transparent 100%)`;
+    }
+    picker.style.maskImage = mask || "";
+    picker.style.webkitMaskImage = mask || "";
   }
 
   // Mensaje bajo el selector de avatares animando a seguir jugando para desbloquear más fotos
