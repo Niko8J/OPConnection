@@ -365,6 +365,12 @@
        (dos clases en el mismo selector) subimos la especificidad para que este valor gane
        siempre, sin depender del orden de las reglas en el archivo. */
     .modal-content.profile-modal-content { max-width: 1080px; }
+    /* Editar perfil, a diferencia del resto de formularios que comparten auth-modal-content
+       (iniciar sesión, registrarse), sí lleva su propia clase — para que, al ir y venir entre
+       "Perfil" y "Editar perfil", el modal no cambie de alto de golpe: se le da la misma
+       altura máxima que ya usa el de Perfil (min-height, no max-height: el ancho se queda
+       estrecho de formulario, solo el alto se iguala). */
+    .modal-content.edit-profile-modal-content { min-height: var(--modal-max-h); }
     /* Cabecera del Perfil: identidad (avatar+nombre+título) a un lado y rachas al otro. Con
        flex-wrap, si hay sitio van lado a lado (pantallas anchas); si no, se apilan solas
        (móvil), sin depender de un punto de corte fijo por ancho de pantalla. */
@@ -1478,7 +1484,7 @@
 </div>
 
 <div id="edit-profile-modal" class="modal-overlay" onclick="closeEditProfileModalOnOverlay(event)">
-  <div class="modal-content auth-modal-content">
+  <div class="modal-content auth-modal-content edit-profile-modal-content">
     <button class="close-btn" onclick="closeEditProfileModal()">&times;</button>
     <div class="modal-scroll-area">
       <h2>✏️ Editar perfil</h2>
@@ -4232,6 +4238,33 @@
     document.getElementById("edit-new-password-confirm").value = "";
 
     document.getElementById("edit-profile-modal").style.display = "flex";
+    // Se calcula en el siguiente frame, no antes: hasta que el modal no está realmente visible
+    // (display:flex ya aplicado), medir el alto de sus elementos daría 0 en todos ellos.
+    requestAnimationFrame(adjustEditAvatarPickerHeight);
+  }
+
+  // El selector de avatares crece para aprovechar el alto que le sobre al modal (que tiene una
+  // altura mínima igual a la del modal de Perfil, ver .edit-profile-modal-content), en vez de
+  // dejar un hueco vacío debajo del botón de guardar — así se ven más fotos de golpe en
+  // pantallas donde sobra espacio, sin tener que hacer scroll tan seguido. Mismo tipo de
+  // cálculo que measureCardSize() usa para el tablero: medimos cuánto ocupa todo lo DEMÁS
+  // dentro del área de scroll (título, campo de usuario, etiqueta, botón, sección de
+  // contraseña si está visible...) y le damos al selector lo que sobre.
+  function adjustEditAvatarPickerHeight() {
+    const scrollArea = document.querySelector("#edit-profile-modal .modal-scroll-area");
+    const picker = document.getElementById("edit-avatar-picker");
+    if (!scrollArea || !picker) return;
+
+    let siblingsHeight = 0;
+    Array.from(scrollArea.children).forEach(child => {
+      if (child === picker) return;
+      const style = getComputedStyle(child);
+      if (style.display === "none") return; // p. ej. la sección de contraseña, si no aplica
+      siblingsHeight += child.offsetHeight + parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+    });
+
+    const available = scrollArea.clientHeight - siblingsHeight - 20; // -20px: margen de seguridad ante redondeos
+    picker.style.maxHeight = Math.max(180, available) + "px"; // nunca más pequeño que el tamaño de siempre, aunque el cálculo saliera raro
   }
 
   function buildEditAvatarPicker() {
