@@ -4106,7 +4106,6 @@
 
   async function openProfileModal(uid) {
     document.getElementById("auth-dropdown").style.display = "none";
-    closeRankingModal(); // si se abrió desde una fila del Ranking, no dejamos los dos modales superpuestos
     stopProfileRainbowAnimation(); // por si quedaba corriendo de una vista anterior a esta
     switchProfileTab("stats"); // siempre se abre en Estadísticas, aunque la última vez se dejara en Logros
 
@@ -4129,6 +4128,8 @@
       errorEl.style.display = "none";
       bodyEl.style.display = "none";
       loadingEl.style.display = "block";
+      closeRankingModal(); // si se abrió desde una fila del Ranking, justo aquí y no antes: que no
+                            // quede un hueco sin ningún modal visible mientras carga
       modal.style.display = "flex";
     }, LOADING_DELAY_MS);
 
@@ -4183,6 +4184,8 @@
       loadingEl.style.display = "none";
       errorEl.style.display = "none";
       bodyEl.style.display = "block";
+      closeRankingModal(); // si se abrió desde una fila del Ranking, justo aquí y no antes: que no
+                            // quede un hueco sin ningún modal visible mientras carga
       modal.style.display = "flex";
     } catch (e) {
       // Aun si falla la carga, mostramos el modal igualmente (con el aviso de error): si no,
@@ -4192,6 +4195,8 @@
       bodyEl.style.display = "none";
       errorEl.style.display = "block";
       errorEl.innerText = "No se pudo cargar este perfil. Inténtalo más tarde.";
+      closeRankingModal(); // si se abrió desde una fila del Ranking, justo aquí y no antes: que no
+                            // quede un hueco sin ningún modal visible mientras carga
       modal.style.display = "flex";
       console.error("Error cargando el perfil:", e);
     }
