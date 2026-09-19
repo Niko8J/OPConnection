@@ -727,6 +727,13 @@
       display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px;
       max-height: 220px; overflow-y: auto; margin-bottom: 12px; padding: 6px;
       background: #0f172a; border-radius: 6px;
+      /* Sin esto, cuando el recuadro mide más de lo que sus filas necesitan (pocos avatares
+         disponibles + altura ajustada por JS, ver adjustEditAvatarPickerHeight), el navegador
+         reparte ese espacio de sobra ESTIRANDO las filas entre sí (comportamiento por defecto
+         de CSS grid), dejando huecos raros entre una fila y la siguiente. Con align-content:
+         start, las filas se quedan juntas arriba, y el espacio de sobra cae entero al final,
+         donde sí tiene sentido. */
+      align-content: start;
     }
     /* Separa los avatares exclusivos (arriba del todo, si tienes alguno) del resto de
        personajes normales. Ocupa toda la fila (grid-column: 1/-1) sea cual sea el nº de
@@ -4283,7 +4290,14 @@
     });
 
     const available = scrollArea.clientHeight - siblingsHeight - 20; // -20px: margen de seguridad ante redondeos
-    picker.style.maxHeight = Math.max(180, available) + "px"; // nunca más pequeño que el tamaño de siempre, aunque el cálculo saliera raro
+    // height, no max-height: con pocos personajes disponibles (recién registrado, sin apenas
+    // jugar todavía), un simple tope no obliga a ocupar ese espacio, y el hueco de sobra se
+    // quedaba suelto al final del formulario, debajo del botón — sin relación con nada. Con una
+    // altura fija de verdad, ese hueco se queda siempre DENTRO del propio recuadro de avatares
+    // (que se ve más alto de lo que ocuparía su contenido real), donde al menos se entiende
+    // como "aquí hay sitio para más, según vayas jugando".
+    picker.style.maxHeight = "none"; // la clase base trae su propio tope fijo (220px); lo quitamos para que el height de abajo no se quede corto sin explicación
+    picker.style.height = Math.max(180, available) + "px"; // nunca más pequeño que el tamaño de siempre, aunque el cálculo saliera raro
   }
 
   function buildEditAvatarPicker() {
