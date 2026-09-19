@@ -371,6 +371,12 @@
        altura máxima que ya usa el de Perfil (min-height, no max-height: el ancho se queda
        estrecho de formulario, solo el alto se iguala). */
     .modal-content.edit-profile-modal-content { min-height: var(--modal-max-h); }
+    /* Un poco más de alto en ordenadores para Registrarse/completar perfil de Google (donde se
+       ve el selector de avatares) — en móvil no hace falta, ya usa la mayoría de la pantalla
+       de por sí. En "Iniciar sesión" nunca se aplica (esa clase no se pone en ese modo). */
+    @media (min-width: 481px) {
+      .auth-modal-content.auth-modal-with-avatars { min-height: 520px; }
+    }
     /* Cabecera del Perfil: identidad (avatar+nombre+título) a un lado y rachas al otro. Con
        flex-wrap, si hay sitio van lado a lado (pantallas anchas); si no, se apilan solas
        (móvil), sin depender de un punto de corte fijo por ancho de pantalla. */
@@ -735,10 +741,22 @@
          donde sí tiene sentido. */
       align-content: start;
     }
+    /* Difuminado inferior (ver updateAvatarPickerFade): un degradado que desvanece la última
+       fila visible, para avisar de que hay más fotos si se hace scroll. mask-image (no
+       opacity/gradiente de color) porque así se difumina hacia LO QUE HAYA DEBAJO del propio
+       recuadro (su fondo oscuro), sin depender de que ese fondo sea siempre el mismo color. */
+    .avatar-picker.avatar-picker-fade-bottom {
+      mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent 100%);
+    }
     /* Separa los avatares exclusivos (arriba del todo, si tienes alguno) del resto de
        personajes normales. Ocupa toda la fila (grid-column: 1/-1) sea cual sea el nº de
        columnas del grid en cada tamaño de pantalla. */
     .avatar-picker-separator { grid-column: 1 / -1; height: 1px; background: #334155; margin: 4px 0; }
+    .avatar-picker-hint {
+      color: #64748b; font-size: 0.78rem; text-align: center; font-style: italic;
+      margin: -6px 0 12px;
+    }
     .avatar-option {
       width: 100%; aspect-ratio: 1; object-fit: cover; object-position: top center;
       border-radius: 6px; cursor: pointer; border: 2px solid transparent;
@@ -1431,6 +1449,7 @@
         <input type="text" id="avatar-search-input" class="auth-input avatar-search-input"
                placeholder="🔍 Buscar por nombre..." oninput="filterAvatarOptions('avatar-picker', this.value)">
         <div id="avatar-picker" class="avatar-picker"></div>
+        <p id="avatar-picker-hint" class="avatar-picker-hint"></p>
       </div>
 
       <button class="action-btn submit" id="auth-submit-btn" onclick="submitAuthForm()">Entrar</button>
@@ -1505,6 +1524,7 @@
       <input type="text" id="edit-avatar-search-input" class="auth-input avatar-search-input"
              placeholder="🔍 Buscar por nombre..." oninput="filterAvatarOptions('edit-avatar-picker', this.value)">
       <div id="edit-avatar-picker" class="avatar-picker"></div>
+      <p id="edit-avatar-picker-hint" class="avatar-picker-hint"></p>
       <button class="action-btn submit" onclick="submitProfileEdit()">Guardar cambios</button>
 
       <div id="edit-password-section" style="display: none;">
@@ -1719,6 +1739,29 @@
     return database
       .filter(char => allowedIds.has(char.id))
       .sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base', ignorePunctuation: true }));
+  }
+
+  // Difuminado inferior de un selector de avatares (Registrarse o Editar perfil): solo se
+  // muestra si hace falta scroll de verdad Y todavía no se ha llegado al final — así avisa de
+  // que hay más fotos por ver más abajo, y desaparece solo en cuanto ya no hace falta (ni si
+  // todo cabe sin scroll, ni una vez llegado al final).
+  function updateAvatarPickerFade(pickerId) {
+    const picker = document.getElementById(pickerId);
+    if (!picker) return;
+    const needsScroll = picker.scrollHeight > picker.clientHeight + 1; // +1: margen ante redondeos
+    const atBottom = picker.scrollTop + picker.clientHeight >= picker.scrollHeight - 1;
+    picker.classList.toggle("avatar-picker-fade-bottom", needsScroll && !atBottom);
+  }
+
+  // Mensaje bajo el selector de avatares animando a seguir jugando para desbloquear más fotos
+  // — desaparece solo el día que ya se hayan visto TODOS los personajes del juego (comparado
+  // contra el total real, database.length, no contra los que se ven aquí de mínimo garantizado).
+  function updateAvatarPickerHint(hintElId, viewedCount) {
+    const hintEl = document.getElementById(hintElId);
+    if (!hintEl) return;
+    hintEl.textContent = viewedCount >= database.length
+      ? ""
+      : "Sigue encontrando personajes para conseguir más fotos de perfil";
   }
   const STORAGE_KEY_STATE = "opConnectionsInfiniteState";
   const STORAGE_KEY_LAST_DIFFICULTY = "opConnectionsLastDifficulty";
@@ -2086,6 +2129,7 @@
     applyAuthModeUI();
     if (mode === "register") buildAvatarPicker();
     document.getElementById("auth-modal").style.display = "flex";
+    if (mode === "register") requestAnimationFrame(() => updateAvatarPickerFade("avatar-picker"));
   }
 
   function applyAuthModeUI() {
@@ -2106,6 +2150,10 @@
     document.getElementById("auth-forgot-password-link").style.display = isLogin ? "block" : "none";
     document.getElementById("auth-register-extra").style.display = isRegister ? "block" : "none";
     document.getElementById("auth-profile-extra").style.display = (isRegister || isGoogleSetup) ? "block" : "none";
+    // Clase para darle un poco más de alto al modal en ordenadores cuando el selector de
+    // avatares está visible (ver el CSS de .auth-modal-content.auth-modal-with-avatars) — en
+    // "Iniciar sesión" no hace falta, el formulario ya es corto de por sí.
+    document.querySelector("#auth-modal .modal-content").classList.toggle("auth-modal-with-avatars", isRegister || isGoogleSetup);
     document.getElementById("auth-google-section").style.display = (isGoogleSetup || isForgotPassword) ? "none" : "block";
 
     document.getElementById("auth-submit-btn").innerText =
@@ -2127,7 +2175,7 @@
     document.getElementById("auth-error").innerText = "";
     document.getElementById("auth-success").style.display = "none";
     applyAuthModeUI();
-    if (authMode === "register") buildAvatarPicker();
+    if (authMode === "register") { buildAvatarPicker(); updateAvatarPickerFade("avatar-picker"); }
   }
 
   // Se abre desde el enlace "¿Olvidaste tu contraseña?" dentro del propio login, sin cerrar el
@@ -2204,6 +2252,7 @@
     applyAuthModeUI();
     buildAvatarPicker();
     document.getElementById("auth-modal").style.display = "flex";
+    requestAnimationFrame(() => updateAvatarPickerFade("avatar-picker"));
   }
 
   async function signInWithGoogle() {
@@ -2267,6 +2316,7 @@
   function buildAvatarPicker() {
     const picker = document.getElementById("avatar-picker");
     picker.innerHTML = "";
+    picker.onscroll = () => updateAvatarPickerFade("avatar-picker");
 
     const searchInput = document.getElementById("avatar-search-input");
     if (searchInput) searchInput.value = "";
@@ -2291,6 +2341,8 @@
       };
       picker.appendChild(img);
     });
+
+    updateAvatarPickerHint("avatar-picker-hint", 0); // al registrarte, siempre 0 vistos con la cuenta nueva
   }
 
   async function submitAuthForm() {
@@ -4266,7 +4318,10 @@
     document.getElementById("edit-profile-modal").style.display = "flex";
     // Se calcula en el siguiente frame, no antes: hasta que el modal no está realmente visible
     // (display:flex ya aplicado), medir el alto de sus elementos daría 0 en todos ellos.
-    requestAnimationFrame(adjustEditAvatarPickerHeight);
+    requestAnimationFrame(() => {
+      adjustEditAvatarPickerHeight();
+      updateAvatarPickerFade("edit-avatar-picker");
+    });
   }
 
   // El selector de avatares crece para aprovechar el alto que le sobre al modal (que tiene una
@@ -4303,6 +4358,7 @@
   function buildEditAvatarPicker() {
     const picker = document.getElementById("edit-avatar-picker");
     picker.innerHTML = "";
+    picker.onscroll = () => updateAvatarPickerFade("edit-avatar-picker");
 
     const searchInput = document.getElementById("edit-avatar-search-input");
     if (searchInput) searchInput.value = "";
@@ -4353,6 +4409,8 @@
       };
       picker.appendChild(img);
     });
+
+    updateAvatarPickerHint("edit-avatar-picker-hint", (currentUserProfile && currentUserProfile.viewedCharacters || []).length);
   }
 
   function closeEditProfileModal() {
