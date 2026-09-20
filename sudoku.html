@@ -80,6 +80,12 @@
     transform: scale(1.35);
     transform-origin: top center;
   }
+  /* Usopp necesita su propio recorte: en su foto, la cara queda desplazada hacia la derecha,
+     así que "arriba centrado" (el recorte de todos los demás) lo corta mal. */
+  .cell img.usopp-crop {
+    object-position: top right;
+    transform-origin: top right;
+  }
   /* Antes la diferencia era casi imperceptible (92% de opacidad, nada más) — ahora las fijas
      llevan un fondo más oscuro/apagado, la imagen bastante más tenue, y un candado pequeño en
      la esquina para que no quede ninguna duda de cuáles no se pueden tocar. */
@@ -151,6 +157,10 @@
     display: block;
     transform: scale(1.1);
     transform-origin: top center;
+  }
+  .picker img.usopp-crop {
+    object-position: top right;
+    transform-origin: top right;
   }
   .picker .clear-btn {
     grid-column: span 9;
@@ -401,7 +411,10 @@
   function buildCellImg(val) {
     if (!val) return "";
     const crew = CREW[val - 1];
-    return `<img src="${crew.img}" alt="${crew.name}" title="${crew.name}"
+    // Usopp necesita su propio recorte (arriba a la derecha, no arriba centrado como el resto)
+    // porque en su foto concreta la cara queda desplazada hacia ese lado.
+    const cropClass = crew.name === "Usopp" ? " usopp-crop" : "";
+    return `<img class="crew-img${cropClass}" src="${crew.img}" alt="${crew.name}" title="${crew.name}"
                  onerror="this.replaceWith(Object.assign(document.createElement('div'), {className:'fallback-text', textContent:'${crew.name}'}))">`;
   }
 
@@ -449,7 +462,8 @@
     pickerEl.innerHTML = "";
     CREW.forEach((crew, i) => {
       const btn = document.createElement("button");
-      btn.innerHTML = `<img src="${crew.img}" alt="${crew.name}" title="${crew.name}"
+      const cropClass = crew.name === "Usopp" ? " usopp-crop" : "";
+      btn.innerHTML = `<img class="crew-img${cropClass}" src="${crew.img}" alt="${crew.name}" title="${crew.name}"
                              onerror="this.replaceWith(Object.assign(document.createElement('div'), {className:'fallback-text', textContent:'${crew.name}'}))">`;
       btn.onclick = () => placeValue(i + 1);
       pickerEl.appendChild(btn);
