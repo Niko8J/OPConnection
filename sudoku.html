@@ -44,6 +44,62 @@
     max-width: 420px;
   }
 
+  /* --- Botones de modo --- */
+  .mode-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .mode-tab {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    color: var(--text-dim);
+    padding: 8px 18px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .mode-tab.active {
+    background: var(--amber);
+    color: #1c1305;
+    border-color: var(--amber);
+  }
+
+  /* --- Colores por caja (solo modo difícil) --- */
+  :root {
+    --box-tint-0: rgba(245, 158, 11, 0.16);
+    --box-tint-1: rgba(239, 68, 68, 0.16);
+    --box-tint-2: rgba(236, 72, 153, 0.16);
+    --box-tint-3: rgba(56, 189, 248, 0.16);
+    --box-tint-4: rgba(34, 197, 94, 0.16);
+    --box-tint-5: rgba(168, 85, 247, 0.16);
+    --box-tint-6: rgba(148, 163, 184, 0.2);
+    --box-tint-7: rgba(163, 230, 53, 0.16);
+    --box-tint-8: rgba(251, 146, 60, 0.16);
+  }
+  .cell.box-0 { background: var(--box-tint-0); }
+  .cell.box-1 { background: var(--box-tint-1); }
+  .cell.box-2 { background: var(--box-tint-2); }
+  .cell.box-3 { background: var(--box-tint-3); }
+  .cell.box-4 { background: var(--box-tint-4); }
+  .cell.box-5 { background: var(--box-tint-5); }
+  .cell.box-6 { background: var(--box-tint-6); }
+  .cell.box-7 { background: var(--box-tint-7); }
+  .cell.box-8 { background: var(--box-tint-8); }
+
+  .legend {
+    width: min(94vw, 460px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px 10px;
+    margin-top: 10px;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+
   /* --- Tablero --- */
   .board-wrap {
     width: var(--board-size, min(94vw, 460px));
@@ -177,11 +233,18 @@
 <body>
 
 <h1>🏴‍☠️ One Piece Sudoku</h1>
-<p class="subtitle">Rellena el tablero para que cada fila, columna y caja de 3×3 tenga a los nueve tripulantes, sin repetir ninguno.</p>
+<p class="subtitle" id="subtitle">Rellena el tablero para que cada fila, columna y caja de 3×3 tenga a los nueve tripulantes, sin repetir ninguno.</p>
+
+<div class="mode-tabs">
+  <button class="mode-tab active" id="mode-tab-normal" onclick="switchMode('normal')">Normal</button>
+  <button class="mode-tab" id="mode-tab-dificil" onclick="switchMode('dificil')">Difícil</button>
+</div>
 
 <div class="board-wrap">
   <div class="board" id="board"></div>
 </div>
+
+<div class="legend" id="legend" style="display:none;"></div>
 
 <div class="picker-wrap">
   <p class="picker-label" id="picker-label">Toca una casilla vacía para elegir un tripulante</p>
@@ -194,35 +257,72 @@
 </div>
 
 <script>
-  // Los nueve primeros en unirse a la tripulación de Luffy, por orden — las imágenes son las
-  // mismas rutas que ya usa opconnection.es, así que este archivo debe subirse a una carpeta
-  // que también tenga acceso a esa misma carpeta imagenes/ (o cambiar las rutas de abajo).
+  // Los nueve primeros en unirse a la tripulacion de Luffy, por orden -- las imagenes son las
+  // mismas rutas que ya usa opconnection.es, asi que este archivo debe subirse a una carpeta
+  // que tambien tenga acceso a esa misma carpeta imagenes/ (o cambiar las rutas de abajo).
   const CREW = [
-    { name: "Luffy",  img: "imagenes/Luffy.webp" },
-    { name: "Zoro",   img: "imagenes/Zoro.webp" },
-    { name: "Nami",   img: "imagenes/Nami.webp" },
-    { name: "Usopp",  img: "imagenes/Usopp.webp" },
-    { name: "Sanji",  img: "imagenes/Sanji.webp" },
-    { name: "Chopper",img: "imagenes/Chopper.webp" },
-    { name: "Robin",  img: "imagenes/Robin.webp" },
-    { name: "Franky", img: "imagenes/Franky.webp" },
-    { name: "Brook",  img: "imagenes/Brook.webp" }
+    { id: "luffy",   name: "Luffy",   img: "imagenes/Luffy.webp" },
+    { id: "zoro",    name: "Zoro",    img: "imagenes/Zoro.webp" },
+    { id: "nami",    name: "Nami",    img: "imagenes/Nami.webp" },
+    { id: "usopp",   name: "Usopp",   img: "imagenes/Usopp.webp" },
+    { id: "sanji",   name: "Sanji",   img: "imagenes/Sanji.webp" },
+    { id: "chopper", name: "Chopper", img: "imagenes/Chopper.webp" },
+    { id: "robin",   name: "Robin",   img: "imagenes/Robin.webp" },
+    { id: "franky",  name: "Franky",  img: "imagenes/Franky.webp" },
+    { id: "brook",   name: "Brook",   img: "imagenes/Brook.webp" }
   ];
 
-  const GIVENS_TO_REMOVE = 42; // cuántas casillas se vacían del total de 81 (más alto = más difícil)
+  // 9 categorías, una por caja, en orden — HARD_SOLUTION[r][c].cats son los ÍNDICES de
+  // estas categorías que ese personaje tiene EN REALIDAD (según personajes.json), más
+  // allá de la de su propia caja — con esto se puede comprobar en directo si dos
+  // personajes chocan por compartir alguna, sin necesitar el JSON completo aquí.
+  const HARD_CATEGORIES = [
+    "Banda: Sombrero de Paja",
+    "Piratas de Big Mom",
+    "Marines",
+    "Carpinteros",
+    "Músicos",
+    "Cocineros",
+    "Gyojins",
+    "Gigantes",
+    "Zombies",
+  ];
 
-  let solution = [];   // 9x9, la solución completa de verdad (1-9)
-  let board = [];      // 9x9, lo que hay ahora mismo en pantalla (0 = vacío)
-  let givenMask = [];  // 9x9, true si esa casilla venía ya rellena de partida (no se puede tocar)
-  let selectedCell = null; // {r, c} o null
+  const HARD_SOLUTION = [
+    [{ id: "vivi", name: "Nefertari D. Vivi", img: "imagenes/Vivi.webp", cats: [0] }, { id: "luffy", name: "Monkey D. Luffy", img: "imagenes/Luffy.webp", cats: [0] }, { id: "chopper", name: "Tony Tony Chopper", img: "imagenes/Chopper.webp", cats: [0] }, { id: "oven", name: "Charlotte Oven", img: "imagenes/CharlotteOven.webp", cats: [1] }, { id: "flampe", name: "Charlotte Flampe", img: "imagenes/CharlotteFlampe.webp", cats: [1] }, { id: "big_mom", name: "Charlotte Linlin (Big Mom)", img: "imagenes/BigMom.webp", cats: [1] }, { id: "pomsky", name: "Pomsky", img: "imagenes/Pomsky.webp", cats: [2] }, { id: "tashigi", name: "Tashigi", img: "imagenes/Tashigi.webp", cats: [2] }, { id: "capitan_morgan", name: "Capitán Morgan", img: "imagenes/CapitanMorgan.webp", cats: [2] }],
+    [{ id: "karoo", name: "Karoo", img: "imagenes/Karoo.webp", cats: [0] }, { id: "merry", name: "Going Merry", img: "imagenes/GoingMerry.webp", cats: [0] }, { id: "nami", name: "Nami", img: "imagenes/Nami.webp", cats: [0] }, { id: "capone", name: "Capone 'Gang' Bege", img: "imagenes/Capone.webp", cats: [1] }, { id: "brulee", name: "Charlotte Brûlée", img: "imagenes/CharlotteBrulee.webp", cats: [1] }, { id: "mont_dor", name: "Charlotte Mont-d'Or", img: "imagenes/CharlotteMontDor.webp", cats: [1] }, { id: "momonga", name: "Momonga", img: "imagenes/Momonga.webp", cats: [2] }, { id: "koby", name: "Koby", img: "imagenes/Koby.webp", cats: [2] }, { id: "bastille", name: "Bastille", img: "imagenes/Bastille.webp", cats: [2] }],
+    [{ id: "usopp", name: "Usopp", img: "imagenes/Usopp.webp", cats: [0] }, { id: "jinbe", name: "Jinbe", img: "imagenes/Jinbe.webp", cats: [0, 6] }, { id: "zoro", name: "Roronoa Zoro", img: "imagenes/Zoro.webp", cats: [0] }, { id: "cinnamon", name: "Charlotte Cinnamon", img: "imagenes/CharlotteCinnamon.webp", cats: [1] }, { id: "charlotte_opera", name: "Charlotte Opera", img: "imagenes/CharlotteOpera.webp", cats: [1] }, { id: "mondee", name: "Charlotte Mondée", img: "imagenes/CharlotteMondee.webp", cats: [1] }, { id: "strawberry", name: "Strawberry", img: "imagenes/Strawberry.webp", cats: [2] }, { id: "brannew", name: "Brannew", img: "imagenes/Brannew.webp", cats: [2] }, { id: "maynard", name: "Maynard", img: "imagenes/Maynard.webp", cats: [2] }],
+    [{ id: "lucci", name: "Rob Lucci", img: "imagenes/Lucci.webp", cats: [3] }, { id: "paulie", name: "Paulie", img: "imagenes/Paulie.webp", cats: [3] }, { id: "stansen", name: "Stansen", img: "imagenes/Stansen.webp", cats: [3, 7] }, { id: "mawaritosuki", name: "Mizuta Mawaritosuki", img: "imagenes/Mawaritosuki.webp", cats: [4] }, { id: "uta", name: "Uta", img: "imagenes/Uta.webp", cats: [4] }, { id: "bonk_punch", name: "Bonk Punch", img: "imagenes/BonkPunch.webp", cats: [4] }, { id: "sanji", name: "Vinsmoke Sanji", img: "imagenes/Sanji.webp", cats: [0, 5] }, { id: "lucky_roux", name: "Lucky Roux", img: "imagenes/LuckyRoux.webp", cats: [5] }, { id: "wanze", name: "Wanze", img: "imagenes/Wanze.webp", cats: [5] }],
+    [{ id: "franky", name: "Franky", img: "imagenes/Franky.webp", cats: [0, 3] }, { id: "kaku", name: "Kaku", img: "imagenes/Kaku.webp", cats: [3] }, { id: "tom", name: "Tom", img: "imagenes/Tom.webp", cats: [3, 6] }, { id: "igaram", name: "Igaram", img: "imagenes/Igaram.webp", cats: [4] }, { id: "yorki", name: "Yorki", img: "imagenes/Yorki.webp", cats: [4] }, { id: "apoo", name: "Scratchmen Apoo", img: "imagenes/Apoo.webp", cats: [4] }, { id: "zeff", name: "Zeff", img: "imagenes/Zeff.webp", cats: [5] }, { id: "patty", name: "Patty", img: "imagenes/Patty.webp", cats: [5] }, { id: "pudding", name: "Charlotte Pudding", img: "imagenes/Pudding.webp", cats: [1, 5] }],
+    [{ id: "fisher_tiger", name: "Fisher Tiger", img: "imagenes/FisherTiger.webp", cats: [3, 6] }, { id: "tilestone", name: "Tilestone", img: "imagenes/Tilestone.webp", cats: [3] }, { id: "lulu", name: "Peepley Lulu", img: "imagenes/PeepleyLulu.webp", cats: [3] }, { id: "carina", name: "Carina", img: "imagenes/Carina.webp", cats: [4] }, { id: "brook", name: "Brook", img: "imagenes/Brook.webp", cats: [0, 4] }, { id: "madaisuki", name: "Mizuta Madaisuki", img: "imagenes/Madaisuki.webp", cats: [4] }, { id: "chiffon", name: "Charlotte Chiffon", img: "imagenes/Chiffon.webp", cats: [1, 5] }, { id: "goldberg", name: "Goldberg", img: "imagenes/Goldberg.webp", cats: [5, 7] }, { id: "carne", name: "Carne", img: "imagenes/Carne.webp", cats: [5] }],
+    [{ id: "barbel", name: "Barbel", img: "imagenes/Barbel.webp", cats: [6] }, { id: "zeo", name: "Zeo", img: "imagenes/Zeo.webp", cats: [6] }, { id: "shirahoshi", name: "Shirahoshi", img: "imagenes/Shirahoshi.webp", cats: [6] }, { id: "dorry", name: "Dorry", img: "imagenes/Dorry.webp", cats: [7] }, { id: "kashi", name: "Kashi", img: "imagenes/Kashi.webp", cats: [7] }, { id: "zanki", name: "Zanki", img: "imagenes/Zanki.webp", cats: [7] }, { id: "lola_zombie", name: "Lola", img: "imagenes/LolaZombie.webp", cats: [8] }, { id: "inuppe", name: "Inuppe", img: "imagenes/Inuppe.webp", cats: [8] }, { id: "kumashi", name: "Kumashi", img: "imagenes/Kumashi.webp", cats: [8] }],
+    [{ id: "macro", name: "Macro", img: "imagenes/Macro.webp", cats: [6] }, { id: "praline", name: "Charlotte Praline", img: "imagenes/CharlottePraline.webp", cats: [6] }, { id: "aladine", name: "Aladine", img: "imagenes/Aladine.webp", cats: [6] }, { id: "road", name: "Road", img: "imagenes/Road.webp", cats: [7] }, { id: "fuga", name: "Fuga", img: "imagenes/Fuga.webp", cats: [7] }, { id: "morley", name: "Morley", img: "imagenes/Morley.webp", cats: [7] }, { id: "unigaro", name: "Unigaro", img: "imagenes/Unigaro.webp", cats: [8] }, { id: "tararan", name: "Tararan", img: "imagenes/Tararan.webp", cats: [8] }, { id: "mocdonald", name: "MocDonald", img: "imagenes/MocDonald.webp", cats: [8] }],
+    [{ id: "kuroobi", name: "Kuroobi", img: "imagenes/Kuroobi.webp", cats: [6] }, { id: "dosun", name: "Dosun", img: "imagenes/Dosun.webp", cats: [6] }, { id: "daruma", name: "Daruma", img: "imagenes/Daruma.webp", cats: [6] }, { id: "bigpan", name: "Big Pan", img: "imagenes/BigPan.webp", cats: [6, 7] }, { id: "oars_jr", name: "Little Oars Jr.", img: "imagenes/OarsJr.webp", cats: [7] }, { id: "kiba", name: "Kiba", img: "imagenes/Kiba.webp", cats: [7] }, { id: "cerberus_zombie", name: "Cerberus (Zombi)", img: "imagenes/CerberusZombie.webp", cats: [8] }, { id: "jigoro", name: "Jigoro", img: "imagenes/Jigoro.webp", cats: [8] }, { id: "ganzui", name: "Ganzui", img: "imagenes/Ganzui.webp", cats: [8] }],
+  ];
 
-  // --- Generación del sudoku ---
+  const GIVENS_TO_REMOVE = { normal: 42, dificil: 45 }; // cuantas casillas se vacian del total de 81
+
+  // Cada modo lleva su PROPIO estado, del todo independiente -- cambiar de "Normal" a
+  // "Dificil" y volver nunca toca el progreso del otro. "Nuevo tablero" solo afecta al modo
+  // que este activo en ese momento (currentMode).
+  const modes = {
+    normal: { board: null, givenMask: null, selectedCell: null },
+    dificil: { board: null, givenMask: null, selectedCell: null }
+  };
+  let currentMode = "normal";
+  function state() { return modes[currentMode]; }
+
+  function boxOf(r, c) {
+    return (r / 3 | 0) * 3 + (c / 3 | 0);
+  }
+
+  // --- Generacion del sudoku normal (9 simbolos, se genera uno nuevo cada vez) ---
 
   function emptyGrid() {
     return Array.from({ length: 9 }, () => Array(9).fill(0));
   }
 
-  function isSafe(grid, row, col, val) {
+  function isSafeDigit(grid, row, col, val) {
     for (let i = 0; i < 9; i++) {
       if (grid[row][i] === val || grid[i][col] === val) return false;
     }
@@ -244,16 +344,16 @@
     return arr;
   }
 
-  // Backtracking estándar, con el orden de dígitos barajado en cada casilla para que el
+  // Backtracking estandar, con el orden de digitos barajado en cada casilla para que el
   // tablero completo salga distinto cada vez que se genera uno nuevo.
-  function fillGrid(grid) {
+  function fillDigitGrid(grid) {
     for (let row = 0; row < 9; row++) {
       for (let col = 0; col < 9; col++) {
         if (grid[row][col] !== 0) continue;
         for (const val of shuffledDigits()) {
-          if (isSafe(grid, row, col, val)) {
+          if (isSafeDigit(grid, row, col, val)) {
             grid[row][col] = val;
-            if (fillGrid(grid)) return true;
+            if (fillDigitGrid(grid)) return true;
             grid[row][col] = 0;
           }
         }
@@ -263,46 +363,77 @@
     return true;
   }
 
-  function generatePuzzle() {
-    solution = emptyGrid();
-    fillGrid(solution);
+  // Convierte un tablero de digitos (1-9) en uno de personajes reales, usando CREW.
+  function digitGridToCrew(grid) {
+    return grid.map(row => row.map(v => CREW[v - 1]));
+  }
 
-    board = solution.map(row => row.slice());
-    givenMask = Array.from({ length: 9 }, () => Array(9).fill(true));
+  // --- Generacion de un panel (esconder casillas al azar de una solucion ya completa) ---
 
-    // Vaciamos casillas al azar hasta llegar al número pedido — no comprobamos que la solución
-    // siga siendo única (para esta primera versión no hace falta: validamos contra las reglas
-    // del propio sudoku en cada jugada, no contra "la" solución concreta que generamos aquí).
+  function shuffledPositions() {
     const positions = [];
     for (let r = 0; r < 9; r++) for (let c = 0; c < 9; c++) positions.push([r, c]);
     for (let i = positions.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [positions[i], positions[j]] = [positions[j], positions[i]];
     }
-    for (let i = 0; i < GIVENS_TO_REMOVE; i++) {
-      const [r, c] = positions[i];
-      board[r][c] = 0;
-      givenMask[r][c] = false;
-    }
+    return positions;
   }
 
-  // --- Validación ---
+  function generatePuzzle(mode) {
+    let solutionGrid;
+    if (mode === "normal") {
+      const digits = emptyGrid();
+      fillDigitGrid(digits);
+      solutionGrid = digitGridToCrew(digits);
+    } else {
+      // El modo dificil NUNCA genera personajes nuevos: siempre es la misma solucion fija de
+      // 81 (ver HARD_SOLUTION) -- lo unico que cambia entre partidas es que casillas se
+      // esconden, no quien va en cada una.
+      solutionGrid = HARD_SOLUTION.map(row => row.map(cell => cell));
+    }
 
-  // Devuelve el conjunto de casillas (mismo valor) que entran en conflicto con (row, col) en
-  // su fila, columna o caja de 3x3 — vacío si no hay ningún choque.
+    const board = solutionGrid.map(row => row.slice());
+    const givenMask = Array.from({ length: 9 }, () => Array(9).fill(true));
+
+    const positions = shuffledPositions();
+    const toRemove = GIVENS_TO_REMOVE[mode];
+    for (let i = 0; i < toRemove; i++) {
+      const [r, c] = positions[i];
+      board[r][c] = null;
+      givenMask[r][c] = false;
+    }
+
+    modes[mode].board = board;
+    modes[mode].givenMask = givenMask;
+    modes[mode].selectedCell = null;
+  }
+
+  // --- Validacion ---
+
+  // En el modo normal, dos casillas chocan si tienen el MISMO personaje en su fila, columna o
+  // caja (sudoku clasico). En el modo dificil, chocan si comparten CUALQUIERA de las 9
+  // categorias del tablero (aparte de la propia de su caja, que comparten a proposito con
+  // todos sus companeros de caja) -- asi, alguien como Jinbe (Sombrero de Paja Y Gyojin) sigue
+  // chocando con cualquier otro Gyojin de su fila o columna, este en la caja que este.
+  function cellsConflict(a, b, boxA, boxB) {
+    if (currentMode === "normal") {
+      return a.id === b.id;
+    }
+    const catsA = a.cats.filter(i => i !== boxA);
+    const catsB = b.cats.filter(i => i !== boxB);
+    return catsA.some(i => catsB.includes(i));
+  }
+
   function findConflicts(row, col) {
+    const { board } = state();
     const val = board[row][col];
     if (!val) return [];
     const conflicts = [];
+    const ownBox = boxOf(row, col);
     for (let i = 0; i < 9; i++) {
-      if (i !== col && board[row][i] === val) conflicts.push([row, i]);
-      if (i !== row && board[i][col] === val) conflicts.push([i, col]);
-    }
-    const boxRow = Math.floor(row / 3) * 3, boxCol = Math.floor(col / 3) * 3;
-    for (let r = boxRow; r < boxRow + 3; r++) {
-      for (let c = boxCol; c < boxCol + 3; c++) {
-        if ((r !== row || c !== col) && board[r][c] === val) conflicts.push([r, c]);
-      }
+      if (i !== col && board[row][i] && cellsConflict(val, board[row][i], ownBox, boxOf(row, i))) conflicts.push([row, i]);
+      if (i !== row && board[i][col] && cellsConflict(val, board[i][col], ownBox, boxOf(i, col))) conflicts.push([i, col]);
     }
     return conflicts;
   }
@@ -318,82 +449,108 @@
   }
 
   function isBoardFull() {
-    return board.every(row => row.every(v => v !== 0));
+    return state().board.every(row => row.every(v => v !== null));
   }
 
-  // --- Interacción ---
+  // --- Interaccion ---
 
   function selectCell(r, c) {
-    if (givenMask[r][c]) return; // las casillas de partida no se pueden tocar
-    selectedCell = { r, c };
+    const st = state();
+    if (st.givenMask[r][c]) return;
+    st.selectedCell = { r, c };
     render();
   }
 
-  function placeValue(val) {
-    if (!selectedCell) return;
-    const { r, c } = selectedCell;
-    board[r][c] = val;
+  function placeValue(charObj) {
+    const st = state();
+    if (!st.selectedCell) return;
+    const { r, c } = st.selectedCell;
+    st.board[r][c] = charObj;
     render();
     checkWin();
   }
 
   function clearSelected() {
-    if (!selectedCell) return;
-    const { r, c } = selectedCell;
-    board[r][c] = 0;
+    const st = state();
+    if (!st.selectedCell) return;
+    const { r, c } = st.selectedCell;
+    st.board[r][c] = null;
     render();
   }
 
   function clearMyAnswers() {
+    const st = state();
     for (let r = 0; r < 9; r++) {
       for (let c = 0; c < 9; c++) {
-        if (!givenMask[r][c]) board[r][c] = 0;
+        if (!st.givenMask[r][c]) st.board[r][c] = null;
       }
     }
-    selectedCell = null;
+    st.selectedCell = null;
     render();
   }
 
   function newPuzzle() {
-    generatePuzzle();
-    selectedCell = null;
+    generatePuzzle(currentMode);
     render();
   }
 
-  // Al ganar (o si el tablero está lleno pero con algún conflicto), el aviso sustituye
-  // temporalmente al texto normal de la etiqueta del selector — el propio render() se encarga
+  // Cambia de modo SIN reiniciar ningun tablero -- cada uno conserva su progreso tal cual lo
+  // dejaste, se genere o no un panel para el la primera vez que se visita.
+  function switchMode(mode) {
+    currentMode = mode;
+    document.getElementById("mode-tab-normal").classList.toggle("active", mode === "normal");
+    document.getElementById("mode-tab-dificil").classList.toggle("active", mode === "dificil");
+    document.getElementById("subtitle").textContent = mode === "normal"
+      ? "Rellena el tablero para que cada fila, columna y caja de 3x3 tenga a los nueve tripulantes, sin repetir ninguno."
+      : "Cada caja de 3x3 es una categoria distinta (mira la leyenda de abajo). Ni una fila ni una columna pueden repetir a nadie que comparta alguna de esas categorias.";
+    document.getElementById("legend").style.display = mode === "dificil" ? "grid" : "none";
+    if (!state().board) generatePuzzle(mode);
+    render();
+  }
+
+  // Al ganar (o si el tablero esta lleno pero con algun conflicto), el aviso sustituye
+  // temporalmente al texto normal de la etiqueta del selector -- el propio render() se encarga
   // de devolverla a su texto de siempre en cuanto se vuelve a tocar cualquier casilla.
   function checkWin() {
     if (!isBoardFull()) return;
     const label = document.getElementById("picker-label");
     if (allConflictCells().size === 0) {
-      label.textContent = "🎉 ¡Sudoku resuelto! Toda la tripulación en su sitio.";
+      label.textContent = "\ud83c\udf89 \u00a1Sudoku resuelto! Toda la tripulacion en su sitio.";
       label.classList.add("win");
     } else {
-      label.textContent = "El tablero está lleno, pero hay alguna casilla repetida en su fila, columna o caja.";
+      label.textContent = "El tablero esta lleno, pero hay alguna casilla repetida en su fila, columna o caja.";
       label.classList.remove("win");
     }
   }
 
   // --- Pintado ---
 
-  function buildCellImg(val) {
-    if (!val) return "";
-    const crew = CREW[val - 1];
-    return `<img src="${crew.img}" alt="${crew.name}" title="${crew.name}"
-                 onerror="this.replaceWith(Object.assign(document.createElement('div'), {className:'fallback-text', textContent:'${crew.name}'}))">`;
+  // Algunos nombres llevan comillas simples de verdad (p. ej. Capone 'Gang' Bege) — sin
+  // escaparlas, romperían el código del aviso de imagen rota de abajo (que las usa como
+  // delimitador de cadena de texto).
+  function escapeForJsString(s) {
+    return s.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+  }
+
+  function buildCellImg(charObj) {
+    if (!charObj) return "";
+    const safeName = escapeForJsString(charObj.name);
+    return `<img src="${charObj.img}" alt="${charObj.name}" title="${charObj.name}"
+                 onerror="this.replaceWith(Object.assign(document.createElement('div'), {className:'fallback-text', textContent:'${safeName}'}))">`;
   }
 
   function render() {
+    const { board, givenMask, selectedCell } = state();
     const boardEl = document.getElementById("board");
     const conflicts = allConflictCells();
-    const selVal = selectedCell ? board[selectedCell.r][selectedCell.c] : 0;
+    const selVal = selectedCell ? board[selectedCell.r][selectedCell.c] : null;
 
     boardEl.innerHTML = "";
     for (let r = 0; r < 9; r++) {
       for (let c = 0; c < 9; c++) {
         const cell = document.createElement("div");
         cell.className = "cell";
+        if (currentMode === "dificil") cell.classList.add("box-" + boxOf(r, c));
         cell.dataset.row = r;
         cell.dataset.col = c;
         if (givenMask[r][c]) cell.classList.add("given");
@@ -402,7 +559,7 @@
                  (Math.floor(selectedCell.r / 3) === Math.floor(r / 3) && Math.floor(selectedCell.c / 3) === Math.floor(c / 3)))) {
           cell.classList.add("peer");
         }
-        if (selVal && board[r][c] === selVal) cell.classList.add("same-value");
+        if (selVal && board[r][c] && board[r][c].id === selVal.id) cell.classList.add("same-value");
         if (conflicts.has(r + "," + c)) cell.classList.add("conflict");
 
         cell.innerHTML = buildCellImg(board[r][c]);
@@ -411,26 +568,45 @@
       }
     }
 
-    // Vuelve siempre al texto normal (y quita el estilo verde de victoria, si lo tuviera) en
-    // cuanto se selecciona o deselecciona cualquier casilla — el aviso de victoria de
-    // checkWin() se escribe DESPUÉS de esto en cada jugada, así que nunca se pisan entre sí.
     const label = document.getElementById("picker-label");
     label.classList.remove("win");
     label.textContent = selectedCell
-      ? "Elige quién va en esta casilla:"
-      : "Toca una casilla vacía para elegir un tripulante";
+      ? "Elige quien va en esta casilla:"
+      : "Toca una casilla vacia para elegir un tripulante";
+
+    buildPicker();
   }
 
+  // El selector muestra siempre 9 opciones: en modo normal, los 9 tripulantes de siempre; en
+  // dificil, los 9 miembros REALES de la categoria de la caja donde este la casilla
+  // seleccionada (o nada, si no hay ninguna casilla seleccionada todavia).
   function buildPicker() {
     const pickerEl = document.getElementById("picker");
     pickerEl.innerHTML = "";
-    CREW.forEach((crew, i) => {
+    const { selectedCell } = state();
+
+    let options = [];
+    if (currentMode === "normal") {
+      options = CREW;
+    } else if (selectedCell) {
+      const box = boxOf(selectedCell.r, selectedCell.c);
+      const boxRow = Math.floor(box / 3) * 3, boxCol = (box % 3) * 3;
+      for (let r = boxRow; r < boxRow + 3; r++) {
+        for (let c = boxCol; c < boxCol + 3; c++) {
+          options.push(HARD_SOLUTION[r][c]);
+        }
+      }
+    }
+
+    options.forEach(charObj => {
       const btn = document.createElement("button");
-      btn.innerHTML = `<img src="${crew.img}" alt="${crew.name}" title="${crew.name}"
-                             onerror="this.replaceWith(Object.assign(document.createElement('div'), {className:'fallback-text', textContent:'${crew.name}'}))">`;
-      btn.onclick = () => placeValue(i + 1);
+      const safeName = escapeForJsString(charObj.name);
+      btn.innerHTML = `<img src="${charObj.img}" alt="${charObj.name}" title="${charObj.name}"
+                             onerror="this.replaceWith(Object.assign(document.createElement('div'), {className:'fallback-text', textContent:'${safeName}'}))">`;
+      btn.onclick = () => placeValue(charObj);
       pickerEl.appendChild(btn);
     });
+
     const clearBtn = document.createElement("button");
     clearBtn.className = "clear-btn";
     clearBtn.textContent = "Vaciar esta casilla";
@@ -438,11 +614,22 @@
     pickerEl.appendChild(clearBtn);
   }
 
-  // El tablero antes tenía un ancho fijo (como mucho 460px), sin tener en cuenta cuánto alto
-  // sobraba de verdad en la pantalla — en una ventana alta, se quedaba pequeño de más aunque
-  // hubiera mucho hueco libre debajo. Aquí medimos cuánto ocupa TODO lo demás (título,
-  // selector, botones...) y le damos al tablero el máximo posible que quepa a la vez en alto y
-  // en ancho, con 700px como techo para que tampoco crezca sin límite en pantallas enormes.
+  function buildLegend() {
+    const legendEl = document.getElementById("legend");
+    legendEl.innerHTML = "";
+    HARD_CATEGORIES.forEach((cat, i) => {
+      const item = document.createElement("div");
+      item.className = "legend-item";
+      item.innerHTML = `<span class="legend-swatch" style="background:var(--box-tint-${i})"></span><span>${cat}</span>`;
+      legendEl.appendChild(item);
+    });
+  }
+
+  // El tablero antes tenia un ancho fijo (como mucho 460px), sin tener en cuenta cuanto alto
+  // sobraba de verdad en la pantalla -- en una ventana alta, se quedaba pequeno de mas aunque
+  // hubiera mucho hueco libre debajo. Aqui medimos cuanto ocupa TODO lo demas (titulo,
+  // selector, botones...) y le damos al tablero el maximo posible que quepa a la vez en alto y
+  // en ancho, con 700px como techo para que tampoco crezca sin limite en pantallas enormes.
   function updateBoardSize() {
     const wrap = document.querySelector(".board-wrap");
     let usedHeight = 0;
@@ -455,16 +642,15 @@
     const verticalPadding = parseFloat(bodyStyle.paddingTop) + parseFloat(bodyStyle.paddingBottom);
     const horizontalPadding = parseFloat(bodyStyle.paddingLeft) + parseFloat(bodyStyle.paddingRight);
 
-    const availableHeight = window.innerHeight - usedHeight - verticalPadding - 12; // margen de seguridad
+    const availableHeight = window.innerHeight - usedHeight - verticalPadding - 12;
     const availableWidth = window.innerWidth - horizontalPadding;
     const size = Math.max(240, Math.min(availableHeight, availableWidth, 700));
     document.documentElement.style.setProperty("--board-size", size + "px");
   }
 
-  buildPicker();
-  newPuzzle();
-  // En el primer frame, no antes: hasta que el tablero y el resto de elementos no están ya
-  // pintados de verdad, medir su alto real daría valores incorrectos.
+  buildLegend();
+  generatePuzzle("normal");
+  render();
   requestAnimationFrame(updateBoardSize);
   window.addEventListener("resize", updateBoardSize);
 </script>
