@@ -27,7 +27,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 12px 60px;
+    padding: 20px 12px;
     min-height: 100vh;
   }
 
@@ -77,6 +77,8 @@
     object-fit: cover;
     object-position: top center;
     border-radius: 3px;
+    transform: scale(1.35);
+    transform-origin: top center;
   }
   /* Antes la diferencia era casi imperceptible (92% de opacidad, nada más) — ahora las fijas
      llevan un fondo más oscuro/apagado, la imagen bastante más tenue, y un candado pequeño en
@@ -123,6 +125,12 @@
     grid-template-columns: repeat(9, 1fr);
     gap: 6px;
   }
+  /* Sin ninguna casilla elegida, el selector entero se apaga y deja de responder al tacto —
+     antes se podía tocar sin que pasara nada visible, lo que confundía. */
+  .picker.disabled {
+    opacity: 0.35;
+    pointer-events: none;
+  }
   .picker button {
     padding: 0;
     border: 2px solid var(--card-border);
@@ -141,6 +149,8 @@
     object-fit: cover;
     object-position: top center;
     display: block;
+    transform: scale(1.35);
+    transform-origin: top center;
   }
   .picker .clear-btn {
     grid-column: span 9;
@@ -430,6 +440,8 @@
     label.textContent = selectedCell
       ? "Elige quién va en esta casilla:"
       : "Toca una casilla vacía para elegir un tripulante";
+
+    document.getElementById("picker").classList.toggle("disabled", !selectedCell);
   }
 
   function buildPicker() {
