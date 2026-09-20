@@ -10,7 +10,6 @@
     --card: #1e293b;
     --card-border: #334155;
     --amber: #f59e0b;
-    --amber-soft: rgba(245, 158, 11, 0.18);
     --text: #f8fafc;
     --text-dim: #94a3b8;
     --green: #22c55e;
@@ -70,6 +69,7 @@
     position: relative;
     cursor: pointer;
     padding: 2px;
+    overflow: hidden;
   }
   .cell img {
     width: 100%;
@@ -86,9 +86,9 @@
   .cell[data-row="2"], .cell[data-row="5"] { border-bottom: 2px solid var(--box-border); }
 
   .cell.selected { outline: 2px solid var(--amber); outline-offset: -2px; z-index: 2; }
-  .cell.peer { background: #24304a; }
-  .cell.same-value { background: var(--amber-soft); }
-  .cell.conflict img, .cell.conflict .fallback-text { outline: 2px solid var(--red); outline-offset: -2px; border-radius: 3px; }
+  .cell.peer { background: #35476b; }
+  .cell.same-value { background: rgba(56, 189, 248, 0.28); }
+  .cell.conflict { background: var(--red); }
 
   /* --- Selector de personajes --- */
   .picker-wrap {
@@ -101,6 +101,11 @@
     font-size: 0.78rem;
     text-align: center;
     margin: 0 0 8px;
+  }
+  .picker-label.win {
+    color: var(--green);
+    font-weight: bold;
+    font-size: 0.95rem;
   }
   .picker {
     display: grid;
@@ -157,19 +162,6 @@
     border: 1px solid var(--card-border);
   }
 
-  .status {
-    margin-top: 14px;
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    min-height: 1.2em;
-    text-align: center;
-  }
-  .status.win {
-    color: var(--green);
-    font-weight: bold;
-    font-size: 1rem;
-  }
-
   .fallback-text {
     font-size: 0.55rem;
     font-weight: bold;
@@ -177,6 +169,8 @@
     color: var(--text-dim);
     padding: 2px;
     line-height: 1.15;
+    word-break: break-word;
+    max-width: 100%;
   }
 </style>
 </head>
@@ -193,8 +187,6 @@
   <p class="picker-label" id="picker-label">Toca una casilla vacía para elegir un tripulante</p>
   <div class="picker" id="picker"></div>
 </div>
-
-<p class="status" id="status"></p>
 
 <div class="controls">
   <button class="btn" onclick="newPuzzle()">Nuevo tablero</button>
@@ -359,28 +351,27 @@
       }
     }
     selectedCell = null;
-    document.getElementById("status").textContent = "";
-    document.getElementById("status").className = "status";
     render();
   }
 
   function newPuzzle() {
     generatePuzzle();
     selectedCell = null;
-    document.getElementById("status").textContent = "";
-    document.getElementById("status").className = "status";
     render();
   }
 
+  // Al ganar (o si el tablero está lleno pero con algún conflicto), el aviso sustituye
+  // temporalmente al texto normal de la etiqueta del selector — el propio render() se encarga
+  // de devolverla a su texto de siempre en cuanto se vuelve a tocar cualquier casilla.
   function checkWin() {
-    const statusEl = document.getElementById("status");
     if (!isBoardFull()) return;
+    const label = document.getElementById("picker-label");
     if (allConflictCells().size === 0) {
-      statusEl.textContent = "🎉 ¡Sudoku resuelto! Toda la tripulación en su sitio.";
-      statusEl.className = "status win";
+      label.textContent = "🎉 ¡Sudoku resuelto! Toda la tripulación en su sitio.";
+      label.classList.add("win");
     } else {
-      statusEl.textContent = "El tablero está lleno, pero hay alguna casilla repetida en su fila, columna o caja.";
-      statusEl.className = "status";
+      label.textContent = "El tablero está lleno, pero hay alguna casilla repetida en su fila, columna o caja.";
+      label.classList.remove("win");
     }
   }
 
@@ -420,7 +411,11 @@
       }
     }
 
+    // Vuelve siempre al texto normal (y quita el estilo verde de victoria, si lo tuviera) en
+    // cuanto se selecciona o deselecciona cualquier casilla — el aviso de victoria de
+    // checkWin() se escribe DESPUÉS de esto en cada jugada, así que nunca se pisan entre sí.
     const label = document.getElementById("picker-label");
+    label.classList.remove("win");
     label.textContent = selectedCell
       ? "Elige quién va en esta casilla:"
       : "Toca una casilla vacía para elegir un tripulante";
