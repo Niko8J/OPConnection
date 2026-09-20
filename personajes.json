@@ -3485,7 +3485,8 @@
         {"val": "Recompensa: entre mil millones y menos de tres mil millones", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con cuernos", "dif": "dificil"}
+        {"val": "Personajes con cuernos", "dif": "dificil"},
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
       ]
     }
   },
@@ -5812,9 +5813,6 @@
       ],
       "Titulo": [
         {"val": "Emperatrices de Amazon Lilly", "dif": "media"}
-      ],
-      "Marcas": [
-        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ]
     }
   },
@@ -8099,6 +8097,9 @@
       "Banda": [
         {"val": "Piratas Rumbar", "dif": "facil"}
       ],
+      "Estado": [
+        {"val": "Personajes fallecidos", "dif": "media"}
+      ],
       "Especialidad": [
         {"val": "Músicos", "dif": "media"},
         {"val": "Capitanes pirata", "dif": "dificil"}
@@ -8120,6 +8121,9 @@
       "Banda": [
         {"val": "Piratas Rumbar", "dif": "facil"}
       ],
+      "Estado": [
+        {"val": "Personajes fallecidos", "dif": "media"}
+      ],
       "Especialidad": [
         {"val": "Músicos", "dif": "media"}
       ]
@@ -8132,6 +8136,9 @@
     "tags": {
       "Banda": [
         {"val": "Piratas Rumbar", "dif": "facil"}
+      ],
+      "Estado": [
+        {"val": "Personajes fallecidos", "dif": "media"}
       ],
       "Especialidad": [
         {"val": "Músicos", "dif": "media"}
@@ -12134,7 +12141,8 @@
         {"val": "Origen: North Blue", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"},
+        {"val": "Personajes con tatuajes", "dif": "dificil"}
       ]
     }
   },
