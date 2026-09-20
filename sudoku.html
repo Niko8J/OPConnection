@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>One Piece Sudoku</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --card-border: #334155;
+    --amber: #f59e0b;
+    --amber-soft: rgba(245, 158, 11, 0.18);
+    --text: #f8fafc;
+    --text-dim: #94a3b8;
+    --green: #22c55e;
+    --red: #ef4444;
+    --box-border: #64748b;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 12px 60px;
+    min-height: 100vh;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin: 4px 0 2px;
+    text-align: center;
+  }
+  .subtitle {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin: 0 0 18px;
+    text-align: center;
+    max-width: 420px;
+  }
+
+  /* --- Tablero --- */
+  .board-wrap {
+    width: min(94vw, 460px);
+  }
+  .board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--box-border);
+    gap: 1px;
+    border: 3px solid var(--box-border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .cell {
+    background: var(--card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    padding: 2px;
+  }
+  .cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 3px;
+  }
+  .cell.given { cursor: default; }
+  .cell.given img { opacity: 0.92; }
+
+  /* separa las cajas de 3x3 con un borde más grueso */
+  .cell[data-col="2"], .cell[data-col="5"] { border-right: 2px solid var(--box-border); }
+  .cell[data-row="2"], .cell[data-row="5"] { border-bottom: 2px solid var(--box-border); }
+
+  .cell.selected { outline: 2px solid var(--amber); outline-offset: -2px; z-index: 2; }
+  .cell.peer { background: #24304a; }
+  .cell.same-value { background: var(--amber-soft); }
+  .cell.conflict img, .cell.conflict .fallback-text { outline: 2px solid var(--red); outline-offset: -2px; border-radius: 3px; }
+
+  /* --- Selector de personajes --- */
+  .picker-wrap {
+    width: min(94vw, 460px);
+    margin-top: 16px;
+    min-height: 74px;
+  }
+  .picker-label {
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    text-align: center;
+    margin: 0 0 8px;
+  }
+  .picker {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 6px;
+  }
+  .picker button {
+    padding: 0;
+    border: 2px solid var(--card-border);
+    border-radius: 6px;
+    background: var(--card);
+    cursor: pointer;
+    aspect-ratio: 1;
+    overflow: hidden;
+    transition: border-color 0.15s ease, transform 0.1s ease;
+  }
+  .picker button:hover { border-color: var(--amber); }
+  .picker button:active { transform: scale(0.95); }
+  .picker img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+  .picker .clear-btn {
+    grid-column: span 9;
+    aspect-ratio: auto;
+    padding: 9px;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    font-weight: bold;
+  }
+
+  /* --- Controles --- */
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .btn {
+    background: var(--amber);
+    color: #1c1305;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  .btn.secondary {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--card-border);
+  }
+
+  .status {
+    margin-top: 14px;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    min-height: 1.2em;
+    text-align: center;
+  }
+  .status.win {
+    color: var(--green);
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .fallback-text {
+    font-size: 0.55rem;
+    font-weight: bold;
+    text-align: center;
+    color: var(--text-dim);
+    padding: 2px;
+    line-height: 1.15;
+  }
+</style>
+</head>
+<body>
+
+<h1>🏴‍☠️ One Piece Sudoku</h1>
+<p class="subtitle">Rellena el tablero para que cada fila, columna y caja de 3×3 tenga a los nueve tripulantes, sin repetir ninguno.</p>
+
+<div class="board-wrap">
+  <div class="board" id="board"></div>
+</div>
+
+<div class="picker-wrap">
+  <p class="picker-label" id="picker-label">Toca una casilla vacía para elegir un tripulante</p>
+  <div class="picker" id="picker"></div>
+</div>
+
+<p class="status" id="status"></p>
+
+<div class="controls">
+  <button class="btn" onclick="newPuzzle()">Nuevo tablero</button>
+  <button class="btn secondary" onclick="clearMyAnswers()">Borrar mis respuestas</button>
+</div>
+
+<script>
+  // Los nueve primeros en unirse a la tripulación de Luffy, por orden — las imágenes son las
+  // mismas rutas que ya usa opconnection.es, así que este archivo debe subirse a una carpeta
+  // que también tenga acceso a esa misma carpeta imagenes/ (o cambiar las rutas de abajo).
+  const CREW = [
+    { name: "Luffy",  img: "imagenes/Luffy.webp" },
+    { name: "Zoro",   img: "imagenes/Zoro.webp" },
+    { name: "Nami",   img: "imagenes/Nami.webp" },
+    { name: "Usopp",  img: "imagenes/Usopp.webp" },
+    { name: "Sanji",  img: "imagenes/Sanji.webp" },
+    { name: "Chopper",img: "imagenes/Chopper.webp" },
+    { name: "Robin",  img: "imagenes/Robin.webp" },
+    { name: "Franky", img: "imagenes/Franky.webp" },
+    { name: "Brook",  img: "imagenes/Brook.webp" }
+  ];
+
+  const GIVENS_TO_REMOVE = 42; // cuántas casillas se vacían del total de 81 (más alto = más difícil)
+
+  let solution = [];   // 9x9, la solución completa de verdad (1-9)
+  let board = [];      // 9x9, lo que hay ahora mismo en pantalla (0 = vacío)
+  let givenMask = [];  // 9x9, true si esa casilla venía ya rellena de partida (no se puede tocar)
+  let selectedCell = null; // {r, c} o null
+
+  // --- Generación del sudoku ---
+
+  function emptyGrid() {
+    return Array.from({ length: 9 }, () => Array(9).fill(0));
+  }
+
+  function isSafe(grid, row, col, val) {
+    for (let i = 0; i < 9; i++) {
+      if (grid[row][i] === val || grid[i][col] === val) return false;
+    }
+    const boxRow = Math.floor(row / 3) * 3, boxCol = Math.floor(col / 3) * 3;
+    for (let r = boxRow; r < boxRow + 3; r++) {
+      for (let c = boxCol; c < boxCol + 3; c++) {
+        if (grid[r][c] === val) return false;
+      }
+    }
+    return true;
+  }
+
+  function shuffledDigits() {
+    const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  // Backtracking estándar, con el orden de dígitos barajado en cada casilla para que el
+  // tablero completo salga distinto cada vez que se genera uno nuevo.
+  function fillGrid(grid) {
+    for (let row = 0; row < 9; row++) {
+      for (let col = 0; col < 9; col++) {
+        if (grid[row][col] !== 0) continue;
+        for (const val of shuffledDigits()) {
+          if (isSafe(grid, row, col, val)) {
+            grid[row][col] = val;
+            if (fillGrid(grid)) return true;
+            grid[row][col] = 0;
+          }
+        }
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function generatePuzzle() {
+    solution = emptyGrid();
+    fillGrid(solution);
+
+    board = solution.map(row => row.slice());
+    givenMask = Array.from({ length: 9 }, () => Array(9).fill(true));
+
+    // Vaciamos casillas al azar hasta llegar al número pedido — no comprobamos que la solución
+    // siga siendo única (para esta primera versión no hace falta: validamos contra las reglas
+    // del propio sudoku en cada jugada, no contra "la" solución concreta que generamos aquí).
+    const positions = [];
+    for (let r = 0; r < 9; r++) for (let c = 0; c < 9; c++) positions.push([r, c]);
+    for (let i = positions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [positions[i], positions[j]] = [positions[j], positions[i]];
+    }
+    for (let i = 0; i < GIVENS_TO_REMOVE; i++) {
+      const [r, c] = positions[i];
+      board[r][c] = 0;
+      givenMask[r][c] = false;
+    }
+  }
+
+  // --- Validación ---
+
+  // Devuelve el conjunto de casillas (mismo valor) que entran en conflicto con (row, col) en
+  // su fila, columna o caja de 3x3 — vacío si no hay ningún choque.
+  function findConflicts(row, col) {
+    const val = board[row][col];
+    if (!val) return [];
+    const conflicts = [];
+    for (let i = 0; i < 9; i++) {
+      if (i !== col && board[row][i] === val) conflicts.push([row, i]);
+      if (i !== row && board[i][col] === val) conflicts.push([i, col]);
+    }
+    const boxRow = Math.floor(row / 3) * 3, boxCol = Math.floor(col / 3) * 3;
+    for (let r = boxRow; r < boxRow + 3; r++) {
+      for (let c = boxCol; c < boxCol + 3; c++) {
+        if ((r !== row || c !== col) && board[r][c] === val) conflicts.push([r, c]);
+      }
+    }
+    return conflicts;
+  }
+
+  function allConflictCells() {
+    const set = new Set();
+    for (let r = 0; r < 9; r++) {
+      for (let c = 0; c < 9; c++) {
+        if (findConflicts(r, c).length) set.add(r + "," + c);
+      }
+    }
+    return set;
+  }
+
+  function isBoardFull() {
+    return board.every(row => row.every(v => v !== 0));
+  }
+
+  // --- Interacción ---
+
+  function selectCell(r, c) {
+    if (givenMask[r][c]) return; // las casillas de partida no se pueden tocar
+    selectedCell = { r, c };
+    render();
+  }
+
+  function placeValue(val) {
+    if (!selectedCell) return;
+    const { r, c } = selectedCell;
+    board[r][c] = val;
+    render();
+    checkWin();
+  }
+
+  function clearSelected() {
+    if (!selectedCell) return;
+    const { r, c } = selectedCell;
+    board[r][c] = 0;
+    render();
+  }
+
+  function clearMyAnswers() {
+    for (let r = 0; r < 9; r++) {
+      for (let c = 0; c < 9; c++) {
+        if (!givenMask[r][c]) board[r][c] = 0;
+      }
+    }
+    selectedCell = null;
+    document.getElementById("status").textContent = "";
+    document.getElementById("status").className = "status";
+    render();
+  }
+
+  function newPuzzle() {
+    generatePuzzle();
+    selectedCell = null;
+    document.getElementById("status").textContent = "";
+    document.getElementById("status").className = "status";
+    render();
+  }
+
+  function checkWin() {
+    const statusEl = document.getElementById("status");
+    if (!isBoardFull()) return;
+    if (allConflictCells().size === 0) {
+      statusEl.textContent = "🎉 ¡Sudoku resuelto! Toda la tripulación en su sitio.";
+      statusEl.className = "status win";
+    } else {
+      statusEl.textContent = "El tablero está lleno, pero hay alguna casilla repetida en su fila, columna o caja.";
+      statusEl.className = "status";
+    }
+  }
+
+  // --- Pintado ---
+
+  function buildCellImg(val) {
+    if (!val) return "";
+    const crew = CREW[val - 1];
+    return `<img src="${crew.img}" alt="${crew.name}" title="${crew.name}"
+                 onerror="this.replaceWith(Object.assign(document.createElement('div'), {className:'fallback-text', textContent:'${crew.name}'}))">`;
+  }
+
+  function render() {
+    const boardEl = document.getElementById("board");
+    const conflicts = allConflictCells();
+    const selVal = selectedCell ? board[selectedCell.r][selectedCell.c] : 0;
+
+    boardEl.innerHTML = "";
+    for (let r = 0; r < 9; r++) {
+      for (let c = 0; c < 9; c++) {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        cell.dataset.row = r;
+        cell.dataset.col = c;
+        if (givenMask[r][c]) cell.classList.add("given");
+        if (selectedCell && selectedCell.r === r && selectedCell.c === c) cell.classList.add("selected");
+        else if (selectedCell && (selectedCell.r === r || selectedCell.c === c ||
+                 (Math.floor(selectedCell.r / 3) === Math.floor(r / 3) && Math.floor(selectedCell.c / 3) === Math.floor(c / 3)))) {
+          cell.classList.add("peer");
+        }
+        if (selVal && board[r][c] === selVal) cell.classList.add("same-value");
+        if (conflicts.has(r + "," + c)) cell.classList.add("conflict");
+
+        cell.innerHTML = buildCellImg(board[r][c]);
+        cell.onclick = () => selectCell(r, c);
+        boardEl.appendChild(cell);
+      }
+    }
+
+    const label = document.getElementById("picker-label");
+    label.textContent = selectedCell
+      ? "Elige quién va en esta casilla:"
+      : "Toca una casilla vacía para elegir un tripulante";
+  }
+
+  function buildPicker() {
+    const pickerEl = document.getElementById("picker");
+    pickerEl.innerHTML = "";
+    CREW.forEach((crew, i) => {
+      const btn = document.createElement("button");
+      btn.innerHTML = `<img src="${crew.img}" alt="${crew.name}" title="${crew.name}"
+                             onerror="this.replaceWith(Object.assign(document.createElement('div'), {className:'fallback-text', textContent:'${crew.name}'}))">`;
+      btn.onclick = () => placeValue(i + 1);
+      pickerEl.appendChild(btn);
+    });
+    const clearBtn = document.createElement("button");
+    clearBtn.className = "clear-btn";
+    clearBtn.textContent = "Vaciar esta casilla";
+    clearBtn.onclick = clearSelected;
+    pickerEl.appendChild(clearBtn);
+  }
+
+  buildPicker();
+  newPuzzle();
+</script>
+</body>
+</html>
