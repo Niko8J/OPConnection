@@ -81,7 +81,7 @@
   .row-label.victim { border-color: var(--red); border-width: 3px; }
   .row-label.victim::after {
     content: "☠"; position: absolute; bottom: 0; right: 1px;
-    font-size: 0.7em; color: var(--red);
+    font-size: 1.1em; color: var(--red);
   }
 
   .board {
@@ -117,7 +117,12 @@
 
   .cell.blocked { cursor: not-allowed; }
   .cell.blocked .furniture-icon {
-    font-size: 1.3em; opacity: 0.55;
+    font-size: 2em; opacity: 0.6;
+  }
+  .furniture-icon.decorative {
+    position: absolute; bottom: 1px; left: 2px;
+    font-size: 1.3em; opacity: 0.85; z-index: 3; pointer-events: none;
+    text-shadow: 0 0 3px #000, 0 0 3px #000;
   }
   .cell.taken-col { cursor: not-allowed; opacity: 0.35; }
   .cell.occupied { cursor: pointer; }
@@ -232,11 +237,18 @@
     return null;
   }
 
-  // Muebles: casillas bloqueadas, nadie se puede colocar ahí.
-  const FURNITURE = {
-    "0,3": "🪵 Mástil", "1,0": "💣 Cañón", "3,1": "🛏️ Cama",
+  // Mobiliario que BLOQUEA de verdad (objetos sólidos, nadie se puede colocar encima).
+  const BLOCKING_FURNITURE = {
+    "0,3": "🪵 Mástil", "1,0": "💣 Cañón",
     "2,5": "🛢️ Barril", "5,2": "🪙 Cofre", "4,5": "🧭 Timón", "6,3": "🔭 Catalejo"
   };
+  // Mobiliario DECORATIVO: no bloquea — alguien puede sentarse o estar de pie encima, así que
+  // esa casilla sigue siendo una opción válida para colocar a una persona. La cama, al ser más
+  // grande que el resto, ocupa 2 casillas seguidas en vez de solo una.
+  const DECORATIVE_FURNITURE = {
+    "3,1": "🛏️ Cama", "3,2": "🛏️ Cama", "5,0": "🪑 Silla"
+  };
+  const ALL_FURNITURE = { ...BLOCKING_FURNITURE, ...DECORATIVE_FURNITURE };
 
   // Las 7 personas, cada una con su fila fija — Buggy es la víctima (fila 4).
   const PEOPLE = [
@@ -251,9 +263,10 @@
   const personById = Object.fromEntries(PEOPLE.map(p => [p.id, p]));
 
   // Solución real fijada de antemano y comprobada por ordenador: con las 5 pistas de abajo,
-  // de las 1.768 formas válidas de colocar a las 7 personas sin pisar muebles (una por fila y
-  // columna), esta es la ÚNICA que las cumple todas a la vez. El asesino sale solo, no hace
-  // falta guardarlo a mano: es quien comparta sala con la víctima en esta misma solución.
+  // de las 2.016 formas válidas de colocar a las 7 personas sin pisar ningún mueble que
+  // bloquee de verdad (la cama y la silla no cuentan, ahí sí se puede colocar a alguien), esta
+  // es la ÚNICA que las cumple todas a la vez. El asesino sale solo, no hace falta guardarlo a
+  // mano: es quien comparta sala con la víctima en esta misma solución.
   const SOLUTION_COL = { mohji: 1, cabaji: 5, alvida: 2, tashigi: 3, buggy: 4, smoker: 6, bellamy: 0 };
   const MURDERER_ID = (() => {
     const victim = PEOPLE.find(p => p.victim);
@@ -263,18 +276,19 @@
   })();
 
   // Las 5 pistas, comprobadas por ordenador para que, juntas, dejen SOLO esta solución posible
-  // entre las 1.768 formas válidas de colocar a todos sin pisar ningún mueble.
+  // entre las 2.016 formas válidas de colocar a todos sin pisar ningún mueble de los que
+  // bloquean de verdad (la cama y la silla no cuentan como bloqueo: alguien puede sentarse).
   const CLUES = [
+    { text: "Bellamy estaba justo al lado de: 🪑 Silla.",
+      check: pos => isAdjacentToFurniture(pos.bellamy, "5,0") },
+    { text: "Mohji y Bellamy estaban en columnas contiguas (un número de columna justo al lado del otro).",
+      check: pos => pos.mohji != null && pos.bellamy != null && Math.abs(pos.mohji - pos.bellamy) === 1 },
     { text: "Cabaji estaba justo al lado de: 🛢️ Barril.",
       check: pos => isAdjacentToFurniture(pos.cabaji, "2,5") },
-    { text: "Cabaji estaba más a la izquierda que Smoker.",
-      check: pos => pos.cabaji != null && pos.smoker != null && pos.cabaji < pos.smoker },
-    { text: "Buggy estaba en: Timón.",
-      check: pos => pos.buggy != null && roomOf(personById.buggy.row, pos.buggy) === "Timon" },
-    { text: "Alvida y Tashigi estaban en columnas contiguas (un número de columna justo al lado del otro).",
-      check: pos => pos.alvida != null && pos.tashigi != null && Math.abs(pos.alvida - pos.tashigi) === 1 },
-    { text: "Alvida y Mohji estaban en columnas contiguas (un número de columna justo al lado del otro).",
-      check: pos => pos.alvida != null && pos.mohji != null && Math.abs(pos.alvida - pos.mohji) === 1 }
+    { text: "Buggy estaba en la misma sala que Smoker.",
+      check: pos => pos.buggy != null && pos.smoker != null && roomOf(personById.buggy.row, pos.buggy) === roomOf(personById.smoker.row, pos.smoker) },
+    { text: "Buggy y Tashigi estaban en columnas contiguas (un número de columna justo al lado del otro).",
+      check: pos => pos.buggy != null && pos.tashigi != null && Math.abs(pos.buggy - pos.tashigi) === 1 }
   ];
 
   function isAdjacentToFurniture(col, furnitureKey) {
@@ -292,7 +306,7 @@
 
   // --- Estado ---
   let placed = {};       // personId -> columna (o undefined si no colocado aún)
-  let selectedPersonId = PEOPLE[0].id;
+  let selectedPersonId = null; // nadie elegido de partida: hay que tocar un retrato a propósito
   let murdererGuessed = false;
 
   function usedColumns() {
@@ -300,7 +314,7 @@
   }
 
   function isFurniture(r, c) {
-    return (r + "," + c) in FURNITURE;
+    return (r + "," + c) in BLOCKING_FURNITURE;
   }
 
   // --- Interacción ---
@@ -318,9 +332,9 @@
     if (usedColumns().has(col)) return;
     placed[selectedPersonId] = col;
 
-    // pasar automáticamente a la siguiente persona sin colocar, si queda alguna
-    const next = PEOPLE.find(p => placed[p.id] == null);
-    selectedPersonId = next ? next.id : null;
+    // Ya no se salta solo a la siguiente persona: hay que volver a elegir a propósito, tocando
+    // su retrato — así nunca se coloca a nadie sin que lo hayas decidido tú.
+    selectedPersonId = null;
     render();
     checkComplete();
   }
@@ -335,7 +349,7 @@
 
   function resetBoard() {
     placed = {};
-    selectedPersonId = PEOPLE[0].id;
+    selectedPersonId = null;
     murdererGuessed = false;
     document.getElementById("suspect-picker").classList.remove("show");
     document.getElementById("status").textContent = "";
@@ -392,6 +406,16 @@
     renderRowLabels();
     renderBoard();
     renderClues();
+
+    // Aviso de qué tocar primero — solo mientras el tablero no esté completo (no pisa el
+    // mensaje de victoria/error, que se escribe aparte en checkComplete/guessMurderer).
+    if (Object.keys(placed).length < PEOPLE.length) {
+      const statusEl = document.getElementById("status");
+      statusEl.className = "status";
+      statusEl.textContent = selectedPersonId
+        ? `Toca la casilla de su fila donde crees que estaba ${personById[selectedPersonId].name}.`
+        : "Toca primero el retrato de alguien a la izquierda para empezar a colocarlo.";
+    }
   }
 
   function renderRowLabels() {
@@ -421,19 +445,23 @@
         cell.disabled = true; // se habilita más abajo solo si de verdad se puede pulsar
 
         const furnKey = r + "," + c;
-        if (FURNITURE[furnKey]) {
+        const decorativeIcon = DECORATIVE_FURNITURE[furnKey]
+          ? `<span class="furniture-icon decorative">${DECORATIVE_FURNITURE[furnKey].split(" ")[0]}</span>` : "";
+
+        if (BLOCKING_FURNITURE[furnKey]) {
           cell.classList.add("blocked");
-          cell.innerHTML = `<span class="furniture-icon">${FURNITURE[furnKey].split(" ")[0]}</span>`;
+          cell.innerHTML = `<span class="furniture-icon">${BLOCKING_FURNITURE[furnKey].split(" ")[0]}</span>`;
         } else {
           // ¿hay alguien ya colocado aquí?
           const personHere = PEOPLE.find(p => p.row === r && placed[p.id] === c);
           if (personHere) {
             cell.classList.add("occupied");
             cell.innerHTML = `<img src="${personHere.img}" alt="${personHere.name}" title="${personHere.name}"
-                                    onerror="this.replaceWith(Object.assign(document.createElement('div'), {className:'fallback-text', textContent:'${personHere.name}'}))">`;
+                                    onerror="this.replaceWith(Object.assign(document.createElement('div'), {className:'fallback-text', textContent:'${personHere.name}'}))">` + decorativeIcon;
             cell.onclick = () => clearPerson(personHere.id);
             cell.disabled = false;
           } else if (r === personById[selectedPersonId]?.row) {
+            cell.innerHTML = decorativeIcon;
             if (used.has(c)) {
               cell.classList.add("taken-col");
             } else {
@@ -441,8 +469,9 @@
               cell.onclick = () => placeAt(c);
               cell.disabled = false;
             }
-          } else if (used.has(c)) {
-            cell.classList.add("taken-col");
+          } else {
+            cell.innerHTML = decorativeIcon;
+            if (used.has(c)) cell.classList.add("taken-col");
           }
         }
         el.appendChild(cell);
