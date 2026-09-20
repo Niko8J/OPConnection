@@ -78,8 +78,19 @@
     object-position: top center;
     border-radius: 3px;
   }
-  .cell.given { cursor: default; }
-  .cell.given img { opacity: 0.92; }
+  /* Antes la diferencia era casi imperceptible (92% de opacidad, nada más) — ahora las fijas
+     llevan un fondo más oscuro/apagado, la imagen bastante más tenue, y un candado pequeño en
+     la esquina para que no quede ninguna duda de cuáles no se pueden tocar. */
+  .cell.given { cursor: default; background: #141c2b; }
+  .cell.given img { opacity: 0.55; filter: saturate(0.6); }
+  .cell.given::after {
+    content: "🔒";
+    position: absolute;
+    top: 1px; right: 2px;
+    font-size: 0.55em;
+    opacity: 0.75;
+    line-height: 1;
+  }
 
   /* separa las cajas de 3x3 con un borde más grueso */
   .cell[data-col="2"], .cell[data-col="5"] { border-right: 2px solid var(--box-border); }
