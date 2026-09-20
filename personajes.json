@@ -4493,6 +4493,9 @@
     "name": "Rebecca",
     "img": "imagenes/Rebecca.webp",
     "tags": {
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
+      ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
       ],
@@ -11331,6 +11334,9 @@
     "name": "Charlotte Flampe",
     "img": "imagenes/CharlotteFlampe.webp",
     "tags": {
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
+      ],
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
         {"val": "Piratas de Big Mom", "dif": "media"}
@@ -11817,6 +11823,9 @@
     "name": "Charlotte Pudding",
     "img": "imagenes/Pudding.webp",
     "tags": {
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
+      ],
       "Banda": [
         {"val": "Familia Charlotte", "dif": "media"},
         {"val": "Piratas de Big Mom", "dif": "media"}
@@ -11837,6 +11846,9 @@
     "name": "Dellinger",
     "img": "imagenes/Dellinger.webp",
     "tags": {
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
+      ],
       "Banda": [
         {"val": "Donquixote Family", "dif": "facil"}
       ],
