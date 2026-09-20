@@ -46,7 +46,7 @@
 
   /* --- Tablero --- */
   .board-wrap {
-    width: min(94vw, 460px);
+    width: var(--board-size, min(94vw, 460px));
   }
   .board {
     display: grid;
@@ -438,8 +438,35 @@
     pickerEl.appendChild(clearBtn);
   }
 
+  // El tablero antes tenía un ancho fijo (como mucho 460px), sin tener en cuenta cuánto alto
+  // sobraba de verdad en la pantalla — en una ventana alta, se quedaba pequeño de más aunque
+  // hubiera mucho hueco libre debajo. Aquí medimos cuánto ocupa TODO lo demás (título,
+  // selector, botones...) y le damos al tablero el máximo posible que quepa a la vez en alto y
+  // en ancho, con 700px como techo para que tampoco crezca sin límite en pantallas enormes.
+  function updateBoardSize() {
+    const wrap = document.querySelector(".board-wrap");
+    let usedHeight = 0;
+    Array.from(document.body.children).forEach(el => {
+      if (el === wrap) return;
+      const style = getComputedStyle(el);
+      usedHeight += el.offsetHeight + parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+    });
+    const bodyStyle = getComputedStyle(document.body);
+    const verticalPadding = parseFloat(bodyStyle.paddingTop) + parseFloat(bodyStyle.paddingBottom);
+    const horizontalPadding = parseFloat(bodyStyle.paddingLeft) + parseFloat(bodyStyle.paddingRight);
+
+    const availableHeight = window.innerHeight - usedHeight - verticalPadding - 12; // margen de seguridad
+    const availableWidth = window.innerWidth - horizontalPadding;
+    const size = Math.max(240, Math.min(availableHeight, availableWidth, 700));
+    document.documentElement.style.setProperty("--board-size", size + "px");
+  }
+
   buildPicker();
   newPuzzle();
+  // En el primer frame, no antes: hasta que el tablero y el resto de elementos no están ya
+  // pintados de verdad, medir su alto real daría valores incorrectos.
+  requestAnimationFrame(updateBoardSize);
+  window.addEventListener("resize", updateBoardSize);
 </script>
 </body>
 </html>
