@@ -413,7 +413,9 @@
       "Banda": [
         {"val": "Banda: Sombrero de Paja", "dif": "media"},
         {"val": "Agentes de Baroque Works", "dif": "media"},
-        {"val": "Reino de Alabasta", "dif": "facil"}
+        {"val": "Reino de Alabasta", "dif": "facil"},
+        {"val": "Escuadrón de Súper Patos", "dif": "facil"},
+        {"val": "Escuadrón de Súper Patos", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -425,7 +427,8 @@
         {"val": "Personajes que viajaron con los Sombrero de Paja", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con alas", "dif": "dificil"}
+        {"val": "Personajes con alas", "dif": "dificil"},
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ]
     }
   },
@@ -3838,7 +3841,8 @@
     "img": "imagenes/Matsuge.webp",
     "tags": {
       "Banda": [
-        {"val": "Reino de Alabasta", "dif": "facil"}
+        {"val": "Reino de Alabasta", "dif": "facil"},
+        {"val": "Escuadrón de Súper Patos", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -5292,6 +5296,9 @@
     "name": "Hibari",
     "img": "imagenes/Hibari.webp",
     "tags": {
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
+      ],
       "Banda": [
         {"val": "Marines", "dif": "facil"},
         {"val": "Miembros de SWORD", "dif": "media"}
@@ -7509,7 +7516,8 @@
       "Origen": [
         {"val": "Origen: Islas del Cielo", "dif": "facil"}
       ],
-      "Marcas": []
+      "Marcas": [
+      ]
     }
   },
   {
@@ -8043,9 +8051,6 @@
       ],
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
-      ],
-      "Raza": [
-        {"val": "Cyborgs", "dif": "media"}
       ]
     }
   },
@@ -9212,6 +9217,9 @@
     "name": "Rosward Shalria",
     "img": "imagenes/Shalria.webp",
     "tags": {
+      "Edad": [
+        {"val": "Menores de edad", "dif": "dificil"}
+      ],
       "Titulo": [
         {"val": "Nobles mundiales", "dif": "dificil"}
       ],
@@ -14558,6 +14566,136 @@
       ],
       "Fruta": [
         {"val": "Sin fruta del diablo", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "cowboy",
+    "name": "Cowboy",
+    "img": "imagenes/Cowboy.webp",
+    "tags": {
+      "Banda": [
+        {"val": "Reino de Alabasta", "dif": "facil"},
+        {"val": "Escuadrón de Súper Patos", "dif": "facil"},
+        {"val": "Escuadrón de Súper Patos", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con gafas", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "ivan_x",
+    "name": "Ivan X",
+    "img": "imagenes/IvanX.webp",
+    "tags": {
+      "Banda": [
+        {"val": "Reino de Alabasta", "dif": "facil"},
+        {"val": "Escuadrón de Súper Patos", "dif": "facil"},
+        {"val": "Escuadrón de Súper Patos", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "kentauros",
+    "name": "Kentauros",
+    "img": "imagenes/Kentauros.webp",
+    "tags": {
+      "Banda": [
+        {"val": "Reino de Alabasta", "dif": "facil"},
+        {"val": "Escuadrón de Súper Patos", "dif": "facil"},
+        {"val": "Escuadrón de Súper Patos", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes que fuman", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "stomp",
+    "name": "Stomp",
+    "img": "imagenes/Stomp.webp",
+    "tags": {
+      "Banda": [
+        {"val": "Reino de Alabasta", "dif": "facil"},
+        {"val": "Escuadrón de Súper Patos", "dif": "facil"},
+        {"val": "Escuadrón de Súper Patos", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "bourbon_jr",
+    "name": "Bourbon Jr.",
+    "img": "imagenes/BourbonJr.webp",
+    "tags": {
+      "Banda": [
+        {"val": "Reino de Alabasta", "dif": "facil"},
+        {"val": "Escuadrón de Súper Patos", "dif": "facil"},
+        {"val": "Escuadrón de Súper Patos", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"},
+        {"val": "Personajes con gafas", "dif": "dificil"}
+      ]
+    }
+  },
+  {
+    "id": "hikoichi",
+    "name": "Hikoichi",
+    "img": "imagenes/Hikoichi.webp",
+    "tags": {
+      "Banda": [
+        {"val": "Reino de Alabasta", "dif": "facil"},
+        {"val": "Escuadrón de Súper Patos", "dif": "facil"},
+        {"val": "Escuadrón de Súper Patos", "dif": "media"}
+      ],
+      "Origen": [
+        {"val": "Origen: Grand Line", "dif": "dificil"}
+      ],
+      "Raza": [
+        {"val": "Animales", "dif": "media"}
+      ],
+      "Marcas": [
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ]
     }
   }
