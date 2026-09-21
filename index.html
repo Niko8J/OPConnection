@@ -982,6 +982,19 @@
     }
     .site-tagline i { color: #94a3b8; }
     .site-tagline a { color: #94a3b8; }
+    /* Bloque de texto explicativo, solo al final de la página (debajo del juego, antes del pie)
+       — mismo tono apagado que el resto del pie, para que no compita visualmente con el
+       tablero ni con nada de la partida en sí. */
+    .site-about-text {
+      max-width: 640px; margin: calc(var(--v-gap-sm) * 2) auto 0; padding: 0 12px;
+      font-size: 0.74rem; color: #64748b; line-height: 1.6; text-align: left;
+    }
+    .site-about-text h2 {
+      font-size: 0.85rem; color: #94a3b8; text-align: center; margin: 0 0 10px;
+    }
+    .site-about-text p { margin: 0 0 10px; }
+    .site-about-text p:last-child { margin-bottom: 0; }
+    .site-about-text i { color: #94a3b8; }
     .site-footer {
       display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap;
       margin-top: var(--v-gap-sm); flex-shrink: 0;
@@ -1394,6 +1407,28 @@
     <span class="footer-sep">·</span>
     <a href="privacidad.html" class="footer-link" onclick="openPrivacyModal(); return false;">Privacidad</a>
   </footer>
+
+  <section class="site-about-text">
+    <h2>Sobre One Piece Connection</h2>
+    <p>
+      One Piece Connection es un juego de puzles diario, inspirado en el popular <i>Connections</i> del New York Times,
+      pero con personajes del manga y anime <i>One Piece</i> en lugar de palabras. En cada panel aparecen 16 personajes
+      mezclados: el objetivo es encontrar los 4 grupos de 4 que tienen algo en común (una misma tripulación, el mismo
+      origen, una fruta del diablo compartida, una característica física, y muchas otras conexiones posibles) sin
+      equivocarte más de 4 veces.
+    </p>
+    <p>
+      Cada día hay un panel nuevo, igual para todos los jugadores, en tres niveles de dificultad: Novato, Supernova y
+      Yonko. Si prefieres jugar sin parar, el modo Infinito genera panel tras panel al azar hasta que te quedes sin
+      vidas. Registrándote gratis puedes guardar tu progreso, encadenar rachas de días seguidos acertando, desbloquear
+      logros y avatares exclusivos de personajes, y competir por posición en el ranking global.
+    </p>
+    <p>
+      Es un proyecto hecho por fans de <i>One Piece</i>, sin ánimo de lucro y sin ninguna relación oficial con Eiichiro
+      Oda, Shueisha ni Toei Animation — solo una forma divertida de poner a prueba cuánto conoces el mundo creado por
+      Oda, un poco cada día.
+    </p>
+  </section>
   </main>
 
   <div class="ad-side" id="ad-side-right">
@@ -5013,6 +5048,10 @@
     Array.from(container.children).forEach(child => {
       if (child === board) return;
       if (getComputedStyle(child).position === "absolute") return; // no ocupan espacio en el flujo
+      // El bloque de texto explicativo (.site-about-text) queda fuera de esta cuenta a
+      // propósito: solo está pensado para quien haga scroll hasta el final de la página (o
+      // para un rastreador/revisor que lea el HTML), nunca para restarle espacio al tablero.
+      if (child.classList.contains("site-about-text")) return;
       const style = getComputedStyle(child);
       siblingsHeight += child.offsetHeight + parseFloat(style.marginTop) + parseFloat(style.marginBottom);
     });
