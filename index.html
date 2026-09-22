@@ -1874,6 +1874,14 @@
   let database = [];
   let currentDifficulty = "facil";
   let currentCategories = [];
+  // Si pulsas dos dificultades seguidas muy rápido (antes de que la primera termine de cargar),
+  // puede que la petición más antigua tarde más en responder que la más nueva — y si dejamos
+  // que la más antigua siga su curso, acaba pisando con SU contenido lo que ya se había cargado
+  // bien para la más nueva (aunque el botón resaltado sea el correcto). Este contador sirve para
+  // detectar justo ese caso: cada llamada a setDifficulty se queda con "su" número, y si al
+  // terminar ya no coincide con el número más reciente, significa que otra más nueva la ha
+  // adelantado — así que la descarta en silencio, sin tocar nada de lo que ya se ve en pantalla.
+  let difficultySwitchRequestId = 0;
   // Qué día del reto diario está mostrando el tablero ahora mismo — no siempre es "hoy": puede
   // ser un día pasado, si se ha entrado desde el calendario de "Paneles pasados". Solo tiene
   // sentido en los modos diarios (Novato/Supernova/Yonko), nunca en Infinito. Se usa para saber
@@ -5398,6 +5406,8 @@
   });
 
   async function setDifficulty(level, event) {
+    const myRequestId = ++difficultySwitchRequestId;
+
     if (!isInfiniteMode && currentDifficulty === level) {
       if (gameOver) {
         // El reto de hoy en esta dificultad ya está resuelto (ganado o perdido) y ya lo
@@ -5473,6 +5483,13 @@
       showBoardLoading("Cargando tu partida de Infinito…");
       const { state: saved, timedOut } = await loadInfiniteState();
 
+      if (myRequestId !== difficultySwitchRequestId) {
+        // Mientras esperábamos, ya se ha pedido otra dificultad distinta más reciente — no
+        // tocamos nada, para no pisar lo que esa otra ya haya puesto en pantalla.
+        hideBoardLoading();
+        return;
+      }
+
       if (timedOut) {
         document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
         if (previousActiveBtn) previousActiveBtn.classList.add('active');
@@ -5506,7 +5523,7 @@
 
     // Novato / Supernova / Yonko: reto diario compartido por todos (ver "Reto diario" más abajo).
     updateInfiniteScoreDisplay();
-    await loadDailyChallenge(level);
+    await loadDailyChallenge(level, myRequestId);
   }
 
   function updateInfiniteScoreDisplay() {
@@ -6790,7 +6807,7 @@
   // Punto de entrada al pulsar Novato/Supernova/Yonko (o al cargar la página en uno de esos
   // modos). Si ya jugaste hoy esa dificultad, muestra directamente el resultado guardado en
   // vez de dejar reintentarlo; si no, carga (o genera) el panel compartido del día.
-  async function loadDailyChallenge(difficulty) {
+  async function loadDailyChallenge(difficulty, myRequestId) {
     const todayKey = getMadridDailyKey();
     // Con sesión iniciada, el "ya jugaste hoy" vive en tu cuenta (currentUserProfile, ya
     // cargada de Firestore), así que se ve igual en cualquier dispositivo. Como invitado,
@@ -6814,6 +6831,12 @@
 
     try {
       const groups = await getOrCreateDailyPuzzle(difficulty, todayKey);
+      if (myRequestId !== undefined && myRequestId !== difficultySwitchRequestId) {
+        // Mientras esperábamos a Firestore, ya se ha pedido otra dificultad distinta más
+        // reciente — descartamos este resultado en silencio, para no pisar lo que esa otra
+        // petición (más nueva) ya haya puesto en pantalla.
+        return;
+      }
       document.getElementById("warning-msg").innerText = "";
       currentCategories = groups;
       currentViewedDailyDate = todayKey;
