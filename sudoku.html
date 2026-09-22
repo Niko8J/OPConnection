@@ -27,13 +27,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     padding: 20px 6px;
     min-height: 100vh;
   }
 
   .sud-header-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 4px; }
-  .sud-site-logo { max-width: min(50%, 220px); max-height: 90px; }
+  .sud-site-logo { max-width: min(50%, 260px); max-height: 100px; }
   .sud-logo-fallback {
     color: var(--amber); font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1px;
     font-weight: bold; text-align: center;
@@ -168,9 +167,14 @@
   /* --- Controles --- */
   .controls {
     display: flex;
-    gap: 10px;
+    gap: 16px;
     margin-top: 18px;
   }
+  .sud-streak {
+    color: var(--amber); font-weight: bold; font-size: 0.95rem;
+    margin: 14px 0 0; text-align: center;
+  }
+  .sud-streak .sud-streak-dim { color: var(--text-dim); font-weight: normal; font-size: 0.8rem; }
   .btn {
     background: var(--amber);
     color: #1c1305;
@@ -215,6 +219,8 @@
   <button class="btn" onclick="newPuzzle()">Nuevo tablero</button>
 </div>
 
+<p class="sud-streak" id="sud-streak-label"></p>
+
 <div class="board-wrap">
   <div class="board" id="board"></div>
 </div>
@@ -230,6 +236,13 @@
 </div>
 
 <p class="subtitle">Rellena el tablero para que cada fila, columna y caja de 3×3 tenga a los nueve tripulantes, sin repetir ninguno.</p>
+
+<!-- Firebase: solo para sincronizar la racha en la cuenta del usuario, si ha iniciado sesión
+     (misma config que la web principal, mismo proyecto). Si no hay sesión, la racha se guarda
+     en localStorage del navegador en su lugar. -->
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 
 <script>
   // Los nueve primeros en unirse a la tripulación de Luffy, por orden — las imágenes son las
@@ -253,6 +266,13 @@
   let board = [];      // 9x9, lo que hay ahora mismo en pantalla (0 = vacío)
   let givenMask = [];  // 9x9, true si esa casilla venía ya rellena de partida (no se puede tocar)
   let selectedCell = null; // {r, c} o null
+
+  // --- Racha (paneles resueltos seguidos) ---
+  let sudStreak = 0;
+  let sudBoardSolved = true;  // true = el tablero actual ya está resuelto (o aún no hay ninguno real)
+  let sudHasProgress = false; // true = el jugador ya ha colocado algo en el tablero actual
+  let sudCurrentUser = null;
+  const SUD_STREAK_LOCAL_KEY = "opc_sudoku_streak";
 
   // --- Generación del sudoku ---
 
@@ -371,6 +391,7 @@
     if (!selectedCell) return;
     const { r, c } = selectedCell;
     board[r][c] = val;
+    sudHasProgress = true;
     render();
     checkWin();
   }
@@ -389,12 +410,24 @@
       }
     }
     selectedCell = null;
+    sudHasProgress = false; // ya no hay nada que perder: el tablero vuelve a estar como recién empezado
     render();
   }
 
   function newPuzzle() {
+    // Si el tablero actual tiene progreso real sin resolver, avisamos antes de perderlo — generar
+    // uno nuevo sin terminar este reinicia la racha.
+    if (!sudBoardSolved && sudHasProgress) {
+      const seguro = confirm("Todavía no has resuelto este sudoku. Si generas uno nuevo ahora, tu racha actual (" + sudStreak + ") se reiniciará a 0. ¿Quieres continuar?");
+      if (!seguro) return;
+      sudStreak = 0;
+      sudPersistStreak();
+      sudRenderStreak();
+    }
     generatePuzzle();
     selectedCell = null;
+    sudBoardSolved = false;
+    sudHasProgress = false;
     render();
   }
 
@@ -407,6 +440,12 @@
     if (allConflictCells().size === 0) {
       label.textContent = "🎉 ¡Sudoku resuelto! Toda la tripulación en su sitio.";
       label.classList.add("win");
+      if (!sudBoardSolved) { // solo sumar una vez por tablero, no cada vez que se re-renderiza
+        sudBoardSolved = true;
+        sudStreak += 1;
+        sudPersistStreak();
+        sudRenderStreak();
+      }
     } else {
       label.textContent = "El tablero está lleno, pero hay alguna casilla repetida en su fila, columna o caja.";
       label.classList.remove("win");
@@ -499,6 +538,71 @@
     const size = Math.max(240, Math.min(availableHeight, availableWidth, 700));
     document.documentElement.style.setProperty("--board-size", size + "px");
   }
+
+  // --- Firebase: mismo proyecto que la web principal, solo para leer/guardar la racha del
+  // usuario si tiene sesión iniciada (el inicio de sesión en sí se hace en la web principal;
+  // aquí solo comprobamos si ya hay una sesión activa en este navegador). ---
+  const firebaseConfig = {
+    apiKey: "AIzaSyCuksk-Eeon3Si4f8SJgevvYo-D41fycm8",
+    authDomain: "op-connections.firebaseapp.com",
+    projectId: "op-connections",
+    storageBucket: "op-connections.firebasestorage.app",
+    messagingSenderId: "749076812222",
+    appId: "1:749076812222:web:2886ea2491fab3ded729ef",
+    measurementId: "G-ZMK6ZG2J2J"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const sudAuth = firebase.auth();
+  const sudDb = firebase.firestore();
+
+  function sudLoadLocalStreak() {
+    const v = parseInt(localStorage.getItem(SUD_STREAK_LOCAL_KEY) || "0", 10);
+    return isNaN(v) ? 0 : v;
+  }
+  function sudSaveLocalStreak(v) {
+    localStorage.setItem(SUD_STREAK_LOCAL_KEY, String(v));
+  }
+
+  async function sudLoadStreak() {
+    if (sudCurrentUser) {
+      try {
+        const snap = await sudDb.collection("users").doc(sudCurrentUser.uid).get();
+        sudStreak = (snap.exists && snap.data().sudokuStreak) || 0;
+      } catch (e) {
+        sudStreak = sudLoadLocalStreak(); // si falla la lectura remota, no dejamos la racha en blanco
+      }
+    } else {
+      sudStreak = sudLoadLocalStreak();
+    }
+    sudRenderStreak();
+  }
+
+  async function sudPersistStreak() {
+    if (sudCurrentUser) {
+      try {
+        await sudDb.collection("users").doc(sudCurrentUser.uid).set({ sudokuStreak: sudStreak }, { merge: true });
+      } catch (e) {
+        // si falla el guardado remoto, seguimos igualmente — la racha queda en memoria por ahora
+      }
+    } else {
+      sudSaveLocalStreak(sudStreak);
+    }
+  }
+
+  function sudRenderStreak() {
+    const el = document.getElementById("sud-streak-label");
+    if (!el) return;
+    if (sudStreak > 0) {
+      el.textContent = `🔥 Racha: ${sudStreak} panel${sudStreak === 1 ? "" : "es"} seguido${sudStreak === 1 ? "" : "s"}`;
+    } else {
+      el.innerHTML = `<span class="sud-streak-dim">Resuelve un panel entero para empezar una racha</span>`;
+    }
+  }
+
+  sudAuth.onAuthStateChanged(user => {
+    sudCurrentUser = user;
+    sudLoadStreak();
+  });
 
   buildPicker();
   newPuzzle();
