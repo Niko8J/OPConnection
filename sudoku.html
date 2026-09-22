@@ -27,19 +27,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 12px;
+    justify-content: center;
+    padding: 20px 6px;
     min-height: 100vh;
   }
 
-  .sud-back-link {
-    color: var(--text-dim); font-size: 0.8rem; text-decoration: none;
-    border: 1px solid var(--card-border); border-radius: 8px; padding: 6px 14px;
-    margin: 4px 0 18px;
-  }
-  .sud-back-link:hover { border-color: var(--amber); color: var(--text); }
-  .sud-site-logo { max-width: min(50%, 260px); max-height: 100px; }
+  .sud-header-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 4px; }
+  .sud-site-logo { max-width: min(50%, 220px); max-height: 90px; }
   .sud-logo-fallback {
-    color: var(--amber); font-size: 1.7rem; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--amber); font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1px;
     font-weight: bold; text-align: center;
     text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
   }
@@ -190,6 +186,9 @@
     color: var(--text-dim);
     border: 1px solid var(--card-border);
   }
+  /* "Volver" es un <a> de verdad (lleva a index.html), no un <button> como el resto — sin esto
+     se vería subrayado y no centrado como sus vecinos. */
+  a.btn { text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
 
   .fallback-text {
     font-size: 0.55rem;
@@ -205,10 +204,16 @@
 </head>
 <body>
 
-<img src="sudoku.webp" alt="One Piece Sudoku" class="sud-site-logo"
-     onerror="this.style.display='none'; document.getElementById('sud-logo-fallback').style.display='block';">
-<div id="sud-logo-fallback" class="sud-logo-fallback" style="display:none;">One Piece Sudoku</div>
-<a href="index.html" class="sud-back-link">← Volver al juego</a>
+<div class="sud-header-row">
+  <img src="sudoku.webp" alt="One Piece Sudoku" class="sud-site-logo"
+       onerror="this.style.display='none'; document.getElementById('sud-logo-fallback').style.display='block';">
+  <div id="sud-logo-fallback" class="sud-logo-fallback" style="display:none;">One Piece Sudoku</div>
+</div>
+
+<div class="controls">
+  <a href="index.html" class="btn secondary">← Volver</a>
+  <button class="btn" onclick="newPuzzle()">Nuevo tablero</button>
+</div>
 
 <div class="board-wrap">
   <div class="board" id="board"></div>
@@ -220,8 +225,8 @@
 </div>
 
 <div class="controls">
-  <button class="btn" onclick="newPuzzle()">Nuevo tablero</button>
   <button class="btn secondary" onclick="clearMyAnswers()">Borrar mis respuestas</button>
+  <button class="btn secondary" onclick="clearSelected()">Vaciar esta casilla</button>
 </div>
 
 <p class="subtitle">Rellena el tablero para que cada fila, columna y caja de 3×3 tenga a los nueve tripulantes, sin repetir ninguno.</p>
@@ -470,11 +475,6 @@
       btn.onclick = () => placeValue(i + 1);
       pickerEl.appendChild(btn);
     });
-    const clearBtn = document.createElement("button");
-    clearBtn.className = "clear-btn";
-    clearBtn.textContent = "Vaciar esta casilla";
-    clearBtn.onclick = clearSelected;
-    pickerEl.appendChild(clearBtn);
   }
 
   // El tablero antes tenía un ancho fijo (como mucho 460px), sin tener en cuenta cuánto alto
