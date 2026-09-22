@@ -950,6 +950,64 @@
       flex-shrink: 0;
     }
 
+    /* --- Prueba del Sudoku como modo nuevo (ver también sud-area en el HTML) --- */
+    .sud-subtitle { color: #94a3b8; font-size: 0.82rem; margin: 0 0 12px; text-align: center; }
+    .sud-board-wrap { width: 100%; }
+    .sud-board {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      grid-template-rows: repeat(9, 1fr);
+      width: 100%;
+      aspect-ratio: 1;
+      background: #64748b;
+      gap: 1px;
+      border: 3px solid #64748b;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .sud-cell {
+      background: #1e293b; display: flex; align-items: center; justify-content: center;
+      position: relative; cursor: pointer; padding: 2px; overflow: hidden;
+    }
+    .sud-cell img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center; border-radius: 3px;
+      transform: scale(1.35); transform-origin: top center;
+    }
+    .sud-cell.given { cursor: default; background: #141c2b; }
+    .sud-cell.given img { opacity: 0.55; filter: saturate(0.6); }
+    .sud-cell.given::after {
+      content: "🔒"; position: absolute; top: 1px; right: 2px; font-size: 0.55em; opacity: 0.75; line-height: 1;
+    }
+    .sud-cell[data-col="2"], .sud-cell[data-col="5"] { border-right: 2px solid #64748b; }
+    .sud-cell[data-row="2"], .sud-cell[data-row="5"] { border-bottom: 2px solid #64748b; }
+    .sud-cell.selected { outline: 2px solid #f59e0b; outline-offset: -2px; z-index: 2; }
+    .sud-cell.peer { background: #35476b; }
+    .sud-cell.same-value { background: rgba(56, 189, 248, 0.28); }
+    .sud-cell.conflict { background: #ef4444; }
+    .sud-picker-wrap { width: 100%; margin-top: var(--v-gap-sm); }
+    .sud-picker-label { color: #94a3b8; font-size: 0.78rem; text-align: center; margin: 0 0 8px; }
+    .sud-picker-label.win { color: #22c55e; font-weight: bold; font-size: 0.95rem; }
+    .sud-picker { display: grid; grid-template-columns: repeat(9, 1fr); gap: 6px; }
+    .sud-picker.disabled { opacity: 0.35; pointer-events: none; }
+    .sud-picker button {
+      padding: 0; border: 2px solid #334155; border-radius: 6px; background: #1e293b; cursor: pointer;
+      aspect-ratio: 1; overflow: hidden; transition: border-color 0.15s ease, transform 0.1s ease;
+    }
+    .sud-picker button:hover { border-color: #f59e0b; }
+    .sud-picker button:active { transform: scale(0.95); }
+    .sud-picker img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;
+      transform: scale(1.1); transform-origin: top center;
+    }
+    .sud-picker .sud-clear-btn {
+      grid-column: span 9; aspect-ratio: auto; padding: 9px; font-size: 0.8rem; color: #94a3b8; font-weight: bold;
+    }
+    .sud-controls { display: flex; gap: 10px; margin-top: var(--v-gap-sm); }
+    .sud-fallback-text {
+      font-size: 0.5rem; font-weight: bold; text-align: center; color: #94a3b8;
+      padding: 1px; line-height: 1.1; word-break: break-word;
+    }
+
     /* Franja de publicidad fija, debajo de los controles del juego. Le damos una altura
        reservada fija para que el hueco no cambie de tamaño una vez cargue el anuncio real
        (evita el mismo problema que ya tuvimos con la fuente y el logo, que descuadraban el
@@ -1371,6 +1429,7 @@
     <button class="diff-btn" onclick="setDifficulty('media', event)">Supernova</button>
     <button class="diff-btn" onclick="setDifficulty('dificil', event)">Yonko</button>
     <button class="diff-btn" onclick="setDifficulty('infinito', event)">Infinito</button>
+    <button class="diff-btn" id="sud-mode-btn" onclick="enterSudokuMode()">🧩 Sudoku</button>
   </div>
 
   <div id="infinite-score" class="infinite-score" style="visibility: hidden;"></div>
@@ -1394,6 +1453,23 @@
     </div>
     <div class="controls-right">
       <span id="lives-icons"><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div><div class="life-wrapper"><span class="life-icon">🏴‍☠️</span></div></span>
+    </div>
+  </div>
+
+  <!-- Prueba del Sudoku como modo nuevo: solo la mecánica de juego por ahora, sin racha ni
+       guardado — para ver cómo queda integrado antes de construir el resto. -->
+  <div id="sud-area" style="display:none;">
+    <p class="sud-subtitle">Rellena el tablero para que cada fila, columna y caja de 3×3 tenga a los nueve tripulantes, sin repetir ninguno.</p>
+    <div class="sud-board-wrap">
+      <div class="sud-board" id="sud-board"></div>
+    </div>
+    <div class="sud-picker-wrap">
+      <p class="sud-picker-label" id="sud-picker-label">Toca una casilla vacía para elegir un tripulante</p>
+      <div class="sud-picker" id="sud-picker"></div>
+    </div>
+    <div class="sud-controls">
+      <button class="action-btn submit" onclick="sudNewPuzzle()">Nuevo tablero</button>
+      <button class="action-btn" onclick="sudClearMyAnswers()">Borrar mis respuestas</button>
     </div>
   </div>
 
@@ -5393,7 +5469,289 @@
       });
   });
 
+  // ============================================================
+  // PROTOTIPO: Sudoku como modo nuevo (solo mecánica, sin racha ni guardado todavía)
+  // ============================================================
+  const SUD_CREW = [
+    { id: "luffy",   name: "Luffy",   img: "imagenes/Luffy.webp" },
+    { id: "zoro",    name: "Zoro",    img: "imagenes/Zoro.webp" },
+    { id: "nami",    name: "Nami",    img: "imagenes/Nami.webp" },
+    { id: "usopp",   name: "Usopp",   img: "imagenes/Usopp.webp" },
+    { id: "sanji",   name: "Sanji",   img: "imagenes/Sanji.webp" },
+    { id: "chopper", name: "Chopper", img: "imagenes/Chopper.webp" },
+    { id: "robin",   name: "Robin",   img: "imagenes/Robin.webp" },
+    { id: "franky",  name: "Franky",  img: "imagenes/Franky.webp" },
+    { id: "brook",   name: "Brook",   img: "imagenes/Brook.webp" }
+  ];
+  const SUD_GIVENS_TO_REMOVE = 42;
+
+  let sudActive = false;
+  let sudBoard = [];
+  let sudGivenMask = [];
+  let sudSelectedCell = null;
+
+  function sudEmptyGrid() { return Array.from({ length: 9 }, () => Array(9).fill(0)); }
+
+  function sudIsSafeDigit(grid, row, col, val) {
+    for (let i = 0; i < 9; i++) {
+      if (grid[row][i] === val || grid[i][col] === val) return false;
+    }
+    const boxRow = Math.floor(row / 3) * 3, boxCol = Math.floor(col / 3) * 3;
+    for (let r = boxRow; r < boxRow + 3; r++) {
+      for (let c = boxCol; c < boxCol + 3; c++) {
+        if (grid[r][c] === val) return false;
+      }
+    }
+    return true;
+  }
+
+  function sudShuffledDigits() {
+    const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function sudFillGrid(grid) {
+    for (let row = 0; row < 9; row++) {
+      for (let col = 0; col < 9; col++) {
+        if (grid[row][col] !== 0) continue;
+        for (const val of sudShuffledDigits()) {
+          if (sudIsSafeDigit(grid, row, col, val)) {
+            grid[row][col] = val;
+            if (sudFillGrid(grid)) return true;
+            grid[row][col] = 0;
+          }
+        }
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function sudGeneratePuzzle() {
+    const digits = sudEmptyGrid();
+    sudFillGrid(digits);
+    const solution = digits.map(row => row.map(v => SUD_CREW[v - 1]));
+
+    sudBoard = solution.map(row => row.slice());
+    sudGivenMask = Array.from({ length: 9 }, () => Array(9).fill(true));
+
+    const positions = [];
+    for (let r = 0; r < 9; r++) for (let c = 0; c < 9; c++) positions.push([r, c]);
+    for (let i = positions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [positions[i], positions[j]] = [positions[j], positions[i]];
+    }
+    for (let i = 0; i < SUD_GIVENS_TO_REMOVE; i++) {
+      const [r, c] = positions[i];
+      sudBoard[r][c] = null;
+      sudGivenMask[r][c] = false;
+    }
+    sudSelectedCell = null;
+  }
+
+  function sudFindConflicts(row, col) {
+    const val = sudBoard[row][col];
+    if (!val) return [];
+    const conflicts = [];
+    for (let i = 0; i < 9; i++) {
+      if (i !== col && sudBoard[row][i] && sudBoard[row][i].id === val.id) conflicts.push([row, i]);
+      if (i !== row && sudBoard[i][col] && sudBoard[i][col].id === val.id) conflicts.push([i, col]);
+    }
+    const boxRow = Math.floor(row / 3) * 3, boxCol = Math.floor(col / 3) * 3;
+    for (let r = boxRow; r < boxRow + 3; r++) {
+      for (let c = boxCol; c < boxCol + 3; c++) {
+        if ((r !== row || c !== col) && sudBoard[r][c] && sudBoard[r][c].id === val.id) conflicts.push([r, c]);
+      }
+    }
+    return conflicts;
+  }
+
+  function sudAllConflictCells() {
+    const set = new Set();
+    for (let r = 0; r < 9; r++) {
+      for (let c = 0; c < 9; c++) {
+        if (sudFindConflicts(r, c).length) set.add(r + "," + c);
+      }
+    }
+    return set;
+  }
+
+  function sudIsBoardFull() {
+    return sudBoard.every(row => row.every(v => v !== null));
+  }
+
+  function sudSelectCell(r, c) {
+    if (sudGivenMask[r][c]) return;
+    sudSelectedCell = { r, c };
+    sudRender();
+  }
+
+  function sudPlaceValue(charObj) {
+    if (!sudSelectedCell) return;
+    const { r, c } = sudSelectedCell;
+    sudBoard[r][c] = charObj;
+    sudRender();
+    sudCheckWin();
+  }
+
+  function sudClearSelected() {
+    if (!sudSelectedCell) return;
+    const { r, c } = sudSelectedCell;
+    sudBoard[r][c] = null;
+    sudRender();
+  }
+
+  function sudClearMyAnswers() {
+    for (let r = 0; r < 9; r++) {
+      for (let c = 0; c < 9; c++) {
+        if (!sudGivenMask[r][c]) sudBoard[r][c] = null;
+      }
+    }
+    sudSelectedCell = null;
+    sudRender();
+  }
+
+  function sudNewPuzzle() {
+    sudGeneratePuzzle();
+    sudRender();
+  }
+
+  function sudCheckWin() {
+    if (!sudIsBoardFull()) return;
+    const label = document.getElementById("sud-picker-label");
+    if (sudAllConflictCells().size === 0) {
+      label.textContent = "🎉 ¡Sudoku resuelto! Toda la tripulación en su sitio.";
+      label.classList.add("win");
+    } else {
+      label.textContent = "El tablero está lleno, pero hay alguna casilla repetida en su fila, columna o caja.";
+      label.classList.remove("win");
+    }
+  }
+
+  function sudBuildCellImg(val) {
+    if (!val) return "";
+    return `<img src="${val.img}" alt="${val.name}" title="${val.name}"
+                 onerror="this.replaceWith(Object.assign(document.createElement('div'), {className:'sud-fallback-text', textContent:'${val.name}'}))">`;
+  }
+
+  function sudRender() {
+    const boardEl = document.getElementById("sud-board");
+    const conflicts = sudAllConflictCells();
+    const selVal = sudSelectedCell ? sudBoard[sudSelectedCell.r][sudSelectedCell.c] : null;
+
+    boardEl.innerHTML = "";
+    for (let r = 0; r < 9; r++) {
+      for (let c = 0; c < 9; c++) {
+        const cell = document.createElement("div");
+        cell.className = "sud-cell";
+        cell.dataset.row = r;
+        cell.dataset.col = c;
+        if (sudGivenMask[r][c]) cell.classList.add("given");
+        if (sudSelectedCell && sudSelectedCell.r === r && sudSelectedCell.c === c) cell.classList.add("selected");
+        else if (sudSelectedCell && (sudSelectedCell.r === r || sudSelectedCell.c === c ||
+                 (Math.floor(sudSelectedCell.r / 3) === Math.floor(r / 3) && Math.floor(sudSelectedCell.c / 3) === Math.floor(c / 3)))) {
+          cell.classList.add("peer");
+        }
+        if (selVal && sudBoard[r][c] && sudBoard[r][c].id === selVal.id) cell.classList.add("same-value");
+        if (conflicts.has(r + "," + c)) cell.classList.add("conflict");
+
+        cell.innerHTML = sudBuildCellImg(sudBoard[r][c]);
+        cell.onclick = () => sudSelectCell(r, c);
+        boardEl.appendChild(cell);
+      }
+    }
+
+    const label = document.getElementById("sud-picker-label");
+    label.classList.remove("win");
+    label.textContent = sudSelectedCell
+      ? "Elige quién va en esta casilla:"
+      : "Toca una casilla vacía para elegir un tripulante";
+
+    document.getElementById("sud-picker").classList.toggle("disabled", !sudSelectedCell);
+    sudBuildPicker();
+  }
+
+  function sudBuildPicker() {
+    const pickerEl = document.getElementById("sud-picker");
+    pickerEl.innerHTML = "";
+    SUD_CREW.forEach(crew => {
+      const btn = document.createElement("button");
+      btn.innerHTML = `<img src="${crew.img}" alt="${crew.name}" title="${crew.name}"
+                             onerror="this.replaceWith(Object.assign(document.createElement('div'), {className:'sud-fallback-text', textContent:'${crew.name}'}))">`;
+      btn.onclick = () => sudPlaceValue(crew);
+      pickerEl.appendChild(btn);
+    });
+    const clearBtn = document.createElement("button");
+    clearBtn.className = "sud-clear-btn";
+    clearBtn.textContent = "Vaciar esta casilla";
+    clearBtn.onclick = sudClearSelected;
+    pickerEl.appendChild(clearBtn);
+  }
+
+  // El tamaño del tablero se calcula igual que en el archivo independiente: medimos cuánto
+  // ocupa TODO lo demás en pantalla y le damos al tablero el máximo que quepa a la vez en alto
+  // y en ancho — solo que aquí, al vivir dentro de esta web (con su propia cabecera encima),
+  // el "todo lo demás" incluye también el logo, los botones de dificultad, etc.
+  function sudUpdateBoardSize() {
+    const wrap = document.querySelector(".sud-board-wrap");
+    if (!wrap || wrap.offsetParent === null) return; // no calcular si el bloque no está visible
+    const container = document.querySelector(".container");
+    let usedHeight = 0;
+    Array.from(container.children).forEach(child => {
+      if (child.id === "sud-area") return;
+      if (getComputedStyle(child).position === "absolute") return;
+      if (child.classList.contains("site-about-text")) return;
+      const style = getComputedStyle(child);
+      usedHeight += child.offsetHeight + parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+    });
+    // Lo que ocupa el propio bloque de Sudoku aparte del tablero (subtítulo, selector, botones)
+    let sudOwnHeight = 0;
+    Array.from(document.getElementById("sud-area").children).forEach(child => {
+      if (child.classList.contains("sud-board-wrap")) return;
+      sudOwnHeight += child.offsetHeight;
+    });
+    const bodyStyle = getComputedStyle(document.body);
+    const verticalPadding = parseFloat(bodyStyle.paddingTop) + parseFloat(bodyStyle.paddingBottom || 0);
+    const availableHeight = window.innerHeight - usedHeight - sudOwnHeight - verticalPadding - 20;
+    const availableWidth = wrap.clientWidth;
+    const size = Math.max(240, Math.min(availableHeight, availableWidth, 700));
+    wrap.style.width = size + "px";
+  }
+
+  function enterSudokuMode() {
+    sudActive = true;
+    document.getElementById("infinite-score").style.display = "none";
+    document.getElementById("warning-msg").style.display = "none";
+    document.querySelector(".board").style.display = "none";
+    document.querySelector(".controls").style.display = "none";
+    document.getElementById("sud-area").style.display = "block";
+    document.querySelectorAll(".diff-btn").forEach(btn => btn.classList.remove("active"));
+    document.getElementById("sud-mode-btn").classList.add("active");
+    sudGeneratePuzzle();
+    sudRender();
+    requestAnimationFrame(sudUpdateBoardSize);
+  }
+
+  function exitSudokuMode() {
+    sudActive = false;
+    document.getElementById("infinite-score").style.display = "";
+    document.getElementById("warning-msg").style.display = "";
+    document.querySelector(".board").style.display = "";
+    document.querySelector(".controls").style.display = "";
+    document.getElementById("sud-area").style.display = "none";
+  }
+
+  window.addEventListener("resize", () => { if (sudActive) sudUpdateBoardSize(); });
+
   async function setDifficulty(level, event) {
+    // Si venías del prototipo de Sudoku, salimos primero de forma limpia (volver a mostrar el
+    // tablero/controles de conexiones) antes de seguir con la lógica normal de dificultad.
+    if (sudActive) exitSudokuMode();
+
     if (!isInfiniteMode && currentDifficulty === level) {
       if (gameOver) {
         // El reto de hoy en esta dificultad ya está resuelto (ganado o perdido) y ya lo
