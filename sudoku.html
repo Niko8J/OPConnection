@@ -174,6 +174,7 @@
   .sud-streak {
     color: var(--amber); font-weight: bold; font-size: 0.95rem;
     margin: 14px 0 0; text-align: center;
+    min-height: 2.6em; display: flex; align-items: center; justify-content: center;
   }
   .sud-streak .sud-streak-dim { color: var(--text-dim); font-weight: normal; font-size: 0.8rem; }
   .btn {
@@ -220,7 +221,7 @@
   <button class="btn" onclick="newPuzzle()">Nuevo tablero</button>
 </div>
 
-<p class="sud-streak" id="sud-streak-label"></p>
+<p class="sud-streak" id="sud-streak-label"><span class="sud-streak-dim">Resuelve un panel entero para empezar una racha</span></p>
 
 <div class="board-wrap">
   <div class="board" id="board"></div>
@@ -274,6 +275,7 @@
   let sudHasProgress = false; // true = el jugador ya ha colocado algo en el tablero actual
   let sudCurrentUser = null;
   const SUD_STREAK_LOCAL_KEY = "opc_sudoku_streak";
+  const SUD_BOARD_LOCAL_KEY = "opc_sudoku_board";
 
   // --- Generación del sudoku ---
 
@@ -395,6 +397,7 @@
     sudHasProgress = true;
     render();
     checkWin();
+    sudSaveBoard();
   }
 
   function clearSelected() {
@@ -402,6 +405,7 @@
     const { r, c } = selectedCell;
     board[r][c] = 0;
     render();
+    sudSaveBoard();
   }
 
   function clearMyAnswers() {
@@ -413,6 +417,7 @@
     selectedCell = null;
     sudHasProgress = false; // ya no hay nada que perder: el tablero vuelve a estar como recién empezado
     render();
+    sudSaveBoard();
   }
 
   function newPuzzle() {
@@ -428,6 +433,7 @@
     sudBoardSolved = false;
     sudHasProgress = false;
     render();
+    sudSaveBoard();
   }
 
   // Al ganar (o si el tablero está lleno pero con algún conflicto), el aviso sustituye
@@ -622,16 +628,88 @@
     }
   }
 
+  // --- Guardar/cargar el PANEL EN SÍ (no solo la racha) — así, si recargas la página o cambias
+  // de dispositivo, te encuentras exactamente el mismo tablero tal como lo dejaste, en vez de
+  // uno nuevo al azar. Se guarda en la cuenta si has iniciado sesión, o en este navegador si
+  // juegas como invitado — igual que la racha.
+
+  function sudSerializeBoard() {
+    return {
+      sudokuBoard: board, // ya son números planos (1-9 o 0), se pueden guardar tal cual
+      sudokuGivenMask: givenMask,
+      sudokuSolved: sudBoardSolved
+    };
+  }
+
+  function sudDeserializeBoard(data) {
+    board = data.sudokuBoard;
+    givenMask = data.sudokuGivenMask;
+    sudBoardSolved = !!data.sudokuSolved;
+    sudHasProgress = board.some((row, r) => row.some((cell, c) => cell && !givenMask[r][c]));
+  }
+
+  let sudSaveBoardTimer = null;
+  function sudSaveBoard() {
+    // Un pequeño retraso agrupa varias jugadas seguidas en un solo guardado, en vez de escribir
+    // en Firestore en cada clic — no cambia lo que se ve, solo cuántas veces se guarda.
+    clearTimeout(sudSaveBoardTimer);
+    sudSaveBoardTimer = setTimeout(async () => {
+      const data = sudSerializeBoard();
+      if (sudCurrentUser) {
+        try {
+          await sudDb.collection("users").doc(sudCurrentUser.uid).set(data, { merge: true });
+        } catch (e) {
+          localStorage.setItem(SUD_BOARD_LOCAL_KEY, JSON.stringify(data)); // al menos localmente
+        }
+      } else {
+        localStorage.setItem(SUD_BOARD_LOCAL_KEY, JSON.stringify(data));
+      }
+    }, 400);
+  }
+
+  // Al abrir la página: si ya hay un panel guardado (de esta cuenta o de este navegador), lo
+  // recuperamos tal cual; si no hay ninguno todavía, generamos uno nuevo como siempre. Esto solo
+  // pasa UNA vez al cargar — si inicias sesión más tarde en mitad de una partida de invitado, no
+  // te cambiamos el tablero de golpe, para no perder lo que llevabas sin avisar.
+  let sudInitialBoardLoaded = false;
+  async function sudInitialLoad() {
+    if (sudInitialBoardLoaded) return;
+    sudInitialBoardLoaded = true;
+
+    let savedData = null;
+    if (sudCurrentUser) {
+      try {
+        const snap = await sudDb.collection("users").doc(sudCurrentUser.uid).get();
+        if (snap.exists && snap.data().sudokuBoard) savedData = snap.data();
+      } catch (e) {
+        // si falla la lectura remota, seguimos abajo como si no hubiera nada guardado
+      }
+    } else {
+      const raw = localStorage.getItem(SUD_BOARD_LOCAL_KEY);
+      if (raw) {
+        try { savedData = JSON.parse(raw); } catch (e) { /* dato corrupto, lo ignoramos */ }
+      }
+    }
+
+    if (savedData && savedData.sudokuBoard) {
+      sudDeserializeBoard(savedData);
+    } else {
+      generatePuzzle();
+      sudBoardSolved = false;
+      sudHasProgress = false;
+    }
+    selectedCell = null;
+    render();
+    requestAnimationFrame(updateBoardSize);
+  }
+
   sudAuth.onAuthStateChanged(user => {
     sudCurrentUser = user;
     sudStartStreakSync();
+    sudInitialLoad();
   });
 
   buildPicker();
-  newPuzzle();
-  // En el primer frame, no antes: hasta que el tablero y el resto de elementos no están ya
-  // pintados de verdad, medir su alto real daría valores incorrectos.
-  requestAnimationFrame(updateBoardSize);
   window.addEventListener("resize", updateBoardSize);
 </script>
 </body>
