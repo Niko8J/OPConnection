@@ -421,9 +421,7 @@
     if (!sudBoardSolved && sudHasProgress) {
       const seguro = confirm("Todavía no has resuelto este sudoku. Si generas uno nuevo ahora, tu racha actual (" + sudStreak + ") se reiniciará a 0. ¿Quieres continuar?");
       if (!seguro) return;
-      sudStreak = 0;
-      sudPersistStreak();
-      sudRenderStreak();
+      sudResetStreak();
     }
     generatePuzzle();
     selectedCell = null;
@@ -443,9 +441,7 @@
       label.classList.add("win");
       if (!sudBoardSolved) { // solo sumar una vez por tablero, no cada vez que se re-renderiza
         sudBoardSolved = true;
-        sudStreak += 1;
-        sudPersistStreak();
-        sudRenderStreak();
+        sudIncrementStreak();
       }
     } else {
       label.textContent = "El tablero está lleno, pero hay alguna casilla repetida en su fila, columna o caja.";
@@ -555,6 +551,7 @@
   firebase.initializeApp(firebaseConfig);
   const sudAuth = firebase.auth();
   const sudDb = firebase.firestore();
+  let sudStreakUnsubscribe = null; // para poder dejar de escuchar si el usuario cambia
 
   function sudLoadLocalStreak() {
     const v = parseInt(localStorage.getItem(SUD_STREAK_LOCAL_KEY) || "0", 10);
@@ -564,29 +561,54 @@
     localStorage.setItem(SUD_STREAK_LOCAL_KEY, String(v));
   }
 
-  async function sudLoadStreak() {
+  // Antes leíamos la racha UNA vez al cargar la página y luego trabajábamos con esa copia en
+  // memoria — si resolvías un panel en el móvil y otro casi a la vez en el ordenador, cada
+  // pestaña sumaba +1 a SU PROPIA copia desactualizada y una acababa pisando a la otra. Con
+  // onSnapshot, en cambio, esta pestaña se entera al momento de cualquier cambio guardado desde
+  // cualquier otro dispositivo, mientras la página siga abierta — no hace falta ni recargar.
+  function sudStartStreakSync() {
+    if (sudStreakUnsubscribe) { sudStreakUnsubscribe(); sudStreakUnsubscribe = null; }
     if (sudCurrentUser) {
-      try {
-        const snap = await sudDb.collection("users").doc(sudCurrentUser.uid).get();
-        sudStreak = (snap.exists && snap.data().sudokuStreak) || 0;
-      } catch (e) {
-        sudStreak = sudLoadLocalStreak(); // si falla la lectura remota, no dejamos la racha en blanco
-      }
+      sudStreakUnsubscribe = sudDb.collection("users").doc(sudCurrentUser.uid).onSnapshot(
+        snap => { sudStreak = (snap.exists && snap.data().sudokuStreak) || 0; sudRenderStreak(); },
+        () => { sudStreak = sudLoadLocalStreak(); sudRenderStreak(); } // si falla la escucha remota
+      );
     } else {
       sudStreak = sudLoadLocalStreak();
+      sudRenderStreak();
     }
-    sudRenderStreak();
   }
 
-  async function sudPersistStreak() {
+  // Sumar 1 de forma ATÓMICA: Firestore hace la suma en su servidor a partir del valor que
+  // tenga guardado en ESE momento, no del que teníamos nosotros en memoria — así, aunque dos
+  // dispositivos incrementen casi a la vez, ningún incremento se pierde.
+  async function sudIncrementStreak() {
     if (sudCurrentUser) {
       try {
-        await sudDb.collection("users").doc(sudCurrentUser.uid).set({ sudokuStreak: sudStreak }, { merge: true });
+        await sudDb.collection("users").doc(sudCurrentUser.uid).set(
+          { sudokuStreak: firebase.firestore.FieldValue.increment(1) }, { merge: true }
+        );
+        // No hace falta tocar sudStreak a mano: el onSnapshot de arriba se encargará de
+        // actualizarlo solo en cuanto Firestore confirme el cambio.
       } catch (e) {
-        // si falla el guardado remoto, seguimos igualmente — la racha queda en memoria por ahora
+        sudStreak += 1; sudSaveLocalStreak(sudStreak); sudRenderStreak(); // al menos localmente
       }
     } else {
-      sudSaveLocalStreak(sudStreak);
+      sudStreak += 1; sudSaveLocalStreak(sudStreak); sudRenderStreak();
+    }
+  }
+
+  async function sudResetStreak() {
+    sudStreak = 0;
+    if (sudCurrentUser) {
+      try {
+        await sudDb.collection("users").doc(sudCurrentUser.uid).set({ sudokuStreak: 0 }, { merge: true });
+      } catch (e) {
+        sudRenderStreak(); // seguimos igual, aunque falle el guardado remoto
+      }
+    } else {
+      sudSaveLocalStreak(0);
+      sudRenderStreak();
     }
   }
 
@@ -602,7 +624,7 @@
 
   sudAuth.onAuthStateChanged(user => {
     sudCurrentUser = user;
-    sudLoadStreak();
+    sudStartStreakSync();
   });
 
   buildPicker();
