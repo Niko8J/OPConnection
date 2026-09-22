@@ -31,10 +31,21 @@
     min-height: 100vh;
   }
 
-  h1 {
-    font-size: 1.5rem;
-    margin: 4px 0 2px;
-    text-align: center;
+  .sud-back-link {
+    color: var(--text-dim); font-size: 0.8rem; text-decoration: none;
+    border: 1px solid var(--card-border); border-radius: 8px; padding: 6px 14px;
+    margin-bottom: 14px; align-self: flex-start;
+  }
+  .sud-back-link:hover { border-color: var(--amber); color: var(--text); }
+  .sud-site-logo { max-width: min(70%, 260px); max-height: 90px; margin-bottom: 2px; }
+  .sud-logo-fallback {
+    color: var(--amber); font-size: 1.7rem; text-transform: uppercase; letter-spacing: 1px;
+    font-weight: bold; text-align: center;
+    text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  }
+  .sud-mode-label {
+    color: var(--text-dim); font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;
+    margin: 2px 0 10px;
   }
   .subtitle {
     color: var(--text-dim);
@@ -207,7 +218,11 @@
 </head>
 <body>
 
-<h1>🏴‍☠️ One Piece Sudoku</h1>
+<a href="index.html" class="sud-back-link">← Volver al juego</a>
+<img src="titulo.webp" alt="One Piece" class="sud-site-logo"
+     onerror="this.style.display='none'; document.getElementById('sud-logo-fallback').style.display='block';">
+<div id="sud-logo-fallback" class="sud-logo-fallback" style="display:none;">One Piece Connection</div>
+<p class="sud-mode-label">Sudoku</p>
 <p class="subtitle">Rellena el tablero para que cada fila, columna y caja de 3×3 tenga a los nueve tripulantes, sin repetir ninguno.</p>
 
 <div class="board-wrap">
