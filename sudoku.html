@@ -633,17 +633,29 @@
   // uno nuevo al azar. Se guarda en la cuenta si has iniciado sesión, o en este navegador si
   // juegas como invitado — igual que la racha.
 
+  // Firestore NO admite listas dentro de listas (un array de arrays, como es un tablero 9x9
+  // guardado tal cual) — rechaza el guardado con un error, que mi propio código atrapaba y
+  // ocultaba cayendo en un "plan B" local sin avisar. La solución: aplanar el tablero a una
+  // sola lista de 81 casillas antes de guardar, y reconstruir la cuadrícula 9x9 al cargar.
   function sudSerializeBoard() {
     return {
-      sudokuBoard: board, // ya son números planos (1-9 o 0), se pueden guardar tal cual
-      sudokuGivenMask: givenMask,
+      sudokuBoard: board.flat(),
+      sudokuGivenMask: givenMask.flat(),
       sudokuSolved: sudBoardSolved
     };
   }
 
   function sudDeserializeBoard(data) {
-    board = data.sudokuBoard;
-    givenMask = data.sudokuGivenMask;
+    // Si el primer elemento es a su vez una lista, son datos del formato ANTIGUO (de antes de
+    // este arreglo, guardados tal cual anidados) — los usamos directamente. Si no, son del
+    // formato NUEVO (aplanado), y hay que reconstruir la cuadrícula 9x9 a partir de la lista.
+    if (Array.isArray(data.sudokuBoard[0])) {
+      board = data.sudokuBoard;
+      givenMask = data.sudokuGivenMask;
+    } else {
+      board = Array.from({ length: 9 }, (_, r) => data.sudokuBoard.slice(r * 9, r * 9 + 9));
+      givenMask = Array.from({ length: 9 }, (_, r) => data.sudokuGivenMask.slice(r * 9, r * 9 + 9));
+    }
     sudBoardSolved = !!data.sudokuSolved;
     sudHasProgress = board.some((row, r) => row.some((cell, c) => cell && !givenMask[r][c]));
   }
@@ -681,6 +693,15 @@
       } catch (e) {
         // si falla la lectura remota, seguimos abajo como si no hubiera nada guardado
       }
+      // Respaldo: si Firestore no tenía nada guardado, miramos también este navegador — por si
+      // quedó algo ahí de un guardado remoto que fallara en su momento (como pasó con el fallo
+      // de las listas anidadas), para no perder ese progreso.
+      if (!savedData) {
+        const raw = localStorage.getItem(SUD_BOARD_LOCAL_KEY);
+        if (raw) {
+          try { savedData = JSON.parse(raw); } catch (e) { /* dato corrupto, lo ignoramos */ }
+        }
+      }
     } else {
       const raw = localStorage.getItem(SUD_BOARD_LOCAL_KEY);
       if (raw) {
@@ -690,6 +711,7 @@
 
     if (savedData && savedData.sudokuBoard) {
       sudDeserializeBoard(savedData);
+      if (sudCurrentUser) sudSaveBoard(); // si veníamos del respaldo local, lo subimos ya a la cuenta
     } else {
       generatePuzzle();
       sudBoardSolved = false;
