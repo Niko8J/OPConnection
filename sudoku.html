@@ -648,23 +648,20 @@
     sudHasProgress = board.some((row, r) => row.some((cell, c) => cell && !givenMask[r][c]));
   }
 
-  let sudSaveBoardTimer = null;
-  function sudSaveBoard() {
-    // Un pequeño retraso agrupa varias jugadas seguidas en un solo guardado, en vez de escribir
-    // en Firestore en cada clic — no cambia lo que se ve, solo cuántas veces se guarda.
-    clearTimeout(sudSaveBoardTimer);
-    sudSaveBoardTimer = setTimeout(async () => {
-      const data = sudSerializeBoard();
-      if (sudCurrentUser) {
-        try {
-          await sudDb.collection("users").doc(sudCurrentUser.uid).set(data, { merge: true });
-        } catch (e) {
-          localStorage.setItem(SUD_BOARD_LOCAL_KEY, JSON.stringify(data)); // al menos localmente
-        }
-      } else {
-        localStorage.setItem(SUD_BOARD_LOCAL_KEY, JSON.stringify(data));
+  // Antes había un pequeño retraso (400ms) para agrupar varios cambios seguidos en un solo
+  // guardado — pero si recargabas la página justo después de colocar algo, antes de que pasara
+  // ese tiempo, el guardado se perdía por completo. Ahora se guarda al instante en cada cambio.
+  async function sudSaveBoard() {
+    const data = sudSerializeBoard();
+    if (sudCurrentUser) {
+      try {
+        await sudDb.collection("users").doc(sudCurrentUser.uid).set(data, { merge: true });
+      } catch (e) {
+        localStorage.setItem(SUD_BOARD_LOCAL_KEY, JSON.stringify(data)); // al menos localmente
       }
-    }, 400);
+    } else {
+      localStorage.setItem(SUD_BOARD_LOCAL_KEY, JSON.stringify(data));
+    }
   }
 
   // Al abrir la página: si ya hay un panel guardado (de esta cuenta o de este navegador), lo
