@@ -790,6 +790,9 @@
       .diff-btn:hover:not(:disabled) { border-color: #f59e0b; color: #f8fafc; }
     }
     .diff-btn.active { background: #f59e0b; color: #0f172a; border-color: #f59e0b; }
+    /* El botón de Sudoku es un <a> de verdad (abre en pestaña nueva), no un <button> como el
+       resto — sin esto, se vería subrayado y no vertical-centrado como sus vecinos. */
+    a.diff-btn { text-decoration: none; display: inline-flex; align-items: center; }
 
     .infinite-score {
       height: 1.15em;
@@ -1371,6 +1374,7 @@
     <button class="diff-btn" onclick="setDifficulty('media', event)">Supernova</button>
     <button class="diff-btn" onclick="setDifficulty('dificil', event)">Yonko</button>
     <button class="diff-btn" onclick="setDifficulty('infinito', event)">Infinito</button>
+    <a class="diff-btn" href="sudoku.html" target="_blank" rel="noopener">Sudoku</a>
   </div>
 
   <div id="infinite-score" class="infinite-score" style="visibility: hidden;"></div>
