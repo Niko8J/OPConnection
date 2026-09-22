@@ -32,7 +32,7 @@
   }
 
   .sud-header-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 4px; }
-  .sud-site-logo { max-width: min(50%, 260px); max-height: 100px; }
+  .sud-site-logo { max-width: min(50vw, 260px); max-height: 100px; width: auto; height: auto; }
   .sud-logo-fallback {
     color: var(--amber); font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1px;
     font-weight: bold; text-align: center;
@@ -170,6 +170,7 @@
     gap: 16px;
     margin-top: 18px;
   }
+  .sud-controls-bottom { margin-top: 8px; }
   .sud-streak {
     color: var(--amber); font-weight: bold; font-size: 0.95rem;
     margin: 14px 0 0; text-align: center;
@@ -230,7 +231,7 @@
   <div class="picker" id="picker"></div>
 </div>
 
-<div class="controls">
+<div class="controls sud-controls-bottom">
   <button class="btn secondary" onclick="clearMyAnswers()">Borrar mis respuestas</button>
   <button class="btn secondary" onclick="clearSelected()">Vaciar esta casilla</button>
 </div>
