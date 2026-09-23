@@ -41,9 +41,16 @@
     /* Antes cada botón ocupaba el ancho que su propio texto necesitaba, así que "Borrar
        respuestas" (el más largo) le robaba espacio a "Nuevo tablero" y lo hacía partirse en
        dos líneas. Ahora los 3 se reparten el ancho disponible a partes iguales. */
-    .controls .btn { flex: 1 1 0; min-width: 0; padding: 6px 2px; font-size: 0.65rem; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .controls .btn { flex: 1 1 0; min-width: 0; padding: 8px 6px; font-size: 0.74rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   }
 
+  .sud-back-corner {
+    position: fixed; top: 10px; left: 10px; z-index: 50;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--card); border: 1px solid var(--card-border); color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; text-decoration: none;
+  }
   .sud-header-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 4px; }
   .sud-site-logo { max-width: min(50vw, 260px); max-height: 100px; width: auto; height: auto; }
   .sud-logo-fallback {
@@ -182,6 +189,7 @@
     display: flex;
     gap: 16px;
     margin-top: 18px;
+    width: min(94vw, 460px);
   }
   .sud-controls-bottom { margin-top: 8px; }
   .sud-streak {
@@ -225,6 +233,8 @@
 
 <div id="sud-debug-box" style="position:fixed; top:0; left:0; right:0; z-index:9999; background:#000; color:#0f0; font-family:monospace; font-size:11px; padding:8px; white-space:pre-wrap; line-height:1.4;"></div>
 
+<a href="index.html" class="sud-back-corner" title="Volver al juego">←</a>
+
 <div class="sud-header-row">
   <img src="sudoku.webp" alt="One Piece Sudoku" class="sud-site-logo"
        onerror="this.style.display='none'; document.getElementById('sud-logo-fallback').style.display='block';">
@@ -232,7 +242,6 @@
 </div>
 
 <div class="controls">
-  <a href="index.html" class="btn secondary">← Volver</a>
   <button class="btn" onclick="newPuzzle()">Nuevo tablero</button>
   <button class="btn secondary" onclick="clearMyAnswers()">Borrar respuestas</button>
 </div>
@@ -546,6 +555,7 @@
     Array.from(document.body.children).forEach(el => {
       if (el === wrap) return;
       const style = getComputedStyle(el);
+      if (style.position === "fixed" || style.position === "absolute") return; // no ocupan espacio en el flujo
       usedHeight += el.offsetHeight + parseFloat(style.marginTop) + parseFloat(style.marginBottom);
     });
     const bodyStyle = getComputedStyle(document.body);
@@ -554,7 +564,7 @@
 
     const availableHeight = window.innerHeight - usedHeight - verticalPadding - 12; // margen de seguridad
     const availableWidth = window.innerWidth - horizontalPadding;
-    const size = Math.max(240, Math.min(availableHeight, availableWidth, 700));
+    const size = Math.max(160, Math.min(availableHeight, availableWidth, 700));
     document.documentElement.style.setProperty("--board-size", size + "px");
   }
 
