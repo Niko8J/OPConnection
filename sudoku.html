@@ -124,7 +124,7 @@
 
   /* --- Selector de personajes --- */
   .picker-wrap {
-    width: min(94vw, 460px);
+    width: var(--board-size, min(94vw, 460px));
     margin-top: 16px;
     min-height: 74px;
   }
@@ -189,7 +189,7 @@
     display: flex;
     gap: 16px;
     margin-top: 18px;
-    width: min(94vw, 460px);
+    width: var(--board-size, min(94vw, 460px));
   }
   .sud-controls-bottom { margin-top: 8px; }
   .sud-streak {
@@ -230,8 +230,6 @@
 </style>
 </head>
 <body>
-
-<div id="sud-debug-box" style="position:fixed; top:0; left:0; right:0; z-index:9999; background:#000; color:#0f0; font-family:monospace; font-size:11px; padding:8px; white-space:pre-wrap; line-height:1.4;"></div>
 
 <a href="index.html" class="sud-back-corner" title="Volver al juego">←</a>
 
@@ -772,27 +770,6 @@
   if (window.visualViewport) {
     window.visualViewport.addEventListener("resize", updateBoardSize);
   }
-
-  // --- Caja de diagnóstico TEMPORAL: quitar en cuanto tengamos el dato que necesitamos ---
-  function sudShowDebugInfo() {
-    const box = document.getElementById("sud-debug-box");
-    if (!box) return;
-    const allBtns = document.querySelectorAll(".controls")[0].querySelectorAll(".btn");
-    const alturas = Array.from(allBtns).map(b => Math.round(b.getBoundingClientRect().height));
-    const btnStyle = allBtns[0] ? getComputedStyle(allBtns[0]) : null;
-    const controlsRow = document.querySelector(".controls");
-    const rowRect = controlsRow ? controlsRow.getBoundingClientRect() : null;
-    box.textContent =
-      `innerWidth: ${window.innerWidth} | innerHeight: ${window.innerHeight}\n` +
-      `fila botones alto: ${rowRect ? Math.round(rowRect.height) : "N/D"}\n` +
-      `alto de CADA botón: ${alturas.join(" / ")}\n` +
-      `font-size: ${btnStyle ? btnStyle.fontSize : "N/D"} | padding: ${btnStyle ? btnStyle.padding : "N/D"} | min-width: ${btnStyle ? btnStyle.minWidth : "N/D"}\n` +
-      `board-size aplicado: ${getComputedStyle(document.documentElement).getPropertyValue("--board-size")}\n` +
-      `body.scrollHeight: ${document.body.scrollHeight} | window.innerHeight: ${window.innerHeight}\n` +
-      `devicePixelRatio: ${window.devicePixelRatio}`;
-  }
-  [200, 600, 1200, 2500, 4000].forEach(delay => setTimeout(sudShowDebugInfo, delay));
-  window.addEventListener("resize", sudShowDebugInfo);
 </script>
 </body>
 </html>
