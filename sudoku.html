@@ -37,6 +37,8 @@
   @media (max-width: 480px) {
     .sud-instructions { display: none; }
     body { padding: 8px 2px; }
+    .controls { gap: 6px; }
+    .btn { padding: 8px 6px; font-size: 0.72rem; }
   }
 
   .sud-header-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 4px; }
@@ -181,7 +183,7 @@
   .sud-controls-bottom { margin-top: 8px; }
   .sud-streak {
     color: var(--amber); font-weight: bold; font-size: 0.95rem;
-    margin: 14px 0 0; text-align: center;
+    margin: 6px 0 0; text-align: center;
     min-height: 2.6em; display: flex; align-items: center; justify-content: center;
   }
   .sud-streak .sud-streak-dim { color: var(--text-dim); font-weight: normal; font-size: 0.8rem; }
@@ -227,7 +229,7 @@
 <div class="controls">
   <a href="index.html" class="btn secondary">← Volver</a>
   <button class="btn" onclick="newPuzzle()">Nuevo tablero</button>
-  <button class="btn secondary" onclick="clearMyAnswers()">Borrar mis respuestas</button>
+  <button class="btn secondary" onclick="clearMyAnswers()">Borrar respuestas</button>
 </div>
 
 <p class="sud-streak" id="sud-streak-label"><span class="sud-streak-dim">Resuelve un panel entero para empezar una racha</span></p>
@@ -461,6 +463,7 @@
       label.textContent = "El tablero está lleno, pero hay alguna casilla repetida en su fila, columna o caja.";
       label.classList.remove("win");
     }
+    updateBoardSize(); // el mensaje de victoria puede tener otra altura que el texto normal
   }
 
   // --- Pintado ---
@@ -634,6 +637,10 @@
     } else {
       el.innerHTML = `<span class="sud-streak-dim">Resuelve un panel entero para empezar una racha</span>`;
     }
+    // El texto de la racha puede cambiar de alto (una línea o dos, según el mensaje) después de
+    // que el tablero ya se haya medido una vez — volvemos a calcular su tamaño para que nunca
+    // se quede desactualizado ni deje hueco de sobra ni obligue a hacer scroll de más.
+    updateBoardSize();
   }
 
   // --- Guardar/cargar el PANEL EN SÍ (no solo la racha) — así, si recargas la página o cambias
