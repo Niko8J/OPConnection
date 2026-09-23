@@ -7810,7 +7810,8 @@
         {"val": "Origen: South Blue", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes con cuernos", "dif": "dificil"}
+        {"val": "Personajes con cuernos", "dif": "dificil"},
+        {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
       ]
     }
   },
@@ -12380,7 +12381,8 @@
         {"val": "Gobierno Mundial", "dif": "dificil"}
       ],
       "Marcas": [
-        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"}
+        {"val": "Personajes que han usado máscara o antifaz", "dif": "dificil"},
+        {"val": "Personajes con cuernos", "dif": "dificil"}
       ],
       "Titulo": [
         {"val": "Vicealmirantes de la marina", "dif": "media"}
