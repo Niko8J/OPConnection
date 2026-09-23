@@ -41,7 +41,7 @@
     /* Antes cada botón ocupaba el ancho que su propio texto necesitaba, así que "Borrar
        respuestas" (el más largo) le robaba espacio a "Nuevo tablero" y lo hacía partirse en
        dos líneas. Ahora los 3 se reparten el ancho disponible a partes iguales. */
-    .controls .btn { flex: 1 1 0; padding: 6px 2px; font-size: 0.55rem; line-height: 1.15; }
+    .controls .btn { flex: 1 1 0; min-width: 0; padding: 6px 2px; font-size: 0.65rem; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   }
 
   .sud-header-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 4px; }
@@ -767,17 +767,16 @@
   function sudShowDebugInfo() {
     const box = document.getElementById("sud-debug-box");
     if (!box) return;
-    const btn = document.querySelector(".controls .btn");
-    const btnRect = btn ? btn.getBoundingClientRect() : null;
-    const btnStyle = btn ? getComputedStyle(btn) : null;
+    const allBtns = document.querySelectorAll(".controls")[0].querySelectorAll(".btn");
+    const alturas = Array.from(allBtns).map(b => Math.round(b.getBoundingClientRect().height));
+    const btnStyle = allBtns[0] ? getComputedStyle(allBtns[0]) : null;
     const controlsRow = document.querySelector(".controls");
     const rowRect = controlsRow ? controlsRow.getBoundingClientRect() : null;
     box.textContent =
       `innerWidth: ${window.innerWidth} | innerHeight: ${window.innerHeight}\n` +
-      `visualViewport.width: ${window.visualViewport ? window.visualViewport.width : "N/D"}\n` +
       `fila botones alto: ${rowRect ? Math.round(rowRect.height) : "N/D"}\n` +
-      `1er botón alto/ancho: ${btnRect ? Math.round(btnRect.height) + "/" + Math.round(btnRect.width) : "N/D"}\n` +
-      `1er botón font-size: ${btnStyle ? btnStyle.fontSize : "N/D"} | padding: ${btnStyle ? btnStyle.padding : "N/D"}\n` +
+      `alto de CADA botón: ${alturas.join(" / ")}\n` +
+      `font-size: ${btnStyle ? btnStyle.fontSize : "N/D"} | padding: ${btnStyle ? btnStyle.padding : "N/D"} | min-width: ${btnStyle ? btnStyle.minWidth : "N/D"}\n` +
       `board-size aplicado: ${getComputedStyle(document.documentElement).getPropertyValue("--board-size")}\n` +
       `body.scrollHeight: ${document.body.scrollHeight} | window.innerHeight: ${window.innerHeight}\n` +
       `devicePixelRatio: ${window.devicePixelRatio}`;
