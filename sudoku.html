@@ -31,6 +31,14 @@
     min-height: 100vh;
   }
 
+  /* En móvil, el texto de instrucciones ("Rellena el tablero...") no aporta tanto como el
+     espacio que ocupa — se quita, y se reduce el margen alrededor, para que el tablero pueda
+     ser bastante más ancho y alto en pantallas pequeñas, donde antes se veía diminuto. */
+  @media (max-width: 480px) {
+    .sud-instructions { display: none; }
+    body { padding: 8px 2px; }
+  }
+
   .sud-header-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 4px; }
   .sud-site-logo { max-width: min(50vw, 260px); max-height: 100px; width: auto; height: auto; }
   .sud-logo-fallback {
@@ -219,6 +227,7 @@
 <div class="controls">
   <a href="index.html" class="btn secondary">← Volver</a>
   <button class="btn" onclick="newPuzzle()">Nuevo tablero</button>
+  <button class="btn secondary" onclick="clearMyAnswers()">Borrar mis respuestas</button>
 </div>
 
 <p class="sud-streak" id="sud-streak-label"><span class="sud-streak-dim">Resuelve un panel entero para empezar una racha</span></p>
@@ -233,11 +242,10 @@
 </div>
 
 <div class="controls sud-controls-bottom">
-  <button class="btn secondary" onclick="clearMyAnswers()">Borrar mis respuestas</button>
   <button class="btn secondary" onclick="clearSelected()">Vaciar esta casilla</button>
 </div>
 
-<p class="subtitle">Rellena el tablero para que cada fila, columna y caja de 3×3 tenga a los nueve tripulantes, sin repetir ninguno.</p>
+<p class="subtitle sud-instructions">Rellena el tablero para que cada fila, columna y caja de 3×3 tenga a los nueve tripulantes, sin repetir ninguno.</p>
 
 <!-- Firebase: solo para sincronizar la racha en la cuenta del usuario, si ha iniciado sesión
      (misma config que la web principal, mismo proyecto). Si no hay sesión, la racha se guarda
@@ -622,7 +630,7 @@
     const el = document.getElementById("sud-streak-label");
     if (!el) return;
     if (sudStreak > 0) {
-      el.textContent = `🔥 Racha: ${sudStreak} panel${sudStreak === 1 ? "" : "es"} seguido${sudStreak === 1 ? "" : "s"}`;
+      el.textContent = `🔥 Racha: ${sudStreak} panel${sudStreak === 1 ? "" : "es"} ganado${sudStreak === 1 ? "" : "s"}`;
     } else {
       el.innerHTML = `<span class="sud-streak-dim">Resuelve un panel entero para empezar una racha</span>`;
     }
@@ -719,6 +727,8 @@
     }
     selectedCell = null;
     render();
+    checkWin(); // si el panel cargado ya estaba resuelto, esto hace que el aviso de victoria
+                // vuelva a aparecer — no suma la racha otra vez, porque sudBoardSolved ya es true
     requestAnimationFrame(updateBoardSize);
   }
 
