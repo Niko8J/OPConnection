@@ -17,7 +17,7 @@
     --box-border: #64748b;
   }
 
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
   body {
     margin: 0;
@@ -37,8 +37,11 @@
   @media (max-width: 480px) {
     .sud-instructions { display: none; }
     body { padding: 8px 2px; }
-    .controls { gap: 6px; }
-    .btn { padding: 8px 6px; font-size: 0.72rem; }
+    .controls { gap: 4px; }
+    /* Antes cada botón ocupaba el ancho que su propio texto necesitaba, así que "Borrar
+       respuestas" (el más largo) le robaba espacio a "Nuevo tablero" y lo hacía partirse en
+       dos líneas. Ahora los 3 se reparten el ancho disponible a partes iguales. */
+    .controls .btn { flex: 1 1 0; padding: 7px 2px; font-size: 0.62rem; }
   }
 
   .sud-header-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 4px; }
@@ -747,6 +750,12 @@
 
   buildPicker();
   window.addEventListener("resize", updateBoardSize);
+  // En Safari de iPhone, la barra de direcciones se puede recoger sola al usar la página,
+  // cambiando cuánto alto hay disponible de verdad — a veces sin disparar un "resize" normal.
+  // visualViewport es la forma fiable de enterarse también de ese caso.
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", updateBoardSize);
+  }
 </script>
 </body>
 </html>
