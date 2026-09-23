@@ -41,7 +41,7 @@
     /* Antes cada botón ocupaba el ancho que su propio texto necesitaba, así que "Borrar
        respuestas" (el más largo) le robaba espacio a "Nuevo tablero" y lo hacía partirse en
        dos líneas. Ahora los 3 se reparten el ancho disponible a partes iguales. */
-    .controls .btn { flex: 1 1 0; padding: 9px 4px; font-size: 0.78rem; }
+    .controls .btn { flex: 1 1 0; padding: 6px 2px; font-size: 0.55rem; line-height: 1.15; }
   }
 
   .sud-header-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 4px; }
@@ -223,6 +223,8 @@
 </head>
 <body>
 
+<div id="sud-debug-box" style="position:fixed; top:0; left:0; right:0; z-index:9999; background:#000; color:#0f0; font-family:monospace; font-size:11px; padding:8px; white-space:pre-wrap; line-height:1.4;"></div>
+
 <div class="sud-header-row">
   <img src="sudoku.webp" alt="One Piece Sudoku" class="sud-site-logo"
        onerror="this.style.display='none'; document.getElementById('sud-logo-fallback').style.display='block';">
@@ -231,8 +233,8 @@
 
 <div class="controls">
   <a href="index.html" class="btn secondary">← Volver</a>
-  <button class="btn" onclick="newPuzzle()">🔄 Nuevo</button>
-  <button class="btn secondary" onclick="clearMyAnswers()">🗑️ Borrar</button>
+  <button class="btn" onclick="newPuzzle()">Nuevo tablero</button>
+  <button class="btn secondary" onclick="clearMyAnswers()">Borrar respuestas</button>
 </div>
 
 <p class="sud-streak" id="sud-streak-label"><span class="sud-streak-dim">Resuelve un panel entero para empezar una racha</span></p>
@@ -760,6 +762,28 @@
   if (window.visualViewport) {
     window.visualViewport.addEventListener("resize", updateBoardSize);
   }
+
+  // --- Caja de diagnóstico TEMPORAL: quitar en cuanto tengamos el dato que necesitamos ---
+  function sudShowDebugInfo() {
+    const box = document.getElementById("sud-debug-box");
+    if (!box) return;
+    const btn = document.querySelector(".controls .btn");
+    const btnRect = btn ? btn.getBoundingClientRect() : null;
+    const btnStyle = btn ? getComputedStyle(btn) : null;
+    const controlsRow = document.querySelector(".controls");
+    const rowRect = controlsRow ? controlsRow.getBoundingClientRect() : null;
+    box.textContent =
+      `innerWidth: ${window.innerWidth} | innerHeight: ${window.innerHeight}\n` +
+      `visualViewport.width: ${window.visualViewport ? window.visualViewport.width : "N/D"}\n` +
+      `fila botones alto: ${rowRect ? Math.round(rowRect.height) : "N/D"}\n` +
+      `1er botón alto/ancho: ${btnRect ? Math.round(btnRect.height) + "/" + Math.round(btnRect.width) : "N/D"}\n` +
+      `1er botón font-size: ${btnStyle ? btnStyle.fontSize : "N/D"} | padding: ${btnStyle ? btnStyle.padding : "N/D"}\n` +
+      `board-size aplicado: ${getComputedStyle(document.documentElement).getPropertyValue("--board-size")}\n` +
+      `body.scrollHeight: ${document.body.scrollHeight} | window.innerHeight: ${window.innerHeight}\n` +
+      `devicePixelRatio: ${window.devicePixelRatio}`;
+  }
+  [200, 600, 1200, 2500, 4000].forEach(delay => setTimeout(sudShowDebugInfo, delay));
+  window.addEventListener("resize", sudShowDebugInfo);
 </script>
 </body>
 </html>
