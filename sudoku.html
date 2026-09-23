@@ -41,7 +41,7 @@
     /* Antes cada botón ocupaba el ancho que su propio texto necesitaba, así que "Borrar
        respuestas" (el más largo) le robaba espacio a "Nuevo tablero" y lo hacía partirse en
        dos líneas. Ahora los 3 se reparten el ancho disponible a partes iguales. */
-    .controls .btn { flex: 1 1 0; padding: 7px 2px; font-size: 0.62rem; }
+    .controls .btn { flex: 1 1 0; padding: 9px 4px; font-size: 0.78rem; }
   }
 
   .sud-header-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 4px; }
@@ -231,8 +231,8 @@
 
 <div class="controls">
   <a href="index.html" class="btn secondary">← Volver</a>
-  <button class="btn" onclick="newPuzzle()">Nuevo tablero</button>
-  <button class="btn secondary" onclick="clearMyAnswers()">Borrar respuestas</button>
+  <button class="btn" onclick="newPuzzle()">🔄 Nuevo</button>
+  <button class="btn secondary" onclick="clearMyAnswers()">🗑️ Borrar</button>
 </div>
 
 <p class="sud-streak" id="sud-streak-label"><span class="sud-streak-dim">Resuelve un panel entero para empezar una racha</span></p>
@@ -740,6 +740,10 @@
     checkWin(); // si el panel cargado ya estaba resuelto, esto hace que el aviso de victoria
                 // vuelva a aparecer — no suma la racha otra vez, porque sudBoardSolved ya es true
     requestAnimationFrame(updateBoardSize);
+    // Red de seguridad: recalculamos varias veces más durante los primeros segundos, por si la
+    // barra de direcciones de Safari (o algo parecido) cambia el alto disponible sin disparar
+    // ningún evento de los que ya escuchamos.
+    [300, 800, 1500, 3000].forEach(delay => setTimeout(updateBoardSize, delay));
   }
 
   sudAuth.onAuthStateChanged(user => {
