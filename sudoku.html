@@ -505,6 +505,7 @@
       const seguro = confirm("Todavía no has resuelto este sudoku. Si generas uno nuevo ahora, tu racha actual (" + sudStreak + ") se reiniciará a 0. ¿Quieres continuar?");
       if (!seguro) return;
       sudResetStreak();
+      sudRecordLoss();
     }
     generatePuzzle();
     selectedCell = null;
@@ -525,7 +526,7 @@
       label.classList.add("win");
       if (!sudBoardSolved) { // solo sumar una vez por tablero, no cada vez que se re-renderiza
         sudBoardSolved = true;
-        sudIncrementStreak();
+        sudHandleWin();
       }
     } else {
       label.textContent = "El tablero está lleno, pero hay alguna casilla repetida en su fila, columna o caja.";
@@ -707,12 +708,31 @@
   // Sumar 1 de forma ATÓMICA: Firestore hace la suma en su servidor a partir del valor que
   // tenga guardado en ESE momento, no del que teníamos nosotros en memoria — así, aunque dos
   // dispositivos incrementen casi a la vez, ningún incremento se pierde.
-  async function sudIncrementStreak() {
+  // Todo lo que pasa al ganar un panel (racha +1, mejor racha si toca, 5 Berries, contador de
+  // victorias) va en UNA sola transacción — antes iban en dos escrituras separadas, y había una
+  // carrera real entre leer la racha para compararla con la mejor y el propio incremento de la
+  // racha, que a veces hacía que la mejor racha se guardase mal (con un +1 de más). Con una
+  // transacción, todo se lee y se escribe a partir del mismo estado consistente.
+  // Igual que el resto de recompensas del sitio, las Berries/victorias son solo para cuentas con
+  // sesión iniciada — de invitado no hay Berries ni logros, aunque la racha en sí sí se guarda.
+  async function sudHandleWin() {
     if (sudCurrentUser) {
       try {
-        await sudDb.collection("users").doc(sudCurrentUser.uid).set(
-          { sudokuStreak: firebase.firestore.FieldValue.increment(1) }, { merge: true }
-        );
+        const docRef = sudDb.collection("users").doc(sudCurrentUser.uid);
+        await sudDb.runTransaction(async transaction => {
+          const snap = await transaction.get(docRef);
+          const data = snap.exists ? snap.data() : {};
+          const newStreak = (data.sudokuStreak || 0) + 1;
+          const newBest = Math.max(newStreak, data.sudokuBestStreak || 0);
+          const prevWins = (data.modeStats && data.modeStats.sudoku && data.modeStats.sudoku.wins) || 0;
+          transaction.set(docRef, {
+            sudokuStreak: newStreak,
+            sudokuBestStreak: newBest,
+            berries: firebase.firestore.FieldValue.increment(5),
+            totalBerriesEarned: firebase.firestore.FieldValue.increment(5),
+            modeStats: { sudoku: { wins: prevWins + 1 } }
+          }, { merge: true });
+        });
         // No hace falta tocar sudStreak a mano: el onSnapshot de arriba se encargará de
         // actualizarlo solo en cuanto Firestore confirme el cambio.
       } catch (e) {
@@ -734,6 +754,21 @@
     } else {
       sudSaveLocalStreak(0);
       sudRenderStreak();
+    }
+  }
+
+  // Al abandonar un panel sin resolver (confirmado el aviso de "se reiniciará tu racha"), se
+  // suma 1 a modeStats.sudoku.losses — el mismo contador de "derrotas" que ya usan las otras
+  // dificultades para un panel no resuelto, no algo exclusivo del sudoku.
+  async function sudRecordLoss() {
+    if (!sudCurrentUser) return;
+    try {
+      await sudDb.collection("users").doc(sudCurrentUser.uid).set(
+        { modeStats: { sudoku: { losses: firebase.firestore.FieldValue.increment(1) } } },
+        { merge: true }
+      );
+    } catch (e) {
+      console.error("No se pudo actualizar el contador de derrotas del sudoku:", e);
     }
   }
 
