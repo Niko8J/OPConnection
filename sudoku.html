@@ -224,11 +224,12 @@
   /* --- Controles --- */
   .controls {
     display: flex;
+    align-items: center;
     gap: 16px;
     margin-top: 18px;
     width: var(--board-size, min(94vw, 460px));
   }
-  .controls .btn { flex: 1 1 0; min-width: 0; }
+  .controls .btn { flex: 1 1 0; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   /* Los botones deben ajustarse al ancho del tablero (para no quedar descuadrados en pantallas
      anchas), PERO nunca por debajo de lo que el texto necesita para leerse en una sola línea —
      si el tablero sale pequeño (por ejemplo con el escalado de Windows), sin este mínimo la fila
