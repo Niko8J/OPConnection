@@ -585,6 +585,7 @@
   // hubiera mucho hueco libre debajo. Aquí medimos cuánto ocupa TODO lo demás (título,
   // selector, botones...) y le damos al tablero el máximo posible que quepa a la vez en alto y
   // en ancho, con 700px como techo para que tampoco crezca sin límite en pantallas enormes.
+  let sudFrozenAspect = null;
   function updateBoardSize() {
     const wrap = document.querySelector(".board-wrap");
     let usedHeight = 0;
@@ -602,6 +603,19 @@
     const availableWidth = window.innerWidth - horizontalPadding;
     const size = Math.max(160, Math.min(availableHeight, availableWidth, 700));
     document.documentElement.style.setProperty("--board-size", size + "px");
+    sudFrozenAspect = window.innerWidth / window.innerHeight;
+  }
+
+  // Igual que en la web principal: el zoom del navegador cambia el ancho y el alto casi en la
+  // misma proporción, así que la FORMA de la pantalla (ancho/alto) apenas varía — solo un
+  // redimensionado o giro de verdad la cambia de forma notable. Por eso, antes de recalcular el
+  // tamaño del tablero, comprobamos si la proporción ha cambiado más de un 15%; si no, dejamos
+  // que el propio navegador amplíe o reduzca el diseño ya calculado, sin que nosotros lo toquemos
+  // ni "peleemos" con él en mitad del zoom.
+  function sudHandleViewportChange() {
+    const currentAspect = window.innerWidth / window.innerHeight;
+    const aspectChanged = !sudFrozenAspect || Math.abs(currentAspect - sudFrozenAspect) / sudFrozenAspect > 0.15;
+    if (aspectChanged) updateBoardSize();
   }
 
   // --- Firebase: mismo proyecto que la web principal, solo para leer/guardar la racha del
@@ -801,12 +815,12 @@
   });
 
   buildPicker();
-  window.addEventListener("resize", updateBoardSize);
+  window.addEventListener("resize", sudHandleViewportChange);
   // En Safari de iPhone, la barra de direcciones se puede recoger sola al usar la página,
   // cambiando cuánto alto hay disponible de verdad — a veces sin disparar un "resize" normal.
   // visualViewport es la forma fiable de enterarse también de ese caso.
   if (window.visualViewport) {
-    window.visualViewport.addEventListener("resize", updateBoardSize);
+    window.visualViewport.addEventListener("resize", sudHandleViewportChange);
   }
 </script>
 </body>
