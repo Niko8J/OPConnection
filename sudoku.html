@@ -72,7 +72,6 @@
      no lo sustituye: ambos pueden aplicarse a la vez. */
   @media (max-height: 650px) {
     .sud-instructions { display: none; }
-    .sud-site-logo { max-height: 44px; }
     .sud-header-row { margin-bottom: 0; }
     .controls { margin-top: 8px; }
     .controls .btn { padding: 5px 6px; font-size: 0.74rem; }
@@ -90,7 +89,7 @@
     font-size: 1.1rem; text-decoration: none;
   }
   .sud-header-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 4px; }
-  .sud-site-logo { max-width: min(50vw, 260px); max-height: 100px; width: auto; height: auto; }
+  .sud-site-logo { max-width: min(50vw, 260px); max-height: var(--sud-logo-size, 100px); width: auto; height: auto; }
   .sud-logo-fallback {
     color: var(--amber); font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1px;
     font-weight: bold; text-align: center;
@@ -612,6 +611,14 @@
   // en ancho, con 700px como techo para que tampoco crezca sin límite en pantallas enormes.
   let sudFrozenAspect = null;
   function updateBoardSize() {
+    // El logo se escala de forma proporcional al alto total de la ventana (entre un mínimo y un
+    // máximo razonables), igual que se adapta el resto de la página — antes tenía un tamaño fijo
+    // con un único salto brusco a partir de cierto punto, en vez de ir cambiando poco a poco como
+    // hace el tablero. Se aplica ANTES de medir lo demás, para que ese cálculo ya cuente con el
+    // tamaño correcto y definitivo del logo.
+    const logoSize = Math.max(32, Math.min(window.innerHeight * 0.1, 100));
+    document.documentElement.style.setProperty("--sud-logo-size", logoSize + "px");
+
     const wrap = document.querySelector(".board-wrap");
     let usedHeight = 0;
     Array.from(document.body.children).forEach(el => {
