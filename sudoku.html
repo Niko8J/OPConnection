@@ -236,6 +236,7 @@
     color: var(--text-dim);
     border: 1px solid var(--card-border);
   }
+  .btn:disabled { opacity: 0.35; cursor: not-allowed; }
   /* "Volver" es un <a> de verdad (lleva a index.html), no un <button> como el resto — sin esto
      se vería subrayado y no centrado como sus vecinos. */
   a.btn { text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
@@ -270,7 +271,7 @@
 <div class="controls">
   <a href="index.html" class="btn secondary sud-back-inline">← Volver</a>
   <button class="btn" onclick="newPuzzle()">Nuevo tablero</button>
-  <button class="btn secondary" onclick="clearMyAnswers()">Borrar respuestas</button>
+  <button class="btn secondary" id="sud-clear-answers-btn" onclick="clearMyAnswers()">Borrar respuestas</button>
 </div>
 
 <p class="sud-streak" id="sud-streak-label"><span class="sud-streak-dim">Resuelve un panel entero para empezar una racha</span></p>
@@ -285,7 +286,7 @@
 </div>
 
 <div class="controls sud-controls-bottom">
-  <button class="btn secondary" onclick="clearSelected()">Vaciar esta casilla</button>
+  <button class="btn secondary" id="sud-clear-cell-btn" onclick="clearSelected()">Vaciar esta casilla</button>
 </div>
 
 <p class="subtitle sud-instructions">Rellena el tablero para que cada fila, columna y caja de 3×3 tenga a los nueve tripulantes, sin repetir ninguno.</p>
@@ -504,6 +505,8 @@
       label.textContent = "El tablero está lleno, pero hay alguna casilla repetida en su fila, columna o caja.";
       label.classList.remove("win");
     }
+    document.getElementById("sud-clear-answers-btn").disabled = sudBoardSolved;
+    document.getElementById("sud-clear-cell-btn").disabled = sudBoardSolved;
     updateBoardSize(); // el mensaje de victoria puede tener otra altura que el texto normal
   }
 
@@ -556,6 +559,11 @@
       : "Toca una casilla vacía para elegir un tripulante";
 
     document.getElementById("picker").classList.toggle("disabled", !selectedCell);
+
+    // Una vez ganado el panel, no tiene sentido poder borrarlo — se desactivan estos dos
+    // botones para que la victoria se quede tal cual, sin poder reiniciarla por accidente.
+    document.getElementById("sud-clear-answers-btn").disabled = sudBoardSolved;
+    document.getElementById("sud-clear-cell-btn").disabled = sudBoardSolved;
   }
 
   function buildPicker() {
