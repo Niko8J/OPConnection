@@ -255,6 +255,8 @@
 </head>
 <body>
 
+<div id="sud-debug-box" style="position:fixed; top:0; left:0; right:0; z-index:9999; background:#000; color:#0f0; font-family:monospace; font-size:12px; padding:6px; white-space:pre-wrap; line-height:1.4;"></div>
+
 <div class="rotate-overlay">
   <div class="rotate-overlay-icon">📱</div>
   <p>Pon el dispositivo en vertical para seguir jugando</p>
@@ -612,10 +614,20 @@
   // tamaño del tablero, comprobamos si la proporción ha cambiado más de un 15%; si no, dejamos
   // que el propio navegador amplíe o reduzca el diseño ya calculado, sin que nosotros lo toquemos
   // ni "peleemos" con él en mitad del zoom.
+  //
+  // Además, esperamos ("debounce") a que los eventos de resize dejen de llegar durante un
+  // ratito antes de medir nada: mientras dura un gesto de zoom o el giro de una pantalla, el
+  // navegador puede disparar varios "resize" seguidos con valores todavía a medio camino — si
+  // midiéramos ahí, podríamos pillar una proporción rara a mitad de camino que sí superase el
+  // 15%, recalcular con esa medida provisional, y quedarnos pillados con un tamaño equivocado.
+  let sudViewportSettleTimer = null;
   function sudHandleViewportChange() {
-    const currentAspect = window.innerWidth / window.innerHeight;
-    const aspectChanged = !sudFrozenAspect || Math.abs(currentAspect - sudFrozenAspect) / sudFrozenAspect > 0.15;
-    if (aspectChanged) updateBoardSize();
+    clearTimeout(sudViewportSettleTimer);
+    sudViewportSettleTimer = setTimeout(() => {
+      const currentAspect = window.innerWidth / window.innerHeight;
+      const aspectChanged = !sudFrozenAspect || Math.abs(currentAspect - sudFrozenAspect) / sudFrozenAspect > 0.15;
+      if (aspectChanged) updateBoardSize();
+    }, 200);
   }
 
   // --- Firebase: mismo proyecto que la web principal, solo para leer/guardar la racha del
@@ -822,6 +834,20 @@
   if (window.visualViewport) {
     window.visualViewport.addEventListener("resize", sudHandleViewportChange);
   }
+
+  // --- Caja de diagnóstico TEMPORAL: quitar en cuanto tengamos el dato que necesitamos ---
+  function sudShowDebugInfo() {
+    const box = document.getElementById("sud-debug-box");
+    if (!box) return;
+    box.textContent =
+      `innerWidth: ${window.innerWidth} | innerHeight: ${window.innerHeight}\n` +
+      `devicePixelRatio: ${window.devicePixelRatio}\n` +
+      `screen.width: ${screen.width} | screen.height: ${screen.height}\n` +
+      `board-size aplicado: ${getComputedStyle(document.documentElement).getPropertyValue("--board-size")}\n` +
+      `sudFrozenAspect: ${sudFrozenAspect} | proporción actual: ${(window.innerWidth / window.innerHeight).toFixed(3)}`;
+  }
+  [200, 600, 1200, 2500, 4500].forEach(delay => setTimeout(sudShowDebugInfo, delay));
+  window.addEventListener("resize", sudShowDebugInfo);
 </script>
 </body>
 </html>
