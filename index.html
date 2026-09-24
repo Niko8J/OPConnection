@@ -3142,6 +3142,26 @@
     }));
   }
 
+  // Paneles de sudoku resueltos seguidos necesarios para cada nivel de logro — menos escalones
+  // que Infinito al ser un modo más nuevo, con las mismas recompensas en Berries que los cuatro
+  // primeros niveles de ACHIEVEMENT_COIN_REWARDS.
+  const SUDOKU_STREAK_MILESTONES = [1, 10, 25, 50, 100];
+
+  function buildSudokuStreakAchievements() {
+    return SUDOKU_STREAK_MILESTONES.map((n, index) => ({
+      id: `racha_sudoku_${n}`,
+      tier: "sudoku",
+      coins: ACHIEVEMENT_COIN_REWARDS[index],
+      name: n === 1 ? "Gana tu primer sudoku" : `Racha de ${n} sudokus`,
+      nameLines: n === 1 ? ["Gana tu", "primer", "sudoku"] : [`Racha de ${n}`, "sudokus", "seguidos"],
+      description: n === 1
+        ? "Resuelve tu primer panel de sudoku"
+        : `Alcanza una racha de ${n} sudokus resueltos seguidos`,
+      check: profile => (profile.sudokuBestStreak || 0) >= n,
+      progress: profile => ({ current: profile.sudokuBestStreak || 0, target: n })
+    }));
+  }
+
   // Interruptor único para toda la columna de Ranking: con muy pocos jugadores compitiendo
   // entre sí (como ahora mismo), no tiene sentido pagar estos logros — casi cualquiera puede
   // llegar al top 1 solo por ser de los pocos que juegan. En vez de tocar o borrar los logros
@@ -3359,6 +3379,7 @@
 
   const ACHIEVEMENTS = [
     ...buildInfiniteStreakAchievements(),
+    ...buildSudokuStreakAchievements(),
     ...buildDailyStreakAchievements("facil", "novato"),
     ...buildDailyStreakAchievements("media", "supernova"),
     ...buildDailyStreakAchievements("dificil", "yonko"),
@@ -4002,6 +4023,7 @@
     { tier: "supernova", label: "Supernova" },
     { tier: "yonko", label: "Yonko" },
     { tier: "infinito", label: "Infinito" },
+    { tier: "sudoku", label: "Sudoku" },
     { tier: "ranking", label: "Ranking" },
     { tier: "compartidas", label: "Compartidas", mobileLabel: "Partidas compartidas" },
     { tier: "personajes", label: "Personajes" },
@@ -4150,7 +4172,8 @@
       { key: "facil", name: "Novato", current: getEffectiveCurrentStreak(daily.facil), best: (daily.facil && daily.facil.longest) || 0 },
       { key: "media", name: "Supernova", current: getEffectiveCurrentStreak(daily.media), best: (daily.media && daily.media.longest) || 0 },
       { key: "dificil", name: "Yonko", current: getEffectiveCurrentStreak(daily.dificil), best: (daily.dificil && daily.dificil.longest) || 0 },
-      { key: "infinito", name: "Infinito", current: infiniteCurrent, best: profile.bestStreak || 0 }
+      { key: "infinito", name: "Infinito", current: infiniteCurrent, best: profile.bestStreak || 0 },
+      { key: "sudoku", name: "Sudoku", current: profile.sudokuStreak || 0, best: profile.sudokuBestStreak || 0 }
     ].map(m => ({
       ...m,
       wins: (modeStats[m.key] && modeStats[m.key].wins) || 0,
