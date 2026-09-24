@@ -19,6 +19,24 @@
 
   * { box-sizing: border-box; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
+  .rotate-overlay { display: none; }
+  /* Misma lógica que la web principal: "orientation: landscape" + poco alto identifica un
+     MÓVIL en horizontal (el alto pasa a ser el lado corto del dispositivo) — "pointer: coarse"
+     evita que salte en un ordenador con mucho zoom, que también reduce el alto disponible. */
+  @media (orientation: landscape) and (max-height: 500px) and (pointer: coarse) {
+    .rotate-overlay {
+      display: flex; position: fixed; inset: 0; z-index: 9999;
+      background-color: var(--bg); color: var(--text);
+      flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 20px; gap: 10px;
+    }
+    .rotate-overlay-icon { font-size: 2.5rem; animation: rotate-hint 1.6s ease-in-out infinite; }
+    @keyframes rotate-hint {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(90deg); }
+    }
+  }
+
   body {
     margin: 0;
     background: var(--bg);
@@ -235,6 +253,11 @@
 </style>
 </head>
 <body>
+
+<div class="rotate-overlay">
+  <div class="rotate-overlay-icon">📱</div>
+  <p>Pon el dispositivo en vertical para seguir jugando</p>
+</div>
 
 <a href="index.html" class="sud-back-corner" title="Volver al juego">←</a>
 

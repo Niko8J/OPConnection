@@ -1001,7 +1001,7 @@
        — mismo tono apagado que el resto del pie, para que no compita visualmente con el
        tablero ni con nada de la partida en sí. */
     .site-about-text {
-      max-width: 640px; margin: max(calc(var(--v-gap-sm) * 2), 26vh) auto 0; padding: 0 12px;
+      max-width: 640px; margin: calc(var(--v-gap-sm) * 2) auto 0; padding: 0 12px;
       font-size: 0.74rem; color: #64748b; line-height: 1.6; text-align: left;
     }
     .site-about-text h2 {
@@ -1374,7 +1374,7 @@
     <button class="diff-btn" onclick="setDifficulty('media', event)">Supernova</button>
     <button class="diff-btn" onclick="setDifficulty('dificil', event)">Yonko</button>
     <button class="diff-btn" onclick="setDifficulty('infinito', event)">Infinito</button>
-    <a class="diff-btn" href="sudoku.html" target="_blank" rel="noopener">Sudoku</a>
+    <a class="diff-btn" href="sudoku.html">Sudoku</a>
   </div>
 
   <div id="infinite-score" class="infinite-score" style="visibility: hidden;"></div>
