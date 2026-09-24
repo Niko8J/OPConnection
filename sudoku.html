@@ -65,6 +65,22 @@
     .controls .btn { flex: 1 1 0; min-width: 0; padding: 8px 6px; font-size: 0.74rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   }
 
+  /* Cuando el ALTO disponible es muy limitado (no el ancho) — por ejemplo, una ventana de
+     Chrome no maximizada, o Windows con la pantalla escalada al 150%, que deja mucho menos
+     alto real del que parece — achicamos lo que rodea al tablero (logo, márgenes, botones)
+     para dejarle al tablero en sí todo el sitio posible. Esto se suma al de ancho de arriba,
+     no lo sustituye: ambos pueden aplicarse a la vez. */
+  @media (max-height: 650px) {
+    .sud-instructions { display: none; }
+    .sud-site-logo { max-height: 44px; }
+    .sud-header-row { margin-bottom: 0; }
+    .controls { margin-top: 8px; }
+    .controls .btn { padding: 5px 6px; font-size: 0.74rem; }
+    .sud-streak { margin: 2px 0 0; min-height: 1.6em; font-size: 0.8rem; }
+    .sud-controls-bottom { margin-top: 4px; }
+    .picker-wrap { margin-top: 8px; min-height: 0; }
+  }
+
   .sud-back-corner {
     display: none; /* solo se muestra en móvil, ver el media query de abajo */
     position: fixed; top: 10px; left: 10px; z-index: 50;
@@ -254,8 +270,6 @@
 </style>
 </head>
 <body>
-
-<div id="sud-debug-box" style="position:fixed; top:0; left:0; right:0; z-index:9999; background:#000; color:#0f0; font-family:monospace; font-size:12px; padding:6px; white-space:pre-wrap; line-height:1.4;"></div>
 
 <div class="rotate-overlay">
   <div class="rotate-overlay-icon">📱</div>
@@ -834,20 +848,6 @@
   if (window.visualViewport) {
     window.visualViewport.addEventListener("resize", sudHandleViewportChange);
   }
-
-  // --- Caja de diagnóstico TEMPORAL: quitar en cuanto tengamos el dato que necesitamos ---
-  function sudShowDebugInfo() {
-    const box = document.getElementById("sud-debug-box");
-    if (!box) return;
-    box.textContent =
-      `innerWidth: ${window.innerWidth} | innerHeight: ${window.innerHeight}\n` +
-      `devicePixelRatio: ${window.devicePixelRatio}\n` +
-      `screen.width: ${screen.width} | screen.height: ${screen.height}\n` +
-      `board-size aplicado: ${getComputedStyle(document.documentElement).getPropertyValue("--board-size")}\n` +
-      `sudFrozenAspect: ${sudFrozenAspect} | proporción actual: ${(window.innerWidth / window.innerHeight).toFixed(3)}`;
-  }
-  [200, 600, 1200, 2500, 4500].forEach(delay => setTimeout(sudShowDebugInfo, delay));
-  window.addEventListener("resize", sudShowDebugInfo);
 </script>
 </body>
 </html>
