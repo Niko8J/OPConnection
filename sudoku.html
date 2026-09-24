@@ -473,9 +473,10 @@
   }
 
   function newPuzzle() {
-    // Si el tablero actual tiene progreso real sin resolver, avisamos antes de perderlo — generar
-    // uno nuevo sin terminar este reinicia la racha.
-    if (!sudBoardSolved && sudHasProgress) {
+    // Avisamos siempre que el panel actual no esté ya resuelto — da igual que esté vacío, a
+    // medias, o que acabes de borrar tus respuestas: mientras no esté ganado, generar uno nuevo
+    // reinicia la racha, así que el aviso debe saltar en cualquiera de esos casos.
+    if (!sudBoardSolved) {
       const seguro = confirm("Todavía no has resuelto este sudoku. Si generas uno nuevo ahora, tu racha actual (" + sudStreak + ") se reiniciará a 0. ¿Quieres continuar?");
       if (!seguro) return;
       sudResetStreak();
