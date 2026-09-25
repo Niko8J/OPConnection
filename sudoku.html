@@ -72,12 +72,12 @@
      no lo sustituye: ambos pueden aplicarse a la vez. */
   @media (max-height: 650px) {
     .sud-instructions { display: none; }
-    .sud-header-row { margin-bottom: 0; }
-    .controls { margin-top: 8px; }
-    .controls .btn { padding: 5px 6px; font-size: 0.74rem; }
-    .sud-streak { margin: 2px 0 0; min-height: 1.6em; font-size: 0.8rem; }
-    .sud-controls-bottom { margin-top: 4px; }
-    .picker-wrap { margin-top: 8px; min-height: 0; }
+    .sud-header-row { margin-bottom: 0 !important; }
+    .controls { margin-top: 8px !important; }
+    .controls .btn { padding: 5px 6px !important; font-size: 0.74rem !important; }
+    .sud-streak { margin: 2px 0 0 !important; min-height: 1.6em !important; font-size: 0.8rem !important; }
+    .sud-controls-bottom { margin-top: 4px !important; }
+    .picker-wrap { margin-top: 8px !important; min-height: 0 !important; }
   }
 
   .sud-back-corner {
@@ -235,7 +235,7 @@
      "Volver" (más corto) queda más estrecho y "Borrar respuestas" (más largo) más ancho, sin que
      ninguno se corte. La fila de abajo ("Vaciar esta casilla", un único botón) se queda tal cual,
      a ancho completo. */
-  .controls:not(.sud-controls-bottom) .btn { flex: 0 1 auto; white-space: nowrap; overflow: visible; text-overflow: clip; }
+  .controls:not(.sud-controls-bottom) .btn { flex: 1 1 auto; white-space: nowrap; overflow: visible; text-overflow: clip; }
   .controls:not(.sud-controls-bottom) { justify-content: center; }
   /* Los botones deben ajustarse al ancho del tablero (para no quedar descuadrados en pantallas
      anchas), PERO nunca por debajo de lo que el texto necesita para leerse en una sola línea —
