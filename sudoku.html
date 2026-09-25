@@ -540,8 +540,10 @@
       label.textContent = "El tablero está lleno, pero hay alguna casilla repetida en su fila, columna o caja.";
       label.classList.remove("win");
     }
-    document.getElementById("sud-clear-answers-btn").disabled = sudBoardSolved || !sudHasProgress;
-    document.getElementById("sud-clear-cell-btn").disabled = sudBoardSolved || !selectedCell;
+    const casillaSeleccionadaTieneAlgo = selectedCell && !!board[selectedCell.r][selectedCell.c];
+    const hayAlgunaRespuesta = board.some((row, r) => row.some((cell, c) => cell && !givenMask[r][c]));
+    document.getElementById("sud-clear-answers-btn").disabled = sudBoardSolved || !hayAlgunaRespuesta;
+    document.getElementById("sud-clear-cell-btn").disabled = sudBoardSolved || !casillaSeleccionadaTieneAlgo;
     updateBoardSize(); // el mensaje de victoria puede tener otra altura que el texto normal
   }
 
@@ -595,11 +597,14 @@
 
     document.getElementById("picker").classList.toggle("disabled", !selectedCell);
 
-    // Además de desactivarse al ganar (para no poder reiniciar una victoria), cada uno se
-    // desactiva también cuando no hay nada que borrar: "Vaciar esta casilla" sin ninguna casilla
-    // seleccionada, y "Borrar respuestas" sin ninguna respuesta puesta todavía.
-    document.getElementById("sud-clear-answers-btn").disabled = sudBoardSolved || !sudHasProgress;
-    document.getElementById("sud-clear-cell-btn").disabled = sudBoardSolved || !selectedCell;
+    // Calculado directamente del tablero real en cada momento (no de sudHasProgress, que se
+    // podía quedar "pegado" en true si vaciabas la única respuesta que había puesto) — así
+    // "Vaciar esta casilla" exige que la casilla seleccionada tenga algo de verdad, y "Borrar
+    // respuestas" que haya al menos una respuesta en cualquier sitio del tablero.
+    const casillaSeleccionadaTieneAlgo = selectedCell && !!board[selectedCell.r][selectedCell.c];
+    const hayAlgunaRespuesta = board.some((row, r) => row.some((cell, c) => cell && !givenMask[r][c]));
+    document.getElementById("sud-clear-answers-btn").disabled = sudBoardSolved || !hayAlgunaRespuesta;
+    document.getElementById("sud-clear-cell-btn").disabled = sudBoardSolved || !casillaSeleccionadaTieneAlgo;
   }
 
   function buildPicker() {
