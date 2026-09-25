@@ -230,6 +230,13 @@
     width: var(--board-size, min(94vw, 460px));
   }
   .controls .btn { flex: 1 1 0; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* Solo la fila de arriba (Volver/Nuevo tablero/Borrar respuestas) pasa a que cada botón use el
+     ancho que su propio texto necesite, en vez de repartirse el espacio a partes iguales — así
+     "Volver" (más corto) queda más estrecho y "Borrar respuestas" (más largo) más ancho, sin que
+     ninguno se corte. La fila de abajo ("Vaciar esta casilla", un único botón) se queda tal cual,
+     a ancho completo. */
+  .controls:not(.sud-controls-bottom) .btn { flex: 0 1 auto; white-space: nowrap; overflow: visible; text-overflow: clip; }
+  .controls:not(.sud-controls-bottom) { justify-content: center; }
   /* Los botones deben ajustarse al ancho del tablero (para no quedar descuadrados en pantallas
      anchas), PERO nunca por debajo de lo que el texto necesita para leerse en una sola línea —
      si el tablero sale pequeño (por ejemplo con el escalado de Windows), sin este mínimo la fila
@@ -237,13 +244,14 @@
      se aplica en pantallas anchas (ahí es donde se ven los 3 botones con "Volver" incluido); en
      móvil ya tiene su propio tratamiento aparte, con solo 2 botones visibles. */
   @media (min-width: 481px) {
-    .controls { min-width: 340px; }
+    .controls, .sud-streak, .picker-wrap { min-width: 340px; }
   }
   .sud-controls-bottom { margin-top: 8px; }
   .sud-streak {
     color: var(--amber); font-weight: bold; font-size: 0.95rem;
     margin: 6px 0 0; text-align: center;
     min-height: 2.6em; display: flex; align-items: center; justify-content: center;
+    width: var(--board-size, min(94vw, 460px));
   }
   .sud-streak .sud-streak-dim { color: var(--text-dim); font-weight: normal; font-size: 0.8rem; }
   .btn {
