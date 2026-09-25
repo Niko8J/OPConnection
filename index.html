@@ -3142,10 +3142,9 @@
     }));
   }
 
-  // Paneles de sudoku resueltos seguidos necesarios para cada nivel de logro — menos escalones
-  // que Infinito al ser un modo más nuevo, con las mismas recompensas en Berries que los cuatro
-  // primeros niveles de ACHIEVEMENT_COIN_REWARDS.
-  const SUDOKU_STREAK_MILESTONES = [1, 10, 25, 50, 100];
+  // Paneles de sudoku resueltos seguidos necesarios para cada nivel de logro — mismos escalones
+  // y recompensas en Berries que Infinito, para que ambas columnas queden igual de largas.
+  const SUDOKU_STREAK_MILESTONES = [1, 10, 25, 50, 100, 150, 200, 300];
 
   function buildSudokuStreakAchievements() {
     return SUDOKU_STREAK_MILESTONES.map((n, index) => ({
@@ -4024,12 +4023,18 @@
     { tier: "yonko", label: "Yonko" },
     { tier: "infinito", label: "Infinito" },
     { tier: "sudoku", label: "Sudoku" },
-    { tier: "ranking", label: "Ranking" },
     { tier: "compartidas", label: "Compartidas", mobileLabel: "Partidas compartidas" },
     { tier: "personajes", label: "Personajes" },
     { tier: "categorias", label: "Categorías" },
     { tier: "avatares", label: "Avatares exclusivos" },
     { subColumns: [{ tier: "marcos", label: "Marcos" }, { tier: "titulos", label: "Títulos" }], label: "Marcos y Títulos" }
+    // Ranking: oculto a propósito mientras RANKING_ACHIEVEMENTS_ENABLED sea false (muy pocos
+    // jugadores compitiendo entre sí todavía) — los logros en sí siguen definidos tal cual en
+    // ACHIEVEMENTS (buildRankingPositionAchievements), solo no se muestran como columna. Con 10
+    // columnas activas ahora mismo (dos filas exactas de 5), añadir esta de vuelta el día que
+    // toque activarla dejará 11 (una suelta en una tercera fila) — no es un problema, solo un
+    // aviso de que el cuadre perfecto es cosa de este momento concreto, no algo fijo:
+    // , { tier: "ranking", label: "Ranking" }
   ];
 
   // Calcula el llenado de la barrita de progreso. La mayoría de logros son "más es mejor"
