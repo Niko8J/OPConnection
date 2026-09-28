@@ -647,7 +647,7 @@
     "tags": {
       "Banda": [
         {"val": "Piratas de Barbanegra", "dif": "facil"},
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Titulo": [
         {"val": "Shichibukais", "dif": "facil"},
@@ -1192,7 +1192,7 @@
     "img": "imagenes/Marco.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -4371,7 +4371,7 @@
     "img": "imagenes/Barbablanca.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"},
+        {"val": "Piratas de Barbablanca", "dif": "media"},
         {"val": "Piratas de Rocks", "dif": "media"}
       ],
       "Titulo": [
@@ -4413,7 +4413,7 @@
         {"val": "Hermanos y hermanas de los Sombrero de Paja", "dif": "dificil"}
       ],
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: South Blue", "dif": "dificil"}
@@ -5262,7 +5262,7 @@
     "tags": {
       "Banda": [
         {"val": "Origen: Wano", "dif": "facil"},
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -5894,7 +5894,7 @@
     "tags": {
       "Banda": [
         {"val": "Piratas de Roger", "dif": "facil"},
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Titulo": [
         {"val": "Vainas Rojas", "dif": "facil"}
@@ -5972,7 +5972,7 @@
     "img": "imagenes/Jozu.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: West Blue", "dif": "dificil"}
@@ -6132,7 +6132,7 @@
     "tags": {
       "Banda": [
         {"val": "Piratas de Roger", "dif": "facil"},
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Titulo": [
         {"val": "Vainas Rojas", "dif": "facil"}
@@ -6783,7 +6783,7 @@
     "img": "imagenes/WhiteyBay.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
@@ -9349,7 +9349,7 @@
       "Banda": [
         {"val": "Origen: Wano", "dif": "facil"},
         {"val": "Piratas de Roger", "dif": "facil"},
-        {"val": "Piratas de Barbablanca", "dif": "facil"},
+        {"val": "Piratas de Barbablanca", "dif": "media"},
         {"val": "Familia Kozuki", "dif": "media"}
       ],
       "Origen": [
@@ -10994,7 +10994,7 @@
       ],
       "Banda": [
         {"val": "Piratas de Roger", "dif": "facil"},
-        {"val": "Piratas de Barbablanca", "dif": "facil"},
+        {"val": "Piratas de Barbablanca", "dif": "media"},
         {"val": "Familia Kozuki", "dif": "media"},
         {"val": "Origen: Wano", "dif": "facil"}
       ],
@@ -11569,7 +11569,7 @@
     "img": "imagenes/Vista.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: North Blue", "dif": "dificil"}
@@ -12409,7 +12409,7 @@
     "img": "imagenes/OarsJr.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Raza": [
         {"val": "Gigantes", "dif": "facil"},
@@ -13903,7 +13903,7 @@
     "img": "imagenes/Tatch.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Marcas": [
         {"val": "Personajes con cicatrices", "dif": "dificil"}
@@ -13925,7 +13925,7 @@
     "img": "imagenes/Blamenco.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Fruta": [
         {"val": "Fruta del diablo: Paramecia", "dif": "dificil"}
@@ -13947,7 +13947,7 @@
     "img": "imagenes/Rakuyo.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: South Blue", "dif": "dificil"}
@@ -13963,7 +13963,7 @@
     "img": "imagenes/Namur.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -13985,7 +13985,7 @@
     "img": "imagenes/Curiel.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Especialidad": [
         {"val": "Tiradores", "dif": "dificil"}
@@ -14009,7 +14009,7 @@
     "img": "imagenes/Kingdew.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -14028,7 +14028,7 @@
     "img": "imagenes/Haruta.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
@@ -14047,7 +14047,7 @@
     "img": "imagenes/SpeedJiru.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Marcas": [
         {"val": "Personajes que han llevado sombrero, gorro, corona...", "dif": "dificil"}
@@ -14066,7 +14066,7 @@
     "img": "imagenes/Blenheim.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Origen": [
         {"val": "Origen: Grand Line", "dif": "dificil"}
@@ -14088,7 +14088,7 @@
     "img": "imagenes/Fossa.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
@@ -14112,7 +14112,7 @@
     "img": "imagenes/Atmos.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
@@ -14136,7 +14136,7 @@
     "img": "imagenes/HermanosDecalvan.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Especialidad": [
         {"val": "Capitanes pirata", "dif": "dificil"}
@@ -14153,7 +14153,7 @@
     "img": "imagenes/Doma.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Especialidad": [
         {"val": "Capitanes pirata", "dif": "dificil"},
@@ -14171,7 +14171,7 @@
     "img": "imagenes/Squard.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"}
@@ -14190,7 +14190,7 @@
     "img": "imagenes/McGuy.webp",
     "tags": {
       "Banda": [
-        {"val": "Piratas de Barbablanca", "dif": "facil"}
+        {"val": "Piratas de Barbablanca", "dif": "media"}
       ],
       "Especialidad": [
         {"val": "Espadachines", "dif": "dificil"},
