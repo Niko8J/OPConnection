@@ -530,7 +530,9 @@
     if (!isBoardFull()) return;
     const label = document.getElementById("picker-label");
     if (allConflictCells().size === 0) {
-      label.textContent = "🎉 ¡Sudoku resuelto! Toda la tripulación en su sitio.";
+      label.textContent = window.innerWidth <= 480
+        ? "¡Sudoku resuelto!"
+        : "🎉 ¡Sudoku resuelto! Toda la tripulación en su sitio.";
       label.classList.add("win");
       if (!sudBoardSolved) { // solo sumar una vez por tablero, no cada vez que se re-renderiza
         sudBoardSolved = true;
