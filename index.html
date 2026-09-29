@@ -6186,7 +6186,7 @@
   // posición exacta): es la misma gracia de siempre de ver el panel desde otro orden al volver
   // a pulsar la dificultad, que ya existía antes de este arreglo y que solo queríamos
   // conservar para las categorías acertadas y las vidas, no para la disposición del tablero.
-  function resumeDailyFromSaved(difficulty, saved) {
+  async function resumeDailyFromSaved(difficulty, saved) {
     currentDifficulty = difficulty;
     isInfiniteMode = false;
     // Antes esto asumía que un progreso a medias solo podía ser el de hoy — ya no: puede ser
@@ -6196,6 +6196,17 @@
     gameOver = false;
     awaitingNextPanel = false;
     currentCategories = hydrateBoardGroups(saved.groups);
+
+    if (currentCategories.length === 0) {
+      // Mismo caso que en renderFinishedDailyPanel: un progreso a medias guardado con las
+      // categorías vacías, secuela de un fallo ya corregido — recurrimos al panel compartido
+      // real en su lugar.
+      try {
+        currentCategories = await getOrCreateDailyPuzzle(difficulty, currentViewedDailyDate);
+      } catch (e) {
+        console.error("No se pudo recuperar el panel real tras un progreso guardado vacío:", e);
+      }
+    }
     solvedOrder = saved.solvedOrder || [];
     lives = (typeof saved.lives === "number") ? saved.lives : MAX_LIVES;
     hintsRemaining = (typeof saved.hintsRemaining === "number") ? saved.hintsRemaining : 1;
@@ -6934,6 +6945,18 @@
     isInfiniteMode = false;
     currentViewedDailyDate = storedEntry.date;
     currentCategories = hydrateBoardGroups(storedEntry.groups);
+
+    if (currentCategories.length === 0) {
+      // El resultado guardado en tu cuenta tiene las categorías vacías — secuela de un fallo ya
+      // corregido en el que se podía guardar un resultado sin haber llegado a cargar el panel de
+      // verdad. En vez de quedarnos con esa copia dañada, recurrimos al panel compartido real
+      // (que si ya existía ese día, sigue intacto en Firestore) para poder mostrarlo igualmente.
+      try {
+        currentCategories = await getOrCreateDailyPuzzle(difficulty, storedEntry.date);
+      } catch (e) {
+        console.error("No se pudo recuperar el panel real tras un resultado guardado vacío:", e);
+      }
+    }
 
     const won = storedEntry.result === "win";
     // Compatibilidad con resultados guardados ANTES de este cambio (sin solvedOrder ni lives):
