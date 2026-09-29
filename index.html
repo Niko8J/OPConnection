@@ -1288,6 +1288,24 @@
 </head>
 <body class="hide-ads-during-loading">
 
+<div id="debug-error-box" style="display:none; position:fixed; top:0; left:0; right:0; z-index:99999; background:#000; color:#0f0; font-family:monospace; font-size:11px; padding:8px; white-space:pre-wrap; line-height:1.4; max-height:60vh; overflow-y:auto;"></div>
+<script>
+  (function() {
+    const box = () => document.getElementById("debug-error-box");
+    function mostrar(texto) {
+      const b = box();
+      b.style.display = "block";
+      b.textContent += texto + "\n\n";
+    }
+    window.addEventListener("error", e => {
+      mostrar("ERROR: " + e.message + "\nen " + e.filename + ":" + e.lineno + ":" + e.colno + "\n" + (e.error && e.error.stack ? e.error.stack.split("\n").slice(0,4).join("\n") : ""));
+    });
+    window.addEventListener("unhandledrejection", e => {
+      mostrar("PROMESA RECHAZADA: " + (e.reason && e.reason.message ? e.reason.message : e.reason) + "\n" + (e.reason && e.reason.stack ? e.reason.stack.split("\n").slice(0,4).join("\n") : ""));
+    });
+  })();
+</script>
+
 <!-- Contenedor de avisos flotantes (monedas ganadas, logros conseguidos): position:fixed a
      nivel de body, para que se vea por encima de cualquier modal o pantalla, sin importar en
      qué modo se esté jugando. -->
@@ -7805,6 +7823,20 @@
     }
   });
 
+  // --- Diagnóstico TEMPORAL: quitar en cuanto tengamos el dato que necesitamos ---
+  setTimeout(() => {
+    const box = document.getElementById("debug-error-box");
+    if (!box) return;
+    const board = document.querySelector(".board");
+    box.style.display = "block";
+    box.textContent +=
+      `--- Estado a los 3s ---\n` +
+      `currentDifficulty: ${typeof currentDifficulty !== "undefined" ? currentDifficulty : "N/D"}\n` +
+      `currentCategories.length: ${typeof currentCategories !== "undefined" ? currentCategories.length : "N/D"}\n` +
+      `tarjetas en el tablero: ${board ? board.children.length : "N/D (no existe .board)"}\n` +
+      `currentUser: ${typeof currentUser !== "undefined" ? (currentUser ? currentUser.uid : "invitado") : "N/D"}\n` +
+      `warning-msg: "${(document.getElementById("warning-msg") || {}).innerText || ""}"\n`;
+  }, 3000);
 </script>
 </body>
 </html>
