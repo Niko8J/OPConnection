@@ -1288,24 +1288,6 @@
 </head>
 <body class="hide-ads-during-loading">
 
-<div id="debug-error-box" style="display:none; position:fixed; top:0; left:0; right:0; z-index:99999; background:#000; color:#0f0; font-family:monospace; font-size:11px; padding:8px; white-space:pre-wrap; line-height:1.4; max-height:60vh; overflow-y:auto;"></div>
-<script>
-  (function() {
-    const box = () => document.getElementById("debug-error-box");
-    function mostrar(texto) {
-      const b = box();
-      b.style.display = "block";
-      b.textContent += texto + "\n\n";
-    }
-    window.addEventListener("error", e => {
-      mostrar("ERROR: " + e.message + "\nen " + e.filename + ":" + e.lineno + ":" + e.colno + "\n" + (e.error && e.error.stack ? e.error.stack.split("\n").slice(0,4).join("\n") : ""));
-    });
-    window.addEventListener("unhandledrejection", e => {
-      mostrar("PROMESA RECHAZADA: " + (e.reason && e.reason.message ? e.reason.message : e.reason) + "\n" + (e.reason && e.reason.stack ? e.reason.stack.split("\n").slice(0,4).join("\n") : ""));
-    });
-  })();
-</script>
-
 <!-- Contenedor de avisos flotantes (monedas ganadas, logros conseguidos): position:fixed a
      nivel de body, para que se vea por encima de cualquier modal o pantalla, sin importar en
      qué modo se esté jugando. -->
@@ -6753,25 +6735,11 @@
   // El proceso inverso: a partir de los IDs guardados, recupera los personajes completos desde
   // "database" (ya cargada) y reasigna un color de categoría por posición.
   function hydrateBoardGroups(storedGroups) {
-    const resultado = storedGroups.map((g, i) => ({
+    return storedGroups.map((g, i) => ({
       name: g.name,
       color: COLORS[i % COLORS.length],
       items: g.characterIds.map(id => database.find(c => c.id === id)).filter(Boolean)
     }));
-    // --- Diagnóstico TEMPORAL: quitar en cuanto tengamos el dato que necesitamos ---
-    const box = document.getElementById("debug-error-box");
-    if (box) {
-      box.style.display = "block";
-      resultado.forEach((g, i) => {
-        const guardados = storedGroups[i].characterIds.length;
-        const encontrados = g.items.length;
-        if (guardados !== encontrados) {
-          box.textContent += `⚠️ hydrateBoardGroups: "${g.name}" tenía ${guardados} personajes guardados, pero solo se encontraron ${encontrados} en la base de datos actual. IDs guardados: ${storedGroups[i].characterIds.join(", ")}\n`;
-        }
-      });
-      box.textContent += `hydrateBoardGroups: ${resultado.length} grupos, tamaños: [${resultado.map(g => g.items.length).join(", ")}]\n\n`;
-    }
-    return resultado;
   }
 
   // Lee el panel del día para esa dificultad si ya existe en Firestore, o lo genera y lo deja
@@ -6837,15 +6805,10 @@
   async function getOrCreateDailyPuzzle(difficulty, dateKey) {
     const docRef = db.collection("dailyPuzzles").doc(`${dateKey}_${difficulty}`);
 
-    // --- Diagnóstico TEMPORAL: quitar en cuanto tengamos el dato que necesitamos ---
-    const debugBox = document.getElementById("debug-error-box");
-    if (debugBox) { debugBox.style.display = "block"; debugBox.textContent += `getOrCreateDailyPuzzle: clave "${dateKey}_${difficulty}"\n`; }
-
     // Primero miramos si ya existe, SIN transacción (más barato): la inmensa mayoría de visitas
     // del día son solo lectura de un panel que ya generó otra persona antes, así que no tiene
     // sentido comprobar las hermanas cada vez si no vamos a generar nada.
     const existingSnap = await docRef.get();
-    if (debugBox) debugBox.textContent += `   ¿existe ya en Firestore? ${existingSnap.exists}\n`;
     if (existingSnap.exists) {
       return hydrateBoardGroups(existingSnap.data().groups);
     }
@@ -7870,35 +7833,6 @@
     }
   });
 
-  // --- Diagnóstico TEMPORAL: quitar en cuanto tengamos el dato que necesitamos ---
-  // Registra cada llamada a setDifficulty (al empezar y al terminar), con el estado real en
-  // cada momento — así se ve exactamente qué pasa justo cuando pulsas un botón, en vez de una
-  // única foto fija que puede pillar un instante intermedio de la carga.
-  (function() {
-    const box = document.getElementById("debug-error-box");
-    if (!box || typeof setDifficulty !== "function") return;
-    const original = setDifficulty;
-    let llamada = 0;
-    window.setDifficulty = async function(level, event) {
-      const n = ++llamada;
-      box.style.display = "block";
-      box.textContent += `[#${n}] setDifficulty("${level}") empieza | currentDifficulty antes: ${currentDifficulty}\n`;
-      try {
-        const resultado = await original.apply(this, arguments);
-        const board = document.querySelector(".board");
-        box.textContent +=
-          `[#${n}] setDifficulty("${level}") termina\n` +
-          `   currentDifficulty ahora: ${currentDifficulty}\n` +
-          `   currentCategories.length: ${typeof currentCategories !== "undefined" ? currentCategories.length : "N/D"}\n` +
-          `   tarjetas en el tablero: ${board ? board.children.length : "N/D"}\n` +
-          `   warning-msg: "${(document.getElementById("warning-msg") || {}).innerText || ""}"\n\n`;
-        return resultado;
-      } catch (e) {
-        box.textContent += `[#${n}] setDifficulty("${level}") LANZÓ UN ERROR: ${e.message}\n${e.stack ? e.stack.split("\n").slice(0,4).join("\n") : ""}\n\n`;
-        throw e;
-      }
-    };
-  })();
 </script>
 </body>
 </html>
