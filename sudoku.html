@@ -19,6 +19,23 @@
 
   * { box-sizing: border-box; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
+  /* Aviso de logro conseguido — calcado del de la web principal, para que se vea igual aquí. */
+  .sud-toast-container {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    z-index: 300; display: flex; flex-direction: column-reverse; gap: 8px; align-items: center;
+    pointer-events: none; width: 100%; max-width: 90vw;
+  }
+  .sud-toast {
+    background: var(--card); border: 2px solid #a855f7; border-radius: 20px;
+    padding: 8px 18px; color: var(--text); font-weight: bold; font-size: 0.95rem;
+    text-align: center; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    animation: sudToastIn 0.25s ease, sudToastOut 0.25s ease 4.25s forwards;
+  }
+  .sud-toast-content { display: flex; flex-direction: column; align-items: center; }
+  .sud-toast-name { display: block; font-size: 0.85rem; font-weight: normal; color: #d8b4fe; }
+  @keyframes sudToastIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes sudToastOut { to { opacity: 0; transform: translateY(12px); } }
+
   .rotate-overlay { display: none; }
   /* Misma lógica que la web principal: "orientation: landscape" + poco alto identifica un
      MÓVIL en horizontal (el alto pasa a ser el lado corto del dispositivo) — "pointer: coarse"
@@ -287,6 +304,8 @@
 </style>
 </head>
 <body>
+
+<div id="sud-toast-container" class="sud-toast-container"></div>
 
 <div class="rotate-overlay">
   <div class="rotate-overlay-icon">📱</div>
@@ -724,33 +743,80 @@
   // Sumar 1 de forma ATÓMICA: Firestore hace la suma en su servidor a partir del valor que
   // tenga guardado en ESE momento, no del que teníamos nosotros en memoria — así, aunque dos
   // dispositivos incrementen casi a la vez, ningún incremento se pierde.
+  // Mismos umbrales, recompensas e IDs de logro que en index.html (SUDOKU_STREAK_MILESTONES /
+  // ACHIEVEMENT_COIN_REWARDS / `racha_sudoku_${n}`) — así, aunque el aviso salga aquí mismo al
+  // conseguirlo, cuando vuelvas a la web principal lo reconoce como ya cobrado y no lo paga dos
+  // veces (comparten el mismo campo claimedAchievements en tu cuenta).
+  const SUD_STREAK_MILESTONES = [1, 10, 25, 50, 100, 150, 200, 300];
+  const SUD_ACHIEVEMENT_COIN_REWARDS = [25, 50, 75, 150, 250, 400, 600, 1000];
+
+  function sudShowToast(innerHtml, durationMs) {
+    const container = document.getElementById("sud-toast-container");
+    if (!container) return;
+    const toast = document.createElement("div");
+    toast.className = "sud-toast";
+    toast.innerHTML = innerHtml;
+    container.appendChild(toast);
+    setTimeout(() => toast.remove(), durationMs);
+  }
+
+  function sudShowAchievementToast(nombre) {
+    // Mismo pequeño retraso que en la web principal, para que no compita visualmente con
+    // cualquier otro aviso que pudiera salir en el mismo instante.
+    setTimeout(() => {
+      sudShowToast(
+        `<div class="sud-toast-content">🏆 ¡Logro conseguido!<span class="sud-toast-name">${nombre}</span></div>`,
+        4500
+      );
+    }, 600);
+  }
+
   // Todo lo que pasa al ganar un panel (racha +1, mejor racha si toca, 5 Berries, contador de
-  // victorias) va en UNA sola transacción — antes iban en dos escrituras separadas, y había una
-  // carrera real entre leer la racha para compararla con la mejor y el propio incremento de la
-  // racha, que a veces hacía que la mejor racha se guardase mal (con un +1 de más). Con una
-  // transacción, todo se lee y se escribe a partir del mismo estado consistente.
-  // Igual que el resto de recompensas del sitio, las Berries/victorias son solo para cuentas con
-  // sesión iniciada — de invitado no hay Berries ni logros, aunque la racha en sí sí se guarda.
+  // victorias, y cualquier logro de racha nuevo) va en UNA sola transacción — antes iban en dos
+  // escrituras separadas, y había una carrera real entre leer la racha para compararla con la
+  // mejor y el propio incremento de la racha, que a veces hacía que la mejor racha se guardase
+  // mal (con un +1 de más). Con una transacción, todo se lee y se escribe a partir del mismo
+  // estado consistente.
+  // Igual que el resto de recompensas del sitio, las Berries/victorias/logros son solo para
+  // cuentas con sesión iniciada — de invitado no hay Berries ni logros, aunque la racha en sí sí
+  // se guarda.
   async function sudHandleWin() {
     if (sudCurrentUser) {
       try {
         const docRef = sudDb.collection("users").doc(sudCurrentUser.uid);
-        await sudDb.runTransaction(async transaction => {
+        const logrosNuevos = await sudDb.runTransaction(async transaction => {
           const snap = await transaction.get(docRef);
           const data = snap.exists ? snap.data() : {};
           const newStreak = (data.sudokuStreak || 0) + 1;
           const newBest = Math.max(newStreak, data.sudokuBestStreak || 0);
           const prevWins = (data.modeStats && data.modeStats.sudoku && data.modeStats.sudoku.wins) || 0;
+          const claimed = new Set(data.claimedAchievements || []);
+
+          let coinsLogros = 0;
+          const nuevos = [];
+          SUD_STREAK_MILESTONES.forEach((n, i) => {
+            const id = `racha_sudoku_${n}`;
+            if (newBest >= n && !claimed.has(id)) {
+              claimed.add(id);
+              coinsLogros += SUD_ACHIEVEMENT_COIN_REWARDS[i];
+              nuevos.push(n === 1 ? "Gana tu primer sudoku" : `Racha de ${n} sudokus`);
+            }
+          });
+
           transaction.set(docRef, {
             sudokuStreak: newStreak,
             sudokuBestStreak: newBest,
-            berries: firebase.firestore.FieldValue.increment(5),
-            totalBerriesEarned: firebase.firestore.FieldValue.increment(5),
-            modeStats: { sudoku: { wins: prevWins + 1 } }
+            berries: firebase.firestore.FieldValue.increment(5 + coinsLogros),
+            totalBerriesEarned: firebase.firestore.FieldValue.increment(5 + coinsLogros),
+            modeStats: { sudoku: { wins: prevWins + 1 } },
+            claimedAchievements: Array.from(claimed)
           }, { merge: true });
+
+          return nuevos;
         });
         // No hace falta tocar sudStreak a mano: el onSnapshot de arriba se encargará de
         // actualizarlo solo en cuanto Firestore confirme el cambio.
+        logrosNuevos.forEach(nombre => sudShowAchievementToast(nombre));
       } catch (e) {
         sudStreak += 1; sudSaveLocalStreak(sudStreak); sudRenderStreak(); // al menos localmente
       }
