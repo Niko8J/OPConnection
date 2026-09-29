@@ -6742,11 +6742,25 @@
   // El proceso inverso: a partir de los IDs guardados, recupera los personajes completos desde
   // "database" (ya cargada) y reasigna un color de categoría por posición.
   function hydrateBoardGroups(storedGroups) {
-    return storedGroups.map((g, i) => ({
+    const resultado = storedGroups.map((g, i) => ({
       name: g.name,
       color: COLORS[i % COLORS.length],
       items: g.characterIds.map(id => database.find(c => c.id === id)).filter(Boolean)
     }));
+    // --- Diagnóstico TEMPORAL: quitar en cuanto tengamos el dato que necesitamos ---
+    const box = document.getElementById("debug-error-box");
+    if (box) {
+      box.style.display = "block";
+      resultado.forEach((g, i) => {
+        const guardados = storedGroups[i].characterIds.length;
+        const encontrados = g.items.length;
+        if (guardados !== encontrados) {
+          box.textContent += `⚠️ hydrateBoardGroups: "${g.name}" tenía ${guardados} personajes guardados, pero solo se encontraron ${encontrados} en la base de datos actual. IDs guardados: ${storedGroups[i].characterIds.join(", ")}\n`;
+        }
+      });
+      box.textContent += `hydrateBoardGroups: ${resultado.length} grupos, tamaños: [${resultado.map(g => g.items.length).join(", ")}]\n\n`;
+    }
+    return resultado;
   }
 
   // Lee el panel del día para esa dificultad si ya existe en Firestore, o lo genera y lo deja
@@ -6812,10 +6826,15 @@
   async function getOrCreateDailyPuzzle(difficulty, dateKey) {
     const docRef = db.collection("dailyPuzzles").doc(`${dateKey}_${difficulty}`);
 
+    // --- Diagnóstico TEMPORAL: quitar en cuanto tengamos el dato que necesitamos ---
+    const debugBox = document.getElementById("debug-error-box");
+    if (debugBox) { debugBox.style.display = "block"; debugBox.textContent += `getOrCreateDailyPuzzle: clave "${dateKey}_${difficulty}"\n`; }
+
     // Primero miramos si ya existe, SIN transacción (más barato): la inmensa mayoría de visitas
     // del día son solo lectura de un panel que ya generó otra persona antes, así que no tiene
     // sentido comprobar las hermanas cada vez si no vamos a generar nada.
     const existingSnap = await docRef.get();
+    if (debugBox) debugBox.textContent += `   ¿existe ya en Firestore? ${existingSnap.exists}\n`;
     if (existingSnap.exists) {
       return hydrateBoardGroups(existingSnap.data().groups);
     }
