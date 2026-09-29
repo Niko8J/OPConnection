@@ -7824,19 +7824,34 @@
   });
 
   // --- Diagnóstico TEMPORAL: quitar en cuanto tengamos el dato que necesitamos ---
-  setTimeout(() => {
+  // Registra cada llamada a setDifficulty (al empezar y al terminar), con el estado real en
+  // cada momento — así se ve exactamente qué pasa justo cuando pulsas un botón, en vez de una
+  // única foto fija que puede pillar un instante intermedio de la carga.
+  (function() {
     const box = document.getElementById("debug-error-box");
-    if (!box) return;
-    const board = document.querySelector(".board");
-    box.style.display = "block";
-    box.textContent +=
-      `--- Estado a los 3s ---\n` +
-      `currentDifficulty: ${typeof currentDifficulty !== "undefined" ? currentDifficulty : "N/D"}\n` +
-      `currentCategories.length: ${typeof currentCategories !== "undefined" ? currentCategories.length : "N/D"}\n` +
-      `tarjetas en el tablero: ${board ? board.children.length : "N/D (no existe .board)"}\n` +
-      `currentUser: ${typeof currentUser !== "undefined" ? (currentUser ? currentUser.uid : "invitado") : "N/D"}\n` +
-      `warning-msg: "${(document.getElementById("warning-msg") || {}).innerText || ""}"\n`;
-  }, 3000);
+    if (!box || typeof setDifficulty !== "function") return;
+    const original = setDifficulty;
+    let llamada = 0;
+    window.setDifficulty = async function(level, event) {
+      const n = ++llamada;
+      box.style.display = "block";
+      box.textContent += `[#${n}] setDifficulty("${level}") empieza | currentDifficulty antes: ${currentDifficulty}\n`;
+      try {
+        const resultado = await original.apply(this, arguments);
+        const board = document.querySelector(".board");
+        box.textContent +=
+          `[#${n}] setDifficulty("${level}") termina\n` +
+          `   currentDifficulty ahora: ${currentDifficulty}\n` +
+          `   currentCategories.length: ${typeof currentCategories !== "undefined" ? currentCategories.length : "N/D"}\n` +
+          `   tarjetas en el tablero: ${board ? board.children.length : "N/D"}\n` +
+          `   warning-msg: "${(document.getElementById("warning-msg") || {}).innerText || ""}"\n\n`;
+        return resultado;
+      } catch (e) {
+        box.textContent += `[#${n}] setDifficulty("${level}") LANZÓ UN ERROR: ${e.message}\n${e.stack ? e.stack.split("\n").slice(0,4).join("\n") : ""}\n\n`;
+        throw e;
+      }
+    };
+  })();
 </script>
 </body>
 </html>
